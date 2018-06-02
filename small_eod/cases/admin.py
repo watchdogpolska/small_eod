@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from cases.models import Letter, Institution, Case
+from small_eod.cases.models import Letter, Institution, Case
 
 
 class LetterInline(admin.TabularInline):
@@ -14,6 +14,7 @@ class LetterInline(admin.TabularInline):
 class CaseAdmin(admin.ModelAdmin):
     inlines = [LetterInline]
     list_display = ['name', 'comment', 'created', 'modified']
+
 
 class InstitutionAdmin(admin.ModelAdmin):
     list_display = ['name', 'comment', 'created', 'modified']

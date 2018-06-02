@@ -1,0 +1,4 @@
+*.sqlite3
+*.pdf
+docker-compose.yml
+.dockerignore

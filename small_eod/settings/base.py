@@ -12,20 +12,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
+import environ
+root = environ.Path(__file__) - 3
+env = environ.Env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i4l&*ur8_-#@_9#*e(9b7emhhy2h&+--7$!wt!gh1=y1b$21*p'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 
 # Application definition
@@ -39,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'cases.apps.CasesConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'nextcloud_provider',
+    'small_eod.cases.apps.CasesConfig',
+    'small_eod.nextcloud_provider',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +80,7 @@ WSGI_APPLICATION = 'small_eod.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
-    }
+    'default': env.db()
 }
 
 
@@ -110,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = env.str('DJANGO_LANGUAGE_CODE', 'pl-PL')
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = env.str('DJANGO_TIMEZONE', 'Europe/Warsaw')
 
 USE_I18N = True
 
@@ -125,6 +121,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = root("static")
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+MEDIA_PATH = root('media')
+
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`

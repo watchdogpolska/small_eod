@@ -1,0 +1,41 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./contrib/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /static:/static
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      target: development
+    depends_on:
+      - db
+    volumes:
+      - ./src:/src
+      - /static:/code/static
+    environment:
+      DATABASE_URL: mysql://user:pass@db/small_eod
+    expose:
+      - "8000"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: small_eod
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    expose:
+      - "3306"
+    volumes:
+      - ./.contrib/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - db_mysql:/var/lib/mysql
+
+volumes:
+  db_mysql:

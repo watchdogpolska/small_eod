@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class CasesConfig(AppConfig):
-    name = 'cases'
+    name = 'small_eod.cases'
