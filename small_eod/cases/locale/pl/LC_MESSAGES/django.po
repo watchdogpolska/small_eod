@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-05 03:19+0200\n"
+"PO-Revision-Date: 2018-06-05 03:20+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: models.py:8 models.py:21
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:9 models.py:22 models.py:52
+msgid "Comment"
+msgstr "Komentarz"
+
+#: models.py:16 models.py:49
+msgid "Case"
+msgstr "Sprawa"
+
+#: models.py:17
+msgid "Cases"
+msgstr "Sprawy"
+
+#: models.py:29 models.py:41
+msgid "Institution"
+msgstr "Instytucja"
+
+#: models.py:30
+msgid "Institutions"
+msgstr "Instytucje"
+
+#: models.py:34
+msgid "received"
+msgstr "odebrane"
+
+#: models.py:35
+msgid "send"
+msgstr "wysłane"
+
+#: models.py:37
+msgid "Description"
+msgstr "Opis"
+
+#: models.py:42
+msgid "Date of receipt / Date of dispatch"
+msgstr "Data odbioru / Data wysłania"
+
+#: models.py:44
+msgid "Identifier"
+msgstr "Sygnatura"
+
+#: models.py:50
+msgid "Attachment"
+msgstr "Załącznik"
+
+#: models.py:51
+msgid "Ordering"
+msgstr "Kolejność"
+
+#: models.py:59
+msgid "Letter"
+msgstr "list"
+
+#: models.py:60
+msgid "Letters"
+msgstr "Listy"

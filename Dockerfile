@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir pip wheel -U
 RUN pip install --no-cache-dir -r requirements/production.txt
 
 FROM builder as development
-ENV DJANGO_SETTINGS_MODULE=small_eod.settings.development
+ENV DJANGO_SETTINGS_MODULE=config.settings.development
 ENV SECRET_KEY=CHANGE_ME
 RUN pip install -r requirements/development.txt
 # Copy the code as late as possible.

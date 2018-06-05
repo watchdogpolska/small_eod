@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'small_eod.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -121,12 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = root("static")
+STATIC_ROOT = root("staticfiles")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-MEDIA_PATH = root('media')
+MEDIA_ROOT = root('media')
 
 
 AUTHENTICATION_BACKENDS = (
@@ -135,6 +135,12 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend'
 )
+
+RELEASE_ID = auto.revision
+RAVEN_CONFIG = {
+    'dsn': env.str('RAVEN_DSN', 'http://example.com'),
+    'release': RELEASE_ID
+}
 
 LOGIN_REDIRECT_URL = '/admin/'
 SITE_ID = 1
