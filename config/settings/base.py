@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 import environ
+from dealer.auto import auto
+
 root = environ.Path(__file__) - 3
 env = environ.Env()
 # Quick-start development settings - unsuitable for production
