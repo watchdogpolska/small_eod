@@ -5,7 +5,8 @@ from small_eod.cases.models import Letter, Institution, Case
 
 
 class LetterInline(admin.TabularInline):
-    fields = ("identifier", "name", "attachment", "ordering",)
+    fields = ("identifier", "name", "attachment", "institution",
+              "ordering",)
     sortable_field_name = "ordering"
     model = Letter
     extra = 0
