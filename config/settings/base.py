@@ -32,6 +32,9 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 # Application definition
 
 INSTALLED_APPS = [
+    'small_eod.cases.apps.CasesConfig',
+    'small_eod.nextcloud_provider',
+    'import_export',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,8 +46,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'small_eod.cases.apps.CasesConfig',
-    'small_eod.nextcloud_provider',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'small_eod.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database

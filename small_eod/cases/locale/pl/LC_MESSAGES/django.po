@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-05 03:19+0200\n"
-"PO-Revision-Date: 2018-06-05 03:20+0200\n"
+"POT-Creation-Date: 2018-06-08 03:44+0200\n"
+"PO-Revision-Date: 2018-06-08 03:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,62 +20,98 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: models.py:8 models.py:21
-msgid "Name"
-msgstr "Nazwa"
-
-#: models.py:9 models.py:22 models.py:52
-msgid "Comment"
-msgstr "Komentarz"
-
-#: models.py:16 models.py:49
-msgid "Case"
-msgstr "Sprawa"
-
-#: models.py:17
+#: apps.py:7 models.py:23
 msgid "Cases"
 msgstr "Sprawy"
 
-#: models.py:29 models.py:41
+#: models.py:8 models.py:27 models.py:54 models.py:69
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:9 models.py:70 models.py:108
+msgid "Comment"
+msgstr "Komentarz"
+
+#: models.py:12
+msgid "Responsble person"
+msgstr "Osoba odpowiedzialna"
+
+#: models.py:22 models.py:105
+msgid "Case"
+msgstr "Sprawa"
+
+#: models.py:33
+msgid "Channel"
+msgstr "Kanał"
+
+#: models.py:34
+msgid "Channels"
+msgstr "Kanały"
+
+#: models.py:38
+msgid "Nazwa"
+msgstr "Nazwa"
+
+#: models.py:49
+msgid "Person"
+msgstr "Osoba"
+
+#: models.py:50
+msgid "Persons"
+msgstr "Osoby"
+
+#: models.py:64
+msgid "Tag"
+msgstr "Tag"
+
+#: models.py:65 models.py:71 models.py:109
+msgid "Tags"
+msgstr "Tagi"
+
+#: models.py:82 models.py:96
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:30
+#: models.py:83
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:34
+#: models.py:88
 msgid "received"
 msgstr "odebrane"
 
-#: models.py:35
+#: models.py:89
 msgid "send"
 msgstr "wysłane"
 
-#: models.py:37
+#: models.py:91
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:42
+#: models.py:93
+msgid "Direction"
+msgstr "Kierunek"
+
+#: models.py:97
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:44
+#: models.py:99
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:50
+#: models.py:106
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: models.py:51
+#: models.py:107
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:59
+#: models.py:116
 msgid "Letter"
-msgstr "list"
+msgstr "List"
 
-#: models.py:60
+#: models.py:117
 msgid "Letters"
 msgstr "Listy"
