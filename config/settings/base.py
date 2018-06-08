@@ -130,7 +130,7 @@ STATIC_ROOT = root("staticfiles")
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 MEDIA_ROOT = root('media')
-
+MEDIA_URL = '/media/'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
