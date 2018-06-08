@@ -40,8 +40,9 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class LetterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'direction', 'institution', 'data', 'identifier', 'case', 'comment', 'created', 'modified']
-    list_filter = ['institution', 'direction', 'case']
+    list_display = ['name', 'direction', 'institution', 'data', 'identifier', 'case', 'comment', 'created', 'modified',
+                    'channel']
+    list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
 
     raw_id_fields = ['institution', 'case', 'tags']

@@ -10,6 +10,8 @@ class Case(TimeStampedModel):
     responsible_people = models.ManyToManyField(to='cases.Person',
                                                 blank=True,
                                                 verbose_name=_("Responsble person"))
+    tags = models.ManyToManyField(to="cases.Tag", verbose_name=_("Tags"), blank=True)
+
     @staticmethod
     def autocomplete_search_fields():
         return "id__iexact", "name__icontains",
@@ -92,8 +94,9 @@ class Letter(TimeStampedModel):
     direction = models.CharField(max_length=50, choices=DIRECTION,
                                  verbose_name=_("Direction"))
     institution = models.ForeignKey(to=Institution,
-                                    on_delete=models.CASCADE,
-                                    verbose_name=_("Institution"))
+                                    verbose_name=_("Institution"),
+                                    null=True,
+                                    on_delete=models.SET_NULL)
     data = models.DateField(verbose_name=_("Date of receipt / Date of dispatch"))
     identifier = models.CharField(max_length=100,
                                   verbose_name=_("Identifier"),
@@ -107,6 +110,9 @@ class Letter(TimeStampedModel):
     ordering = models.IntegerField(default=1, blank=True, verbose_name=_("Ordering"))
     comment = models.TextField(blank=True, verbose_name=_("Comment"))
     tags = models.ManyToManyField(to=Tag, verbose_name=_("Tags"), blank=True)
+    channel = models.ForeignKey(to=Channel, verbose_name=_("Channel"),
+                                null=True, blank=True,
+                                on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
