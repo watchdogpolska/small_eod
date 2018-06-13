@@ -1,7 +1,28 @@
 from django.conf import settings
 from django.db import models
+from model_utils import Choices
 from model_utils.models import TimeStampedModel
 from django.utils.translation import gettext_lazy as _
+
+
+class Dictionary(TimeStampedModel):
+    TYPE = Choices((1, 'whose_case', _("Whose case")),
+                   (2, 'what_scope', _("What scope")),
+                   (3, 'inaction_scope', _("Inaction scope")),
+                   (4, 'decision_scope', _("Decision scope")),
+                   (5, 'time_of_info_provide', _("The moment of providing information")),
+                   (6, 'proceedings_interrupted', _("Proceedings interrupted")),
+                   (7, 'status', _("Status"))
+                   )
+    type = models.IntegerField(choices=TYPE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _("Dictionary")
+        verbose_name_plural = _("Dictinaries")
 
 
 class Case(TimeStampedModel):
@@ -11,6 +32,45 @@ class Case(TimeStampedModel):
                                                 blank=True,
                                                 verbose_name=_("Responsble person"))
     tags = models.ManyToManyField(to="cases.Tag", verbose_name=_("Tags"), blank=True)
+
+    whose_case = models.ManyToManyField(to=Dictionary,
+                                        limit_choices_to={'type': Dictionary.TYPE.whose_case},
+                                        verbose_name=_("Whose case"),
+                                        blank=True,
+                                        related_name="case_whose_case")
+    what_scope = models.ManyToManyField(to=Dictionary,
+                                        limit_choices_to={'type': Dictionary.TYPE.what_scope},
+                                        verbose_name=_("What scope"),
+                                        blank=True,
+                                        related_name="case_what_scope")
+    inaction_scope = models.ManyToManyField(to=Dictionary,
+                                            limit_choices_to={'type': Dictionary.TYPE.inaction_scope},
+                                            verbose_name=_("Inaction scope"),
+                                            blank=True,
+                                            related_name="case_inaction_scope"
+                                            )
+    decision_scope = models.ManyToManyField(to=Dictionary,
+                                            limit_choices_to={'type': Dictionary.TYPE.decision_scope},
+                                            verbose_name=_("Decision scope"),
+                                            blank=True,
+                                            related_name="case_decision_scope"
+                                            )
+    time_of_info_provide = models.ManyToManyField(to=Dictionary,
+                                                  limit_choices_to={'type': Dictionary.TYPE.time_of_info_provide},
+                                                  verbose_name=_("The moment of providing information"),
+                                                  blank=True,
+                                                  related_name="case_time_of_info_provide"
+                                                  )
+    proceddings_interrupted = models.ManyToManyField(to=Dictionary,
+                                                     limit_choices_to={'type': Dictionary.TYPE.proceedings_interrupted},
+                                                     verbose_name=_("Proceedings interrupted"),
+                                                     blank=True,
+                                                     related_name="case_proceedings_interrupted")
+    status = models.ManyToManyField(to=Dictionary,
+                                    limit_choices_to={'type': Dictionary.TYPE.status},
+                                    verbose_name=_("Status"),
+                                    blank=True,
+                                    related_name="case_status")
 
     @staticmethod
     def autocomplete_search_fields():
@@ -53,7 +113,7 @@ class Person(TimeStampedModel):
 
 
 class Tag(TimeStampedModel):
-    name = models.CharField(verbose_name=_("Name"), max_length=100)
+    name = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
 
     @staticmethod
     def autocomplete_search_fields():

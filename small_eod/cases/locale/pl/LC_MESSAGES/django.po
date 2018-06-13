@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-08 03:44+0200\n"
-"PO-Revision-Date: 2018-06-08 03:44+0200\n"
+"POT-Creation-Date: 2018-06-13 10:48+0200\n"
+"PO-Revision-Date: 2018-06-13 10:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,98 +20,134 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: apps.py:7 models.py:23
-msgid "Cases"
-msgstr "Sprawy"
-
-#: models.py:8 models.py:27 models.py:54 models.py:69
-msgid "Name"
-msgstr "Nazwa"
-
-#: models.py:9 models.py:70 models.py:108
-msgid "Comment"
-msgstr "Komentarz"
-
-#: models.py:12
-msgid "Responsble person"
-msgstr "Osoba odpowiedzialna"
-
-#: models.py:22 models.py:105
-msgid "Case"
-msgstr "Sprawa"
-
-#: models.py:33
-msgid "Channel"
-msgstr "Kanał"
-
-#: models.py:34
-msgid "Channels"
-msgstr "Kanały"
-
-#: models.py:38
-msgid "Nazwa"
-msgstr "Nazwa"
-
-#: models.py:49
-msgid "Person"
-msgstr "Osoba"
-
-#: models.py:50
-msgid "Persons"
-msgstr "Osoby"
-
-#: models.py:64
-msgid "Tag"
-msgstr "Tag"
-
-#: models.py:65 models.py:71 models.py:109
+#: admin.py:14 models.py:34 models.py:127 models.py:133 models.py:172
 msgid "Tags"
 msgstr "Tagi"
 
-#: models.py:82 models.py:96
+#: apps.py:7 models.py:85
+msgid "Cases"
+msgstr "Sprawy"
+
+#: models.py:9 models.py:38
+msgid "Whose case"
+msgstr "Czyja sprawa"
+
+#: models.py:10 models.py:43
+msgid "What scope"
+msgstr "Jaki zakres sprawy"
+
+#: models.py:11 models.py:48
+msgid "Inaction scope"
+msgstr "Bezczynność w jakim zakresie"
+
+#: models.py:12 models.py:54
+msgid "Decision scope"
+msgstr "Decyzja w jakim zakresie"
+
+#: models.py:13 models.py:60
+msgid "The moment of providing information"
+msgstr "Informacja udzielona w którym momencie"
+
+#: models.py:14 models.py:66
+msgid "Proceedings interrupted"
+msgstr "Postępowanie przerwane (rodzaj)"
+
+#: models.py:15 models.py:71
+msgid "Status"
+msgstr "Status"
+
+#: models.py:24
+msgid "Dictionary"
+msgstr "Słownik"
+
+#: models.py:25
+msgid "Dictinaries"
+msgstr "Słowniki"
+
+#: models.py:29 models.py:89 models.py:116 models.py:131
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:30 models.py:132 models.py:171
+msgid "Comment"
+msgstr "Komentarz"
+
+#: models.py:33
+msgid "Responsble person"
+msgstr "Osoba odpowiedzialna"
+
+#: models.py:84 models.py:168
+msgid "Case"
+msgstr "Sprawa"
+
+#: models.py:95 models.py:173
+msgid "Channel"
+msgstr "Kanał"
+
+#: models.py:96
+msgid "Channels"
+msgstr "Kanały"
+
+#: models.py:100
+msgid "Nazwa"
+msgstr "Nazwa"
+
+#: models.py:111
+msgid "Person"
+msgstr "Osoba"
+
+#: models.py:112
+msgid "Persons"
+msgstr "Osoby"
+
+#: models.py:126
+msgid "Tag"
+msgstr "Tag"
+
+#: models.py:144 models.py:157
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:83
+#: models.py:145
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:88
+#: models.py:150
 msgid "received"
 msgstr "odebrane"
 
-#: models.py:89
+#: models.py:151
 msgid "send"
 msgstr "wysłane"
 
-#: models.py:91
+#: models.py:153
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:93
+#: models.py:155
 msgid "Direction"
 msgstr "Kierunek"
 
-#: models.py:97
+#: models.py:160
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:99
+#: models.py:162
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:106
+#: models.py:169
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: models.py:107
+#: models.py:170
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:116
+#: models.py:182
 msgid "Letter"
 msgstr "List"
 
-#: models.py:117
+#: models.py:183
 msgid "Letters"
 msgstr "Listy"
