@@ -3,7 +3,7 @@ from django.utils.encoding import force_text
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportMixin
 
-from small_eod.cases.models import Letter, Institution, Case, Channel, Tag, Person
+from small_eod.cases.models import Letter, Institution, Case, Channel, Tag, Person, Dictionary
 from small_eod.cases.resources import InstitutionResource, TagResource
 
 
@@ -65,6 +65,7 @@ class TagAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 admin.site.register(Person)
+admin.site.register(Dictionary)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Channel)
 admin.site.register(Case, CaseAdmin)
