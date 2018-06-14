@@ -14,8 +14,8 @@ class Dictionary(TimeStampedModel):
                    (6, 'proceedings_interrupted', _("Proceedings interrupted")),
                    (7, 'status', _("Status"))
                    )
-    type = models.IntegerField(choices=TYPE)
-    name = models.CharField(max_length=100)
+    type = models.IntegerField(choices=TYPE, verbose_name=_("Type"))
+    name = models.CharField(max_length=100, verbose_name=_("Name"))
 
     def __str__(self):
         return self.name

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 10:48+0200\n"
-"PO-Revision-Date: 2018-06-13 10:47+0200\n"
+"POT-Creation-Date: 2018-06-14 02:59+0200\n"
+"PO-Revision-Date: 2018-06-14 03:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:14 models.py:34 models.py:127 models.py:133 models.py:172
+#: admin.py:16 models.py:34 models.py:127 models.py:133 models.py:172
 msgid "Tags"
 msgstr "Tagi"
 
@@ -56,6 +56,14 @@ msgstr "Postępowanie przerwane (rodzaj)"
 msgid "Status"
 msgstr "Status"
 
+#: models.py:17
+msgid "Type"
+msgstr "Typ"
+
+#: models.py:18 models.py:29 models.py:89 models.py:116 models.py:131
+msgid "Name"
+msgstr "Nazwa"
+
 #: models.py:24
 msgid "Dictionary"
 msgstr "Słownik"
@@ -63,10 +71,6 @@ msgstr "Słownik"
 #: models.py:25
 msgid "Dictinaries"
 msgstr "Słowniki"
-
-#: models.py:29 models.py:89 models.py:116 models.py:131
-msgid "Name"
-msgstr "Nazwa"
 
 #: models.py:30 models.py:132 models.py:171
 msgid "Comment"

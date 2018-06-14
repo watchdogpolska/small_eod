@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from django.forms import widgets
 from django.utils.encoding import force_text
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportMixin
@@ -27,6 +29,10 @@ class CaseAdmin(admin.ModelAdmin):
     list_display = ['name', 'comment', 'created', 'modified', display_tags]
     list_filter = ['responsible_people']
     raw_id_fields = ['responsible_people', 'tags']
+
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': widgets.CheckboxSelectMultiple},
+    }
 
     autocomplete_lookup_fields = {
         # 'fk': ['responsible_people'],
