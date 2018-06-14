@@ -24,10 +24,18 @@ class LetterInline(admin.TabularInline):
     extra = 0
 
 
+class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
+
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super().__init__(field, request, params, model, model_admin, field_path)
+        self.title = _("Institution tags by letters")
+
+
 class CaseAdmin(admin.ModelAdmin):
     inlines = [LetterInline]
     list_display = ['name', 'comment', 'created', 'modified', display_tags]
-    list_filter = ['responsible_people']
+    list_filter = ['responsible_people', 'tags',
+                   ('letter__institution__tags', InstitutionTagFilter)]
     raw_id_fields = ['responsible_people', 'tags']
 
     formfield_overrides = {

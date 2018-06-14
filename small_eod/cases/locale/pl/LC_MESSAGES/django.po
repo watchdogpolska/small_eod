@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 03:33+0200\n"
-"PO-Revision-Date: 2018-06-14 03:34+0200\n"
+"POT-Creation-Date: 2018-06-14 13:09+0200\n"
+"PO-Revision-Date: 2018-06-14 13:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -23,6 +23,10 @@ msgstr ""
 #: admin.py:16 models.py:34 models.py:127 models.py:133 models.py:172
 msgid "Tags"
 msgstr "Tagi"
+
+#: admin.py:31
+msgid "Institution tags by letters"
+msgstr "Tagi instytucji poprzez listy"
 
 #: apps.py:7 models.py:85
 msgid "Cases"
