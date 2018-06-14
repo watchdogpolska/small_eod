@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 02:59+0200\n"
-"PO-Revision-Date: 2018-06-14 03:00+0200\n"
+"POT-Creation-Date: 2018-06-14 03:33+0200\n"
+"PO-Revision-Date: 2018-06-14 03:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -27,6 +27,22 @@ msgstr "Tagi"
 #: apps.py:7 models.py:85
 msgid "Cases"
 msgstr "Sprawy"
+
+#: dashboard.py:29
+msgid "System"
+msgstr "System"
+
+#: dashboard.py:36
+msgid "Application"
+msgstr "Aplikacja"
+
+#: dashboard.py:45
+msgid "Support"
+msgstr "Wsparcie techniczne"
+
+#: dashboard.py:58
+msgid "Recent Actions"
+msgstr "Ostatnie akcje"
 
 #: models.py:9 models.py:38
 msgid "Whose case"

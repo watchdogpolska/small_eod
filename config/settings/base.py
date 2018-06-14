@@ -34,8 +34,9 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     'small_eod.cases.apps.CasesConfig',
     'small_eod.nextcloud_provider',
-    'import_export',
+    'grappelli.dashboard',
     'grappelli',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,5 +146,10 @@ RAVEN_CONFIG = {
     'release': RELEASE_ID
 }
 
+INSTALLED_APPS += ['github_revision', ]
+GITHUB_REVISION_REPO_URL = 'https://github.com/watchdogpolska/small_eod'
+
 LOGIN_REDIRECT_URL = '/admin/'
 SITE_ID = 1
+
+GRAPPELLI_INDEX_DASHBOARD = 'small_eod.cases.dashboard.CustomIndexDashboard'
