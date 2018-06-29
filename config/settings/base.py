@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     'small_eod.cases.apps.CasesConfig',
     'small_eod.nextcloud_provider',
+    'small_eod.extracts',
     'grappelli.dashboard',
     'grappelli',
     'import_export',
