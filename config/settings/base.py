@@ -33,6 +33,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 INSTALLED_APPS = [
     'small_eod.cases.apps.CasesConfig',
+    'allauth.socialaccount.providers.google',
     'small_eod.nextcloud_provider',
     'small_eod.extracts',
     'grappelli.dashboard',
@@ -154,3 +155,15 @@ LOGIN_REDIRECT_URL = '/admin/'
 SITE_ID = 1
 
 GRAPPELLI_INDEX_DASHBOARD = 'small_eod.cases.dashboard.CustomIndexDashboard'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

@@ -20,9 +20,9 @@ from django.urls import path, include
 from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
-    path('', RedirectView.as_view(pattern_name='nextcloud_login')),
+    path('', RedirectView.as_view(pattern_name='google_login')),
     path('admin/', admin.site.urls),
-    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
+    path('grappelli/', include('grappelli.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 
