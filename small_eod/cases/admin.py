@@ -16,9 +16,7 @@ def display_tags(obj):
 display_tags.short_description = _("Tags")
 
 
-class LetterInline(admin.TabularInline):
-    fields = ("identifier", "name", "attachment", "institution",
-              "ordering", "data", "case")
+class LetterInline(admin.StackedInline):
     sortable_field_name = "ordering"
     model = Letter
     extra = 0

@@ -1,7 +1,7 @@
 FROM python:3-slim as builder
 ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y\
-    libmysqlclient-dev \
+    libmariadbclient-dev-compat \
     gcc
 RUN mkdir /code /code/production
 WORKDIR /code
