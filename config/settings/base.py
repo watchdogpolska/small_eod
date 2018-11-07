@@ -33,8 +33,6 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 INSTALLED_APPS = [
     'small_eod.cases.apps.CasesConfig',
-    'allauth.socialaccount.providers.google',
-    'small_eod.nextcloud_provider',
     'small_eod.extracts',
     'grappelli.dashboard',
     'grappelli',
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
