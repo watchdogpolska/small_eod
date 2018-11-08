@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 13:09+0200\n"
-"PO-Revision-Date: 2018-06-14 13:10+0200\n"
+"POT-Creation-Date: 2018-11-08 00:30+0100\n"
+"PO-Revision-Date: 2018-11-08 00:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,11 +20,20 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:16 models.py:34 models.py:127 models.py:133 models.py:172
+#: admin.py:18 admin.py:28 models.py:34 models.py:127 models.py:133
+#: models.py:172
 msgid "Tags"
 msgstr "Tagi"
 
-#: admin.py:31
+#: admin.py:23
+msgid "View {} letters"
+msgstr "Zobacz {} listów"
+
+#: admin.py:26 models.py:183
+msgid "Letters"
+msgstr "Listy"
+
+#: admin.py:41
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
@@ -32,19 +41,19 @@ msgstr "Tagi instytucji poprzez listy"
 msgid "Cases"
 msgstr "Sprawy"
 
-#: dashboard.py:29
+#: dashboard.py:67
 msgid "System"
 msgstr "System"
 
-#: dashboard.py:36
+#: dashboard.py:74
 msgid "Application"
 msgstr "Aplikacja"
 
-#: dashboard.py:45
+#: dashboard.py:83
 msgid "Support"
 msgstr "Wsparcie techniczne"
 
-#: dashboard.py:58
+#: dashboard.py:96
 msgid "Recent Actions"
 msgstr "Ostatnie akcje"
 
@@ -172,6 +181,10 @@ msgstr "Kolejność"
 msgid "Letter"
 msgstr "List"
 
-#: models.py:183
-msgid "Letters"
-msgstr "Listy"
+#: templates/admin/app_index.html:15
+msgid "Add"
+msgstr ""
+
+#: templates/admin/app_index.html:22
+msgid "You don´t have permission to edit anything."
+msgstr ""
