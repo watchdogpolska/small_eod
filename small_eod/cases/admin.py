@@ -75,15 +75,14 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 class LetterAdmin(admin.ModelAdmin):
     list_display = ['name', 'direction', 'institution', 'data', 'identifier', 'case', 'comment', 'created', 'modified',
-                    'channel', display_tags]
+                    'channel']
     list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
 
-    raw_id_fields = ['institution', 'case', 'tags']
+    raw_id_fields = ['institution', 'case']
 
     autocomplete_lookup_fields = {
         'fk': ['institution', 'case'],
-        'm2m': ['tags'],
     }
 
 
