@@ -70,7 +70,7 @@ Dodatkowe uwagi:
 
 Instalacja Docker opisana została na 
 
-Uruchomienie bazy danych i serwera plików;
+Uruchomienie bazy danych i serwera WWWW:
 
 ```
 docker-compose up nginx db
