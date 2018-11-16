@@ -85,7 +85,7 @@ docker-compose up web
 Aplikacja nie posiada front-endu oraz domyślnie wykorzystuje logowanie GSuite. W celu utworzenia konta użytkownika wykonaj:
 
 ```bash
-docker-compose run python manage.py createsuperuser
+docker-compose run web python manage.py createsuperuser
 ```
 
 Za sprawą usługi ```web``` pod adresem ```http://localhost:8000/admin/``` dostępne jest logowanie z wykorzystaniem loginu i hasła.
