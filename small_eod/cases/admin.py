@@ -53,6 +53,8 @@ class CaseAdmin(admin.ModelAdmin):
     list_display = ['name', 'audited_institution', 'comment', 'created', 'modified', display_tags, link_to_letters]
     list_filter = ['responsible_people', 'tags',
                    ('letter__institution__tags', InstitutionTagFilter)]
+    search_fields = ['name', 'comment', 'audited_institution__name', 'comment']
+
     raw_id_fields = ['responsible_people', 'tags']
 
     formfield_overrides = {
