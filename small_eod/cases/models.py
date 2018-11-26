@@ -177,6 +177,6 @@ class Letter(TimeStampedModel):
         return self.name
 
     class Meta:
-        ordering = ['data', ]
+        ordering = ['-data', ]
         verbose_name = _("Letter")
         verbose_name_plural = _("Letters")
