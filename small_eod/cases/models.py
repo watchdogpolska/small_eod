@@ -161,6 +161,7 @@ class Letter(TimeStampedModel):
                                  verbose_name=_("Direction"))
     institution = models.ForeignKey(to=Institution,
                                     verbose_name=_("Institution"),
+                                    help_text=_("From whom / to whom"),
                                     null=True,
                                     on_delete=models.SET_NULL)
     data = models.DateField(verbose_name=_("Date of receipt / Date of dispatch"))

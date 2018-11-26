@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-08 00:30+0100\n"
-"PO-Revision-Date: 2018-11-08 00:30+0100\n"
+"POT-Creation-Date: 2018-11-26 03:02+0100\n"
+"PO-Revision-Date: 2018-11-26 03:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,24 +20,27 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:18 admin.py:28 models.py:34 models.py:127 models.py:133
-#: models.py:172
+#: admin.py:17 models.py:34 models.py:133 models.py:139
 msgid "Tags"
 msgstr "Tagi"
 
-#: admin.py:23
+#: admin.py:22
 msgid "View {} letters"
 msgstr "Zobacz {} listów"
 
-#: admin.py:26 models.py:183
+#: admin.py:24 models.py:189
 msgid "Letters"
 msgstr "Listy"
 
-#: admin.py:41
+#: admin.py:33 models.py:90 models.py:175
+msgid "Case"
+msgstr "Sprawa"
+
+#: admin.py:48
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
-#: apps.py:7 models.py:85
+#: apps.py:7 models.py:91
 msgid "Cases"
 msgstr "Sprawy"
 
@@ -57,31 +60,31 @@ msgstr "Wsparcie techniczne"
 msgid "Recent Actions"
 msgstr "Ostatnie akcje"
 
-#: models.py:9 models.py:38
+#: models.py:9 models.py:44
 msgid "Whose case"
 msgstr "Czyja sprawa"
 
-#: models.py:10 models.py:43
+#: models.py:10 models.py:49
 msgid "What scope"
 msgstr "Jaki zakres sprawy"
 
-#: models.py:11 models.py:48
+#: models.py:11 models.py:54
 msgid "Inaction scope"
 msgstr "Bezczynność w jakim zakresie"
 
-#: models.py:12 models.py:54
+#: models.py:12 models.py:60
 msgid "Decision scope"
 msgstr "Decyzja w jakim zakresie"
 
-#: models.py:13 models.py:60
+#: models.py:13 models.py:66
 msgid "The moment of providing information"
 msgstr "Informacja udzielona w którym momencie"
 
-#: models.py:14 models.py:66
+#: models.py:14 models.py:72
 msgid "Proceedings interrupted"
 msgstr "Postępowanie przerwane (rodzaj)"
 
-#: models.py:15 models.py:71
+#: models.py:15 models.py:77
 msgid "Status"
 msgstr "Status"
 
@@ -89,7 +92,7 @@ msgstr "Status"
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:18 models.py:29 models.py:89 models.py:116 models.py:131
+#: models.py:18 models.py:29 models.py:95 models.py:122 models.py:137
 msgid "Name"
 msgstr "Nazwa"
 
@@ -101,7 +104,7 @@ msgstr "Słownik"
 msgid "Dictinaries"
 msgstr "Słowniki"
 
-#: models.py:30 models.py:132 models.py:171
+#: models.py:30 models.py:138 models.py:178
 msgid "Comment"
 msgstr "Komentarz"
 
@@ -109,82 +112,88 @@ msgstr "Komentarz"
 msgid "Responsble person"
 msgstr "Osoba odpowiedzialna"
 
-#: models.py:84 models.py:168
-msgid "Case"
-msgstr "Sprawa"
+#: models.py:37
+#, fuzzy
+#| msgid "Institution"
+msgid "Audited institution"
+msgstr "Instytucja"
 
-#: models.py:95 models.py:173
+#: models.py:101 models.py:179
 msgid "Channel"
 msgstr "Kanał"
 
-#: models.py:96
+#: models.py:102
 msgid "Channels"
 msgstr "Kanały"
 
-#: models.py:100
+#: models.py:106
 msgid "Nazwa"
 msgstr "Nazwa"
 
-#: models.py:111
+#: models.py:117
 msgid "Person"
 msgstr "Osoba"
 
-#: models.py:112
+#: models.py:118
 msgid "Persons"
 msgstr "Osoby"
 
-#: models.py:126
+#: models.py:132
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:144 models.py:157
+#: models.py:150 models.py:163
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:145
+#: models.py:151
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:150
+#: models.py:156
 msgid "received"
 msgstr "odebrane"
 
-#: models.py:151
+#: models.py:157
 msgid "send"
 msgstr "wysłane"
 
-#: models.py:153
+#: models.py:159
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:155
+#: models.py:161
 msgid "Direction"
 msgstr "Kierunek"
 
-#: models.py:160
+#: models.py:164
+msgid "From whom / to whom"
+msgstr "Od kogo / do kogo"
+
+#: models.py:167
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:162
+#: models.py:169
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:169
+#: models.py:176
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: models.py:170
+#: models.py:177
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:182
+#: models.py:188
 msgid "Letter"
 msgstr "List"
 
 #: templates/admin/app_index.html:15
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 #: templates/admin/app_index.html:22
 msgid "You don´t have permission to edit anything."
-msgstr ""
+msgstr "Nie masz uprawnień, aby edytować cokolwiek."
