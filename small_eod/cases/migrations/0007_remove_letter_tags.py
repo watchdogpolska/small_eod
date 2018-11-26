@@ -5,12 +5,10 @@ from django.db import migrations
 
 def migrate_tags_from_letter_to_case(apps, schema_editor):
     Letter = apps.get_model('cases', 'Letter')
-    for row in Letter.objects.exclude(tags=None).all():
-        if not row.institution:
+    for row in Letter.objects.all():
+        if not row.case:
             continue
-        for tag in row.tags.all():
-            row.institution.tags.add(tag)
-        row.institution.save()
+        row.case.tags.add(*row.tags.all())
 
 
 class Migration(migrations.Migration):
