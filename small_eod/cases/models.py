@@ -32,7 +32,13 @@ class Case(TimeStampedModel):
                                                 blank=True,
                                                 verbose_name=_("Responsble person"))
     tags = models.ManyToManyField(to="cases.Tag", verbose_name=_("Tags"), blank=True)
-
+    audited_institution = models.ForeignKey(
+        to='cases.Institution',
+        verbose_name=_("Audited institution"),
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE
+    )
     whose_case = models.ManyToManyField(to=Dictionary,
                                         limit_choices_to={'type': Dictionary.TYPE.whose_case},
                                         verbose_name=_("Whose case"),
