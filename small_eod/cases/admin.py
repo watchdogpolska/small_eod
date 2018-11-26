@@ -4,6 +4,7 @@ from django.forms import widgets
 from django.template.defaultfilters import safe
 from django.urls import reverse
 from django.utils.encoding import force_text
+from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportMixin
 
@@ -13,8 +14,6 @@ from small_eod.cases.resources import InstitutionResource, TagResource
 
 def display_tags(obj):
     return ", ".join(force_text(x) for x in obj.tags.all()) or '-'
-
-
 display_tags.short_description = _("Tags")
 
 
@@ -22,10 +21,18 @@ def link_to_letters(obj):
     url = reverse('admin:cases_letter_changelist') + "?case__id__exact=" + str(obj.pk)
     return safe('<a href="{}">{}</a>'.format(url, _("View {} letters").format(obj.letter_count)))
 
-
 link_to_letters.short_description = _("Letters")
 
-display_tags.short_description = _("Tags")
+
+def link_to_case(obj):
+    if not obj.case_id:
+        return None
+    url = reverse('admin:cases_case_changelist') + "?pk__exact=" + str(obj.case_id)
+    return safe('<a href="{}">{}</a>'.format(url, escape(obj.case)))
+
+link_to_case.short_description = _("Case")
+
+
 
 
 class LetterInline(admin.StackedInline):
@@ -58,7 +65,7 @@ class CaseAdmin(admin.ModelAdmin):
     }
 
     def get_queryset(self, request):
-        return super().get_queryset(request).annotate(letter_count=models.Count('letter'))
+        return super().get_queryset(request).annotate(letter_count=models.Count('letter')).prefetch_related('tags')
 
 
 class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -74,7 +81,7 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class LetterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'direction', 'institution', 'data', 'identifier', 'case', 'comment', 'created', 'modified',
+    list_display = ['name', 'direction', 'institution', 'data', 'identifier', link_to_case, 'comment', 'created', 'modified',
                     'channel']
     list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
@@ -84,6 +91,9 @@ class LetterAdmin(admin.ModelAdmin):
     autocomplete_lookup_fields = {
         'fk': ['institution', 'case'],
     }
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('channel', 'channel', 'institution', 'case')
 
 
 class TagAdmin(ImportExportMixin, admin.ModelAdmin):
