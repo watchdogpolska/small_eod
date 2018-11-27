@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-26 03:02+0100\n"
-"PO-Revision-Date: 2018-11-26 03:03+0100\n"
+"POT-Creation-Date: 2018-11-27 21:09+0100\n"
+"PO-Revision-Date: 2018-11-27 21:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -36,7 +36,7 @@ msgstr "Listy"
 msgid "Case"
 msgstr "Sprawa"
 
-#: admin.py:48
+#: admin.py:46
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
@@ -113,10 +113,8 @@ msgid "Responsble person"
 msgstr "Osoba odpowiedzialna"
 
 #: models.py:37
-#, fuzzy
-#| msgid "Institution"
 msgid "Audited institution"
-msgstr "Instytucja"
+msgstr "Kontrolowana instytucja"
 
 #: models.py:101 models.py:179
 msgid "Channel"
