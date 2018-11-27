@@ -33,8 +33,6 @@ def link_to_case(obj):
 link_to_case.short_description = _("Case")
 
 
-
-
 class LetterInline(admin.StackedInline):
     sortable_field_name = "ordering"
     model = Letter
@@ -55,14 +53,14 @@ class CaseAdmin(admin.ModelAdmin):
                    ('letter__institution__tags', InstitutionTagFilter)]
     search_fields = ['name', 'comment', 'audited_institution__name', 'comment']
 
-    raw_id_fields = ['responsible_people', 'tags']
+    raw_id_fields = ['responsible_people', 'audited_institution', 'tags']
 
     formfield_overrides = {
         models.ManyToManyField: {'widget': widgets.CheckboxSelectMultiple},
     }
 
     autocomplete_lookup_fields = {
-        # 'fk': ['responsible_people'],
+        'fk': ['audited_institution', ],
         'm2m': ['responsible_people', 'tags'],
     }
 
