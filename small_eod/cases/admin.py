@@ -37,6 +37,11 @@ class LetterInline(admin.StackedInline):
     sortable_field_name = "ordering"
     model = Letter
     extra = 0
+    raw_id_fields = ['institution', ]
+
+    autocomplete_lookup_fields = {
+        'fk': ['institution', ]
+    }
 
 
 class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
