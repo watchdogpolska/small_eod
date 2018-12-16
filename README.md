@@ -68,24 +68,118 @@ Dodatkowe uwagi:
 
 ## Uruchomienie projektu
 
-Instalacja Docker opisana została na 
+### Ubuntu
 
-Uruchomienie bazy danych i serwera WWWW:
+W celu prowadzenia rozwoju oprogramowania zalecana jest instalacja oprogramowania bez dodatkowej warstwy wirtualizacji. W celu przeprowadzenia takowej instalacji należy przeprowadzić instalacje w sposób przedstawiony poniżej.
 
+Niniejsza procedura została zweryfikowana dla Ubuntu 18.10.
+
+Pobierz kod źródłowy projektu:
+
+```bash
+git clone git@github.com:watchdogpolska/small_eod.git
 ```
-docker-compose up nginx db
+
+Zainstaluj wymagane zależności:
+
+```bash
+sudo apt-get install -y libmariadbclient-dev-compat gcc
+```
+
+Zainstaluj serwer bazodanowy:
+
+```bash
+sudo apt-get install mariadb-server-10.1
+```
+
+Zainicjalizuj bazę danych:
+
+```bash
+sudo mysql < contrib/docker/docker-entrypoint-initdb.d/*
+```
+
+Utwórz użytkownika bazy danych:
+
+```bash
+sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$(whoami)'@'localhost' IDENTIFIED BY 'password';"
+```
+
+Ustaw zmienną środowiskową z danymi dostępowymi do serwera bazodanowego:
+
+```bash
+export DATABASE_URL="mysql://$(whoami):password@localhost/small_eod"
+```
+
+Zainstaluj zależności systemowe dla Python:
+
+```bash
+sudo apt-get install virtualenv python3-pip python3-dev
+```
+
+Utwórz i aktywuj wirtualne środowisko Python:
+
+```bash
+virtualenv -p python3 env && source env/bin/activate
+```
+
+Zainstaluj zależności Python w wirtualnym środowisku Python:
+
+```bash
+pip install -r requirements/development.txt 
+```
+
+Zainicjalizuj tabele bazy danych:
+
+```bash
+python manage.py migrate
+```
+
+Utwórz konto administratora:
+
+```bash
+python manage.py createsuperuser
+```
+
+Uruchom serwer WWW:
+
+```bash
+python manage.py runsever
+```
+
+W przypadku wystąpienia problemów zweryfikuj powyższe polecenia z ```/Dockerfile```.
+
+Po adresem ```http://localhost:8000/admin/``` dostępne jest logowanie z wykorzystaniem loginu i hasła.
+
+Aplikacja nie posiada front-endu oraz domyślnie wykorzystuje logowanie GSuite. W celu utworzenia konta użytkownika wykonaj:
+
+```bash
+python manage.py createsuperuser
+```
+
+### Docker
+
+W celu wsparcia wykonania testów wykorzystywane jest oprogramowanie Docker. 
+
+W celu pracy nad rozwojem automatycznych testów wykonaj instalacje przedstawioną poniżej.
+
+Celem długoterminowym jest wykorzystanie Docker także w środowisku produkcyjnym, do czego obecny kształt obrazów Docker nie jest przystosowany.
+
+Instalacja Docker opisana została opisana w [dokumentacji projektu Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+
+Uruchomienie zależności aplikacji:
+
+```bash
+docker-compose up -d db nginx
 ```
 
 Uruchomienie serwera aplikacyjnego:
 
 ```bash
-docker-compose up web
+docker-compose up -d --build web 
 ```
 
-Aplikacja nie posiada front-endu oraz domyślnie wykorzystuje logowanie GSuite. W celu utworzenia konta użytkownika wykonaj:
+Wykonanie testów:
 
 ```bash
-docker-compose run web python manage.py createsuperuser
+docker-compose run web python manage.py test --keepdb
 ```
-
-Za sprawą usługi ```web``` pod adresem ```http://localhost:8000/admin/``` dostępne jest logowanie z wykorzystaniem loginu i hasła.
