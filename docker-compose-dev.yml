@@ -1,15 +1,6 @@
 version: '3.4'
+
 services:
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./contrib/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - static:/static
-      - media:/media
-    depends_on:
-      - web
 
   db:
     image: mysql:5.7
@@ -27,8 +18,7 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/code/staticfiles
-      - media:/code/media
+      - .:/code
     environment:
       DATABASE_URL: mysql://root:pass@db/small_eod
     expose:
@@ -36,9 +26,6 @@ services:
     command: >
       sh -c "./wait_for_it.sh db:3306 &&
              python manage.py collectstatic --noinput &&
+             python manage.py makemigrations --noinput &&
              python manage.py migrate --noinput &&
              python manage.py runserver 0.0.0.0:8000"
-
-volumes:
-  static:
-  media:
