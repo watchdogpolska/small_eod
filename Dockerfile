@@ -14,5 +14,3 @@ VOLUME /code/media
 VOLUME /code/staticfiles
 # Copy the code as late as possible.
 COPY . /code/
-ENTRYPOINT ["sh", "contrib/docker/entrypoint.sh"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
