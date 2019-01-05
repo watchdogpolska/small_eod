@@ -23,8 +23,8 @@ services:
     environment:
       DATABASE_URL: mysql://root:pass@db/small_eod
       DJANGO_SETTINGS_MODULE: config.settings.development
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     command: >
       sh -c "./wait_for_it.sh db:3306 &&
              python manage.py collectstatic --noinput &&
