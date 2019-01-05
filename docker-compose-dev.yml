@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 'pass'
       MYSQL_ROOT_HOST: '%'
-    expose:
-      - "3306"
+    ports:
+      - "3306:3306"
     volumes:
       - ./contrib/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
 
