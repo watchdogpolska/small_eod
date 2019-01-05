@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_ROOT_HOST: '%'
+    expose:
+      - "3306"
+    volumes:
+      - ./contrib/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+
+  web:
+    build:
+      context: .
+      target: dev
+    depends_on:
+      - db
+    volumes:
+      - .:/code
+    environment:
+      DATABASE_URL: mysql://root:pass@db/small_eod
+      DJANGO_SETTINGS_MODULE: config.settings.development
+    expose:
+      - "8000"
+    command: >
+      sh -c "./wait_for_it.sh db:3306 &&
+             python manage.py collectstatic --noinput &&
+             python manage.py makemigrations --noinput &&
+             python manage.py migrate --noinput &&
+             python manage.py runserver 0.0.0.0:8000"

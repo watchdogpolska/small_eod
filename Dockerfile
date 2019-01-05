@@ -8,8 +8,11 @@ COPY requirements/*.txt /code/requirements/
 RUN pip install --no-cache-dir pip wheel -U
 RUN pip install --no-cache-dir -r requirements/development.txt
 
-FROM builder
+FROM builder as dev
+VOLUME /code
+COPY . /code/
 
+FROM builder
 VOLUME /code/media
 VOLUME /code/staticfiles
 # Copy the code as late as possible.
