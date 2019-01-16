@@ -75,6 +75,8 @@ class CaseAdmin(admin.ModelAdmin):
             .select_related('audited_institution')\
             .prefetch_related('tags')
 
+    link_to_letters.admin_order_field = 'letter_count'
+
 
 class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
     raw_id_fields = ['tags']
