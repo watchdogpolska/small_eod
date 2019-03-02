@@ -54,8 +54,8 @@ class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
 class CaseAdmin(admin.ModelAdmin):
     inlines = [LetterInline]
     list_display = ['name', 'audited_institution', 'comment', 'created', 'modified', display_tags, link_to_letters]
-    list_filter = ['responsible_people', 'tags',
-                   ('letter__institution__tags', InstitutionTagFilter)]
+    list_filter = ['responsible_people', 'tags', 'audited_institution', 'whose_case', 'what_scope', 'inaction_scope',
+                   'decision_scope', 'time_of_info_provide', 'proceddings_interrupted', 'status']
     search_fields = ['name', 'comment', 'audited_institution__name', 'comment']
 
     raw_id_fields = ['responsible_people', 'audited_institution', 'tags']
@@ -74,6 +74,8 @@ class CaseAdmin(admin.ModelAdmin):
             .annotate(letter_count=models.Count('letter'))\
             .select_related('audited_institution')\
             .prefetch_related('tags')
+
+    link_to_letters.admin_order_field = 'letter_count'
 
 
 class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
