@@ -8,7 +8,8 @@ from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportMixin
 
-from small_eod.cases.models import Letter, Institution, Case, Channel, Tag, Person, Dictionary
+from small_eod.cases.models import Letter, Institution, Case, Channel, Tag, \
+    Person, Dictionary, LetterName
 from small_eod.cases.resources import InstitutionResource, TagResource
 
 
@@ -91,7 +92,8 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class LetterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'direction', 'institution', 'data', 'identifier', link_to_case, 'comment', 'created', 'modified',
+    list_display = ['pk', 'name', 'direction', 'institution', 'data', 'identifier', link_to_case, 'comment',
+                    'created', 'modified',
                     'channel']
     list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
@@ -103,7 +105,9 @@ class LetterAdmin(admin.ModelAdmin):
     }
 
     def get_queryset(self, request):
-        return super().get_queryset(request).select_related('channel', 'channel', 'institution', 'case')
+        return super().get_queryset(request).select_related(
+            'channel', 'channel', 'institution', 'case', 'name'
+        )
 
 
 class TagAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -115,5 +119,6 @@ admin.site.register(Dictionary)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Channel)
 admin.site.register(Case, CaseAdmin)
+admin.site.register(LetterName)
 admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(Letter, LetterAdmin)

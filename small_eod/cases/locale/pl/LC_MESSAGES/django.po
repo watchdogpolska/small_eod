@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 21:09+0100\n"
-"PO-Revision-Date: 2018-11-27 21:09+0100\n"
+"POT-Creation-Date: 2019-03-02 05:39+0100\n"
+"PO-Revision-Date: 2019-03-02 05:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,23 +20,23 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:17 models.py:34 models.py:133 models.py:139
+#: admin.py:18 models.py:34 models.py:133 models.py:139
 msgid "Tags"
 msgstr "Tagi"
 
-#: admin.py:22
+#: admin.py:23
 msgid "View {} letters"
 msgstr "Zobacz {} listów"
 
-#: admin.py:24 models.py:189
+#: admin.py:25 models.py:203
 msgid "Letters"
 msgstr "Listy"
 
-#: admin.py:33 models.py:90 models.py:175
+#: admin.py:34 models.py:90 models.py:189
 msgid "Case"
 msgstr "Sprawa"
 
-#: admin.py:46
+#: admin.py:52
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
@@ -104,7 +104,7 @@ msgstr "Słownik"
 msgid "Dictinaries"
 msgstr "Słowniki"
 
-#: models.py:30 models.py:138 models.py:178
+#: models.py:30 models.py:138 models.py:192
 msgid "Comment"
 msgstr "Komentarz"
 
@@ -116,7 +116,7 @@ msgstr "Osoba odpowiedzialna"
 msgid "Audited institution"
 msgstr "Kontrolowana instytucja"
 
-#: models.py:101 models.py:179
+#: models.py:101 models.py:193
 msgid "Channel"
 msgstr "Kanał"
 
@@ -140,7 +140,7 @@ msgstr "Osoby"
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:150 models.py:163
+#: models.py:150 models.py:177
 msgid "Institution"
 msgstr "Instytucja"
 
@@ -148,43 +148,55 @@ msgstr "Instytucja"
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:156
-msgid "received"
-msgstr "odebrane"
-
-#: models.py:157
-msgid "send"
-msgstr "wysłane"
-
-#: models.py:159
+#: models.py:155 models.py:172
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:161
+#: models.py:162
+msgid "Letter description"
+msgstr "Opis listu"
+
+#: models.py:163
+msgid "Letter descriptions"
+msgstr "Opisy listów"
+
+#: models.py:168
+msgid "received"
+msgstr "odebrane"
+
+#: models.py:169
+msgid "send"
+msgstr "wysłane"
+
+#: models.py:175
 msgid "Direction"
 msgstr "Kierunek"
 
-#: models.py:164
+#: models.py:178
 msgid "From whom / to whom"
 msgstr "Od kogo / do kogo"
 
-#: models.py:167
+#: models.py:181
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:169
+#: models.py:183
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:176
+#: models.py:190
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: models.py:177
+#: models.py:191
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:188
+#: models.py:198
+msgid "Letter #{}"
+msgstr "List #{}"
+
+#: models.py:202
 msgid "Letter"
 msgstr "List"
 

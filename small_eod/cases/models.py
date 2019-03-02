@@ -151,12 +151,26 @@ class Institution(TimeStampedModel):
         verbose_name_plural = _("Institutions")
 
 
+class LetterName(TimeStampedModel):
+    content = models.CharField(max_length=200, verbose_name=_("Description"))
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        ordering = ['content']
+        verbose_name = _("Letter description")
+        verbose_name_plural = _("Letter descriptions")
+
+
 class Letter(TimeStampedModel):
     DIRECTION = (
         ("R", _("received")),
         ("S", _("send"))
     )
-    name = models.CharField(max_length=200, verbose_name=_("Description"))
+    name = models.ForeignKey(to='cases.LetterName',
+                             verbose_name=_("Description"),
+                             on_delete=models.CASCADE)
     direction = models.CharField(max_length=50, choices=DIRECTION,
                                  verbose_name=_("Direction"))
     institution = models.ForeignKey(to=Institution,
@@ -181,7 +195,7 @@ class Letter(TimeStampedModel):
                                 on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.name
+        return _("Letter #{}").format(self.pk)
 
     class Meta:
         ordering = ['-data', ]
