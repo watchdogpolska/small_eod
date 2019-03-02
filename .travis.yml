@@ -1,6 +1,7 @@
 language: python
-python:
-  - "3.5"
-  - "3.6"
-install:
-  - pip install -r requirements/production.txt
+
+services:
+  - docker
+
+script:
+  - ./contrib/travis/script.sh
