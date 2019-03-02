@@ -173,7 +173,7 @@ class Letter(TimeStampedModel):
                              null=True,
                              blank=True,
                              verbose_name=_("Case"))
-    attachment = models.FileField(verbose_name=_("Attachment"), blank=True)
+    attachment = models.FileField(verbose_name=_("Attachment"), blank=True, max_length=130)
     ordering = models.IntegerField(default=1, blank=True, verbose_name=_("Ordering"))
     comment = models.TextField(blank=True, verbose_name=_("Comment"))
     channel = models.ForeignKey(to=Channel, verbose_name=_("Channel"),
