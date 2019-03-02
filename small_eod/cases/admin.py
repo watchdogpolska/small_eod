@@ -34,6 +34,12 @@ def link_to_case(obj):
 link_to_case.short_description = _("Case")
 
 
+def get_attachment_status(obj):
+    return bool(obj.attachment)
+get_attachment_status.short_description = _("Attachment")
+get_attachment_status.boolean = True
+
+
 class LetterInline(admin.StackedInline):
     sortable_field_name = "ordering"
     model = Letter
@@ -90,11 +96,10 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
         'm2m': ['tags'],
     }
 
-
 class LetterAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name', 'direction', 'institution', 'data', 'identifier', link_to_case, 'comment',
                     'created', 'modified',
-                    'channel']
+                    'channel', get_attachment_status]
     list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
 
