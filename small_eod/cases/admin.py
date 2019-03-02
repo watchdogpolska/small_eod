@@ -101,7 +101,7 @@ class LetterAdmin(admin.ModelAdmin):
                     'created', 'modified',
                     'channel', get_attachment_status]
     list_filter = ['institution', 'direction', 'case', 'channel']
-    search_fields = ['name', 'comment', 'identifier', 'institution__name', 'comment']
+    search_fields = ['name__content', 'comment', 'identifier', 'institution__name', 'comment']
 
     raw_id_fields = ['institution', 'case']
 
