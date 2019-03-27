@@ -10,11 +10,10 @@ def set_name_fk(apps, schema_editor):
     LetterName = apps.get_model('cases', 'LetterName')
     ln = {}
     for row in Letter.objects.all():
-        if row.name.strip() in ln:
-            row.name_fk = ln[row.name]
-        else:
+        if row.name.strip() not in ln:
             ln[row.name] = LetterName.objects.create(content=row.name)
             ln[row.name].save()
+        row.name_fk = ln[row.name]
         row.save()
 
 class Migration(migrations.Migration):
