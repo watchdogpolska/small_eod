@@ -45,16 +45,6 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
     * zarejestrowanie sprawy i jednoczesne wielu archiwalnych listów
     * przesłanie załączników poprzez przeciągnięcie i upuszczenie
 
-* Wprowadzenie poczekalni, czyli pism, które nie posiadają wszystkich metadanych, co jest konieczne, aby importować:
-
-    * E-maile oznaczone odpowiednią etykietą (GSuite wprowadzane w Stowarzyszeniu może powiadamiać i udostępniać przez API)
-    * Skany pism bezpośrednio z skanera (drukarka wysyła przez SMTP i można poprzez IMAP pobrać zeskanowany dokument)
-
-* Obserwowanie spraw - powiadomienie o zmianach osób, których sprawa dotyczy
-* Kontrolę terminu
-
-    * rejestracje terminu w sprawie
-    * powiadomienie o upływie terminu
  
 ## Technologia
 
