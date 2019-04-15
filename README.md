@@ -1,4 +1,5 @@
 # Small_EOD
+[![Build Status](https://travis-ci.org/watchdogpolska/small_eod.svg?branch=master)](https://travis-ci.org/watchdogpolska/small_eod)
 
 System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczególności w zakresie:
 
