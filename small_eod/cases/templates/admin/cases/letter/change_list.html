@@ -4,21 +4,29 @@
     {{ block.super }}
     <style>
         .column-institution, .field-institution {
-            width: 5%;
+            max-width: 300px;
             word-wrap: break-word;
         }
 
         .column-data, .field-data {
-            width: 5%;
+            max-width: 250px;
             word-wrap: break-word;
         }
 
         .column-comment, .field-comment {
-            width: 100%;
+            min-width: 350px;
         }
 
         table.grp-table {
             table-layout: fixed;
+        }
+
+        .column-link_to_case {
+            min-width: 350px;
+        }
+
+        .sortable.column-data.sorted.descending {
+            max-width: 170px;
         }
     </style>
 {% endblock %}
