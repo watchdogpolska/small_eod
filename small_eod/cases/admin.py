@@ -1,6 +1,12 @@
+import unicodedata
+from os.path import basename
+
+import zipstream as zipstream
+from django.conf.urls import url
 from django.contrib import admin
 from django.db import models
 from django.forms import widgets
+from django.http import StreamingHttpResponse
 from django.template.defaultfilters import safe
 from django.urls import reverse
 from django.utils.encoding import force_text
@@ -58,6 +64,27 @@ class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
         self.title = _("Institution tags by letters")
 
 
+def download_selected_letters(modeladmin, request, queryset):
+    z = zipstream.ZipFile()
+    for letter in queryset.filter(attachment__isnull=False).select_related('case'):
+        case_name = letter.case.name if letter.case else 'unknown'
+        case_name = unicodedata.normalize('NFKD', case_name.replace('/', '__'))
+        z.write(
+            letter.attachment.path,
+            "{case_id}-{case_name}/{filename}".format(
+                case_id=letter.case.id or 'unknown',
+                case_name=case_name,
+                filename=basename(letter.attachment.path)
+            )
+        )
+    response = StreamingHttpResponse(
+        streaming_content=z,
+        content_type='application/zip',
+    )
+    response['Content-Disposition'] = 'attachment; filename="letters.zip"'
+    return response
+
+
 class CaseAdmin(admin.ModelAdmin):
     inlines = [LetterInline]
     list_display = ['name', 'audited_institution', 'comment', 'created', 'modified', display_tags, link_to_letters]
@@ -96,13 +123,14 @@ class InstitutionAdmin(ImportExportMixin, admin.ModelAdmin):
         'm2m': ['tags'],
     }
 
+
 class LetterAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name', 'direction', 'institution', 'data', 'identifier', link_to_case, 'comment',
                     'created', 'modified',
                     'channel', get_attachment_status]
     list_filter = ['institution', 'direction', 'case', 'channel']
     search_fields = ['name__content', 'comment', 'identifier', 'institution__name', 'comment', 'case__name']
-
+    actions = [download_selected_letters]
     raw_id_fields = ['institution', 'case']
 
     autocomplete_lookup_fields = {
