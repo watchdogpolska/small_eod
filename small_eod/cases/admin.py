@@ -71,9 +71,10 @@ def download_selected_letters(modeladmin, request, queryset):
         case_name = unicodedata.normalize('NFKD', case_name.replace('/', '__'))
         z.write(
             letter.attachment.path,
-            "{case_id}-{case_name}/{filename}".format(
+            "{case_id}-{case_name}/{ordering}-{filename}".format(
                 case_id=letter.case.id or 'unknown',
                 case_name=case_name,
+                ordering=letter.ordering,
                 filename=basename(letter.attachment.path)
             )
         )
@@ -83,7 +84,7 @@ def download_selected_letters(modeladmin, request, queryset):
     )
     response['Content-Disposition'] = 'attachment; filename="letters.zip"'
     return response
-
+download_selected_letters.short_description = _("Download selected letters")
 
 class CaseAdmin(admin.ModelAdmin):
     inlines = [LetterInline]

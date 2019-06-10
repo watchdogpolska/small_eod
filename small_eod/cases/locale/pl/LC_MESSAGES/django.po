@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-02 05:39+0100\n"
-"PO-Revision-Date: 2019-03-02 05:40+0100\n"
+"POT-Creation-Date: 2019-06-10 11:52+0200\n"
+"PO-Revision-Date: 2019-06-10 11:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,25 +20,33 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:18 models.py:34 models.py:133 models.py:139
+#: admin.py:24 models.py:34 models.py:133 models.py:139
 msgid "Tags"
 msgstr "Tagi"
 
-#: admin.py:23
+#: admin.py:29
 msgid "View {} letters"
 msgstr "Zobacz {} listów"
 
-#: admin.py:25 models.py:203
+#: admin.py:31 models.py:203
 msgid "Letters"
 msgstr "Listy"
 
-#: admin.py:34 models.py:90 models.py:189
+#: admin.py:40 models.py:90 models.py:189
 msgid "Case"
 msgstr "Sprawa"
 
-#: admin.py:52
+#: admin.py:45 models.py:190
+msgid "Attachment"
+msgstr "Załącznik"
+
+#: admin.py:64
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
+
+#: admin.py:87
+msgid "Download selected letters"
+msgstr "Pobierz wybrane listy"
 
 #: apps.py:7 models.py:91
 msgid "Cases"
@@ -183,10 +191,6 @@ msgstr "Data odbioru / Data wysłania"
 #: models.py:183
 msgid "Identifier"
 msgstr "Sygnatura"
-
-#: models.py:190
-msgid "Attachment"
-msgstr "Załącznik"
 
 #: models.py:191
 msgid "Ordering"
