@@ -208,11 +208,18 @@ Warunki końcowe:
 
 ## Content-API
 
-### Technologia
+### Założenia
 
 * framework - Django & Django-REST-Framework
-* kontrola uprawnień - GitHub Actions
+* kontrola uprawnień - Django
+* baza danych - PostgreSQL / MySQL
 * CI - GitHub Actions
+* składowanie plików - Amazon S3
+
+Django ustanowi podstawowy kształt systemu.
+Django-REST-Framework pozwoli w łatwy sposób udostępnić zgromadzone dane.
+GitHub Actions stanowi aktualnie podstawowy system CI w Stowarzyszeniu. Winniśmy dążyć do pokrycia co najmniej jednym testem end-to-end każdego endpointu API.
+Dane będziemy przechowywać w usłudze zgodnej z Amazon S3, co pozwoli przechowywanie w przyszłości potencjalnie znacznej ilości danych niskim nakładem administracyjnym.
 
 ### Model danych
 
@@ -314,7 +321,8 @@ Model powiadomień zostanie zdefiniowany po zrealizowaniu podstawowych elementó
 
 ## Panel Zarządzania
 
-### Technologia
+### Założenia
 
 * framework - Vue/React
 * protokół komunikacji - REST
+* framework UI - Bootstrap / AntDesign / inny?
