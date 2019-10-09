@@ -14,41 +14,60 @@ x-paginationOffset: &metaPaginationOffset
   schema:
     type: integer
     format: int32
-x-errorResponse: &metaErrorResponse
-  default:
+x-errorResponse:
+  default: &metaErrorResponse
     description: unexpected error
     content:
       application/json:
         schema:
           $ref: "#/components/schemas/Error"
 x-metaEdit: &metaEdit
-  createdOn:
+  createdOn: &metaCreatedOn
     type: string
     format: datetime
     title: Czas utworzenia treści
     readOnly: true
-  createdBy:
+  createdBy: &metaCreatedBy
     type: string
     description: User ID responsible for creating the content
     readOnly: true
-  modifiedOn: 
+  modifiedOn: &metaModifiedOn
     type: string
     format: datetime
     title: Czas ostatniej modyfikacji treści
     readOnly: true
-  modifiedBy:
+  modifiedBy: &metaModifiedBy
     type: string
     title: User ID responsible for the latest content change
     readOnly: true
-
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Swagger
+  title: Small_EOD
+  contact:
+    name: Adam Dobrawy
+    email: adam.dobrawy@siecobywatelska.pl
   license:
     name: MIT
 security:
   - sessionAuth: []
+
+tags:
+  - name: administrativeUnit
+  - name: case
+  - name: collection
+  - name: description
+  - name: dictionary
+  - name: event
+  - name: file
+  - name: institution
+  - name: letter
+  - name: note
+  - name: notifiedUser
+  - name: responsibleUser
+  - name: session
+  - name: user
+
 paths:
   /case:
     get:
@@ -73,7 +92,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Case"
     post:
       summary: Create a case
@@ -94,12 +113,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Case"
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+        default: *metaErrorResponse
   /case/{caseId}:
     get:
       summary: Info for a specific case
@@ -113,7 +127,7 @@ paths:
           description: The id of the case to retrieve
           schema:
             type: number
-            format: letterId
+            format: caseId
       responses:
         '200':
           description: Expected response to a valid request
@@ -121,7 +135,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Case"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     patch:
       summary: Updated case
       operationId: updateCaseById
@@ -149,7 +163,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Case"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single case based on the ID supplied
       operationId: deleteCase
@@ -234,7 +248,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserRef"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single responsible user based on the ID supplied
       operationId: deleteResponsibleUser
@@ -319,7 +333,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserRef"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single notified user based on the ID supplied
       operationId: deleteNotifiedUser
@@ -372,7 +386,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Letter"
     post:
       summary: Create a letter
@@ -405,7 +419,7 @@ paths:
           description: The id of the letter to retrieve
           schema:
             type: number
-            format: letterId        
+            format: letterId       
       responses:
         '200':
           description: Expected response to a valid request
@@ -413,7 +427,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Letter"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single letter based on the ID supplied
       operationId: deleteLetter
@@ -517,7 +531,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Letter"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
   /collection:
     get:
       summary: List all collections
@@ -541,7 +555,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Collection"
     post:
       summary: Create a collection
@@ -592,7 +606,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
-        <<: *metaErrorResponse
+        default:  *metaErrorResponse
     patch:
       summary: Updated collection
       operationId: updateCollectionById
@@ -620,7 +634,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single collection based on the ID supplied
       operationId: deleteCollection
@@ -660,13 +674,6 @@ paths:
           schema:
             type: number
             format: collectionId
-        - name: caseId
-          in: path
-          required: true
-          description: The id of the collection to retrieve
-          schema:
-            type: number
-            format: caseId
       responses:
         '200':
           description: Expected response to a valid request
@@ -674,7 +681,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Case"
-        <<: *metaErrorResponse
+        default:  *metaErrorResponse
   /collection/{collectionId}/case/{caseId}/letter:
     get:
       summary: Letters of cases match query for a specific collection
@@ -706,7 +713,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Letter"
-        <<: *metaErrorResponse
+        default:  *metaErrorResponse
   /collection/{collectionId}/case/{caseId}/note:
     get:
       summary: Notes of case match query for a specific collection
@@ -738,7 +745,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Letter"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
   /collection/{collectionId}/case/{caseId}/event:
     get:
       summary: Events of case match query for a specific collection
@@ -770,8 +777,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Event"
-        <<: *metaErrorResponse
-  /note/:
+        default: *metaErrorResponse
+  /note:
     get:
       summary: List all notes of case
       operationId: listNote
@@ -794,7 +801,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Note"
     post:
       summary: Create a note
@@ -842,7 +849,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Note"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single note based on the ID supplied
       operationId: deleteNote
@@ -865,7 +872,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /event/:
+  /event:
     get:
       summary: List all events of case
       operationId: listEvent
@@ -888,7 +895,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Event"
     post:
       summary: Create a event
@@ -936,7 +943,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Event"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single event based on the ID supplied
       operationId: deleteEvent
@@ -959,7 +966,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /user/:
+  /user:
     get:
       summary: List all users
       operationId: listUser
@@ -975,7 +982,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/User"
     post:
       summary: Create a user
@@ -1023,7 +1030,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single user based on the ID supplied
       operationId: deleteUser
@@ -1067,7 +1074,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Session"
     post:
       summary: Create a session
@@ -1124,7 +1131,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Session"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single session based on the ID supplied
       operationId: deleteSession
@@ -1154,7 +1161,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /dictionary/:
+  /dictionary:
     get:
       summary: List all dictionaries
       operationId: listDictionary
@@ -1170,7 +1177,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Dictionary"
     post:
       summary: Create a dictionary
@@ -1218,7 +1225,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dictionary"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single dictionary based on the ID supplied
       operationId: deleteDictionary
@@ -1241,7 +1248,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /description/:
+  /description:
     get:
       summary: List all descriptions
       operationId: listDescription
@@ -1257,7 +1264,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Description"
     post:
       summary: Create a description
@@ -1305,7 +1312,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Description"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single description based on the ID supplied
       operationId: deleteDescription
@@ -1328,7 +1335,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /institution/:
+  /institution:
     get:
       summary: List all institutions
       operationId: listInstitution
@@ -1344,7 +1351,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/Institution"
     post:
       summary: Create a institution
@@ -1371,95 +1378,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /institution/{institutionId}:
-    get:
-      summary: Info for a specific institution
-      operationId: showInstitutionById
-      tags:
-        - institution
-      parameters:
-        - name: institutionId
-          in: path
-          required: true
-          description: The id of the institution to retrieve
-          schema:
-            type: number
-            format: letterId
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Institution"
-        <<: *metaErrorResponse
-    delete:
-      description: Deletes a single institution based on the ID supplied
-      operationId: deleteInstitution
-      parameters:
-        - name: institutionId
-          in: path
-          description: The id of the institution to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      tags:
-        - institution
-      responses:
-        '204':
-          description: institution deleted
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /institution/{institutionId}:
-    get:
-      summary: Info for a specific institution
-      operationId: showInstitutionById
-      tags:
-        - institution
-      parameters:
-        - name: institutionId
-          in: path
-          required: true
-          description: The id of the institution to retrieve
-          schema:
-            type: number
-            format: letterId
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Institution"
-        <<: *metaErrorResponse
-    delete:
-      description: Deletes a single institution based on the ID supplied
-      operationId: deleteInstitution
-      parameters:
-        - name: institutionId
-          in: path
-          description: The id of the institution to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      tags:
-        - institution
-      responses:
-        '204':
-          description: institution deleted
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /administrativeUnit/:
+  /administrativeUnit:
     get:
       summary: List all administrative units
       operationId: listAdministrativeUnit
@@ -1475,7 +1394,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/AdministrativeUnit"
     post:
       summary: Create a administrative unit
@@ -1523,7 +1442,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AdministrativeUnit"
-        <<: *metaErrorResponse
+        default: *metaErrorResponse
     delete:
       description: Deletes a single administrative unit based on the ID supplied
       operationId: deleteAdministrativeUnit
@@ -1540,50 +1459,6 @@ paths:
       responses:
         '204':
           description: administrativeUnit deleted
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /administrativeUnit/{administrativeUnitId}:
-    get:
-      summary: Info for a specific administrative unit
-      operationId: showAdministrativeUnitById
-      tags:
-        - administrativeUnit
-      parameters:
-        - name: administrativeUnitId
-          in: path
-          required: true
-          description: The id of the administrative unit to retrieve
-          schema:
-            type: number
-            format: letterId
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AdministrativeUnit"
-        <<: *metaErrorResponse
-    delete:
-      description: Deletes a single administrative unit based on the ID supplied
-      operationId: deleteAdministrativeUnit
-      parameters:
-        - name: administrativeUnitId
-          in: path
-          description: The id of the administrative unit to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      tags:
-        - administrativeUnit
-      responses:
-        '204':
-          description: administrative unit deleted
         default:
           description: unexpected error
           content:
@@ -1618,7 +1493,7 @@ components:
           name:
               type: string
               description: Name of the statistical field
-              example: 
+              example:
                   - whose_case
                   - what_scope
                   - inaction_scope
@@ -1730,7 +1605,7 @@ components:
           - id
           - name
       properties:
-          id: 
+          id:
               type: string
               readOnly: true
           name:
@@ -1750,7 +1625,10 @@ components:
           administrativeUnit:
               type: string
               format: administrativeUnitId
-          <<: *metaEdit
+          createdOn: *metaCreatedOn
+          createdBy: *metaCreatedBy
+          modifiedOn: *metaModifiedOn
+          modifiedBy: *metaModifiedBy
     Tag:
         type: object
         required:
@@ -1773,7 +1651,7 @@ components:
             - id
             - name
         properties:
-            id: 
+            id:
                 type: string
                 format: collectionId
                 readOnly: true
@@ -1869,7 +1747,10 @@ components:
               type: array
               items:
                   type: string
-          <<: *metaEdit
+          createdOn: *metaCreatedOn
+          createdBy: *metaCreatedBy
+          modifiedOn: *metaModifiedOn
+          modifiedBy: *metaModifiedBy
     File:
       type: object
       properties:
@@ -1912,11 +1793,11 @@ components:
             type: string
         postal_code:
             type: string
-        city: 
+        city:
             type: string
         voivodeship:
             type: string
-        house_no: 
+        house_no:
             type: string
         flat_no:
             type: string
@@ -1953,7 +1834,7 @@ components:
           description: Required address fields
           items:
             type: string
-            enum: 
+            enum:
               - email
               - epuap
               - street
@@ -1962,7 +1843,10 @@ components:
               - voivodeship
               - house_no
               - flat_no
-        <<: *metaEdit
+        createdOn: *metaCreatedOn
+        createdBy: *metaCreatedBy
+        modifiedOn: *metaModifiedOn
+        modifiedBy: *metaModifiedBy
     Error:
       type: object
       required:
@@ -1989,7 +1873,10 @@ components:
             format: caseId
           comment:
               type: string
-          <<: *metaEdit
+          createdOn: *metaCreatedOn
+          createdBy: *metaCreatedBy
+          modifiedOn: *metaModifiedOn
+          modifiedBy: *metaModifiedBy
     Event:
       type: object
       required:
@@ -2006,7 +1893,10 @@ components:
             format: caseId
           comment:
               type: string
-          <<: *metaEdit
+          createdOn: *metaCreatedOn
+          createdBy: *metaCreatedBy
+          modifiedOn: *metaModifiedOn
+          modifiedBy: *metaModifiedBy
     User:
       type: object
       required:
@@ -2070,7 +1960,10 @@ components:
           maxLength: 200
         userAgent:
           type: string
-        <<: *metaEdit
+        createdOn: *metaCreatedOn
+        createdBy: *metaCreatedBy
+        modifiedOn: *metaModifiedOn
+        modifiedBy: *metaModifiedBy
     AdministrativeUnit:
       type: object
       properties:
