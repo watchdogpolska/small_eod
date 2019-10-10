@@ -1919,6 +1919,10 @@ components:
         password:
           type: string
           writeOnly: true
+        permission:
+          type: array
+          items:
+            type: string
     Session:
       type: object
       required:

@@ -36,6 +36,7 @@ Celem wszelkich podejmowanych przez Stowarzyszenia działań jest realizacja cel
 
   * wykorzystanie środowisk chmurowych
   * wykorzystanie konteneryzacji
+  * aktywne utrzymywane w długoletniej perspektywie.
 
 Uwaga: Na dzień 1 października 2019 roku [HyperOne](https://www.hyperone.com/) udostępnia Stowarzyszeniu zasoby informatyczne bez opłat. W ofercie posiada usługi tj. Wirtualne Maszyny, Bazy Danych (PostgreSQL i MySQL), Kontenery. W przygotowaniu są usługi tj. skład obiektowy (~Amazon S3, Swift), SMTP-as-a-service (~SendGrid, ~Mailgun), Kubernetes-as-a-service (Amazon EKS, Google Kubernetes Engine).
 
@@ -117,9 +118,9 @@ Scenariusz (scenariusze) procesów biznesowych:
 
 1. Użytkownik wypełnia formularz i zatwierdza **dodanie listu**
 1. System weryfikuje wprowadzone dane i potwierdza ich przyjęcie.
-1. Archiwista wyświetla listę listów bez przypisanych spraw
-1. Użytkownik wybiera edycje listu
-1. System wyświetla formularz edycji listu
+1. Archiwista wyświetla listę listów bez przypisanych spraw.
+1. Użytkownik wybiera edycje listu.
+1. System wyświetla formularz edycji listu.
 
 * Pola wynikają z interfejsu API
 
@@ -241,6 +242,8 @@ Wyróżniamy następujące elementy:
 * Description - słownik opisów listów
 * AdministrativeUnit - jednostki podziału terytorialnego
 
+Szczegółowy model danych został udokumentowany w ```./swagger.yaml```.
+
 ### Model uprawnień
 
 System wyróżnia następujące uprawnienia:
@@ -309,7 +312,7 @@ Klasy uprawnień mają następujące znaczenie:
 
 W celu kontroli dostępu wykorzystywane jest:
 
-* uwierzytelnianie  poprzez GSuite - oznaczone w dokumentacji API jako ```sessionAuth```
+* uwierzytelnianie poprzez GSuite - oznaczone w dokumentacji API jako ```sessionAuth```
 * uwierzytelnianie hasłem - wyłącznie w celach administracyjnych, tożsame z oznaczeniem w API jako ```sessionAuth```
 * uwierzytelnianie kodem JWT - oznaczone w dokumentacji API jako ```bearerAuth```.
 
@@ -321,8 +324,57 @@ Model powiadomień zostanie zdefiniowany po zrealizowaniu podstawowych elementó
 
 ## Panel Zarządzania
 
-### Założenia
+### Założenia Panelu Zarządzania
 
 * framework - Vue/React
 * protokół komunikacji - REST
 * framework UI - Bootstrap / AntDesign / inny?
+
+### Struktura Panelu Zarządzania
+
+Struktura *Panelu Zarządzania* składa się z trzech sekcji:
+
+* sekcji publicznej
+* sekcji prezentacji kolekcji
+* sekcji edycji
+
+Sekcje publiczna umożliwia:
+
+* zalogowanie do sekcji edycji z wykorzystaniem GSuite
+* uzyskanie podstawowych informacji o projekcie (3-4 zdania)
+* odesłanie do GitHub w celu uzyskania szczegółowych informacji o projekcie
+
+Sekcja prezentacji kolekcji umożliwi zapoznanie się (tylko do odczytu) z sprawami zebranymi w danej kolekcji oraz materiałami z nią powiązanymi (listami, notatkami, wydarzeniami). Dostęp do treści kolekcji będzie możliwy na podstawie przesłanego linku zawierającego token. Niektóre kolekcje mogą być publicznie i nie wymagać żadnego tokenu.
+
+W V2 możemy zacząć od prezentowania wszystkich danych w postaci tabelarycznej.
+
+Sekcja edycji umożliwia:
+
+* odczyt, dodanie i dodanie jednostek administracyjnych (zaimportowanych wstępnie z bazy TERYT)
+* odczyt, dodanie i edycje spraw z uwzględnieniem:
+  * adaptacji do uprawnień użytkownika
+  * filtrowania wyszukiwanych spraw – zob. obecne  ```./ui/v1/case_list.png```
+  * edycja sprawy umożliwia określenie:
+    * instytucji - na podstawie kolekcji instytucji
+    * wskazania wartości pól danych statycznych - zgodnie z regułami danego słownika
+    * użytkowników odpowiedzialnych
+    * użytkowników powiadamianych
+  * uzyskanie uzyskania chronologicznej wiedzy na temat elementów powiązanych (listów, notatek, wydarzeń) – zob. pokrewne ```./ui/v1/porady_case_view.png```
+  * możliwość wyboru opisu listów wyłącznie spośród przewidzianych wcześniej opisów listów
+  * możliwości dodania bez znaczącej zmiany kontekstu sprawy (UX) - zob. obecne ```./ui/v1/case_change.png```:
+    * wielu listu z uwzględnieniem:
+      * dodania wielu plików do sprawy
+      * wykorzystanie drag-and-drop plików
+      * zarządzania kolejnością listów
+    * wydarzenia
+    * notatki
+* odczyt listów niepowiązanych z sprawami w celu:
+  * prostego utworzenie nowej sprawy i powiązania z nową sprawą
+  * powiązania z istniejącą sprawą
+* odczyt, dodanie i edycje opisów listów (kolekcja na potrzeby wyboru wartości pola "Opis" w formularzu edycji listu)
+* odczyt, dodanie i edycje słowników (kolekcja na temat pól danych statystycznych w formularzu edycji sprawy)
+* odczyt, dodanie i edycja użytkowników
+
+W przypadku prezentacji odczytu sprawy (a za tym także listów, notatek i wydarzeń) możemy współdzielić komponenty z sekcją prezentacji.
+
+W V2 możemy zacząć od prezentowania wszystkich danych w postaci tabelarycznej.
