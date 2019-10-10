@@ -3,10 +3,8 @@ name: YAML files
 on: [push]
 
 jobs:
-  build:
-
+  lint_speccy:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up Node 12.x
@@ -16,3 +14,16 @@ jobs:
     - name: Lint with Speccy
       run: |
         find . -name 'swagger.yaml' -exec npx speccy lint {} \;
+
+  lint_openapi:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: Lint with Speccy
+      run: |
+        pip install openapi-spec-validator
+        find . -name 'swagger.yaml' -exec python -m openapi_spec_validator {} \;
