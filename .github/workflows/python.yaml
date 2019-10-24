@@ -1,0 +1,11 @@
+name: Django application
+
+on: [push]
+
+jobs:
+  django:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build & test
+      run: ./contrib/github/script.sh
