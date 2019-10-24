@@ -26,4 +26,4 @@ jobs:
     - name: Lint with openapi-spec-validator
       run: |
         pip install openapi-spec-validator
-        find . -name 'swagger.yaml' -print0 | xargs -n 1 python -m openapi_spec_validator {} \;
+        find . -name 'swagger.yaml' -print0 | xargs -n 1 python -m openapi_spec_validator

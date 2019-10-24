@@ -66,8 +66,9 @@ tags:
   - name: notifiedUser
   - name: responsibleUser
   - name: session
-  - name: user
   - name: tagNamespace
+  - name: user
+
 
 paths:
   /case:
