@@ -9,6 +9,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Lint
       run: make lint
+    - name: Build
+      run: make build
     - name: Migration check
       run: make check
     - name: Show settings
