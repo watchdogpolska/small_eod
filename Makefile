@@ -10,7 +10,7 @@ test: wait_mysql
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
 wait_mysql:
-	docker-compose up db
+	docker-compose up -d db
 	docker-compose run web bash -c 'wait-for-it db:3306'
 
 migrate:
