@@ -6,18 +6,15 @@ from django.core.management.base import BaseCommand
 
 from small_eod.extracts.models import Mail
 
-FIELD_MAP = {
-    'to': 'to_address',
-    'from': 'from_address'
-}
+FIELD_MAP = {"to": "to_address", "from": "from_address"}
 
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument('infile', nargs='+', type=argparse.FileType('r'))
+        parser.add_argument("infile", nargs="+", type=argparse.FileType("r"))
 
     def handle(self, *args, **options):
-        for file in options['infile']:
+        for file in options["infile"]:
             c_file = csv.DictReader(file)
             with transaction.atomic():
                 for row in c_file:
