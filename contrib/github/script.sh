@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eux
-make wait_mysql
+make wait_mysql migrate
 # verify that user able to create user
 docker-compose run web python manage.py createsuperuser --username root --email root@example.com --noinput
 # run test suite
