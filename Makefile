@@ -1,13 +1,16 @@
+.PHONY: all test clean docs
+
 clean:
 	docker-compose down
 
 build:
 	docker-compose build web
 
-test: check
+test: wait_mysql
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
 wait_mysql:
+	docker-compose up db
 	docker-compose run web bash -c 'wait-for-it db:3306'
 
 migrate:
@@ -31,6 +34,3 @@ migrations: wait_mysql
 
 settings:
 	docker-compose run web python manage.py diffsettings
-
-docs:
-	docker-compose run web sphinx-build -b html -d docs/_build/doctrees docs docs/_build/html
