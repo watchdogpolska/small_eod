@@ -1,14 +1,12 @@
 #!/bin/sh
 set -eux
-docker-compose up -d db nginx
-docker-compose build web
-sleep 30 # for db start
+make wait_mysql migrate
 # verify that user able to create user
 docker-compose run web python manage.py createsuperuser --username root --email root@example.com --noinput
 # run test suite
-docker-compose run web python manage.py test --keepdb
+make test
 # verify integration of services
-docker-compose up -d web
+docker-compose up -d web nginx
 sleep 5 # for http server start
 # verify that user able to view login form
 curl http://localhost:8000/ -s

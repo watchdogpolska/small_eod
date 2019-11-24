@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def migrate_tags_from_letter_to_case(apps, schema_editor):
-    Letter = apps.get_model('cases', 'Letter')
+    Letter = apps.get_model("cases", "Letter")
     for row in Letter.objects.all():
         if not row.case:
             continue
@@ -14,13 +14,10 @@ def migrate_tags_from_letter_to_case(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cases', '0006_auto_20181107_2349'),
+        ("cases", "0006_auto_20181107_2349"),
     ]
 
     operations = [
         migrations.RunPython(migrate_tags_from_letter_to_case),
-        migrations.RemoveField(
-            model_name='letter',
-            name='tags',
-        ),
+        migrations.RemoveField(model_name="letter", name="tags",),
     ]
