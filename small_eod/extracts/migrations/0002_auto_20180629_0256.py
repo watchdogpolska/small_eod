@@ -6,20 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('extracts', '0001_initial'),
+        ("extracts", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mail',
-            name='text',
-            field=models.TextField(default=''),
+            model_name="mail",
+            name="text",
+            field=models.TextField(default=""),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='mail',
-            name='to_address',
-            field=models.TextField(default=''),
+            model_name="mail",
+            name="to_address",
+            field=models.TextField(default=""),
             preserve_default=False,
         ),
     ]

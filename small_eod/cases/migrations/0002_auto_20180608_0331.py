@@ -11,120 +11,219 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cases', '0001_initial'),
+        ("cases", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Channel',
+            name="Channel",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
             ],
-            options={
-                'verbose_name_plural': 'Channels',
-                'verbose_name': 'Channel',
-            },
+            options={"verbose_name_plural": "Channels", "verbose_name": "Channel",},
         ),
         migrations.CreateModel(
-            name='Person',
+            name="Person",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('name', models.CharField(max_length=100, verbose_name='Nazwa')),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Nazwa")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name_plural': 'Persons',
-                'verbose_name': 'Person',
-            },
+            options={"verbose_name_plural": "Persons", "verbose_name": "Person",},
         ),
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
             ],
+            options={"verbose_name_plural": "Tags", "verbose_name": "Tag",},
+        ),
+        migrations.AlterModelOptions(
+            name="case",
             options={
-                'verbose_name_plural': 'Tags',
-                'verbose_name': 'Tag',
+                "ordering": ["created"],
+                "verbose_name": "Case",
+                "verbose_name_plural": "Cases",
             },
         ),
         migrations.AlterModelOptions(
-            name='case',
-            options={'ordering': ['created'], 'verbose_name': 'Case', 'verbose_name_plural': 'Cases'},
+            name="institution",
+            options={
+                "ordering": ["created"],
+                "verbose_name": "Institution",
+                "verbose_name_plural": "Institutions",
+            },
         ),
         migrations.AlterModelOptions(
-            name='institution',
-            options={'ordering': ['created'], 'verbose_name': 'Institution', 'verbose_name_plural': 'Institutions'},
-        ),
-        migrations.AlterModelOptions(
-            name='letter',
-            options={'ordering': ['data'], 'verbose_name': 'Letter', 'verbose_name_plural': 'Letters'},
-        ),
-        migrations.AlterField(
-            model_name='case',
-            name='comment',
-            field=models.TextField(blank=True, verbose_name='Comment'),
+            name="letter",
+            options={
+                "ordering": ["data"],
+                "verbose_name": "Letter",
+                "verbose_name_plural": "Letters",
+            },
         ),
         migrations.AlterField(
-            model_name='institution',
-            name='comment',
-            field=models.TextField(blank=True, verbose_name='Comment'),
+            model_name="case",
+            name="comment",
+            field=models.TextField(blank=True, verbose_name="Comment"),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='attachment',
-            field=models.FileField(upload_to='', verbose_name='Attachment'),
+            model_name="institution",
+            name="comment",
+            field=models.TextField(blank=True, verbose_name="Comment"),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='case',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='cases.Case', verbose_name='Case'),
+            model_name="letter",
+            name="attachment",
+            field=models.FileField(upload_to="", verbose_name="Attachment"),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='comment',
-            field=models.TextField(blank=True, verbose_name='Comment'),
+            model_name="letter",
+            name="case",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="cases.Case",
+                verbose_name="Case",
+            ),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='direction',
-            field=models.CharField(choices=[('R', 'received'), ('S', 'send')], max_length=50, verbose_name='Direction'),
+            model_name="letter",
+            name="comment",
+            field=models.TextField(blank=True, verbose_name="Comment"),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='identifier',
-            field=models.CharField(blank=True, max_length=100, verbose_name='Identifier'),
+            model_name="letter",
+            name="direction",
+            field=models.CharField(
+                choices=[("R", "received"), ("S", "send")],
+                max_length=50,
+                verbose_name="Direction",
+            ),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='institution',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cases.Institution', verbose_name='Institution'),
+            model_name="letter",
+            name="identifier",
+            field=models.CharField(
+                blank=True, max_length=100, verbose_name="Identifier"
+            ),
         ),
         migrations.AlterField(
-            model_name='letter',
-            name='ordering',
-            field=models.IntegerField(blank=True, default=1, verbose_name='Ordering'),
+            model_name="letter",
+            name="institution",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="cases.Institution",
+                verbose_name="Institution",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="letter",
+            name="ordering",
+            field=models.IntegerField(blank=True, default=1, verbose_name="Ordering"),
         ),
         migrations.AddField(
-            model_name='case',
-            name='responsible_people',
-            field=models.ManyToManyField(blank=True, to='cases.Person', verbose_name='Responsble person'),
+            model_name="case",
+            name="responsible_people",
+            field=models.ManyToManyField(
+                blank=True, to="cases.Person", verbose_name="Responsble person"
+            ),
         ),
         migrations.AddField(
-            model_name='institution',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='cases.Tag', verbose_name='Tags'),
+            model_name="institution",
+            name="tags",
+            field=models.ManyToManyField(
+                blank=True, to="cases.Tag", verbose_name="Tags"
+            ),
         ),
         migrations.AddField(
-            model_name='letter',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='cases.Tag', verbose_name='Tags'),
+            model_name="letter",
+            name="tags",
+            field=models.ManyToManyField(
+                blank=True, to="cases.Tag", verbose_name="Tags"
+            ),
         ),
     ]

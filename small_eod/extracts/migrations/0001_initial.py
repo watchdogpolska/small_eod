@@ -9,25 +9,43 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Mail',
+            name="Mail",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('subject', models.TextField()),
-                ('from_address', models.TextField()),
-                ('body', models.TextField()),
-                ('attachments_count', models.TextField()),
-                ('date', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("subject", models.TextField()),
+                ("from_address", models.TextField()),
+                ("body", models.TextField()),
+                ("attachments_count", models.TextField()),
+                ("date", models.TextField()),
             ],
-            options={
-                'verbose_name': 'Mails',
-                'verbose_name_plural': 'Mails',
-            },
+            options={"verbose_name": "Mails", "verbose_name_plural": "Mails",},
         ),
     ]

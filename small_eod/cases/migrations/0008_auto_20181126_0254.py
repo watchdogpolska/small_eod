@@ -6,12 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cases', '0007_remove_letter_tags'),
+        ("cases", "0007_remove_letter_tags"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='letter',
-            options={'ordering': ['-data'], 'verbose_name': 'Letter', 'verbose_name_plural': 'Letters'},
+            name="letter",
+            options={
+                "ordering": ["-data"],
+                "verbose_name": "Letter",
+                "verbose_name_plural": "Letters",
+            },
         ),
     ]

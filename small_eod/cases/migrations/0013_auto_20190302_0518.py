@@ -5,9 +5,10 @@ import django.db.models.deletion
 import django.utils.timezone
 import model_utils.fields
 
+
 def set_name_fk(apps, schema_editor):
-    Letter = apps.get_model('cases', 'Letter')
-    LetterName = apps.get_model('cases', 'LetterName')
+    Letter = apps.get_model("cases", "Letter")
+    LetterName = apps.get_model("cases", "LetterName")
     ln = {}
     for row in Letter.objects.all():
         if row.name.strip() not in ln:
@@ -16,41 +17,67 @@ def set_name_fk(apps, schema_editor):
         row.name_fk = ln[row.name]
         row.save()
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cases', '0012_auto_20190104_2012'),
+        ("cases", "0012_auto_20190104_2012"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LetterName',
+            name="LetterName",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('content', models.CharField(max_length=200, verbose_name='Description')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                (
+                    "content",
+                    models.CharField(max_length=200, verbose_name="Description"),
+                ),
             ],
             options={
-                'ordering': ['content'],
-                'verbose_name': 'Letter description',
-                'verbose_name_plural': 'Letter descriptions',
+                "ordering": ["content"],
+                "verbose_name": "Letter description",
+                "verbose_name_plural": "Letter descriptions",
             },
         ),
         migrations.AddField(
-            model_name='letter',
-            name='name_fk',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='cases.LetterName', verbose_name='Description'),
+            model_name="letter",
+            name="name_fk",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="cases.LetterName",
+                verbose_name="Description",
+            ),
             preserve_default=False,
         ),
         migrations.RunPython(set_name_fk),
-        migrations.RemoveField(
-            model_name='letter',
-            name='name',
-        ),
+        migrations.RemoveField(model_name="letter", name="name",),
         migrations.RenameField(
-            model_name='letter',
-            old_name='name_fk',
-            new_name='name',
-        )
+            model_name="letter", old_name="name_fk", new_name="name",
+        ),
     ]

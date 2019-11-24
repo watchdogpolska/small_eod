@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Lint Python
-      run: |
-        docker run --rm -v $(pwd):/data quay.io/watchdogpolska/pyupgrade
-        docker run --rm -v $(pwd):/data cytopia/black --check /data
+    - name: Lint
+      run: make lint
+    - name: Migration check
+      run: make check
+    - name: Show settings
+      run: make settings
     - name: Build & test
       run: ./contrib/github/script.sh
