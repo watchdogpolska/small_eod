@@ -15,4 +15,4 @@ VOLUME /code/media
 VOLUME /code/staticfiles
 # Copy the code as late as possible.
 COPY . /code/
-CMD ["bash","-c","python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"]
+CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
