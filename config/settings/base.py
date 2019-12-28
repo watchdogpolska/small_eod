@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "small_eod.cases.apps.CasesConfig",
     "small_eod.extracts",
     "small_eod.users",
+    "small_eod.events",
     "grappelli.dashboard",
     "grappelli",
     "import_export",
