@@ -1544,7 +1544,7 @@ paths:
             type: integer
             format: int64
       tags:
-        - TagNamespace
+        - tagNamespace
       responses:
         '204':
           description: Tag Namespace deleted
