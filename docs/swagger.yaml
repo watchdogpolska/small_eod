@@ -1791,20 +1791,8 @@ components:
             type: string
             format: date-time
           query:
-            type: array
-            description: Kryteria wyszukiwania
-            minItems: 1
-            items:
-              type: object
-              properties:
-                key:
-                  type: string
-                  enum:
-                    - institution
-                    - tags
-                    - dictionaryId
-                value:
-                  type: string
+            type: string
+            description: Search query
           createdOn: *metaCreatedOn
           createdBy: *metaCreatedBy
           modifiedOn: *metaModifiedOn
