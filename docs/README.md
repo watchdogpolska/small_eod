@@ -242,7 +242,7 @@ Wyróżniamy następujące elementy:
 * Description - słownik opisów listów
 * AdministrativeUnit - jednostki podziału terytorialnego
 
-Szczegółowy model danych został udokumentowany w ```./swagger.yaml```.
+Szczegółowy model danych został udokumentowany w ```./swagger.yaml```. Wizualizacja możliwa poprzez [Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/master/docs/swagger.yaml) lub ReDoc(https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/master/docs/swagger.yaml).
 
 ### Model uprawnień
 
