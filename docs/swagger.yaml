@@ -294,6 +294,13 @@ paths:
             format: caseId
       tags:
         - notifiedUser
+      requestBody:
+        description: New notified user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRef'
       responses:
         '201':
           description: Expected response to a valid request
@@ -395,6 +402,13 @@ paths:
       operationId: createLetter
       tags:
         - letter
+      requestBody:
+        description: New letter
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Letter'
       responses:
         '201':
           description: Expected response to a valid request
@@ -466,6 +480,13 @@ paths:
             format: letterId
       tags:
         - file
+      requestBody:
+        description: New file
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
       responses:
         '201':
           description: Expected response to a valid request
@@ -486,7 +507,7 @@ paths:
       tags:
         - file
       requestBody:
-        description: New responsible user
+        description: New file signature request
         required: true
         content:
           application/json:
@@ -1086,7 +1107,7 @@ paths:
       tags:
         - session
       requestBody:
-        description: New user
+        description: New session
         required: true
         content:
           application/json:
