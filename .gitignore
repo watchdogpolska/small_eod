@@ -3,3 +3,6 @@
 
 Pipfile
 Pipfile.lock
+
+.env
+local.py
