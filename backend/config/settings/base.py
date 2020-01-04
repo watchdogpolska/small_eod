@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'teryt_tree',
+    # 'teryt_tree',
 
     'small_eod.users',
     'small_eod.generic',
