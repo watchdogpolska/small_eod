@@ -1,0 +1,6 @@
+# my.cnf
+[client]
+database = small_eod
+user = admin
+password = admin
+default-character-set = utf8
