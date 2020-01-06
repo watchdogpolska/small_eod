@@ -49,6 +49,13 @@ info:
     email: adam.dobrawy@siecobywatelska.pl
   license:
     name: MIT
+servers:
+  - url: https://small-eod.siecobywatelska.pl/v1
+    description: Production server (uses live data)
+  - url: https://demo.small-eod.siecobywatelska.pl/v1
+    description: Sandbox server (uses test data)
+  - url: https://localhost:8080/v1
+    description: Development server (uses ephemeral data)
 security:
   - sessionAuth: []
 
@@ -629,7 +636,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
-        default:  *metaErrorResponse
+        default: *metaErrorResponse
     patch:
       summary: Updated collection
       operationId: updateCollectionById
