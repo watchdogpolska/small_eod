@@ -1863,6 +1863,9 @@ components:
         identifier:
           type: string
           description: External identifier of letter / case
+        description:
+          type: descriptionId
+          description: Description of letter (from enum)
         institution:
           type: array
           items:
