@@ -1,8 +1,8 @@
 *.pyc
 .idea*
+.DS_Store
 
 Pipfile
 Pipfile.lock
 
 .env
-local.py

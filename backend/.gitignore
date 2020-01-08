@@ -6,7 +6,7 @@ __pycache__/
 Pipfile
 Pipfile.lock
 .idea
-.DS_Store
+
 local.py
 
 # C extensions
