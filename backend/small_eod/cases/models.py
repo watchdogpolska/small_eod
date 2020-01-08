@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 
-from small_eod.institutions.models import Institution
-from small_eod.generic.models import TimestampUserLogModel
+from ..institutions.models import Institution
+from ..generic.models import TimestampUserLogModel
 
 
 class Case(TimestampUserLogModel):
@@ -19,7 +19,6 @@ class Case(TimestampUserLogModel):
         related_name='case_notifiedUser',
         blank=True,
     )
-    letterCount = models.IntegerField(default=0)
-    noteCount = models.IntegerField(default=0)
+
 
 

@@ -13,20 +13,20 @@ class DictTypes(models.TextChoices):
 
 
 class Dictionary(TimestampUserLogModel):
+    case = models.ForeignKey(to=Case, on_delete=models.CASCADE)
     type = models.CharField(max_length=6, choices=DictTypes.choices)
     name = models.CharField(max_length=100)
     active = models.BooleanField(default=False)
-    case = models.ForeignKey(to=Case, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Dictionaries"
 
 
 class ChoiceRange(models.Model):
+    case = models.ForeignKey(to=Case, on_delete=models.CASCADE)
     type = models.CharField(max_length=6, choices=DictTypes.choices)
     minItems = models.IntegerField(default=1)
     maxItems = models.IntegerField(default=1)
-    case = models.ForeignKey(to=Case, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('type', 'case')

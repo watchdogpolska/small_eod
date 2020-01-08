@@ -1,2 +1,2 @@
 # small_eod_rest
-Rest API draft for small_eod
+REST API server for small_eod

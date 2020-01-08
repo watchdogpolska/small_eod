@@ -1,6 +1,6 @@
 from django.db import models
 from ..generic.models import TimestampUserLogModel
-# from teryt_tree.models import JednostkaAdministracyjna
+from teryt_tree.models import JednostkaAdministracyjna
 
 
 class AddressData(models.Model):
@@ -19,13 +19,6 @@ class ExternalIdentifier(models.Model):
     regon = models.CharField(max_length=100)
 
 
-class AdministrativeUnit(models.Model):
-    category = models.CharField(max_length=100)
-    terc = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    level = models.IntegerField()
-
-
 class Institution(TimestampUserLogModel):
     name = models.CharField(max_length=256)
     external_identifier = models.OneToOneField(
@@ -35,8 +28,7 @@ class Institution(TimestampUserLogModel):
         blank=True
     )
     administrativeUnit = models.OneToOneField(
-        # JednostkaAdministracyjna,
-        to=AdministrativeUnit,
+        to=JednostkaAdministracyjna,
         on_delete=models.CASCADE,
         null=True,
         blank=True

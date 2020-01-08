@@ -1,10 +1,10 @@
-from .models import AddressData, ExternalIdentifier, AdministrativeUnit, Institution
+from .models import AddressData, ExternalIdentifier, JednostkaAdministracyjna, Institution
 from rest_framework import serializers
 
 
 class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdministrativeUnit
+        model = JednostkaAdministracyjna
         exclude = ['id', ]
 
 
@@ -47,7 +47,7 @@ class InstitutionSerializer(serializers.ModelSerializer):
 
         new_external_id = ExternalIdentifier.objects.create(**validated_data.pop('external_identifier'))
         new_address = AddressData.objects.create(**validated_data.pop('address'))
-        new_admin_unit = AdministrativeUnit.objects.create(**validated_data.pop('administrativeUnit'))
+        new_admin_unit = JednostkaAdministracyjna.objects.create(**validated_data.pop('administrativeUnit'))
 
         new_institution = Institution.objects.create(
             external_identifier=new_external_id,
