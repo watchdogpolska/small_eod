@@ -56,10 +56,11 @@ class CaseSerializer(serializers.ModelSerializer):
 class CaseCountSerializer(CaseSerializer):
     letterCount = serializers.IntegerField(read_only=True, source='letter_count')
     noteCount = serializers.IntegerField(read_only=True, source='note_count')
+    eventCount = serializers.IntegerField(read_only=True, source='event_count')
 
     class Meta:
         model = CaseSerializer.Meta.model
         read_only_fields = CaseSerializer.Meta.read_only_fields
         fields = CaseSerializer.Meta.fields + [
-            "letterCount", "noteCount"
+            "letterCount", "noteCount", "eventCount"
         ]

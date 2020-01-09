@@ -1706,6 +1706,10 @@ components:
           type: number
           description: Count of note in case
           readOnly: true
+        eventCount:
+          type: number
+          description: Count of event in case
+          readOnly: true
         createdOn: *metaCreatedOn
         createdBy: *metaCreatedBy
         modifiedOn: *metaModifiedOn
