@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import Case
-from .serializers import CaseCountSerializer
+from .serializers import CaseSerializer, CaseCountSerializer
 from .factories import CaseFactory
 from ..tags.models import Tag
 from ..dictionaries.factories import FeatureFactory, DictionaryFactory
@@ -8,7 +8,7 @@ from ..dictionaries.factories import FeatureFactory, DictionaryFactory
 # Create your tests here.
 class CaseCountSerializerTestCase(TestCase):
     def test_tag_field(self):
-        serializer = CaseCountSerializer(data={
+        serializer = CaseSerializer(data={
             "name": "Polska Fundacja Narodowa o rejestr umów",
             "auditedInstitution": [],
             "comment": "xxx",
@@ -21,7 +21,7 @@ class CaseCountSerializerTestCase(TestCase):
         obj = serializer.save()
         self.assertTrue(Tag.objects.count(), 1)
         self.assertEqual(obj.tag.all()[0].name, "rejestr umów")
-        data = CaseCountSerializer(Case.objects.with_counter().get()).data
+        data = CaseSerializer(Case.objects.get()).data
         self.assertTrue(data["tag"], ["rejestr umów"])
 
     def test_raise_for_over_maximum_feature(self):

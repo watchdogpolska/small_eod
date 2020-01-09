@@ -12,12 +12,9 @@ class TagField(serializers.ListField):
         return [self.child.to_representation(item) if item is not None else None for item in data.all()]
 
 
-class CaseCountSerializer(serializers.ModelSerializer):
+class CaseSerializer(serializers.ModelSerializer):
     tag = TagField()
     feature = serializers.PrimaryKeyRelatedField(many=True, queryset=Feature.objects.all())
-
-    letterCount = serializers.IntegerField(read_only=True, source='letter_count')
-    noteCount = serializers.IntegerField(read_only=True, source='note_count')
 
     createdBy = serializers.PrimaryKeyRelatedField(read_only=True)
     modifiedBy = serializers.PrimaryKeyRelatedField(read_only=True)
@@ -27,7 +24,6 @@ class CaseCountSerializer(serializers.ModelSerializer):
         read_only_fields = ['createdOn', 'modifiedOn']
         fields = [
             'id', "comment", "auditedInstitution","name", "responsibleUser", "notifiedUser", "feature", "tag",
-            "letterCount", "noteCount", 
             "createdBy", "modifiedBy", "createdOn", "modifiedOn"
         ]
 
@@ -56,3 +52,14 @@ class CaseCountSerializer(serializers.ModelSerializer):
             if length > dictionary.maxItems:
                 raise serializers.ValidationError("Maximum number of items for {} is {}".format(dictionary, dictionary.minItems))
         return value
+
+class CaseCountSerializer(CaseSerializer):
+    letterCount = serializers.IntegerField(read_only=True, source='letter_count')
+    noteCount = serializers.IntegerField(read_only=True, source='note_count')
+
+    class Meta:
+        model = CaseSerializer.Meta.model
+        read_only_fields = CaseSerializer.Meta.read_only_fields
+        fields = CaseSerializer.Meta.fields + [
+            "letterCount", "noteCount"
+        ]
