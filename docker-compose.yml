@@ -23,7 +23,7 @@ services:
 
   web:
     build:
-      context: .
+      context: ./backend-project
     depends_on:
       - db
     volumes:
