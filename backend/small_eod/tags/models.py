@@ -1,7 +1,5 @@
 from django.db import models
 from django.core.validators import RegexValidator
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 
 from ..generic.models import TimestampUserLogModel
 
