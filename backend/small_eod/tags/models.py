@@ -22,16 +22,4 @@ class TagNamespace(TimestampUserLogModel):
 
 
 class Tag(models.Model):
-    limit = models.Q(app_label='cases', model='Case') | \
-            models.Q(app_label='letter', model='Letter')
-
-    tag_string = models.CharField(max_length=256)
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE,
-        limit_choices_to= limit
-    )
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-
+    name = models.CharField(max_length=256)

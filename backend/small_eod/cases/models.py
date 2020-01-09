@@ -3,12 +3,13 @@ from django.conf import settings
 
 from ..institutions.models import Institution
 from ..generic.models import TimestampUserLogModel
-
+from ..dictionaries.models import Feature
+from ..tags.models import Tag
 
 class Case(TimestampUserLogModel):
-    comment = models.CharField(max_length=256)
-    auditedInstitution = models.ManyToManyField(to=Institution)
     name = models.CharField(max_length=256)
+    comment = models.CharField(max_length=256)
+    auditedInstitution = models.ManyToManyField(to=Institution, blank=True)
     responsibleUser = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
         related_name='case_responsibleUser',
@@ -19,6 +20,5 @@ class Case(TimestampUserLogModel):
         related_name='case_notifiedUser',
         blank=True,
     )
-
-
-
+    feature = models.ManyToManyField(to=Feature, blank=True)
+    tag = models.ManyToManyField(to=Tag, blank=True)
