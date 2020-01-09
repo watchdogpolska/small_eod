@@ -1693,23 +1693,11 @@ components:
           description: List of users which receive notifications
           items:
             $ref: "#/components/schemas/UserRef"
-        matrix:
+        features:
           type: array
-          description: Structure to collect statistical information in relation to Dictionary
+          description: List of features from dictionaries
           items:
-            type: object
-            properties:
-              id:
-                type: number
-                format: matrixId
-              dictionary:
-                type: string
-                format: dictionaryId
-              values:
-                type: array
-                items:
-                  type: string
-                  format: dictionaryValueId
+            type: string
         letterCount:
           type: number
           description: Count of letter in case
@@ -1717,6 +1705,10 @@ components:
         noteCount:
           type: number
           description: Count of note in case
+          readOnly: true
+        eventCount:
+          type: number
+          description: Count of event in case
           readOnly: true
         createdOn: *metaCreatedOn
         createdBy: *metaCreatedBy
