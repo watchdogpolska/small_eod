@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Lint
+      run: make lint
     - name: Build
       run: make build
     - name: Migration check
@@ -17,5 +19,3 @@ jobs:
       # https://github.community/t5/GitHub-Actions/Permission-Denied-quot-exec-entrypoint-sh-quot/td-p/31249
       # This looks like the best place to do it.
       run: chmod +x ./backend-project/contrib/github/script.sh && ./backend-project/contrib/github/script.sh
-    - name: Lint
-      run: make lint
