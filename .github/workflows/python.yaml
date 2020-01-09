@@ -7,8 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Lint
-      run: make lint
     - name: Build
       run: make build
     - name: Migration check
@@ -16,4 +14,6 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: ./contrib/github/script.sh
+      run: ./backend-project/contrib/github/script.sh
+    - name: Lint
+      run: make lint
