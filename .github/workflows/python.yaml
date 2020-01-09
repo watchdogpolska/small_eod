@@ -14,7 +14,8 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: chmod +x ./backend-project/contrib/github/script.sh \
-           && ./backend-project/contrib/github/script.sh
+      # https://github.community/t5/GitHub-Actions/Permission-Denied-quot-exec-entrypoint-sh-quot/td-p/31249
+      # This looks like the best place to do it.
+      run: chmod +x ./backend-project/contrib/github/script.sh && ./backend-project/contrib/github/script.sh
     - name: Lint
       run: make lint
