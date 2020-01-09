@@ -18,5 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('small_eod.tags.urls')),
+    path('api/', include('small_eod.tags.urls', namespace='api-tags')),
+    path('api/institutions/', include('small_eod.institutions.urls', namespace='api-institutions')),
+
 ]

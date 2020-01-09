@@ -1,6 +1,8 @@
 from .models import AddressData, ExternalIdentifier, JednostkaAdministracyjna, Institution
 from rest_framework import serializers
 
+from ..generic.serializers import UserLogModelSerializer
+
 
 class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,7 +24,7 @@ class ExternalIdentifierSerializer(serializers.ModelSerializer):
         exclude = ['id', ]
 
 
-class InstitutionSerializer(serializers.ModelSerializer):
+class InstitutionSerializer(UserLogModelSerializer):
 
     address = AddressDataSerializer()
     external_identifier = ExternalIdentifierSerializer()
@@ -45,16 +47,14 @@ class InstitutionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        new_external_id = ExternalIdentifier.objects.create(**validated_data.pop('external_identifier'))
-        new_address = AddressData.objects.create(**validated_data.pop('address'))
-        new_admin_unit = JednostkaAdministracyjna.objects.create(**validated_data.pop('administrativeUnit'))
+        validated_data['external_identifier'] = ExternalIdentifier.objects.create(
+            **validated_data.pop('external_identifier')
+        )
+        validated_data['address'] = AddressData.objects.create(
+            **validated_data.pop('address')
+        )
+        validated_data['administrativeUnit'] = JednostkaAdministracyjna.objects.create(
+            **validated_data.pop('administrativeUnit')
+        )
 
-        new_institution = Institution.objects.create(
-            external_identifier=new_external_id,
-            administrativeUnit=new_admin_unit,
-            address=new_address,
-            createdBy=self.context['request'].user,
-            modifiedBy=self.context['request'].user,
-            **validated_data)
-
-        return new_institution
+        return super().create(validated_data)

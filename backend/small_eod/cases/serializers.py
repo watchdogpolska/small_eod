@@ -10,7 +10,7 @@ class CaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        read_only_fields = ['createdBy', 'modifiedBy', 'createdOn', 'modifiedOn', 'id', 'letterCount', 'noteCount']
+        read_only_fields = ['createdBy', 'modifiedBy', 'createdOn', 'modifiedOn', 'id']
         fields = '__all__'
         # depth = 1
 
