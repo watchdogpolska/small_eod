@@ -1,8 +1,9 @@
 from rest_framework import viewsets
 
-from .serializers import CaseSerializer, Case
+from .models import Case
+from .serializers import CaseCountSerializer
 
 
 class CaseViewSet(viewsets.ModelViewSet):
-    queryset = Case.objects.all()
-    serializer_class = CaseSerializer
+    queryset = Case.objects.with_counter().all()
+    serializer_class = CaseCountSerializer

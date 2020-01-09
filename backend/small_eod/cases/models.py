@@ -6,6 +6,11 @@ from ..generic.models import TimestampUserLogModel
 from ..dictionaries.models import Feature
 from ..tags.models import Tag
 
+
+class CaseQuerySet(models.QuerySet):
+    def with_counter(self):
+        return self.annotate(letter_count=models.Count("letter"), note_count=models.Count("note"))
+
 class Case(TimestampUserLogModel):
     name = models.CharField(max_length=256)
     comment = models.CharField(max_length=256)
@@ -22,3 +27,5 @@ class Case(TimestampUserLogModel):
     )
     feature = models.ManyToManyField(to=Feature, blank=True)
     tag = models.ManyToManyField(to=Tag, blank=True)
+
+    objects = CaseQuerySet.as_manager()
