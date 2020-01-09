@@ -1864,8 +1864,8 @@ components:
           type: string
           description: External identifier of letter / case
         description:
-          type: descriptionId
-          description: Description of letter (from enum)
+          type: number
+          description: Description ID choose by content creator
         institution:
           type: array
           items:
