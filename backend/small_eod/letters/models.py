@@ -23,3 +23,8 @@ class Letter(TimestampUserLogModel):
     ordering = models.IntegerField(default=0)
     comment = models.CharField(max_length=256)
     excerpt = models.CharField(max_length=256)
+
+
+class Description(models.Model):
+    letter = models.ForeignKey(to=Letter, on_delete=models.CASCADE)
+    text = models.CharField(max_length=256)
