@@ -14,6 +14,7 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: ./backend-project/contrib/github/script.sh
+      run: chmod +x ./backend-project/contrib/github/script.sh \
+           && ./backend-project/contrib/github/script.sh
     - name: Lint
       run: make lint
