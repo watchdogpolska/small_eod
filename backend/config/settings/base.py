@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'small_eod.dictionaries',
     'small_eod.channels',
     'small_eod.institutions',
-    'small_eod.case_collections',
+    'small_eod.collections',
     'small_eod.files',
     'small_eod.letters',
     'small_eod.notes',

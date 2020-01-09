@@ -14,13 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf import settings
+from netbox.views import APIRootView, HomeView, SearchView
+from drf_yasg.views import get_schema_view
+from .swagger import info
+
+schema_view = get_schema_view(
+    info,
+    validators=['flex', 'ssv'],
+    public=True,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/institutions/', include('small_eod.institutions.urls', namespace='api-institutions')),
+    path('api/', APIRootView.as_view(), name='api-root'),
+    path('api/institutions/', include('small_eod.institutions.urls')),
 
+    path('api/docs/', schema_view.with_ui('swagger'), name='api_docs'),
+    path('api/redoc/', schema_view.with_ui('redoc'), name='api_redocs'),
+    re_path('^api/swagger(?P<format>.json|.yaml)$', schema_view.without_ui(), name='schema_swagger'),
 ]
 
 
