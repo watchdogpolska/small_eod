@@ -4,3 +4,4 @@ docker-compose.yml
 .dockerignore
 staticfiles
 media
+Dockerfile

@@ -27,7 +27,7 @@ fmt:
 	docker run --rm -v $$(pwd):/data cytopia/black /data
 
 check: wait_mysql
-	docker-compose run web bash -c "python manage.py makemigrations --check"
+	docker-compose run web python manage.py makemigrations --check
 
 migrations: wait_mysql
 	docker-compose run web python manage.py makemigrations

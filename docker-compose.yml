@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/code
+      - ./backend-project:/code
       - static:/code/staticfiles
       - media:/code/media
     environment:
