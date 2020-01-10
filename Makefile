@@ -38,3 +38,8 @@ migrations: wait_mysql
 
 settings:
 	docker-compose run web python manage.py diffsettings
+
+createsuperuser:
+	docker-compose run web python manage.py createsuperuser --username root --email root@example.com --noinput
+
+test-local: lint build check test

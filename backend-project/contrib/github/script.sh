@@ -3,7 +3,7 @@ set -eux
 docker-compose up -d
 make wait_mysql wait_minio migrate
 # verify that user able to create user
-docker-compose run web python manage.py createsuperuser --username root --email root@example.com --noinput
+make createsuperuser
 # run test suite
 make test
 # verify integration of services
