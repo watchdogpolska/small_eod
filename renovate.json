@@ -1,8 +1,8 @@
 {
   "extends": [
-    "backend-project/config:base"
+    "config:base"
   ],
   "pip_requirements": {
-    "fileMatch": ["requirements/.+?\\.txt$"]
+    "fileMatch": ["backend-project/requirements/.+?\\.txt$"]
   }
 }
