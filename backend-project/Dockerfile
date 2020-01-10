@@ -29,7 +29,6 @@ ENV REQS_FILE="requirements/development.txt"
 FROM prod_settings AS prod
 RUN pip install --no-cache-dir -r $REQS_FILE
 COPY . /code/
-#ENTRYPOINT ["bash", "-c", "wait-for-it db:5432"]
 CMD ["bash", "-c", "python manage.py collectstatic --no-input && wait-for-it db:5432 && python manage.py migrate && gunicorn -w 3 -b 0.0.0.0:8000 --forwarded-allow-ips='nginx' config.wsgi"]
 
 # DEVELOPMENT BUILD
