@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements/development.txt
 FROM builder
 
 VOLUME /code/media
-VOLUME /code/staticfiles
+VOLUME /code/static
 # Copy the code as late as possible.
 COPY . /code/
 CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
