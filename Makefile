@@ -21,10 +21,10 @@ pyupgrade:
 
 lint: pyupgrade
 	docker run --rm -v /$$(pwd):/apps alpine/flake8 ./backend-project
-	docker run --rm -v /$$(pwd):/data cytopia/black --check /data
+	docker run --rm -v /$$(pwd):/data cytopia/black --check ./backend-project
 
 fmt:
-	docker run --rm -v $$(pwd):/data cytopia/black /data
+	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
 
 check: wait_mysql
 	docker-compose run web python manage.py makemigrations --check
