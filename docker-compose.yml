@@ -38,10 +38,27 @@ services:
       - media:/code/media
     environment:
       DATABASE_URL: postgres://user:pass@db:5432/small_eod
+      MINIO_ACCESS_KEY: test
+      MINIO_SECRET_KEY: test8chars
+      MINIO_URL: http://minio:9000
       # SECRET_KEY
       # DJANGO_ALLOWED_HOSTS
     expose:
       - "8000"
+
+  minio:
+    # https://hub.docker.com/layers/minio/minio/RELEASE.2020-01-03T19-12-21Z/images/sha256-f00aa6ef2b7286dc620aca168bf1bc9280db8461a02d293d5ae491b3d6d3006b
+    image: minio/minio@sha256:f00aa6ef2b7286dc620aca168bf1bc9280db8461a02d293d5ae491b3d6d3006b
+    ports:
+      - "9000:9000"
+    expose:
+      - 9000
+    command: server /data
+    volumes:
+      - ./dev-data/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: test
+      MINIO_SECRET_KEY: test8chars
 
 volumes:
   static:

@@ -6,3 +6,5 @@ Pipfile
 Pipfile.lock
 
 .env
+
+/dev-data
