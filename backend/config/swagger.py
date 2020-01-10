@@ -5,5 +5,4 @@ info = openapi.Info(
       default_version='v1',
       contact=openapi.Contact(name="Adam Dobrawy", email="adam.dobrawy@siecobywatelska.pl"),
       license=openapi.License(name="MIT"),
-      public=True,
 )
