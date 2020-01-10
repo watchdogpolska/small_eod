@@ -6,12 +6,16 @@ clean:
 build:
 	docker-compose build web
 
-test: wait_mysql
+test: wait_mysql wait_minio
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
 wait_mysql:
 	docker-compose up -d db
 	docker-compose run web bash -c 'wait-for-it db:5432'
+
+wait_minio:
+	docker-compose up -d minio
+	docker-compose run web bash -c 'wait-for-it minio:9000'
 
 migrate:
 	docker-compose run web python manage.py migrate
@@ -19,7 +23,7 @@ migrate:
 pyupgrade:
 	docker run --rm -v /$$(pwd):/data quay.io/watchdogpolska/pyupgrade
 
-lint: pyupgrade
+lint:
 	docker run --rm -v /$$(pwd):/apps alpine/flake8 ./backend-project
 	docker run --rm -v /$$(pwd):/data cytopia/black --check ./backend-project
 
