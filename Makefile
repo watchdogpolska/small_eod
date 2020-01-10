@@ -17,11 +17,11 @@ migrate:
 	docker-compose run web python manage.py migrate
 
 pyupgrade:
-	docker run --rm -v $$(pwd):/data quay.io/watchdogpolska/pyupgrade
+	docker run --rm -v /$$(pwd):/data quay.io/watchdogpolska/pyupgrade
 
 lint: pyupgrade
-	docker run --rm -v $$(pwd):/apps alpine/flake8 ./backend-project
-	docker run --rm -v $$(pwd):/data cytopia/black --check /data
+	docker run --rm -v /$$(pwd):/apps alpine/flake8 ./backend-project
+	docker run --rm -v /$$(pwd):/data cytopia/black --check /data
 
 fmt:
 	docker run --rm -v $$(pwd):/data cytopia/black /data
