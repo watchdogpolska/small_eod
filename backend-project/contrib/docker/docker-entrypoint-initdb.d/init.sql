@@ -1,0 +1,2 @@
+CREATE DATABASE small_eod ENCODING 'utf8';
+CREATE DATABASE test_small_eod ENCODING 'utf8';
