@@ -76,7 +76,7 @@ class CaseSerializer(serializers.ModelSerializer):
             if length > dictionary.max_items:
                 raise serializers.ValidationError(
                     "Maximum number of items for {} is {}".format(
-                        dictionary, dictionary.min_items
+                        dictionary, dictionary.max_items
                     )
                 )
         return value
