@@ -1,0 +1,31 @@
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '.pyi?$'
+exclude = '''
+(
+  /(
+      \frontend-project
+    | \docs
+    | tests
+    | settings
+    | migrations
+    | \.github
+    | \.git
+    | \.eggs
+    | \.hg
+    | \.mypy_cache
+    | \.nox
+    | \.tox
+    | \.venv
+    | \venv             # pycharm
+    | \_build
+    | build
+    | dist
+  )/
+  |
+  /(
+    tests.py
+  )
+)
+'''
