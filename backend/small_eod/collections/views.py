@@ -13,7 +13,7 @@ from ..letters.models import Letter
 
 def parse_query(query):
     # TODO: Add extensive query parser
-    return {"id__in":[int(x) for x in query.split(',')]}
+    return {"pk__in":[int(x) for x in query.split(',')]}
 
 class CollectionViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
@@ -23,14 +23,14 @@ class CaseViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CaseSerializer
 
     def get_queryset(self):
-        collection = Collection.objects.get(self.kwargs['collection_pk'])
+        collection = Collection.objects.get(pk=self.kwargs['collection_pk'])
         return Case.objects.filter(**parse_query(collection.query)).with_counter().all()
 
 class BaseSubCollection(viewsets.ReadOnlyModelViewSet):
     model = None
 
     def get_queryset(self):
-        collection = Collection.objects.get(self.kwargs['collection_pk'])
+        collection = Collection.objects.get(pk=self.kwargs['collection_pk'])
         case = Case.objects.filter(**parse_query(collection.query)).get(pk=self.kwargs['case_pk'])
         return self.model.objects.filter(case=case).all()
 

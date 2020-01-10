@@ -137,3 +137,13 @@ AUTH_USER_MODEL = 'users.User'
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'config.swagger.info'
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}

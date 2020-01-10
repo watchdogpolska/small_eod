@@ -13,10 +13,10 @@ event_router = routers.NestedSimpleRouter(case_router, 'case', lookup='case')
 event_router.register('event', EventViewSet, basename='collection-event')
 
 note_router = routers.NestedSimpleRouter(case_router, 'case', lookup='case')
-note_router.register('note', EventViewSet, basename='collection-note')
+note_router.register('note', NoteViewSet, basename='collection-note')
 
 letter_router = routers.NestedSimpleRouter(case_router, 'case', lookup='case')
-letter_router.register('letter', EventViewSet, basename='collection-letter')
+letter_router.register('letter', LetterViewSet, basename='collection-letter')
 
 urlpatterns = [
     path('', include(router.urls)),
