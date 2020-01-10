@@ -7,5 +7,4 @@ info = openapi.Info(
         name="Adam Dobrawy", email="adam.dobrawy@siecobywatelska.pl"
     ),
     license=openapi.License(name="MIT"),
-    public=True,
 )
