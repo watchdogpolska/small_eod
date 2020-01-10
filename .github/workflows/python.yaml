@@ -1,6 +1,12 @@
 name: Django application
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+    - 'backend-project/**'
+  pull_request:
+    paths-ignore:
+    - 'backend-project/**'
 
 jobs:
   django:
@@ -18,4 +24,4 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: chmod +x ./backend-project/contrib/github/script.sh && ./backend-project/contrib/github/script.sh
+      run: ./backend-project/contrib/github/script.sh
