@@ -21,7 +21,7 @@ class CaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        read_only_fields = ['created_on', 'modified_on']
+        read_only_fields = ['created_on', 'modified_on', "created_by", "modified_by"]
         fields = [
             'id', "comment", "audited_institution","name", "responsible_user", "notified_user", "feature", "tag",
             "created_by", "modified_by", "created_on", "modified_on"

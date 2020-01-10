@@ -54,7 +54,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',  include("small_eod.collections.urls")),
-
     path('api/docs/', schema_view.with_ui('swagger'), name='api_docs'),
     path('api/redoc/', schema_view.with_ui('redoc'), name='api_redocs'),
     re_path('^api/swagger(?P<format>.json|.yaml)$', schema_view.without_ui(), name='schema_swagger'),

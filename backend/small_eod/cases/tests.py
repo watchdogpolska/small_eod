@@ -4,6 +4,9 @@ from .serializers import CaseSerializer, CaseCountSerializer
 from .factories import CaseFactory
 from ..tags.models import Tag
 from ..dictionaries.factories import FeatureFactory, DictionaryFactory
+from ..users.factories import UserFactory
+from ..generic.tests import GenericViewSetMixin
+from django.urls import reverse
 
 # Create your tests here.
 class CaseCountSerializerTestCase(TestCase):
@@ -47,3 +50,11 @@ class CaseCountSerializerTestCase(TestCase):
         data = CaseCountSerializer(case_counted).data
         self.assertEqual(data["letter_count"], 0)
         self.assertEqual(data["note_count"], 0)
+
+class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
+    basename = 'case'
+    serializer_class = CaseSerializer
+    factory_class = CaseFactory
+
+    def validate_item(self, item):
+        self.assertEqual(item["name"], self.obj.name)
