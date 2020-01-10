@@ -12,7 +12,7 @@ class DictionarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dictionary
-        fields = ["name", "active", "minItems", "maxItems", "values"]
+        fields = ["name", "active", "min_items", "max_items", "values"]
 
     def create(self, validated_data):
         features_data = validated_data.pop('values')

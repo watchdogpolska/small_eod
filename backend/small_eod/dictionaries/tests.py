@@ -7,8 +7,8 @@ class DictionarySerializerTestCase(TestCase):
         serializer = DictionarySerializer(data={
             "name": "Czyja sprawa",
             "active": True,
-            "minItems": 1,
-            "maxItems": 2,
+            "min_items": 1,
+            "max_items": 2,
             "values": [
                 { "name": "SO-WP"},
                 { "name": "Klienci"},

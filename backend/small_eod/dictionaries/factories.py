@@ -7,8 +7,8 @@ from .models import Feature, Dictionary
 class DictionaryFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "dictionary-%04d" % n)
     active = True
-    minItems = factory.fuzzy.FuzzyInteger(0, 3)
-    maxItems = factory.fuzzy.FuzzyInteger(4, 5)
+    min_items = factory.fuzzy.FuzzyInteger(0, 3)
+    max_items = factory.fuzzy.FuzzyInteger(4, 5)
 
     class Meta:
         model = Dictionary

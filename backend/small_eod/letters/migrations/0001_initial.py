@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
             name='Letter',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modifiedOn', models.DateTimeField(auto_now=True)),
-                ('createdOn', models.DateTimeField(auto_now_add=True)),
+                ('modified_on', models.DateTimeField(auto_now=True)),
+                ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('direction', models.TextField(choices=[('IN', 'Received'), ('OUT', 'Sent')], default='IN', max_length=3)),
                 ('name', models.CharField(max_length=256)),
                 ('final', models.BooleanField()),

@@ -12,7 +12,7 @@ class CollectionSerializer(serializers.ModelSerializer):
             "id",
             "comment",
             "public",
-            "expiredOn",
+            "expired_on",
             "query",
         ]
 

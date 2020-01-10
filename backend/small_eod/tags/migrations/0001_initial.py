@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
             name='TagNamespace',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modifiedOn', models.DateTimeField(auto_now=True)),
-                ('createdOn', models.DateTimeField(auto_now_add=True)),
+                ('modified_on', models.DateTimeField(auto_now=True)),
+                ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('description', models.CharField(max_length=256)),
                 ('color', models.CharField(default='000000', max_length=6, validators=[django.core.validators.RegexValidator(code='Non_RGB_hex', message='Field must be hexadecimal RGB color', regex='^(?:[a-f0-9]{6})|(?:[A-F0-9]{6})$')])),
             ],

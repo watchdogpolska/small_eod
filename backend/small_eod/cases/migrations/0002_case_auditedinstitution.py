@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='case',
-            name='auditedInstitution',
+            name='audited_institution',
             field=models.ManyToManyField(blank=True, to='institutions.Institution'),
         ),
     ]

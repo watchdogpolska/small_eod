@@ -39,8 +39,8 @@ class Migration(migrations.Migration):
             name='Institution',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modifiedOn', models.DateTimeField(auto_now=True)),
-                ('createdOn', models.DateTimeField(auto_now_add=True)),
+                ('modified_on', models.DateTimeField(auto_now=True)),
+                ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('name', models.CharField(max_length=256)),
                 ('address', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='institutions.AddressData')),
                 ('administrativeUnit', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='teryt_tree.JednostkaAdministracyjna')),

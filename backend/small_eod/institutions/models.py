@@ -27,7 +27,7 @@ class Institution(TimestampUserLogModel):
         null=True,
         blank=True
     )
-    administrativeUnit = models.OneToOneField(
+    administrative_unit = models.OneToOneField(
         to=JednostkaAdministracyjna,
         on_delete=models.CASCADE,
         null=True,

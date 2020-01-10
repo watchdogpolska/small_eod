@@ -8,7 +8,7 @@ from .models import Collection
 class CollectionFactory(factory.django.DjangoModelFactory):
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
     public = True
-    expiredOn = factory.fuzzy.FuzzyDateTime(
+    expired_on = factory.fuzzy.FuzzyDateTime(
         start_dt=timezone.now(),
         end_dt=timezone.now() + datetime.timedelta(days=10)
     )

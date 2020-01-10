@@ -10,10 +10,10 @@ class CaseCountSerializerTestCase(TestCase):
     def test_tag_field(self):
         serializer = CaseSerializer(data={
             "name": "Polska Fundacja Narodowa o rejestr umów",
-            "auditedInstitution": [],
+            "audited_institution": [],
             "comment": "xxx",
-            "responsibleUser": [],
-            "notifiedUser": [],
+            "responsible_user": [],
+            "notified_user": [],
             "feature": [],
             "tag": ["rejestr umów"],
         })
@@ -25,14 +25,14 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertTrue(data["tag"], ["rejestr umów"])
 
     def test_raise_for_over_maximum_feature(self):
-        dictionary = DictionaryFactory(maxItems=3)
+        dictionary = DictionaryFactory(max_items=3)
         features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
         serializer = CaseCountSerializer(data={
             "name": "Polska Fundacja Narodowa o rejestr umów",
-            "auditedInstitution": [],
+            "audited_institution": [],
             "comment": "xxx",
-            "responsibleUser": [],
-            "notifiedUser": [],
+            "responsible_user": [],
+            "notified_user": [],
             "feature": [x.id for x in features],
             "tag": [],
         })
@@ -45,5 +45,5 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertEqual(case_counted.letter_count, 0)
         self.assertEqual(case_counted.note_count, 0)
         data = CaseCountSerializer(case_counted).data
-        self.assertEqual(data["letterCount"], 0)
-        self.assertEqual(data["noteCount"], 0)
+        self.assertEqual(data["letter_count"], 0)
+        self.assertEqual(data["note_count"], 0)

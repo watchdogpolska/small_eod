@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
             name='Collection',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modifiedOn', models.DateTimeField(auto_now=True)),
-                ('createdOn', models.DateTimeField(auto_now_add=True)),
+                ('modified_on', models.DateTimeField(auto_now=True)),
+                ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('comment', models.CharField(max_length=256)),
                 ('public', models.BooleanField(default=False)),
-                ('expiredOn', models.DateTimeField()),
+                ('expired_on', models.DateTimeField()),
                 ('query', models.CharField(max_length=256)),
             ],
             options={

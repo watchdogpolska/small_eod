@@ -28,20 +28,20 @@ class InstitutionSerializer(UserLogModelSerializer):
 
     address = AddressDataSerializer()
     external_identifier = ExternalIdentifierSerializer()
-    administrativeUnit = AdministrativeUnitSerializer()
+    administrative_unit = AdministrativeUnitSerializer()
 
     class Meta:
         model = Institution
-        read_only_fields = ['createdBy', 'modifiedBy', 'createdOn', 'modifiedOn', 'id']
+        read_only_fields = ['created_by', 'modified_by', 'created_on', 'modified_on', 'id']
         fields = [
-            'modifiedOn',
+            'modified_on',
             'name',
             'external_identifier',
-            'createdOn',
-            'administrativeUnit',
+            'created_on',
+            'administrative_unit',
             'address',
-            'modifiedBy',
-            'createdBy',
+            'modified_by',
+            'created_by',
             'id',
         ]
 
@@ -53,8 +53,8 @@ class InstitutionSerializer(UserLogModelSerializer):
         validated_data['address'] = AddressData.objects.create(
             **validated_data.pop('address')
         )
-        validated_data['administrativeUnit'] = JednostkaAdministracyjna.objects.create(
-            **validated_data.pop('administrativeUnit')
+        validated_data['administrative_unit'] = JednostkaAdministracyjna.objects.create(
+            **validated_data.pop('administrative_unit')
         )
 
         return super().create(validated_data)

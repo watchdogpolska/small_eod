@@ -7,8 +7,8 @@ class UserLogModelSerializer(ModelSerializer):
         instance = super().create(validated_data)
 
         current_user = self.context['request'].user
-        instance.createdBy = current_user
-        instance.modifiedBy = current_user
+        instance.created_by = current_user
+        instance.modified_by = current_user
         instance.save()
         return instance
 
@@ -16,6 +16,6 @@ class UserLogModelSerializer(ModelSerializer):
         instance = super().create(validated_data)
 
         current_user = self.context['request'].user
-        instance.modifiedBy = current_user
+        instance.modified_by = current_user
         instance.save()
         return instance

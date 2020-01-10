@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='case',
-            name='createdBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='case_createdBy', to=settings.AUTH_USER_MODEL),
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='case_created_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='case',
@@ -29,18 +29,18 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='case',
-            name='modifiedBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='case_modifiedBy', to=settings.AUTH_USER_MODEL),
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='case_modified_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='case',
-            name='notifiedUser',
-            field=models.ManyToManyField(blank=True, related_name='case_notifiedUser', to=settings.AUTH_USER_MODEL),
+            name='notified_user',
+            field=models.ManyToManyField(blank=True, related_name='case_notified_user', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='case',
-            name='responsibleUser',
-            field=models.ManyToManyField(blank=True, related_name='case_responsibleUser', to=settings.AUTH_USER_MODEL),
+            name='responsible_user',
+            field=models.ManyToManyField(blank=True, related_name='case_responsible_user', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='case',

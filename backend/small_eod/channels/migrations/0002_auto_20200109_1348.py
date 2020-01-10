@@ -17,12 +17,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='channel',
-            name='createdBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='channel_createdBy', to=settings.AUTH_USER_MODEL),
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='channel_created_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='channel',
-            name='modifiedBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='channel_modifiedBy', to=settings.AUTH_USER_MODEL),
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='channel_modified_by', to=settings.AUTH_USER_MODEL),
         ),
     ]

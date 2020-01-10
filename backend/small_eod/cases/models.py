@@ -14,15 +14,15 @@ class CaseQuerySet(models.QuerySet):
 class Case(TimestampUserLogModel):
     name = models.CharField(max_length=256)
     comment = models.CharField(max_length=256)
-    auditedInstitution = models.ManyToManyField(to=Institution, blank=True)
-    responsibleUser = models.ManyToManyField(
+    audited_institution = models.ManyToManyField(to=Institution, blank=True)
+    responsible_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name='case_responsibleUser',
+        related_name='case_responsible_user',
         blank=True,
     )
-    notifiedUser = models.ManyToManyField(
+    notified_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name='case_notifiedUser',
+        related_name='case_notified_user',
         blank=True,
     )
     feature = models.ManyToManyField(to=Feature, blank=True)

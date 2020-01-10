@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
             name='Channel',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('modifiedOn', models.DateTimeField(auto_now=True)),
-                ('createdOn', models.DateTimeField(auto_now_add=True)),
+                ('modified_on', models.DateTimeField(auto_now=True)),
+                ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('name', models.CharField(choices=[('FED', 'fedrowanie'), ('FAX', 'faks'), ('CUS', 'od klienta'), ('MEC', 'mecenas zewnętrzny'), ('PER', 'dostarczenie osobiste'), ('EMAIL', 'email'), ('POST', 'poczta tradycyjna'), ('EPUAP', 'epuap')], max_length=5)),
                 ('city', models.BooleanField(default=False)),
                 ('voivodeship', models.BooleanField(default=False)),

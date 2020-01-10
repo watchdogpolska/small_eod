@@ -17,12 +17,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='note',
-            name='createdBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='note_createdBy', to=settings.AUTH_USER_MODEL),
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='note_created_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='note',
-            name='modifiedBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='note_modifiedBy', to=settings.AUTH_USER_MODEL),
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='note_modified_by', to=settings.AUTH_USER_MODEL),
         ),
     ]

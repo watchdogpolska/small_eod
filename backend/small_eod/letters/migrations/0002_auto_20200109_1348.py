@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='letter',
-            name='createdBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='letter_createdBy', to=settings.AUTH_USER_MODEL),
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='letter_created_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='letter',
@@ -28,8 +28,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='letter',
-            name='modifiedBy',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='letter_modifiedBy', to=settings.AUTH_USER_MODEL),
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='letter_modified_by', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='description',

@@ -146,7 +146,7 @@ paths:
                 $ref: "#/components/schemas/Case"
         default: *metaErrorResponse
     patch:
-      summary: Updated case
+      summary: modified case
       operationId: updateCaseById
       tags:
         - case
@@ -159,7 +159,7 @@ paths:
             type: number
             format: caseId
       requestBody:
-        description: Updated case
+        description: Modified case
         required: true
         content:
           application/json:
@@ -638,7 +638,7 @@ paths:
                 $ref: "#/components/schemas/Collection"
         default: *metaErrorResponse
     patch:
-      summary: Updated collection
+      summary: modified collection
       operationId: updateCollectionById
       tags:
         - collection
@@ -651,7 +651,7 @@ paths:
             type: number
             format: collectionId
       requestBody:
-        description: Updated collection
+        description: Modified collection
         required: true
         content:
           application/json:
