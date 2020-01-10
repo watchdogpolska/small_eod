@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ApiConfig(AppConfig):
-    name = 'tags'
+class TagConfig(AppConfig):
+    name = 'small_eod.tags'

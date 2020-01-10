@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from itertools import groupby
 from operator import attrgetter
-from .models import Tag
+from .models import Note
 
 
-class TagSerializer(serializers.ModelSerializer):
+class NoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tag
+        model = Note
         fields = [
-            "name",
+            "case",
+            "comment"
         ]
 

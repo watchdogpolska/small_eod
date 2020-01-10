@@ -1,13 +1,15 @@
 from rest_framework import serializers
 from itertools import groupby
 from operator import attrgetter
-from .models import Tag
+from .models import File
 
 
-class TagSerializer(serializers.ModelSerializer):
+class FileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tag
+        model = File
         fields = [
+            "letter",
+            "path",
             "name",
         ]
 

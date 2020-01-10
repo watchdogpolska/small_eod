@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class InstitutionConfig(AppConfig):
-    name = 'institutions'
+    name = 'small_eod.institutions'

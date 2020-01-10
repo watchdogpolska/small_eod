@@ -1,1 +1,1 @@
-default_app_config = 'small_eod.events.apps.EventsConfig'
+default_app_config = 'small_eod.events.apps.EventConfig'

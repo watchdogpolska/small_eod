@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class CollectionConfig(AppConfig):
-    name = 'collections'
+    name = 'small_eod.collections'

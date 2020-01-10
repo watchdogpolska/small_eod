@@ -1,1 +1,1 @@
-default_app_config = 'small_eod.institutions.apps.InstitutionConfig'
+default_app_config = 'small_eod.generic.apps.GenericConfig'

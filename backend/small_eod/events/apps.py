@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class EventConfig(AppConfig):
-    name = 'events'
+    name = 'small_eod.events'

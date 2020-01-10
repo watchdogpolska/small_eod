@@ -11,7 +11,4 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        return User.objects.create_user(username=validated_data['username'],
-                                        email=validated_data['email'],
-                                        password=validated_data['password'],
-                                        )
+        return User.objects.create_user(**validated_data)

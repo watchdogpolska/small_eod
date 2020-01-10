@@ -3,21 +3,7 @@ from ..generic.models import TimestampUserLogModel
 
 
 class Channel(TimestampUserLogModel):
-
-    class Name(models.TextChoices):
-        FED = 'FED', 'fedrowanie'
-        FAX = 'FAX', 'faks'
-        CUS = 'CUS', 'od klienta'
-        MEC = 'MEC', 'mecenas zewnętrzny'
-        PER = 'PER', 'dostarczenie osobiste'
-        EMAIL = 'EMAIL', 'email'
-        POST = 'POST', 'poczta tradycyjna'
-        EPUAP = 'EPUAP', 'epuap'
-
-    name = models.CharField(
-        choices=Name.choices,
-        max_length=5
-    )
+    name = models.CharField(max_length=25)
     city = models.BooleanField(default=False)
     voivodeship = models.BooleanField(default=False)
     flat_no = models.BooleanField(default=False)
