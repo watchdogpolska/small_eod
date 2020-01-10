@@ -40,7 +40,7 @@ class CaseCountSerializerTestCase(TestCase):
             "tag": [],
         })
         self.assertFalse(serializer.is_valid())
-        self.assertEqual(set(serializer.errors.keys()), set(['feature']))
+        self.assertEqual(set(serializer.errors.keys()), {'feature'})
 
     def test_serializer_counters(self):
         CaseFactory()

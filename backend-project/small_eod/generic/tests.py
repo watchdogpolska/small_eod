@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from ..users.factories import UserFactory
 
-class ReadOnlyViewSetMixin(object):
+class ReadOnlyViewSetMixin:
     basename = None
     serializer_class = None
     factory_class = None
