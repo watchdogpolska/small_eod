@@ -29,6 +29,7 @@ from small_eod.notes.views import NoteViewSet
 from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
 from rest_framework import routers
+from rest_framework import permissions
 
 router = routers.DefaultRouter()
 router.register(r'cases', CaseViewSet)
@@ -46,7 +47,8 @@ router.register(r'users', UserViewSet)
 schema_view = get_schema_view(
     info,
     # validators=['flex', 'ssv'],
-    # public=True,
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
