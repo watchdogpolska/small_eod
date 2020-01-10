@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from itertools import groupby
 from operator import attrgetter
-from .models import Letter
+from .models import Letter, Description
 
 
 class LetterSerializer(serializers.ModelSerializer):
@@ -20,5 +20,12 @@ class LetterSerializer(serializers.ModelSerializer):
             "ordering",
             "comment",
             "excerpt",
+        ]
+
+class DescriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Description
+        fields = [
+            "name",
         ]
 
