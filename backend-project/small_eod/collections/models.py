@@ -9,4 +9,3 @@ class Collection(TimestampUserLogModel):
     public = models.BooleanField(default=False)
     expired_on = models.DateTimeField()
     query = models.CharField(max_length=256)
-

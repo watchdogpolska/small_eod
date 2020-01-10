@@ -6,13 +6,14 @@ from ..cases.models import Case
 
 
 class Letter(TimestampUserLogModel):
-
     class Direction(models.TextChoices):
-        IN = 'IN', 'Received'
-        OUT = 'OUT', 'Sent'
+        IN = "IN", "Received"
+        OUT = "OUT", "Sent"
 
     case = models.ForeignKey(to=Case, on_delete=models.DO_NOTHING)
-    direction = models.TextField(choices=Direction.choices, default=Direction.IN, max_length=3)
+    direction = models.TextField(
+        choices=Direction.choices, default=Direction.IN, max_length=3
+    )
     name = models.CharField(max_length=256)
     channel = models.ForeignKey(to=Channel, on_delete=models.DO_NOTHING)
     final = models.BooleanField()

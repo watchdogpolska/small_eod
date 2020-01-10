@@ -10,4 +10,3 @@ class TagSerializer(serializers.ModelSerializer):
         fields = [
             "name",
         ]
-

@@ -12,4 +12,3 @@ class FileSerializer(serializers.ModelSerializer):
             "path",
             "name",
         ]
-

@@ -22,10 +22,10 @@ class LetterSerializer(serializers.ModelSerializer):
             "excerpt",
         ]
 
+
 class DescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Description
         fields = [
             "name",
         ]
-

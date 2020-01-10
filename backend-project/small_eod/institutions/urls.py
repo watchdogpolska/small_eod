@@ -2,8 +2,8 @@ from rest_framework import routers
 
 from .views import InstitutionViewSet
 
-app_name = 'small_eod.institutions'
+app_name = "small_eod.institutions"
 
 router = routers.SimpleRouter()
-router.register('', InstitutionViewSet)
+router.register("", InstitutionViewSet)
 urlpatterns = router.urls

@@ -22,20 +22,11 @@ class ExternalIdentifier(models.Model):
 class Institution(TimestampUserLogModel):
     name = models.CharField(max_length=256)
     external_identifier = models.OneToOneField(
-        ExternalIdentifier,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        ExternalIdentifier, on_delete=models.CASCADE, null=True, blank=True
     )
     administrative_unit = models.OneToOneField(
-        to=JednostkaAdministracyjna,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        to=JednostkaAdministracyjna, on_delete=models.CASCADE, null=True, blank=True
     )
     address = models.OneToOneField(
-        AddressData,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        AddressData, on_delete=models.CASCADE, null=True, blank=True
     )

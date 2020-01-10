@@ -14,4 +14,3 @@ class EventSerializer(serializers.ModelSerializer):
             "data",
             "comment",
         ]
-

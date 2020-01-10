@@ -1,4 +1,1 @@
 from .views import DictionaryViewSet
-
-
-

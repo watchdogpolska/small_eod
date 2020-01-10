@@ -19,4 +19,3 @@ class ChannelSerializer(serializers.ModelSerializer):
             "email",
             "epuap",
         ]
-

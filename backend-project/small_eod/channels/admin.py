@@ -4,4 +4,3 @@ from .models import Channel
 
 
 admin.site.register(Channel)
-

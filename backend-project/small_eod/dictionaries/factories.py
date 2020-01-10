@@ -13,9 +13,9 @@ class DictionaryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Dictionary
 
+
 class FeatureFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "feature-%04d" % n)
 
     class Meta:
         model = Feature
-

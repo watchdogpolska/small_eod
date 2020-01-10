@@ -9,8 +9,7 @@ class CollectionFactory(factory.django.DjangoModelFactory):
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
     public = True
     expired_on = factory.fuzzy.FuzzyDateTime(
-        start_dt=timezone.now(),
-        end_dt=timezone.now() + datetime.timedelta(days=10)
+        start_dt=timezone.now(), end_dt=timezone.now() + datetime.timedelta(days=10)
     )
 
     class Meta:

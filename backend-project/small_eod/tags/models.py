@@ -8,14 +8,14 @@ class TagNamespace(TimestampUserLogModel):
     description = models.CharField(max_length=256)
     color = models.CharField(
         max_length=6,
-        default='000000',
+        default="000000",
         validators=[
             RegexValidator(
-                regex=r'^(?:[a-f0-9]{6})|(?:[A-F0-9]{6})$',
+                regex=r"^(?:[a-f0-9]{6})|(?:[A-F0-9]{6})$",
                 message="Field must be hexadecimal RGB color",
-                code="Non_RGB_hex"
+                code="Non_RGB_hex",
             )
-        ]
+        ],
     )
 
 
