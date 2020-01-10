@@ -16,4 +16,4 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: ./contrib/github/script.sh
+      run: ./backend-project/contrib/github/script.sh
