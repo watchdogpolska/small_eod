@@ -17,7 +17,7 @@ services:
   db:
     # https://hub.docker.com/_/postgres
     # https://hub.docker.com/layers/postgres/library/postgres/12.1-alpine/images/sha256-acc27976001fac260a2e6e06170e70b7e667cdd85f16ee7355de0d47dcb990ae
-    image: postgres@sha256:acc27976001fac260a2e6e06170e70b7e667cdd85f16ee7355de0d47dcb990ae
+    image: postgres@sha256:625225ca4ab31e1f8fc53dcd7dcff96293359c27002b7525522188ca6139cf66
     expose:
       - "5432"
     volumes:
