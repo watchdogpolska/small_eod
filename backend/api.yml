@@ -1,0 +1,380 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Small_EOD",
+        "contact": {
+            "name": "Adam Dobrawy",
+            "email": "adam.dobrawy@siecobywatelska.pl"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "v1"
+    },
+    "basePath": "/api",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "Basic": []
+        }
+    ],
+    "paths": {
+        "/institutions/": {
+            "get": {
+                "operationId": "institutions_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Institution"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "post": {
+                "operationId": "institutions_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "parameters": []
+        },
+        "/institutions/{id}/": {
+            "get": {
+                "operationId": "institutions_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "put": {
+                "operationId": "institutions_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "patch": {
+                "operationId": "institutions_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Institution"
+                        }
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "delete": {
+                "operationId": "institutions_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "institutions"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this institution.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "ExternalIdentifier": {
+            "title": "External identifier",
+            "required": [
+                "nip",
+                "regon"
+            ],
+            "type": "object",
+            "properties": {
+                "nip": {
+                    "title": "Nip",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "regon": {
+                    "title": "Regon",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                }
+            }
+        },
+        "AdministrativeUnit": {
+            "title": "Administrativeunit",
+            "required": [
+                "name",
+                "updated_on",
+                "category"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "maxLength": 36,
+                    "minLength": 1
+                },
+                "slug": {
+                    "title": "Slug",
+                    "type": "string",
+                    "format": "slug",
+                    "pattern": "^[-a-zA-Z0-9_]+$",
+                    "readOnly": true,
+                    "minLength": 1
+                },
+                "updated_on": {
+                    "title": "Updated date",
+                    "type": "string",
+                    "format": "date"
+                },
+                "active": {
+                    "title": "Active",
+                    "type": "boolean"
+                },
+                "lft": {
+                    "title": "Lft",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "rght": {
+                    "title": "Rght",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "tree_id": {
+                    "title": "Tree id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "level": {
+                    "title": "Level",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "parent": {
+                    "title": "Parent",
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "category": {
+                    "title": "Category",
+                    "type": "integer"
+                }
+            }
+        },
+        "AddressData": {
+            "title": "Address",
+            "required": [
+                "city",
+                "voivodeship",
+                "street",
+                "postal_code",
+                "house_no",
+                "email",
+                "epuap"
+            ],
+            "type": "object",
+            "properties": {
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "format": "uri",
+                    "readOnly": true
+                },
+                "city": {
+                    "title": "City",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "voivodeship": {
+                    "title": "Voivodeship",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "flat_no": {
+                    "title": "Flat no",
+                    "type": "string",
+                    "maxLength": 100,
+                    "x-nullable": true
+                },
+                "street": {
+                    "title": "Street",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "postal_code": {
+                    "title": "Postal code",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "house_no": {
+                    "title": "House no",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "email": {
+                    "title": "Email",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254,
+                    "minLength": 1
+                },
+                "epuap": {
+                    "title": "Epuap",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                }
+            }
+        },
+        "Institution": {
+            "required": [
+                "name",
+                "external_identifier",
+                "administrativeUnit",
+                "address"
+            ],
+            "type": "object",
+            "properties": {
+                "modifiedOn": {
+                    "title": "ModifiedOn",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                },
+                "external_identifier": {
+                    "$ref": "#/definitions/ExternalIdentifier"
+                },
+                "createdOn": {
+                    "title": "CreatedOn",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "administrativeUnit": {
+                    "$ref": "#/definitions/AdministrativeUnit"
+                },
+                "address": {
+                    "$ref": "#/definitions/AddressData"
+                },
+                "modifiedBy": {
+                    "title": "ModifiedBy",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "createdBy": {
+                    "title": "CreatedBy",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                }
+            }
+        }
+    }
+}
