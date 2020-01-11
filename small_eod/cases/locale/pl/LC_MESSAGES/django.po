@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 11:52+0200\n"
-"PO-Revision-Date: 2019-06-10 11:52+0200\n"
+"POT-Creation-Date: 2020-01-11 02:04+0100\n"
+"PO-Revision-Date: 2020-01-11 02:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,99 +20,99 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:24 models.py:34 models.py:133 models.py:139
+#: admin.py:33 models.py:35 models.py:156 models.py:162
 msgid "Tags"
 msgstr "Tagi"
 
-#: admin.py:29
+#: admin.py:39
 msgid "View {} letters"
 msgstr "Zobacz {} listów"
 
-#: admin.py:31 models.py:203
+#: admin.py:43 models.py:241
 msgid "Letters"
 msgstr "Listy"
 
-#: admin.py:40 models.py:90 models.py:189
+#: admin.py:53 models.py:105 models.py:218
 msgid "Case"
 msgstr "Sprawa"
 
-#: admin.py:45 models.py:190
+#: admin.py:60 models.py:221
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: admin.py:64
+#: admin.py:78
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
-#: admin.py:87
+#: admin.py:102
 msgid "Download selected letters"
 msgstr "Pobierz wybrane listy"
 
-#: apps.py:7 models.py:91
+#: apps.py:7 models.py:106
 msgid "Cases"
 msgstr "Sprawy"
 
-#: dashboard.py:67
+#: dashboard.py:64
 msgid "System"
 msgstr "System"
 
-#: dashboard.py:74
+#: dashboard.py:69
 msgid "Application"
 msgstr "Aplikacja"
 
-#: dashboard.py:83
+#: dashboard.py:79
 msgid "Support"
 msgstr "Wsparcie techniczne"
 
-#: dashboard.py:96
+#: dashboard.py:94
 msgid "Recent Actions"
 msgstr "Ostatnie akcje"
 
-#: models.py:9 models.py:44
+#: models.py:10 models.py:46
 msgid "Whose case"
 msgstr "Czyja sprawa"
 
-#: models.py:10 models.py:49
+#: models.py:11 models.py:53
 msgid "What scope"
 msgstr "Jaki zakres sprawy"
 
-#: models.py:11 models.py:54
+#: models.py:12 models.py:60
 msgid "Inaction scope"
 msgstr "Bezczynność w jakim zakresie"
 
-#: models.py:12 models.py:60
+#: models.py:13 models.py:67
 msgid "Decision scope"
 msgstr "Decyzja w jakim zakresie"
 
-#: models.py:13 models.py:66
+#: models.py:14 models.py:74
 msgid "The moment of providing information"
 msgstr "Informacja udzielona w którym momencie"
 
-#: models.py:14 models.py:72
+#: models.py:15 models.py:81
 msgid "Proceedings interrupted"
 msgstr "Postępowanie przerwane (rodzaj)"
 
-#: models.py:15 models.py:77
+#: models.py:16 models.py:88
 msgid "Status"
 msgstr "Status"
 
-#: models.py:17
+#: models.py:18
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:18 models.py:29 models.py:95 models.py:122 models.py:137
+#: models.py:19 models.py:30 models.py:110 models.py:142 models.py:160
 msgid "Name"
 msgstr "Nazwa"
 
-#: models.py:24
+#: models.py:25
 msgid "Dictionary"
 msgstr "Słownik"
 
-#: models.py:25
+#: models.py:26
 msgid "Dictinaries"
 msgstr "Słowniki"
 
-#: models.py:30 models.py:138 models.py:192
+#: models.py:31 models.py:161 models.py:224
 msgid "Comment"
 msgstr "Komentarz"
 
@@ -120,87 +120,87 @@ msgstr "Komentarz"
 msgid "Responsble person"
 msgstr "Osoba odpowiedzialna"
 
-#: models.py:37
+#: models.py:38
 msgid "Audited institution"
 msgstr "Kontrolowana instytucja"
 
-#: models.py:101 models.py:193
+#: models.py:116 models.py:227
 msgid "Channel"
 msgstr "Kanał"
 
-#: models.py:102
+#: models.py:117
 msgid "Channels"
 msgstr "Kanały"
 
-#: models.py:106
+#: models.py:121
 msgid "Nazwa"
 msgstr "Nazwa"
 
-#: models.py:117
+#: models.py:137
 msgid "Person"
 msgstr "Osoba"
 
-#: models.py:118
+#: models.py:138
 msgid "Persons"
 msgstr "Osoby"
 
-#: models.py:132
+#: models.py:155
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:150 models.py:177
+#: models.py:178 models.py:204
 msgid "Institution"
 msgstr "Instytucja"
 
-#: models.py:151
+#: models.py:179
 msgid "Institutions"
 msgstr "Instytucje"
 
-#: models.py:155 models.py:172
+#: models.py:183 models.py:197
 msgid "Description"
 msgstr "Opis"
 
-#: models.py:162
+#: models.py:190
 msgid "Letter description"
 msgstr "Opis listu"
 
-#: models.py:163
+#: models.py:191
 msgid "Letter descriptions"
 msgstr "Opisy listów"
 
-#: models.py:168
+#: models.py:195
 msgid "received"
 msgstr "odebrane"
 
-#: models.py:169
+#: models.py:195
 msgid "send"
 msgstr "wysłane"
 
-#: models.py:175
+#: models.py:200
 msgid "Direction"
 msgstr "Kierunek"
 
-#: models.py:178
+#: models.py:205
 msgid "From whom / to whom"
 msgstr "Od kogo / do kogo"
 
-#: models.py:181
+#: models.py:209
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:183
+#: models.py:211
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:191
+#: models.py:223
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:198
+#: models.py:234
 msgid "Letter #{}"
 msgstr "List #{}"
 
-#: models.py:202
+#: models.py:240
 msgid "Letter"
 msgstr "List"
 
