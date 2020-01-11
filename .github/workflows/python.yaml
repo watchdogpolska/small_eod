@@ -2,10 +2,10 @@ name: Django application
 
 on:
   push:
-    paths-ignore:
+    paths:
     - 'backend-project/**'
   pull_request:
-    paths-ignore:
+    paths:
     - 'backend-project/**'
 
 jobs:
