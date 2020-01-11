@@ -177,7 +177,7 @@ class LetterAdmin(admin.ModelAdmin):
         "channel",
         get_attachment_status,
     ]
-    list_filter = ["institution", "description", "direction", "case", "channel"]
+    list_filter = ["institution", "name", "direction", "case", "channel"]
     search_fields = [
         "name__content",
         "comment",
