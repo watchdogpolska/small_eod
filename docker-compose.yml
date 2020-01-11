@@ -30,6 +30,7 @@ services:
   web:
     build:
       context: ./backend-project
+      target: dev
     depends_on:
       - db
     volumes:
