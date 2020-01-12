@@ -71,27 +71,28 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
 
 
 class FactoryCreateObjectsMixin:
+    FACTORY = Type[DjangoModelFactory]
+    MODEL = Type[Model]
 
-    FACTORY: Tuple[Type[Model], Type[DjangoModelFactory]] = ()
-    FACTORY_MANY_COUNT: int = 10
+    FACTORY_COUNT = 10
 
-    @tag('FactoryCreateObjectsMixin')
-    def test_factories_simple(self):
-        model, factory = self.FACTORY[0], self.FACTORY[1]
-        factory()
+    def _test_factory_object(self, msg, count):
+        obj = self.FACTORY()
         self.assertEqual(
-            1,
-            model.objects.all().count(),
-            msg=f"Failed simple factory test, model: {model} with factory: {factory}"
+            count,
+            self.MODEL.objects.all().count(),
+            msg=f"Failed {msg} factory test - "
+                f"position: {count} "
+                f"model: {self.MODEL} "
+                f"factory: {self.FACTORY} "
+                f"object: {obj}"
         )
 
     @tag('FactoryCreateObjectsMixin')
+    def test_factories_simple(self):
+        self._test_factory_object(msg='simple', count=1)
+
+    @tag('FactoryCreateObjectsMixin')
     def test_factories_many(self):
-        model, factory = self.FACTORY[0], self.FACTORY[1]
-        for x in range(1, self.FACTORY_MANY_COUNT):
-            factory()
-            self.assertEqual(
-                x,
-                model.objects.all().count(),
-                msg=f"Failed many factory test, model: {model} with factory: {factory}"
-            )
+        for x in range(1, self.FACTORY_COUNT):
+            self._test_factory_object(msg='many', count=x)

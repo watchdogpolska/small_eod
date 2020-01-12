@@ -6,11 +6,14 @@ from ..generic.tests import FactoryCreateObjectsMixin
 
 
 class TagFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = (Tag, TagFactory)
+    MODEL = Tag
+    FACTORY = TagFactory
 
 
 class TagNamespaceFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = (TagNamespace, TagNamespaceFactory)
+    MODEL = TagNamespace
+    FACTORY = TagNamespaceFactory
+
 
 class TagsTestCase(TestCase):
 
@@ -21,3 +24,7 @@ class TagsTestCase(TestCase):
         tag = TagFactory(name="test")
         tag_namespace = TagNamespaceFactory(prefix="test")
         self.assertTrue(tag.name.startswith(tag_namespace.prefix))
+
+
+class TagNamespaceTestCase(TestCase):
+    pass
