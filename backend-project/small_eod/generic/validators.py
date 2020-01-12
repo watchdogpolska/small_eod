@@ -3,7 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ExactLenghtsValidator(BaseValidator):
-    message = _('Ensure this value has length of any %(limit_value)s (it has %(show_value)d).')
+    message = _(
+        "Ensure this value has length of any %(limit_value)s (it has %(show_value)d)."
+    )
 
     def __init__(self, limit_value: list = None, **kwargs):
         super().__init__(limit_value=limit_value, **kwargs)
