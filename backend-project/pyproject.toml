@@ -26,6 +26,7 @@ exclude = '''
   |
   /(
     tests.py
+    | factories.py
   )
 )
 '''
