@@ -11,7 +11,7 @@ class ExactLenghtsValidator(BaseValidator):
         super().__init__(limit_value=limit_value, **kwargs)
 
     def compare(self, a, b):
-        return all([a != x for x in b])
+        return all((a != x for x in b))
 
     def clean(self, x):
         return len(x)
