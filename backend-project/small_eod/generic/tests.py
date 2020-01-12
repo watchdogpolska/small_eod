@@ -1,10 +1,14 @@
-from typing import Tuple, Type
+from typing import Type
 
+from django.core.validators import ValidationError
 from django.db.models import Model
+from django.forms import model_to_dict
+from django.test import TestCase
 from django.test import tag
 from django.urls import reverse
 from factory.django import DjangoModelFactory
 
+from .validators import ExactLengthsValidator
 from ..users.factories import UserFactory
 
 
@@ -45,6 +49,7 @@ class ReadOnlyViewSetMixin:
 
     def validate_item(self, item):
         raise NotImplementedError('validate_item must be overridden')
+
 
 class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_ommited_fields(self):
@@ -96,3 +101,59 @@ class FactoryCreateObjectsMixin:
     def test_factories_many(self):
         for x in range(1, self.FACTORY_COUNT):
             self._test_factory_object(msg='many', count=x)
+
+
+    def test_print_to_console(self):
+        """
+        Show in the console how the data looks like.
+        Just making sure that frontend has the right data
+        to work with.
+        """
+        print(f"\n{model_to_dict(self.FACTORY())}")
+
+
+class ExactLengthsValidatorTestCase(TestCase):
+
+    def test_validator_message(self):
+        """
+        Validator returns corrrect error message.
+        """
+        validator = ExactLengthsValidator([10, 14, 566, 1])
+
+        with self.assertRaises(ValidationError) as err:
+            validator("12")
+
+        self.assertIn(
+            'Ensure this value has length of any [10, 14, 566, 1] (it has 2).',
+            err.exception,
+        )
+
+    def test_validator_values(self):
+        """
+        Given invalid values, validator raises `ValidationError`.
+        Given valid values, validator does not raise `ValidationError`.
+        """
+        validator = ExactLengthsValidator([10, 14])
+
+        # valid values
+        chars_10 = "1111111111"; self.assertEqual(len(chars_10), 10)
+        chars_14 = "11111111111111"; self.assertEqual(len(chars_14), 14)
+
+        # invalid values
+        chars_9 = "111111111"; self.assertEqual(len(chars_9), 9)
+        chars_12 = "111111111111"; self.assertEqual(len(chars_12), 12)
+        chars_15 = "111111111111111"; self.assertEqual(len(chars_15), 15)
+
+        # valid test
+        validator(chars_10)
+        validator(chars_14)
+
+        # invalid test
+        with self.assertRaises(ValidationError):
+            validator(chars_9)
+
+        with self.assertRaises(ValidationError):
+            validator(chars_12)
+
+        with self.assertRaises(ValidationError):
+            validator(chars_15)

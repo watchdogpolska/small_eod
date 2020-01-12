@@ -3,6 +3,7 @@ from factory.django import DjangoModelFactory
 from factory.fuzzy import BaseFuzzyAttribute
 
 from .models import Tag, TagNamespace
+from ..generic.factories import TimestampUserFactoryMixin
 
 
 class ColorFuzzyAttribute(BaseFuzzyAttribute):
@@ -18,7 +19,7 @@ class TagFactory(DjangoModelFactory):
         model = Tag
 
 
-class TagNamespaceFactory(DjangoModelFactory):
+class TagNamespaceFactory(TimestampUserFactoryMixin, DjangoModelFactory):
     prefix = factory.Sequence(lambda n: "tag-%s" % n)
     description = factory.Sequence(lambda n: "desc-%s" % n)
     color = ColorFuzzyAttribute()
