@@ -12,7 +12,7 @@ test: wait_mysql wait_minio
 test-backend-all:
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
-test-django-fast:
+test-backend-fast:
 	docker-compose run web python manage.py test --keepdb --verbosity=2 --exclude-tag=factory_many --exclude-tag=factory_simple
 
 wait_mysql:
