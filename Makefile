@@ -9,7 +9,7 @@ build:
 test: wait_mysql wait_minio
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
-test-django-all:
+test-backend-all:
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
 test-django-fast:
