@@ -1,11 +1,10 @@
-from typing import Tuple, Type, List
+from typing import Tuple, Type
 
 from django.db.models import Model
-from django.test import TestCase, tag
+from django.test import tag
 from django.urls import reverse
 from factory.django import DjangoModelFactory
 
-from ..tests import tags
 from ..users.factories import UserFactory
 
 
@@ -71,30 +70,28 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
         return data
 
 
-class FactoryTestCase(TestCase):
+class FactoryCreateObjectsMixin:
 
-    FACTORIES: List[Tuple[Type[Model], Type[DjangoModelFactory]]] = ()
-    FACTORIES_MANY: int = 10
+    FACTORY: Tuple[Type[Model], Type[DjangoModelFactory]] = ()
+    FACTORY_MANY_COUNT: int = 10
 
-    @tag(tags.FACTORY_SINGLE)
+    @tag('FactoryCreateObjectsMixin')
     def test_factories_simple(self):
-        for e in self.FACTORIES:
-            model, factory = e[0], e[1]
+        model, factory = self.FACTORY[0], self.FACTORY[1]
+        factory()
+        self.assertEqual(
+            1,
+            model.objects.all().count(),
+            msg=f"Failed simple factory test, model: {model} with factory: {factory}"
+        )
+
+    @tag('FactoryCreateObjectsMixin')
+    def test_factories_many(self):
+        model, factory = self.FACTORY[0], self.FACTORY[1]
+        for x in range(1, self.FACTORY_MANY_COUNT):
             factory()
             self.assertEqual(
-                1,
+                x,
                 model.objects.all().count(),
-                msg=f"Failed simple factory test, model: {model} with factory: {factory}"
+                msg=f"Failed many factory test, model: {model} with factory: {factory}"
             )
-
-    @tag(tags.FACTORY_MANY)
-    def test_factories_many(self):
-        for e in self.FACTORIES:
-            model, factory = e[0], e[1]
-            for x in range(1, self.FACTORIES_MANY):
-                factory()
-                self.assertEqual(
-                    x,
-                    model.objects.all().count(),
-                    msg=f"Failed many factory test, model: {model} with factory: {factory}"
-                )
