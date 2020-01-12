@@ -8,7 +8,7 @@ from django.test import tag
 from django.urls import reverse
 from factory.django import DjangoModelFactory
 
-from .validators import ExactLenghtsValidator
+from .validators import ExactLengthsValidator
 from ..users.factories import UserFactory
 
 
@@ -112,13 +112,13 @@ class FactoryCreateObjectsMixin:
         print(f"\n{model_to_dict(self.FACTORY())}")
 
 
-class ExactLenghtsValidatorTestCase(TestCase):
+class ExactLengthsValidatorTestCase(TestCase):
 
     def test_validator_message(self):
         """
         Validator returns corrrect error message.
         """
-        validator = ExactLenghtsValidator([10, 14, 566, 1])
+        validator = ExactLengthsValidator([10, 14, 566, 1])
 
         with self.assertRaises(ValidationError) as err:
             validator("12")
@@ -133,7 +133,7 @@ class ExactLenghtsValidatorTestCase(TestCase):
         Given invalid values, validator raises `ValidationError`.
         Given valid values, validator does not raise `ValidationError`.
         """
-        validator = ExactLenghtsValidator([10, 14])
+        validator = ExactLengthsValidator([10, 14])
 
         # valid values
         chars_10 = "1111111111"; self.assertEqual(len(chars_10), 10)

@@ -2,7 +2,7 @@ from django.core.validators import BaseValidator
 from django.utils.translation import ugettext_lazy as _
 
 
-class ExactLenghtsValidator(BaseValidator):
+class ExactLengthsValidator(BaseValidator):
     message = _(
         "Ensure this value has length of any %(limit_value)s (it has %(show_value)d)."
     )

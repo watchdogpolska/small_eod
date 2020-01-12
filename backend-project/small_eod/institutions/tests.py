@@ -52,7 +52,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
     def test_nip_length(self):
         """
-        `nip` accepts lenght of 10 only.
+        `nip` accepts length of 10 only.
         """
         f = modelform_factory(ExternalIdentifier, fields=('nip',))
 
@@ -84,7 +84,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
     def test_regon_length(self):
         """
-        `regon` accepts lenght of 10 or 14 only.
+        `regon` accepts length of 10 or 14 only.
         """
         f = modelform_factory(ExternalIdentifier, fields=('regon',))
 

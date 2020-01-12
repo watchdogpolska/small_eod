@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='externalidentifier',
             name='nip',
-            field=models.CharField(max_length=10, validators=[small_eod.generic.validators.ExactLenghtsValidator([10]), django.core.validators.RegexValidator('[0-9]*$')]),
+            field=models.CharField(max_length=10, validators=[small_eod.generic.validators.ExactLengthsValidator([10]), django.core.validators.RegexValidator('[0-9]*$')]),
         ),
         migrations.AlterField(
             model_name='externalidentifier',
             name='regon',
-            field=models.CharField(max_length=14, validators=[small_eod.generic.validators.ExactLenghtsValidator([10, 14]), django.core.validators.RegexValidator('[0-9]*$')]),
+            field=models.CharField(max_length=14, validators=[small_eod.generic.validators.ExactLengthsValidator([10, 14]), django.core.validators.RegexValidator('[0-9]*$')]),
         ),
     ]
