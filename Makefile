@@ -6,14 +6,10 @@ clean:
 build:
 	docker-compose build web
 
-test: wait_mysql wait_minio
-	docker-compose run web python manage.py test --keepdb --verbosity=2
+test: wait_mysql wait_minio test-django-backend
 
-test-django-all:
+test-django-backend:
 	docker-compose run web python manage.py test --keepdb --verbosity=2
-
-test-django-fast:
-	docker-compose run web python manage.py test --keepdb --verbosity=2 --exclude-tag=factory_many --exclude-tag=factory_simple
 
 wait_mysql:
 	docker-compose up -d db
