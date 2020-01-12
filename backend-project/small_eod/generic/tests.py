@@ -1,4 +1,4 @@
-from typing import Tuple, Type
+from typing import Type
 
 from django.db.models import Model
 from django.test import tag
