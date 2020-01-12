@@ -9,6 +9,12 @@ build:
 test: wait_mysql wait_minio
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
+test-django-all:
+	docker-compose run web python manage.py test --keepdb --verbosity=2
+
+test-django-fast:
+	docker-compose run web python manage.py test --keepdb --verbosity=2 --exclude-tag=factory_many --exclude-tag=factory_simple
+
 wait_mysql:
 	docker-compose up -d db
 	docker-compose run web bash -c 'wait-for-it db:5432'
@@ -19,6 +25,9 @@ wait_minio:
 
 migrate:
 	docker-compose run web python manage.py migrate
+
+makemigrations:
+	docker-compose run web python manage.py makemigrations
 
 pyupgrade:
 	docker run --rm -v /$$(pwd):/data quay.io/watchdogpolska/pyupgrade
