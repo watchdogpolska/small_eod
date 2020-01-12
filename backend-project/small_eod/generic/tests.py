@@ -2,6 +2,7 @@ from typing import Type
 
 from django.core.validators import ValidationError
 from django.db.models import Model
+from django.forms import model_to_dict
 from django.test import TestCase
 from django.test import tag
 from django.urls import reverse
@@ -100,6 +101,15 @@ class FactoryCreateObjectsMixin:
     def test_factories_many(self):
         for x in range(1, self.FACTORY_COUNT):
             self._test_factory_object(msg='many', count=x)
+
+
+    def test_print_to_console(self):
+        """
+        Show in the console how the data looks like.
+        Just making sure that frontend has the right data
+        to work with.
+        """
+        print(f"\n{model_to_dict(self.FACTORY())}")
 
 
 class ExactLenghtsValidatorTestCase(TestCase):
