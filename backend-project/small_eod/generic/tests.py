@@ -1,6 +1,12 @@
-from django.test import TestCase
+from typing import Tuple, Type
+
+from django.db.models import Model
+from django.test import tag
 from django.urls import reverse
+from factory.django import DjangoModelFactory
+
 from ..users.factories import UserFactory
+
 
 class ReadOnlyViewSetMixin:
     basename = None
@@ -62,3 +68,31 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
             del data[field]
         del data["id"]
         return data
+
+
+class FactoryCreateObjectsMixin:
+    FACTORY = Type[DjangoModelFactory]
+    MODEL = Type[Model]
+
+    FACTORY_COUNT = 10
+
+    def _test_factory_object(self, msg, count):
+        obj = self.FACTORY()
+        self.assertEqual(
+            count,
+            self.MODEL.objects.all().count(),
+            msg=f"Failed {msg} factory test - "
+                f"position: {count} "
+                f"model: {self.MODEL} "
+                f"factory: {self.FACTORY} "
+                f"object: {obj}"
+        )
+
+    @tag('FactoryCreateObjectsMixin')
+    def test_factories_simple(self):
+        self._test_factory_object(msg='simple', count=1)
+
+    @tag('FactoryCreateObjectsMixin')
+    def test_factories_many(self):
+        for x in range(1, self.FACTORY_COUNT):
+            self._test_factory_object(msg='many', count=x)

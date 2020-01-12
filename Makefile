@@ -6,7 +6,9 @@ clean:
 build:
 	docker-compose build web
 
-test: wait_mysql wait_minio
+test: wait_mysql wait_minio test-django-backend
+
+test-django-backend:
 	docker-compose run web python manage.py test --keepdb --verbosity=2
 
 wait_mysql:
@@ -19,6 +21,9 @@ wait_minio:
 
 migrate:
 	docker-compose run web python manage.py migrate
+
+makemigrations:
+	docker-compose run web python manage.py makemigrations
 
 pyupgrade:
 	docker run --rm -v /$$(pwd):/data quay.io/watchdogpolska/pyupgrade
