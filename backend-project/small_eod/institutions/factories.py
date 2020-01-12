@@ -1,11 +1,12 @@
 import string
-from ..users.factories import UserFactory
+
 import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
 from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 from .models import AddressData, ExternalIdentifier, Institution
+from ..generic.factories import TimestampUserFactoryMixin
 
 
 class PolishFaker(factory.Faker):
@@ -46,14 +47,11 @@ class ExternalIdentifierFactory(DjangoModelFactory):
         model = ExternalIdentifier
 
 
-class InstitutionFactory(DjangoModelFactory):
+class InstitutionFactory(TimestampUserFactoryMixin, DjangoModelFactory):
     name = factory.Sequence(lambda n: "name-%s" % n)
     external_identifier = factory.SubFactory(ExternalIdentifierFactory)
     administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory)
     address = factory.SubFactory(AddressDataFactory)
-
-    created_by = factory.SubFactory(UserFactory)
-    modified_by = factory.SubFactory(UserFactory)
 
     class Meta:
         model = Institution
