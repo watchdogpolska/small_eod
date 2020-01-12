@@ -1,5 +1,5 @@
 # Small_EOD
-[![Build Status](https://travis-ci.org/watchdogpolska/small_eod.svg?branch=master)](https://travis-ci.org/watchdogpolska/small_eod)
+![Build Status](https://github.com/watchdogpolska/small_eod/workflows/Django%20application/badge.svg?branch=dev) ![Build Status](https://github.com/watchdogpolska/small_eod/workflows/YAML%20files/badge.svg?branch=dev)
 
 System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczególności w zakresie:
 
