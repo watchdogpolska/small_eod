@@ -1,5 +1,10 @@
+import string
+from ..users.factories import UserFactory
+import factory
 from factory.django import DjangoModelFactory
-import factory.fuzzy
+from factory.fuzzy import FuzzyText
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
+
 from .models import AddressData, ExternalIdentifier, Institution
 
 
@@ -7,6 +12,16 @@ class PolishFaker(factory.Faker):
     def __init__(self, *args, **kwargs):
         kwargs["locale"] = "PL"
         super().__init__(*args, **kwargs)
+
+
+class FuzzyRegon(factory.fuzzy.BaseFuzzyAttribute):
+    def __init__(self):
+        super().__init__()
+        self.chars_10 = FuzzyText(length=10, chars=string.digits)
+        self.chars_14 = FuzzyText(length=14, chars=string.digits)
+
+    def fuzz(self):
+        return factory.random.randgen.choice([self.chars_10, self.chars_14,]).fuzz()
 
 
 class AddressDataFactory(DjangoModelFactory):
@@ -17,19 +32,28 @@ class AddressDataFactory(DjangoModelFactory):
     postal_code = PolishFaker("postcode")
     house_no = PolishFaker("building_number")
     email = PolishFaker("email")
-    epuap = factory.Sequence(lambda n: "epuap-%s" % n)  # todo provide example epuap
+    epuap = factory.Sequence(lambda n: "/epuap-%s/SkrytkaESP" % n)
 
     class Meta:
         model = AddressData
 
 
 class ExternalIdentifierFactory(DjangoModelFactory):
-    # todo
+    nip = FuzzyText(length=10, chars=string.digits)
+    regon = FuzzyRegon()
+
     class Meta:
         model = ExternalIdentifier
 
 
 class InstitutionFactory(DjangoModelFactory):
-    # todo
+    name = factory.Sequence(lambda n: "name-%s" % n)
+    external_identifier = factory.SubFactory(ExternalIdentifierFactory)
+    administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory)
+    address = factory.SubFactory(AddressDataFactory)
+
+    created_by = factory.SubFactory(UserFactory)
+    modified_by = factory.SubFactory(UserFactory)
+
     class Meta:
         model = Institution
