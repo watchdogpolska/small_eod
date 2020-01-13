@@ -19,28 +19,23 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     @classmethod
     def create_factory(cls):
         return cls.FACTORY.create(
-            audited_institutions=(InstitutionFactory(), InstitutionFactory(),),
-            responsible_users=(UserFactory(), UserFactory(),),
-            notified_users=(UserFactory(), UserFactory(),),
-            tags=(TagFactory(), TagFactory(),),
+            audited_institutions=InstitutionFactory.create_batch(size=2),
+            responsible_users=UserFactory.create_batch(size=2),
+            notified_users=UserFactory.create_batch(size=2),
+            tags=TagFactory.create_batch(size=2),
         )
 
     def test_many_to_many(self):
         """
         Check if related objects are created.
         """
-        audited_institutions = (
-            InstitutionFactory(), InstitutionFactory(),
-        )
-        responsible_users = (
-            UserFactory(), UserFactory(),
-        )
-        notified_users = (
-            UserFactory(), UserFactory(),
-        )
-        tags = (
-            TagFactory(), TagFactory(),
-        )
+        audited_institutions = InstitutionFactory.create_batch(size=2)
+
+        responsible_users = UserFactory.create_batch(size=2)
+
+        notified_users = UserFactory.create_batch(size=2)
+
+        tags = TagFactory.create_batch(size=2)
 
         case = self.FACTORY.create(
             audited_institutions=audited_institutions,
@@ -49,10 +44,10 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
             tags=tags,
         )
 
-        self.assertEqual(audited_institutions, tuple(case.audited_institution.all()))
-        self.assertEqual(responsible_users, tuple(case.responsible_user.all()))
-        self.assertEqual(notified_users, tuple(case.notified_user.all()))
-        self.assertEqual(tags, tuple(case.tag.all()))
+        self.assertCountEqual(audited_institutions, case.audited_institution.all())
+        self.assertCountEqual(responsible_users, case.responsible_user.all())
+        self.assertCountEqual(notified_users, case.notified_user.all())
+        self.assertCountEqual(tags, case.tag.all())
 
 
 class CaseCountSerializerTestCase(TestCase):
