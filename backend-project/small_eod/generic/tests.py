@@ -79,7 +79,7 @@ class FactoryCreateObjectsMixin:
     FACTORY = Type[DjangoModelFactory]
     MODEL = Type[Model]
 
-    FACTORY_COUNT = 10
+    FACTORY_COUNT = 2
 
     @classmethod
     def create_factory(cls):
@@ -106,14 +106,13 @@ class FactoryCreateObjectsMixin:
         for x in range(1, self.FACTORY_COUNT):
             self._test_factory_object(msg='many', count=x)
 
-
-    def test_print_to_console(self):
-        """
-        Show in the console how the data looks like.
-        Just making sure that frontend has the right data
-        to work with.
-        """
-        print(f"\n{model_to_dict(self.create_factory())}")
+    # def test_print_to_console(self):
+    #     """
+    #     Show in the console how the data looks like.
+    #     Just making sure that frontend has the right data
+    #     to work with.
+    #     """
+    #     print(f"\n{model_to_dict(self.create_factory())}")
 
 
 class ExactLengthsValidatorTestCase(TestCase):
