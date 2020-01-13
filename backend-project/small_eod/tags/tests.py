@@ -16,7 +16,6 @@ class TagNamespaceFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 
 
 class TagsTestCase(TestCase):
-
     def test_prefix(self):
         """
         `Tag` can be matched by `TagNamespace.prefix`.

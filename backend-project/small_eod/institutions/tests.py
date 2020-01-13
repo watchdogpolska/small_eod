@@ -42,23 +42,26 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `nip` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=('nip',))
+        f = modelform_factory(ExternalIdentifier, fields=("nip",))
 
-        form = f(data=dict(nip='abc'))
+        form = f(data=dict(nip="abc"))
         self.assertFalse(form.is_valid())
 
-        form = f(data=dict(nip='9999999999'))
+        form = f(data=dict(nip="9999999999"))
         self.assertTrue(form.is_valid())
 
     def test_nip_length(self):
         """
         `nip` accepts length of 10 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=('nip',))
+        f = modelform_factory(ExternalIdentifier, fields=("nip",))
 
-        chars_9 = '111111111'; self.assertEqual(len(chars_9), 9)
-        chars_10 = '1111111111'; self.assertEqual(len(chars_10), 10)
-        chars_11 = '11111111111'; self.assertEqual(len(chars_11), 11)
+        chars_9 = "111111111"
+        self.assertEqual(len(chars_9), 9)
+        chars_10 = "1111111111"
+        self.assertEqual(len(chars_10), 10)
+        chars_11 = "11111111111"
+        self.assertEqual(len(chars_11), 11)
 
         form = f(data=dict(nip=chars_9))
         self.assertFalse(form.is_valid())
@@ -73,25 +76,28 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `regon` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=('regon',))
+        f = modelform_factory(ExternalIdentifier, fields=("regon",))
 
-        form = f(data=dict(regon='abc'))
+        form = f(data=dict(regon="abc"))
         self.assertFalse(form.is_valid())
 
-        form = f(data=dict(regon='9999999999'))
+        form = f(data=dict(regon="9999999999"))
         self.assertTrue(form.is_valid())
-
 
     def test_regon_length(self):
         """
         `regon` accepts length of 10 or 14 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=('regon',))
+        f = modelform_factory(ExternalIdentifier, fields=("regon",))
 
-        chars_9 = '111111111'; self.assertEqual(len(chars_9), 9)
-        chars_10 = '1111111111'; self.assertEqual(len(chars_10), 10)
-        chars_11 = '11111111111'; self.assertEqual(len(chars_11), 11)
-        chars_14 = '11111111111111'; self.assertEqual(len(chars_14), 14)
+        chars_9 = "111111111"
+        self.assertEqual(len(chars_9), 9)
+        chars_10 = "1111111111"
+        self.assertEqual(len(chars_10), 10)
+        chars_11 = "11111111111"
+        self.assertEqual(len(chars_11), 11)
+        chars_14 = "11111111111111"
+        self.assertEqual(len(chars_14), 14)
 
         form = f(data=dict(regon=chars_9))
         self.assertFalse(form.is_valid())
