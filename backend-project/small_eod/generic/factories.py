@@ -7,8 +7,7 @@ def _m2m_post_add(attr, obj, create, extracted, **kwargs):
     if not create:
         return
     if extracted:
-        for each in extracted:
-            getattr(obj, attr).add(each)
+        getattr(obj, attr).set(extracted)
 
 
 class AbstractTimestampUserFactory(factory.Factory):
