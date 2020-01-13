@@ -1,8 +1,9 @@
 from django.db import models
-from ..generic.models import TimestampUserLogModel
-from ..channels.models import Channel
-from ..institutions.models import Institution, AddressData
+
 from ..cases.models import Case
+from ..channels.models import Channel
+from ..generic.models import TimestampUserLogModel
+from ..institutions.models import Institution, AddressData
 
 
 class Letter(TimestampUserLogModel):
