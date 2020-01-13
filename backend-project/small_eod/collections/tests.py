@@ -5,9 +5,11 @@ from django.urls import reverse
 from ..generic.tests import ReadOnlyViewSetMixin
 from ..users.factories import UserFactory
 
+
 class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
     basename = "collection-note"
     factory_class = NoteFactory
+
     def setUp(self):
         super().setUp()
         self.collection = CollectionFactory(query=str(self.obj.case.id))
