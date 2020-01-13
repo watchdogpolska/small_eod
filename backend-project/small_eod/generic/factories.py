@@ -1,4 +1,7 @@
+import datetime
+
 import factory.fuzzy
+from django.utils import timezone
 
 from ..users.factories import UserFactory
 
@@ -35,4 +38,17 @@ class ManyToManyPostGeneration(factory.PostGeneration):
 class FuzzyTrueOrFalse(factory.fuzzy.FuzzyChoice):
     def __init__(self, **kwargs):
         kwargs["choices"] = (True, False)
+        super().__init__(**kwargs)
+
+
+class FuzzyTrueOrFalseOrNone(factory.fuzzy.FuzzyChoice):
+    def __init__(self, **kwargs):
+        kwargs["choices"] = (True, False, None)
+        super().__init__(**kwargs)
+
+
+class FuzzyDateTimeFromNow(factory.fuzzy.FuzzyDateTime):
+    def __init__(self, max_days: int = None, **kwargs):
+        kwargs["start_dt"] = timezone.now()
+        kwargs["end_dt"] = timezone.now() + datetime.timedelta(days=max_days)
         super().__init__(**kwargs)
