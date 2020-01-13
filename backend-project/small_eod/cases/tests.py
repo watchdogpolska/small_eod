@@ -1,14 +1,60 @@
 from django.test import TestCase
+
+from .factories import CaseFactory
 from .models import Case
 from .serializers import CaseSerializer, CaseCountSerializer
-from .factories import CaseFactory
-from ..tags.models import Tag
 from ..dictionaries.factories import FeatureFactory, DictionaryFactory
+from ..generic.tests import GenericViewSetMixin, FactoryCreateObjectsMixin
+from ..institutions.factories import InstitutionFactory
+from ..tags.factories import TagFactory
+from ..tags.models import Tag
 from ..users.factories import UserFactory
-from ..generic.tests import GenericViewSetMixin
-from django.urls import reverse
 
-# Create your tests here.
+
+class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+    MODEL = Case
+    FACTORY = CaseFactory
+    FACTORY_COUNT = 2   # its slow
+
+    @classmethod
+    def create_factory(cls):
+        return cls.FACTORY.create(
+            audited_institutions=(InstitutionFactory(), InstitutionFactory(),),
+            responsible_users=(UserFactory(), UserFactory(),),
+            notified_users=(UserFactory(), UserFactory(),),
+            tags=(TagFactory(), TagFactory(),),
+        )
+
+    def test_many_to_many(self):
+        """
+        Check if related objects are created.
+        """
+        audited_institutions = (
+            InstitutionFactory(), InstitutionFactory(),
+        )
+        responsible_users = (
+            UserFactory(), UserFactory(),
+        )
+        notified_users = (
+            UserFactory(), UserFactory(),
+        )
+        tags = (
+            TagFactory(), TagFactory(),
+        )
+
+        case = self.FACTORY.create(
+            audited_institutions=audited_institutions,
+            responsible_users=responsible_users,
+            notified_users=notified_users,
+            tags=tags,
+        )
+
+        self.assertEqual(audited_institutions, tuple(case.audited_institution.all()))
+        self.assertEqual(responsible_users, tuple(case.responsible_user.all()))
+        self.assertEqual(notified_users, tuple(case.notified_user.all()))
+        self.assertEqual(tags, tuple(case.tag.all()))
+
+
 class CaseCountSerializerTestCase(TestCase):
     def test_tag_field(self):
         serializer = CaseSerializer(data={
@@ -50,6 +96,7 @@ class CaseCountSerializerTestCase(TestCase):
         data = CaseCountSerializer(case_counted).data
         self.assertEqual(data["letter_count"], 0)
         self.assertEqual(data["note_count"], 0)
+
 
 class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = 'case'
