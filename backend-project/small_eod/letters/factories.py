@@ -3,11 +3,11 @@ import factory.fuzzy
 from .models import Letter, Description
 from ..cases.factories import CaseFactory
 from ..channels.factories import ChannelFactory
-from ..generic.factories import FuzzyTrueOrFalse, FuzzyDateTimeFromNow
+from ..generic.factories import FuzzyTrueOrFalse, FuzzyDateTimeFromNow, AbstractTimestampUserFactory
 from ..institutions.factories import InstitutionFactory, AddressDataFactory
 
 
-class LetterFactory(factory.DjangoModelFactory):
+class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     final = FuzzyTrueOrFalse()
     date = FuzzyDateTimeFromNow(max_days=10)
