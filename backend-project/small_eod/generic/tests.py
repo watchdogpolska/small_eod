@@ -81,8 +81,12 @@ class FactoryCreateObjectsMixin:
 
     FACTORY_COUNT = 10
 
+    @classmethod
+    def create_factory(cls):
+        return cls.FACTORY()
+
     def _test_factory_object(self, msg, count):
-        obj = self.FACTORY()
+        obj = self.create_factory()
         self.assertEqual(
             count,
             self.MODEL.objects.all().count(),
@@ -109,7 +113,7 @@ class FactoryCreateObjectsMixin:
         Just making sure that frontend has the right data
         to work with.
         """
-        print(f"\n{model_to_dict(self.FACTORY())}")
+        print(f"\n{model_to_dict(self.create_factory())}")
 
 
 class ExactLengthsValidatorTestCase(TestCase):
