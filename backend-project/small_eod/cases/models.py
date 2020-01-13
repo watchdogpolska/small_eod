@@ -28,3 +28,6 @@ class Case(TimestampUserLogModel):
     tag = models.ManyToManyField(to=Tag, blank=True)
 
     objects = CaseQuerySet.as_manager()
+
+    def __str__(self):
+        return self.name

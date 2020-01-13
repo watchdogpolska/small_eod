@@ -4,6 +4,7 @@ from operator import attrgetter
 from .models import Case
 from ..tags.models import Tag
 from ..dictionaries.models import Feature
+from ..generic.serializers import UserLogModelSerializer
 
 
 class TagField(serializers.ListField):
@@ -16,18 +17,15 @@ class TagField(serializers.ListField):
         ]
 
 
-class CaseSerializer(serializers.ModelSerializer):
+class CaseSerializer(UserLogModelSerializer):
     tag = TagField()
     feature = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Feature.objects.all()
     )
 
-    created_by = serializers.PrimaryKeyRelatedField(read_only=True)
-    modified_by = serializers.PrimaryKeyRelatedField(read_only=True)
-
     class Meta:
         model = Case
-        read_only_fields = ["created_on", "modified_on", "created_by", "modified_by"]
+        read_only_fields = []
         fields = [
             "id",
             "comment",
@@ -51,7 +49,7 @@ class CaseSerializer(serializers.ModelSerializer):
         responsible_user = validated_data.pop("responsible_user")
         notified_user = validated_data.pop("notified_user")
         feature = validated_data.pop("feature")
-        case = Case.objects.create(**validated_data)
+        case = super().create(**validated_data)
         case.tag.set(tag)
         case.audited_institution.set(audited_institution)
         case.responsible_user.set(responsible_user)
