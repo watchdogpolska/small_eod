@@ -1,4 +1,5 @@
 import datetime
+import string
 
 import factory.fuzzy
 from django.utils import timezone
@@ -34,6 +35,12 @@ class ManyToManyPostGeneration(factory.PostGeneration):
         )
 
 
+class PolishFaker(factory.Faker):
+    def __init__(self, *args, **kwargs):
+        kwargs["locale"] = "PL"
+        super().__init__(*args, **kwargs)
+
+
 class FuzzyTrueOrFalse(factory.fuzzy.FuzzyChoice):
     def __init__(self, **kwargs):
         kwargs["choices"] = (True, False)
@@ -51,3 +58,19 @@ class FuzzyDateTimeFromNow(factory.fuzzy.FuzzyDateTime):
         kwargs["start_dt"] = timezone.now()
         kwargs["end_dt"] = timezone.now() + datetime.timedelta(days=max_days)
         super().__init__(**kwargs)
+
+
+class FuzzyRegon(factory.fuzzy.BaseFuzzyAttribute):
+    def __init__(self):
+        super().__init__()
+        self.chars_10 = factory.fuzzy.FuzzyText(length=10, chars=string.digits)
+        self.chars_14 = factory.fuzzy.FuzzyText(length=14, chars=string.digits)
+
+    def fuzz(self):
+        return factory.random.randgen.choice([self.chars_10, self.chars_14,]).fuzz()
+
+
+class RGBColorFuzzyAttribute(factory.fuzzy.BaseFuzzyAttribute):
+    def fuzz(self):
+        n = factory.random.randgen.randint(0, 999999)
+        return "{:06d}".format(n)

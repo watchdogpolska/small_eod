@@ -5,6 +5,7 @@ from ..cases.factories import CaseFactory
 
 
 class NoteFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+
     case = factory.SubFactory(CaseFactory)
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
 

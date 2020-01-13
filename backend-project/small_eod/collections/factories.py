@@ -9,11 +9,11 @@ from ..generic.factories import (
 
 
 class CollectionFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
-    # todo add `query` | improve `expired_on`
+    # todo add `query`
 
-    comment = factory.Sequence(lambda n: "comment-%04d" % n)
     public = FuzzyTrueOrFalse()
     expired_on = FuzzyDateTimeFromNow(max_days=10)
+    comment = factory.Sequence(lambda n: "comment-%04d" % n)
 
     class Meta:
         model = Collection
