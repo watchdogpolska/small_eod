@@ -23,6 +23,7 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
             responsible_users=(UserFactory(), UserFactory(),),
             notified_users=(UserFactory(), UserFactory(),),
             tags=(TagFactory(), TagFactory(),),
+            features=(FeatureFactory(), FeatureFactory(),)
         )
 
     def test_many_to_many(self):
@@ -41,18 +42,23 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
         tags = (
             TagFactory(), TagFactory(),
         )
+        features = (
+            FeatureFactory(), FeatureFactory(),
+        )
 
         case = self.FACTORY.create(
             audited_institutions=audited_institutions,
             responsible_users=responsible_users,
             notified_users=notified_users,
             tags=tags,
+            features=features,
         )
 
         self.assertEqual(audited_institutions, tuple(case.audited_institution.all()))
         self.assertEqual(responsible_users, tuple(case.responsible_user.all()))
         self.assertEqual(notified_users, tuple(case.notified_user.all()))
         self.assertEqual(tags, tuple(case.tag.all()))
+        self.assertEqual(features, tuple(case.feature.all()))
 
 
 class CaseCountSerializerTestCase(TestCase):
