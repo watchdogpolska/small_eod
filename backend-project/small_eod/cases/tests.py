@@ -9,7 +9,10 @@ from ..institutions.factories import InstitutionFactory
 from ..tags.factories import TagFactory
 from ..tags.models import Tag
 from ..users.factories import UserFactory
-
+from ..generic.tests import GenericViewSetMixin
+from django.urls import reverse
+from rest_framework.test import APIRequestFactory, force_authenticate
+from ..notes.factories import NoteFactory
 
 class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = Case
@@ -52,17 +55,25 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 
 
 class CaseCountSerializerTestCase(TestCase):
+    def setUp(self):
+        self.default_data = {
+            "name": "Polska Fundacja Narodowa o rejestr umów",
+            "audited_institution": [],
+            "comment": "xxx",
+            "responsible_user": [],
+            "notified_user": [],
+            "feature": [],
+            "tag": ["rejestr umów"],
+        }
+        self.user = UserFactory()
+        factory = APIRequestFactory()
+        self.request = factory.get("/")
+        force_authenticate(self.request, user=self.user)
+        self.request.user = self.user
+
     def test_tag_field(self):
         serializer = CaseSerializer(
-            data={
-                "name": "Polska Fundacja Narodowa o rejestr umów",
-                "audited_institution": [],
-                "comment": "xxx",
-                "responsible_user": [],
-                "notified_user": [],
-                "feature": [],
-                "tag": ["rejestr umów"],
-            }
+            data=self.default_data, context={"request": self.request}
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
@@ -76,27 +87,44 @@ class CaseCountSerializerTestCase(TestCase):
         features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
         serializer = CaseCountSerializer(
             data={
-                "name": "Polska Fundacja Narodowa o rejestr umów",
-                "audited_institution": [],
-                "comment": "xxx",
-                "responsible_user": [],
-                "notified_user": [],
-                "feature": [x.id for x in features],
-                "tag": [],
-            }
+                **self.default_data,
+                **{"feature": [x.id for x in features], "tag": [],},
+            },
+            context={"request": self.request},
         )
         self.assertFalse(serializer.is_valid())
         self.assertEqual(set(serializer.errors.keys()), {"feature"})
 
     def test_serializer_counters(self):
-        CaseFactory()
+        NoteFactory()
         case_counted = Case.objects.with_counter().get()
         self.assertEqual(case_counted.letter_count, 0)
-        self.assertEqual(case_counted.note_count, 0)
+        self.assertEqual(case_counted.note_count, 1)
         data = CaseCountSerializer(case_counted).data
         self.assertEqual(data["letter_count"], 0)
-        self.assertEqual(data["note_count"], 0)
+        self.assertEqual(data["note_count"], 1)
 
+    def test_default_for_related_user(self):
+        del self.default_data["responsible_user"]
+        del self.default_data["notified_user"]
+        serializer = CaseCountSerializer(
+            data=self.default_data, context={"request": self.request}
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertCountEqual(obj.responsible_user.all(), [self.user])
+
+    def test_save_related_user(self):
+        [responsible_user, notified_user] = UserFactory.create_batch(size=2)
+        self.default_data["responsible_user"] = [responsible_user.pk]
+        self.default_data["notified_user"] = [notified_user.pk]
+        serializer = CaseCountSerializer(
+            data=self.default_data, context={"request": self.request}
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertCountEqual(obj.responsible_user.all(), [responsible_user])
+        self.assertCountEqual(obj.notified_user.all(), [notified_user])
 
 class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "case"

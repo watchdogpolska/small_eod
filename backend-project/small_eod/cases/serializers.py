@@ -4,6 +4,7 @@ from operator import attrgetter
 from .models import Case
 from ..tags.models import Tag
 from ..dictionaries.models import Feature
+from ..users.models import User
 
 
 class TagField(serializers.ListField):
@@ -16,12 +17,24 @@ class TagField(serializers.ListField):
         ]
 
 
+class CurrentUserListDefault:
+    requires_context = True
+
+    def __call__(self, serializer_field):
+        return [serializer_field.context["request"].user]
+
+
 class CaseSerializer(serializers.ModelSerializer):
     tag = TagField()
     feature = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Feature.objects.all()
     )
-
+    responsible_user = serializers.PrimaryKeyRelatedField(
+        many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
+    )
+    notified_user = serializers.PrimaryKeyRelatedField(
+        many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
+    )
     created_by = serializers.PrimaryKeyRelatedField(read_only=True)
     modified_by = serializers.PrimaryKeyRelatedField(read_only=True)
 
