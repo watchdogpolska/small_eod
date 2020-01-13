@@ -1,3 +1,10 @@
-# from django.test import TestCase
+from django.test import TestCase
 
-# Create your tests here.
+from .factories import ChannelFactory
+from .models import Channel
+from ..generic.tests import FactoryCreateObjectsMixin
+
+
+class ChannelFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+    FACTORY = ChannelFactory
+    MODEL = Channel

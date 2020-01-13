@@ -1,4 +1,4 @@
-import factory
+import factory.fuzzy
 
 from ..users.factories import UserFactory
 
@@ -30,3 +30,9 @@ class ManyToManyPostGeneration(factory.PostGeneration):
             extracted=extracted,
             **kwargs,
         )
+
+
+class FuzzyTrueOrFalse(factory.fuzzy.FuzzyChoice):
+    def __init__(self, **kwargs):
+        kwargs["choices"] = (True, False)
+        super().__init__(**kwargs)
