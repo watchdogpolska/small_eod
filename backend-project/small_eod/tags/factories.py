@@ -13,15 +13,15 @@ class ColorFuzzyAttribute(BaseFuzzyAttribute):
 
 
 class TagFactory(DjangoModelFactory):
-    name = factory.Sequence(lambda n: "tag-%s" % n)
+    name = factory.Sequence(lambda n: "tag-%04s" % n)
 
     class Meta:
         model = Tag
 
 
 class TagNamespaceFactory(AbstractTimestampUserFactory, DjangoModelFactory):
-    prefix = factory.Sequence(lambda n: "tag-%s" % n)
-    description = factory.Sequence(lambda n: "desc-%s" % n)
+    prefix = factory.Sequence(lambda n: "tag-%04s" % n)
+    description = factory.Sequence(lambda n: "desc-%04s" % n)
     color = ColorFuzzyAttribute()
 
     class Meta:

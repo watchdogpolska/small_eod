@@ -33,7 +33,7 @@ class AddressDataFactory(DjangoModelFactory):
     postal_code = PolishFaker("postcode")
     house_no = PolishFaker("building_number")
     email = PolishFaker("email")
-    epuap = factory.Sequence(lambda n: "/epuap-%s/SkrytkaESP" % n)
+    epuap = factory.Sequence(lambda n: "/epuap-%04s/SkrytkaESP" % n)
 
     class Meta:
         model = AddressData
@@ -48,7 +48,7 @@ class ExternalIdentifierFactory(DjangoModelFactory):
 
 
 class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
-    name = factory.Sequence(lambda n: "name-%s" % n)
+    name = factory.Sequence(lambda n: "name-%04s" % n)
     external_identifier = factory.SubFactory(ExternalIdentifierFactory)
     administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory)
     address = factory.SubFactory(AddressDataFactory)
