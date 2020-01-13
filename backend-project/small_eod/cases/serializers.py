@@ -49,7 +49,7 @@ class CaseSerializer(UserLogModelSerializer):
         responsible_user = validated_data.pop("responsible_user")
         notified_user = validated_data.pop("notified_user")
         feature = validated_data.pop("feature")
-        case = super().create(**validated_data)
+        case = super().create(validated_data)
         case.tag.set(tag)
         case.audited_institution.set(audited_institution)
         case.responsible_user.set(responsible_user)

@@ -5,7 +5,7 @@ from rest_framework.routers import SimpleRouter
 from .views import CaseViewSet, ResponsibleUserViewSet, NotifiedUserViewSet
 
 router = SimpleRouter()
-router.register("cases", CaseViewSet, basename="cases")
+router.register("cases", CaseViewSet, basename="case")
 
 user_router = NestedSimpleRouter(router, "cases", lookup="case")
 user_router.register(
