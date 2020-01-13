@@ -3,7 +3,11 @@ import factory.fuzzy
 from .models import Letter, Description
 from ..cases.factories import CaseFactory
 from ..channels.factories import ChannelFactory
-from ..generic.factories import FuzzyTrueOrFalse, FuzzyDateTimeFromNow, AbstractTimestampUserFactory
+from ..generic.factories import (
+    FuzzyTrueOrFalse,
+    FuzzyDateTimeFromNow,
+    AbstractTimestampUserFactory,
+)
 from ..institutions.factories import InstitutionFactory, AddressDataFactory
 
 
