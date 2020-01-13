@@ -14,7 +14,7 @@ from ..users.factories import UserFactory
 class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = Case
     FACTORY = CaseFactory
-    FACTORY_COUNT = 2   # its slow
+    FACTORY_COUNT = 2  # its slow
 
     @classmethod
     def create_factory(cls):
@@ -53,15 +53,17 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 
 class CaseCountSerializerTestCase(TestCase):
     def test_tag_field(self):
-        serializer = CaseSerializer(data={
-            "name": "Polska Fundacja Narodowa o rejestr umów",
-            "audited_institution": [],
-            "comment": "xxx",
-            "responsible_user": [],
-            "notified_user": [],
-            "feature": [],
-            "tag": ["rejestr umów"],
-        })
+        serializer = CaseSerializer(
+            data={
+                "name": "Polska Fundacja Narodowa o rejestr umów",
+                "audited_institution": [],
+                "comment": "xxx",
+                "responsible_user": [],
+                "notified_user": [],
+                "feature": [],
+                "tag": ["rejestr umów"],
+            }
+        )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertTrue(Tag.objects.count(), 1)
@@ -72,17 +74,19 @@ class CaseCountSerializerTestCase(TestCase):
     def test_raise_for_over_maximum_feature(self):
         dictionary = DictionaryFactory(max_items=3)
         features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
-        serializer = CaseCountSerializer(data={
-            "name": "Polska Fundacja Narodowa o rejestr umów",
-            "audited_institution": [],
-            "comment": "xxx",
-            "responsible_user": [],
-            "notified_user": [],
-            "feature": [x.id for x in features],
-            "tag": [],
-        })
+        serializer = CaseCountSerializer(
+            data={
+                "name": "Polska Fundacja Narodowa o rejestr umów",
+                "audited_institution": [],
+                "comment": "xxx",
+                "responsible_user": [],
+                "notified_user": [],
+                "feature": [x.id for x in features],
+                "tag": [],
+            }
+        )
         self.assertFalse(serializer.is_valid())
-        self.assertEqual(set(serializer.errors.keys()), {'feature'})
+        self.assertEqual(set(serializer.errors.keys()), {"feature"})
 
     def test_serializer_counters(self):
         CaseFactory()
@@ -95,7 +99,7 @@ class CaseCountSerializerTestCase(TestCase):
 
 
 class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
-    basename = 'case'
+    basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
 
