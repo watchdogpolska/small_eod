@@ -1,13 +1,22 @@
 from django.test import TestCase
+
+from .factories import CollectionFactory
+from .models import Collection
+from ..generic.tests import ReadOnlyViewSetMixin, FactoryCreateObjectsMixin
 from ..notes.factories import NoteFactory
-from ..collections.factories import CollectionFactory
-from django.urls import reverse
-from ..generic.tests import ReadOnlyViewSetMixin
-from ..users.factories import UserFactory
+
+
+class CollectionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+    FACTORY = CollectionFactory
+    MODEL = Collection
+
 
 class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
+    # todo move it to notes/tests.py?
+
     basename = "collection-note"
     factory_class = NoteFactory
+
     def setUp(self):
         super().setUp()
         self.collection = CollectionFactory(query=str(self.obj.case.id))

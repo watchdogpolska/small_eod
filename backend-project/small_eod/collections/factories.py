@@ -1,15 +1,19 @@
-import factory
+import datetime
+
 import factory.fuzzy
 from django.utils import timezone
-import datetime
+
 from .models import Collection
+from ..generic.factories import AbstractTimestampUserFactory, FuzzyTrueOrFalse
 
 
-class CollectionFactory(factory.django.DjangoModelFactory):
+class CollectionFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+    # todo add `query` | improve `expired_on`
+
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
-    public = True
+    public = FuzzyTrueOrFalse()
     expired_on = factory.fuzzy.FuzzyDateTime(
-        start_dt=timezone.now(), end_dt=timezone.now() + datetime.timedelta(days=10)
+        start_dt=timezone.now(), end_dt=timezone.now() + datetime.timedelta(days=10),
     )
 
     class Meta:
