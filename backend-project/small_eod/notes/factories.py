@@ -1,7 +1,5 @@
-import factory
 import factory.fuzzy
-from django.utils import timezone
-import datetime
+
 from .models import Note
 from ..cases.factories import CaseFactory
 
