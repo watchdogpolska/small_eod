@@ -1,3 +1,15 @@
-# from django.test import TestCase
+from django.test import TestCase
 
-# Create your tests here.
+from .factories import DescriptionFactory, LetterFactory
+from .models import Description, Letter
+from ..generic.tests import FactoryCreateObjectsMixin
+
+
+class LetterFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+    FACTORY = LetterFactory
+    MODEL = Letter
+
+
+class DescriptionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+    FACTORY = DescriptionFactory
+    MODEL = Description
