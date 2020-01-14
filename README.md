@@ -59,9 +59,59 @@ Dodatkowe uwagi:
 
 ## Uruchomienie projektu
 
-### Ubuntu
+## Ogólne
+Przed wykonaniem commitu można uruchomić testy lokalnie, np. jednostkowo:
+* test formatu tekstu
+```bash
+make lint
+```
+* testy django
+```bash
+make test-django-backend
+```
+* zbudowanie kontenerów
+```bash
+make build
+```
+* testowanie backendu django
+```bash
+make test-django-backend
+```
 
-W celu prowadzenia rozwoju oprogramowania zalecana jest instalacja oprogramowania bez dodatkowej warstwy wirtualizacji. W celu przeprowadzenia takowej instalacji należy przeprowadzić instalacje w sposób przedstawiony poniżej.
+Badź grupowo, wszystkie powyższe:
+```bash
+make test-local
+```
+
+* automatyczne sformatowanie tekstu (np. w przypadku błędów ze strony `make lint`)
+```bash
+make fmt
+```
+## Dla leniwych
+#### Docker
+* W celu prowadzenia rozwoju oprogramowania zainstaluj: [Docker](https://docs.docker.com/install/)
+* Cały stack można włączyć za pomocą komendy:
+```bash
+docker-compose up
+```
+#### GithubDesktop
+* Pracująć na `Windows` bądź `Mac` polecane lecz nie wymagane: [GitHub Desktop](https://desktop.github.com/)
+#### PyCharm
+* Niezależnie od platformy polecane: [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#)
+* Skonfiguruj `remote interpreter`
+![interpreter](./docs/images/interpreter.png)
+
+* Ustaw `path mappings`
+![interpreter2](./docs/images/interpreter2.png)
+* Możesz cieszyć się interaktywnym debuggerem i miłym środowiskiem pracy.
+![interpreter2](./docs/images/debugger.png)
+* [Skonfiguruj `default template` dla testów django i zobacz jak można pracować z PyCharm](./docs/images/workflow.gif)
+
+## Dla hardcorów
+## NIEAKTUALNE
+#### Ubuntu
+
+W celu prowadzenia rozwoju oprogramowania możliwa jest instalacja oprogramowania bez dodatkowej warstwy wirtualizacji. W celu przeprowadzenia takowej instalacji należy przeprowadzić instalacje w sposób przedstawiony poniżej.
 
 Niniejsza procedura została zweryfikowana dla Ubuntu 18.10.
 
