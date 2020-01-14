@@ -54,7 +54,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 
 Dodatkowe uwagi:
 
-* Projekt korzysta z kontenerów Docker.
+* Projekt Stowarzyszenia korzysta z kontenerów Docker.
 * Dodatkowe integracje tj. e-mail, ePUAP, Envelo mogą być odrębnymi usługami, lecz komunikującymi się (microservices)
 
 ## Jeżeli chcesz rozwijać projekt
