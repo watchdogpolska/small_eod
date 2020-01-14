@@ -4,11 +4,16 @@ from .factories import CaseFactory
 from .models import Case
 from .serializers import CaseSerializer, CaseCountSerializer
 from ..dictionaries.factories import FeatureFactory, DictionaryFactory
-from ..generic.tests import GenericViewSetMixin, FactoryCreateObjectsMixin
+from ..generic.tests import (
+    GenericViewSetMixin,
+    FactoryCreateObjectsMixin,
+    ReadOnlyViewSetMixin,
+)
 from ..institutions.factories import InstitutionFactory
 from ..tags.factories import TagFactory
 from ..tags.models import Tag
 from ..users.factories import UserFactory
+from ..users.serializers import UserSerializer
 from ..generic.tests import GenericViewSetMixin
 from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
@@ -147,3 +152,37 @@ class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+
+
+class UserViewSetMixin(ReadOnlyViewSetMixin):
+    user_type = None
+    factory_class = UserFactory
+    serializer_class = UserSerializer
+
+    def setUp(self):
+        super().setUp()
+        field_dict = {self.__class__.user_type: [self.obj.pk,]}
+        self.case = CaseFactory(**field_dict)
+
+    def get_extra_kwargs(self):
+        return dict(case_pk=self.case.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.username, item["username"])
+
+    def test_list_no_users(self):
+        field_dict = {self.__class__.user_type: []}
+        self.case = CaseFactory(**field_dict)
+        response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 0)
+
+
+class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
+    user_type = "notified_users"
+    basename = "case-notified_user"
+
+
+class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
+    user_type = "responsible_users"
+    basename = "case-responsible_user"

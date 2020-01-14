@@ -1,15 +1,16 @@
 from rest_framework import serializers
 
 from .models import Dictionary, Feature
+from ..generic.serializers import UserLogModelSerializer
 
 
-class NestedFeatureSerializer(serializers.ModelSerializer):
+class NestedFeatureSerializer(UserLogModelSerializer):
     class Meta:
         model = Feature
         fields = ["id", "name"]
 
 
-class DictionarySerializer(serializers.ModelSerializer):
+class DictionarySerializer(UserLogModelSerializer):
     values = NestedFeatureSerializer(many=True)
 
     class Meta:
@@ -18,7 +19,7 @@ class DictionarySerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         features_data = validated_data.pop("values")
-        dictionary = Dictionary.objects.create(**validated_data)
+        dictionary = super().create(validated_data)
         for feature_data in features_data:
             Feature.objects.create(dictionary=dictionary, **feature_data)
         return dictionary

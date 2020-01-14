@@ -2,9 +2,10 @@ from rest_framework import serializers
 from itertools import groupby
 from operator import attrgetter
 from .models import Letter, Description
+from ..generic.serializers import UserLogModelSerializer
 
 
-class LetterSerializer(serializers.ModelSerializer):
+class LetterSerializer(UserLogModelSerializer):
     class Meta:
         model = Letter
         fields = [

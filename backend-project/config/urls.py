@@ -18,7 +18,6 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from drf_yasg.views import get_schema_view
 from .swagger import info
-from small_eod.cases.views import CaseViewSet
 from small_eod.channels.views import ChannelViewSet
 from small_eod.dictionaries.views import DictionaryViewSet
 from small_eod.events.views import EventViewSet
@@ -32,7 +31,6 @@ from rest_framework import routers
 from rest_framework import permissions
 
 router = routers.DefaultRouter()
-router.register(r"cases", CaseViewSet)
 router.register(r"channels", ChannelViewSet)
 router.register(r"descriptions", DescriptionViewSet)
 router.register(r"dictionaries", DictionaryViewSet)
@@ -54,6 +52,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("small_eod.collections.urls")),
+    path("", include("small_eod.cases.urls")),
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),
     re_path(
