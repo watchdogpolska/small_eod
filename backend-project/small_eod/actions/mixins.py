@@ -29,7 +29,6 @@ class ActionMixin:
     action_handlers = [dummy_pusher, dummy_pusher2]
 
     def handle_actions(self, serializer, action):
-        print(self.action_handlers)
         for handle in self.action_handlers:
             try:
                 handle(serializer, action)
