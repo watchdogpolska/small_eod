@@ -67,14 +67,14 @@ Pracująć na `Windows`/`Mac` dostępny jest [GitHub Desktop](https://desktop.gi
 
 ### Docker
 * W celu szybkiego uruchomienia środowiska wymagany jest [Docker](https://docs.docker.com/install/), a jeśli pracujesz na Linuxie, dodatkowo [docker-compose](https://docs.docker.com/compose/install/). <br>(Docker dla Windows i Mac już go posiada)
-* Aby dowiedzieć się więcej o Dockerze zobacz np. https://www.youtube.com/watch?v=P4ZC3cFN0WQ
+* Aby dowiedzieć się więcej o Dockerze zobacz [ten film](https://www.youtube.com/watch?v=P4ZC3cFN0WQ)
 * W razie problemów bądź pytań otwórz [issue](https://github.com/watchdogpolska/small_eod/issues)
 
 * Cały stack uruchamiany jest za pomocą komendy:
 ```bash
 docker-compose up
 ```
-Po adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) dostępne jest już logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany plików w lokalnym repozytorium będą automatycznie ładowane przez `Django`.
+Po adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) dostępne jest już logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany plików w lokalnym repozytorium będą automatycznie ładowane przez Django.
 
 * Aby utworzyć konto administratora uruchom:
 ```bash
@@ -110,17 +110,5 @@ make test-local
 make fmt
 ```
 
-#### PyCharm
-Niezależnie od platformy z uwagi na świętną integrację z [`Dockerem`](https://docs.docker.com/install/) i `Gitem` możliwa jest praca w środowisku [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#). Automatycznie skonfiguruje on dla Ciebie repozytorium `git` i przełączy pliki na których aktualnie pracujesz (`git checkout`) jednocześnie nie tracąc poprzednich zmian.
- 
- Aby skonfigurować Pycharm z naszym środowiskiem, wykonaj poniższe kroki
-* Skonfiguruj `remote interpreter` 
-
-W przypadku błędów połączenia z serwerem Dockera upewnij się że konfiguracja TLS dla Dockera jest prawidłowa - jeśli wiesz co robisz, możesz ją po prostu wyłączyć.
-![interpreter](./docs/images/interpreter.png)
-
-* Ustaw `path mappings`
-![interpreter2](./docs/images/interpreter2.png)
-* Zaczekaj aż Pycharm wykona index plików i już za chwilę możesz cieszyć się interaktywnym debuggerem i miłym środowiskiem pracy.
-![interpreter2](./docs/images/debugger.png)
-* Możesz również [skonfigurować `default template` dla testów django i zobaczyć jak można pracować z PyCharm](./docs/images/workflow.gif)
+### Pomoc
+[Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.MD)
