@@ -1,6 +1,9 @@
+from django.core import validators
 from django.db import models
-from ..generic.models import TimestampUserLogModel
 from teryt_tree.models import JednostkaAdministracyjna
+
+from ..generic.models import TimestampUserLogModel
+from ..generic.validators import ExactLengthsValidator
 
 
 class AddressData(models.Model):
@@ -15,8 +18,19 @@ class AddressData(models.Model):
 
 
 class ExternalIdentifier(models.Model):
-    nip = models.CharField(max_length=100)
-    regon = models.CharField(max_length=100)
+
+    nip = models.CharField(
+        max_length=10,
+        validators=[ExactLengthsValidator([10]), validators.RegexValidator("[0-9]*$"),],
+    )
+
+    regon = models.CharField(
+        max_length=14,
+        validators=[
+            ExactLengthsValidator([10, 14]),
+            validators.RegexValidator("[0-9]*$"),
+        ],
+    )
 
 
 class Institution(TimestampUserLogModel):

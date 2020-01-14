@@ -1,27 +1,22 @@
 import factory
 from factory.django import DjangoModelFactory
-from factory.fuzzy import BaseFuzzyAttribute
 
 from .models import Tag, TagNamespace
-
-
-class ColorFuzzyAttribute(BaseFuzzyAttribute):
-    def fuzz(self):
-        n = factory.random.randgen.randint(0, 999999)
-        return "{:06d}".format(n)
+from ..generic.factories import AbstractTimestampUserFactory, RGBColorFuzzyAttribute
 
 
 class TagFactory(DjangoModelFactory):
-    name = factory.Sequence(lambda n: "tag-%s" % n)
+    name = factory.Sequence(lambda n: "tag-%04d" % n)
 
     class Meta:
         model = Tag
 
 
-class TagNamespaceFactory(DjangoModelFactory):
-    prefix = factory.Sequence(lambda n: "tag-%s" % n)
-    description = factory.Sequence(lambda n: "desc-%s" % n)
-    color = ColorFuzzyAttribute()
+class TagNamespaceFactory(AbstractTimestampUserFactory, DjangoModelFactory):
+
+    color = RGBColorFuzzyAttribute()
+    prefix = factory.Sequence(lambda n: "tag-%04d" % n)
+    description = factory.Sequence(lambda n: "desc-%04d" % n)
 
     class Meta:
         model = TagNamespace

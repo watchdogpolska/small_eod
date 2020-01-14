@@ -5,16 +5,15 @@ from .models import Case
 from ..tags.models import Tag
 from ..dictionaries.models import Feature
 from ..generic.serializers import UserLogModelSerializer
+from ..users.models import User
+from ..tags.fields import TagField
 
 
-class TagField(serializers.ListField):
-    child = serializers.CharField()
+class CurrentUserListDefault:
+    requires_context = True
 
-    def to_representation(self, data):
-        return [
-            self.child.to_representation(item) if item is not None else None
-            for item in data.all()
-        ]
+    def __call__(self, serializer_field):
+        return [serializer_field.context["request"].user]
 
 
 class CaseSerializer(UserLogModelSerializer):
@@ -22,6 +21,15 @@ class CaseSerializer(UserLogModelSerializer):
     feature = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Feature.objects.all()
     )
+
+    responsible_user = serializers.PrimaryKeyRelatedField(
+        many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
+    )
+    notified_user = serializers.PrimaryKeyRelatedField(
+        many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
+    )
+    created_by = serializers.PrimaryKeyRelatedField(read_only=True)
+    modified_by = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Case

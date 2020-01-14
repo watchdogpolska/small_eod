@@ -4,8 +4,9 @@ from .models import User
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+
+    email = factory.Faker("email", locale="PL")
     username = factory.Sequence("user-{}".format)
-    email = factory.LazyAttribute(lambda o: "%s@example.com" % o.username)
     password = factory.PostGenerationMethodCall("set_password", "pass")
 
     class Meta:
