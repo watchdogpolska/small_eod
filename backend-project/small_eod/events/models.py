@@ -4,7 +4,7 @@ from ..cases.models import Case
 
 
 class Event(TimestampUserLogModel):
-    case = models.ForeignKey(to=Case, on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=256)
     data = models.DateTimeField()
+    name = models.CharField(max_length=256)
     comment = models.CharField(max_length=256)
+    case = models.ForeignKey(to=Case, on_delete=models.DO_NOTHING)
