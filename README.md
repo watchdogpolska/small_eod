@@ -57,9 +57,10 @@ Dodatkowe uwagi:
 * Wdrażamy w Stowarzyszeniu kontenery, więc nie obawiamy się małych usług, lecz obecnie ta aplikacja jeszcze nie wykorzystuje kontenerów
 * Dodatkowe integracje tj. e-mail, ePUAP, Envelo wydaje się, że mogą być odrębnymi usługami, lecz komunikującymi się
 
-## Uruchomienie projektu
+## Jeżeli chcesz rozwijać projekt
 
-## Ogólne
+## Dla deweloperów
+### Uruchomienie projektu
 Pobierz kod źródłowy projektu komendą git lub pracująć na `Windows`/`Mac` wykorzystaj [GitHub Desktop](https://desktop.github.com/)
 ```bash
 git clone git@github.com:watchdogpolska/small_eod.git
