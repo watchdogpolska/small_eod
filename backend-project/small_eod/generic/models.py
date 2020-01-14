@@ -6,6 +6,9 @@ from django.conf import settings
 
 class TimestampUserLogModel(models.Model):
 
+    modified_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
     created_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.DO_NOTHING,
@@ -20,9 +23,6 @@ class TimestampUserLogModel(models.Model):
         null=True,
         blank=True,
     )
-
-    modified_on = models.DateTimeField(auto_now=True)
-    created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
