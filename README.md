@@ -54,18 +54,35 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 
 Dodatkowe uwagi:
 
-* Wdrażamy w Stowarzyszeniu kontenery, więc nie obawiamy się małych usług, lecz obecnie ta aplikacja jeszcze nie wykorzystuje kontenerów
-* Dodatkowe integracje tj. e-mail, ePUAP, Envelo wydaje się, że mogą być odrębnymi usługami, lecz komunikującymi się
+* Projekt korzysta z kontenerów Docker.
+* Dodatkowe integracje tj. e-mail, ePUAP, Envelo mogą być odrębnymi usługami, lecz komunikującymi się (microservices)
 
 ## Jeżeli chcesz rozwijać projekt
 
-## Dla deweloperów
-### Uruchomienie projektu
-Pobierz kod źródłowy projektu komendą git lub pracująć na `Windows`/`Mac` wykorzystaj [GitHub Desktop](https://desktop.github.com/)
+Kod źródłowy projektu można pobrać za pomocą komendy git:
 ```bash
 git clone git@github.com:watchdogpolska/small_eod.git
 ```
-Przed wykonaniem commitu można uruchomić testy lokalnie, np. jednostkowo:
+Pracująć na `Windows`/`Mac` dostępny jest [GitHub Desktop](https://desktop.github.com/) - jak z niego skorzystać możesz zobaczyć [tutaj]((/docs/images/githubdesktop.gif)).
+
+### Docker
+* W celu szybkiego uruchomienia środowiska wymagany jest [Docker](https://docs.docker.com/install/), a jeśli pracujesz na Linuxie, dodatkowo [docker-compose](https://docs.docker.com/compose/install/). <br>(Docker dla Windows i Mac już go posiada)
+* Aby dowiedzieć się więcej o Dockerze zobacz np. https://www.youtube.com/watch?v=P4ZC3cFN0WQ
+* W razie problemów bądź pytań otwórz [issue](https://github.com/watchdogpolska/small_eod/issues)
+
+* Cały stack uruchamiany jest za pomocą komendy:
+```bash
+docker-compose up
+```
+Po adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) dostępne jest już logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany plików w lokalnym repozytorium będą automatycznie ładowane przez `Django`.
+
+* Aby utworzyć konto administratora uruchom:
+```bash
+docker-compose run web python manage.py createsuperuser
+```
+
+### Testy
+Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych, ale przed ich dodaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile):
 * test formatu tekstu
 ```bash
 make lint
@@ -92,28 +109,18 @@ make test-local
 ```bash
 make fmt
 ```
-## Dla leniwych
-#### Docker
-* W celu prowadzenia rozwoju oprogramowania zainstaluj: [Docker](https://docs.docker.com/install/) i jeśli pracujesz na Linuxie: [docker-compose](https://docs.docker.com/compose/install/) (Docker dla Windows i Mac powinień już posiadać)
-* Cały stack można włączyć za pomocą komendy:
-```bash
-docker-compose up
-```
-* W razie problemów bądź pytań otwórz [issue](https://github.com/watchdogpolska/small_eod/issues)
+
 #### PyCharm
-* Niezależnie od platformy polecane: [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#)
-* Skonfiguruj `remote interpreter` (w przypadku błędów połączenia upewnij się że Twoja konfiguracja TLS jest prawidłowa)
+Niezależnie od platformy z uwagi na świętną integrację z [`Dockerem`](https://docs.docker.com/install/) i `Gitem` możliwa jest praca w środowisku [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#). Automatycznie skonfiguruje on dla Ciebie repozytorium `git` i przełączy pliki na których aktualnie pracujesz (`git checkout`) jednocześnie nie tracąc poprzednich zmian.
+ 
+ Aby skonfigurować Pycharm z naszym środowiskiem, wykonaj poniższe kroki
+* Skonfiguruj `remote interpreter` 
+
+W przypadku błędów połączenia z serwerem Dockera upewnij się że konfiguracja TLS dla Dockera jest prawidłowa - jeśli wiesz co robisz, możesz ją po prostu wyłączyć.
 ![interpreter](./docs/images/interpreter.png)
 
 * Ustaw `path mappings`
 ![interpreter2](./docs/images/interpreter2.png)
-* Możesz cieszyć się interaktywnym debuggerem i miłym środowiskiem pracy.
+* Zaczekaj aż Pycharm wykona index plików i już za chwilę możesz cieszyć się interaktywnym debuggerem i miłym środowiskiem pracy.
 ![interpreter2](./docs/images/debugger.png)
-* [Skonfiguruj `default template` dla testów django i zobacz jak można pracować z PyCharm](./docs/images/workflow.gif)
-
-Utwórz konto administratora:
-```bash
-docker-compose run web python manage.py createsuperuser
-```
-W przypadku wystąpienia problemów zweryfikuj powyższe polecenia z ```/Dockerfile```.
-Po adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) dostępne jest logowanie z wykorzystaniem loginu i hasła.
+* Możesz również [skonfigurować `default template` dla testów django i zobaczyć jak można pracować z PyCharm](./docs/images/workflow.gif)
