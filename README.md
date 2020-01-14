@@ -98,7 +98,7 @@ docker-compose up
 * Pracująć na `Windows` bądź `Mac` polecane lecz nie wymagane: [GitHub Desktop](https://desktop.github.com/)
 #### PyCharm
 * Niezależnie od platformy polecane: [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#)
-* Skonfiguruj `remote interpreter`
+* Skonfiguruj `remote interpreter` (w przypadku błędów połączenia upewnij się że Twoja konfiguracja TLS jest prawidłowa)
 ![interpreter](./docs/images/interpreter.png)
 
 * Ustaw `path mappings`
