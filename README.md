@@ -89,7 +89,7 @@ make fmt
 ```
 ## Dla leniwych
 #### Docker
-* W celu prowadzenia rozwoju oprogramowania zainstaluj: [Docker](https://docs.docker.com/install/)
+* W celu prowadzenia rozwoju oprogramowania zainstaluj: [Docker](https://docs.docker.com/install/) i jeśli pracujesz na Linuxie: [docker-compose](https://docs.docker.com/compose/install/) (Docker dla Windows i Mac powinień już posiadać)
 * Cały stack można włączyć za pomocą komendy:
 ```bash
 docker-compose up
