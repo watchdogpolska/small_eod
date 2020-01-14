@@ -14,6 +14,7 @@ from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 from ..notes.factories import NoteFactory
 
+
 class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = Case
     FACTORY = CaseFactory
@@ -56,7 +57,16 @@ class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 
 class CaseCountSerializerTestCase(TestCase):
     def setUp(self):
-        self.default_data = {
+        self.user = UserFactory()
+        factory = APIRequestFactory()
+        self.request = factory.get("/")
+        force_authenticate(self.request, user=self.user)
+        self.request.user = self.user
+
+    def get_default_data(self, new_data=None, skip=None):
+        new_data = new_data or {}
+        skip = skip or []
+        default_data = {
             "name": "Polska Fundacja Narodowa o rejestr umów",
             "audited_institution": [],
             "comment": "xxx",
@@ -65,15 +75,16 @@ class CaseCountSerializerTestCase(TestCase):
             "feature": [],
             "tag": ["rejestr umów"],
         }
-        self.user = UserFactory()
-        factory = APIRequestFactory()
-        self.request = factory.get("/")
-        force_authenticate(self.request, user=self.user)
-        self.request.user = self.user
+        for field in skip:
+            del default_data[field]
+        return {
+            **default_data,
+            **new_data,
+        }
 
     def test_tag_field(self):
         serializer = CaseSerializer(
-            data=self.default_data, context={"request": self.request}
+            data=self.get_default_data(), context={"request": self.request}
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
@@ -86,10 +97,9 @@ class CaseCountSerializerTestCase(TestCase):
         dictionary = DictionaryFactory(max_items=3)
         features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
         serializer = CaseCountSerializer(
-            data={
-                **self.default_data,
-                **{"feature": [x.id for x in features], "tag": [],},
-            },
+            data=self.get_default_data(
+                {"feature": [x.id for x in features], "tag": [],}
+            ),
             context={"request": self.request},
         )
         self.assertFalse(serializer.is_valid())
@@ -105,10 +115,9 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertEqual(data["note_count"], 1)
 
     def test_default_for_related_user(self):
-        del self.default_data["responsible_user"]
-        del self.default_data["notified_user"]
         serializer = CaseCountSerializer(
-            data=self.default_data, context={"request": self.request}
+            data=self.get_default_data(skip=["responsible_user", "notified_user"]),
+            context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
@@ -116,15 +125,20 @@ class CaseCountSerializerTestCase(TestCase):
 
     def test_save_related_user(self):
         [responsible_user, notified_user] = UserFactory.create_batch(size=2)
-        self.default_data["responsible_user"] = [responsible_user.pk]
-        self.default_data["notified_user"] = [notified_user.pk]
         serializer = CaseCountSerializer(
-            data=self.default_data, context={"request": self.request}
+            data=self.get_default_data(
+                new_data={
+                    "responsible_user": [responsible_user.pk],
+                    "notified_user": [notified_user.pk],
+                }
+            ),
+            context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertCountEqual(obj.responsible_user.all(), [responsible_user])
         self.assertCountEqual(obj.notified_user.all(), [notified_user])
+
 
 class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "case"

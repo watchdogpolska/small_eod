@@ -5,16 +5,7 @@ from .models import Case
 from ..tags.models import Tag
 from ..dictionaries.models import Feature
 from ..users.models import User
-
-
-class TagField(serializers.ListField):
-    child = serializers.CharField()
-
-    def to_representation(self, data):
-        return [
-            self.child.to_representation(item) if item is not None else None
-            for item in data.all()
-        ]
+from ..tags.fields import TagField
 
 
 class CurrentUserListDefault:
