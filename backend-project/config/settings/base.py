@@ -122,8 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "./static/"
-MEDIA_ROOT = "./media/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 
 SWAGGER_SETTINGS = {"DEFAULT_INFO": "config.swagger.info"}
