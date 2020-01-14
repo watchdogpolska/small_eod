@@ -28,8 +28,6 @@ class CaseSerializer(UserLogModelSerializer):
     notified_user = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
-    created_by = serializers.PrimaryKeyRelatedField(read_only=True)
-    modified_by = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Case
