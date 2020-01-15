@@ -40,8 +40,10 @@ class DictionarySerializerTestCase(TestCase):
                 "active": True,
                 "min_items": 1,
                 "max_items": 2,
+
                 "values": [{"name": "SO-WP"}, {"name": "Klienci"},],
             },
+
             context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)

@@ -21,7 +21,7 @@ class ExternalIdentifier(models.Model):
 
     nip = models.CharField(
         max_length=10,
-        validators=[ExactLengthsValidator([10]), validators.RegexValidator("[0-9]*$"),],
+        validators=[ExactLengthsValidator([10]), validators.RegexValidator("[0-9]*$")],
     )
 
     regon = models.CharField(

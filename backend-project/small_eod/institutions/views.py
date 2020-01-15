@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .serializers import AddressDataSerializer, InstitutionSerializer
-from .models import AddressData, Institution
+from .serializers import InstitutionSerializer
+from .models import Institution
 
 
 class InstitutionViewSet(viewsets.ModelViewSet):
