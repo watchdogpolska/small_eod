@@ -4,6 +4,8 @@ from .factories import DictionaryFactory, FeatureFactory
 from .models import Dictionary, Feature
 from .serializers import DictionarySerializer
 from ..generic.tests import FactoryCreateObjectsMixin
+from ..users.factories import UserFactory
+from rest_framework.test import APIRequestFactory, force_authenticate
 
 
 class DictionaryFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
@@ -24,6 +26,13 @@ class FeatureFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 
 
 class DictionarySerializerTestCase(TestCase):
+    def setUp(self):
+        self.user = UserFactory()
+        factory = APIRequestFactory()
+        self.request = factory.get("/")
+        force_authenticate(self.request, user=self.user)
+        self.request.user = self.user
+
     def test_save_nested_values(self):
         serializer = DictionarySerializer(
             data={
@@ -31,8 +40,9 @@ class DictionarySerializerTestCase(TestCase):
                 "active": True,
                 "min_items": 1,
                 "max_items": 2,
-                "values": [{"name": "SO-WP"}, {"name": "Klienci"},],
-            }
+                "values": [{"name": "SO-WP"}, {"name": "Klienci"}],
+            },
+            context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         dictionary = serializer.save()

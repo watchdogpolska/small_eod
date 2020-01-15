@@ -2,7 +2,6 @@ from typing import Type
 
 from django.core.validators import ValidationError
 from django.db.models import Model
-from django.forms import model_to_dict
 from django.test import TestCase
 from django.test import tag
 from django.urls import reverse
@@ -23,6 +22,7 @@ class ReadOnlyViewSetMixin:
         self.obj = self.factory_class()
         self.user = getattr(self, "user", UserFactory(username="john"))
         self.client.login(username="john", password="pass")
+        self.response_results_key = "results"
 
     def get_extra_kwargs(self):
         return dict()
@@ -32,11 +32,22 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("get_url must be overridden or basename defined")
         return reverse("{}-{}".format(self.basename, name), kwargs=kwargs)
 
-    def test_list_plain(self):
+    def test_dict_plain(self):
+        parsed_response_len = 4
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+        parsed_response = response.json()
+        response_result = parsed_response.get(self.response_results_key)
+
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 1)
-        self.validate_item(response.json()[0])
+        self.assertIsNotNone(response_result)
+        self.assertEqual(len(parsed_response), parsed_response_len)
+        self.validate_item(response_result[0])
+
+    # def test_list_plain(self):
+    #     response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(len(response.json()), 1)
+    #     self.validate_item(response.json()[0])
 
     def test_retrieve_plain(self):
         response = self.client.get(
@@ -72,28 +83,6 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
             del data[field]
         del data["id"]
         return data
-
-
-class ReadOnlyPaginatedViewSetMixin(ReadOnlyViewSetMixin):
-    def test_list_plain(self):
-        pass
-
-    def test_dict_plain(self):
-        parsed_response_len = 4
-        response_results_key = "results"
-
-        response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
-        parsed_response = response.json()
-        response_result = parsed_response.get(response_results_key)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response_result)
-        self.assertEqual(len(parsed_response), parsed_response_len)
-        self.validate_item(response_result[0])
-
-
-class GenericPaginatedViewSetMixin(GenericViewSetMixin, ReadOnlyPaginatedViewSetMixin):
-    pass
 
 
 class FactoryCreateObjectsMixin:
@@ -133,6 +122,7 @@ class FactoryCreateObjectsMixin:
     #     Just making sure that frontend has the right data
     #     to work with.
     #     """
+    #     from django.forms import model_to_dict
     #     print(f"\n{model_to_dict(self.create_factory())}")
 
 
