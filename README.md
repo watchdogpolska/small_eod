@@ -127,4 +127,4 @@ make test-django-backend
 
 ### Materiały dodatkowe
 
-* [Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.MD)
+* [Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.md)
