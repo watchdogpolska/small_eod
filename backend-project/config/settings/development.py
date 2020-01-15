@@ -6,7 +6,7 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True
 
 INSTALLED_APPS += ["debug_toolbar", "django_extensions"]
 
-MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware",] + MIDDLEWARE
+MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
 
 INTERNAL_IPS = [
     "127.0.0.1",

@@ -14,8 +14,6 @@ from ..tags.factories import TagFactory
 from ..tags.models import Tag
 from ..users.factories import UserFactory
 from ..users.serializers import UserSerializer
-from ..generic.tests import GenericViewSetMixin
-from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 from ..notes.factories import NoteFactory
 
@@ -103,7 +101,7 @@ class CaseCountSerializerTestCase(TestCase):
         features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
         serializer = CaseCountSerializer(
             data=self.get_default_data(
-                {"feature": [x.id for x in features], "tag": [],}
+                {"feature": [x.id for x in features], "tag": []}
             ),
             context={"request": self.request},
         )
@@ -161,7 +159,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
 
     def setUp(self):
         super().setUp()
-        field_dict = {self.__class__.user_type: [self.obj.pk,]}
+        field_dict = {self.__class__.user_type: [self.obj.pk]}
         self.case = CaseFactory(**field_dict)
 
     def get_extra_kwargs(self):

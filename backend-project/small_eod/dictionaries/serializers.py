@@ -1,5 +1,3 @@
-from rest_framework import serializers
-
 from .models import Dictionary, Feature
 from ..generic.serializers import UserLogModelSerializer
 

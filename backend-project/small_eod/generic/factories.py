@@ -67,7 +67,7 @@ class FuzzyRegon(factory.fuzzy.BaseFuzzyAttribute):
         self.chars_14 = factory.fuzzy.FuzzyText(length=14, chars=string.digits)
 
     def fuzz(self):
-        return factory.random.randgen.choice([self.chars_10, self.chars_14,]).fuzz()
+        return factory.random.randgen.choice([self.chars_10, self.chars_14]).fuzz()
 
 
 class RGBColorFuzzyAttribute(factory.fuzzy.BaseFuzzyAttribute):
