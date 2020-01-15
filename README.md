@@ -72,6 +72,8 @@ Projekt realizowany jest zgodnie z filozofią open-source. Szczegółowe informa
 * w jaki sposób wprowadzić zmiany do projektu sa dostępne w [https://github.com/firstcontributions/first-contributions](https://github.com/firstcontributions/first-contributions)
 * udziału w projektach open-source i sposobie organizacji pracy dostępne w artykule "[How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)"
 
+Zadania do wykonania są zarejestrowane jako zagadnienia oznaczone etykietą [good first issue](https://github.com/watchdogpolska/small_eod/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) w portalu GitHub. W celu ich realizacji wystarczy komentarz o rozpoczęciu prac, a następnie utworzenie żądania wcielenia zmian (pull request).
+
 ## Uruchomienie projektu
 
 W celu ułatwienia rozwoju projektu wykorzystywane jest oprogramowanie Docker. Umożliwia ona uruchomienie wszystkich usług niezbędnych do pracy nad projektem. Usługi zostały opisane w pliku ```docker-compose.yml```.
