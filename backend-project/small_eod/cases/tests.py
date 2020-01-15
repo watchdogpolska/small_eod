@@ -4,12 +4,11 @@ from .factories import CaseFactory
 from .models import Case
 from .serializers import CaseSerializer, CaseCountSerializer
 from ..dictionaries.factories import FeatureFactory, DictionaryFactory
-from ..generic.tests import GenericViewSetMixin, FactoryCreateObjectsMixin
+from ..generic.tests import GenericPaginatedViewSetMixin, FactoryCreateObjectsMixin
 from ..institutions.factories import InstitutionFactory
 from ..tags.factories import TagFactory
 from ..tags.models import Tag
 from ..users.factories import UserFactory
-from ..generic.tests import GenericViewSetMixin
 from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 from ..notes.factories import NoteFactory
@@ -140,7 +139,7 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertCountEqual(obj.notified_user.all(), [notified_user])
 
 
-class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
+class CaseViewSetTestCase(GenericPaginatedViewSetMixin, TestCase):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory

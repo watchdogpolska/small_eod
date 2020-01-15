@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from .factories import CollectionFactory
 from .models import Collection
-from ..generic.tests import ReadOnlyViewSetMixin, FactoryCreateObjectsMixin
+from ..generic.tests import ReadOnlyPaginatedViewSetMixin, FactoryCreateObjectsMixin
 from ..notes.factories import NoteFactory
 
 
@@ -11,7 +11,7 @@ class CollectionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = Collection
 
 
-class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
+class NoteViewSetTestCase(ReadOnlyPaginatedViewSetMixin, TestCase):
     # todo move it to notes/tests.py?
 
     basename = "collection-note"

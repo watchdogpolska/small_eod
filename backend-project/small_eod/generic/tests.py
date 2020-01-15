@@ -74,6 +74,28 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
         return data
 
 
+class ReadOnlyPaginatedViewSetMixin(ReadOnlyViewSetMixin):
+    def test_list_plain(self):
+        pass
+
+    def test_dict_plain(self):
+        parsed_response_len = 4
+        response_results_key = "results"
+
+        response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+        parsed_response = response.json()
+        response_result = parsed_response.get(response_results_key)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response_result)
+        self.assertEqual(len(parsed_response), parsed_response_len)
+        self.validate_item(response_result[0])
+
+
+class GenericPaginatedViewSetMixin(GenericViewSetMixin, ReadOnlyPaginatedViewSetMixin):
+    pass
+
+
 class FactoryCreateObjectsMixin:
     FACTORY = Type[DjangoModelFactory]
     MODEL = Type[Model]
