@@ -7,7 +7,7 @@ from .views import (
     NoteViewSet,
 )
 
-from django.urls import path, re_path, include
+from django.urls import path, include
 
 router = routers.SimpleRouter()
 router.register("collections", CollectionViewSet)

@@ -1,7 +1,10 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 
 class UserLogModelSerializer(ModelSerializer):
+    created_by = PrimaryKeyRelatedField(read_only=True)
+    modified_by = PrimaryKeyRelatedField(read_only=True)
+
     def create(self, validated_data):
         instance = super().create(validated_data)
 

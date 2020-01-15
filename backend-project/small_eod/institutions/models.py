@@ -21,7 +21,7 @@ class ExternalIdentifier(models.Model):
 
     nip = models.CharField(
         max_length=10,
-        validators=[ExactLengthsValidator([10]), validators.RegexValidator("[0-9]*$"),],
+        validators=[ExactLengthsValidator([10]), validators.RegexValidator("[0-9]*$")],
     )
 
     regon = models.CharField(
@@ -45,3 +45,6 @@ class Institution(TimestampUserLogModel):
     external_identifier = models.OneToOneField(
         ExternalIdentifier, on_delete=models.CASCADE, null=True, blank=True
     )
+
+    def __str__(self):
+        return f"{self.name} ({self.pk})"
