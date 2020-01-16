@@ -173,7 +173,9 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         self.case = CaseFactory(**field_dict)
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json().get(self.response_results_key)), 0)
+        self.assertEqual(
+            len(response.json().get(self.paginated_response_results_key)), 0
+        )
 
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):

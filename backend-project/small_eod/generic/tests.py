@@ -16,7 +16,7 @@ class ReadOnlyViewSetMixin:
     serializer_class = None
     factory_class = None
 
-    response_results_key = "results"
+    paginated_response_results_key = "results"
     paginated = True
     parsed_response_len = 4
 
@@ -40,7 +40,7 @@ class ReadOnlyViewSetMixin:
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
         parsed_response = response.json()
         response_result = (
-            parsed_response.get(self.response_results_key)
+            parsed_response.get(self.paginated_response_results_key)
             if self.paginated is True
             else parsed_response
         )
