@@ -50,12 +50,6 @@ class ReadOnlyViewSetMixin:
         self.assertIs(type(response_result), list)
         self.validate_item(response_result[0])
 
-    # def test_list_plain(self):
-    #     response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertEqual(len(response.json()), 1)
-    #     self.validate_item(response.json()[0])
-
     def test_retrieve_plain(self):
         response = self.client.get(
             self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk)
