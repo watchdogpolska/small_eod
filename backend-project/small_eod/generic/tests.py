@@ -16,13 +16,17 @@ class ReadOnlyViewSetMixin:
     serializer_class = None
     factory_class = None
 
+    response_results_key = "results"
+    paginated = True
+    parsed_response_len = 4
+
     def setUp(self):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
+
         self.obj = self.factory_class()
         self.user = getattr(self, "user", UserFactory(username="john"))
         self.client.login(username="john", password="pass")
-        self.response_results_key = "results"
 
     def get_extra_kwargs(self):
         return dict()
@@ -32,15 +36,18 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("get_url must be overridden or basename defined")
         return reverse("{}-{}".format(self.basename, name), kwargs=kwargs)
 
-    def test_dict_plain(self):
-        parsed_response_len = 4
+    def test_list_plain(self):
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
         parsed_response = response.json()
-        response_result = parsed_response.get(self.response_results_key)
+        response_result = (
+            parsed_response.get(self.response_results_key)
+            if self.paginated is True
+            else parsed_response
+        )
 
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response_result)
-        self.assertEqual(len(parsed_response), parsed_response_len)
+        self.assertEqual(len(parsed_response), self.parsed_response_len)
+        self.assertIs(type(response_result), list)
         self.validate_item(response_result[0])
 
     # def test_list_plain(self):
