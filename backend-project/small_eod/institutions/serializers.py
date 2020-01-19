@@ -12,53 +12,60 @@ from ..generic.serializers import UserLogModelSerializer
 class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = JednostkaAdministracyjna
-        exclude = [
-            "id",
+        fields = [
+            'id',
+            'parent',
+            'name',
+            'category',
+            'slug',
+            'updated_on',
+            'active'
         ]
 
 
-class AddressDataSerializer(serializers.HyperlinkedModelSerializer):
+class AddressDataNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddressData
-        fields = "__all__"
-        read_only_fields = [
-            "id",
+        fields = [
+            'email',
+            'city',
+            'epuap',
+            'street',
+            'house_no',
+            'postal_code',
+            'voivodeship',
+            'flat_no'
         ]
 
 
-class ExternalIdentifierSerializer(serializers.ModelSerializer):
+class ExternalIdentifierNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExternalIdentifier
-        exclude = [
-            "id",
-        ]
+        fields = ['nip', 'regon']
 
 
 class InstitutionSerializer(UserLogModelSerializer):
 
-    address = AddressDataSerializer()
-    external_identifier = ExternalIdentifierSerializer()
-    administrative_unit = AdministrativeUnitSerializer()
+    address = AddressDataNestedSerializer()
+    external_identifier = ExternalIdentifierNestedSerializer()
+    administrative_unit = serializers.PrimaryKeyRelatedField(
+        many=False,
+        queryset=JednostkaAdministracyjna.objects.all()
+    )
 
     class Meta:
         model = Institution
-        read_only_fields = [
-            "created_by",
-            "modified_by",
-            "created_on",
-            "modified_on",
-            "id",
-        ]
         fields = [
+            "id",
+            "modified_by",
+            "created_by",
             "modified_on",
+            "created_on",
+
             "name",
             "external_identifier",
-            "created_on",
             "administrative_unit",
             "address",
-            "modified_by",
-            "created_by",
-            "id",
         ]
 
     def create(self, validated_data):
@@ -69,8 +76,8 @@ class InstitutionSerializer(UserLogModelSerializer):
         validated_data["address"] = AddressData.objects.create(
             **validated_data.pop("address")
         )
-        validated_data["administrative_unit"] = JednostkaAdministracyjna.objects.create(
-            **validated_data.pop("administrative_unit")
-        )
+        administrative_unit = validated_data.pop("administrative_unit")
+        institution = super().create(validated_data)
+        institution.administrative_unit.set(administrative_unit)
+        return institution
 
-        return super().create(validated_data)

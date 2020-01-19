@@ -125,6 +125,8 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertCountEqual(obj.responsible_user.all(), [self.user])
+        self.assertCountEqual(obj.notified_user.all(), [self.user])
+
 
     def test_save_related_user(self):
         [responsible_user, notified_user] = UserFactory.create_batch(size=2)
@@ -184,3 +186,4 @@ class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
     user_type = "responsible_users"
     basename = "case-responsible_user"
+
