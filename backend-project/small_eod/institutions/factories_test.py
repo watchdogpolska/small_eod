@@ -18,4 +18,3 @@ class ExternalIdentifierFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 class InstitutionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     FACTORY = InstitutionFactory
     MODEL = Institution
-

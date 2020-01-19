@@ -3,9 +3,7 @@ from django.test import TestCase
 from .factories import CaseFactory
 from .models import Case
 from ..dictionaries.factories import FeatureFactory
-from ..generic.tests import (
-    FactoryCreateObjectsMixin,
-)
+from ..generic.tests import FactoryCreateObjectsMixin
 from ..institutions.factories import InstitutionFactory
 from ..tags.factories import TagFactory
 from ..users.factories import UserFactory
