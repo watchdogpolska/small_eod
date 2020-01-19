@@ -8,4 +8,3 @@ from ...generic.tests import FactoryCreateObjectsMixin
 class UserFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = User
     FACTORY = UserFactory
-

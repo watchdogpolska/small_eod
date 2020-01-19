@@ -13,4 +13,3 @@ class TagFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
 class TagNamespaceFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     MODEL = TagNamespace
     FACTORY = TagNamespaceFactory
-

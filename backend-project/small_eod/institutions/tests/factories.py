@@ -1,6 +1,10 @@
 from django.test import TestCase
 
-from ..factories import AddressDataFactory, ExternalIdentifierFactory, InstitutionFactory
+from ..factories import (
+    AddressDataFactory,
+    ExternalIdentifierFactory,
+    InstitutionFactory,
+)
 from ..models import AddressData, ExternalIdentifier, Institution
 from ...generic.tests import FactoryCreateObjectsMixin
 
