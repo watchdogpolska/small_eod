@@ -2,14 +2,14 @@ from django.test import TestCase
 
 from ..factories import TagFactory, TagNamespaceFactory
 from ..models import Tag, TagNamespace
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class TagFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class TagFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = Tag
     FACTORY = TagFactory
 
 
-class TagNamespaceFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class TagNamespaceFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = TagNamespace
     FACTORY = TagNamespaceFactory

@@ -3,10 +3,10 @@ from django.test import TestCase
 from ..factories import NoteFactory
 from ..models import Note
 from ...cases.models import Case
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class NoteFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class NoteFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = NoteFactory
     MODEL = Note
 

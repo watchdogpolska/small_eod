@@ -2,15 +2,15 @@ from django.test import TestCase
 
 from ..factories import DictionaryFactory, FeatureFactory
 from ..models import Dictionary, Feature
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class DictionaryFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class DictionaryFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = Dictionary
     FACTORY = DictionaryFactory
 
 
-class FeatureFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class FeatureFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = Feature
     FACTORY = FeatureFactory
 

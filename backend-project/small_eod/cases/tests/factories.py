@@ -3,13 +3,13 @@ from django.test import TestCase
 from ..factories import CaseFactory
 from ..models import Case
 from ...dictionaries.factories import FeatureFactory
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 from ...institutions.factories import InstitutionFactory
 from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
 
 
-class CaseFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = Case
     FACTORY = CaseFactory
     FACTORY_COUNT = 2  # its slow

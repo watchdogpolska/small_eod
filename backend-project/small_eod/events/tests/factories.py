@@ -2,9 +2,9 @@ from django.test import TestCase
 
 from ..factories import EventFactory
 from ..models import Event
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class EventFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class EventFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = EventFactory
     MODEL = Event

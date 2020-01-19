@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from .factories import CaseFactory
 from .serializers import CaseSerializer
-from ...generic.tests import (
+from ...generic.tests.views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
 )

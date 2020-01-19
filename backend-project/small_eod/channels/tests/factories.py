@@ -2,9 +2,9 @@ from django.test import TestCase
 
 from ..factories import ChannelFactory
 from ..models import Channel
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class ChannelFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class ChannelFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = ChannelFactory
     MODEL = Channel

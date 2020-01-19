@@ -2,9 +2,9 @@ from django.test import TestCase
 
 from ..factories import UserFactory
 from ..models import User
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class UserFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class UserFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = User
     FACTORY = UserFactory

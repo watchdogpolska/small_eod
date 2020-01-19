@@ -6,19 +6,19 @@ from ..factories import (
     InstitutionFactory,
 )
 from ..models import AddressData, ExternalIdentifier, Institution
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class AddressDataFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class AddressDataFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = AddressDataFactory
     MODEL = AddressData
 
 
-class ExternalIdentifierFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class ExternalIdentifierFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = ExternalIdentifierFactory
     MODEL = ExternalIdentifier
 
 
-class InstitutionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class InstitutionFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = InstitutionFactory
     MODEL = Institution

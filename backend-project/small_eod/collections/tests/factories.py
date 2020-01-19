@@ -2,9 +2,9 @@ from django.test import TestCase
 
 from ..factories import CollectionFactory
 from ..models import Collection
-from ...generic.tests import FactoryCreateObjectsMixin
+from ...generic.tests.factories import FactoryTestCaseMixin
 
 
-class CollectionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
+class CollectionFactoryTestCase(FactoryTestCaseMixin, TestCase):
     FACTORY = CollectionFactory
     MODEL = Collection
