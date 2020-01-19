@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from .factories import NoteFactory
-from .models import Note
-from ..cases.models import Case
-from ..generic.tests import FactoryCreateObjectsMixin
+from ..factories import NoteFactory
+from ..models import Note
+from ...cases.models import Case
+from ...generic.tests import FactoryCreateObjectsMixin
 
 
 class NoteFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
