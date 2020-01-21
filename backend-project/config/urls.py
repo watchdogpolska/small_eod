@@ -23,7 +23,9 @@ from small_eod.dictionaries.views import DictionaryViewSet
 from small_eod.events.views import EventViewSet
 from small_eod.institutions.views import InstitutionViewSet
 from small_eod.letters.views import LetterViewSet, DescriptionViewSet
-from small_eod.letters.views import PresignedUploadFileView, CreateFileView, get_letter_file
+from small_eod.letters.views import PresignedUploadFileView
+from small_eod.letters.views import CreateFileView
+from small_eod.letters.views import get_letter_file
 from small_eod.notes.views import NoteViewSet
 from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
