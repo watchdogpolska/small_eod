@@ -6,7 +6,18 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
         fields = [
-            "letter",
+            "id",
             "path",
             "name",
+        ]
+
+
+class FileRelatedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = [
+            "id",
+            "path",
+            "name",
+            "letter",
         ]
