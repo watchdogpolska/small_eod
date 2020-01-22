@@ -29,6 +29,7 @@ class Case(TimestampUserLogModel):
     )
     notified_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL, related_name="case_notified_user", blank=True,
+        verbose_name=_("Notified user"), help_text=_("User who will receive notification.")
     )
     responsible_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL, related_name="case_responsible_user", blank=True,
