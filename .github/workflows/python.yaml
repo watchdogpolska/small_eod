@@ -4,9 +4,11 @@ on:
   push:
     paths:
     - 'backend-project/**'
+    - '**/docker-compose.yml'
   pull_request:
     paths:
     - 'backend-project/**'
+    - '**/docker-compose.yml'
 
 jobs:
   django:
