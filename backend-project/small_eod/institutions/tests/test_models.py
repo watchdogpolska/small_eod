@@ -2,13 +2,8 @@ from django.forms import modelform_factory
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from ..factories import AddressDataFactory, ExternalIdentifierFactory, InstitutionFactory
 from ..models import AddressData, ExternalIdentifier, Institution
-from ..serializers import (
-    InstitutionSerializer,
-    AddressDataNestedSerializer,
-    ExternalIdentifierNestedSerializer,
-)
+from ..serializers import InstitutionSerializer
 from ...users.factories import UserFactory
 from teryt_tree.factories import JednostkaAdministracyjnaFactory, CategoryFactory
 
@@ -42,7 +37,7 @@ class InstitutionTestCase(TestCase):
                 "epuap": "asdfg",
                 "house_no": "666",
             },
-            "external_identifier": {"nip": "123456789", "regon": "1234567890",},
+            "external_identifier": {"nip": "1234567890", "regon": "1234567890"},
         }
         for field in skip:
             del default_data[field]
