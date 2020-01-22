@@ -33,6 +33,7 @@ class Case(TimestampUserLogModel):
     )
     responsible_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL, related_name="case_responsible_user", blank=True,
+        verbose_name=_("Responsible user"), help_text=_("User who is responsible for this case.")
     )
 
     def __str__(self):
