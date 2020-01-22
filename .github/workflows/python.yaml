@@ -11,7 +11,7 @@ on:
     - '**/docker-compose.yml'
 
 jobs:
-  django:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -25,7 +25,7 @@ jobs:
       run: make check
     - name: Show settings
       run: make settings
-    - name: Build & test
+    - name: Test
       run: ./backend-project/contrib/github/script.sh
     - uses: actions/upload-artifact@v1
       with:
@@ -37,3 +37,19 @@ jobs:
       with:
         name: openapi.json
         path: ./openapi.json
+
+  build:
+    runs-on: ubuntu-latest
+    # if: "github.ref == 'refs/heads/master'"
+    needs:
+      - test
+    steps:
+    - uses: actions/checkout@v1
+    - name: "Docker login"
+      env:
+        DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
+    - name: Push image
+      run: docker push docker-registry.siecobywatelska.pl/small_eod:latest
