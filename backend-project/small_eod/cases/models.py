@@ -26,7 +26,9 @@ class Case(TimestampUserLogModel):
                                )
 
     tag = models.ManyToManyField(to=Tag, blank=True, verbose_name=_("Tag"), help_text="Choose tag.")
-    feature = models.ManyToManyField(to=Feature, blank=True, verbose_name=_("Feature"))
+    feature = models.ManyToManyField(to=Feature, blank=True,
+                                     verbose_name=_("Feature"), help_text= _("Features for this case.")
+                                     )
 
     audited_institution = models.ManyToManyField(
         to=Institution, blank=True,
