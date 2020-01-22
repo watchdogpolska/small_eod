@@ -1,22 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .factories import DescriptionFactory, LetterFactory
-from .models import Description, Letter
-from ..generic.tests import FactoryCreateObjectsMixin
+from ..factories import LetterFactory
 
 from rest_framework import status
 from rest_framework.test import APITestCase
-
-
-class LetterFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = LetterFactory
-    MODEL = Letter
-
-
-class DescriptionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = DescriptionFactory
-    MODEL = Description
 
 
 class PresignedUploadFileTestCase(APITestCase):
