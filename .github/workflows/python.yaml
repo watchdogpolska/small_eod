@@ -1,12 +1,20 @@
 name: Django application
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'backend-project/**'
+  pull_request:
+    paths:
+    - 'backend-project/**'
 
 jobs:
   django:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Pyupgrade
+      run: make pyupgrade
     - name: Lint
       run: make lint
     - name: Build
@@ -16,4 +24,14 @@ jobs:
     - name: Show settings
       run: make settings
     - name: Build & test
-      run: ./contrib/github/script.sh
+      run: ./backend-project/contrib/github/script.sh
+    - uses: actions/upload-artifact@v1
+      with:
+        name: openapi.yaml
+        path: ./openapi.yaml
+    - uses: actions/upload-artifact@v1
+      # see https://github.com/actions/upload-artifact/issues/11 
+      # for remove duplicated actions
+      with:
+        name: openapi.json
+        path: ./openapi.json

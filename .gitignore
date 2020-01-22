@@ -1,2 +1,10 @@
 *.pyc
 .idea*
+.DS_Store
+
+Pipfile
+Pipfile.lock
+
+.env
+
+/dev-data

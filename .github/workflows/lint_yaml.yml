@@ -1,6 +1,12 @@
 name: YAML files
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'docs/**'
+  pull_request:
+    paths:
+    - 'docs/**'
 
 jobs:
   lint_speccy:

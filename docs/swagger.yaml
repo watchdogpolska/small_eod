@@ -146,7 +146,7 @@ paths:
                 $ref: "#/components/schemas/Case"
         default: *metaErrorResponse
     patch:
-      summary: Updated case
+      summary: modified case
       operationId: updateCaseById
       tags:
         - case
@@ -159,7 +159,7 @@ paths:
             type: number
             format: caseId
       requestBody:
-        description: Updated case
+        description: Modified case
         required: true
         content:
           application/json:
@@ -638,7 +638,7 @@ paths:
                 $ref: "#/components/schemas/Collection"
         default: *metaErrorResponse
     patch:
-      summary: Updated collection
+      summary: modified collection
       operationId: updateCollectionById
       tags:
         - collection
@@ -651,7 +651,7 @@ paths:
             type: number
             format: collectionId
       requestBody:
-        description: Updated collection
+        description: Modified collection
         required: true
         content:
           application/json:
@@ -1700,23 +1700,11 @@ components:
           description: List of users which receive notifications
           items:
             $ref: "#/components/schemas/UserRef"
-        matrix:
+        features:
           type: array
-          description: Structure to collect statistical information in relation to Dictionary
+          description: List of features from dictionaries
           items:
-            type: object
-            properties:
-              id:
-                type: number
-                format: matrixId
-              dictionary:
-                type: string
-                format: dictionaryId
-              values:
-                type: array
-                items:
-                  type: string
-                  format: dictionaryValueId
+            type: string
         letterCount:
           type: number
           description: Count of letter in case
@@ -1724,6 +1712,10 @@ components:
         noteCount:
           type: number
           description: Count of note in case
+          readOnly: true
+        eventCount:
+          type: number
+          description: Count of event in case
           readOnly: true
         createdOn: *metaCreatedOn
         createdBy: *metaCreatedBy
@@ -1864,8 +1856,8 @@ components:
           type: string
           description: External identifier of letter / case
         description:
-          type: descriptionId
-          description: Description of letter (from enum)
+          type: number
+          description: Description ID choose by content creator
         institution:
           type: array
           items:

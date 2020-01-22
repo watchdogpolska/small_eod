@@ -1,5 +1,6 @@
 # Small_EOD
-[![Build Status](https://travis-ci.org/watchdogpolska/small_eod.svg?branch=master)](https://travis-ci.org/watchdogpolska/small_eod)
+
+![Build Status](https://github.com/watchdogpolska/small_eod/workflows/Django%20application/badge.svg?branch=dev) ![Build Status](https://github.com/watchdogpolska/small_eod/workflows/YAML%20files/badge.svg?branch=dev)
 
 System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczególności w zakresie:
 
@@ -12,165 +13,118 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 * w początkowych etapach system będzie przeznaczony do archiwizacji dokumentów pochodzących z różnych mediów
 * w przyszłości system będzie służył także do:
 
-    * zarządzanie przebiegiem procesu sporządzenia pism
-    * powiadamiania o nowych pismach
-    * kontroli terminów
-    * wysyłkę pism poprzez odpowiednie kolejki:
-        * Envelo - realizowane automatycznie
-        * ePUAP - realizowane manualnie przez osoby uprawnione, a następnie automatycznie
-        * Poczta tradycyjna - realizowane manualnie przez osoby uprawnione
+  * zarządzanie przebiegiem procesu sporządzenia pism
+  * powiadamiania o nowych pismach
+  * kontroli terminów
+  * wysyłkę pism poprzez odpowiednie kolejki:
+    * Envelo - realizowane automatycznie
+    * ePUAP - realizowane manualnie przez osoby uprawnione, a następnie automatycznie
+    * Poczta tradycyjna - realizowane manualnie przez osoby uprawnione
 
-* należy zachować ciągłość funkcjonowania procesów Stowarzyszenia
+* należy w trakcie rozwoju zachować ciągłość funkcjonowania procesów Stowarzyszenia
 * system trwale będzie miał charakter wewnętrzny dla Stowarzyszenia
-    * publikacja danych z systemu odbywać się będzie poprzez API
-* Platforma udostępnia skuteczne API
+  * publikacja danych z systemu odbywać się będzie poprzez API
+* Platforma udostępnia skuteczne API w celu umożliwienia powstania wokół systemu integracji
 * Uwierzytelnienie z wykorzystaniem GSuite
 
-## Stan aktualny
+## Architektura
 
-* W odrębnym systemie Stowarzyszenie wykorzystuje rejestr korespondencji w dwóch tabelach SQL (przychodzące i wychodzące)
+System składa się z następujących komponentów:
 
-* System umożliwia:
-
-    * rejestracje dokumentów papierowych
-    * rejestracje spraw
-    
-* Panel redakcyjny został wykonany w oparciu o ```django-admin```.
-
-## Pilne zmiany
-
-* Automatyczna rejestracja w dotychczasowym systemie korespondencji
-* Opracowanie elastycznego interfejsu użytkownika nie opartego o ```django-grappeli```, w szczególności umożliwiającego:
-
-    * sprawne zarejestrowanie sprawy
-    * zarejestrowanie sprawy i jednoczesne wielu archiwalnych listów
-    * przesłanie załączników poprzez przeciągnięcie i upuszczenie
-
- 
-## Technologia
-
-* Back-end - Django
-* Front-end - Vue / React (cokolwiek elastycznego)
+* Back-end - Django, dostępny w podkatalogu ```backend-project```
+* Front-end - Vue / React, dostępny w podkatalogu ```frontend-project```
+* Minio - podsystem składowania plików binarnych (dokumenty, zdjęcia itp.)
+* Baza danych PostgreSQL
 
 Dodatkowe uwagi:
 
-* Wdrażamy w Stowarzyszeniu kontenery, więc nie obawiamy się małych usług, lecz obecnie ta aplikacja jeszcze nie wykorzystuje kontenerów
-* Dodatkowe integracje tj. e-mail, ePUAP, Envelo wydaje się, że mogą być odrębnymi usługami, lecz komunikującymi się
+* Projekt Stowarzyszenia korzysta z kontenerów Docker.
+* Dodatkowe integracje tj. e-mail, ePUAP, Envelo mogą być odrębnymi usługami, lecz komunikującymi się (microservices)
+* Back-end udostępnia dokumentacja REST API zgodną z Swagger
+* Została opracowana biblioteka: [small-eod-sdk-javascript](https://github.com/watchdogpolska/small-eod-sdk-javascript/)
 
-## Uruchomienie projektu
+## Historia
 
-### Ubuntu
+Stowarzyszenie prowadziło jedynie rejestr korespondencji w oparciu o interfejs webowy dla dwóch tabelach SQL (przychodzące i wychodzące)
 
-W celu prowadzenia rozwoju oprogramowania zalecana jest instalacja oprogramowania bez dodatkowej warstwy wirtualizacji. W celu przeprowadzenia takowej instalacji należy przeprowadzić instalacje w sposób przedstawiony poniżej.
+Opracowano small_eod v1, który umożliwiał rejestracje rejestracje dokumentów papierowych i rejestracje spraw. Całość została wykonana w oparciu o ```django-admin```, co ograniczało rozwój, lecz pozwoliło na poznanie podstawowych koncepcji.
 
-Niniejsza procedura została zweryfikowana dla Ubuntu 18.10.
+Rozpoczęto opracowanie small_eod v2, który stanowić ma trwałe rozwiązanie dla Stowarzyszenia poprzez m. in.: elastyczny interfejsu użytkownika nie opartego o ```django-grappeli```, w szczególności umożliwiającego:
 
-Pobierz kod źródłowy projektu:
+* sprawne zarejestrowanie sprawy
+* zarejestrowanie sprawy i jednoczesne wielu archiwalnych listów
+* przesłanie załączników poprzez przeciągnięcie i upuszczenie
+
+Szczegółowe założenia i wymagania dla small_eod v2 zostały przedstawione w ```docs```.
+
+## Udział w projekcie
+
+W celu rozwoju projektu kod źródłowy projektu można pobrać za pomocą komendy git:
 
 ```bash
 git clone git@github.com:watchdogpolska/small_eod.git
 ```
 
-Zainstaluj wymagane zależności:
+W przypadku pracy w środowisku Windows/Mac można wykorzystać [GitHub Desktop](https://desktop.github.com/). W celu pobrania należy [postępować zgodnie z instrukcją](https://help.github.com/en/desktop/contributing-to-projects/cloning-a-repository-from-github-to-github-desktop).
+
+Projekt realizowany jest zgodnie z filozofią open-source. Szczegółowe informacje na temat:
+
+* w jaki sposób wprowadzić zmiany do projektu sa dostępne w [https://github.com/firstcontributions/first-contributions](https://github.com/firstcontributions/first-contributions)
+* udziału w projektach open-source i sposobie organizacji pracy dostępne w artykule "[How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)"
+
+Zadania do wykonania są zarejestrowane jako zagadnienia oznaczone etykietą [good first issue](https://github.com/watchdogpolska/small_eod/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) w portalu GitHub. W celu ich realizacji wystarczy komentarz o rozpoczęciu prac, a następnie utworzenie żądania wcielenia zmian (pull request).
+
+## Uruchomienie projektu
+
+W celu ułatwienia rozwoju projektu wykorzystywane jest oprogramowanie Docker. Umożliwia ona uruchomienie wszystkich usług niezbędnych do pracy nad projektem. Usługi zostały opisane w pliku ```docker-compose.yml```.
+
+W celu uruchomienia środowiska aplikacji wymagane jest:
+
+* instalacja [Docker](https://docs.docker.com/install/), zgodnie z [dokumentacją projektu Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+* instalacja [docker-compose](https://docs.docker.com/compose/install/), w przypadku pracy na Linux (Docker dla Windows i Mac jest dostarczony z tym oprogramowaniem w standardzie)
+
+Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo [Docker dla webdevelopera - #01 - Czym jest Docker?](https://www.youtube.com/watch?v=P4ZC3cFN0WQ).
+
+W celu uruchomienia projektu należy wykonąc:
 
 ```bash
-sudo apt-get install -y libmariadbclient-dev-compat gcc
+docker-compose up
 ```
 
-Zainstaluj serwer bazodanowy:
+Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) winno być możliwe logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany kodu aplikacji w lokalnym repozytorium będą automatycznie załadowane przez Django.
+
+W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-sudo apt-get install mariadb-server-10.1
+docker-compose run web python manage.py createsuperuser
 ```
 
-Zainicjalizuj bazę danych:
+W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
+
+## Testy automatyczne
+
+Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Wszelkie proponowane zmiany z wykorzystaniem [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+
+Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych, ale przed ich dodaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile).
+
+W celu wykonanie testów automatycznych formatowania należy wykonać:
 
 ```bash
-sudo mysql < contrib/docker/docker-entrypoint-initdb.d/*
+make lint
 ```
 
-Utwórz użytkownika bazy danych:
+Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
 
 ```bash
-sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$(whoami)'@'localhost' IDENTIFIED BY 'password';"
+make fmt
 ```
 
-Ustaw zmienną środowiskową z danymi dostępowymi do serwera bazodanowego:
+W celu wykonania testów automatycznych backendu należy wykonać:
 
 ```bash
-export DATABASE_URL="mysql://$(whoami):password@localhost/small_eod"
+make test-django-backend
 ```
 
-Zainstaluj zależności systemowe dla Python:
+### Materiały dodatkowe
 
-```bash
-sudo apt-get install virtualenv python3-pip python3-dev
-```
-
-Utwórz i aktywuj wirtualne środowisko Python:
-
-```bash
-virtualenv -p python3 env && source env/bin/activate
-```
-
-Zainstaluj zależności Python w wirtualnym środowisku Python:
-
-```bash
-pip install -r requirements/development.txt 
-```
-
-Zainicjalizuj tabele bazy danych:
-
-```bash
-python manage.py migrate
-```
-
-Utwórz konto administratora:
-
-```bash
-python manage.py createsuperuser
-```
-
-Uruchom serwer WWW:
-
-```bash
-python manage.py runsever
-```
-
-W przypadku wystąpienia problemów zweryfikuj powyższe polecenia z ```/Dockerfile```.
-
-Po adresem ```http://localhost:8000/admin/``` dostępne jest logowanie z wykorzystaniem loginu i hasła.
-
-Aplikacja nie posiada front-endu oraz domyślnie wykorzystuje logowanie GSuite. W celu utworzenia konta użytkownika wykonaj:
-
-```bash
-python manage.py createsuperuser
-```
-
-### Docker
-
-W celu wsparcia wykonania testów wykorzystywane jest oprogramowanie Docker. 
-
-W celu pracy nad rozwojem automatycznych testów wykonaj instalacje przedstawioną poniżej.
-
-Celem długoterminowym jest wykorzystanie Docker także w środowisku produkcyjnym, do czego obecny kształt obrazów Docker nie jest przystosowany.
-
-Instalacja Docker opisana została opisana w [dokumentacji projektu Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
-
-Uruchomienie zależności aplikacji:
-
-```bash
-docker-compose up -d db nginx
-```
-
-Uruchomienie serwera aplikacyjnego:
-
-```bash
-docker-compose up -d --build web 
-```
-
-Wykonanie testów:
-
-```bash
-docker-compose run web python manage.py test --keepdb
-```
+* [Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.md)

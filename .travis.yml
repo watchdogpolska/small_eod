@@ -1,7 +1,0 @@
-language: python
-
-services:
-  - docker
-
-script:
-  - ./contrib/travis/script.sh

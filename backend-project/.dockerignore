@@ -1,0 +1,7 @@
+*.sqlite3
+*.pdf
+docker-compose.yml
+.dockerignore
+static
+media
+Dockerfile
