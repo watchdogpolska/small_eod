@@ -18,7 +18,7 @@ class CaseQuerySet(models.QuerySet):
 class Case(TimestampUserLogModel):
     objects = CaseQuerySet.as_manager()
 
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, verbose_name=_("Name"), help_text=_("Case's name"))
     comment = models.CharField(max_length=256)
 
     tag = models.ManyToManyField(to=Tag, blank=True)
