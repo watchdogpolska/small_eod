@@ -22,7 +22,7 @@ class Case(TimestampUserLogModel):
     comment = models.CharField(max_length=256, verbose_name=_("Comment"), help_text=_("Comment cannot be longer than 256 characters."))
 
     tag = models.ManyToManyField(to=Tag, blank=True, verbose_name=_("Tag"), help_text="Choose tag")
-    feature = models.ManyToManyField(to=Feature, blank=True)
+    feature = models.ManyToManyField(to=Feature, blank=True, verbose_name=_("Feature"))
 
     audited_institution = models.ManyToManyField(
         to=Institution, blank=True, help_text=_("Case audits this Institution"),
