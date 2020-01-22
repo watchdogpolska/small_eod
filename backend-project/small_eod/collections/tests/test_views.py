@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from ..factories import CollectionFactory
-from ...generic.tests.views import ReadOnlyViewSetMixin
+from ...generic.tests.test_views import ReadOnlyViewSetMixin
 from ...notes.factories import NoteFactory
 
 

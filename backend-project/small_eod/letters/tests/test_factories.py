@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..factories import DescriptionFactory, LetterFactory
 from ..models import Description, Letter
-from ...generic.tests.factories import FactoryTestCaseMixin
+from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class LetterFactoryTestCase(FactoryTestCaseMixin, TestCase):

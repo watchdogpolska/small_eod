@@ -1,1 +1,0 @@
-from .factories import TagFactoryTestCase, TagNamespaceFactoryTestCase

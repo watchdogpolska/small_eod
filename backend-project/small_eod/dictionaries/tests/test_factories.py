@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..factories import DictionaryFactory, FeatureFactory
 from ..models import Dictionary, Feature
-from ...generic.tests.factories import FactoryTestCaseMixin
+from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class DictionaryFactoryTestCase(FactoryTestCaseMixin, TestCase):

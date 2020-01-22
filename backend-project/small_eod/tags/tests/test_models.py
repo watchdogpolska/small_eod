@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .factories import TagFactory, TagNamespaceFactory
+from ..factories import TagFactory, TagNamespaceFactory
 
 
 class TagTestCase(TestCase):

@@ -6,7 +6,7 @@ from ..factories import (
     InstitutionFactory,
 )
 from ..models import AddressData, ExternalIdentifier, Institution
-from ...generic.tests.factories import FactoryTestCaseMixin
+from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class AddressDataFactoryTestCase(FactoryTestCaseMixin, TestCase):
