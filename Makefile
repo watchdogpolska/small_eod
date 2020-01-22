@@ -9,7 +9,7 @@ build:
 test: wait_mysql wait_minio test-django-backend
 
 test-django-backend:
-	docker-compose run web python manage.py test --keepdb --verbosity=2
+	docker-compose run web python manage.py test --keepdb --verbosity=2 small_eod.letters.tests.FileCreateTestCase
 
 wait_mysql:
 	docker-compose up -d db
@@ -48,3 +48,6 @@ createsuperuser:
 	docker-compose run web python manage.py createsuperuser --username root --email root@example.com --noinput
 
 test-local: lint build check test
+
+openapi: 
+	docker-compose run web python manage.py generate_swagger

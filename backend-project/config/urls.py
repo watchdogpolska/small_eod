@@ -22,10 +22,6 @@ from small_eod.channels.views import ChannelViewSet
 from small_eod.dictionaries.views import DictionaryViewSet
 from small_eod.events.views import EventViewSet
 from small_eod.institutions.views import InstitutionViewSet
-from small_eod.letters.views import LetterViewSet, DescriptionViewSet
-from small_eod.letters.views import PresignedUploadFileView
-from small_eod.letters.views import CreateFileView
-from small_eod.letters.views import get_letter_file
 from small_eod.notes.views import NoteViewSet
 from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
@@ -34,11 +30,9 @@ from rest_framework import permissions
 
 router = routers.DefaultRouter()
 router.register(r"channels", ChannelViewSet)
-router.register(r"descriptions", DescriptionViewSet)
 router.register(r"dictionaries", DictionaryViewSet)
 router.register(r"events", EventViewSet)
 router.register(r"institutions", InstitutionViewSet)
-router.register(r"letters", LetterViewSet)
 router.register(r"notes", NoteViewSet)
 router.register(r"tags", TagViewSet)
 router.register(r"users", UserViewSet)
@@ -54,10 +48,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("small_eod.collections.urls")),
     path("", include("small_eod.cases.urls")),
-    #
-    path('letter/file/sign', PresignedUploadFileView.as_view(), name='file_upload'),
-    path('letter/<letter_id>/file', CreateFileView.as_view(), name='create_file'),
-    path('letter/<letter_id>/file/<file_id>', get_letter_file),
+    path("", include("small_eod.letters.urls")),
     #
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),

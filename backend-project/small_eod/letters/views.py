@@ -1,17 +1,19 @@
-from uuid import uuid4
-from urllib.parse import urljoin
-
 from django.shortcuts import get_object_or_404, redirect
-
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import mixins
+from rest_framework_nested.viewsets import NestedViewSetMixin
 
 from .models import Letter, Description
-from .serializers import LetterSerializer, DescriptionSerializer
-
-from config.minio_app import minio_app
-from small_eod.files.serializers import FileSerializer, FileRelatedSerializer
+from .serializers import (
+    LetterSerializer,
+    DescriptionSerializer,
+    FileSerializer,
+    SignRequestSerializer,
+)
+from ..files.serializers import FileSerializer
 from ..files.models import File
 
 
@@ -25,52 +27,29 @@ class DescriptionViewSet(viewsets.ModelViewSet):
     serializer_class = DescriptionSerializer
 
 
+class FileViewSet(NestedViewSetMixin,
+                  mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  viewsets.GenericViewSet):
+    model = File
+    serializer_class = FileSerializer
+    parent_lookup_kwargs = {
+        'letter_pk': 'letter__pk'
+    }
+
+    def perform_create(self, serializer):
+        serializer.save(letter=get_object_or_404(Letter, pk=self.kwargs['letter_pk']))
+
 class PresignedUploadFileView(APIView):
     """
-    Generates presigned form data for uploading files.
-
+    Generates pre-signed form data for uploading files to object storage.
     """
+
+    serializer_class = SignRequestSerializer
+
+    @swagger_auto_schema(request_body=SignRequestSerializer)
     def post(self, request, format=None):
-        name = request.data['name']
-        path = f'{uuid4()}/{name}'
-        url, form_data = minio_app.presigned_post_form_data('files', f'{uuid4()}/{name}')
-        path = urljoin(url, path)
-
-        return Response({
-            'name': name,
-            'method': 'POST',
-            'url': url,
-            'formData': form_data,
-            'path': path,
-        }, status=status.HTTP_201_CREATED)
-
-
-class CreateFileView(APIView):
-    """
-    Creates File instance within Letter.
-
-    """
-    def post(self, request, letter_id, format=None):
-        get_object_or_404(Letter, id=letter_id)
-        serializer = FileRelatedSerializer(data={
-            'path': request.data['path'],
-            'name': request.data['name'],
-            'letter': letter_id,
-        })
-
-        if serializer.is_valid():
-            serializer.save()
-            response_data = serializer.data
-            del response_data['letter']  # To be compliant with swagger
-            return Response(response_data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def get_letter_file(request, letter_id, file_id):
-    """
-    Redirects to already existing view.
-
-    """
-
-    return redirect('letter-detail', pk=letter_id)
+        serializer = SignRequestSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
