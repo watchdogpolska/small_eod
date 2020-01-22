@@ -14,14 +14,18 @@ class PresignedUploadFileTestCase(APITestCase):
         }
 
         response = self.client.post(url, data, format="json")
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertIn('formData', response.data)
 
-    def test_get_not_allowed(self):
-        url = reverse("file_upload")
-
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        form_data = response.data['formData']
+        self.assertIn('bucket', form_data)
+        self.assertIn('key', form_data)
+        self.assertIn('policy', form_data)
+        self.assertIn('x-amz-algorithm', form_data)
+        self.assertIn('x-amz-credential', form_data)
+        self.assertIn('x-amz-date', form_data)
+        self.assertIn('x-amz-signature', form_data)
 
 
 class FileCreateTestCase(APITestCase):
@@ -43,10 +47,3 @@ class FileCreateTestCase(APITestCase):
         self.assertEqual(response.data["name"], data["name"])
         self.assertEqual(response.data["path"], data["path"])
         self.assertIn("id", response.data)
-
-    def test_get_not_allowed(self):
-        url = reverse("letter-files-list", kwargs={"letter_pk": 0})
-
-        response = self.client.get(url)
-
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)

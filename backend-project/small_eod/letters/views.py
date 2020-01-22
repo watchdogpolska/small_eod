@@ -52,4 +52,6 @@ class PresignedUploadFileView(APIView):
         serializer = SignRequestSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()  # Trigger .create(..)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

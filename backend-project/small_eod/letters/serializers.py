@@ -48,10 +48,10 @@ class SignRequestSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=200)
     method = serializers.CharField(read_only=True)
     url = serializers.CharField(read_only=True)
-    formData = serializers.CharField(read_only=True)
+    formData = serializers.DictField(read_only=True, child=serializers.CharField())
     path = serializers.CharField(read_only=True)
 
-    def create(self, **validated_data):
+    def create(self, validated_data):
         path = f'{uuid4()}/{validated_data["name"]}'
         url, form_data = minio_app.presigned_post_form_data("files", path)
         path = urljoin(url, path)
