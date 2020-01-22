@@ -4,7 +4,7 @@ services:
   nginx:
     # https://hub.docker.com/_/nginx
     # https://hub.docker.com/layers/nginx/library/nginx/1.17.7-alpine/images/sha256-2911ad2d54f4cf4dc7ad21af122c1eefce16836a34be751c63351ca1fb452d57
-    image: nginx@sha256:89a42c3ba15f09a3fbe39856bddacdf9e94cd03df7403cad4fc105088e268fc9
+    image: nginx@sha256:401ff5d136d690b2eaf61055aabdb7b4bc2ed8114fb5e423963249db7ac0188e
     ports:
       - "8000:8000"
     volumes:
