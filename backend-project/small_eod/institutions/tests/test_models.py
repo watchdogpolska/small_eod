@@ -2,31 +2,15 @@ from django.forms import modelform_factory
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from .factories import AddressDataFactory, ExternalIdentifierFactory, InstitutionFactory
-from .models import AddressData, ExternalIdentifier, Institution
-from .serializers import (
+from ..factories import AddressDataFactory, ExternalIdentifierFactory, InstitutionFactory
+from ..models import AddressData, ExternalIdentifier, Institution
+from ..serializers import (
     InstitutionSerializer,
     AddressDataNestedSerializer,
     ExternalIdentifierNestedSerializer,
 )
-from ..generic.tests import FactoryCreateObjectsMixin
-from ..users.factories import UserFactory
+from ...users.factories import UserFactory
 from teryt_tree.factories import JednostkaAdministracyjnaFactory, CategoryFactory
-
-
-class AddressDataFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = AddressDataFactory
-    MODEL = AddressData
-
-
-class ExternalIdentifierFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = ExternalIdentifierFactory
-    MODEL = ExternalIdentifier
-
-
-class InstitutionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = InstitutionFactory
-    MODEL = Institution
 
 
 class AddressDataTestCase(TestCase):

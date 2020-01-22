@@ -1,14 +1,8 @@
 from django.test import TestCase
 
-from .factories import CollectionFactory
-from .models import Collection
-from ..generic.tests import ReadOnlyViewSetMixin, FactoryCreateObjectsMixin
-from ..notes.factories import NoteFactory
-
-
-class CollectionFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
-    FACTORY = CollectionFactory
-    MODEL = Collection
+from ..factories import CollectionFactory
+from ...generic.tests.test_views import ReadOnlyViewSetMixin
+from ...notes.factories import NoteFactory
 
 
 class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
