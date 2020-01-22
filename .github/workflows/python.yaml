@@ -25,3 +25,13 @@ jobs:
       run: make settings
     - name: Build & test
       run: ./backend-project/contrib/github/script.sh
+    - uses: actions/upload-artifact@v1
+      with:
+        name: openapi.yaml
+        path: ./openapi.yaml
+    - uses: actions/upload-artifact@v1
+      # see https://github.com/actions/upload-artifact/issues/11 
+      # for remove duplicated actions
+      with:
+        name: openapi.json
+        path: ./openapi.json

@@ -8,9 +8,14 @@ class ReadOnlyViewSetMixin:
     serializer_class = None
     factory_class = None
 
+    paginated_response_results_key = "results"
+    paginated = True
+    parsed_response_len = 4
+
     def setUp(self):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
+
         self.obj = self.factory_class()
         self.user = getattr(self, "user", UserFactory(username="john"))
         self.client.login(username="john", password="pass")
@@ -25,9 +30,17 @@ class ReadOnlyViewSetMixin:
 
     def test_list_plain(self):
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+        parsed_response = response.json()
+        response_result = (
+            parsed_response.get(self.paginated_response_results_key)
+            if self.paginated is True
+            else parsed_response
+        )
+
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 1)
-        self.validate_item(response.json()[0])
+        self.assertEqual(len(parsed_response), self.parsed_response_len)
+        self.assertIs(type(response_result), list)
+        self.validate_item(response_result[0])
 
     def test_retrieve_plain(self):
         response = self.client.get(
