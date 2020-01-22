@@ -13,13 +13,13 @@ class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = JednostkaAdministracyjna
         fields = [
-            'id',
-            'parent',
-            'name',
-            'category',
-            'slug',
-            'updated_on',
-            'active'
+            "id",
+            "parent",
+            "name",
+            "category",
+            "slug",
+            "updated_on",
+            "active"
         ]
 
 
@@ -27,21 +27,20 @@ class AddressDataNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddressData
         fields = [
-            'email',
-            'city',
-            'epuap',
-            'street',
-            'house_no',
-            'postal_code',
-            'voivodeship',
-            'flat_no'
+            "email",
+            "city",
+            "epuap",
+            "street",
+            "house_no",
+            "postal_code",
+            "flat_no",
         ]
 
 
 class ExternalIdentifierNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExternalIdentifier
-        fields = ['nip', 'regon']
+        fields = ["nip", "regon"]
 
 
 class InstitutionSerializer(UserLogModelSerializer):
@@ -49,8 +48,7 @@ class InstitutionSerializer(UserLogModelSerializer):
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
     administrative_unit = serializers.PrimaryKeyRelatedField(
-        many=False,
-        queryset=JednostkaAdministracyjna.objects.all()
+        many=False, queryset=JednostkaAdministracyjna.objects.all()
     )
 
     class Meta:
@@ -61,7 +59,6 @@ class InstitutionSerializer(UserLogModelSerializer):
             "created_by",
             "modified_on",
             "created_on",
-
             "name",
             "external_identifier",
             "administrative_unit",
@@ -78,6 +75,6 @@ class InstitutionSerializer(UserLogModelSerializer):
         )
         administrative_unit = validated_data.pop("administrative_unit")
         institution = super().create(validated_data)
-        institution.administrative_unit.set(administrative_unit)
+        institution.administrative_unit = administrative_unit
+        institution.save()
         return institution
-
