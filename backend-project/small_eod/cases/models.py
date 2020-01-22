@@ -25,7 +25,7 @@ class Case(TimestampUserLogModel):
     feature = models.ManyToManyField(to=Feature, blank=True, verbose_name=_("Feature"))
 
     audited_institution = models.ManyToManyField(
-        to=Institution, blank=True, help_text=_("Case audits this Institution"),
+        to=Institution, blank=True, verbose_name="Audited institution", help_text=_("Case audits this Institution"),
     )
     notified_user = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL, related_name="case_notified_user", blank=True,
