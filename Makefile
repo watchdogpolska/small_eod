@@ -35,10 +35,10 @@ lint:
 fmt:
 	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
 
-check: wait_mysql
+check: wait_mysql wait_minio
 	docker-compose run web python manage.py makemigrations --check
 
-migrations: wait_mysql
+migrations: wait_mysql wait_minio
 	docker-compose run web python manage.py makemigrations
 
 settings:
