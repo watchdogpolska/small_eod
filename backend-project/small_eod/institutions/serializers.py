@@ -12,15 +12,7 @@ from ..generic.serializers import UserLogModelSerializer
 class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = JednostkaAdministracyjna
-        fields = [
-            "id",
-            "parent",
-            "name",
-            "category",
-            "slug",
-            "updated_on",
-            "active"
-        ]
+        fields = ["id", "parent", "name", "category", "slug", "updated_on", "active"]
 
 
 class AddressDataNestedSerializer(serializers.ModelSerializer):

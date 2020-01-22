@@ -41,7 +41,11 @@ class Institution(TimestampUserLogModel):
     name = models.CharField(max_length=256)
 
     administrative_unit = models.OneToOneField(
-        to=JednostkaAdministracyjna, on_delete=models.CASCADE, null=True, blank=True, validators=[validate_level_3]
+        to=JednostkaAdministracyjna,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        validators=[validate_level_3],
     )
     address = models.OneToOneField(
         AddressData, on_delete=models.CASCADE, null=True, blank=True

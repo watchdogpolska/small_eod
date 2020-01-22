@@ -4,10 +4,15 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 
 from .factories import AddressDataFactory, ExternalIdentifierFactory, InstitutionFactory
 from .models import AddressData, ExternalIdentifier, Institution
-from .serializers import InstitutionSerializer, AddressDataNestedSerializer, ExternalIdentifierNestedSerializer
+from .serializers import (
+    InstitutionSerializer,
+    AddressDataNestedSerializer,
+    ExternalIdentifierNestedSerializer,
+)
 from ..generic.tests import FactoryCreateObjectsMixin
 from ..users.factories import UserFactory
 from teryt_tree.factories import JednostkaAdministracyjnaFactory, CategoryFactory
+
 
 class AddressDataFactoryTestCase(FactoryCreateObjectsMixin, TestCase):
     FACTORY = AddressDataFactory
@@ -53,10 +58,7 @@ class InstitutionTestCase(TestCase):
                 "epuap": "asdfg",
                 "house_no": "666",
             },
-            "external_identifier": {
-                "nip":'123456789',
-                'regon':"1234567890",
-            },
+            "external_identifier": {"nip": "123456789", "regon": "1234567890",},
         }
         for field in skip:
             del default_data[field]
@@ -166,7 +168,6 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
 
 class InstitutionValidatorsTestCase(TestCase):
-
     def test_level_3(self):
         """
         Administrative unit must be a level 3 unit.
