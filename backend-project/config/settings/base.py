@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "small_eod.letters",
     "small_eod.notes",
     "small_eod.events",
+    "small_eod.actions",
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": (
         "djangorestframework_camel_case.parser.CamelCaseJSONParser",
     ),
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
 
