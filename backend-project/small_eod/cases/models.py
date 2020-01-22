@@ -25,7 +25,7 @@ class Case(TimestampUserLogModel):
                                help_text=_("Comment cannot be longer than 256 characters.")
                                )
 
-    tag = models.ManyToManyField(to=Tag, blank=True, verbose_name=_("Tag"), help_text="Choose tag.")
+    tag = models.ManyToManyField(to=Tag, blank=True, verbose_name=_("Tag"), help_text=_("Choose tag."))
     feature = models.ManyToManyField(to=Feature, blank=True,
                                      verbose_name=_("Feature"), help_text= _("Features for this case.")
                                      )
