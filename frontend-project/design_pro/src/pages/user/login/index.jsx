@@ -36,33 +36,33 @@ const Login = props => {
   return (
     <div className={styles.main}>
       <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
-        <Tab key="account" tab="账户密码登录">
+        <Tab key="account" tab="Hasło logowania do konta">
           {status === 'error' && loginType === 'account' && !submitting && (
-            <LoginMessage content="账户或密码错误（admin/ant.design）" />
+            <LoginMessage content="Błąd konta lub hasła（admin/ant.design）" />
           )}
 
           <UserName
             name="userName"
-            placeholder="用户名: admin or user"
+            placeholder="Nazwa użytkownika: admin or user"
             rules={[
               {
                 required: true,
-                message: '请输入用户名!',
+                message: 'Proszę podać swoją nazwę użytkownika!',
               },
             ]}
           />
           <Password
             name="password"
-            placeholder="密码: ant.design"
+            placeholder="Hasło: ant.design"
             rules={[
               {
                 required: true,
-                message: '请输入密码！',
+                message: 'Proszę podać hasło!',
               },
             ]}
           />
         </Tab>
-        <Tab key="mobile" tab="手机号登录">
+        <Tab key="mobile" tab="Logowanie przez telefon">
           {status === 'error' && loginType === 'mobile' && !submitting && (
             <LoginMessage content="验证码错误" />
           )}
@@ -96,24 +96,24 @@ const Login = props => {
         </Tab>
         <div>
           <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
-            自动登录
+          Zaloguj autmatycznie
           </Checkbox>
           <a
             style={{
               float: 'right',
             }}
           >
-            忘记密码
+            
           </a>
         </div>
-        <Submit loading={submitting}>登录</Submit>
+        <Submit loading={submitting}>Submit</Submit>
         <div className={styles.other}>
-          其他登录方式
+          
           <AlipayCircleOutlined className={styles.icon} />
           <TaobaoCircleOutlined className={styles.icon} />
           <WeiboCircleOutlined className={styles.icon} />
           <Link className={styles.register} to="/user/register">
-            注册账户
+            Register
           </Link>
         </div>
       </LoginFrom>

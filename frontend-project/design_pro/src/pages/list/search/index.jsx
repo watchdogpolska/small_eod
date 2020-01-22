@@ -65,8 +65,8 @@ class Search extends Component {
         }}
       >
         <Input.Search
-          placeholder="请输入"
-          enterButton="搜索"
+          placeholder="xxx"
+          enterButton="yyy"
           size="large"
           onSearch={this.handleFormSubmit}
           style={{
