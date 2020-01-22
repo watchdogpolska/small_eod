@@ -46,7 +46,7 @@ class DescriptionSerializer(serializers.ModelSerializer):
 
 class SignRequestSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=200)
-    method = (serializers.CharField(read_only=True),)
+    method = serializers.CharField(read_only=True)
     url = serializers.CharField(read_only=True)
     formData = serializers.CharField(read_only=True)
     path = serializers.CharField(read_only=True)
