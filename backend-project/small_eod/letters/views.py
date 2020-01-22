@@ -10,7 +10,6 @@ from .models import Letter, Description
 from .serializers import (
     LetterSerializer,
     DescriptionSerializer,
-    FileSerializer,
     SignRequestSerializer,
 )
 from ..files.serializers import FileSerializer
@@ -27,18 +26,19 @@ class DescriptionViewSet(viewsets.ModelViewSet):
     serializer_class = DescriptionSerializer
 
 
-class FileViewSet(NestedViewSetMixin,
-                  mixins.CreateModelMixin,
-                  mixins.RetrieveModelMixin,
-                  viewsets.GenericViewSet):
+class FileViewSet(
+    NestedViewSetMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     model = File
     serializer_class = FileSerializer
-    parent_lookup_kwargs = {
-        'letter_pk': 'letter__pk'
-    }
+    parent_lookup_kwargs = {"letter_pk": "letter__pk"}
 
     def perform_create(self, serializer):
-        serializer.save(letter=get_object_or_404(Letter, pk=self.kwargs['letter_pk']))
+        serializer.save(letter=get_object_or_404(Letter, pk=self.kwargs["letter_pk"]))
+
 
 class PresignedUploadFileView(APIView):
     """

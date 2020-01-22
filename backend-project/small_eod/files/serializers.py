@@ -7,9 +7,4 @@ class FileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        fields = [
-            "id",
-            "path",
-            "name",
-            "letter"
-        ]
+        fields = ["id", "path", "name", "letter"]

@@ -4,7 +4,6 @@ from .views import (
     FileViewSet,
     PresignedUploadFileView,
     DescriptionViewSet,
-    DescriptionViewSet,
 )
 
 from django.urls import path, include
