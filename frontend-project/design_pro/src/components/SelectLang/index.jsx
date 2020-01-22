@@ -17,13 +17,13 @@ const SelectLang = props => {
    /* 'zh-CN': '简体中文',
     'zh-TW': '繁体中文',*/
     'en-US': 'English',
-    'pt-BR': 'Português',
+   // 'pt-BR': 'Português',
   };
   const languageIcons = {
     /*'zh-CN': '🇨🇳',
     'zh-TW': '🇭🇰',*/
     'en-US': '🇺🇸',
-    'pt-BR': '🇧🇷',
+    //'pt-BR': '🇧🇷',
   };
   const langMenu = (
     <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={changeLang}>
@@ -40,7 +40,7 @@ const SelectLang = props => {
   return (
     <HeaderDropdown overlay={langMenu} placement="bottomRight">
       <span className={classNames(styles.dropDown, className)}>
-        <GlobalOutlined title="语言" />
+        <GlobalOutlined title="title" />
       </span>
     </HeaderDropdown>
   );
