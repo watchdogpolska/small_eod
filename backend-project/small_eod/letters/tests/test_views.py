@@ -16,16 +16,16 @@ class PresignedUploadFileTestCase(APITestCase):
         response = self.client.post(url, data, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertIn('formData', response.data)
+        self.assertIn("formData", response.data)
 
-        form_data = response.data['formData']
-        self.assertIn('bucket', form_data)
-        self.assertIn('key', form_data)
-        self.assertIn('policy', form_data)
-        self.assertIn('x-amz-algorithm', form_data)
-        self.assertIn('x-amz-credential', form_data)
-        self.assertIn('x-amz-date', form_data)
-        self.assertIn('x-amz-signature', form_data)
+        form_data = response.data["formData"]
+        self.assertIn("bucket", form_data)
+        self.assertIn("key", form_data)
+        self.assertIn("policy", form_data)
+        self.assertIn("x-amz-algorithm", form_data)
+        self.assertIn("x-amz-credential", form_data)
+        self.assertIn("x-amz-date", form_data)
+        self.assertIn("x-amz-signature", form_data)
 
 
 class FileCreateTestCase(APITestCase):
