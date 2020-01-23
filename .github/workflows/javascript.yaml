@@ -19,7 +19,10 @@ jobs:
         node-version: '12.x'
     - name: Install
       run: npm install
+      working-directory: ./frontend-project/design_pro/
     - name: Lint
       run: npm run lint
+      working-directory: ./frontend-project/design_pro/
     - name: Build
       run: npm run build
+      working-directory: ./frontend-project/design_pro/
