@@ -108,7 +108,7 @@ const AdvancedForm = ({ submitting, dispatch }) => {
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
     setError(errorInfo.errorFields);
   };
 

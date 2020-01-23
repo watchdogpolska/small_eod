@@ -4,18 +4,13 @@ import { Mapbox } from '@antv/l7-maps';
 import * as React from 'react';
 
 export default class Map extends React.Component {
-  initMap() {
-    this.scene = new Scene({
-      id: 'map',
-      map: new Mapbox({
-        pitch: 20,
-        // @ts-ignore
-        style: 'blank',
-        center: [5, 40.16797],
-        zoom: 0.51329,
-        minZoom: 0.2,
-      }),
-    });
+  async componentDidMount() {
+    this.initMap();
+    this.addLayer();
+  }
+
+  componentWillUnmount() {
+    this.scene.destroy();
   }
 
   addLayer() {
@@ -106,13 +101,18 @@ export default class Map extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    this.scene.destroy();
-  }
-
-  async componentDidMount() {
-    this.initMap();
-    this.addLayer();
+  initMap() {
+    this.scene = new Scene({
+      id: 'map',
+      map: new Mapbox({
+        pitch: 20,
+        // @ts-ignore
+        style: 'blank',
+        center: [5, 40.16797],
+        zoom: 0.51329,
+        minZoom: 0.2,
+      }),
+    });
   }
 
   render() {

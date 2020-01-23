@@ -96,19 +96,16 @@ const Login = props => {
         </Tab>
         <div>
           <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
-          Zaloguj autmatycznie
+            Zaloguj autmatycznie
           </Checkbox>
-          <a
+          {/* <a
             style={{
               float: 'right',
             }}
-          >
-            
-          </a>
+          ></a> */}
         </div>
         <Submit loading={submitting}>Submit</Submit>
         <div className={styles.other}>
-          
           <AlipayCircleOutlined className={styles.icon} />
           <TaobaoCircleOutlined className={styles.icon} />
           <WeiboCircleOutlined className={styles.icon} />
