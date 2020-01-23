@@ -4,10 +4,12 @@ on:
   push:
     paths:
     - 'backend-project/**'
+    - '.github/**'
     - '**/docker-compose.yml'
   pull_request:
     paths:
     - 'backend-project/**'
+    - '.github/**'
     - '**/docker-compose.yml'
 
 jobs:
