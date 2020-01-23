@@ -40,9 +40,9 @@ jobs:
         name: openapi.json
         path: ./openapi.json
 
-  build:
+  push:
     runs-on: ubuntu-latest
-    # if: "github.ref == 'refs/heads/master'"
+    if: "github.ref == 'refs/heads/master'"
     needs:
       - test
     steps:
