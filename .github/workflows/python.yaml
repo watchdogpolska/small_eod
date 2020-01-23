@@ -47,6 +47,8 @@ jobs:
       - test
     steps:
     - uses: actions/checkout@v1
+    - name: Build production image
+      run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod:latest backend-project/
     - name: "Docker login"
       env:
         DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
