@@ -1,0 +1,26 @@
+name: 'Preview on HyperOne Website'
+description: 'Preview application on HyperOne Website'
+inputs:
+  HYPERONE_TOKEN:
+    description: 'HyperOne Token'
+    required: true
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+  SOURCE:
+    description: 'Local path of source files'
+    required: true
+  DESTINATION:
+    description: 'Destination path of files'
+    required: true
+  HYPERONE_FLAVOUR:
+    description: 'Website flavour'
+    required: false
+  HYPERONE_IMAGE:
+    description: "Website image"
+    required: false
+runs:
+  # using: 'node12'
+  # main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'

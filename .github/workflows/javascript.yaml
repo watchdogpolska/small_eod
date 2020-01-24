@@ -5,8 +5,13 @@ on:
     paths:
     - 'frontend-project/design_pro/**'
   pull_request:
-    paths:
-    - 'frontend-project/design_pro/**'
+    types:
+      # standard
+      - opened
+      - synchronize
+      - reopened
+      # extra
+      - closed
 
 jobs:
   test:
@@ -15,14 +20,23 @@ jobs:
     - uses: actions/checkout@v1
     - name: Set up Node 12.x
       uses: actions/setup-node@v1
+      if: github.event.action != 'closed'
       with:
         node-version: '12.x'
     - name: Install
       run: npm install
       working-directory: ./frontend-project/design_pro/
+      if: github.event.action != 'closed'
     - name: Lint
       run: npm run lint
       working-directory: ./frontend-project/design_pro/
+      if: github.event.action != 'closed'
     - name: Build
       run: npm run build
       working-directory: ./frontend-project/design_pro/
+      if: github.event.action != 'closed'
+    - uses: ./.github/actions/preview
+      with:
+        HYPERONE_TOKEN: "${{secrets.HYPERONE_TOKEN}}"
+        GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
+        SOURCE: "./frontend-project/design_pro/dist/"

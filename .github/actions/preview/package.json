@@ -1,0 +1,18 @@
+{
+  "name": "preview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Dobrawy",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/github": "^2.1.0",
+    "hyperone-client": "github:hyperonecom/h1-client-js",
+    "klaw": "^3.0.0",
+    "ssh2": "^0.8.7",
+    "tar": "^5.0.5"
+  }
+}
