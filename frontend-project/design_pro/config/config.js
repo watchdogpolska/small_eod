@@ -288,7 +288,7 @@ export default {
                   component: './account/settings',
                 },
               ],
-            },
+            },/*
             {
               name: 'editor',
               icon: 'highlight',
@@ -313,7 +313,7 @@ export default {
                   component: './editor/koni',
                 },
               ],
-            },
+            },*/
             {
               path: '/',
               redirect: '/dashboard/analysis',
