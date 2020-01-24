@@ -160,7 +160,7 @@ export default {
               ],
             },
             {
-              path: '/Instytucje',
+              path: '/form',
               icon: 'form',
               name: 'Instytucje',
               routes: [
@@ -179,7 +179,7 @@ export default {
               ],
             },
             {
-              path: '/Kanaly',
+              path: '/form_',
               icon: 'form',
               name: 'Kanały',
               routes: [
@@ -246,7 +246,7 @@ export default {
               ],
             },
             {
-              path: '/opisy-listow',
+              path: '/table',
               icon: 'table',
               name: 'Opisy listów',
               routes: [
