@@ -56,7 +56,6 @@ const plugins = [
 ];
 
 if (isAntDesignProPreview) {
-  // 针对 preview.pro.ant.design 的 GA 统计代码
   plugins.push([
     'umi-plugin-ga',
     {
@@ -160,7 +159,7 @@ export default {
               ],
             },
             {
-              path: '/Instytucje',
+              path: '/form',
               icon: 'form',
               name: 'Instytucje',
               routes: [
@@ -179,7 +178,7 @@ export default {
               ],
             },
             {
-              path: '/Kanaly',
+              path: '/form_',
               icon: 'form',
               name: 'Kanały',
               routes: [
@@ -246,7 +245,7 @@ export default {
               ],
             },
             {
-              path: '/opisy-listow',
+              path: '/table',
               icon: 'table',
               name: 'Opisy listów',
               routes: [
@@ -368,32 +367,7 @@ export default {
                   component: './form/advanced-form',
                 },
               ],
-            },/*
-            {
-              name: 'editor',
-              icon: 'highlight',
-              path: '/editor',
-              routes: [
-                {
-                  name: 'flow',
-                  icon: 'smile',
-                  path: '/editor/flow',
-                  component: './editor/flow',
-                },
-                {
-                  name: 'mind',
-                  icon: 'smile',
-                  path: '/editor/mind',
-                  component: './editor/mind',
-                },
-                {
-                  name: 'koni',
-                  icon: 'smile',
-                  path: '/editor/koni',
-                  component: './editor/koni',
-                },
-              ],
-            },*/
+            },
             {
               path: '/',
               redirect: '/dashboard/analysis',
