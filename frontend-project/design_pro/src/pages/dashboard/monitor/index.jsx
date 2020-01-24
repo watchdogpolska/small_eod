@@ -1,4 +1,4 @@
-import { Card, Col, Row, Statistic } from 'antd';
+/*import { Card, Col, Row, Statistic } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
@@ -285,3 +285,4 @@ export default connect(({ dashboardAndmonitor, loading }) => ({
   dashboardAndmonitor,
   loading: loading.models.dashboardAndmonitor,
 }))(Monitor);
+*/

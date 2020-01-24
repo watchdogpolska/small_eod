@@ -115,7 +115,7 @@ export default {
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
-            {
+            /*{
               path: '/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
@@ -139,7 +139,7 @@ export default {
                   component: './dashboard/workplace',
                 },
               ],
-            },
+            },*/
             {
               path: '/form',
               icon: 'form',
