@@ -19,7 +19,9 @@ class Channel(TimestampUserLogModel):
     street = models.BooleanField(default=False,
                                  verbose_name=_("Street"),
                                  help_text="Name of street in institution address is mandatory for this channel.")
-    flat_no = models.BooleanField(default=False)
+    flat_no = models.BooleanField(default=False,
+                                  verbose_name=_("Flat number"),
+                                  help_text="Flat number in institution address is mandatory for this channel.")
     house_no = models.BooleanField(default=False)
     postal_code = models.BooleanField(default=False)
     voivodeship = models.BooleanField(default=False)
