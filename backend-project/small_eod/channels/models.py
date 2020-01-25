@@ -10,7 +10,9 @@ class Channel(TimestampUserLogModel):
     city = models.BooleanField(default=False,
                                verbose_name=_("City"),
                                help_text=_("Name of city in institution address is mandatory for this channel."))
-    email = models.BooleanField(default=False)
+    email = models.BooleanField(default=False,
+                                verbose_name=_("E-mail"),
+                                help_text=_("Institution e-mail address is mandatory for this channel."))
     epuap = models.BooleanField(default=False)
     street = models.BooleanField(default=False)
     flat_no = models.BooleanField(default=False)
