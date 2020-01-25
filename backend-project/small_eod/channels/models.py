@@ -28,4 +28,6 @@ class Channel(TimestampUserLogModel):
     postal_code = models.BooleanField(default=False,
                                       verbose_name=_("Postal code"),
                                       help_text=_("Postal code in institution address is mandatory for this channel."))
-    voivodeship = models.BooleanField(default=False)
+    voivodeship = models.BooleanField(default=False,
+                                      verbose_name=_("Voivodeship"),
+                                      help_text=_("Voivodeship in institution address is mandatory for this channel."))
