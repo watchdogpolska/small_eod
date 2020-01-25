@@ -16,7 +16,9 @@ class Channel(TimestampUserLogModel):
     epuap = models.BooleanField(default=False,
                                 verbose_name=_("ePUAP"),
                                 help_text=_("Institution ePUAP address is mandatory for this channel."))
-    street = models.BooleanField(default=False)
+    street = models.BooleanField(default=False,
+                                 verbose_name=_("Street"),
+                                 help_text="Name of street in institution address is mandatory for this channel.")
     flat_no = models.BooleanField(default=False)
     house_no = models.BooleanField(default=False)
     postal_code = models.BooleanField(default=False)
