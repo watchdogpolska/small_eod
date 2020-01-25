@@ -7,7 +7,9 @@ class Channel(TimestampUserLogModel):
     name = models.CharField(max_length=25,
                             verbose_name=_("Name"),
                             help_text=_("Channel's name. Name cannot be longer than 25 characters."))
-    city = models.BooleanField(default=False)
+    city = models.BooleanField(default=False,
+                               verbose_name=_("City"),
+                               help_text=_("Name of city in institution address is mandatory for this channel."))
     email = models.BooleanField(default=False)
     epuap = models.BooleanField(default=False)
     street = models.BooleanField(default=False)
