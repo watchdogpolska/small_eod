@@ -27,10 +27,7 @@ class DescriptionViewSet(viewsets.ModelViewSet):
 
 
 class FileViewSet(
-    NestedViewSetMixin,
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet,
+    NestedViewSetMixin, viewsets.ModelViewSet, viewsets.GenericViewSet,
 ):
     model = File
     serializer_class = FileSerializer
