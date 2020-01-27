@@ -109,9 +109,7 @@ const Login = props => {
           <AlipayCircleOutlined className={styles.icon} />
           <TaobaoCircleOutlined className={styles.icon} />
           <WeiboCircleOutlined className={styles.icon} />
-          <Link className={styles.register} to="/user/register">
-            Register
-          </Link>
+          
         </div>
       </LoginFrom>
     </div>

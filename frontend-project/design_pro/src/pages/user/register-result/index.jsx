@@ -1,4 +1,4 @@
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
+/*import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { Button, Result } from 'antd';
 import Link from 'umi/link';
 import React from 'react';
@@ -41,3 +41,4 @@ const RegisterResult = ({ location }) => (
 );
 
 export default RegisterResult;
+*/
