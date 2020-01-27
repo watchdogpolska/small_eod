@@ -32,7 +32,16 @@ const TableForm = ({ value, onChange }) => {
   const newMember = () => {
     const newData = data?.map(item => ({ ...item })) || []; // eslint-disable-next-line no-unused-expressions
 
-    newData?.push({
+    // newData?.push({
+    //   key: `NEW_TEMP_ID_${index}`,
+    //   workId: '',
+    //   name: '',
+    //   department: '',
+    //   editable: true,
+    //   isNew: true,
+    // });
+
+    newData.push({
       key: `NEW_TEMP_ID_${index}`,
       workId: '',
       name: '',

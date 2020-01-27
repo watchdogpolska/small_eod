@@ -1,4 +1,5 @@
-import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
+// import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
+import { Form, Button, Col, Input, Popover, Progress, Row, message } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { useState, useEffect } from 'react';
 import Link from 'umi/link';
@@ -7,7 +8,7 @@ import router from 'umi/router';
 import styles from './style.less';
 
 const FormItem = Form.Item;
-const { Option } = Select;
+// const { Option } = Select;
 const InputGroup = Input.Group;
 const passwordStatusMap = {
   ok: (
@@ -33,9 +34,10 @@ const passwordProgressMap = {
 };
 
 const Register = ({ submitting, dispatch, userAndregister }) => {
-  const [count, setcount] = useState(0);
+  // const [count, setcount] = useState(0);
   const [visible, setvisible] = useState(false);
-  const [prefix, setprefix] = useState('86');
+  // const [prefix, setprefix] = useState('86');
+  const [prefix] = useState('86');
   const [popover, setpopover] = useState(false);
   const confirmDirty = false;
   let interval;
@@ -64,18 +66,18 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     [],
   );
 
-  const onGetCaptcha = () => {
-    let counts = 59;
-    setcount(counts);
-    interval = window.setInterval(() => {
-      counts -= 1;
-      setcount(counts);
+  // const onGetCaptcha = () => {
+  //   let counts = 59;
+  //   setcount(counts);
+  //   interval = window.setInterval(() => {
+  //     counts -= 1;
+  //     setcount(counts);
 
-      if (counts === 0) {
-        clearInterval(interval);
-      }
-    }, 1000);
-  };
+  //     if (counts === 0) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+  // };
 
   const getPasswordStatus = () => {
     const value = form.getFieldValue('password');
@@ -141,9 +143,9 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     return promise.resolve();
   };
 
-  const changePrefix = value => {
-    setprefix(value);
-  };
+  // const changePrefix = value => {
+  //   setprefix(value);
+  // };
 
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
@@ -268,17 +270,10 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
             })}
           />
         </FormItem>
-        <InputGroup compact>
-          
-        
-        </InputGroup>
+        <InputGroup compact></InputGroup>
         <Row gutter={8}>
-          <Col span={16}>
-            
-          </Col>
-          <Col span={8}>
-           
-          </Col>
+          <Col span={16}></Col>
+          <Col span={8}></Col>
         </Row>
         <FormItem>
           <Button

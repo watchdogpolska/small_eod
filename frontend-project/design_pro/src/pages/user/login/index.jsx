@@ -1,7 +1,6 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import { Link } from 'umi';
 import { connect } from 'dva';
 import styles from './style.less';
 import LoginFrom from './components/Login';
@@ -96,23 +95,19 @@ const Login = props => {
         </Tab>
         <div>
           <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
-          Zaloguj autmatycznie
+            Zaloguj autmatycznie
           </Checkbox>
-          <a
+          {/* <a
             style={{
               float: 'right',
             }}
-          >
-            
-          </a>
+          ></a> */}
         </div>
         <Submit loading={submitting}>Submit</Submit>
         <div className={styles.other}>
-          
           <AlipayCircleOutlined className={styles.icon} />
           <TaobaoCircleOutlined className={styles.icon} />
           <WeiboCircleOutlined className={styles.icon} />
-          
         </div>
       </LoginFrom>
     </div>

@@ -1,4 +1,5 @@
 import { queryCurrent, query as queryUsers } from '@/services/user';
+
 const UserModel = {
   namespace: 'user',
   state: {
