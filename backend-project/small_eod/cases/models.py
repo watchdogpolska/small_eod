@@ -18,20 +18,44 @@ class CaseQuerySet(models.QuerySet):
 class Case(TimestampUserLogModel):
     objects = CaseQuerySet.as_manager()
 
-    name = models.CharField(max_length=256)
-    comment = models.CharField(max_length=256)
+    name = models.CharField(
+        max_length=256, verbose_name=_("Name"), help_text=_("Case's name."),
+    )
+    comment = models.CharField(
+        max_length=256,
+        verbose_name=_("Comment"),
+        help_text=_("Comment for this case."),
+    )
 
-    tag = models.ManyToManyField(to=Tag, blank=True)
-    feature = models.ManyToManyField(to=Feature, blank=True)
+    tag = models.ManyToManyField(
+        to=Tag, blank=True, verbose_name=_("Tag"), help_text=_("Choose tag.")
+    )
+    feature = models.ManyToManyField(
+        to=Feature,
+        blank=True,
+        verbose_name=_("Feature"),
+        help_text=_("Features for this case."),
+    )
 
     audited_institution = models.ManyToManyField(
-        to=Institution, blank=True, help_text=_("Case audits this Institution"),
+        to=Institution,
+        blank=True,
+        verbose_name="Audited institution",
+        help_text=_("Case audits this Institution."),
     )
     notified_user = models.ManyToManyField(
-        to=settings.AUTH_USER_MODEL, related_name="case_notified_user", blank=True,
+        to=settings.AUTH_USER_MODEL,
+        related_name="case_notified_user",
+        blank=True,
+        verbose_name=_("Notified user"),
+        help_text=_("User who will receive notification."),
     )
     responsible_user = models.ManyToManyField(
-        to=settings.AUTH_USER_MODEL, related_name="case_responsible_user", blank=True,
+        to=settings.AUTH_USER_MODEL,
+        related_name="case_responsible_user",
+        blank=True,
+        verbose_name=_("Responsible user"),
+        help_text=_("User who is responsible for this case."),
     )
 
     def __str__(self):
