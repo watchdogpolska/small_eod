@@ -4,8 +4,8 @@ from .models import (
     JednostkaAdministracyjna,
     Institution,
 )
+from django.db import models
 from rest_framework import serializers
-
 from ..generic.serializers import UserLogModelSerializer
 
 
@@ -40,7 +40,10 @@ class InstitutionSerializer(UserLogModelSerializer):
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
     administrative_unit = serializers.PrimaryKeyRelatedField(
-        many=False, queryset=JednostkaAdministracyjna.objects.all()
+        many=False,
+        queryset=JednostkaAdministracyjna.objects.filter(
+            models.Q(category__level=3)
+        ).all(),
     )
 
     class Meta:

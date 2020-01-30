@@ -1,10 +1,10 @@
 from django.core import validators
 from django.db import models
+
 from teryt_tree.models import JednostkaAdministracyjna
 
 from ..generic.models import TimestampUserLogModel
 from ..generic.validators import ExactLengthsValidator
-from .validators import validate_level_3
 
 
 class AddressData(models.Model):
@@ -40,12 +40,12 @@ class ExternalIdentifier(models.Model):
 class Institution(TimestampUserLogModel):
     name = models.CharField(max_length=256)
 
-    administrative_unit = models.OneToOneField(
+    administrative_unit = models.ForeignKey(
         to=JednostkaAdministracyjna,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        validators=[validate_level_3],
+        limit_choices_to=models.Q(category__level=3),
     )
     address = models.OneToOneField(
         AddressData, on_delete=models.CASCADE, null=True, blank=True
