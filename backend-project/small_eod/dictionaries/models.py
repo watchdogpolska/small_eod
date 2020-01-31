@@ -16,4 +16,4 @@ class Dictionary(TimestampUserLogModel):
 
 class Feature(models.Model):
     name = models.CharField(max_length=100, verbose_name=_("Name"), help_text=_("Name of feature."))
-    dictionary = models.ForeignKey(to=Dictionary, on_delete=models.CASCADE)
+    dictionary = models.ForeignKey(to=Dictionary, on_delete=models.CASCADE, verbose_name=_("Dictionary"), help_text=_("Name of dictionary."))
