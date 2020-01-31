@@ -8,4 +8,4 @@ class Collection(TimestampUserLogModel):
     expired_on = models.DateTimeField(verbose_name=_("An expiration date"), help_text=_("An expiration date of collection."))
     query = models.CharField(max_length=256, verbose_name=_("Query"), help_text=_("Query for collection."))
     comment = models.CharField(max_length=256, verbose_name=_("Comment"), help_text=_("Comment for collection."))
-    public = models.BooleanField(default=False)
+    public = models.BooleanField(default=False, verbose_name=_("Public"), help_text=_("Make public."))
