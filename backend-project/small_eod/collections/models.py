@@ -6,6 +6,6 @@ from ..generic.models import TimestampUserLogModel
 
 class Collection(TimestampUserLogModel):
     expired_on = models.DateTimeField(verbose_name=_("An expiration date"), help_text=_("An expiration date of collection."))
-    query = models.CharField(max_length=256)
+    query = models.CharField(max_length=256, verbose_name=_("Query"), help_text=_("Query for collection."))
     comment = models.CharField(max_length=256)
     public = models.BooleanField(default=False)
