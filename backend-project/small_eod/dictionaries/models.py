@@ -30,5 +30,5 @@ class Feature(models.Model):
         to=Dictionary,
         on_delete=models.CASCADE,
         verbose_name=_("Dictionary"),
-        help_text=_("Name of dictionary."),
+        help_text=_("Related dictionary."),
     )
