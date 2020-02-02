@@ -3,8 +3,7 @@ version: '3.4'
 services:
   nginx:
     # https://hub.docker.com/_/nginx
-    # https://hub.docker.com/layers/nginx/library/nginx/1.17.7-alpine/images/sha256-2911ad2d54f4cf4dc7ad21af122c1eefce16836a34be751c63351ca1fb452d57
-    image: nginx@sha256:89a42c3ba15f09a3fbe39856bddacdf9e94cd03df7403cad4fc105088e268fc9
+    image: nginx:1.17.7-alpine
     ports:
       - "8000:8000"
     volumes:
@@ -16,8 +15,7 @@ services:
 
   db:
     # https://hub.docker.com/_/postgres
-    # https://hub.docker.com/layers/postgres/library/postgres/12.1-alpine/images/sha256-acc27976001fac260a2e6e06170e70b7e667cdd85f16ee7355de0d47dcb990ae
-    image: postgres@sha256:625225ca4ab31e1f8fc53dcd7dcff96293359c27002b7525522188ca6139cf66
+    image: postgres:12.1-alpine
     expose:
       - "5432"
     volumes:
@@ -48,8 +46,8 @@ services:
       - "8000"
 
   minio:
-    # https://hub.docker.com/layers/minio/minio/RELEASE.2020-01-03T19-12-21Z/images/sha256-f00aa6ef2b7286dc620aca168bf1bc9280db8461a02d293d5ae491b3d6d3006b
-    image: minio/minio@sha256:53c65fca691336b77b74180937d8d6f7845ef1afea0e0ae9780598835d7a5979
+    # https://hub.docker.com/r/minio/minio/
+    image: minio/minio:RELEASE.2020-01-16T22-40-29Z
     ports:
       - "9000:9000"
     expose:
