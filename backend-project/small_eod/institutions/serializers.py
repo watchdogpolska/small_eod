@@ -4,7 +4,6 @@ from .models import (
     JednostkaAdministracyjna,
     Institution,
 )
-from django.db import models
 from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
 
@@ -39,11 +38,11 @@ class InstitutionSerializer(UserLogModelSerializer):
     """
     TODO implement true validation inheritance instead of queryset limiting
     """
+
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
     administrative_unit = serializers.PrimaryKeyRelatedField(
-        many=False,
-        queryset=JednostkaAdministracyjna.objects.all(),
+        many=False, queryset=JednostkaAdministracyjna.objects.all(),
     )
 
     class Meta:
@@ -63,7 +62,9 @@ class InstitutionSerializer(UserLogModelSerializer):
     def validate_administrative_unit(self, admin):
         admin_unit = JednostkaAdministracyjna.objects.get(pk=admin.id)
         if admin_unit.category.level != 3:
-            raise serializers.ValidationError("Administrative unit should be of level 3 (community)")
+            raise serializers.ValidationError(
+                "Administrative unit should be of level 3 (community)"
+            )
         return admin
 
     def create(self, validated_data):
