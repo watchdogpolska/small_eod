@@ -36,7 +36,6 @@ class ExternalIdentifierNestedSerializer(serializers.ModelSerializer):
 
 
 class InstitutionSerializer(UserLogModelSerializer):
-
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
     administrative_unit = serializers.PrimaryKeyRelatedField(
@@ -73,3 +72,18 @@ class InstitutionSerializer(UserLogModelSerializer):
         institution.administrative_unit = administrative_unit
         institution.save()
         return institution
+
+    def update(self, instance, validated_data):
+        institution_nested = [
+            {
+                "instance": instance.external_identifier,
+                "data": validated_data.pop("external_identifier"),
+            },
+            {"instance": instance.address, "data": validated_data.pop("address")},
+        ]
+
+        for nested_object in institution_nested:
+            for attr, value in nested_object["data"].items():
+                setattr(nested_object["instance"], attr, value)
+            nested_object["instance"].save()
+        return super().update(instance, validated_data)
