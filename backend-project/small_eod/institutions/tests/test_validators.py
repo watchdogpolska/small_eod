@@ -91,21 +91,21 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
 
 class InstitutionValidatorsTestCase(TestCase):
-    def test_level_3(self):
+    def test_level_3_positive(self):
         """
         Administrative unit must be a level 3 unit.
         """
-        category1 = CategoryFactory(level=1)
-        administrative_unit = JednostkaAdministracyjnaFactory(category=category1)
-
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
-        self.assertEqual(administrative_unit.category.level, 1)
-        form = f(data=dict(administrative_unit=administrative_unit))
-        self.assertFalse(form.is_valid())
-
-        category3 = CategoryFactory(level=3)
-        administrative_unit = JednostkaAdministracyjnaFactory(category=category3)
+        administrative_unit = JednostkaAdministracyjnaFactory(category__level=3)
         self.assertEqual(administrative_unit.category.level, 3)
         form = f(data=dict(administrative_unit=administrative_unit))
         self.assertTrue(form.is_valid())
+
+    def test_level_3_negative(self):
+        f = modelform_factory(Institution, fields=("administrative_unit",))
+
+        administrative_unit = JednostkaAdministracyjnaFactory(category__level=1)
+        self.assertEqual(administrative_unit.category.level, 1)
+        form = f(data=dict(administrative_unit=administrative_unit))
+        self.assertFalse(form.is_valid())

@@ -1,5 +1,4 @@
 from django.test import TestCase
-from rest_framework.test import APIRequestFactory, force_authenticate
 
 from ..models import AddressData, ExternalIdentifier, Institution
 from ..serializers import (
@@ -7,8 +6,8 @@ from ..serializers import (
     ExternalIdentifierNestedSerializer,
     AddressDataNestedSerializer,
 )
-from ...users.factories import UserFactory
-from teryt_tree.factories import JednostkaAdministracyjnaFactory, CategoryFactory
+from ...generic.mixins import AuthRequiredMixin
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
 class AddressDataSerializerTestCase(TestCase):
@@ -40,7 +39,7 @@ class AddressDataSerializerTestCase(TestCase):
         self.assertEqual(data["postal_code"], "22222")
         self.assertEqual(data["flat_no"], "")
 
-    def test_update(self):
+    def test_update_city(self):
         serializer = AddressDataNestedSerializer(self.obj, data={"city": "New City"})
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
@@ -70,7 +69,7 @@ class ExternalIdentifierSerializerTestCase(TestCase):
         )
         self.assertFalse(serializer.is_valid(), serializer.errors)
 
-    def test_update(self):
+    def test_update_nip(self):
         serializer = ExternalIdentifierNestedSerializer(
             self.obj, data={"nip": "1111111111"}
         )
@@ -80,15 +79,10 @@ class ExternalIdentifierSerializerTestCase(TestCase):
         self.assertEqual(obj.nip, "1111111111")
 
 
-class InstitutionSerializerTestCase(TestCase):
+class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
     def setUp(self):
-        self.user = UserFactory()
-        factory = APIRequestFactory()
-        self.request = factory.get("/")
-        force_authenticate(self.request, user=self.user)
-        self.request.user = self.user
-        self.category = CategoryFactory(level=3)
-        self.admin_unit = JednostkaAdministracyjnaFactory(category=self.category)
+        super().setUp()
+        self.admin_unit = JednostkaAdministracyjnaFactory(category__level=3)
         self.default_serializer = InstitutionSerializer(
             data=self.get_default_data(), context={"request": self.request}
         )
@@ -137,7 +131,7 @@ class InstitutionSerializerTestCase(TestCase):
         )
         self.assertFalse(serializer.is_valid(), serializer.errors)
 
-    def test_update(self):
+    def test_update_name(self):
         serializer = InstitutionSerializer(
             self.obj,
             data={"name": "Inna nazwa sprawy"},

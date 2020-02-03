@@ -8,12 +8,6 @@ from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
 
 
-class AdministrativeUnitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JednostkaAdministracyjna
-        fields = ["id", "parent", "name", "category", "slug", "updated_on", "active"]
-
-
 class AddressDataNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddressData
@@ -79,7 +73,12 @@ class InstitutionSerializer(UserLogModelSerializer):
         return institution
 
     def update(self, instance, validated_data):
-
+        """
+        institution_nested - variable storing representations of the nested objects
+        of InstitutionSerializer (External Identifier and Address).
+        Iterating over those 2 and updating fields of the related objects,
+        using key-value pairs from PATCH request.
+        """
         institution_nested = [
             {
                 "instance": instance.external_identifier,
