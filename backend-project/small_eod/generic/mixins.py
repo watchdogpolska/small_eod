@@ -3,7 +3,6 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 
 
 class AuthRequiredMixin:
-
     def setUp(self):
         self.user = UserFactory()
         factory = APIRequestFactory()

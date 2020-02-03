@@ -123,7 +123,9 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_data__external_identifier_field(self):
         data = self.serializer_class(self.obj).data
-        self.assertTrue(data["external_identifier"]["regon"], self.obj.external_identifier.regon)
+        self.assertTrue(
+            data["external_identifier"]["regon"], self.obj.external_identifier.regon
+        )
 
     def test_validate_administrative_unit(self):
         admin_unit = JednostkaAdministracyjnaFactory()
@@ -135,7 +137,6 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_update_name(self):
         serializer = self.serializer_class(
-
             self.obj,
             data={"name": "Inna nazwa sprawy"},
             context={"request": self.request},

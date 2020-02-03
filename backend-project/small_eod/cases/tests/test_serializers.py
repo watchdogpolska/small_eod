@@ -10,7 +10,6 @@ from ...generic.mixins import AuthRequiredMixin
 
 
 class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
-
     def get_default_data(self, new_data=None, skip=None):
         new_data = new_data or {}
         skip = skip or []

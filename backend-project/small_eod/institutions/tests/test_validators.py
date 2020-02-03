@@ -2,7 +2,7 @@ from django.forms import modelform_factory
 from django.test import TestCase
 
 from ..models import ExternalIdentifier, Institution
-from teryt_tree.factories import JednostkaAdministracyjnaFactory, CategoryFactory
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
 class ExternalIdentifierValidatorsTestCase(TestCase):
