@@ -35,9 +35,6 @@ class ExternalIdentifierNestedSerializer(serializers.ModelSerializer):
 
 
 class InstitutionSerializer(UserLogModelSerializer):
-    """
-    TODO implement true validation inheritance instead of queryset limiting
-    """
 
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
@@ -82,12 +79,13 @@ class InstitutionSerializer(UserLogModelSerializer):
         return institution
 
     def update(self, instance, validated_data):
+
         institution_nested = [
             {
                 "instance": instance.external_identifier,
-                "data": validated_data.pop("external_identifier"),
+                "data": validated_data.pop("external_identifier", {}),
             },
-            {"instance": instance.address, "data": validated_data.pop("address")},
+            {"instance": instance.address, "data": validated_data.pop("address", {})},
         ]
 
         for nested_object in institution_nested:
