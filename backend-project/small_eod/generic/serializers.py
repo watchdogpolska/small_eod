@@ -15,7 +15,7 @@ class UserLogModelSerializer(ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        instance = super().create(validated_data)
+        instance = super().update(instance, validated_data)
 
         current_user = self.context["request"].user
         instance.modified_by = current_user

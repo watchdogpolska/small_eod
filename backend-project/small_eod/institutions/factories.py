@@ -21,7 +21,6 @@ class ExternalIdentifierFactory(DjangoModelFactory):
 class AddressDataFactory(DjangoModelFactory):
 
     city = PolishFaker("city")
-    voivodeship = PolishFaker("region")
     flat_no = PolishFaker("building_number")
     street = PolishFaker("street_name")
     postal_code = PolishFaker("postcode")

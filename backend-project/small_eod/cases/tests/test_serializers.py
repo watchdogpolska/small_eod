@@ -1,5 +1,4 @@
 from django.test import TestCase
-from rest_framework.test import APIRequestFactory, force_authenticate
 
 from ..models import Case
 from ..serializers import CaseSerializer, CaseCountSerializer
@@ -7,16 +6,10 @@ from ...dictionaries.factories import FeatureFactory, DictionaryFactory
 from ...notes.factories import NoteFactory
 from ...tags.models import Tag
 from ...users.factories import UserFactory
+from ...generic.mixins import AuthRequiredMixin
 
 
-class CaseCountSerializerTestCase(TestCase):
-    def setUp(self):
-        self.user = UserFactory()
-        factory = APIRequestFactory()
-        self.request = factory.get("/")
-        force_authenticate(self.request, user=self.user)
-        self.request.user = self.user
-
+class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
     def get_default_data(self, new_data=None, skip=None):
         new_data = new_data or {}
         skip = skip or []
@@ -76,6 +69,7 @@ class CaseCountSerializerTestCase(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertCountEqual(obj.responsible_user.all(), [self.user])
+        self.assertCountEqual(obj.notified_user.all(), [self.user])
 
     def test_save_related_user(self):
         [responsible_user, notified_user] = UserFactory.create_batch(size=2)
