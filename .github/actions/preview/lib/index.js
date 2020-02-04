@@ -159,8 +159,8 @@ async function run() {
         core.setOutput('domain', website.fqdn);
         await new Promise(resolve => setTimeout(resolve, 3 * 1000));
         await uploadSsh({
-          // host: website.fqdn,
-          host: '62.181.8.96',
+          host: website.fqdn,
+          // host: '62.181.8.96',
           username: website.id,
           password: password,
         }, path.join(process.env.GITHUB_WORKSPACE, srcDir), destDir);
