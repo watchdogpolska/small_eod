@@ -98,7 +98,7 @@ const getCreateNote = (website) => {
   return `${SEPERATOR_START}
   ---
   # HyperOne Preview\n\n
-  Preview URL: [${website.fqdn}](https://${website.fqdn})
+  Preview URL: [${website.fqdn}](http://${website.fqdn})
   ${SEPERATOR_END}`;
 };
 
