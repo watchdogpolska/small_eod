@@ -31,4 +31,5 @@ class Letter(TimestampUserLogModel):
 
 
 class Description(models.Model):
+    letter = models.ForeignKey(to=Letter, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
