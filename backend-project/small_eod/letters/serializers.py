@@ -7,18 +7,18 @@ from ..institutions.serializers import AddressDataNestedSerializer
 from ..channels.serializers import ChannelNestedSerializer
 
 
-class DescriptionNestedSerializer(serializers.ModelSerializer):
+class DescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Description
-        fields = [
-            "name",
-        ]
+        fields = ["name", "letter"]
 
 
 class LetterSerializer(UserLogModelSerializer):
-    description = DescriptionNestedSerializer()
+    description = serializers.ListField()
     case = serializers.PrimaryKeyRelatedField(many=False, queryset=Case.objects.all())
-    institution = serializers.PrimaryKeyRelatedField(many=False, queryset=Institution.objects.all())
+    institution = serializers.PrimaryKeyRelatedField(
+        many=False, queryset=Institution.objects.all()
+    )
     address = AddressDataNestedSerializer()
     channel = ChannelNestedSerializer()
 
@@ -37,10 +37,12 @@ class LetterSerializer(UserLogModelSerializer):
             "ordering",
             "comment",
             "excerpt",
-            "description"
+            "description",
         ]
 
     def create(self, validated_data):
+        descriptions = validated_data.pop("description")
+
         validated_data["address"] = Description.objects.create(
             **validated_data.pop("address")
         )
@@ -54,6 +56,10 @@ class LetterSerializer(UserLogModelSerializer):
         case = validated_data.pop("case")
 
         letter = super().create(validated_data)
+
+        for description in descriptions:
+            Description.objects.get_or_create(name=description, letter=letter)
+
         letter.institution = institution
         letter.case = case
         letter.save()
@@ -67,12 +73,12 @@ class LetterSerializer(UserLogModelSerializer):
         using key-value pairs from PATCH request.
         """
         nested = [
-            {
-                "instance": instance.address,
-                "data": validated_data.pop("address", {}),
-            },
+            {"instance": instance.address, "data": validated_data.pop("address", {})},
             {"instance": instance.channel, "data": validated_data.pop("channel", {})},
-            {"instance": instance.description, "data": validated_data.pop("description", {})},
+            {
+                "instance": instance.description,
+                "data": validated_data.pop("description", {}),
+            },
         ]
 
         for nested_object in nested:
@@ -80,4 +86,3 @@ class LetterSerializer(UserLogModelSerializer):
                 setattr(nested_object["instance"], attr, value)
             nested_object["instance"].save()
         return super().update(instance, validated_data)
-

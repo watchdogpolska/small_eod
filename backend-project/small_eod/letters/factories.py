@@ -34,6 +34,7 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
 class DescriptionFactory(factory.DjangoModelFactory):
     name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
+    letter = factory.SubFactory(LetterFactory)
 
     class Meta:
         model = Description
