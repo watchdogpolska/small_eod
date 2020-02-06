@@ -55,7 +55,10 @@ class ReadOnlyViewSetMixin:
 
 class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_ommited_fields(self):
-        return self.serializer_class.Meta.read_only_fields
+        if hasattr(self.serializer_class.Meta, 'read_only_fields'):
+            return self.serializer_class.Meta.read_only_fields + ['id']
+        else:
+            return ['id']
 
     def test_create_plain(self):
         response = self.client.post(
@@ -71,8 +74,14 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_create_data(self):
         if not self.serializer_class:
             raise NotImplementedError("serializer_class must be defined")
-        data = self.serializer_class(self.obj).data
-        for field in self.get_ommited_fields():
-            del data[field]
-        del data["id"]
+
+        data = {key: value for (key, value) in self.serializer_class(self.obj).data.items() if
+                key not in self.get_ommited_fields()}
         return data
+
+    def test_created_by(self):
+        pass
+
+    def test_modified_by(self):
+        pass
+

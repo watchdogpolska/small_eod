@@ -1,17 +1,17 @@
 from django.test import TestCase
 
-from ..factories import ChannelFactory
-from ..serializers import ChannelSerializer
+from ..factories import NoteFactory
+from ..serializers import NoteSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
 )
 
 
-class ChannelViewSetTestCase(GenericViewSetMixin, TestCase):
-    basename = "channel"
-    serializer_class = ChannelSerializer
-    factory_class = ChannelFactory
+class NoteViewSetTestCase(GenericViewSetMixin, TestCase):
+    basename = "note"
+    serializer_class = NoteSerializer
+    factory_class = NoteFactory
 
     def validate_item(self, item):
-        self.assertEqual(item["name"], self.obj.name)
+        self.assertEqual(item["comment"], self.obj.comment)

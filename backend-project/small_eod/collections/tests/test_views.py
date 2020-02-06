@@ -1,8 +1,21 @@
 from django.test import TestCase
 
 from ..factories import CollectionFactory
-from ...generic.tests.test_views import ReadOnlyViewSetMixin
+from ..serializers import CollectionSerializer
+from ...generic.tests.test_views import (
+    ReadOnlyViewSetMixin,
+    GenericViewSetMixin
+)
 from ...notes.factories import NoteFactory
+
+
+class CollectionViewSetTestCase(GenericViewSetMixin, TestCase):
+    basename = "collection"
+    serializer_class = CollectionSerializer
+    factory_class = CollectionFactory
+
+    def validate_item(self, item):
+        self.assertEqual(item["comment"], self.obj.comment)
 
 
 class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
