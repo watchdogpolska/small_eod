@@ -10,6 +10,7 @@ from ...notes.factories import NoteFactory
 
 
 class CollectionViewSetTestCase(GenericViewSetMixin, TestCase):
+    #TODO: Test nie przechodzi z powody braku pola querry - należy uzupełnić factory
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory

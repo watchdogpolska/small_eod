@@ -5,12 +5,13 @@ from ..serializers import CaseSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
+    AuthorshipViewSetMixin,
 )
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
-class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
+class CaseViewSetTestCase(AuthorshipViewSetMixin, TestCase):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory

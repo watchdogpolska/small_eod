@@ -17,7 +17,8 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("factory_class must be defined")
 
         self.obj = self.factory_class()
-        self.user = getattr(self, "user", UserFactory(username="john"))
+        #self.user = getattr(self, "user", UserFactory(username="john"))
+        self.user = UserFactory(username="john")
         self.client.login(username="john", password="pass")
 
     def get_extra_kwargs(self):
@@ -79,9 +80,18 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
                 key not in self.get_ommited_fields()}
         return data
 
+
+class AuthorshipViewSetMixin(GenericViewSetMixin):
     def test_created_by(self):
-        pass
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data=self.get_create_data(),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201)
 
-    def test_modified_by(self):
-        pass
-
+        self.assertEqual(response.json()['createdBy'], self.user.id)
+        self.assertEqual(response.json()['modifiedBy'], self.user.id)
+    #
+    # def test_modified_by(self):
+    #     pass
