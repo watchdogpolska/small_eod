@@ -17,7 +17,6 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("factory_class must be defined")
 
         self.obj = self.factory_class()
-        # self.user = getattr(self, "user", UserFactory(username="john"))
         self.user = UserFactory(username="john")
         self.client.login(username="john", password="pass")
 

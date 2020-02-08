@@ -2,11 +2,7 @@ from django.test import TestCase
 
 from ..factories import InstitutionFactory
 from ..serializers import InstitutionSerializer
-from ...generic.tests.test_views import (
-    GenericViewSetMixin,
-    ReadOnlyViewSetMixin,
-    AuthorshipViewSetMixin,
-)
+from ...generic.tests.test_views import AuthorshipViewSetMixin
 
 
 class InstitutionViewSetTestCase(AuthorshipViewSetMixin, TestCase):

@@ -2,10 +2,7 @@ from django.test import TestCase
 
 from ..factories import ChannelFactory
 from ..serializers import ChannelSerializer
-from ...generic.tests.test_views import (
-    GenericViewSetMixin,
-    ReadOnlyViewSetMixin,
-)
+from ...generic.tests.test_views import GenericViewSetMixin
 
 
 class ChannelViewSetTestCase(GenericViewSetMixin, TestCase):

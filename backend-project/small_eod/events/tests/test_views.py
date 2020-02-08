@@ -2,10 +2,7 @@ from django.test import TestCase
 
 from ..factories import EventFactory
 from ..serializers import EventSerializer
-from ...generic.tests.test_views import (
-    GenericViewSetMixin,
-    ReadOnlyViewSetMixin,
-)
+from ...generic.tests.test_views import GenericViewSetMixin
 
 
 class EventViewSetTestCase(GenericViewSetMixin, TestCase):
