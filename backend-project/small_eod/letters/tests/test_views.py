@@ -34,15 +34,15 @@ class PresignedUploadFileTestCase(APITestCase):
         data = {
             "name": "text.file",
         }
-        content = b'xxx'
+        content = b"xxx"
 
         # Upload file
         backend_resp = self.client.post(url, data, format="json")
         minio_upload_resp = requests.post(
-            url=backend_resp.data['url'],
-            data=backend_resp.data['formData'],
-            files = { 'file': BytesIO(content)}
-        );
+            url=backend_resp.data["url"],
+            data=backend_resp.data["formData"],
+            files={"file": BytesIO(content)},
+        )
         self.assertEqual(minio_upload_resp.status_code, status.HTTP_204_NO_CONTENT)
 
         # Create a file
@@ -52,11 +52,10 @@ class PresignedUploadFileTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Download file content
-        minio_download_resp = requests.get(
-            url=response.json()['downloadUrl'],
-        );
+        minio_download_resp = requests.get(url=response.json()["downloadUrl"],)
         self.assertEqual(minio_download_resp.status_code, status.HTTP_200_OK)
         self.assertEqual(minio_download_resp.content, content)
+
 
 class FileCreateTestCase(APITestCase):
     def test_file_not_found(self):
