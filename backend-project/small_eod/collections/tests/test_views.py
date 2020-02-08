@@ -2,15 +2,12 @@ from django.test import TestCase
 
 from ..factories import CollectionFactory
 from ..serializers import CollectionSerializer
-from ...generic.tests.test_views import (
-    ReadOnlyViewSetMixin,
-    GenericViewSetMixin
-)
+from ...generic.tests.test_views import ReadOnlyViewSetMixin, GenericViewSetMixin
 from ...notes.factories import NoteFactory
 
 
 class CollectionViewSetTestCase(GenericViewSetMixin, TestCase):
-    #TODO: Test nie przechodzi z powody braku pola querry - należy uzupełnić factory
+    # TODO: Test nie przechodzi z powodu braku wypełnionego pola querry podczas tworzenia - należy uzupełnić factory
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory

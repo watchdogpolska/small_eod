@@ -17,7 +17,7 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("factory_class must be defined")
 
         self.obj = self.factory_class()
-        #self.user = getattr(self, "user", UserFactory(username="john"))
+        # self.user = getattr(self, "user", UserFactory(username="john"))
         self.user = UserFactory(username="john")
         self.client.login(username="john", password="pass")
 
@@ -56,10 +56,10 @@ class ReadOnlyViewSetMixin:
 
 class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_ommited_fields(self):
-        if hasattr(self.serializer_class.Meta, 'read_only_fields'):
-            return self.serializer_class.Meta.read_only_fields + ['id']
+        if hasattr(self.serializer_class.Meta, "read_only_fields"):
+            return self.serializer_class.Meta.read_only_fields + ["id"]
         else:
-            return ['id']
+            return ["id"]
 
     def test_create_plain(self):
         response = self.client.post(
@@ -76,8 +76,11 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
         if not self.serializer_class:
             raise NotImplementedError("serializer_class must be defined")
 
-        data = {key: value for (key, value) in self.serializer_class(self.obj).data.items() if
-                key not in self.get_ommited_fields()}
+        data = {
+            key: value
+            for (key, value) in self.serializer_class(self.obj).data.items()
+            if key not in self.get_ommited_fields()
+        }
         return data
 
 
@@ -89,9 +92,15 @@ class AuthorshipViewSetMixin(GenericViewSetMixin):
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["createdBy"], self.user.id)
+        self.assertEqual(response.json()["modifiedBy"], self.user.id)
 
-        self.assertEqual(response.json()['createdBy'], self.user.id)
-        self.assertEqual(response.json()['modifiedBy'], self.user.id)
-    #
-    # def test_modified_by(self):
-    #     pass
+    def test_modified_by(self):
+        response = self.client.put(
+            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
+            data=self.get_create_data(),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.json()["createdBy"], self.user.id)
+        self.assertEqual(response.json()["modifiedBy"], self.user.id)
