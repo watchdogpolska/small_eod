@@ -17,7 +17,7 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("factory_class must be defined")
 
         self.obj = self.factory_class()
-        self.user = getattr(self, "user", UserFactory(username="john"))
+        self.user = UserFactory(username="john")
         self.client.login(username="john", password="pass")
 
     def get_extra_kwargs(self):
@@ -55,7 +55,10 @@ class ReadOnlyViewSetMixin:
 
 class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_ommited_fields(self):
-        return self.serializer_class.Meta.read_only_fields
+        if hasattr(self.serializer_class.Meta, "read_only_fields"):
+            return self.serializer_class.Meta.read_only_fields + ["id"]
+        else:
+            return ["id"]
 
     def test_create_plain(self):
         response = self.client.post(
@@ -71,8 +74,58 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
     def get_create_data(self):
         if not self.serializer_class:
             raise NotImplementedError("serializer_class must be defined")
-        data = self.serializer_class(self.obj).data
-        for field in self.get_ommited_fields():
-            del data[field]
-        del data["id"]
+
+        data = {
+            key: value
+            for (key, value) in self.serializer_class(self.obj).data.items()
+            if key not in self.get_ommited_fields()
+        }
         return data
+
+
+class AuthorshipViewSetMixin:
+    def test_created_by(self):
+        if not hasattr(self, "obj"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "user"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "get_create_data"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data=self.get_create_data(),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["createdBy"], self.user.id)
+        self.assertEqual(response.json()["modifiedBy"], self.user.id)
+
+    def test_modified_by(self):
+        if not hasattr(self, "obj"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "user"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "get_create_data"):
+            raise NotImplementedError(
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+
+        response = self.client.put(
+            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
+            data=self.get_create_data(),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.json()["createdBy"], self.user.id)
+        self.assertEqual(response.json()["modifiedBy"], self.user.id)

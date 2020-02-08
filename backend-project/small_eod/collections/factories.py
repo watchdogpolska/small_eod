@@ -14,6 +14,7 @@ class CollectionFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory
     public = FuzzyTrueOrFalse()
     expired_on = FuzzyDateTimeFromNow(max_days=10)
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
+    query = "Some querry"
 
     class Meta:
         model = Collection
