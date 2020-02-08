@@ -83,7 +83,7 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
         return data
 
 
-class AuthorshipViewSetMixin(GenericViewSetMixin):
+class AuthorshipViewSetMixin:
     def test_created_by(self):
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),

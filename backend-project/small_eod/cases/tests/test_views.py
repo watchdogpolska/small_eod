@@ -3,6 +3,7 @@ from django.test import TestCase
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
 from ...generic.tests.test_views import (
+    GenericViewSetMixin,
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
 )
@@ -10,7 +11,7 @@ from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
-class CaseViewSetTestCase(AuthorshipViewSetMixin, TestCase):
+class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
