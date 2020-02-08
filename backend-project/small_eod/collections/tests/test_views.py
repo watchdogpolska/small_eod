@@ -7,7 +7,8 @@ from ...notes.factories import NoteFactory
 
 
 class CollectionViewSetTestCase(GenericViewSetMixin, TestCase):
-    # TODO: Test nie przechodzi z powodu braku wypełnionego pola querry podczas tworzenia - należy uzupełnić factory
+    # TODO: Test nie przechodzi z powodu braku wypełnionego pola querry podczas
+    # tworzenia - należy uzupełnić factory
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
