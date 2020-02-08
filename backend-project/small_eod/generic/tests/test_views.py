@@ -85,15 +85,18 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
 
 class AuthorshipViewSetMixin:
     def test_created_by(self):
-        if not hasattr(self, 'obj'):
+        if not hasattr(self, "obj"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
-        if not hasattr(self, 'user'):
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "user"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
-        if not hasattr(self, 'get_create_data'):
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "get_create_data"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
 
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),
@@ -105,15 +108,18 @@ class AuthorshipViewSetMixin:
         self.assertEqual(response.json()["modifiedBy"], self.user.id)
 
     def test_modified_by(self):
-        if not hasattr(self, 'obj'):
+        if not hasattr(self, "obj"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
-        if not hasattr(self, 'user'):
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "user"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
-        if not hasattr(self, 'get_create_data'):
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
+        if not hasattr(self, "get_create_data"):
             raise NotImplementedError(
-                "Authorship mixin must be used alongside the GenericViewSetMixin")
+                "Authorship mixin must be used alongside the GenericViewSetMixin"
+            )
 
         response = self.client.put(
             self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
