@@ -1,6 +1,5 @@
 from uuid import uuid4
-from urllib.parse import urljoin
-
+from django.conf import settings
 from rest_framework import serializers
 from .models import Letter, Description
 from ..generic.serializers import UserLogModelSerializer
@@ -53,8 +52,7 @@ class SignRequestSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         path = f'{uuid4()}/{validated_data["name"]}'
-        url, form_data = minio_app.presigned_post_form_data("files", path)
-        path = urljoin(url, path)
+        url, form_data = minio_app.presigned_post_form_data(settings.MINIO_BUCKET, path)
         return {
             "name": validated_data["name"],
             "method": "POST",

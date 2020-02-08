@@ -27,5 +27,5 @@ class FilesConfig(AppConfig):
     name = "small_eod.files"
 
     def ready(self):
-        if not minio_app.bucket_exists("files"):
-            minio_app.make_bucket("files")
+        if not minio_app.bucket_exists(settings.MINIO_BUCKET):
+            minio_app.make_bucket(settings.MINIO_BUCKET)

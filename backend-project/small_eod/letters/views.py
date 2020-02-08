@@ -26,11 +26,13 @@ class DescriptionViewSet(viewsets.ModelViewSet):
 
 
 class FileViewSet(
-    NestedViewSetMixin, viewsets.ModelViewSet, viewsets.GenericViewSet,
+    viewsets.ModelViewSet, viewsets.GenericViewSet,
 ):
     model = File
     serializer_class = FileSerializer
-    parent_lookup_kwargs = {"letter_pk": "letter__pk"}
+
+    def get_queryset(self):
+        return self.model.objects.filter(letter__pk=self.kwargs["letter_pk"]).all()
 
     def perform_create(self, serializer):
         serializer.save(letter=get_object_or_404(Letter, pk=self.kwargs["letter_pk"]))

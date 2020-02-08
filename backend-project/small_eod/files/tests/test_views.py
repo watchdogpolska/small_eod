@@ -10,5 +10,8 @@ class FileViewSetTestCase(GenericViewSetMixin, TestCase):
     serializer_class = FileSerializer
     factory_class = FileFactory
 
+    def get_extra_kwargs(self):
+        return {'letter_pk': self.obj.letter.pk}
+
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
