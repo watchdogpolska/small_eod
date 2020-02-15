@@ -15,7 +15,7 @@ services:
 
   db:
     # https://hub.docker.com/_/postgres
-    image: postgres:12.1-alpine
+    image: postgres:12.2-alpine
     expose:
       - "5432"
     volumes:
