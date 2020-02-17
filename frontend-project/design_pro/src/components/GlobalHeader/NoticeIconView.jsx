@@ -28,6 +28,7 @@ class GlobalHeaderRight extends Component {
       });
     }
   };
+
   handleNoticeClear = (title, key) => {
     const { dispatch } = this.props;
     message.success(`${'清空了'} ${title}`);
@@ -39,6 +40,7 @@ class GlobalHeaderRight extends Component {
       });
     }
   };
+
   getNoticeData = () => {
     const { notices = [] } = this.props;
 
@@ -80,6 +82,7 @@ class GlobalHeaderRight extends Component {
     });
     return groupBy(newNotices, 'type');
   };
+
   getUnreadData = noticeData => {
     const unreadMsg = {};
     Object.keys(noticeData).forEach(key => {
@@ -151,4 +154,3 @@ export default connect(({ user, global, loading }) => ({
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
 }))(GlobalHeaderRight);
-

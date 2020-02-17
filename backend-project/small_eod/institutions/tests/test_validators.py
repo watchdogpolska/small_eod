@@ -1,7 +1,8 @@
 from django.forms import modelform_factory
 from django.test import TestCase
 
-from ..models import ExternalIdentifier
+from ..models import ExternalIdentifier, Institution
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
 class ExternalIdentifierValidatorsTestCase(TestCase):
@@ -20,6 +21,9 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
         form = f(data=dict(nip="9999999999"))
         self.assertTrue(form.is_valid())
+
+        form = f(data=dict(nip="abc1234567"))
+        self.assertFalse(form.is_valid())
 
     def test_nip_length(self):
         """
@@ -55,6 +59,9 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         form = f(data=dict(regon="9999999999"))
         self.assertTrue(form.is_valid())
 
+        form = f(data=dict(regon="abc1234567"))
+        self.assertFalse(form.is_valid())
+
     def test_regon_length(self):
         """
         `regon` accepts length of 10 or 14 only.
@@ -81,3 +88,24 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
 
         form = f(data=dict(regon=chars_14))
         self.assertTrue(form.is_valid())
+
+
+class InstitutionValidatorsTestCase(TestCase):
+    def test_level_3_positive(self):
+        """
+        Administrative unit must be a level 3 unit.
+        """
+        f = modelform_factory(Institution, fields=("administrative_unit",))
+
+        administrative_unit = JednostkaAdministracyjnaFactory(category__level=3)
+        self.assertEqual(administrative_unit.category.level, 3)
+        form = f(data=dict(administrative_unit=administrative_unit))
+        self.assertTrue(form.is_valid())
+
+    def test_level_3_negative(self):
+        f = modelform_factory(Institution, fields=("administrative_unit",))
+
+        administrative_unit = JednostkaAdministracyjnaFactory(category__level=1)
+        self.assertEqual(administrative_unit.category.level, 1)
+        form = f(data=dict(administrative_unit=administrative_unit))
+        self.assertFalse(form.is_valid())

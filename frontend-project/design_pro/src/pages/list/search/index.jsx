@@ -27,8 +27,9 @@ class Search extends Component {
     }
   };
 
-  handleFormSubmit = value => {
-    console.log(value);
+  // handleFormSubmit = value => {
+  handleFormSubmit = () => {
+    // console.log(value);
   };
 
   getTabKey = () => {

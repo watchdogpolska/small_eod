@@ -35,10 +35,10 @@ lint:
 fmt:
 	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
 
-check: wait_mysql
+check: wait_mysql wait_minio
 	docker-compose run web python manage.py makemigrations --check
 
-migrations: wait_mysql
+migrations: wait_mysql wait_minio
 	docker-compose run web python manage.py makemigrations
 
 settings:
@@ -48,3 +48,6 @@ createsuperuser:
 	docker-compose run -e DJANGO_SUPERUSER_PASSWORD=root web python manage.py createsuperuser --username root --email root@example.com --noinput
 
 test-local: lint build check test
+
+openapi: 
+	docker-compose run web python manage.py generate_swagger

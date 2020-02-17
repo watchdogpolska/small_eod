@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "small_eod.letters",
     "small_eod.notes",
     "small_eod.events",
+    "small_eod.administrative_units",
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,4 @@ REST_FRAMEWORK = {
 MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")
 MINIO_URL = env("MINIO_URL")
+MINIO_BUCKET = env("MINIO_BUCKET", default="files")
