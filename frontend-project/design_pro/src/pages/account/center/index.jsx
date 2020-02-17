@@ -14,7 +14,7 @@ const operationTabList = [
     key: 'articles',
     tab: (
       <span>
-        文章{' '}
+        account/center/index.jsx{' '}
         <span
           style={{
             fontSize: 14,
@@ -29,7 +29,7 @@ const operationTabList = [
     key: 'applications',
     tab: (
       <span>
-        应用{' '}
+        account/center/index.jsx{' '}
         <span
           style={{
             fontSize: 14,
@@ -44,7 +44,7 @@ const operationTabList = [
     key: 'projects',
     tab: (
       <span>
-        项目{' '}
+        account/center/index.jsx{' '}
         <span
           style={{
             fontSize: 14,

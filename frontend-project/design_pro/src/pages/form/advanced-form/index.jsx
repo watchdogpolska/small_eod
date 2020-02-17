@@ -197,8 +197,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择管理员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                  <Option value="xiao">AdvancedForm/index.jsx</Option>
+                  <Option value="mao">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -216,8 +216,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择审批员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                  <Option value="xiao">AdvancedForm/index.jsx</Option>
+                  <Option value="mao">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -276,8 +276,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择仓库类型">
-                  <Option value="private">私密</Option>
-                  <Option value="public">公开</Option>
+                  <Option value="private">AdvancedForm/index.jsx</Option>
+                  <Option value="public">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -349,8 +349,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择管理员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                  <Option value="xiao">AdvancedForm/index.jsx</Option>
+                  <Option value="mao">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -368,8 +368,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择审批员">
-                  <Option value="xiao">付晓晓</Option>
-                  <Option value="mao">周毛毛</Option>
+                  <Option value="xiao">AdvancedForm/index.jsx</Option>
+                  <Option value="mao">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -435,8 +435,8 @@ const AdvancedForm = ({ submitting, dispatch }) => {
                 ]}
               >
                 <Select placeholder="请选择仓库类型">
-                  <Option value="private">私密</Option>
-                  <Option value="public">公开</Option>
+                  <Option value="private">AdvancedForm/index.jsx</Option>
+                  <Option value="public">AdvancedForm/index.jsx</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -451,7 +451,7 @@ const AdvancedForm = ({ submitting, dispatch }) => {
       <FooterToolbar>
         {getErrorInfo(error)}
         <Button type="primary" onClick={() => form?.submit()} loading={submitting}>
-          提交
+        AdvancedForm/index.jsx
         </Button>
       </FooterToolbar>
     </Form>

@@ -39,8 +39,8 @@ const Articles = props => {
             description={
               <span>
                 <Tag>Ant Design</Tag>
-                <Tag>设计语言</Tag>
-                <Tag>蚂蚁金服</Tag>
+                <Tag>account/center/articles</Tag>
+                <Tag>account/center/articles</Tag>
               </span>
             }
           />

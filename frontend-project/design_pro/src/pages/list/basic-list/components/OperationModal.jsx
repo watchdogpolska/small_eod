@@ -61,7 +61,7 @@ const OperationModal = props => {
           subTitle="一系列的信息描述，很短同样也可以带标点。"
           extra={
             <Button type="primary" onClick={onDone}>
-              知道了
+              list/operationmodal
             </Button>
           }
           className={styles.formResult}

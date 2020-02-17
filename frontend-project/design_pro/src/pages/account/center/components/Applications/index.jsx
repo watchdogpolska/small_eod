@@ -62,11 +62,11 @@ const Applications = props => {
   const CardInfo = ({ activeUser, newUser }) => (
     <div className={stylesApplications.cardInfo}>
       <div>
-        <p>活跃用户</p>
+        <p>account/center/index.jsx</p>
         <p>{activeUser}</p>
       </div>
       <div>
-        <p>新增用户</p>
+        <p>account/center/index.jsx</p>
         <p>{newUser}</p>
       </div>
     </div>
