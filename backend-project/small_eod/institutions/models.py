@@ -70,7 +70,9 @@ class ExternalIdentifier(models.Model):
 
 
 class Institution(TimestampUserLogModel):
-    name = models.CharField(max_length=256)
+    name = models.CharField(
+        max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
+    )
 
     administrative_unit = models.ForeignKey(
         to=JednostkaAdministracyjna,
@@ -78,12 +80,24 @@ class Institution(TimestampUserLogModel):
         null=True,
         blank=True,
         limit_choices_to=models.Q(category__level=3),
+        verbose_name=_("Administrative division"),
+        help_text=_("Administrative division."),
     )
     address = models.OneToOneField(
-        AddressData, on_delete=models.CASCADE, null=True, blank=True
+        AddressData,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_("Address"),
+        help_text=_("Address of institution."),
     )
     external_identifier = models.OneToOneField(
-        ExternalIdentifier, on_delete=models.CASCADE, null=True, blank=True
+        ExternalIdentifier,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_("External identifier"),
+        help_text=_("External identifier of institution."),
     )
 
     def __str__(self):
