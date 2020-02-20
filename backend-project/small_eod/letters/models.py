@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from ..cases.models import Case
 from ..channels.models import Channel
@@ -31,4 +32,8 @@ class Letter(TimestampUserLogModel):
 
 
 class Description(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(
+        max_length=256,
+        verbose_name=_("Description"),
+        help_text=_("Description of letter."),
+    )
