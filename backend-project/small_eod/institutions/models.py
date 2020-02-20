@@ -53,6 +53,8 @@ class ExternalIdentifier(models.Model):
         max_length=10,
         validators=[ExactLengthsValidator([10]), validators.RegexValidator("^[0-9]*$")],
         blank=True,
+        verbose_name=_("NIP"),
+        help_text=_("Tax Identification Number."),
     )
 
     regon = models.CharField(
@@ -62,6 +64,8 @@ class ExternalIdentifier(models.Model):
             validators.RegexValidator("^[0-9]*$"),
         ],
         blank=True,
+        verbose_name=_("REGON"),
+        help_text=_("Statistical Identification Number."),
     )
 
 
