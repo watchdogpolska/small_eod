@@ -1,5 +1,6 @@
 from django.core import validators
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from teryt_tree.models import JednostkaAdministracyjna
 
@@ -8,13 +9,42 @@ from ..generic.validators import ExactLengthsValidator
 
 
 class AddressData(models.Model):
-    email = models.EmailField(blank=True)
-    city = models.CharField(max_length=100, blank=True)
-    epuap = models.CharField(max_length=100, blank=True)
-    street = models.CharField(max_length=100, blank=True)
-    house_no = models.CharField(max_length=100, blank=True)
-    postal_code = models.CharField(max_length=100, blank=True)
-    flat_no = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(
+        blank=True, verbose_name=_("E-mail"), help_text=_("E-mail address.")
+    )
+    city = models.CharField(
+        max_length=100, blank=True, verbose_name=_("City"), help_text=_("Name of city.")
+    )
+    epuap = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("ePUAP"),
+        help_text=_("ePUAP address."),
+    )
+    street = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Street"),
+        help_text=_("Name of street."),
+    )
+    house_no = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("House number"),
+        help_text=_("House number."),
+    )
+    postal_code = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Postal code"),
+        help_text=_("Postal code."),
+    )
+    flat_no = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Flat number"),
+        help_text=_("Flat number."),
+    )
 
 
 class ExternalIdentifier(models.Model):
