@@ -31,7 +31,7 @@ class Letter(TimestampUserLogModel):
         help_text=_("Description of the letter."),
     )
     ordering = models.IntegerField(
-        default=0, verbose_name=_("Ordering"), help_text=_("Order of letter")
+        default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
     )
     comment = models.CharField(
         max_length=256, verbose_name=_("Comment"), help_text=_("Comment for letter.")
