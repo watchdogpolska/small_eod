@@ -6,15 +6,17 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class TagNamespace(TimestampUserLogModel):
-    description = models.CharField(max_length=256)
+    description = models.CharField(max_length=256, verbose_name=_("Description"))
 
     prefix = models.CharField(
         max_length=254,
+        verbose_name=_("Prefix"),
         help_text=_("This namespace will match each tag starting with `prefix`."),
     )
 
     color = models.CharField(
         max_length=6,
+        verbose_name=_("Color"),
         default="000000",
         validators=[
             RegexValidator(
@@ -27,7 +29,7 @@ class TagNamespace(TimestampUserLogModel):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, verbose_name=_("Tag"))
 
     def __str__(self):
         return self.name
