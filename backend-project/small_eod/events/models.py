@@ -5,7 +5,7 @@ from ..cases.models import Case
 
 
 class Event(TimestampUserLogModel):
-    data = models.DateTimeField(verbose_name=_("Date"), help_text=_("Date of event."))
+    date = models.DateTimeField(verbose_name=_("Date"), help_text=_("Date of event."))
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Name of event.")
     )
