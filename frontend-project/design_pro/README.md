@@ -1,20 +1,18 @@
-Szybka instrukcja dla frontendu:
-Ścieżka do właściwego folderu:
+Szybka instrukcja dla frontendu:</br>
+Ścieżka do właściwego folderu:</br>
 small_eod/frontend-project/design_pro/
+</br></br>
+1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork").</br>
+2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br>
+3.W edytorze kodu otwórz folder "design_pro".</br>
+4.W terminalu wpisz npm i, a następnie npm start.</br>
+</br></br>
 
-1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork")
-2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.
-3.W edytorze kodu otwórz folder "design_pro"
-4.W terminalu wpisz npm i, a następnie npm start.
-
-U mnie działa ;)
-
-
-
+W razie problemów pisz na Slacku, na kanale frontendowym.
 
 
 
-
+</br></br></br></br></br></br></br></br></br></br></br>
 
 
 
@@ -30,7 +28,9 @@ U mnie działa ;)
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 # Ant Design Pro
 
 This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
