@@ -28,7 +28,6 @@ class LetterSerializer(UserLogModelSerializer):
     channel = ChannelNestedSerializer()
     attachment = FileSerializer(many=True, read_only=True)
 
-
     class Meta:
         model = Letter
         fields = [

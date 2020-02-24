@@ -66,4 +66,3 @@ class Description(models.Model):
         verbose_name=_("Description"),
         help_text=_("Description of letter."),
     )
-
