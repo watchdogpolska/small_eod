@@ -11,10 +11,12 @@ small_eod/frontend-project/design_pro/
 5.Commituj zawsze na branchu dev.
 </br></br>
 
-Dostęp do wersji DEMO
+Dostęp do wersji DEMO</br>
+demo.small-eod.siecobywatelska.pl/admin/
 -> napisz na slacku w sprawie loginu i hasła
 </br>
 API
+https://api.dev.small-eod.siecobywatelska.pl/api/docs/
 -> napisz na slacku w sprawie loginu i hasła
 
 
