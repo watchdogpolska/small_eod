@@ -1,6 +1,6 @@
-Repozytorium frontendu
-
 Szybka instrukcja dla frontendu:</br>
+
+Repozytorium</br>
 Ścieżka do właściwego folderu:</br>
 small_eod/frontend-project/design_pro/
 </br></br>
@@ -12,11 +12,11 @@ small_eod/frontend-project/design_pro/
 </br></br>
 
 Dostęp do wersji DEMO</br>
-demo.small-eod.siecobywatelska.pl/admin/
+https://demo.small-eod.siecobywatelska.pl/admin/</br>
 -> napisz na slacku w sprawie loginu i hasła
 </br>
 API
-https://api.dev.small-eod.siecobywatelska.pl/api/docs/
+https://api.dev.small-eod.siecobywatelska.pl/api/docs/</br>
 -> napisz na slacku w sprawie loginu i hasła
 
 
