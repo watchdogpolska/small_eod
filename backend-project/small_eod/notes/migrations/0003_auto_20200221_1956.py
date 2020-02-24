@@ -10,6 +10,8 @@ class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('notes', '0002_auto_20200109_1348'),
+        ('cases', '0006_auto_20200126_0711'),
+
     ]
 
     operations = [
@@ -32,5 +34,15 @@ class Migration(migrations.Migration):
             model_name='note',
             name='modified_on',
             field=models.DateTimeField(auto_now=True, verbose_name='Date of the modification'),
+        ),
+        migrations.AlterField(
+            model_name='note',
+            name='case',
+            field=models.ForeignKey(help_text='Related case.', on_delete=django.db.models.deletion.DO_NOTHING, to='cases.Case', verbose_name='Case'),
+        ),
+        migrations.AlterField(
+            model_name='note',
+            name='comment',
+            field=models.CharField(max_length=256, verbose_name='Comment'),
         ),
     ]

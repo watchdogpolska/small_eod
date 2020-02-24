@@ -2,15 +2,20 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+from django.conf import settings
+
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+
         ('institutions', '0005_auto_20200203_0453'),
         ('channels', '0005_auto_20200125_1954'),
         ('cases', '0006_auto_20200126_0711'),
         ('letters', '0003_auto_20200110_0200'),
+
     ]
 
     operations = [
@@ -73,5 +78,34 @@ class Migration(migrations.Migration):
             model_name='letter',
             name='ordering',
             field=models.IntegerField(default=0, help_text='Order of letter', verbose_name='Ordering'),
+        ),
+        migrations.AlterField(
+            model_name='letter',
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING,
+                                    related_name='letter_created_by', to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Created by'),
+        ),
+        migrations.AlterField(
+            model_name='letter',
+            name='created_on',
+            field=models.DateTimeField(auto_now_add=True, verbose_name='Date of creation'),
+        ),
+        migrations.AlterField(
+            model_name='letter',
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING,
+                                    related_name='letter_modified_by', to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Modified by'),
+        ),
+        migrations.AlterField(
+            model_name='letter',
+            name='modified_on',
+            field=models.DateTimeField(auto_now=True, verbose_name='Date of the modification'),
+        ),
+        migrations.AddField(
+            model_name='letter',
+            name='description',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='letters.Description', blank=True, null=True)
         ),
     ]

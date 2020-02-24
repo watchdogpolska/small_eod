@@ -15,7 +15,7 @@ from ..files.serializers import FileSerializer
 class DescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Description
-        fields = ["name", "id"]
+        fields = ["name"]
 
 
 class LetterSerializer(UserLogModelSerializer):

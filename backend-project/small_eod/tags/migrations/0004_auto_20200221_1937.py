@@ -2,11 +2,13 @@
 
 import django.core.validators
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('tags', '0003_tagnamespace_prefix'),
     ]
 
@@ -31,4 +33,29 @@ class Migration(migrations.Migration):
             name='prefix',
             field=models.CharField(help_text='This namespace will match each tag starting with `prefix`.', max_length=254, verbose_name='Prefix'),
         ),
+        migrations.AlterField(
+            model_name='tagnamespace',
+            name='created_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING,
+                                    related_name='tagnamespace_created_by', to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Created by'),
+        ),
+        migrations.AlterField(
+            model_name='tagnamespace',
+            name='created_on',
+            field=models.DateTimeField(auto_now_add=True, verbose_name='Date of creation'),
+        ),
+        migrations.AlterField(
+            model_name='tagnamespace',
+            name='modified_by',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING,
+                                    related_name='tagnamespace_modified_by', to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Modified by'),
+        ),
+        migrations.AlterField(
+            model_name='tagnamespace',
+            name='modified_on',
+            field=models.DateTimeField(auto_now=True, verbose_name='Date of the modification'),
+        )
     ]
+

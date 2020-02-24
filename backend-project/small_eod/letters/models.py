@@ -7,6 +7,14 @@ from ..generic.models import TimestampUserLogModel
 from ..institutions.models import Institution, AddressData
 
 
+class Description(models.Model):
+    name = models.CharField(
+        max_length=256,
+        verbose_name=_("Description"),
+        help_text=_("Description of letter."),
+    )
+
+
 class Letter(TimestampUserLogModel):
     class Direction(models.TextChoices):
         IN = "IN", "Received"
@@ -57,12 +65,10 @@ class Letter(TimestampUserLogModel):
     institution = models.ForeignKey(
         to=Institution, on_delete=models.DO_NOTHING, verbose_name=_("Institution"),
     )
-
-
-class Description(models.Model):
-    letter = models.ForeignKey(to=Letter, on_delete=models.CASCADE)
-    name = models.CharField(
-        max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of letter."),
+    description = models.ForeignKey(
+        to=Description,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Description of letter."),
+        null=True,
+        blank=True,
     )
