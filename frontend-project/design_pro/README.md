@@ -12,13 +12,11 @@ small_eod/frontend-project/design_pro/
 </br></br>
 
 Dostęp do wersji DEMO:
-Link:demo.small-eod.siecobywatelska.pl/admin/ </br>
-Nazwa użytkownika: demo-user</br>
-Hasło: t7Hmww7KReUJXCF</br>
+-> napisz na slacku w sprawie loginu i hasła
+</br>
+API:
+-> napisz na slacku w sprawie loginu i hasła
 
-W razie problemów pisz na Slacku, na kanale frontendowym.
-
-</b
 
 </br></br></br></br></br></br></br></br></br></br></br>
 
