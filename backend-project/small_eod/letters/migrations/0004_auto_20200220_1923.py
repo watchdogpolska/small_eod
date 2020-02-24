@@ -106,6 +106,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='letter',
             name='description',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='letters.Description', blank=True, null=True)
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='letters.Description', blank=True, null=True, verbose_name="Description of letter.")
         ),
     ]
