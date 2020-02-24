@@ -38,5 +38,3 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     class Meta:
         model = Letter
-
-
