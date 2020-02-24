@@ -24,6 +24,7 @@ class LetterSerializer(UserLogModelSerializer):
     institution = serializers.PrimaryKeyRelatedField(
         many=False, queryset=Institution.objects.all()
     )
+    date = serializers.DateTimeField()
     address = AddressDataNestedSerializer()
     channel = ChannelNestedSerializer()
     attachment = FileSerializer(many=True, read_only=True)

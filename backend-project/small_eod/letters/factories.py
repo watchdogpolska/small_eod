@@ -11,6 +11,13 @@ from ..generic.factories import (
 from ..institutions.factories import InstitutionFactory, AddressDataFactory
 
 
+class DescriptionFactory(factory.DjangoModelFactory):
+    name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
+
+    class Meta:
+        model = Description
+
+
 class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     final = FuzzyTrueOrFalse()
@@ -27,14 +34,9 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
     channel = factory.SubFactory(ChannelFactory)
     address = factory.SubFactory(AddressDataFactory)
     institution = factory.SubFactory(InstitutionFactory)
+    description = factory.SubFactory(DescriptionFactory)
 
     class Meta:
         model = Letter
 
 
-class DescriptionFactory(factory.DjangoModelFactory):
-    name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
-    letter = factory.SubFactory(LetterFactory)
-
-    class Meta:
-        model = Description

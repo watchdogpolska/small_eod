@@ -54,7 +54,11 @@ class Letter(TimestampUserLogModel):
     )
 
     case = models.ForeignKey(
-        to=Case, on_delete=models.DO_NOTHING, verbose_name=_("Case"),
+        to=Case,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Case"),
+        null=True,
+        blank=True,
     )
     channel = models.ForeignKey(
         to=Channel, on_delete=models.DO_NOTHING, verbose_name=_("Channel"),
@@ -63,7 +67,11 @@ class Letter(TimestampUserLogModel):
         to=AddressData, on_delete=models.DO_NOTHING, verbose_name=_("Address"),
     )
     institution = models.ForeignKey(
-        to=Institution, on_delete=models.DO_NOTHING, verbose_name=_("Institution"),
+        to=Institution,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Institution"),
+        blank=True,
+        null=True,
     )
     description = models.ForeignKey(
         to=Description,
