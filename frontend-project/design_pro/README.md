@@ -1,3 +1,5 @@
+Repozytorium frontendu
+
 Szybka instrukcja dla frontendu:</br>
 Ścieżka do właściwego folderu:</br>
 small_eod/frontend-project/design_pro/
@@ -9,9 +11,14 @@ small_eod/frontend-project/design_pro/
 5.Commituj zawsze na branchu dev.
 </br></br>
 
+Dostęp do wersji DEMO:
+Link:demo.small-eod.siecobywatelska.pl/admin/ </br>
+Nazwa użytkownika: demo-user</br>
+Hasło: t7Hmww7KReUJXCF</br>
+
 W razie problemów pisz na Slacku, na kanale frontendowym.
 
-
+</b
 
 </br></br></br></br></br></br></br></br></br></br></br>
 
