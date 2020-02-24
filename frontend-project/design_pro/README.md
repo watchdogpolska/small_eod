@@ -6,6 +6,7 @@ small_eod/frontend-project/design_pro/
 2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br>
 3.W edytorze kodu otwórz folder "design_pro".</br>
 4.W terminalu wpisz npm i, a następnie npm start.</br>
+5.Commituj zawsze na branchu dev.
 </br></br>
 
 W razie problemów pisz na Slacku, na kanale frontendowym.
