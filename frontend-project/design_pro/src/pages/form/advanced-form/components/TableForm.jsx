@@ -214,19 +214,19 @@ const TableForm = ({ value, onChange }) => {
 
           return (
             <span>
-              <a onClick={e => saveRow(e, record.key)}>保存</a>
+              <a onClick={e => saveRow(e, record.key)}>TableForm</a>
               <Divider type="vertical" />
-              <a onClick={e => cancel(e, record.key)}>取消</a>
+              <a onClick={e => cancel(e, record.key)}>TableForm</a>
             </span>
           );
         }
 
         return (
           <span>
-            <a onClick={e => toggleEditable(e, record.key)}>编辑</a>
+            <a onClick={e => toggleEditable(e, record.key)}>TableForm</a>
             <Divider type="vertical" />
-            <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
-              <a>删除</a>
+            <Popconfirm title="TableForm" onConfirm={() => remove(record.key)}>
+              <a>TTableForm</a>
             </Popconfirm>
           </span>
         );

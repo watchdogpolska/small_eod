@@ -39,7 +39,7 @@ export default {
       },
     ],
   },
-  Mobile: {
+  /*Mobile: {
     props: {
       size: 'large',
       prefix: <MobileTwoTone className={styles.prefixIcon} />,
@@ -55,7 +55,7 @@ export default {
         message: 'Wrong mobile number format!',
       },
     ],
-  },
+  },*/
   Captcha: {
     props: {
       size: 'large',
