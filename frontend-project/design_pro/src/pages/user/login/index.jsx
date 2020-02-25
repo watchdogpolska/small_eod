@@ -5,7 +5,9 @@ import { connect } from 'dva';
 import styles from './style.less';
 import LoginFrom from './components/Login';
 
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginFrom;
+//  Mobile, Captcha, -- unused value in - LoginForm
+
+const { Tab, UserName, Password, Submit } = LoginFrom;
 
 const LoginMessage = ({ content }) => (
   <Alert

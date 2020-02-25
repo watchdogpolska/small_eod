@@ -1,11 +1,12 @@
-import { LockTwoTone, MailTwoTone, MobileTwoTone, UserOutlined } from '@ant-design/icons';
+// MobileTwoTone - unused import from '@ant-design/icons'
+import { LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import styles from './index.less';
 
 export default {
   UserName: {
     props: {
-      size: 'large',
+      // size: 'large'
       id: 'userName',
       prefix: (
         <UserOutlined
@@ -39,7 +40,7 @@ export default {
       },
     ],
   },
-  /*Mobile: {
+  /* Mobile: {
     props: {
       size: 'large',
       prefix: <MobileTwoTone className={styles.prefixIcon} />,
@@ -55,7 +56,7 @@ export default {
         message: 'Wrong mobile number format!',
       },
     ],
-  },*/
+  }, */
   Captcha: {
     props: {
       size: 'large',
