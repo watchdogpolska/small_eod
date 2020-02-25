@@ -13,11 +13,11 @@ export default {
   'menu.form.step-form.confirm': 'Step Form(confirm transfer information)',
   'menu.form.step-form.result': 'Step Form(finished)',
   'menu.form.advanced-form': 'Advanced Form',
-  'menu': 'Listy',
-  'menu.list': 'Opisy listów',
-  'menu': 'Tagi',
-  'menu': 'Kanały',
-  'menu': 'Sprawy',
+  'menu.lists': 'Listy',
+  'menu.list-description': 'Opisy listów',
+  'menu.tags': 'Tagi',
+  'menu.channels': 'Kanały',
+  'menu.cases': 'Sprawy',
   'menu.list.table-list': 'Search Table',
   'menu.list.basic-list': 'Basic List',
   'menu.list.card-list': 'Card List',
@@ -40,6 +40,4 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
-
-  
 };
