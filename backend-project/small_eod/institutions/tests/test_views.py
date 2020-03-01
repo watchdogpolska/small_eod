@@ -14,8 +14,9 @@ from ...generic.tests.test_views import (
 # from ...users.factories import UserFactory
 # from ...users.serializers import UserSerializer
 
+
 class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
-    basename = "nstitution"
+    basename = "institution"
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
 

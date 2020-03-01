@@ -37,7 +37,7 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     address = factory.SubFactory(AddressDataFactory)
     name = factory.Sequence(lambda n: "name-%04d" % n)
     external_identifier = factory.SubFactory(ExternalIdentifierFactory)
-    administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory)
+    administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory, category__level=3)
 
     class Meta:
         model = Institution
