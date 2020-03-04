@@ -26,7 +26,7 @@ makemigrations:
 	docker-compose run web python manage.py makemigrations
 
 pyupgrade:
-	docker run --rm -v /$$(pwd):/data quay.io/watchdogpolska/pyupgrade
+	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade
 
 lint:
 	docker run --rm -v /$$(pwd):/apps alpine/flake8 ./backend-project
