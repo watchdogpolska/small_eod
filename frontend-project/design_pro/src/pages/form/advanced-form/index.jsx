@@ -451,7 +451,7 @@ const AdvancedForm = ({ submitting, dispatch }) => {
       <FooterToolbar>
         {getErrorInfo(error)}
         <Button type="primary" onClick={() => form?.submit()} loading={submitting}>
-        AdvancedForm/index.jsx
+          AdvancedForm/index.jsx
         </Button>
       </FooterToolbar>
     </Form>
