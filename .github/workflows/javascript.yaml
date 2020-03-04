@@ -3,10 +3,10 @@ name: JavaScript files
 on:
   push:
     paths:
-    - 'frontend-project/design_pro/**'
+    - 'frontend-project/**'
   pull_request:
     paths:
-    - 'frontend-project/design_pro/**'
+    - 'frontend-project/**'
 
 jobs:
   test:
@@ -19,10 +19,10 @@ jobs:
         node-version: '12.x'
     - name: Install
       run: npm install
-      working-directory: ./frontend-project/design_pro/
+      working-directory: ./frontend-project/
     - name: Lint
       run: npm run lint
-      working-directory: ./frontend-project/design_pro/
+      working-directory: ./frontend-project/
     - name: Build
       run: npm run build
-      working-directory: ./frontend-project/design_pro/
+      working-directory: ./frontend-project/
