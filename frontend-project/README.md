@@ -1,44 +1,10 @@
 Szybka instrukcja dla frontendu:</br>
 
-Repozytorium</br>
-Ścieżka do właściwego folderu:</br>
-small_eod/frontend-project/design_pro/
-</br></br>
-1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork").</br>
-2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br>
-3.W edytorze kodu otwórz folder "design_pro".</br>
-4.W terminalu wpisz npm i, a następnie npm start.</br>
-5.Commituj zawsze na branchu dev.
-</br></br>
+Repozytorium</br> Ścieżka do właściwego folderu:</br> small_eod/frontend-project/ </br></br> 1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork").</br> 2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br> 3.W edytorze kodu otwórz folder "frontend-project".</br> 4.W terminalu wpisz npm i, a następnie npm start.</br> 5.Commituj zawsze na branchu dev. </br></br>
 
-Dostęp do wersji DEMO</br>
-https://demo.small-eod.siecobywatelska.pl/admin/</br>
--> napisz na slacku w sprawie loginu i hasła
-</br>
-</br>
-API</br>
-https://api.dev.small-eod.siecobywatelska.pl/api/docs/</br>
--> napisz na slacku w sprawie loginu i hasła
-
+Dostęp do wersji DEMO</br> https://demo.small-eod.siecobywatelska.pl/admin/</br> -> napisz na slacku w sprawie loginu i hasła </br> </br> API</br> https://api.dev.small-eod.siecobywatelska.pl/api/docs/</br> -> napisz na slacku w sprawie loginu i hasła
 
 </br></br></br></br></br></br></br></br></br></br></br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Ant Design Pro
 
