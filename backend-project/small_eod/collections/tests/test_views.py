@@ -4,11 +4,11 @@ from ..factories import CollectionFactory
 from ..serializers import CollectionSerializer
 from ...generic.tests.test_views import ReadOnlyViewSetMixin, GenericViewSetMixin
 from ...notes.factories import NoteFactory
+from ...cases.factories import CaseFactory
 
 
 class CollectionViewSetTestCase(GenericViewSetMixin, TestCase):
-    # TODO: Test nie przechodzi z powodu braku wypełnionego pola querry podczas
-    # tworzenia - należy uzupełnić factory
+
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
@@ -32,3 +32,19 @@ class NoteViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
 
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
+
+
+class CaseViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
+
+    basename = "collection-cases"
+    factory_class = CaseFactory
+
+    def setUp(self):
+        super().setUp()
+        self.collection = CollectionFactory(query=str(self.obj.id))
+
+    def get_extra_kwargs(self):
+        return dict(collection_pk=self.collection.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.name, item["name"])
