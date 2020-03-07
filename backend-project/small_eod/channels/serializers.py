@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Channel
 
 
-class ChannelSerializer(serializers.ModelSerializer):
+class ChannelNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Channel
         fields = [

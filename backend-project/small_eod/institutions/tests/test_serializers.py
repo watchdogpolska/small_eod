@@ -118,12 +118,12 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_nested_address_fields(self):
         data = self.serializer_class(self.obj).data
-        self.assertTrue(data["address"]["house_no"], self.obj.address.house_no)
-        self.assertTrue(data["address"]["city"], self.obj.address.city)
+        self.assertEqual(data["address"]["house_no"], self.obj.address.house_no)
+        self.assertEqual(data["address"]["city"], self.obj.address.city)
 
     def test_data__external_identifier_field(self):
         data = self.serializer_class(self.obj).data
-        self.assertTrue(
+        self.assertEqual(
             data["external_identifier"]["regon"], self.obj.external_identifier.regon
         )
 
