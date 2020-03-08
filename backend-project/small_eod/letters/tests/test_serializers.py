@@ -68,7 +68,7 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
             "ordering": 90,
             "comment": "comment",
             "excerpt": "No idea what this field does",
-            "description": self.description.pk
+            "description": self.description.pk,
         }
         for field in skip:
             del default_data[field]
