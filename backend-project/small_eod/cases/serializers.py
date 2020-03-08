@@ -19,9 +19,8 @@ class CurrentUserListDefault:
 class CaseSerializer(UserLogModelSerializer):
     tag = TagField()
     feature = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Feature.objects.all()
+        many=True, default=[], queryset=Feature.objects.all()
     )
-
     responsible_user = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
@@ -46,6 +45,7 @@ class CaseSerializer(UserLogModelSerializer):
             "created_on",
             "modified_on",
         ]
+        extra_kwargs = {"audited_institution": {"default": []}}
 
     def create(self, validated_data):
         tag = [
@@ -99,3 +99,4 @@ class CaseCountSerializer(CaseSerializer):
             "note_count",
             "event_count",
         ]
+        extra_kwargs = CaseSerializer.Meta.extra_kwargs

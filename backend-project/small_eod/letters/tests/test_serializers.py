@@ -6,6 +6,7 @@ from ..serializers import LetterSerializer, DescriptionSerializer
 from ...generic.mixins import AuthRequiredMixin
 from ..factories import LetterFactory, DescriptionFactory
 from ...files.factories import FileFactory
+from ...channels.factories import ChannelFactory
 
 # from ...channels.factories import ChannelFactory
 from ...institutions.factories import InstitutionFactory
@@ -49,6 +50,8 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         self.obj = self.factory_class()
         self.institution = InstitutionFactory()
         self.case = CaseFactory()
+        self.channel = ChannelFactory()
+        self.description = DescriptionFactory()
 
     def get_default_data(self, new_data=None, skip=None):
         new_data = new_data or {}
@@ -56,28 +59,16 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         default_data = {
             "name": "Letter 1",
             "direction": "IN",
-            "channel": {
-                "name": "Semi Physical letter",
-                "email": True,
-                "city": True,
-                "epuap": True,
-                "house_no": True,
-            },
+            "channel": self.channel.pk,
             "final": True,
             "date": datetime.now() + timedelta(days=1),
             "identifier": "ssj2",
             "institution": self.institution.pk,
-            "address": {
-                "email": "test@test.test",
-                "city": "Dzierżoniów",
-                "epuap": "asdfg",
-                "house_no": "666",
-            },
             "case": self.case.pk,
             "ordering": 90,
             "comment": "comment",
             "excerpt": "No idea what this field does",
-            "description": {"name": "A little important"},
+            "description": self.description.pk,
         }
         for field in skip:
             del default_data[field]
@@ -104,10 +95,7 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_nested_fields(self):
         data = self.serializer_class(self.obj).data
-        self.assertEqual(data["address"]["email"], self.obj.address.email)
-        self.assertEqual(data["address"]["city"], self.obj.address.city)
-        self.assertEqual(data["channel"]["email"], self.obj.channel.email)
-        self.assertEqual(data["description"]["name"], self.obj.description.name)
+        self.assertEqual(data["description"], self.obj.description.pk)
 
     def test_attachments(self):
         self.attachment = FileFactory(letter=self.obj)

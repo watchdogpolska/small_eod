@@ -4,10 +4,8 @@ from rest_framework import serializers
 from .models import Letter, Description
 from ..generic.serializers import UserLogModelSerializer
 from ..cases.models import Case
-from ..institutions.models import Institution, AddressData
-from ..institutions.serializers import AddressDataNestedSerializer
+from ..institutions.models import Institution
 from ..channels.models import Channel
-from ..channels.serializers import ChannelNestedSerializer
 from ..files.apps import minio_app
 from ..files.serializers import FileSerializer
 
@@ -19,14 +17,18 @@ class DescriptionSerializer(serializers.ModelSerializer):
 
 
 class LetterSerializer(UserLogModelSerializer):
-    description = DescriptionSerializer()
-    case = serializers.PrimaryKeyRelatedField(many=False, queryset=Case.objects.all())
-    institution = serializers.PrimaryKeyRelatedField(
-        many=False, queryset=Institution.objects.all()
+    description = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Description.objects.all()
     )
-    date = serializers.DateTimeField()
-    address = AddressDataNestedSerializer()
-    channel = ChannelNestedSerializer()
+    case = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Case.objects.all()
+    )
+    institution = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Institution.objects.all()
+    )
+    channel = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Channel.objects.all()
+    )
     attachment = FileSerializer(many=True, read_only=True)
 
     class Meta:
@@ -40,7 +42,6 @@ class LetterSerializer(UserLogModelSerializer):
             "date",
             "identifier",
             "institution",
-            "address",
             "case",
             "attachment",
             "ordering",
@@ -54,20 +55,14 @@ class LetterSerializer(UserLogModelSerializer):
         ]
 
     def create(self, validated_data):
-        validated_data["address"] = AddressData.objects.create(
-            **validated_data.pop("address")
-        )
-        validated_data["channel"] = Channel.objects.create(
-            **validated_data.pop("channel")
-        )
-        validated_data["description"] = Description.objects.create(
-            **validated_data.pop("description")
-        )
+        channel = validated_data.pop("channel")
+        description = validated_data.pop("description")
         institution = validated_data.pop("institution")
         case = validated_data.pop("case")
 
         letter = super().create(validated_data)
-
+        letter.channel = channel
+        letter.description = description
         letter.institution = institution
         letter.case = case
         letter.save()
@@ -80,14 +75,7 @@ class LetterSerializer(UserLogModelSerializer):
         Iterating over those 3 and updating fields of the related objects,
         using key-value pairs from PATCH request.
         """
-        nested = [
-            {"instance": instance.address, "data": validated_data.pop("address", {})},
-            {"instance": instance.channel, "data": validated_data.pop("channel", {})},
-            {
-                "instance": instance.description,
-                "data": validated_data.pop("description", {}),
-            },
-        ]
+        nested = []
         for nested_object in nested:
             for attr, value in nested_object["data"].items():
                 setattr(nested_object["instance"], attr, value)

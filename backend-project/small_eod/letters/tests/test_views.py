@@ -1,19 +1,23 @@
 from django.urls import reverse
+from django.test import TestCase
 import requests
 from io import BytesIO
 
-from ..factories import LetterFactory
-
 from rest_framework import status
 from rest_framework.test import APITestCase
+
+from ..factories import LetterFactory
+from ..serializers import LetterSerializer
+from ...generic.tests.test_views import (
+    GenericViewSetMixin,
+    AuthorshipViewSetMixin,
+)
 
 
 class PresignedUploadFileTestCase(APITestCase):
     def test_getting_form_data(self):
         url = reverse("file_upload")
-        data = {
-            "name": "text.file",
-        }
+        data = {"name": "text.file"}
 
         response = self.client.post(url, data, format="json")
 
@@ -76,3 +80,23 @@ class FileCreateTestCase(APITestCase):
         self.assertEqual(response.data["name"], data["name"])
         self.assertEqual(response.data["path"], data["path"])
         self.assertIn("id", response.data)
+
+
+class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+    basename = "letter"
+    serializer_class = LetterSerializer
+    factory_class = LetterFactory
+
+    def validate_item(self, item):
+        self.assertEqual(item["name"], self.obj.name)
+
+    def test_create_minimum(self):
+        name = "testowa-nazwa"
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data={"name": name},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201, response.json())
+        item = response.json()
+        self.assertEqual(item["name"], name)

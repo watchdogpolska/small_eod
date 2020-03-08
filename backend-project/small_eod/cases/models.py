@@ -23,6 +23,7 @@ class Case(TimestampUserLogModel):
     )
     comment = models.CharField(
         max_length=256,
+        blank=True,
         verbose_name=_("Comment"),
         help_text=_("Comment for this case."),
     )
