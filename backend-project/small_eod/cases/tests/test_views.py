@@ -19,6 +19,17 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
 
+    def test_create_minimum(self):
+        name = "testowa-nazwa"
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data={"name": name},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201, response.json())
+        item = response.json()
+        self.assertEqual(item["name"], name)
+
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
     user_type = None
