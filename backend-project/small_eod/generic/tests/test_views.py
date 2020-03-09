@@ -48,9 +48,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin):
 
     def test_retrieve_plain(self):
         self.login_required()
-        response = self.client.get(
-            self.get_url_detail()
-        )
+        response = self.client.get(self.get_url_detail())
         self.assertEqual(response.status_code, 200)
         self.validate_item(response.json())
 

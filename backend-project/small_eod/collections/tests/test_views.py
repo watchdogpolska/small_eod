@@ -32,8 +32,7 @@ class TokenAuthorizationTestCaseMixin:
         self.client.logout()
 
         resp = self.client.get(
-            path=self.get_url_detail(),
-            HTTP_AUTHORIZATION=f"Bearer {token}",
+            path=self.get_url_detail(), HTTP_AUTHORIZATION=f"Bearer {token}",
         )
         self.assertEqual(resp.status_code, 200)
 

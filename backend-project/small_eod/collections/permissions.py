@@ -43,7 +43,7 @@ class TokenPermission(BasePermission):
             return False
         raw_token = self.get_raw_token(header)
         pk = self.get_collection_pk(request, view, obj)
-        if not pk: # not allow list collections
+        if not pk:  # not allow list collections
             return False
         except_subject = f"collection-{pk}"
 
