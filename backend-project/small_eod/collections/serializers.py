@@ -7,6 +7,7 @@ class CollectionSerializer(UserLogModelSerializer):
         model = Collection
         fields = [
             "id",
+            "name",
             "comment",
             "public",
             "expired_on",

@@ -53,7 +53,34 @@ class ReadOnlyViewSetMixin:
         raise NotImplementedError("validate_item must be overridden")
 
 
-class GenericViewSetMixin(ReadOnlyViewSetMixin):
+class UpdateViewSetMixin:
+    def get_update_data(self):
+        if not hasattr(self.obj, "name") and not self.serializer_class:
+            raise NotImplementedError(
+                "get_update_data must be overridden, because no 'name' field"
+            )
+        return {"name": f"{self.obj.name}-updated"}
+
+    def validate_update_item(self, item):
+        if not self.obj.name and not self.serializer_class:
+            raise NotImplementedError(
+                "validate_update_item must be defined, because no 'name' field"
+            )
+        self.assertEqual(item["id"], self.obj.pk)
+        self.assertEqual(item["name"], f"{self.obj.name}-updated")
+
+    def test_update_partial_plain(self):
+        response = self.client.patch(
+            self.get_url(name="detail", pk=self.obj.pk, **self.get_extra_kwargs()),
+            data=self.get_update_data(),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200, response.json())
+        item = response.json()
+        self.validate_update_item(item)
+
+
+class GenericViewSetMixin(UpdateViewSetMixin, ReadOnlyViewSetMixin):
     def get_ommited_fields(self):
         if hasattr(self.serializer_class.Meta, "read_only_fields"):
             return self.serializer_class.Meta.read_only_fields + ["id"]
@@ -66,7 +93,7 @@ class GenericViewSetMixin(ReadOnlyViewSetMixin):
             data=self.get_create_data(),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 201, response.json())
         item = response.json()
         self.assertNotEqual(item["id"], self.obj.pk)
         self.validate_item(item)
