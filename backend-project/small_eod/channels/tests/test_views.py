@@ -1,13 +1,13 @@
 from django.test import TestCase
 
 from ..factories import ChannelFactory
-from ..serializers import ChannelNestedSerializer
+from ..serializers import ChannelSerializer
 from ...generic.tests.test_views import GenericViewSetMixin
 
 
 class ChannelViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "channel"
-    serializer_class = ChannelNestedSerializer
+    serializer_class = ChannelSerializer
     factory_class = ChannelFactory
 
     def validate_item(self, item):
