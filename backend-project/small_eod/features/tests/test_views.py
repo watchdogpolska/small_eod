@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.urls import reverse
 
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..serializers import FeatureSerializer, FeatureOptionSerializer

@@ -3,6 +3,7 @@ from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
 from rest_framework.serializers import ModelSerializer
 
+
 class FeatureOptionSerializer(ModelSerializer):
     feature = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Feature.objects.all()
@@ -11,6 +12,7 @@ class FeatureOptionSerializer(ModelSerializer):
     class Meta:
         model = FeatureOption
         fields = ["id", "name", "feature"]
+
 
 class NestedFeatureOptionSerializer(ModelSerializer):
     class Meta:

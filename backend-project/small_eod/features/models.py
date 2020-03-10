@@ -30,7 +30,7 @@ class FeatureOption(models.Model):
     feature = models.ForeignKey(
         to=Feature,
         on_delete=models.CASCADE,
-        related_name='featureoptions',
+        related_name="featureoptions",
         verbose_name=_("Feature"),
         help_text=_("Related feature."),
     )
