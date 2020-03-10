@@ -41,7 +41,9 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(parsed_response), self.parsed_response_len)
         self.assertIs(type(response_result), list)
-        self.validate_item(response_result[0])
+        self.validate_item(
+            next(obj for obj in response_result if obj["id"] == self.obj.pk)
+        )
 
     def get_url_detail(self):
         return self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk)

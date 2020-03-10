@@ -6,7 +6,6 @@ from ...generic.tests.test_views import ReadOnlyViewSetMixin
 
 
 class UserViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
-
     basename = "user"
     serializer_class = UserSerializer
     factory_class = UserFactory

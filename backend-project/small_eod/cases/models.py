@@ -3,7 +3,7 @@ from django.conf import settings
 
 from ..institutions.models import Institution
 from ..generic.models import TimestampUserLogModel
-from ..dictionaries.models import Feature
+from ..features.models import FeatureOption
 from ..tags.models import Tag
 from django.utils.translation import ugettext_lazy as _
 
@@ -31,11 +31,11 @@ class Case(TimestampUserLogModel):
     tag = models.ManyToManyField(
         to=Tag, blank=True, verbose_name=_("Tag"), help_text=_("Choose tag.")
     )
-    feature = models.ManyToManyField(
-        to=Feature,
+    featureoptions = models.ManyToManyField(
+        to=FeatureOption,
         blank=True,
-        verbose_name=_("Feature"),
-        help_text=_("Features for this case."),
+        verbose_name=_("Feature option"),
+        help_text=_("Features options for this case."),
     )
 
     audited_institution = models.ManyToManyField(

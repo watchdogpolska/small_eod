@@ -19,7 +19,6 @@ from django.conf import settings
 from drf_yasg.views import get_schema_view
 from .swagger import info
 from small_eod.channels.views import ChannelViewSet
-from small_eod.dictionaries.views import DictionaryViewSet
 from small_eod.events.views import EventViewSet
 from small_eod.institutions.views import InstitutionViewSet
 from small_eod.notes.views import NoteViewSet
@@ -30,7 +29,6 @@ from rest_framework import permissions
 
 router = routers.DefaultRouter()
 router.register(r"channels", ChannelViewSet)
-router.register(r"dictionaries", DictionaryViewSet)
 router.register(r"events", EventViewSet)
 router.register(r"institutions", InstitutionViewSet)
 router.register(r"notes", NoteViewSet)
@@ -49,6 +47,7 @@ urlpatterns = [
     path("api/", include("small_eod.collections.urls")),
     path("api/", include("small_eod.cases.urls")),
     path("api/", include("small_eod.letters.urls")),
+    path("api/", include("small_eod.features.urls")),
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),
     re_path(

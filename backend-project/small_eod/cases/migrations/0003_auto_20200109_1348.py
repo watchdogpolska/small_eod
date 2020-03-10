@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('dictionaries', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('tags', '0001_initial'),
         ('cases', '0002_case_auditedinstitution'),
@@ -21,11 +20,6 @@ class Migration(migrations.Migration):
             model_name='case',
             name='created_by',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='case_created_by', to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='case',
-            name='feature',
-            field=models.ManyToManyField(blank=True, to='dictionaries.Feature'),
         ),
         migrations.AddField(
             model_name='case',

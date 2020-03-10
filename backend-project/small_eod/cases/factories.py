@@ -14,7 +14,7 @@ class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactor
     responsible_users = ManyToManyPostGeneration("responsible_user")
     notified_users = ManyToManyPostGeneration("notified_user")
     tags = ManyToManyPostGeneration("tag")
-    features = ManyToManyPostGeneration("feature")
+    featureoptions = ManyToManyPostGeneration("featureoptions")
 
     class Meta:
         model = Case
