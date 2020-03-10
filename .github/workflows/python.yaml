@@ -39,7 +39,9 @@ jobs:
       with:
         name: openapi.json
         path: ./openapi.json
-
+    - name: Docker-compose logs
+      run: make logs
+      if: failure()
   push:
     runs-on: ubuntu-latest
     if: "github.ref == 'refs/heads/master'"
