@@ -40,7 +40,7 @@ jobs:
         name: openapi.json
         path: ./openapi.json
     - name: Docker-compose logs
-      run: make logs
+      run: docker-compose logs
       if: failure()
   push:
     runs-on: ubuntu-latest
