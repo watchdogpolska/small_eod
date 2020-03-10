@@ -1,9 +1,9 @@
 from django.urls import reverse
 
-from ...users.factories import UserFactory
+from ...users.mixins import AuthenticatedMixin
 
 
-class ReadOnlyViewSetMixin:
+class ReadOnlyViewSetMixin(AuthenticatedMixin):
     basename = None
     serializer_class = None
     factory_class = None
@@ -15,10 +15,7 @@ class ReadOnlyViewSetMixin:
     def setUp(self):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
-
         self.obj = self.factory_class()
-        self.user = UserFactory(username="john")
-        self.client.login(username="john", password="pass")
 
     def get_extra_kwargs(self):
         return dict()
@@ -28,8 +25,12 @@ class ReadOnlyViewSetMixin:
             raise NotImplementedError("get_url must be overridden or basename defined")
         return reverse("{}-{}".format(self.basename, name), kwargs=kwargs)
 
+    def get_url_list(self):
+        return self.get_url(name="list", **self.get_extra_kwargs())
+
     def test_list_plain(self):
-        response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
+        self.login_required()
+        response = self.client.get(self.get_url_list())
         parsed_response = response.json()
         response_result = (
             parsed_response.get(self.paginated_response_results_key)
@@ -42,10 +43,12 @@ class ReadOnlyViewSetMixin:
         self.assertIs(type(response_result), list)
         self.validate_item(response_result[0])
 
+    def get_url_detail(self):
+        return self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk)
+
     def test_retrieve_plain(self):
-        response = self.client.get(
-            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk)
-        )
+        self.login_required()
+        response = self.client.get(self.get_url_detail())
         self.assertEqual(response.status_code, 200)
         self.validate_item(response.json())
 
@@ -70,6 +73,7 @@ class UpdateViewSetMixin:
         self.assertEqual(item["name"], f"{self.obj.name}-updated")
 
     def test_update_partial_plain(self):
+        self.login_required()
         response = self.client.patch(
             self.get_url(name="detail", pk=self.obj.pk, **self.get_extra_kwargs()),
             data=self.get_update_data(),
@@ -88,6 +92,7 @@ class GenericViewSetMixin(UpdateViewSetMixin, ReadOnlyViewSetMixin):
             return ["id"]
 
     def test_create_plain(self):
+        self.login_required()
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),
             data=self.get_create_data(),
@@ -116,11 +121,13 @@ class AuthorshipViewSetMixin:
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )
-        if not hasattr(self, "user"):
+        if not hasattr(self, "get_create_data"):
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )
-        if not hasattr(self, "get_create_data"):
+
+        self.login_required()
+        if not hasattr(self, "user"):
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )
@@ -139,11 +146,13 @@ class AuthorshipViewSetMixin:
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )
-        if not hasattr(self, "user"):
+        if not hasattr(self, "get_create_data"):
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )
-        if not hasattr(self, "get_create_data"):
+
+        self.login_required()
+        if not hasattr(self, "user"):
             raise NotImplementedError(
                 "Authorship mixin must be used alongside the GenericViewSetMixin"
             )

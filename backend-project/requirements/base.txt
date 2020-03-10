@@ -8,3 +8,4 @@ drf-nested-routers==0.91
 djangorestframework-camel-case==1.1.2
 drf-yasg==1.17.1
 minio==5.0.7
+pyjwt==1.7.1

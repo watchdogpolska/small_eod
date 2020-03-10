@@ -1,7 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Collection
-from .serializers import CollectionSerializer
+from .serializers import CollectionSerializer, TokenSetSerializer
 from ..cases.serializers import CaseSerializer
 from ..cases.models import Case
 from ..notes.serializers import NoteSerializer
@@ -10,6 +13,11 @@ from ..events.serializers import EventSerializer
 from ..events.models import Event
 from ..letters.serializers import LetterSerializer
 from ..letters.models import Letter
+from django.shortcuts import get_object_or_404
+from .permissions import (
+    CollectionMemberTokenPermission,
+    CollectionDirectTokenPermission,
+)
 
 
 def parse_query(query):
@@ -20,10 +28,26 @@ def parse_query(query):
 class CollectionViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
+    permission_classes = [IsAuthenticated | CollectionDirectTokenPermission]
+
+
+class TokenCreateAPIView(APIView):
+    serializer_class = TokenSetSerializer
+
+    def post(self, request, collection_pk):
+        collection = get_object_or_404(Collection, pk=collection_pk)
+        serializer = TokenSetSerializer(
+            data=self.request.data,
+            context={"collection": collection, "request": request},
+        )
+        serializer.is_valid(raise_exception=True)
+        tokenset = serializer.save(collection=collection)
+        return Response(tokenset, status=status.HTTP_201_CREATED)
 
 
 class CaseViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CaseSerializer
+    permission_classes = [IsAuthenticated | CollectionMemberTokenPermission]
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
@@ -32,6 +56,7 @@ class CaseViewSet(viewsets.ReadOnlyModelViewSet):
 
 class BaseSubCollection(viewsets.ReadOnlyModelViewSet):
     model = None
+    permission_classes = [IsAuthenticated | CollectionMemberTokenPermission]
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
