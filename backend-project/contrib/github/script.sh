@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eux
-docker-compose up -d
 make wait_mysql wait_minio migrate
+docker-compose up -d
 # verify that user able to create user
 make createsuperuser
 # run test suite
