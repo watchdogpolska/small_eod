@@ -17,10 +17,8 @@ const plugins = [
         hmr: true,
       },
       locale: {
-        // default false
         enable: true,
-        // default zh-CN
-        default: 'zh-CN',
+        default: 'pl-PL',
         // default true, when it is true, will use `navigator.language` overwrite default
         baseNavigator: true,
       },
@@ -114,31 +112,19 @@ export default {
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
-            /*{
-              path: '/dashboard',
-              name: 'dashboard',
-              icon: 'dashboard',
+            {
+              name: 'cases',
+              icon: 'FileTextOutlined',
+              path: '/cases',
               routes: [
                 {
-                  name: 'analysis',
-                  icon: 'smile',
-                  path: '/dashboard/analysis',
-                  component: './dashboard/analysis',
-                },
-                {
-                  name: 'monitor',
-                  icon: 'smile',
-                  path: '/dashboard/monitor',
-                  component: './dashboard/monitor',
-                },
-                {
-                  name: 'workplace',
-                  icon: 'smile',
-                  path: '/dashboard/workplace',
-                  component: './dashboard/workplace',
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/cases/new',
+                  component: './cases/new',
                 },
               ],
-            },*/
+            },
             {
               name: 'account',
               icon: 'user',
