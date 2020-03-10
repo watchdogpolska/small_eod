@@ -22,17 +22,17 @@ test-django-backend:
 
 wait_mysql:
 	docker-compose up -d db
-	docker-compose run backend bash -c 'wait-for-it db:5432'
+	docker-compose run --rm backend bash -c 'wait-for-it db:5432'
 
 wait_minio:
 	docker-compose up -d minio
-	docker-compose run backend bash -c 'wait-for-it minio:9000'
+	docker-compose run --rm backend bash -c 'wait-for-it minio:9000'
 
 migrate:
-	docker-compose run backend python manage.py migrate
+	docker-compose run --rm backend python manage.py migrate
 
 makemigrations:
-	docker-compose run backend python manage.py makemigrations
+	docker-compose run --rm backend python manage.py makemigrations
 
 pyupgrade:
 	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade
@@ -45,18 +45,18 @@ fmt:
 	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
 
 check: wait_mysql wait_minio
-	docker-compose run backend python manage.py makemigrations --check
+	docker-compose run --rm backend python manage.py makemigrations --check
 
 migrations: wait_mysql wait_minio
-	docker-compose run backend python manage.py makemigrations
+	docker-compose run --rm backend python manage.py makemigrations
 
 settings:
-	docker-compose run backend python manage.py diffsettings
+	docker-compose run --rm backend python manage.py diffsettings
 
 createsuperuser:
-	docker-compose run -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
+	docker-compose run --rm -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
 
 test-local: lint build check test
 
 openapi: 
-	docker-compose run backend python manage.py generate_swagger
+	docker-compose run --rm backend python manage.py generate_swagger
