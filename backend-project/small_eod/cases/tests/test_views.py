@@ -20,6 +20,7 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
         self.assertEqual(item["name"], self.obj.name)
 
     def test_create_minimum(self):
+        self.login_required()
         name = "testowa-nazwa"
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),
@@ -48,6 +49,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         self.assertEqual(self.obj.username, item["username"])
 
     def test_list_no_users(self):
+        self.login_required()
         field_dict = {self.__class__.user_type: []}
         self.case = CaseFactory(**field_dict)
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))

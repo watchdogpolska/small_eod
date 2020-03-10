@@ -78,6 +78,7 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         }
 
     def test_save(self):
+        self.login_required()
         serializer = self.serializer_class(
             data=self.get_default_data(), context={"request": self.request}
         )
