@@ -3,7 +3,7 @@ from itertools import groupby
 from operator import attrgetter
 from .models import Case
 from ..tags.models import Tag
-from ..dictionaries.models import Feature
+from ..features.models import FeatureOption
 from ..generic.serializers import UserLogModelSerializer
 from ..users.models import User
 from ..tags.fields import TagField
@@ -18,8 +18,8 @@ class CurrentUserListDefault:
 
 class CaseSerializer(UserLogModelSerializer):
     tag = TagField()
-    feature = serializers.PrimaryKeyRelatedField(
-        many=True, default=[], queryset=Feature.objects.all()
+    featureoptions = serializers.PrimaryKeyRelatedField(
+        many=True, default=[], queryset=FeatureOption.objects.all()
     )
     responsible_user = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
@@ -38,7 +38,7 @@ class CaseSerializer(UserLogModelSerializer):
             "name",
             "responsible_user",
             "notified_user",
-            "feature",
+            "featureoptions",
             "tag",
             "created_by",
             "modified_by",
@@ -54,33 +54,33 @@ class CaseSerializer(UserLogModelSerializer):
         audited_institution = validated_data.pop("audited_institution")
         responsible_user = validated_data.pop("responsible_user")
         notified_user = validated_data.pop("notified_user")
-        feature = validated_data.pop("feature")
+        featureoptions = validated_data.pop("featureoptions")
         case = super().create(validated_data)
         case.tag.set(tag)
         case.audited_institution.set(audited_institution)
         case.responsible_user.set(responsible_user)
         case.notified_user.set(notified_user)
-        case.feature.set(feature)
+        case.featureoptions.set(featureoptions)
         return case
 
-    def validate_feature(self, value):
+    def validate_featureoptions(self, value):
         """
-        Check that features match minimum & maximum of dictionaries
+        Check that featureoptions match minimum & maximum of options
         """
-        for dictionary, items in groupby(
-            sorted(value, key=attrgetter("dictionary_id")), attrgetter("dictionary")
+        for feature, items in groupby(
+            sorted(value, key=attrgetter("feature_id")), attrgetter("feature")
         ):
             length = len(list(items))
-            if length < dictionary.min_items:
+            if length < feature.min_options:
                 raise serializers.ValidationError(
                     "Minimum number of items for {} is {}".format(
-                        dictionary, dictionary.min_items
+                        feature, feature.min_options
                     )
                 )
-            if length > dictionary.max_items:
+            if length > feature.max_options:
                 raise serializers.ValidationError(
                     "Maximum number of items for {} is {}".format(
-                        dictionary, dictionary.max_items
+                        feature, feature.max_options
                     )
                 )
         return value

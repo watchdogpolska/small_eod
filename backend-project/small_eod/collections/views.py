@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
 
 from .models import Collection
 from .serializers import CollectionSerializer, TokenSetSerializer
@@ -34,6 +35,7 @@ class CollectionViewSet(viewsets.ModelViewSet):
 class TokenCreateAPIView(APIView):
     serializer_class = TokenSetSerializer
 
+    @swagger_auto_schema(request_body=TokenSetSerializer)
     def post(self, request, collection_pk):
         collection = get_object_or_404(Collection, pk=collection_pk)
         serializer = TokenSetSerializer(
