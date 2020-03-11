@@ -1,8 +1,8 @@
 .PHONY: all test clean docs
 
-start:
+start: wait_mysql wait_minio
 	docker-compose up -d
-
+	
 stop:
 	docker-compose stop
 
