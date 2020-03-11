@@ -21,14 +21,14 @@ class Case(TimestampUserLogModel):
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Case's name."),
     )
-    comment = models.CharField(
+    comments = models.CharField(
         max_length=256,
         blank=True,
         verbose_name=_("Comment"),
         help_text=_("Comment for this case."),
     )
 
-    tag = models.ManyToManyField(
+    tags = models.ManyToManyField(
         to=Tag, blank=True, verbose_name=_("Tag"), help_text=_("Choose tag.")
     )
     featureoptions = models.ManyToManyField(
@@ -38,22 +38,22 @@ class Case(TimestampUserLogModel):
         help_text=_("Features options for this case."),
     )
 
-    audited_institution = models.ManyToManyField(
+    audited_institutions = models.ManyToManyField(
         to=Institution,
         blank=True,
         verbose_name="Audited institution",
         help_text=_("Case audits this Institution."),
     )
-    notified_user = models.ManyToManyField(
+    notified_users = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name="case_notified_user",
+        related_name="notified_users",
         blank=True,
         verbose_name=_("Notified user"),
         help_text=_("User who will receive notification."),
     )
-    responsible_user = models.ManyToManyField(
+    responsible_users = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name="case_responsible_user",
+        related_name="responsible_users",
         blank=True,
         verbose_name=_("Responsible user"),
         help_text=_("User who is responsible for this case."),
