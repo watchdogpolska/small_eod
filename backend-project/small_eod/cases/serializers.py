@@ -17,14 +17,14 @@ class CurrentUserListDefault:
 
 
 class CaseSerializer(UserLogModelSerializer):
-    tag = TagField()
+    tags = TagField()
     featureoptions = serializers.PrimaryKeyRelatedField(
         many=True, default=[], queryset=FeatureOption.objects.all()
     )
-    responsible_user = serializers.PrimaryKeyRelatedField(
+    responsible_users = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
-    notified_user = serializers.PrimaryKeyRelatedField(
+    notified_users = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
 
@@ -33,33 +33,33 @@ class CaseSerializer(UserLogModelSerializer):
         read_only_fields = []
         fields = [
             "id",
-            "comment",
-            "audited_institution",
+            "comments",
+            "audited_institutions",
             "name",
-            "responsible_user",
-            "notified_user",
+            "responsible_users",
+            "notified_users",
             "featureoptions",
-            "tag",
+            "tags",
             "created_by",
             "modified_by",
             "created_on",
             "modified_on",
         ]
-        extra_kwargs = {"audited_institution": {"default": []}}
+        extra_kwargs = {"audited_institutions": {"default": []}}
 
     def create(self, validated_data):
-        tag = [
-            Tag.objects.get_or_create(name=tag)[0] for tag in validated_data.pop("tag")
+        tags = [
+            Tag.objects.get_or_create(name=tags)[0] for tags in validated_data.pop("tags")
         ]
-        audited_institution = validated_data.pop("audited_institution")
-        responsible_user = validated_data.pop("responsible_user")
-        notified_user = validated_data.pop("notified_user")
+        audited_institutions = validated_data.pop("audited_institutions")
+        responsible_users = validated_data.pop("responsible_users")
+        notified_users = validated_data.pop("notified_users")
         featureoptions = validated_data.pop("featureoptions")
         case = super().create(validated_data)
-        case.tag.set(tag)
-        case.audited_institution.set(audited_institution)
-        case.responsible_user.set(responsible_user)
-        case.notified_user.set(notified_user)
+        case.tags.set(tags)
+        case.audited_institutions.set(audited_institutions)
+        case.responsible_users.set(responsible_users)
+        case.notified_users.set(notified_users)
         case.featureoptions.set(featureoptions)
         return case
 
