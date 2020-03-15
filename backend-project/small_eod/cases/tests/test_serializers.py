@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..models import Case
 from ..serializers import CaseSerializer, CaseCountSerializer
-from ...dictionaries.factories import FeatureFactory, DictionaryFactory
+from ...features.factories import FeatureOptionFactory, FeatureFactory
 from ...notes.factories import NoteFactory
 from ...tags.models import Tag
 from ...users.factories import UserFactory
@@ -43,16 +43,16 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_raise_for_over_maximum_feature(self):
         self.login_required()
-        dictionary = DictionaryFactory(max_items=3)
-        features = FeatureFactory.create_batch(size=5, dictionary=dictionary)
+        feature = FeatureFactory(max_options=3)
+        options = FeatureOptionFactory.create_batch(size=5, feature=feature)
         serializer = CaseCountSerializer(
             data=self.get_default_data(
-                {"feature": [x.id for x in features], "tag": []}
+                {"featureoptions": [x.id for x in options], "tag": []}
             ),
             context={"request": self.request},
         )
         self.assertFalse(serializer.is_valid())
-        self.assertEqual(set(serializer.errors.keys()), {"feature"})
+        self.assertEqual(set(serializer.errors.keys()), {"featureoptions"})
 
     def test_serializer_counters(self):
         self.login_required()
