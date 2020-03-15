@@ -15,12 +15,12 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
         skip = skip or []
         default_data = {
             "name": "Polska Fundacja Narodowa o rejestr umów",
-            "audited_institution": [],
-            "comment": "xxx",
-            "responsible_user": [],
-            "notified_user": [],
+            "audited_institutions": [],
+            "comments": "xxx",
+            "responsible_users": [],
+            "notified_users": [],
             "feature": [],
-            "tag": ["rejestr umów"],
+            "tags": ["rejestr umów"],
         }
         for field in skip:
             del default_data[field]
@@ -37,9 +37,9 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertTrue(Tag.objects.count(), 1)
-        self.assertEqual(obj.tag.all()[0].name, "rejestr umów")
+        self.assertEqual(obj.tags.all()[0].name, "rejestr umów")
         data = CaseSerializer(Case.objects.get()).data
-        self.assertTrue(data["tag"], ["rejestr umów"])
+        self.assertTrue(data["tags"], ["rejestr umów"])
 
     def test_raise_for_over_maximum_feature(self):
         self.login_required()
@@ -47,7 +47,7 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
         options = FeatureOptionFactory.create_batch(size=5, feature=feature)
         serializer = CaseCountSerializer(
             data=self.get_default_data(
-                {"featureoptions": [x.id for x in options], "tag": []}
+                {"featureoptions": [x.id for x in options], "tags": []}
             ),
             context={"request": self.request},
         )
@@ -67,27 +67,27 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
     def test_default_for_related_user(self):
         self.login_required()
         serializer = CaseCountSerializer(
-            data=self.get_default_data(skip=["responsible_user", "notified_user"]),
+            data=self.get_default_data(skip=["responsible_users", "notified_users"]),
             context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
-        self.assertCountEqual(obj.responsible_user.all(), [self.user])
-        self.assertCountEqual(obj.notified_user.all(), [self.user])
+        self.assertCountEqual(obj.responsible_users.all(), [self.user])
+        self.assertCountEqual(obj.notified_users.all(), [self.user])
 
     def test_save_related_user(self):
         self.login_required()
-        [responsible_user, notified_user] = UserFactory.create_batch(size=2)
+        [responsible_users, notified_users] = UserFactory.create_batch(size=2)
         serializer = CaseCountSerializer(
             data=self.get_default_data(
                 new_data={
-                    "responsible_user": [responsible_user.pk],
-                    "notified_user": [notified_user.pk],
+                    "responsible_users": [responsible_users.pk],
+                    "notified_users": [notified_users.pk],
                 }
             ),
             context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
-        self.assertCountEqual(obj.responsible_user.all(), [responsible_user])
-        self.assertCountEqual(obj.notified_user.all(), [notified_user])
+        self.assertCountEqual(obj.responsible_users.all(), [responsible_users])
+        self.assertCountEqual(obj.notified_users.all(), [notified_users])
