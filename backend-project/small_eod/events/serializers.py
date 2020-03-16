@@ -9,6 +9,6 @@ class EventSerializer(UserLogModelSerializer):
             "id",
             "case",
             "name",
-            "data",
+            "date",
             "comment",
         ]
