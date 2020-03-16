@@ -4,7 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
-from ..institutions.models import Institution, AddressData
+from ..institutions.models import Institution
+from django.utils.timezone import datetime
+
+
+class Description(models.Model):
+    name = models.CharField(
+        max_length=256,
+        verbose_name=_("Description"),
+        help_text=_("Description of letter."),
+    )
 
 
 class Letter(TimestampUserLogModel):
@@ -19,12 +28,19 @@ class Letter(TimestampUserLogModel):
         verbose_name=_("Direction"),
         help_text=_("Direction for letter."),
     )
-
     date = models.DateTimeField(
-        verbose_name=_("Date"), help_text=_("Date of sending or receiving.")
+        verbose_name=_("Date"),
+        help_text=_("Date of sending or receiving."),
+        default=datetime.now,
     )
-    final = models.BooleanField()
-
+    final = models.BooleanField(
+        verbose_name=_("Final version"),
+        default=True,
+        help_text=_(
+            "Indicates whether the document has "
+            + "final content or is, for example, a draft"
+        ),
+    )
     name = models.CharField(
         max_length=256,
         verbose_name=_("Description"),
@@ -34,34 +50,48 @@ class Letter(TimestampUserLogModel):
         default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
     )
     comment = models.CharField(
-        max_length=256, verbose_name=_("Comment"), help_text=_("Comment for letter.")
+        max_length=256,
+        verbose_name=_("Comment"),
+        help_text=_("Comment for letter."),
+        blank=True,
     )
     excerpt = models.CharField(
-        max_length=256, verbose_name=_("Excerpt"), help_text=_("Excerpt of letter.")
+        max_length=256,
+        verbose_name=_("Excerpt"),
+        help_text=_("Excerpt of letter."),
+        blank=True,
     )
     identifier = models.CharField(
         max_length=256,
         verbose_name=_("Identifier"),
         help_text=_("Identifier of letter."),
+        blank=True,
     )
-
     case = models.ForeignKey(
-        to=Case, on_delete=models.DO_NOTHING, verbose_name=_("Case"),
+        to=Case,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Case"),
+        null=True,
+        blank=True,
     )
     channel = models.ForeignKey(
-        to=Channel, on_delete=models.DO_NOTHING, verbose_name=_("Channel"),
-    )
-    address = models.ForeignKey(
-        to=AddressData, on_delete=models.DO_NOTHING, verbose_name=_("Address"),
+        to=Channel,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Channel"),
+        blank=True,
+        null=True,
     )
     institution = models.ForeignKey(
-        to=Institution, on_delete=models.DO_NOTHING, verbose_name=_("Institution"),
+        to=Institution,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Institution"),
+        blank=True,
+        null=True,
     )
-
-
-class Description(models.Model):
-    name = models.CharField(
-        max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of letter."),
+    description = models.ForeignKey(
+        to=Description,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Description of letter."),
+        null=True,
+        blank=True,
     )

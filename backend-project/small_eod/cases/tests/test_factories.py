@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..factories import CaseFactory
 from ..models import Case
-from ...dictionaries.factories import FeatureFactory
+from ...features.factories import FeatureOptionFactory
 from ...generic.tests.mixins import FactoryTestCaseMixin
 from ...institutions.factories import InstitutionFactory
 from ...tags.factories import TagFactory
@@ -21,7 +21,7 @@ class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
             responsible_users=UserFactory.create_batch(size=2),
             notified_users=UserFactory.create_batch(size=2),
             tags=TagFactory.create_batch(size=2),
-            features=FeatureFactory.create_batch(size=2),
+            featureoptions=FeatureOptionFactory.create_batch(size=2),
         )
 
     def test_many_to_many(self):
@@ -32,18 +32,18 @@ class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
         responsible_users = UserFactory.create_batch(size=2)
         notified_users = UserFactory.create_batch(size=2)
         tags = TagFactory.create_batch(size=2)
-        features = FeatureFactory.create_batch(size=2)
+        featureoptions = FeatureOptionFactory.create_batch(size=2)
 
         case = self.FACTORY.create(
             audited_institutions=audited_institutions,
             responsible_users=responsible_users,
             notified_users=notified_users,
             tags=tags,
-            features=features,
+            featureoptions=featureoptions,
         )
 
         self.assertCountEqual(audited_institutions, case.audited_institution.all())
         self.assertCountEqual(responsible_users, case.responsible_user.all())
         self.assertCountEqual(notified_users, case.notified_user.all())
         self.assertCountEqual(tags, case.tag.all())
-        self.assertCountEqual(features, case.feature.all())
+        self.assertCountEqual(featureoptions, case.featureoptions.all())

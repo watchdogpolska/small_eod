@@ -47,8 +47,6 @@ class PresignedUploadFileView(APIView):
     @swagger_auto_schema(request_body=SignRequestSerializer)
     def post(self, request, format=None):
         serializer = SignRequestSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        serializer.is_valid(raise_exception=True)
         serializer.save()  # Trigger .create(..)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

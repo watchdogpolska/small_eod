@@ -1,19 +1,25 @@
 from django.urls import reverse
+from django.test import TestCase
 import requests
 from io import BytesIO
-
-from ..factories import LetterFactory
 
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from ..factories import LetterFactory
+from ..serializers import LetterSerializer
+from ...generic.tests.test_views import (
+    GenericViewSetMixin,
+    AuthorshipViewSetMixin,
+)
+from ...users.mixins import AuthenticatedMixin
 
-class PresignedUploadFileTestCase(APITestCase):
+
+class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
     def test_getting_form_data(self):
+        self.login_required()
         url = reverse("file_upload")
-        data = {
-            "name": "text.file",
-        }
+        data = {"name": "text.file"}
 
         response = self.client.post(url, data, format="json")
 
@@ -30,14 +36,13 @@ class PresignedUploadFileTestCase(APITestCase):
         self.assertIn("x-amz-signature", form_data)
 
     def test_file_upload_and_download(self):
-        url = reverse("file_upload")
-        data = {
-            "name": "text.file",
-        }
+        self.login_required()
         content = b"xxx"
 
         # Upload file
-        backend_resp = self.client.post(url, data, format="json")
+        backend_resp = self.client.post(
+            path=reverse("file_upload"), data={"name": "text.file"}, format="json"
+        )
         minio_upload_resp = requests.post(
             url=backend_resp.data["url"],
             data=backend_resp.data["formData"],
@@ -57,8 +62,9 @@ class PresignedUploadFileTestCase(APITestCase):
         self.assertEqual(minio_download_resp.content, content)
 
 
-class FileCreateTestCase(APITestCase):
+class FileCreateTestCase(AuthenticatedMixin, APITestCase):
     def test_file_not_found(self):
+        self.login_required()
         url = reverse("letter-files-list", kwargs={"letter_pk": 0})
         data = {"path": "path/to/file", "name": "test.file"}
 
@@ -66,6 +72,7 @@ class FileCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_file_created(self):
+        self.login_required()
         letter = LetterFactory()
 
         url = reverse("letter-files-list", kwargs={"letter_pk": letter.pk})
@@ -76,3 +83,24 @@ class FileCreateTestCase(APITestCase):
         self.assertEqual(response.data["name"], data["name"])
         self.assertEqual(response.data["path"], data["path"])
         self.assertIn("id", response.data)
+
+
+class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+    basename = "letter"
+    serializer_class = LetterSerializer
+    factory_class = LetterFactory
+
+    def validate_item(self, item):
+        self.assertEqual(item["name"], self.obj.name)
+
+    def test_create_minimum(self):
+        self.login_required()
+        name = "testowa-nazwa"
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data={"name": name},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201, response.json())
+        item = response.json()
+        self.assertEqual(item["name"], name)

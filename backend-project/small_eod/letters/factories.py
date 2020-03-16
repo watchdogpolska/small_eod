@@ -8,7 +8,14 @@ from ..generic.factories import (
     FuzzyDateTimeFromNow,
     AbstractTimestampUserFactory,
 )
-from ..institutions.factories import InstitutionFactory, AddressDataFactory
+from ..institutions.factories import InstitutionFactory
+
+
+class DescriptionFactory(factory.DjangoModelFactory):
+    name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
+
+    class Meta:
+        model = Description
 
 
 class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
@@ -25,15 +32,8 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     case = factory.SubFactory(CaseFactory)
     channel = factory.SubFactory(ChannelFactory)
-    address = factory.SubFactory(AddressDataFactory)
     institution = factory.SubFactory(InstitutionFactory)
+    description = factory.SubFactory(DescriptionFactory)
 
     class Meta:
         model = Letter
-
-
-class DescriptionFactory(factory.DjangoModelFactory):
-    name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
-
-    class Meta:
-        model = Description
