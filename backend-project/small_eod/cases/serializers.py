@@ -49,8 +49,7 @@ class CaseSerializer(UserLogModelSerializer):
 
     def create(self, validated_data):
         tag = [
-            Tag.objects.get_or_create(name=tag)[0]
-            for tag in validated_data.pop("tags")
+            Tag.objects.get_or_create(name=tag)[0] for tag in validated_data.pop("tags")
         ]
         audited_institutions = validated_data.pop("audited_institutions")
         responsible_users = validated_data.pop("responsible_users")
