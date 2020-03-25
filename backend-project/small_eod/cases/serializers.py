@@ -48,16 +48,16 @@ class CaseSerializer(UserLogModelSerializer):
         extra_kwargs = {"audited_institutions": {"default": []}}
 
     def create(self, validated_data):
-        tags = [
-            Tag.objects.get_or_create(name=tags)[0]
-            for tags in validated_data.pop("tags")
+        tag = [
+            Tag.objects.get_or_create(name=tag)[0]
+            for tag in validated_data.pop("tags")
         ]
         audited_institutions = validated_data.pop("audited_institutions")
         responsible_users = validated_data.pop("responsible_users")
         notified_users = validated_data.pop("notified_users")
         featureoptions = validated_data.pop("featureoptions")
         case = super().create(validated_data)
-        case.tags.set(tags)
+        case.tags.set(tag)
         case.audited_institutions.set(audited_institutions)
         case.responsible_users.set(responsible_users)
         case.notified_users.set(notified_users)
