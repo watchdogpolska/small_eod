@@ -3,7 +3,7 @@ version: '3.4'
 services:
   nginx:
     # https://hub.docker.com/_/nginx
-    image: nginx:1.17.7-alpine
+    image: nginx:1.17.9-alpine
     ports:
       - "8000:8000"
     volumes:
