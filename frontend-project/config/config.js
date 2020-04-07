@@ -407,7 +407,10 @@ export default {
   },
   manifest: {
     basePath: '/',
-  }, // chainWebpack: webpackPlugin,
+  },
+  chainWebpack: (config) => {
+    config.module.rule('small-eod-client').parser({amd: false});
+  },
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',
