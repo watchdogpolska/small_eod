@@ -408,8 +408,8 @@ export default {
   manifest: {
     basePath: '/',
   },
-  chainWebpack: (config) => {
-    config.module.rule('small-eod-client').parser({amd: false});
+  chainWebpack: config => {
+    config.module.rule('small-eod-client').parser({ amd: false });
   },
   // proxy: {
   //   '/server/api/': {
