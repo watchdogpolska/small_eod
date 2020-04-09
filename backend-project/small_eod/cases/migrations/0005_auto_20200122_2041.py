@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
         ('institutions', '0004_auto_20200112_2019'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('tags', '0003_tagnamespace_prefix'),
-        ('dictionaries', '0002_auto_20200109_1348'),
         ('cases', '0004_auto_20200114_0211'),
     ]
 
@@ -24,11 +23,6 @@ class Migration(migrations.Migration):
             model_name='case',
             name='comment',
             field=models.CharField(help_text='Comment cannot be longer than 256 characters.', max_length=256, verbose_name='Comment'),
-        ),
-        migrations.AlterField(
-            model_name='case',
-            name='feature',
-            field=models.ManyToManyField(blank=True, help_text='Features for this case.', to='dictionaries.Feature', verbose_name='Feature'),
         ),
         migrations.AlterField(
             model_name='case',

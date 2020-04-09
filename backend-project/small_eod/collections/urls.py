@@ -5,6 +5,7 @@ from .views import (
     EventViewSet,
     LetterViewSet,
     NoteViewSet,
+    TokenCreateAPIView,
 )
 
 from django.urls import path, include
@@ -30,4 +31,9 @@ urlpatterns = [
     path("", include(event_router.urls)),
     path("", include(note_router.urls)),
     path("", include(letter_router.urls)),
+    path(
+        "collections/<collection_pk>/tokens/",
+        TokenCreateAPIView.as_view(),
+        name="collection-tokens-list",
+    ),
 ]

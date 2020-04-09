@@ -29,7 +29,6 @@ class ExternalIdentifierNestedSerializer(serializers.ModelSerializer):
 
 
 class InstitutionSerializer(UserLogModelSerializer):
-
     address = AddressDataNestedSerializer()
     external_identifier = ExternalIdentifierNestedSerializer()
     administrative_unit = serializers.PrimaryKeyRelatedField(
@@ -59,7 +58,6 @@ class InstitutionSerializer(UserLogModelSerializer):
         return admin
 
     def create(self, validated_data):
-
         validated_data["external_identifier"] = ExternalIdentifier.objects.create(
             **validated_data.pop("external_identifier")
         )

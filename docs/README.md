@@ -234,7 +234,7 @@ Model danych jest dostępny w dokumentacji API.
 
 Wyróżniamy następujące elementy:
 
-* Dictionary - dane na temat słowników danych statystycznych
+* Feature - dane na temat cech i wartości oceny statystycznej
 * Case - dane na temat sprawy
 * Institution - informacje o instytucjach
 * Tag - dodatkowa konfiguracja prezentacji znaczników
@@ -276,10 +276,14 @@ W front-endzie przekłada się to na sekcje prezentacji kolekcji, która może z
 
 System wyróżnia następujące uprawnienia:
 
-* Dictionary.change
-* Dictionary.view
-* Dictionary.delete
-* Dictionary.create
+* Feature.change
+* Feature.view
+* Feature.delete
+* Feature.create
+* FeatureOption.change
+* FeatureOption.view
+* FeatureOption.delete
+* FeatureOption.create
 * Case.change
 * Case.view
 * Case.delete

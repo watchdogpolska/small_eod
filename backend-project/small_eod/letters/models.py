@@ -1,9 +1,19 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
-from ..institutions.models import Institution, AddressData
+from ..institutions.models import Institution
+from django.utils.timezone import datetime
+
+
+class Description(models.Model):
+    name = models.CharField(
+        max_length=256,
+        verbose_name=_("Description"),
+        help_text=_("Description of letter."),
+    )
 
 
 class Letter(TimestampUserLogModel):
@@ -12,23 +22,76 @@ class Letter(TimestampUserLogModel):
         OUT = "OUT", "Sent"
 
     direction = models.TextField(
-        choices=Direction.choices, default=Direction.IN, max_length=3
+        choices=Direction.choices,
+        default=Direction.IN,
+        max_length=3,
+        verbose_name=_("Direction"),
+        help_text=_("Direction for letter."),
     )
-
-    date = models.DateTimeField()
-    final = models.BooleanField()
-
-    name = models.CharField(max_length=256)
-    ordering = models.IntegerField(default=0)
-    comment = models.CharField(max_length=256)
-    excerpt = models.CharField(max_length=256)
-    identifier = models.CharField(max_length=256)
-
-    case = models.ForeignKey(to=Case, on_delete=models.DO_NOTHING)
-    channel = models.ForeignKey(to=Channel, on_delete=models.DO_NOTHING)
-    address = models.ForeignKey(to=AddressData, on_delete=models.DO_NOTHING)
-    institution = models.ForeignKey(to=Institution, on_delete=models.DO_NOTHING)
-
-
-class Description(models.Model):
-    name = models.CharField(max_length=256)
+    date = models.DateTimeField(
+        verbose_name=_("Date"),
+        help_text=_("Date of sending or receiving."),
+        default=datetime.now,
+    )
+    final = models.BooleanField(
+        verbose_name=_("Final version"),
+        default=True,
+        help_text=_(
+            "Indicates whether the document has "
+            + "final content or is, for example, a draft"
+        ),
+    )
+    name = models.CharField(
+        max_length=256,
+        verbose_name=_("Description"),
+        help_text=_("Description of the letter."),
+    )
+    ordering = models.IntegerField(
+        default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
+    )
+    comment = models.CharField(
+        max_length=256,
+        verbose_name=_("Comment"),
+        help_text=_("Comment for letter."),
+        blank=True,
+    )
+    excerpt = models.CharField(
+        max_length=256,
+        verbose_name=_("Excerpt"),
+        help_text=_("Excerpt of letter."),
+        blank=True,
+    )
+    identifier = models.CharField(
+        max_length=256,
+        verbose_name=_("Identifier"),
+        help_text=_("Identifier of letter."),
+        blank=True,
+    )
+    case = models.ForeignKey(
+        to=Case,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Case"),
+        null=True,
+        blank=True,
+    )
+    channel = models.ForeignKey(
+        to=Channel,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Channel"),
+        blank=True,
+        null=True,
+    )
+    institution = models.ForeignKey(
+        to=Institution,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Institution"),
+        blank=True,
+        null=True,
+    )
+    description = models.ForeignKey(
+        to=Description,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Description of letter."),
+        null=True,
+        blank=True,
+    )

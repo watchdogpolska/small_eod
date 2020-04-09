@@ -109,6 +109,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         }
 
     def test_save(self):
+        self.login_required()
         serializer = self.serializer_class(
             data=self.get_default_data(), context={"request": self.request}
         )
@@ -118,12 +119,12 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_nested_address_fields(self):
         data = self.serializer_class(self.obj).data
-        self.assertTrue(data["address"]["house_no"], self.obj.address.house_no)
-        self.assertTrue(data["address"]["city"], self.obj.address.city)
+        self.assertEqual(data["address"]["house_no"], self.obj.address.house_no)
+        self.assertEqual(data["address"]["city"], self.obj.address.city)
 
     def test_data__external_identifier_field(self):
         data = self.serializer_class(self.obj).data
-        self.assertTrue(
+        self.assertEqual(
             data["external_identifier"]["regon"], self.obj.external_identifier.regon
         )
 
@@ -136,6 +137,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertFalse(serializer.is_valid(), serializer.errors)
 
     def test_update_name(self):
+        self.login_required()
         serializer = self.serializer_class(
             self.obj,
             data={"name": "Inna nazwa sprawy"},
@@ -148,6 +150,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertEqual(obj.name, "Inna nazwa sprawy")
 
     def test_update_nested_address(self):
+        self.login_required()
         serializer = self.serializer_class(
             self.obj,
             data={"address": {"email": "new.email@asdf.pl"}},
@@ -160,6 +163,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertEqual(obj.address.email, "new.email@asdf.pl")
 
     def test_update_nested_external_identifier(self):
+        self.login_required()
         serializer = self.serializer_class(
             instance=self.obj,
             data={"external_identifier": {"nip": "1111111111"}},
