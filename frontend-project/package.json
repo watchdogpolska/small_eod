@@ -49,7 +49,7 @@
   "dependencies": {
     "@ant-design/compatible": "^0.0.1-rc.0",
     "@ant-design/icons": "^4.0.0-alpha.19",
-    "@ant-design/pro-layout": "4.11.0-1",
+    "@ant-design/pro-layout": "4.11.3",
     "@antv/data-set": "^0.10.2",
     "@antv/l7": "^2.0.0",
     "@antv/l7-maps": "^2.0.0",
