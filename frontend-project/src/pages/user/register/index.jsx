@@ -270,10 +270,10 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
             })}
           />
         </FormItem>
-        <InputGroup compact></InputGroup>
+        <InputGroup compact />
         <Row gutter={8}>
-          <Col span={16}></Col>
-          <Col span={8}></Col>
+          <Col span={16} />
+          <Col span={8} />
         </Row>
         <FormItem>
           <Button
