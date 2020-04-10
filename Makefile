@@ -53,7 +53,7 @@ migrations: wait_mysql wait_minio
 settings:
 	docker-compose run --rm backend python manage.py diffsettings
 
-createsuperuser:
+createsuperuser: wait_minio
 	docker-compose run --rm -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
 
 test-local: lint build check test

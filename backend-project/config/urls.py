@@ -56,6 +56,7 @@ urlpatterns = [
         name="schema_swagger",
     ),
     path("api/", include(router.urls)),
+    path("api/auth/", include("rest_framework_social_oauth2.urls")),
 ]
 
 

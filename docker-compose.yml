@@ -40,6 +40,8 @@ services:
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
       MINIO_URL: http://minio:9000
+      SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: "key"
+      SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: "secret"
       # SECRET_KEY
       # DJANGO_ALLOWED_HOSTS
     expose:
