@@ -1,4 +1,6 @@
-const getNotices = (req, res) => {
+import { Request, Response } from 'express';
+
+const getNotices = (req: Request, res: Response) => {
   res.json([
     {
       id: '000000001',
