@@ -2,8 +2,8 @@ Django==3.0.3
 django-environ==0.4.5
 django-teryt-tree==0.16.1
 djangorestframework==3.11.0
-psycopg2-binary==2.8.4
-django-extensions==2.2.8
+psycopg2-binary==2.8.5
+django-extensions==2.2.9
 drf-nested-routers==0.91
 djangorestframework-camel-case==1.1.2
 django-rest-framework-social-oauth2==1.1.0
