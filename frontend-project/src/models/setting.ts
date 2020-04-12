@@ -1,14 +1,21 @@
-import defaultSettings from '../../config/defaultSettings';
+import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
-const updateColorWeak = colorWeak => {
+export interface SettingModelType {
+  namespace: 'settings';
+  state: DefaultSettings;
+  reducers: {
+    changeSetting: any;
+  };
+}
+
+const updateColorWeak: (colorWeak: boolean) => void = colorWeak => {
   const root = document.getElementById('root');
-
   if (root) {
     root.className = colorWeak ? 'colorWeak' : '';
   }
 };
 
-const SettingModel = {
+const SettingModel: SettingModelType = {
   namespace: 'settings',
   state: defaultSettings,
   reducers: {
@@ -18,9 +25,11 @@ const SettingModel = {
       if (state.contentWidth !== contentWidth && window.dispatchEvent) {
         window.dispatchEvent(new Event('resize'));
       }
-
       updateColorWeak(!!colorWeak);
-      return { ...state, ...payload };
+      return {
+        ...state,
+        ...payload,
+      };
     },
   },
 };

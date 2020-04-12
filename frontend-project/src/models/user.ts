@@ -1,10 +1,43 @@
 import { queryCurrent, query as queryUsers } from '@/services/user';
 
-const UserModel = {
+export interface CurrentUser {
+  avatar?: string;
+  name?: string;
+  title?: string;
+  group?: string;
+  signature?: string;
+  tags?: {
+    key: string;
+    label: string;
+  }[];
+  userid?: string;
+  unreadCount?: number;
+}
+
+export interface UserModelState {
+  currentUser?: CurrentUser;
+}
+
+export interface UserModelType {
+  namespace: 'user';
+  state: UserModelState;
+  effects: {
+    fetch: any;
+    fetchCurrent: any;
+  };
+  reducers: {
+    saveCurrentUser: any;
+    changeNotifyCount: any;
+  };
+}
+
+const UserModel: UserModelType = {
   namespace: 'user',
+
   state: {
     currentUser: {},
   },
+
   effects: {
     *fetch(_, { call, put }) {
       const response = yield call(queryUsers);
@@ -13,7 +46,6 @@ const UserModel = {
         payload: response,
       });
     },
-
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
@@ -22,11 +54,14 @@ const UserModel = {
       });
     },
   },
+
   reducers: {
     saveCurrentUser(state, action) {
-      return { ...state, currentUser: action.payload || {} };
+      return {
+        ...state,
+        currentUser: action.payload || {},
+      };
     },
-
     changeNotifyCount(
       state = {
         currentUser: {},
@@ -44,4 +79,5 @@ const UserModel = {
     },
   },
 };
+
 export default UserModel;
