@@ -28,8 +28,6 @@ class TagSelect extends Component {
     },
   };
 
-  static Option = TagSelectOption;
-
   static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps) {
       return {
@@ -106,6 +104,8 @@ class TagSelect extends Component {
     node &&
     node.type &&
     (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
+
+  static Option = TagSelectOption;
 
   render() {
     const { value, expand } = this.state;

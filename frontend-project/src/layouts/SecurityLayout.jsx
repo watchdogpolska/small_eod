@@ -37,7 +37,7 @@ class SecurityLayout extends React.Component {
     }
 
     if (!isLogin) {
-      return <Redirect to={`/user/login?${queryString}`}></Redirect>;
+      return <Redirect to={`/user/login?${queryString}`} />;
     }
 
     return children;
