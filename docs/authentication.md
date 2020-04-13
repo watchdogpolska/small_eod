@@ -113,7 +113,28 @@ $ curl \
 
 ## Flow
 
-#todo
+1. Frontend presents login button to user with URL: `http://localhost:8000/api/auth/login/google-oauth2`
+2. Backend is redirecting request to Google with proper setup based on `base.py` settings:
+    - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY 
+    - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+    - SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE
+
+    A long with these settings request contains redirect URI to `http://localhost:8000/api/auth/complete/google-oauth2` and random characters to identify state.
+
+    Example URL to where user will be redirected:
+    `https://accounts.google.com/o/oauth2/auth?client_id=key&redirect_uri=http://localhost:8000/api/auth/complete/google-oauth2/&state=YkxuVMTmx4Diw1gzD3EgcRuDY6k7id4D&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+openid+email+profile`
+
+3. User authorizes `small_eod` application.
+4. Google uses `redirect_uri` and make request with authorization code.
+
+    Example callback URI:
+    `http://localhost:8000/api/auth/complete/google-oauth2/?code=4/ygHGt7j39aW2i17VRynVIDVILasdasdNfMQa4KCE-XUead4IM0ulU8ffDVlRHHFrtWqgbqWhQCCYv0ORFG7_7BM`
+
+5. Backend receives request with authorization code 
+   and exchanges it for Google access and refresh by making another request.
+
+6. #TODO I am not so sure what happens next. How google access token is provided for user :(    
+
 
 ## Authenticating requests
 
