@@ -113,6 +113,7 @@ $ curl \
 
 ## Flow
 
+0. [OAuth2 simply explained](https://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified) or [full spec](https://oauth.net/2/)
 1. Frontend presents login button to user with URL: `http://localhost:8000/api/auth/login/google-oauth2`
 2. Backend is redirecting request to Google with proper setup based on `base.py` settings:
     - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY 
