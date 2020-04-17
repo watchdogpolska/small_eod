@@ -1,35 +1,29 @@
 import { fetchAll } from '@/services/tags';
 
+export interface Tag {} // idk what properties Tag should have cuz its not mine code
+
+export interface TagsState {
+  tags: Tag[];
+}
+
 export interface TagsModelType {
   namespace: string;
-  state: any[];
+  state: TagsState;
   effects: {
-    fetchAll(
-      _: any,
-      {
-        call,
-        put,
-      }: {
-        call: any;
-        put: any;
-      },
-    ): Generator<any, void, unknown>;
+    fetchAll: any;
   };
   reducers: {
-    saveAll(
-      _: any,
-      {
-        payload,
-      }: {
-        payload: any;
-      },
-    ): any;
+    saveAll: any;
   };
 }
 
+const defaultTagsState: TagsState = {
+  tags: [],
+};
+
 const TagsModel = {
   namespace: 'tags',
-  state: [],
+  state: defaultTagsState,
   effects: {
     *fetchAll(_, { call, put }) {
       const response = yield call(fetchAll);
