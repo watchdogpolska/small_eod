@@ -1,9 +1,28 @@
 import { Avatar, List } from 'antd';
+
 import React from 'react';
 import classNames from 'classnames';
+import { NoticeIconData } from './index';
 import styles from './NoticeList.less';
 
-const NoticeList = ({
+export interface NoticeIconTabProps {
+  count?: number;
+  name?: string;
+  showClear?: boolean;
+  showViewMore?: boolean;
+  style?: React.CSSProperties;
+  title: string;
+  tabKey: string;
+  data?: NoticeIconData[];
+  onClick?: (item: NoticeIconData) => void;
+  onClear?: () => void;
+  emptyText?: string;
+  clearText?: string;
+  viewMoreText?: string;
+  list: NoticeIconData[];
+  onViewMore?: (e: any) => void;
+}
+const NoticeList: React.SFC<NoticeIconTabProps> = ({
   data = [],
   onClick,
   onClear,
@@ -15,7 +34,7 @@ const NoticeList = ({
   viewMoreText,
   showViewMore = false,
 }) => {
-  if (data.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <div className={styles.notFound}>
         <img
@@ -26,33 +45,23 @@ const NoticeList = ({
       </div>
     );
   }
-
   return (
     <div>
-      <List
+      <List<NoticeIconData>
         className={styles.list}
         dataSource={data}
         renderItem={(item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
-          }); // eslint-disable-next-line no-nested-ternary
-
-          // const leftIcon = item.avatar ? (
-          //   typeof item.avatar === 'string' ? (
-          //     <Avatar className={styles.avatar} src={item.avatar} />
-          //   ) : (
-          //     <span className={styles.iconElement}>{item.avatar}</span>
-          //   )
-          // ) : null;
-          let leftIcon = null;
-          if (item.avatar) {
-            leftIcon =
-              typeof item.avatar === 'string' ? (
-                <Avatar className={styles.avatar} src={item.avatar} />
-              ) : (
-                <span className={styles.iconElement}>{item.avatar}</span>
-              );
-          }
+          });
+          // eslint-disable-next-line no-nested-ternary
+          const leftIcon = item.avatar ? (
+            typeof item.avatar === 'string' ? (
+              <Avatar className={styles.avatar} src={item.avatar} />
+            ) : (
+              <span className={styles.iconElement}>{item.avatar}</span>
+            )
+          ) : null;
 
           return (
             <List.Item
