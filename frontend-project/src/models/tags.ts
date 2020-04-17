@@ -1,5 +1,32 @@
 import { fetchAll } from '@/services/tags';
 
+export interface TagsModelType {
+  namespace: string;
+  state: any[];
+  effects: {
+    fetchAll(
+      _: any,
+      {
+        call,
+        put,
+      }: {
+        call: any;
+        put: any;
+      },
+    ): Generator<any, void, unknown>;
+  };
+  reducers: {
+    saveAll(
+      _: any,
+      {
+        payload,
+      }: {
+        payload: any;
+      },
+    ): any;
+  };
+}
+
 const TagsModel = {
   namespace: 'tags',
   state: [],
