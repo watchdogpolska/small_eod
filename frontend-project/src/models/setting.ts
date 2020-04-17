@@ -8,7 +8,7 @@ export interface SettingModelType {
   };
 }
 
-const updateColorWeak: (colorWeak: boolean) => void = colorWeak => {
+const updateColorWeak = (colorWeak: boolean) => {
   const root = document.getElementById('root');
   if (root) {
     root.className = colorWeak ? 'colorWeak' : '';
