@@ -1,4 +1,6 @@
 import { fetchAll } from '@/services/tags';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
 export interface Tag {} // idk what properties Tag should have cuz its not mine code
 
@@ -10,10 +12,10 @@ export interface TagsModelType {
   namespace: string;
   state: TagsState;
   effects: {
-    fetchAll: any;
+    fetchAll: Effect;
   };
   reducers: {
-    saveAll: any;
+    saveAll: Reducer<TagsState>;
   };
 }
 
