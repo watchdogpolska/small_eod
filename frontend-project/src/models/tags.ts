@@ -1,6 +1,6 @@
 import { fetchAll } from '@/services/tags';
-import { Effect } from 'dva';
-import { Reducer } from 'redux';
+import { Effect, EffectsCommandMap } from 'dva';
+import { Reducer, AnyAction } from 'redux';
 
 export interface Tag {} // idk what properties Tag should have cuz its not mine code
 
@@ -27,7 +27,7 @@ const TagsModel = {
   namespace: 'tags',
   state: defaultTagsState,
   effects: {
-    *fetchAll(_, { call, put }) {
+    *fetchAll(_: AnyAction, { call, put }: EffectsCommandMap) {
       const response = yield call(fetchAll);
       yield put({
         type: 'saveAll',
@@ -36,7 +36,7 @@ const TagsModel = {
     },
   },
   reducers: {
-    saveAll(_, { payload }) {
+    saveAll(_: AnyAction, { payload }: EffectsCommandMap) {
       return payload.results;
     },
   },
