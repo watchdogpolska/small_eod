@@ -42,8 +42,8 @@ class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
             featureoptions=featureoptions,
         )
 
-        self.assertCountEqual(audited_institutions, case.audited_institution.all())
-        self.assertCountEqual(responsible_users, case.responsible_user.all())
-        self.assertCountEqual(notified_users, case.notified_user.all())
-        self.assertCountEqual(tags, case.tag.all())
+        self.assertCountEqual(audited_institutions, case.audited_institutions.all())
+        self.assertCountEqual(responsible_users, case.responsible_users.all())
+        self.assertCountEqual(notified_users, case.notified_users.all())
+        self.assertCountEqual(tags, case.tags.all())
         self.assertCountEqual(featureoptions, case.featureoptions.all())
