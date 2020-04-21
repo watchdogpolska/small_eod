@@ -14,11 +14,11 @@ class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_user.all()
+        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
 
 
 class NotifiedUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_user.all()
+        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
