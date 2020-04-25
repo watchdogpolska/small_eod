@@ -53,7 +53,9 @@ class CaseViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
-        return Case.objects.filter(**parse_query(collection.query)).with_counter().all()
+        return (
+            Case.objects.filter(**parse_query(collection.queries)).with_counter().all()
+        )
 
 
 class BaseSubCollection(viewsets.ReadOnlyModelViewSet):
@@ -62,7 +64,7 @@ class BaseSubCollection(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
-        case = Case.objects.filter(**parse_query(collection.query)).get(
+        case = Case.objects.filter(**parse_query(collection.queries)).get(
             pk=self.kwargs["case_pk"]
         )
         return self.model.objects.filter(case=case).all()
