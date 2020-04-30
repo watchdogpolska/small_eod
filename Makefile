@@ -38,8 +38,8 @@ pyupgrade:
 	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade
 
 lint:
-	docker run --rm -v /$$(pwd):/apps alpine/flake8 ./backend-project
-	docker run --rm -v /$$(pwd):/data cytopia/black --check ./backend-project
+	docker run --rm -v /$$(pwd)/backend-project:/apps alpine/flake8 .
+	docker run --rm -v /$$(pwd)/backend-project:/data cytopia/black --check .
 
 fmt:
 	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
