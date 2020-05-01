@@ -27,10 +27,10 @@ class FeatureOption(models.Model):
     name = models.CharField(
         max_length=100, verbose_name=_("Name"), help_text=_("Name of option.")
     )
-    feature = models.ForeignKey(
+    features = models.ForeignKey(
         to=Feature,
         on_delete=models.CASCADE,
         related_name="featureoptions",
-        verbose_name=_("Feature"),
-        help_text=_("Related feature."),
+        verbose_name=_("Features"),
+        help_text=_("Related features."),
     )
