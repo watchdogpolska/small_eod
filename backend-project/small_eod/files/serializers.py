@@ -6,7 +6,7 @@ from datetime import timedelta
 
 
 class FileSerializer(serializers.ModelSerializer):
-    letter = serializers.PrimaryKeyRelatedField(read_only=True)
+    letters = serializers.PrimaryKeyRelatedField(read_only=True)
     download_url = serializers.SerializerMethodField(read_only=True)
 
     def get_download_url(self, obj):
@@ -16,5 +16,5 @@ class FileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        fields = ["id", "path", "download_url", "name", "letter"]
+        fields = ["id", "path", "download_url", "name", "letters"]
         read_only_fields = []

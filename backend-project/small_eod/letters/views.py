@@ -31,10 +31,10 @@ class FileViewSet(
     serializer_class = FileSerializer
 
     def get_queryset(self):
-        return self.model.objects.filter(letter__pk=self.kwargs["letter_pk"]).all()
+        return self.model.objects.filter(letters__pk=self.kwargs["letter_pk"]).all()
 
     def perform_create(self, serializer):
-        serializer.save(letter=get_object_or_404(Letter, pk=self.kwargs["letter_pk"]))
+        serializer.save(letters=get_object_or_404(Letter, pk=self.kwargs["letter_pk"]))
 
 
 class PresignedUploadFileView(APIView):

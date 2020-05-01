@@ -10,10 +10,10 @@ class File(models.Model):
     name = models.CharField(
         max_length=100, verbose_name=_("Name"), help_text=_("Name of file.")
     )
-    letter = models.ForeignKey(
+    letters = models.ForeignKey(
         to=Letter,
         on_delete=models.CASCADE,
-        related_name="attachment",
-        verbose_name=_("Letter"),
-        help_text=_("Related letter."),
+        related_name="attachments",
+        verbose_name=_("Letters"),
+        help_text=_("Related letters."),
     )
