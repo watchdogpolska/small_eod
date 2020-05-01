@@ -5,13 +5,13 @@ from rest_framework.serializers import ModelSerializer
 
 
 class FeatureOptionSerializer(ModelSerializer):
-    feature = serializers.PrimaryKeyRelatedField(
+    features = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Feature.objects.all()
     )
 
     class Meta:
         model = FeatureOption
-        fields = ["id", "name", "feature"]
+        fields = ["id", "name", "features"]
 
 
 class NestedFeatureOptionSerializer(ModelSerializer):
@@ -29,7 +29,7 @@ class FeatureSerializer(UserLogModelSerializer):
 
     def create(self, validated_data):
         features_data = validated_data.pop("featureoptions")
-        feature = super().create(validated_data)
+        features = super().create(validated_data)
         for feature_data in features_data:
-            FeatureOption.objects.create(feature=feature, **feature_data)
-        return feature
+            FeatureOption.objects.create(features=features, **feature_data)
+        return features
