@@ -9,12 +9,12 @@ class Event(TimestampUserLogModel):
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Name of event.")
     )
-    comment = models.CharField(
-        max_length=256, verbose_name=_("Comment"), help_text=_("Comment text.")
+    comments = models.CharField(
+        max_length=256, verbose_name=_("Comments"), help_text=_("Comments text.")
     )
-    case = models.ForeignKey(
+    cases = models.ForeignKey(
         to=Case,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Case"),
-        help_text=_("Case for this event."),
+        verbose_name=_("Cases"),
+        help_text=_("Cases for this event."),
     )
