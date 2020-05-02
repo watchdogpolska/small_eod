@@ -17,16 +17,16 @@ class DescriptionSerializer(serializers.ModelSerializer):
 
 
 class LetterSerializer(UserLogModelSerializer):
-    description = serializers.PrimaryKeyRelatedField(
+    descriptions = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Description.objects.all()
     )
-    case = serializers.PrimaryKeyRelatedField(
+    cases = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Case.objects.all()
     )
-    institution = serializers.PrimaryKeyRelatedField(
+    institutions = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Institution.objects.all()
     )
-    channel = serializers.PrimaryKeyRelatedField(
+    channels = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Channel.objects.all()
     )
     attachments = FileSerializer(many=True, read_only=True)
@@ -37,17 +37,17 @@ class LetterSerializer(UserLogModelSerializer):
             "id",
             "name",
             "direction",
-            "channel",
+            "channels",
             "final",
             "date",
             "identifier",
-            "institution",
-            "case",
+            "institutions",
+            "cases",
             "attachments",
             "ordering",
-            "comment",
-            "excerpt",
-            "description",
+            "comments",
+            "excerpts",
+            "descriptions",
             "created_on",
             "created_by",
             "modified_on",
@@ -55,10 +55,10 @@ class LetterSerializer(UserLogModelSerializer):
         ]
 
     def create(self, validated_data):
-        channel = validated_data.pop("channel")
-        description = validated_data.pop("description")
-        institution = validated_data.pop("institution")
-        case = validated_data.pop("case")
+        channel = validated_data.pop("channels")
+        description = validated_data.pop("descriptions")
+        institution = validated_data.pop("institutions")
+        case = validated_data.pop("cases")
 
         letter = super().create(validated_data)
         letter.channel = channel

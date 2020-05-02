@@ -49,16 +49,16 @@ class Letter(TimestampUserLogModel):
     ordering = models.IntegerField(
         default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
     )
-    comment = models.CharField(
+    comments = models.CharField(
         max_length=256,
-        verbose_name=_("Comment"),
-        help_text=_("Comment for letter."),
+        verbose_name=_("Comments"),
+        help_text=_("Comments for letter."),
         blank=True,
     )
-    excerpt = models.CharField(
+    excerpts = models.CharField(
         max_length=256,
-        verbose_name=_("Excerpt"),
-        help_text=_("Excerpt of letter."),
+        verbose_name=_("Excerpts"),
+        help_text=_("Excerpts of letter."),
         blank=True,
     )
     identifier = models.CharField(
@@ -67,31 +67,31 @@ class Letter(TimestampUserLogModel):
         help_text=_("Identifier of letter."),
         blank=True,
     )
-    case = models.ForeignKey(
+    cases = models.ForeignKey(
         to=Case,
         on_delete=models.DO_NOTHING,
         verbose_name=_("Case"),
         null=True,
         blank=True,
     )
-    channel = models.ForeignKey(
+    channels = models.ForeignKey(
         to=Channel,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Channel"),
+        verbose_name=_("Channels"),
         blank=True,
         null=True,
     )
-    institution = models.ForeignKey(
+    institutions = models.ForeignKey(
         to=Institution,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Institution"),
+        verbose_name=_("Institutions"),
         blank=True,
         null=True,
     )
-    description = models.ForeignKey(
+    descriptions = models.ForeignKey(
         to=Description,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Description of letter."),
+        verbose_name=_("Descriptions of letter."),
         null=True,
         blank=True,
     )

@@ -59,16 +59,16 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         default_data = {
             "name": "Letter 1",
             "direction": "IN",
-            "channel": self.channel.pk,
+            "channels": self.channel.pk,
             "final": True,
             "date": datetime.now() + timedelta(days=1),
             "identifier": "ssj2",
-            "institution": self.institution.pk,
-            "case": self.case.pk,
+            "institutions": self.institution.pk,
+            "cases": self.case.pk,
             "ordering": 90,
-            "comment": "comment",
-            "excerpt": "No idea what this field does",
-            "description": self.description.pk,
+            "comments": "comment",
+            "excerpts": "No idea what this field does",
+            "descriptions": self.description.pk,
         }
         for field in skip:
             del default_data[field]
@@ -96,7 +96,7 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def test_nested_fields(self):
         data = self.serializer_class(self.obj).data
-        self.assertEqual(data["description"], self.obj.description.pk)
+        self.assertEqual(data["descriptions"], self.obj.descriptions.pk)
 
     def test_attachments(self):
         self.attachment = FileFactory(letters=self.obj)

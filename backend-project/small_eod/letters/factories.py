@@ -26,14 +26,14 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
     direction = factory.fuzzy.FuzzyChoice(("IN", "OUT"))
 
     name = factory.Sequence(lambda n: "letter-%04d" % n)
-    comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)
-    excerpt = factory.Sequence(lambda n: "letter-excerpt-%04d" % n)
+    comments = factory.Sequence(lambda n: "letter-comment-%04d" % n)
+    excerpts = factory.Sequence(lambda n: "letter-excerpt-%04d" % n)
     identifier = factory.Sequence(lambda n: "letter-identifier-%04d" % n)
 
-    case = factory.SubFactory(CaseFactory)
-    channel = factory.SubFactory(ChannelFactory)
-    institution = factory.SubFactory(InstitutionFactory)
-    description = factory.SubFactory(DescriptionFactory)
+    cases = factory.SubFactory(CaseFactory)
+    channels = factory.SubFactory(ChannelFactory)
+    institutions = factory.SubFactory(InstitutionFactory)
+    descriptions = factory.SubFactory(DescriptionFactory)
 
     class Meta:
         model = Letter
