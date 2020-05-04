@@ -1,7 +1,6 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
-import { connect } from 'dva';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 const layout = {
@@ -55,8 +54,7 @@ const InstitutionsNewForm = () => {
               >
                 <Select
                   placeholder={formatMessage({ id: 'institutions-new.form.administrative-division.placeholder' })}
-                >
-                </Select>
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -74,8 +72,7 @@ const InstitutionsNewForm = () => {
               >
                 <Select
                   placeholder={formatMessage({ id: 'institutions-new.form.address.placeholder' })}
-                >
-                </Select>
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -93,8 +90,7 @@ const InstitutionsNewForm = () => {
               >
                 <Select
                   placeholder={formatMessage({ id: 'institutions-new.form.external-identifier.placeholder' })}
-                >
-                </Select>
+                />
               </Form.Item>
             </Col>
           </Row>
