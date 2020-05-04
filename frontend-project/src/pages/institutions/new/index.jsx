@@ -19,7 +19,6 @@ const InstitutionsNewForm = () => {
     form.submit();
   };
 
-
   return (
     <Form {...layout} form={form}>
       <PageHeaderWrapper content={formatMessage({ id: 'institutions-new.page-header-content' })}>
@@ -36,7 +35,9 @@ const InstitutionsNewForm = () => {
                   },
                 ]}
               >
-                <Input placeholder={formatMessage({ id: 'institutions-new.form.name.placeholder' })} />
+                <Input
+                  placeholder={formatMessage({ id: 'institutions-new.form.name.placeholder' })}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -48,12 +49,16 @@ const InstitutionsNewForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: 'institutions-new.form.administrative-division.required-error' }),
+                    message: formatMessage({
+                      id: 'institutions-new.form.administrative-division.required-error',
+                    }),
                   },
                 ]}
               >
                 <Select
-                  placeholder={formatMessage({ id: 'institutions-new.form.administrative-division.placeholder' })}
+                  placeholder={formatMessage({
+                    id: 'institutions-new.form.administrative-division.placeholder',
+                  })}
                 />
               </Form.Item>
             </Col>
@@ -84,12 +89,16 @@ const InstitutionsNewForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: 'institutions-new.form.external-identifier.required-error' }),
+                    message: formatMessage({
+                      id: 'institutions-new.form.external-identifier.required-error',
+                    }),
                   },
                 ]}
               >
                 <Select
-                  placeholder={formatMessage({ id: 'institutions-new.form.external-identifier.placeholder' })}
+                  placeholder={formatMessage({
+                    id: 'institutions-new.form.external-identifier.placeholder',
+                  })}
                 />
               </Form.Item>
             </Col>

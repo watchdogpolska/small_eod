@@ -5,7 +5,8 @@ export default {
   'institutions-new.form.save.label': 'Save',
   'institutions-new.form.administrative-division.label': 'Administrative Division',
   'institutions-new.form.administrative-division.placeholder': 'Choose administrative division',
-  'institutions-new.form.administrative-division.required-error': 'Administrative division is required',
+  'institutions-new.form.administrative-division.required-error':
+    'Administrative division is required',
   'institutions-new.page-header-content': 'You can add new institution here.',
   'institutions-new.form.address.label': 'Address',
   'institutions-new.form.address.placeholder': 'Choose address',
