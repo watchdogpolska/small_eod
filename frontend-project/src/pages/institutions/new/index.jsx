@@ -4,9 +4,6 @@ import { connect } from 'dva';
 import React, { useEffect } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
-const { TextArea } = Input;
-const { Option } = Select;
-
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
