@@ -12,7 +12,6 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-
 const InstitutionsNewForm: React.FunctionComponent = () => {
   const [form] = Form.useForm();
 
