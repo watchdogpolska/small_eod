@@ -143,21 +143,15 @@ export default {
               ],
             },
             {
-              path: '/form',
-              icon: 'form',
-              name: 'Instytucje',
+              name: 'institutions',
+              icon: 'HomeOutlined',
+              path: '/institutions',
               routes: [
                 {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/institutions/new',
+                  component: './institutions/new',
                 },
               ],
             },
