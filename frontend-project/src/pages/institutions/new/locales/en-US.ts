@@ -3,7 +3,7 @@ export default {
   'institutions-new.form.name.placeholder': "Institution's name",
   'institutions-new.form.name.required-error': 'Name is required',
   'institutions-new.form.save.label': 'Save',
-  'institutions-new.form.administrative-division.label': 'Administrative Division',
+  'institutions-new.form.administrative-division.label': 'Administrative division',
   'institutions-new.form.administrative-division.placeholder': 'Choose administrative division',
   'institutions-new.form.administrative-division.required-error':
     'Administrative division is required',
