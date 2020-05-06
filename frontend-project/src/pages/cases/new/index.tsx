@@ -1,8 +1,25 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+
+interface UserType {
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  id: number,
+}
+
+interface TagType {
+  name: string,
+}
+
+interface CasesNewFormProps {
+  tags: TagType[],
+  users: UserType[],
+}
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -16,7 +33,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm = ({ tags, dispatch }) => {
+const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispatch }) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
@@ -25,6 +42,7 @@ const CasesNewForm = ({ tags, dispatch }) => {
 
   useEffect(() => {
     dispatch({ type: 'tags/fetchAll' });
+    dispatch({ type: 'users/fetchAll' });
   }, []);
 
   return (
@@ -132,7 +150,11 @@ const CasesNewForm = ({ tags, dispatch }) => {
                 <Select
                   mode="multiple"
                   placeholder={formatMessage({ id: 'cases-new.form.notified-users.placeholder' })}
-                />
+                >
+                  {users.map(user => (
+                    <Option key={user.id}>{user.firstName} {user.lastName}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -140,14 +162,16 @@ const CasesNewForm = ({ tags, dispatch }) => {
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.responsible-users.label' })}
-                name="notified-users"
+                name="responsible-users"
               >
                 <Select
                   mode="multiple"
-                  placeholder={formatMessage({
-                    id: 'cases-new.form.responsible-users.placeholder',
-                  })}
-                />
+                  placeholder={formatMessage({ id: 'cases-new.form.responsible-users.placeholder' })}
+                >
+                  {users.map(user => (
+                    <Option key={user.id}>{user.firstName} {user.firstName}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -166,4 +190,4 @@ const CasesNewForm = ({ tags, dispatch }) => {
   );
 };
 
-export default connect(({ tags }) => ({ tags }))(CasesNewForm);
+export default connect(({ tags, users }) => ({ tags, users }))(CasesNewForm);
