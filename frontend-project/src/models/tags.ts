@@ -2,7 +2,9 @@ import { fetchAll } from '@/services/tags';
 import { Effect, EffectsCommandMap } from 'dva';
 import { Reducer, AnyAction } from 'redux';
 
-export interface Tag {} // idk what properties Tag should have cuz its not mine code
+export interface Tag {
+  name: string
+}
 
 export interface TagsState {
   tags: Tag[];
