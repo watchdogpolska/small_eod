@@ -3,7 +3,7 @@ export default {
   'institutions-new.form.name.placeholder': 'Nazwa instytucji',
   'institutions-new.form.name.required-error': 'Nazwa jest wymagana',
   'institutions-new.form.save.label': 'Zapisz',
-  'institutions-new.form.administrative-division.label': 'Jednostka Administracyjna',
+  'institutions-new.form.administrative-division.label': 'Jednostka administracyjna',
   'institutions-new.form.administrative-division.placeholder': 'Wybierz jednostkę administracyjną',
   'institutions-new.form.administrative-division.required-error':
     'Jednostka administacyjna jest wymagana',
