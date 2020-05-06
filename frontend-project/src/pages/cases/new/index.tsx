@@ -5,20 +5,20 @@ import React, { useEffect, FunctionComponent } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 interface UserType {
-  username: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  id: number,
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: number;
 }
 
 interface TagType {
-  name: string,
+  name: string;
 }
 
 interface CasesNewFormProps {
-  tags: TagType[],
-  users: UserType[],
+  tags: TagType[];
+  users: UserType[];
 }
 
 const { TextArea } = Input;
@@ -100,7 +100,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   mode="tags"
                   placeholder={formatMessage({ id: 'cases-new.form.tags.placeholder' })}
                 >
-                  {tags.map(tag => (
+                  {tags.map((tag) => (
                     <Option key={tag.name}>{tag.name}</Option>
                   ))}
                 </Select>
@@ -151,8 +151,10 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   mode="multiple"
                   placeholder={formatMessage({ id: 'cases-new.form.notified-users.placeholder' })}
                 >
-                  {users.map(user => (
-                    <Option key={user.id}>{user.firstName} {user.lastName}</Option>
+                  {users.map((user) => (
+                    <Option key={user.id}>
+                      {user.firstName} {user.lastName}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>
@@ -166,10 +168,14 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
               >
                 <Select
                   mode="multiple"
-                  placeholder={formatMessage({ id: 'cases-new.form.responsible-users.placeholder' })}
+                  placeholder={formatMessage({
+                    id: 'cases-new.form.responsible-users.placeholder',
+                  })}
                 >
-                  {users.map(user => (
-                    <Option key={user.id}>{user.firstName} {user.firstName}</Option>
+                  {users.map((user) => (
+                    <Option key={user.id}>
+                      {user.firstName} {user.firstName}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>
