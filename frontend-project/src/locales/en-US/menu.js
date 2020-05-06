@@ -39,4 +39,6 @@ export default {
   'menu.account.logout': 'Logout',
   'menu.cases': 'Cases',
   'menu.cases.new': 'New',
+  'menu.institutions': 'Institutions',
+  'menu.institutions.new': 'New',
 };
