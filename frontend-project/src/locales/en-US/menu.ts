@@ -1,5 +1,4 @@
 export default {
-
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',
@@ -38,7 +37,7 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
-  //sidebar menu
+  // sidebar menu
   'menu.groups': 'Groups',
   'menu.users': 'Users',
   'menu.social-applications': 'Social applications',
