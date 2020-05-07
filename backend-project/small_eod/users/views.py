@@ -5,18 +5,17 @@ from django.urls import reverse
 from drf_yasg.utils import swagger_auto_schema
 from .serializers import UserSerializer, User
 from django.conf import settings
-from rest_framework.permissions import AllowAny
 from .serializers import (
     RequestSerializer,
     TokenResponseSerializer,
     RefreshTokenRequestSerializer,
 )
-import requests
 from requests_oauthlib import OAuth2Session
 from rest_framework_simplejwt.tokens import RefreshToken
 
 authorization_base_url = "https://accounts.google.com/o/oauth2/v2/auth"
 token_url = "https://www.googleapis.com/oauth2/v4/token"
+userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -44,7 +43,6 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def auth(self, request):
         google = self.get_oauthlib(request)
-        ## TODO: Adjust authorization url for front-end
         authorization_url, state = google.authorization_url(url=authorization_base_url)
         request.session["state"] = state
         serializer = RequestSerializer({"url": authorization_url})
@@ -52,19 +50,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     @swagger_auto_schema(
-        operation_description="API endpoint to exchange authorization code to access token",
+        operation_description="API endpoint to exchange "
+        + "authorization code to access token",
         responses={200: TokenResponseSerializer()},
         manual_parameters=[],
         security=[],
     )
     def exchange(self, request):
         google = self.get_oauthlib(request)
-        token = google.fetch_token(
+        google.fetch_token(
             token_url=token_url,
             client_secret=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
             authorization_response=request.build_absolute_uri(),
         )
-        resp = google.get("https://www.googleapis.com/oauth2/v1/userinfo")
+        resp = google.get(userinfo_url)
         profile = resp.json()
         user, _ = User.objects.get_or_create(
             defaults={
@@ -83,7 +82,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["post"])
     @swagger_auto_schema(
-        operation_description="API endpoint to exchange refresh token to fresh access token",
+        operation_description="API endpoint to exchange "
+        + "refresh token to fresh access token",
         responses={200: TokenResponseSerializer()},
         request_body=RefreshTokenRequestSerializer,
         manual_parameters=[],

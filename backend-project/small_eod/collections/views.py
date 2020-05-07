@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
-from django.utils.decorators import method_decorator, classonlymethod
+from django.utils.decorators import method_decorator
 
 from .models import Collection
 from .serializers import CollectionSerializer, TokenSetSerializer
