@@ -1,4 +1,5 @@
 export default {
+
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',
@@ -37,8 +38,19 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
-  'menu.cases': 'Cases',
-  'menu.cases.new': 'New',
+  //sidebar menu
+  'menu.groups': 'Groups',
+  'menu.users': 'Users',
+  'menu.social-applications': 'Social applications',
+  'menu.social-accounts': 'Social accounts',
+  'menu.social-accounts-tokens': 'Application tokens',
   'menu.institutions': 'Institutions',
   'menu.institutions.new': 'New',
+  'menu.channels': 'Channels',
+  'menu.letters': 'Letters',
+  'menu.letters-descriptions': 'Letters descriptions',
+  'menu.cases': 'Cases',
+  'menu.cases.new': 'New',
+  'menu.dictionaries': 'Dictionaries',
+  'menu.tags': 'Tags',
 };

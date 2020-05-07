@@ -111,36 +111,29 @@ export default {
           authority: ['admin', 'user'],
           routes: [
             {
-              name: 'cases',
-              icon: 'FileTextOutlined',
-              path: '/cases',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/cases/new',
-                  component: './cases/new',
-                },
-              ],
+              name: 'groups',
+              icon: 'user',
+              path: '/groups',
             },
             {
-              name: 'account',
+              name: 'users',
               icon: 'user',
-              path: '/account',
-              routes: [
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: 'settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
-              ],
+              path: '/users',
+            },
+            {
+              name: 'social-applications',
+              icon: 'GlobalOutlined',
+              path: '/social-applications',
+            },
+            {
+              name: 'social-accounts',
+              icon: 'GlobalOutlined',
+              path: '/social-accounts',
+            },
+            {
+              name: 'social-accounts-tokens',
+              icon: 'GlobalOutlined',
+              path: '/social-accounts-tokens',
             },
             {
               name: 'institutions',
@@ -156,195 +149,42 @@ export default {
               ],
             },
             {
-              path: '/form_',
+              name: 'channels',
               icon: 'form',
-              name: 'Kanały',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
+              path: '/channels',
             },
             {
-              path: '/list',
+              name: 'letters',
               icon: 'table',
-              name: 'Listy',
-              routes: [
-                {
-                  path: '/list/search',
-                  name: 'search-list',
-                  component: './list/search',
-                  routes: [
-                    {
-                      path: '/list/search',
-                      redirect: '/list/search/articles',
-                    },
-                    {
-                      name: 'articles',
-                      icon: 'smile',
-                      path: '/list/search/articles',
-                      component: './list/search/articles',
-                    },
-                    {
-                      name: 'projects',
-                      icon: 'smile',
-                      path: '/list/search/projects',
-                      component: './list/search/projects',
-                    },
-                    {
-                      name: 'applications',
-                      icon: 'smile',
-                      path: '/list/search/applications',
-                      component: './list/search/applications',
-                    },
-                  ],
-                },
-                {
-                  name: 'basic-list',
-                  icon: 'smile',
-                  path: '/list/basic-list',
-                  component: './list/basic-list',
-                },
-                {
-                  name: 'card-list',
-                  icon: 'smile',
-                  path: '/list/card-list',
-                  component: './list/card-list',
-                },
-              ],
+              path: '/letters',
             },
             {
-              path: '/table',
+              name: 'letters-descriptions',
               icon: 'table',
-              name: 'Opisy listów',
+              path: '/letters-descriptions',
+            },
+            {
+              name: 'cases',
+              icon: 'FileTextOutlined',
+              path: '/cases',
               routes: [
                 {
-                  path: '/list/search',
-                  name: 'search-list',
-                  component: './list/search',
-                  routes: [
-                    {
-                      path: '/list/search',
-                      redirect: '/list/search/articles',
-                    },
-                    {
-                      name: 'articles',
-                      icon: 'smile',
-                      path: '/list/search/articles',
-                      component: './list/search/articles',
-                    },
-                    {
-                      name: 'projects',
-                      icon: 'smile',
-                      path: '/list/search/projects',
-                      component: './list/search/projects',
-                    },
-                    {
-                      name: 'applications',
-                      icon: 'smile',
-                      path: '/list/search/applications',
-                      component: './list/search/applications',
-                    },
-                  ],
-                },
-                {
-                  name: 'basic-list',
-                  icon: 'smile',
-                  path: '/list/basic-list',
-                  component: './list/basic-list',
-                },
-                {
-                  name: 'card-list',
-                  icon: 'smile',
-                  path: '/list/card-list',
-                  component: './list/card-list',
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/cases/new',
+                  component: './cases/new',
                 },
               ],
             },
             {
-              path: '/profile',
-              name: 'Osoby',
-              icon: 'profile',
-              routes: [
-                {
-                  name: 'basic',
-                  icon: 'smile',
-                  path: '/profile/basic',
-                  component: './profile/basic',
-                },
-                {
-                  name: 'advanced',
-                  icon: 'smile',
-                  path: '/profile/advanced',
-                  component: './profile/advanced',
-                },
-              ],
-            },
-            {
-              name: 'Sprawy',
-              icon: 'CheckCircleOutlined',
-              path: '/result',
-              routes: [
-                {
-                  name: 'success',
-                  icon: 'smile',
-                  path: '/result/success',
-                  component: './result/success',
-                },
-                {
-                  name: 'fail',
-                  icon: 'smile',
-                  path: '/result/fail',
-                  component: './result/fail',
-                },
-              ],
-            },
-            {
-              path: '/Slowniki',
+              name: 'dictionaries',
               icon: 'form',
-              name: 'Słowniki',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
+              path: '/dictionaries',
             },
             {
+              name: 'tags',
+              icon: 'form',
               path: '/tagi',
-              icon: 'form',
-              name: 'Tagi',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
             },
             {
               path: '/',

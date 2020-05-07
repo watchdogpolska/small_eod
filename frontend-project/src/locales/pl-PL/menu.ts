@@ -1,0 +1,16 @@
+export default {
+  'menu.groups': 'Grupy',
+  'menu.users': 'Użytkownicy',
+  'menu.social-applications': 'Aplikacje społecznościowe',
+  'menu.social-accounts': 'Konta społecznościowe',
+  'menu.social-accounts-tokens': 'Tokeny aplikacji',
+  'menu.institutions': 'Instytucje',
+  'menu.institutions.new': 'Nowa',
+  'menu.channels': 'Kanały',
+  'menu.letters': 'Listy',
+  'menu.letters-descriptions': 'Opisy listów',
+  'menu.cases': 'Sprawy',
+  'menu.cases.new': 'Nowa',
+  'menu.dictionaries': 'Słowniki',
+  'menu.tags': 'Tagi',
+};
