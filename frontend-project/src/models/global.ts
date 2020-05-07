@@ -1,11 +1,26 @@
+import { NoticeIconData } from '@/components/NoticeIcon';
 import { queryNotices } from '@/services/user';
+import { ConnectState } from './connect.d';
+
+export interface NoticeItem extends NoticeIconData {
+  id: string;
+  type: string;
+  status: string;
+}
+
+export interface GlobalModelState {
+  collapsed: boolean;
+  notices: NoticeItem[];
+}
 
 const GlobalModel = {
   namespace: 'global',
+
   state: {
     collapsed: false,
     notices: [],
   },
+
   effects: {
     *fetchNotices(_, { call, put, select }) {
       const data = yield call(queryNotices);
@@ -13,8 +28,8 @@ const GlobalModel = {
         type: 'saveNotices',
         payload: data,
       });
-      const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length,
+      const unreadCount: number = yield select(
+        (state: ConnectState) => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -24,15 +39,14 @@ const GlobalModel = {
         },
       });
     },
-
     *clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
         payload,
       });
-      const count = yield select(state => state.global.notices.length);
-      const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length,
+      const count: number = yield select((state: ConnectState) => state.global.notices.length);
+      const unreadCount: number = yield select(
+        (state: ConnectState) => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -42,23 +56,22 @@ const GlobalModel = {
         },
       });
     },
-
     *changeNoticeReadState({ payload }, { put, select }) {
-      const notices = yield select(state =>
+      const notices: NoticeItem[] = yield select((state: ConnectState) =>
         state.global.notices.map(item => {
           const notice = { ...item };
-
           if (notice.id === payload) {
             notice.read = true;
           }
-
           return notice;
         }),
       );
+
       yield put({
         type: 'saveNotices',
         payload: notices,
       });
+
       yield put({
         type: 'user/changeNotifyCount',
         payload: {
@@ -68,43 +81,34 @@ const GlobalModel = {
       });
     },
   },
-  reducers: {
-    changeLayoutCollapsed(
-      state = {
-        notices: [],
-        collapsed: true,
-      },
-      { payload },
-    ) {
-      return { ...state, collapsed: payload };
-    },
 
-    saveNotices(state, { payload }) {
+  reducers: {
+    changeLayoutCollapsed(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
+      return {
+        ...state,
+        collapsed: payload,
+      };
+    },
+    saveNotices(state, { payload }): GlobalModelState {
       return {
         collapsed: false,
         ...state,
         notices: payload,
       };
     },
-
-    saveClearedNotices(
-      state = {
-        notices: [],
-        collapsed: true,
-      },
-      { payload },
-    ) {
+    saveClearedNotices(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
       return {
         collapsed: false,
         ...state,
-        notices: state.notices.filter(item => item.type !== payload),
+        notices: state.notices.filter((item): boolean => item.type !== payload),
       };
     },
   },
+
   subscriptions: {
-    setup({ history }) {
+    setup({ history }): void {
       // Subscribe history(url) change, trigger `load` action if pathname is `/`
-      history.listen(({ pathname, search }) => {
+      history.listen(({ pathname, search }): void => {
         if (typeof window.ga !== 'undefined') {
           window.ga('send', 'pageview', pathname + search);
         }
@@ -112,4 +116,5 @@ const GlobalModel = {
     },
   },
 };
+
 export default GlobalModel;

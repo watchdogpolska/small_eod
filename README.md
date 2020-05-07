@@ -96,7 +96,7 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:80
 W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-docker-compose run web python manage.py createsuperuser
+docker-compose run backend python manage.py createsuperuser
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)

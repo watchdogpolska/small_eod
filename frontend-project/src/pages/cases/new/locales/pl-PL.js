@@ -16,7 +16,7 @@ export default {
   'cases-new.form.responsible-users.placeholder': 'Użytkownicy odpowiedzialni za daną sprawę',
   'cases-new.form.save.label': 'Zapisz',
   'cases-new.form.tags.label': 'Tagi',
-  'cases-new.form.tags.placeholder': 'Wybierze tagi',
+  'cases-new.form.tags.placeholder': 'Wybierz tagi',
   'cases-new.form.tags.required-error': 'Tagi są wymagane',
   'cases-new.page-header-content': 'Możesz dodać tutaj nową sprawę.',
 };
