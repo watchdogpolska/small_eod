@@ -22,7 +22,9 @@ class RequestSerializer(serializers.Serializer):
 
 class TokenResponseSerializer(serializers.Serializer):
     access_token = serializers.CharField()
-    expires_in = serializers.IntegerField(default=api_settings.ACCESS_TOKEN_LIFETIME.total_seconds())
+    expires_in = serializers.IntegerField(
+        default=api_settings.ACCESS_TOKEN_LIFETIME.total_seconds()
+    )
     refresh_token = serializers.CharField()
 
 

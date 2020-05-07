@@ -127,13 +127,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 
-SWAGGER_SETTINGS = {"DEFAULT_INFO": "config.swagger.info"}
+SWAGGER_SETTINGS = {
+    "DEFAULT_INFO": "config.swagger.info",
+    "SECURITY_DEFINITIONS": {
+        "Basic": {"type": "basic"},
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"},
+        "CollectionToken": {"type": "apiKey", "name": "authorization", "in": "query"},
+    },
+    "SECURITY_REQUIREMENTS": [{"Basic": []}, {"Bearer": []}],
+}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_RENDERER_CLASSES": (

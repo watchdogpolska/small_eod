@@ -37,7 +37,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin):
             if self.paginated is True
             else parsed_response
         )
-        
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(parsed_response), self.parsed_response_len)
         self.assertIs(type(response_result), list)

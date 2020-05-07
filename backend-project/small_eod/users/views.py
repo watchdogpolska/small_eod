@@ -35,7 +35,7 @@ class UserViewSet(viewsets.ModelViewSet):
         )
 
     @swagger_auto_schema(
-        method='get',
+        method="get",
         operation_description="API endpoint to receive URI for OAuth authorization url",
         responses={200: RequestSerializer()},
         manual_parameters=[],
