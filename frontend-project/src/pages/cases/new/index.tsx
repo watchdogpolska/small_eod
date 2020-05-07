@@ -100,7 +100,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   mode="tags"
                   placeholder={formatMessage({ id: 'cases-new.form.tags.placeholder' })}
                 >
-                  {tags.map((tag) => (
+                  {tags.map(tag => (
                     <Option key={tag.name}>{tag.name}</Option>
                   ))}
                 </Select>
@@ -151,7 +151,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   mode="multiple"
                   placeholder={formatMessage({ id: 'cases-new.form.notified-users.placeholder' })}
                 >
-                  {users.map((user) => (
+                  {users.map(user => (
                     <Option key={user.id}>
                       {user.firstName} {user.lastName}
                     </Option>
@@ -172,7 +172,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                     id: 'cases-new.form.responsible-users.placeholder',
                   })}
                 >
-                  {users.map((user) => (
+                  {users.map(user => (
                     <Option key={user.id}>
                       {user.firstName} {user.firstName}
                     </Option>
