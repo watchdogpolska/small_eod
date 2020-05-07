@@ -12,14 +12,16 @@ class Collection(TimestampUserLogModel):
         verbose_name=_("An expiration date"),
         help_text=_("An expiration date of collection."),
     )
-    query = models.CharField(
-        max_length=256, verbose_name=_("Query"), help_text=_("Query for collection.")
+    queries = models.CharField(
+        max_length=256,
+        verbose_name=_("Queries"),
+        help_text=_("Queries for collection."),
     )
-    comment = models.CharField(
+    comments = models.CharField(
         max_length=256,
         blank=True,
-        verbose_name=_("Comment"),
-        help_text=_("Comment for collection."),
+        verbose_name=_("Comments"),
+        help_text=_("Comments for collection."),
     )
     public = models.BooleanField(
         default=False, verbose_name=_("Public"), help_text=_("Make public.")

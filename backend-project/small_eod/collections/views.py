@@ -72,7 +72,9 @@ class CaseViewSet(CollectionTokenSecuredViewSet):
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
-        return Case.objects.filter(**parse_query(collection.query)).with_counter().all()
+        return (
+            Case.objects.filter(**parse_query(collection.queries)).with_counter().all()
+        )
 
 
 class BaseSubCollection(CollectionTokenSecuredViewSet):
@@ -80,7 +82,7 @@ class BaseSubCollection(CollectionTokenSecuredViewSet):
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
-        case = Case.objects.filter(**parse_query(collection.query)).get(
+        case = Case.objects.filter(**parse_query(collection.queries)).get(
             pk=self.kwargs["case_pk"]
         )
         return self.model.objects.filter(case=case).all()

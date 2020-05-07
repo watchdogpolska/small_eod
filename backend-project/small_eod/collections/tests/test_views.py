@@ -49,7 +49,7 @@ class CollectionViewSetTestCase(
         return self.obj
 
     def validate_item(self, item):
-        self.assertEqual(item["comment"], self.obj.comment)
+        self.assertEqual(item["comments"], self.obj.comments)
 
 
 class TokenCreateAPIView(AuthenticatedMixin, TestCase):
@@ -85,7 +85,7 @@ class NoteViewSetTestCase(
 
     def setUp(self):
         super().setUp()
-        self.collection = CollectionFactory(query=str(self.obj.case.id))
+        self.collection = CollectionFactory(queries=str(self.obj.case.id))
 
     def get_extra_kwargs(self):
         return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
@@ -103,7 +103,7 @@ class CaseViewSetTestCase(
 
     def setUp(self):
         super().setUp()
-        self.collection = CollectionFactory(query=str(self.obj.id))
+        self.collection = CollectionFactory(queries=str(self.obj.id))
 
     def get_extra_kwargs(self):
         return dict(collection_pk=self.collection.pk)
