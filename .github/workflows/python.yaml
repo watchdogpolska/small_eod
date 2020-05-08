@@ -27,7 +27,7 @@ jobs:
       run: make check
     - name: Show settings
       run: make settings
-    - name: Test Django
+    - name: Test
       run: ./backend-project/contrib/github/script.sh
     - uses: actions/upload-artifact@v1
       with:
