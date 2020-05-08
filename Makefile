@@ -1,5 +1,7 @@
 .PHONY: all test clean docs
 
+TEST?=small_eod
+
 start: wait_mysql wait_minio
 	docker-compose up -d
 	
@@ -18,7 +20,7 @@ build:
 test: wait_mysql wait_minio test-django-backend
 
 test-django-backend:
-	docker-compose run backend python manage.py test --keepdb --verbosity=2
+	docker-compose run backend python manage.py test --keepdb --verbosity=2 ${TEST}
 
 wait_mysql:
 	docker-compose up -d db

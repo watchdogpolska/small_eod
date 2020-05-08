@@ -4,7 +4,7 @@ The application supports authentication with OAuth 2.0 identity provider.
 
 ## Flow
 
-1. [OAuth2 simply explained](https://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified) or [full spec](https://oauth.net/2/)
+1. Authentication implements the OAuth protocol as a "Client Server". See [OAuth2 simply explained](https://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified) or [full spec](https://oauth.net/2/) for detailed information.
 
 2. Frontend fetch URI from `http://localhost:8000/api/users/auth/`.
 
@@ -26,7 +26,7 @@ The application supports authentication with OAuth 2.0 identity provider.
     Example callback URI:
     `http://localhost:8000/api/auth/exchange/?code=4/ygHGt7j39aW2i17VRynVIDVILasdasdNfMQa4KCE-XUead4IM0ulU8ffDVlRHHFrtWqgbqWhQCCYv0ORFG7_7BM`
 
-7. Backend receives request with authorization code 
+7. Backend receives request with authorization code
    and exchanges it for Google access, create local user account and provide access token.
 
 8. Front-end periodically refresh access token by request to ```/api/auth/refresh```.
