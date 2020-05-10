@@ -44,5 +44,5 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
         )
         self.assertEqual(refresh_response.status_code, 200)
         parsed_refresh_response = exchange_response.json()
-        self.assertIn('accessToken', parsed_refresh_response)
-        self.assertIn('refreshToken', parsed_refresh_response)
+        self.assertIn("accessToken", parsed_refresh_response)
+        self.assertIn("refreshToken", parsed_refresh_response)
