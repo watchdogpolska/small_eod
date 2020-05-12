@@ -3,6 +3,7 @@ import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
 import React, { useEffect } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { queryInstitutions } from '@/services/cases';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -16,6 +17,18 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const institutionsNames = [];
+
+const fetchInstitutions = () => {
+  const data = queryInstitutions();
+  data.then((d) => {
+    d.results.forEach((result) => {
+      institutionsNames.push(result.name);
+    });
+  });
+
+}
+
 const CasesNewForm = ({ tags, dispatch }) => {
   const [form] = Form.useForm();
 
@@ -24,6 +37,7 @@ const CasesNewForm = ({ tags, dispatch }) => {
   };
 
   useEffect(() => {
+    fetchInstitutions();
     dispatch({ type: 'tags/fetchAll' });
   }, []);
 
@@ -118,8 +132,11 @@ const CasesNewForm = ({ tags, dispatch }) => {
                   mode="multiple"
                   placeholder={formatMessage({
                     id: 'cases-new.form.audited-institution.placeholder',
-                  })}
-                />
+                  })}>
+                    {institutionsNames.map(institutionName => (
+                    <Option key={institutionName}>{institutionName}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
