@@ -28,7 +28,7 @@ DEBUG = False
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ALLOWED_HOSTS = []
-
+USE_X_FORWARDED_HOST = True
 
 # Application definition
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "small_eod.generic",
     "small_eod.tags",
     "small_eod.cases",
-    "small_eod.dictionaries",
+    "small_eod.features",
     "small_eod.channels",
     "small_eod.institutions",
     "small_eod.collections",

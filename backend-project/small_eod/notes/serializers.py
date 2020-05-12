@@ -5,4 +5,4 @@ from ..generic.serializers import UserLogModelSerializer
 class NoteSerializer(UserLogModelSerializer):
     class Meta:
         model = Note
-        fields = ["case", "comment"]
+        fields = ["id", "case", "comment"]

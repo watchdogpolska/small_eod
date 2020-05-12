@@ -3,7 +3,7 @@ from itertools import groupby
 from operator import attrgetter
 from .models import Case
 from ..tags.models import Tag
-from ..dictionaries.models import Feature
+from ..features.models import FeatureOption
 from ..generic.serializers import UserLogModelSerializer
 from ..users.models import User
 from ..tags.fields import TagField
@@ -17,15 +17,14 @@ class CurrentUserListDefault:
 
 
 class CaseSerializer(UserLogModelSerializer):
-    tag = TagField()
-    feature = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Feature.objects.all()
+    tags = TagField()
+    featureoptions = serializers.PrimaryKeyRelatedField(
+        many=True, default=[], queryset=FeatureOption.objects.all()
     )
-
-    responsible_user = serializers.PrimaryKeyRelatedField(
+    responsible_users = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
-    notified_user = serializers.PrimaryKeyRelatedField(
+    notified_users = serializers.PrimaryKeyRelatedField(
         many=True, default=CurrentUserListDefault(), queryset=User.objects.all()
     )
 
@@ -34,53 +33,54 @@ class CaseSerializer(UserLogModelSerializer):
         read_only_fields = []
         fields = [
             "id",
-            "comment",
-            "audited_institution",
+            "comments",
+            "audited_institutions",
             "name",
-            "responsible_user",
-            "notified_user",
-            "feature",
-            "tag",
+            "responsible_users",
+            "notified_users",
+            "featureoptions",
+            "tags",
             "created_by",
             "modified_by",
             "created_on",
             "modified_on",
         ]
+        extra_kwargs = {"audited_institutions": {"default": []}}
 
     def create(self, validated_data):
         tag = [
-            Tag.objects.get_or_create(name=tag)[0] for tag in validated_data.pop("tag")
+            Tag.objects.get_or_create(name=tag)[0] for tag in validated_data.pop("tags")
         ]
-        audited_institution = validated_data.pop("audited_institution")
-        responsible_user = validated_data.pop("responsible_user")
-        notified_user = validated_data.pop("notified_user")
-        feature = validated_data.pop("feature")
+        audited_institutions = validated_data.pop("audited_institutions")
+        responsible_users = validated_data.pop("responsible_users")
+        notified_users = validated_data.pop("notified_users")
+        featureoptions = validated_data.pop("featureoptions")
         case = super().create(validated_data)
-        case.tag.set(tag)
-        case.audited_institution.set(audited_institution)
-        case.responsible_user.set(responsible_user)
-        case.notified_user.set(notified_user)
-        case.feature.set(feature)
+        case.tags.set(tag)
+        case.audited_institutions.set(audited_institutions)
+        case.responsible_users.set(responsible_users)
+        case.notified_users.set(notified_users)
+        case.featureoptions.set(featureoptions)
         return case
 
-    def validate_feature(self, value):
+    def validate_featureoptions(self, value):
         """
-        Check that features match minimum & maximum of dictionaries
+        Check that featureoptions match minimum & maximum of options
         """
-        for dictionary, items in groupby(
-            sorted(value, key=attrgetter("dictionary_id")), attrgetter("dictionary")
+        for feature, items in groupby(
+            sorted(value, key=attrgetter("features_id")), attrgetter("features")
         ):
             length = len(list(items))
-            if length < dictionary.min_items:
+            if length < feature.min_options:
                 raise serializers.ValidationError(
                     "Minimum number of items for {} is {}".format(
-                        dictionary, dictionary.min_items
+                        feature, feature.min_options
                     )
                 )
-            if length > dictionary.max_items:
+            if length > feature.max_options:
                 raise serializers.ValidationError(
                     "Maximum number of items for {} is {}".format(
-                        dictionary, dictionary.max_items
+                        feature, feature.max_options
                     )
                 )
         return value
@@ -99,3 +99,4 @@ class CaseCountSerializer(CaseSerializer):
             "note_count",
             "event_count",
         ]
+        extra_kwargs = CaseSerializer.Meta.extra_kwargs
