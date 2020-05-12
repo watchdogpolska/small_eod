@@ -16553,9 +16553,10 @@ slice-ansi@^2.1.0:
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
 
-"small_eod_client@https://github.com/watchdogpolska/small-eod-sdk-javascript.git#9f60ca5e51c7e95b5effd5686c26a481d365279e":
+"small_eod_client@https://github.com/watchdogpolska/small-eod-sdk-javascript.git#9e3dc075e1de0cf1292dda3fe92ffe6c709e0ca3":
   version "1.0.4"
-  resolved "https://github.com/watchdogpolska/small-eod-sdk-javascript.git#9f60ca5e51c7e95b5effd5686c26a481d365279e"
+  uid "9e3dc075e1de0cf1292dda3fe92ffe6c709e0ca3"
+  resolved "https://github.com/watchdogpolska/small-eod-sdk-javascript.git#9e3dc075e1de0cf1292dda3fe92ffe6c709e0ca3"
   dependencies:
     superagent "5.1.0"
 
