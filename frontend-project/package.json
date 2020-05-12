@@ -55,7 +55,6 @@
     "@antv/l7-maps": "^2.0.0",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.isequal": "^4.5.5",
-    "@types/react-router": "^5.0.2",
     "antd": "^4.0.0-rc.1",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
@@ -92,6 +91,8 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^1.0.17",
+    "@types/puppeteer": "^2.1.0",
+    "@types/react-router": "^5.0.2",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
