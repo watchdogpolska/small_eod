@@ -5,13 +5,13 @@ const localStorageMock = (() => {
   let store = {};
 
   return {
-    getItem(key) {
+    getItem(key: string): string | null {
       return store[key] || null;
     },
-    setItem(key, value) {
+    setItem(key: string, value: { toString: () => string }): void {
       store[key] = value.toString();
     },
-    clear() {
+    clear(): void {
       store = {};
     },
   };
