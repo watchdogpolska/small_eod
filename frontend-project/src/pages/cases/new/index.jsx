@@ -20,9 +20,9 @@ const tailLayout = {
 const institutionsNames = [];
 
 const fetchInstitutions = () => {
-  const data = queryInstitutions();
-  data.then((d) => {
-    d.results.forEach((result) => {
+  const queryPromise = queryInstitutions();
+  queryPromise.then((data) => {
+    data.results.forEach((result) => {
       institutionsNames.push(result.name);
     });
   });
