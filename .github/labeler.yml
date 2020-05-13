@@ -1,0 +1,7 @@
+front-end: 'frontend-project/**'
+back-end: 'backend-project/**'
+ci: 
+  - '.github/**'
+  - Makefile
+  - docker-compose.yml
+  - '**/Dockerfile'
