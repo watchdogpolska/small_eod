@@ -140,7 +140,7 @@ const CasesNewForm = ({ tags, dispatch }) => {
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.responsible-users.label' })}
-                name="notified-users"
+                name="responsible-users"
               >
                 <Select
                   mode="multiple"
