@@ -85,10 +85,10 @@ W celu uruchomienia środowiska aplikacji wymagane jest:
 
 Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo [Docker dla webdevelopera - #01 - Czym jest Docker?](https://www.youtube.com/watch?v=P4ZC3cFN0WQ).
 
-W celu uruchomienia projektu należy wykonąc:
+W celu uruchomienia projektu należy wykonać:
 
 ```bash
-docker-compose up
+make start
 ```
 
 Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) winno być możliwe logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany kodu aplikacji w lokalnym repozytorium będą automatycznie załadowane przez Django.
@@ -96,7 +96,7 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:80
 W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-docker-compose run backend python manage.py createsuperuser
+make createsuperuser
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
