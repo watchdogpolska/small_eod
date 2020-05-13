@@ -32,7 +32,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 System składa się z następujących komponentów:
 
 * Back-end - Django, dostępny w podkatalogu ```backend-project```
-* Front-end - Vue / React, dostępny w podkatalogu ```frontend-project```
+* Front-end - React, dostępny w podkatalogu ```frontend-project```
 * Minio - podsystem składowania plików binarnych (dokumenty, zdjęcia itp.)
 * Baza danych PostgreSQL
 
