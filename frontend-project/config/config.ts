@@ -290,25 +290,6 @@ export default {
               ],
             },
             {
-              name: 'Sprawy',
-              icon: 'CheckCircleOutlined',
-              path: '/result',
-              routes: [
-                {
-                  name: 'success',
-                  icon: 'smile',
-                  path: '/result/success',
-                  component: './result/success',
-                },
-                {
-                  name: 'fail',
-                  icon: 'smile',
-                  path: '/result/fail',
-                  component: './result/fail',
-                },
-              ],
-            },
-            {
               path: '/Slowniki',
               icon: 'form',
               name: 'Słowniki',
