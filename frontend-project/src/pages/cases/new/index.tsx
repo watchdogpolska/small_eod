@@ -3,22 +3,16 @@ import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
 import React, { useEffect, FunctionComponent } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { User } from '@/models/users';
 
-interface UserType {
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  id: number;
-}
-
-interface TagType {
+interface Tag {
   name: string;
 }
 
 interface CasesNewFormProps {
-  tags: TagType[];
-  users: UserType[];
+  tags: Tag[];
+  users: User[];
+  dispatch: Function;
 }
 
 const { TextArea } = Input;
@@ -39,7 +33,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
   const onSubmit = () => {
     form.submit();
   };
-
   useEffect(() => {
     dispatch({ type: 'tags/fetchAll' });
     dispatch({ type: 'users/fetchAll' });
@@ -101,7 +94,9 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   placeholder={formatMessage({ id: 'cases-new.form.tags.placeholder' })}
                 >
                   {tags.map(tag => (
-                    <Option key={tag.name}>{tag.name}</Option>
+                    <Option key={tag.name} value={tag.name}>
+                      {tag.name}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>
@@ -152,7 +147,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   placeholder={formatMessage({ id: 'cases-new.form.notified-users.placeholder' })}
                 >
                   {users.map(user => (
-                    <Option key={user.id}>
+                    <Option key={user.id} value={user.id}>
                       {user.firstName} {user.lastName}
                     </Option>
                   ))}
@@ -173,7 +168,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   })}
                 >
                   {users.map(user => (
-                    <Option key={user.id}>
+                    <Option key={user.id} value={user.id}>
                       {user.firstName} {user.firstName}
                     </Option>
                   ))}
@@ -196,4 +191,4 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
   );
 };
 
-export default connect(({ tags, users }) => ({ tags, users }))(CasesNewForm);
+export default connect(({ tags, users }: any) => ({ tags, users }))(CasesNewForm);
