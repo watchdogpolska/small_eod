@@ -5,3 +5,7 @@ ci:
   - Makefile
   - docker-compose.yml
   - '**/Dockerfile'
+docs:
+  - '**.md'
+  - '**.rst'
+  - 'docs/**'
