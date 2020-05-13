@@ -26,7 +26,6 @@ const fetchInstitutions = () => {
       institutionsNames.push(result.name);
     });
   });
-
 }
 
 const CasesNewForm = ({ tags, dispatch }) => {
@@ -132,8 +131,9 @@ const CasesNewForm = ({ tags, dispatch }) => {
                   mode="multiple"
                   placeholder={formatMessage({
                     id: 'cases-new.form.audited-institution.placeholder',
-                  })}>
-                    {institutionsNames.map(institutionName => (
+                  })}
+                >
+                  {institutionsNames.map(institutionName => (
                     <Option key={institutionName}>{institutionName}</Option>
                   ))}
                 </Select>
