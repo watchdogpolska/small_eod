@@ -12,5 +12,5 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  testMatch: ['**/?(*.)+(spec|test).[t]s'],
+  testMatch: ['**/?(*.)+(spec|test).ts'],
 };
