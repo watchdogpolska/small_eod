@@ -67,7 +67,7 @@ const InstitutionsNewForm: FunctionComponent = () => {
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'institutions-new.form.address.label' })}
-                name="administrative-division"
+                name="address"
                 rules={[
                   {
                     required: true,
@@ -85,7 +85,7 @@ const InstitutionsNewForm: FunctionComponent = () => {
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'institutions-new.form.external-identifier.label' })}
-                name="administrative-division"
+                name="external-identifier"
                 rules={[
                   {
                     required: true,
