@@ -2,8 +2,8 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { Avatar, Menu, Spin } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { router } from 'umi';
-import { connect } from 'dva';
-import React, { Component, Dispatch } from 'react';
+import { connect, Dispatch } from 'dva';
+import React, { Component } from 'react';
 import { CurrentUser } from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
