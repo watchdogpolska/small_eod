@@ -28,7 +28,7 @@ DEBUG = False
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ALLOWED_HOSTS = []
-
+USE_X_FORWARDED_HOST = True
 
 # Application definition
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "small_eod.generic",
     "small_eod.tags",
     "small_eod.cases",
-    "small_eod.dictionaries",
+    "small_eod.features",
     "small_eod.channels",
     "small_eod.institutions",
     "small_eod.collections",
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "small_eod.letters",
     "small_eod.notes",
     "small_eod.events",
+    "small_eod.administrative_units",
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,4 @@ REST_FRAMEWORK = {
 MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")
 MINIO_URL = env("MINIO_URL")
+MINIO_BUCKET = env("MINIO_BUCKET", default="files")

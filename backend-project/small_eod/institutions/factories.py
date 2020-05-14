@@ -19,9 +19,7 @@ class ExternalIdentifierFactory(DjangoModelFactory):
 
 
 class AddressDataFactory(DjangoModelFactory):
-
     city = PolishFaker("city")
-    voivodeship = PolishFaker("region")
     flat_no = PolishFaker("building_number")
     street = PolishFaker("street_name")
     postal_code = PolishFaker("postcode")
@@ -34,11 +32,12 @@ class AddressDataFactory(DjangoModelFactory):
 
 
 class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
-
     address = factory.SubFactory(AddressDataFactory)
     name = factory.Sequence(lambda n: "name-%04d" % n)
     external_identifier = factory.SubFactory(ExternalIdentifierFactory)
-    administrative_unit = factory.SubFactory(JednostkaAdministracyjnaFactory)
+    administrative_unit = factory.SubFactory(
+        JednostkaAdministracyjnaFactory, category__level=3
+    )
 
     class Meta:
         model = Institution

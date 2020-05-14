@@ -5,18 +5,31 @@ from ..serializers import CaseSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
+    AuthorshipViewSetMixin,
 )
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
-class CaseViewSetTestCase(GenericViewSetMixin, TestCase):
+class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+
+    def test_create_minimum(self):
+        self.login_required()
+        name = "testowa-nazwa"
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data={"name": name},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201, response.json())
+        item = response.json()
+        self.assertEqual(item["name"], name)
 
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
@@ -36,6 +49,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         self.assertEqual(self.obj.username, item["username"])
 
     def test_list_no_users(self):
+        self.login_required()
         field_dict = {self.__class__.user_type: []}
         self.case = CaseFactory(**field_dict)
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))

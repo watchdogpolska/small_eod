@@ -1,0 +1,28 @@
+name: JavaScript files
+
+on:
+  push:
+    paths:
+    - 'frontend-project/**'
+  pull_request:
+    paths:
+    - 'frontend-project/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Node 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install
+      run: npm install
+      working-directory: ./frontend-project/
+    - name: Lint
+      run: npm run lint
+      working-directory: ./frontend-project/
+    - name: Build
+      run: npm run build
+      working-directory: ./frontend-project/

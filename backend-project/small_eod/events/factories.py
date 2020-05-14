@@ -7,10 +7,10 @@ from ..generic.factories import AbstractTimestampUserFactory, FuzzyDateTimeFromN
 
 class EventFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
-    case = factory.SubFactory(CaseFactory)
-    data = FuzzyDateTimeFromNow(max_days=10)
+    cases = factory.SubFactory(CaseFactory)
+    date = FuzzyDateTimeFromNow(max_days=10)
     name = factory.Sequence(lambda n: "event-%04d" % n)
-    comment = factory.Sequence(lambda n: "comment-event-%04d" % n)
+    comments = factory.Sequence(lambda n: "comments-event-%04d" % n)
 
     class Meta:
         model = Event

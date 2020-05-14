@@ -32,7 +32,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 System składa się z następujących komponentów:
 
 * Back-end - Django, dostępny w podkatalogu ```backend-project```
-* Front-end - Vue / React, dostępny w podkatalogu ```frontend-project```
+* Front-end - React, dostępny w podkatalogu ```frontend-project```
 * Minio - podsystem składowania plików binarnych (dokumenty, zdjęcia itp.)
 * Baza danych PostgreSQL
 
@@ -96,7 +96,7 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:80
 W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-docker-compose run web python manage.py createsuperuser
+docker-compose run backend python manage.py createsuperuser
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
