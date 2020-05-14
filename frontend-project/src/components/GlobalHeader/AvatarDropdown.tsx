@@ -1,13 +1,23 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
-import React from 'react';
-import { connect } from 'dva';
+import { ClickParam } from 'antd/es/menu';
 import { router } from 'umi';
+import { connect, Dispatch } from 'dva';
+import React, { Component } from 'react';
+import { CurrentUser } from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import { ConnectState } from '@/models/connect';
+import { Action } from 'redux';
 
-class AvatarDropdown extends React.Component {
-  onMenuClick = event => {
+export interface GlobalHeaderRightProps extends Partial<ConnectState> {
+  currentUser?: CurrentUser;
+  menu?: boolean;
+  dispatch: Dispatch<Action<'login/logout'>>;
+}
+
+class AvatarDropdown extends Component<GlobalHeaderRightProps> {
+  onMenuClick = (event: ClickParam) => {
     const { key } = event;
 
     if (key === 'logout') {
@@ -25,7 +35,7 @@ class AvatarDropdown extends React.Component {
     router.push(`/account/${key}`);
   };
 
-  render() {
+  render(): React.ReactNode {
     const {
       currentUser = {
         avatar: '',
@@ -38,20 +48,20 @@ class AvatarDropdown extends React.Component {
         {menu && (
           <Menu.Item key="center">
             <UserOutlined />
-            User name
+            个人中心
           </Menu.Item>
         )}
         {menu && (
           <Menu.Item key="settings">
             <SettingOutlined />
-            Ustawienia
+            个人设置
           </Menu.Item>
         )}
         {menu && <Menu.Divider />}
 
         <Menu.Item key="logout">
           <LogoutOutlined />
-          Wyloguj
+          退出登录
         </Menu.Item>
       </Menu>
     );
@@ -63,17 +73,19 @@ class AvatarDropdown extends React.Component {
         </span>
       </HeaderDropdown>
     ) : (
-      <Spin
-        size="small"
-        style={{
-          marginLeft: 8,
-          marginRight: 8,
-        }}
-      />
+      <span className={`${styles.action} ${styles.account}`}>
+        <Spin
+          size="small"
+          style={{
+            marginLeft: 8,
+            marginRight: 8,
+          }}
+        />
+      </span>
     );
   }
 }
 
-export default connect(({ user }) => ({
+export default connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser,
 }))(AvatarDropdown);
