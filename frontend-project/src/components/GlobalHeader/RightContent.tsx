@@ -1,14 +1,28 @@
+import { Tooltip, Tag } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
 import React from 'react';
-import { connect } from 'dva';
+import { ConnectState } from '@/models/connect';
+import { Action } from 'redux';
+import { Dispatch, connect } from 'dva';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
 
-const GlobalHeaderRight = props => {
+export type SiderTheme = 'light' | 'dark';
+export interface GlobalHeaderRightProps {
+  theme?: SiderTheme;
+  layout: 'sidemenu' | 'topmenu';
+  dispatch: Dispatch<Action<any>>;
+}
+const ENVTagColor = {
+  dev: 'orange',
+  test: 'green',
+  pre: '#87d068',
+};
+
+const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
   const { theme, layout } = props;
   let className = styles.right;
 
@@ -43,7 +57,7 @@ const GlobalHeaderRight = props => {
         //   //console.log('input', value);
         // }}
       />
-      <Tooltip title="Pomoc ant_design">
+      <Tooltip title="使用文档">
         <a
           target="_blank"
           href="https://pro.ant.design/docs/getting-started"
@@ -55,12 +69,17 @@ const GlobalHeaderRight = props => {
       </Tooltip>
       <NoticeIconView />
       <Avatar menu />
+      {process.env.REACT_APP_ENV && (
+        <span>
+          <Tag color={ENVTagColor[process.env.REACT_APP_ENV]}>{process.env.REACT_APP_ENV}</Tag>
+        </span>
+      )}
       <SelectLang className={styles.action} />
     </div>
   );
 };
 
-export default connect(({ settings }) => ({
+export default connect(({ settings }: ConnectState) => ({
   theme: settings.navTheme,
   layout: settings.layout,
 }))(GlobalHeaderRight);
