@@ -23,6 +23,7 @@ const ENVTagColor = {
 };
 
 const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
+  const reactEnv = process.env.REACT_APP_ENV;
   const { theme, layout } = props;
   let className = styles.right;
 
@@ -69,9 +70,9 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
       </Tooltip>
       <NoticeIconView />
       <Avatar menu />
-      {process.env.REACT_APP_ENV && (
+      {reactEnv && (
         <span>
-          <Tag color={ENVTagColor[process.env.REACT_APP_ENV]}>{process.env.REACT_APP_ENV}</Tag>
+          <Tag color={ENVTagColor[reactEnv]}>{reactEnv}</Tag>
         </span>
       )}
       <SelectLang className={styles.action} />
