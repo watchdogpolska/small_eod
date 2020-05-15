@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..serializers import FeatureSerializer, FeatureOptionSerializer
@@ -39,14 +39,31 @@ class FeatureViewSetTestCase(GenericViewSetMixin, TestCase):
         self.assertEqual(item["name"], name)
         self.assertEqual(item["featureoptions"][0]["name"], optionname)
 
+    def test_num_queries_for_list(self):
+        #TODO
+        pass
+
+    def test_num_queries_for_detail(self):
+        # TODO
+        pass
+
 
 class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "feature-featureoption"
     factory_class = FeatureOptionFactory
     serializer_class = FeatureOptionSerializer
+    queries_less_than_limit = 5
 
     def get_extra_kwargs(self):
         return dict(feature_pk=self.obj.feature.pk)
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def test_num_queries_for_list(self):
+        #TODO
+        pass
+
+    def test_num_queries_for_detail(self):
+        # TODO
+        pass

@@ -3,7 +3,58 @@ from django.urls import reverse
 from ...users.mixins import AuthenticatedMixin
 
 
-class ReadOnlyViewSetMixin(AuthenticatedMixin):
+class NumQueriesLimitMixin:
+
+
+    def test_num_queries_for_list (self):
+
+        self.login_required()
+        if not hasattr(self, "get_url_list"):
+            raise NotImplementedError(
+                "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
+            )
+        print("1zenek")
+        existing_instances_num = self.factory_class._meta.model.objects.all().count()
+        print("lista instancji to " + str(existing_instances_num))
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
+
+        print(response.json())
+        print("liczba obiektów w response nr 1: " + str(response.json()['count']))
+        assert response.json()['count'] == existing_instances_num
+
+
+        #checking whether the number of queries remains unchanged after adding a new instance
+        self.new_obj = self.factory_class()
+        print("2zenek")
+        print(self.new_obj)
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
+        print(response.json())
+        print("liczba obiektów w response nr 2: " + str(response.json()['count']))
+        print("liczba instancji po stworzeniu nowego obiektu " + str(self.factory_class._meta.model.objects.all().count()))
+        assert response.json()['count'] == existing_instances_num + 1
+
+
+
+    def test_num_queries_for_detail(self):
+        self.login_required()
+        if not hasattr(self, "get_url_detail"):
+            raise NotImplementedError(
+                "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
+            )
+        instances_num = self.factory_class._meta.model.objects.all().count()
+        print("zenobiusz")
+        print(instances_num)
+
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_detail())
+            print("disco")
+            print(response.json())
+
+
+
+class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
     basename = None
     serializer_class = None
     factory_class = None

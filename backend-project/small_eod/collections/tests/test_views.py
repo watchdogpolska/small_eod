@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from django.urls import reverse
 
 from ..factories import CollectionFactory
@@ -44,6 +44,7 @@ class CollectionViewSetTestCase(
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
+    queries_less_than_limit = 7
 
     def get_collection(self):
         return self.obj
@@ -82,6 +83,7 @@ class NoteViewSetTestCase(
 ):
     basename = "collection-note"
     factory_class = NoteFactory
+    queries_less_than_limit = 7
 
     def setUp(self):
         super().setUp()
@@ -93,6 +95,15 @@ class NoteViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def test_num_queries_for_list(self):
+        self.login_required()
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
+
+        second_note = NoteFactory(case=self.obj.case)
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
+
 
 class CaseViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
@@ -100,6 +111,7 @@ class CaseViewSetTestCase(
 
     basename = "collection-cases"
     factory_class = CaseFactory
+    queries_less_than_limit = 16
 
     def setUp(self):
         super().setUp()
@@ -110,3 +122,13 @@ class CaseViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def test_num_queries_for_list(self):
+        self.login_required()
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
+
+        second_case = CaseFactory()
+        self.collection = CollectionFactory(query= str(self.obj.id) + "," + str(second_case.id))
+        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
+            response = self.client.get(self.get_url_list())
