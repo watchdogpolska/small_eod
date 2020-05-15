@@ -22,6 +22,7 @@ export default {
   'menu.home': 'Home',
   'menu.institutions': 'Institutions',
   'menu.institutions.new': 'New',
+  'menu.letters': 'Letters',
   'menu.login': 'Login',
   'menu.more-blocks': 'More Blocks',
   'menu.profile': 'Osoby',
