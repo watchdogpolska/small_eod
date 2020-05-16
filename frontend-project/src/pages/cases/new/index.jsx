@@ -1,9 +1,11 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
-import React from 'react';
+import { connect } from 'dva';
+import React, { useEffect } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -14,12 +16,16 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm = () => {
+const CasesNewForm = ({ tags, dispatch }) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
     form.submit();
   };
+
+  useEffect(() => {
+    dispatch({ type: 'tags/fetchAll' });
+  }, []);
 
   return (
     <Form {...layout} form={form}>
@@ -75,7 +81,11 @@ const CasesNewForm = () => {
                 <Select
                   mode="tags"
                   placeholder={formatMessage({ id: 'cases-new.form.tags.placeholder' })}
-                />
+                >
+                  {tags.map(tag => (
+                    <Option key={tag.name}>{tag.name}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -130,7 +140,7 @@ const CasesNewForm = () => {
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.responsible-users.label' })}
-                name="notified-users"
+                name="responsible-users"
               >
                 <Select
                   mode="multiple"
@@ -156,4 +166,4 @@ const CasesNewForm = () => {
   );
 };
 
-export default CasesNewForm;
+export default connect(({ tags }) => ({ tags }))(CasesNewForm);

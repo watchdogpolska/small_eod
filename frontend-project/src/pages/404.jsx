@@ -12,7 +12,7 @@ const NoFoundPage = () => (
         Back Home
       </Button>
     }
-  ></Result>
+  />
 );
 
 export default NoFoundPage;

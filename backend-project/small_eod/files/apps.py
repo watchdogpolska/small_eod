@@ -16,7 +16,7 @@ class MinioApp(Minio):
 
 
 minio_app = MinioApp(
-    settings.MINIO_URL.replace("http://", ""),
+    settings.MINIO_URL.replace("http://", "").replace("https://", ""),
     settings.MINIO_ACCESS_KEY,
     settings.MINIO_SECRET_KEY,
     secure="https" in settings.MINIO_URL,
