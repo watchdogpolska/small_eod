@@ -63,12 +63,14 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         self.login_required()
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
+        self.assertEqual(response.status_code, 200)
 
         second_user = UserFactory()
         field_dict = {self.__class__.user_type: [self.obj.pk, second_user.pk]}
         self.case = CaseFactory(**field_dict)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
+        self.assertEqual(response.status_code, 200)
 
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):

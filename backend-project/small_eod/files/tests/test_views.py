@@ -10,7 +10,6 @@ class FileViewSetTestCase(GenericViewSetMixin, TestCase):
     serializer_class = FileSerializer
     factory_class = FileFactory
 
-
     def get_extra_kwargs(self):
         return {"letter_pk": self.obj.letter.pk}
 
@@ -18,7 +17,7 @@ class FileViewSetTestCase(GenericViewSetMixin, TestCase):
         self.assertEqual(item["name"], self.obj.name)
 
     def test_num_queries_for_list(self):
-        #TODO
+        # TODO
         pass
 
     def test_num_queries_for_detail(self):

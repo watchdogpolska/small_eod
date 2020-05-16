@@ -40,7 +40,7 @@ class FeatureViewSetTestCase(GenericViewSetMixin, TestCase):
         self.assertEqual(item["featureoptions"][0]["name"], optionname)
 
     def test_num_queries_for_list(self):
-        #TODO
+        # TODO
         pass
 
     def test_num_queries_for_detail(self):
@@ -61,7 +61,7 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
         self.assertEqual(self.obj.name, item["name"])
 
     def test_num_queries_for_list(self):
-        #TODO
+        # TODO
         pass
 
     def test_num_queries_for_detail(self):
