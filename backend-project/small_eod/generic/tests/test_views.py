@@ -17,7 +17,7 @@ class NumQueriesLimitMixin:
         assert response.json()["count"] == existing_instances_num
 
         # number of queries after adding a new instance
-        self.new_obj = self.factory_class()
+        self.factory_class.create_batch(size=5)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
