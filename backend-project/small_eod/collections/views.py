@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
+from django.utils.decorators import method_decorator
 
 from .models import Collection
 from .serializers import CollectionSerializer, TokenSetSerializer
@@ -19,6 +20,13 @@ from .permissions import (
     CollectionMemberTokenPermission,
     CollectionDirectTokenPermission,
 )
+from django.conf import settings
+
+SECURITY_SCHEMAS = list(settings.SWAGGER_SETTINGS["SECURITY_REQUIREMENTS"]) + [
+    {"CollectionToken": []}
+]
+
+security_decorator = swagger_auto_schema(security=SECURITY_SCHEMAS)
 
 
 def parse_query(query):
@@ -26,6 +34,7 @@ def parse_query(query):
     return {"pk__in": [int(x) for x in query.split(",")]}
 
 
+@method_decorator(name="retrieve", decorator=security_decorator)
 class CollectionViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
@@ -35,7 +44,12 @@ class CollectionViewSet(viewsets.ModelViewSet):
 class TokenCreateAPIView(APIView):
     serializer_class = TokenSetSerializer
 
-    @swagger_auto_schema(request_body=TokenSetSerializer)
+    @swagger_auto_schema(
+        request_body=TokenSetSerializer,
+        decorator=swagger_auto_schema(
+            request_body=TokenSetSerializer, security=SECURITY_SCHEMAS
+        ),
+    )
     def post(self, request, collection_pk):
         collection = get_object_or_404(Collection, pk=collection_pk)
         serializer = TokenSetSerializer(
@@ -47,9 +61,14 @@ class TokenCreateAPIView(APIView):
         return Response(tokenset, status=status.HTTP_201_CREATED)
 
 
-class CaseViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = CaseSerializer
+@method_decorator(name="list", decorator=security_decorator)
+@method_decorator(name="retrieve", decorator=security_decorator)
+class CollectionTokenSecuredViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated | CollectionMemberTokenPermission]
+
+
+class CaseViewSet(CollectionTokenSecuredViewSet):
+    serializer_class = CaseSerializer
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])
@@ -58,9 +77,8 @@ class CaseViewSet(viewsets.ReadOnlyModelViewSet):
         )
 
 
-class BaseSubCollection(viewsets.ReadOnlyModelViewSet):
+class BaseSubCollection(CollectionTokenSecuredViewSet):
     model = None
-    permission_classes = [IsAuthenticated | CollectionMemberTokenPermission]
 
     def get_queryset(self):
         collection = Collection.objects.get(pk=self.kwargs["collection_pk"])

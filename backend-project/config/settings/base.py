@@ -127,12 +127,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 
-SWAGGER_SETTINGS = {"DEFAULT_INFO": "config.swagger.info"}
+SWAGGER_SETTINGS = {
+    "DEFAULT_INFO": "config.swagger.info",
+    "SECURITY_DEFINITIONS": {
+        "Basic": {"type": "basic"},
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"},
+        "CollectionToken": {"type": "apiKey", "name": "authorization", "in": "query"},
+    },
+    "SECURITY_REQUIREMENTS": [{"Basic": []}, {"Bearer": []}],
+}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_RENDERER_CLASSES": (
@@ -146,6 +155,13 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
 }
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    "openid",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+]
 
 MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")

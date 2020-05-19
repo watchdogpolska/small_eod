@@ -1,5 +1,7 @@
 .PHONY: all test clean docs
 
+TEST?=small_eod
+
 start: wait_mysql wait_minio
 	docker-compose up -d
 	
@@ -18,7 +20,7 @@ build:
 test: wait_mysql wait_minio test-django-backend test-openapi-spec
 
 test-django-backend:
-	docker-compose run backend python manage.py test --keepdb --verbosity=2
+	docker-compose run backend python manage.py test --keepdb --verbosity=2 ${TEST}
 
 test-openapi-spec:
 	docker-compose run --rm backend python manage.py generate_swagger --format json -o openapi.json
@@ -58,7 +60,7 @@ migrations: wait_mysql wait_minio
 settings:
 	docker-compose run --rm backend python manage.py diffsettings
 
-createsuperuser:
+createsuperuser: wait_minio
 	docker-compose run --rm -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
 
 test-local: lint build check test
