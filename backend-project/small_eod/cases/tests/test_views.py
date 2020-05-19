@@ -65,7 +65,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
 
-        second_user = UserFactory()
+        second_user = self.factory_class()
         field_dict = {self.__class__.user_type: [self.obj.pk, second_user.pk]}
         self.case = CaseFactory(**field_dict)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
