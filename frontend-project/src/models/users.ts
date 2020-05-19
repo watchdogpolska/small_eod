@@ -1,6 +1,6 @@
 import { fetchAll } from '@/services/users';
 import { Effect, EffectsCommandMap } from 'dva';
-import { Reducer, AnyAction } from 'redux';
+import { AnyAction } from 'redux';
 
 export interface User {
   username: string;
@@ -16,16 +16,16 @@ export interface UsersState {
 
 export interface UsersModelType {
   namespace: string;
-  state: UsersState;
+  state: UsersState | [];
   effects: {
     fetchAll: Effect;
   };
   reducers: {
-    saveAll: Reducer<UsersState>;
+    saveAll: Function;
   };
 }
 
-const UsersModel = {
+const UsersModel: UsersModelType = {
   namespace: 'users',
   state: [],
   effects: {
