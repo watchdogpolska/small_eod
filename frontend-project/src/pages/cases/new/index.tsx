@@ -136,6 +136,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
               </Form.Item>
             </Col>
           </Row>
+
           <Row>
             <Col span={16}>
               <Form.Item
@@ -148,7 +149,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                 >
                   {users.map(user => (
                     <Option key={user.id} value={user.id}>
-                      {user.firstName} {user.lastName}
+                      {user.username}
                     </Option>
                   ))}
                 </Select>
@@ -169,7 +170,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                 >
                   {users.map(user => (
                     <Option key={user.id} value={user.id}>
-                      {user.firstName} {user.firstName}
+                      {user.username}
                     </Option>
                   ))}
                 </Select>

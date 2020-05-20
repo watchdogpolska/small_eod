@@ -1,6 +1,7 @@
 import { fetchAll } from '@/services/users';
 import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
+import { Reducer } from 'react';
 
 export interface User {
   username: string;
@@ -10,24 +11,25 @@ export interface User {
   id: number;
 }
 
-export interface UsersState {
-  users: User[];
+export interface Payload {
+  payload: { results: User[] };
 }
 
 export interface UsersModelType {
   namespace: string;
-  state: UsersState | [];
+  state: User[];
   effects: {
     fetchAll: Effect;
   };
   reducers: {
-    saveAll: Function;
+    saveAll: Reducer<User[], Payload>;
   };
 }
+const defaultUsersState: User[] = [];
 
 const UsersModel: UsersModelType = {
   namespace: 'users',
-  state: [],
+  state: defaultUsersState,
   effects: {
     *fetchAll(_: AnyAction, { call, put }: EffectsCommandMap) {
       const response = yield call(fetchAll);
@@ -38,7 +40,7 @@ const UsersModel: UsersModelType = {
     },
   },
   reducers: {
-    saveAll(_: AnyAction, { payload }: EffectsCommandMap) {
+    saveAll(_, { payload }) {
       return payload.results;
     },
   },
