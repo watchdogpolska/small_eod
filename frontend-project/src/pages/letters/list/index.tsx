@@ -1,39 +1,13 @@
-import React, { useRef } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
+import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-import smallEodSDK from '@/utils/sdk';
-
-export interface TableListItem {
-  id: number;
-  name: string;
-  identifier: string;
-  direction: string;
-}
-
-export interface TableListParams {
-  pageSize: number;
-  current: number;
-}
-
-export async function queryLetters(params?: TableListParams) {
-  smallEodSDK.LettersApi();
-
-  return smallEodSDK
-    .lettersList({
-      limit: params.pageSize,
-      offset: params.pageSize * (params.current - 1),
-    })
-    .then(result => ({
-      data: result.results,
-      total: result.count,
-    }));
-}
+import { Letter, fetchLettersPage } from '@/services/letters';
 
 const TableList: React.FC<{}> = () => {
   const actionRef = useRef<ActionType>();
-  const columns: ProColumns<TableListItem>[] = [
+  const columns: ProColumns<Letter>[] = [
     {
       title: formatMessage({ id: 'letters-list.table.columns.name.title' }),
       dataIndex: 'name',
@@ -54,12 +28,12 @@ const TableList: React.FC<{}> = () => {
 
   return (
     <PageHeaderWrapper content={formatMessage({ id: 'letters-list.page-header-content' })}>
-      <ProTable<TableListItem>
+      <ProTable<Letter>
         headerTitle={formatMessage({ id: 'letters-list.table-header-title' })}
         actionRef={actionRef}
         rowKey="id"
         tableAlertRender={false}
-        request={queryLetters}
+        request={fetchLettersPage}
         columns={columns}
         rowSelection={false}
         search={false}
