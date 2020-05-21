@@ -5,12 +5,11 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import smallEodSDK from '@/utils/sdk';
 
-
 export interface TableListItem {
   id: number;
-  name: string,
-  identifier: string,
-  direction: string,
+  name: string;
+  identifier: string;
+  direction: string;
 }
 
 export interface TableListParams {
@@ -21,32 +20,34 @@ export interface TableListParams {
 export async function queryLetters(params?: TableListParams) {
   smallEodSDK.LettersApi();
 
-  return smallEodSDK.lettersList({
-    limit: params.pageSize,
-    offset: params.pageSize * (params.current - 1),
-  }).then((result) => ({
-    data: result.results,
-    total: result.count,
-  }));
+  return smallEodSDK
+    .lettersList({
+      limit: params.pageSize,
+      offset: params.pageSize * (params.current - 1),
+    })
+    .then(result => ({
+      data: result.results,
+      total: result.count,
+    }));
 }
 
 const TableList: React.FC<{}> = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: formatMessage({id: 'letters-list.table.columns.name.title'}),
+      title: formatMessage({ id: 'letters-list.table.columns.name.title' }),
       dataIndex: 'name',
     },
     {
-      title: formatMessage({id: 'letters-list.table.columns.identifier.title'}),
+      title: formatMessage({ id: 'letters-list.table.columns.identifier.title' }),
       dataIndex: 'identifier',
     },
     {
-      title: formatMessage({id: 'letters-list.table.columns.comment.title'}),
+      title: formatMessage({ id: 'letters-list.table.columns.comment.title' }),
       dataIndex: 'comment',
     },
     {
-      title: formatMessage({id: 'letters-list.table.columns.direction.title'}),
+      title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
     },
   ];
@@ -63,7 +64,14 @@ const TableList: React.FC<{}> = () => {
         rowSelection={false}
         search={false}
         options={false}
-        pagination={{pageSize: 20, showSizeChanger: false, showTotal: (total, range) => `${range[0]}-${range[1]} / ${formatMessage({id: 'letters-list.table.total'})} ${total}`}}
+        pagination={{
+          pageSize: 20,
+          showSizeChanger: false,
+          showTotal: (total, range) =>
+            `${range[0]}-${range[1]} / ${formatMessage({
+              id: 'letters-list.table.total',
+            })} ${total}`,
+        }}
       />
     </PageHeaderWrapper>
   );
