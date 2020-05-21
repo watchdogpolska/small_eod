@@ -1,11 +1,11 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Letter, fetchLettersPage } from '@/services/letters';
 
-const TableList: React.FC<{}> = () => {
+const TableList: FC<{}> = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<Letter>[] = [
     {
@@ -26,6 +26,9 @@ const TableList: React.FC<{}> = () => {
     },
   ];
 
+  const showTotal = (total, range) =>
+    `${range[0]}-${range[1]} / ${formatMessage({ id: 'letters-list.table.total' })} ${total}`;
+
   return (
     <PageHeaderWrapper content={formatMessage({ id: 'letters-list.page-header-content' })}>
       <ProTable<Letter>
@@ -41,10 +44,7 @@ const TableList: React.FC<{}> = () => {
         pagination={{
           pageSize: 20,
           showSizeChanger: false,
-          showTotal: (total, range) =>
-            `${range[0]}-${range[1]} / ${formatMessage({
-              id: 'letters-list.table.total',
-            })} ${total}`,
+          showTotal,
         }}
       />
     </PageHeaderWrapper>

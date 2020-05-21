@@ -1,8 +1,13 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
 
+interface File {
+  downloadUrl: string;
+  letter: number;
+}
+
 export interface Letter {
-  attachment: [];
+  attachment: File[];
   case: number;
   channel: number;
   comment: string;
