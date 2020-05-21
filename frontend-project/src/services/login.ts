@@ -19,3 +19,7 @@ export const fakeAccountLogin = async (params: LoginParams): Promise<FakeAccount
     data: params,
   });
 };
+
+export const getFakeCaptcha = async (mobile: string) => {
+  return request(`/api/login/captcha?mobile=${mobile}`);
+};
