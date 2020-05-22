@@ -37,11 +37,9 @@ const webpackPlugin = (config: IWebpackChainConfig) => {
             const packageName = getModulePackageName(module) || '';
             if (packageName) {
               return [
-                'bizcharts',
                 'g6',
                 '@antv',
                 'l7',
-                'bizcharts-plugin-slider',
               ].includes(packageName);
             }
             return false;
