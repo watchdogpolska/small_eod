@@ -157,7 +157,7 @@ export default {
             },
             {
               path: '/',
-              redirect: '/dashboard/analysis',
+              redirect: '/cases/new',
               authority: ['admin', 'user'],
             },
             {
