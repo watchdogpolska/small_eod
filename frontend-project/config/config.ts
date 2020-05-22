@@ -162,25 +162,6 @@ export default {
               ],
             },
             {
-              path: '/form_',
-              icon: 'form',
-              name: 'Kanały',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
-            },
-            {
               path: '/profile',
               name: 'Osoby',
               icon: 'profile',
@@ -196,44 +177,6 @@ export default {
                   icon: 'smile',
                   path: '/profile/advanced',
                   component: './profile/advanced',
-                },
-              ],
-            },
-            {
-              path: '/Slowniki',
-              icon: 'form',
-              name: 'Słowniki',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
-            },
-            {
-              path: '/tagi',
-              icon: 'form',
-              name: 'Tagi',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
                 },
               ],
             },
