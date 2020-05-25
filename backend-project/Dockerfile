@@ -1,4 +1,5 @@
-FROM python:3-slim as builder
+ARG PYTHON_VERSION="3.7"
+FROM python:${PYTHON_VERSION}-slim as builder
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
