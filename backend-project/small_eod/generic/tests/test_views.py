@@ -4,24 +4,31 @@ from ...users.mixins import AuthenticatedMixin
 
 
 class NumQueriesLimitMixin:
+
+    def get_extra_factory_kwargs(self):
+        return dict()
+
     def test_num_queries_for_list(self):
         self.login_required()
         if not hasattr(self, "get_url_list"):
             raise NotImplementedError(
                 "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
             )
-        existing_instances_num = self.factory_class._meta.model.objects.all().count()
+        print("existing ", self.factory_class._meta.model.objects.all().count())
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
-        assert response.json()["count"] == existing_instances_num
+        response_count = response.json()["count"]
+        print(response_count)
+        assert response.json()["count"] > 0
 
-        # number of queries after adding a new instance
-        self.new_obj = self.factory_class()
+        # number of queries after adding 5 new instances
+        self.new_objs = self.factory_class.create_batch(size=5, **self.get_extra_factory_kwargs())
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
-        assert response.json()["count"] == existing_instances_num + 1
+        print(response.json()["count"])
+        assert response.json()["count"] == response_count + 5
 
     def test_num_queries_for_detail(self):
         self.login_required()
@@ -46,7 +53,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
     def setUp(self):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
-        self.obj = self.factory_class()
+        self.obj = self.factory_class(**self.get_extra_factory_kwargs())
 
     def get_extra_kwargs(self):
         return dict()

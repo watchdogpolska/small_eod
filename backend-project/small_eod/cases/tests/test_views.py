@@ -7,7 +7,7 @@ from ...generic.tests.test_views import (
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
 )
-from ...users.factories import UserFactory
+from ...users.factories import UserWithCaseFactory
 from ...users.serializers import UserSerializer
 
 
@@ -35,16 +35,19 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
     user_type = None
-    factory_class = UserFactory
+    factory_class = UserWithCaseFactory
     serializer_class = UserSerializer
+    queries_less_than_limit = 50
 
     def setUp(self):
+        self.case = CaseFactory()
         super().setUp()
-        field_dict = {self.__class__.user_type: [self.obj.pk]}
-        self.case = CaseFactory(**field_dict)
 
     def get_extra_kwargs(self):
         return dict(case_pk=self.case.pk)
+
+    def get_extra_factory_kwargs(self):
+        return {'hook__case': self.case}
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
@@ -59,27 +62,12 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
             len(response.json().get(self.paginated_response_results_key)), 0
         )
 
-    def test_num_queries_for_list(self):
-        self.login_required()
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)
-
-        second_user = UserFactory()
-        field_dict = {self.__class__.user_type: [self.obj.pk, second_user.pk]}
-        self.case = CaseFactory(**field_dict)
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)
-
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
     user_type = "notified_users"
     basename = "case-notified_user"
-    queries_less_than_limit = 6
 
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
     user_type = "responsible_users"
     basename = "case-responsible_user"
-    queries_less_than_limit = 6

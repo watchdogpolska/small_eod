@@ -12,3 +12,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
         django_get_or_create = ("username",)
+
+
+class UserWithCaseFactory(UserFactory):
+    hook = factory.PostGeneration(lambda obj, create, extracted, **kwargs: kwargs['case'].responsible_users.add(obj))
