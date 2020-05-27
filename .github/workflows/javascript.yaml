@@ -18,11 +18,11 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install
-      run: npm install
+      run: yarn
       working-directory: ./frontend-project/
     - name: Lint
-      run: npm run lint
+      run: yarn lint
       working-directory: ./frontend-project/
     - name: Build
-      run: npm run build
+      run: yarn build
       working-directory: ./frontend-project/

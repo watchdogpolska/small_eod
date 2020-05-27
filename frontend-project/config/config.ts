@@ -124,6 +124,12 @@ export default {
               ],
             },
             {
+              name: 'letters',
+              icon: 'FileTextOutlined',
+              path: '/letters',
+              component: './letters/list',
+            },
+            {
               name: 'account',
               icon: 'user',
               path: '/account',
