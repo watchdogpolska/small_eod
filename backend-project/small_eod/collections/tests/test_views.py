@@ -49,7 +49,7 @@ class CollectionViewSetTestCase(
         return self.obj
 
     def validate_item(self, item):
-        self.assertEqual(item["comments"], self.obj.comments)
+        self.assertEqual(item["comment"], self.obj.comment)
 
 
 class TokenCreateAPIView(AuthenticatedMixin, TestCase):
