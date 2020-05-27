@@ -21,11 +21,11 @@ class Case(TimestampUserLogModel):
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Case's name."),
     )
-    comments = models.CharField(
+    comment = models.CharField(
         max_length=256,
         blank=True,
-        verbose_name=_("Comments"),
-        help_text=_("Comments for this case."),
+        verbose_name=_("Comment"),
+        help_text=_("Comment for this case."),
     )
 
     tags = models.ManyToManyField(

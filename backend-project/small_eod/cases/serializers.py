@@ -33,7 +33,7 @@ class CaseSerializer(UserLogModelSerializer):
         read_only_fields = []
         fields = [
             "id",
-            "comments",
+            "comment",
             "audited_institutions",
             "name",
             "responsible_users",
