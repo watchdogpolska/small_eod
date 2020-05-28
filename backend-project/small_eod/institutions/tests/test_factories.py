@@ -1,22 +1,8 @@
 from django.test import TestCase
 
-from ..factories import (
-    AddressDataFactory,
-    ExternalIdentifierFactory,
-    InstitutionFactory,
-)
-from ..models import AddressData, ExternalIdentifier, Institution
+from ..factories import InstitutionFactory
+from ..models import Institution
 from ...generic.tests.mixins import FactoryTestCaseMixin
-
-
-class AddressDataFactoryTestCase(FactoryTestCaseMixin, TestCase):
-    FACTORY = AddressDataFactory
-    MODEL = AddressData
-
-
-class ExternalIdentifierFactoryTestCase(FactoryTestCaseMixin, TestCase):
-    FACTORY = ExternalIdentifierFactory
-    MODEL = ExternalIdentifier
 
 
 class InstitutionFactoryTestCase(FactoryTestCaseMixin, TestCase):

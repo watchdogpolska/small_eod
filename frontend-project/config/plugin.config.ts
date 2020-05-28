@@ -36,11 +36,7 @@ const webpackPlugin = (config: IWebpackChainConfig) => {
           test: (module: { context: string }) => {
             const packageName = getModulePackageName(module) || '';
             if (packageName) {
-              return [
-                'g6',
-                '@antv',
-                'l7',
-              ].includes(packageName);
+              return ['g6', '@antv', 'l7'].includes(packageName);
             }
             return false;
           },
