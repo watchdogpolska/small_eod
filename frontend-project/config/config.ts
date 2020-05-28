@@ -1,5 +1,5 @@
-import defaultSettings from './defaultSettings';
 import slash from 'slash2';
+import defaultSettings from './defaultSettings';
 import themePluginConfig from './themePluginConfig';
 const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 
@@ -128,25 +128,6 @@ export default {
               icon: 'FileTextOutlined',
               path: '/letters',
               component: './letters/list',
-            },
-            {
-              name: 'account',
-              icon: 'user',
-              path: '/account',
-              routes: [
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: 'settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
-              ],
             },
             {
               name: 'institutions',
