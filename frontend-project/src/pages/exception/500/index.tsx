@@ -1,9 +1,9 @@
 import Link from 'umi/link';
 import { Result, Button } from 'antd';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-export default () => (
+export default (): ReactNode => (
   <Result
     status="500"
     title="500"
