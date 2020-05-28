@@ -1,0 +1,10 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence.
+
+*       @ad-m
+
+# Person leading front-end
+frontend-project/ @magul
+
+# Person leading back-end
+backend-project / @ad-m
