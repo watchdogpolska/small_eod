@@ -44,7 +44,7 @@ class CaseCountSerializerTestCase(AuthRequiredMixin, TestCase):
     def test_raise_for_over_maximum_feature(self):
         self.login_required()
         feature = FeatureFactory(max_options=3)
-        options = FeatureOptionFactory.create_batch(size=5, features=feature)
+        options = FeatureOptionFactory.create_batch(size=5, feature=feature)
         serializer = CaseCountSerializer(
             data=self.get_default_data(
                 {"featureoptions": [x.id for x in options], "tag": []}

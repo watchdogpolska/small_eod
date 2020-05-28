@@ -46,7 +46,7 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     serializer_class = FeatureOptionSerializer
 
     def get_extra_kwargs(self):
-        return dict(feature_pk=self.obj.features.pk)
+        return dict(feature_pk=self.obj.feature.pk)
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])

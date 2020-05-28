@@ -68,7 +68,7 @@ class CaseSerializer(UserLogModelSerializer):
         Check that featureoptions match minimum & maximum of options
         """
         for feature, items in groupby(
-            sorted(value, key=attrgetter("features_id")), attrgetter("features")
+            sorted(value, key=attrgetter("feature_id")), attrgetter("feature")
         ):
             length = len(list(items))
             if length < feature.min_options:
