@@ -1,81 +1,9 @@
 from django.test import TestCase
 
-from ..serializers import (
-    InstitutionSerializer,
-    ExternalIdentifierNestedSerializer,
-    AddressDataNestedSerializer,
-)
+from ..serializers import InstitutionSerializer
 from ...generic.mixins import AuthRequiredMixin
 from teryt_tree.factories import JednostkaAdministracyjnaFactory
-from ..factories import (
-    AddressDataFactory,
-    ExternalIdentifierFactory,
-    InstitutionFactory,
-)
-
-
-class AddressDataNestedSerializerTestCase(TestCase):
-    serializer_class = AddressDataNestedSerializer
-    factory_class = AddressDataFactory
-
-    def setUp(self):
-        self.obj = self.factory_class()
-
-    def test_save(self):
-        data = {"email": "asd@asd.pl"}
-        serializer = self.serializer_class(data=data)
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        obj = serializer.save()
-        self.assertEqual(obj.email, data["email"])
-
-    def test_data_fields(self):
-        data = self.serializer_class(self.obj).data
-        self.assertEqual(data["street"], self.obj.street)
-        self.assertEqual(data["house_no"], self.obj.house_no)
-        self.assertEqual(data["postal_code"], self.obj.postal_code)
-        self.assertEqual(data["flat_no"], self.obj.flat_no)
-
-    def test_update_city(self):
-        serializer = self.serializer_class(self.obj, data={"city": "New City"})
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        obj = serializer.save()
-        self.assertEqual(serializer.data["city"], "New City")
-        self.assertEqual(obj.city, "New City")
-
-
-class ExternalIdentifierSerializerTestCase(TestCase):
-    serializer_class = ExternalIdentifierNestedSerializer
-    factory_class = ExternalIdentifierFactory
-
-    def setUp(self):
-        self.obj = self.factory_class()
-
-    def test_save(self):
-        data = {"nip": "1234567890", "regon": "1234567890"}
-        serializer = self.serializer_class(data=data)
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        obj = serializer.save()
-        self.assertEqual(obj.nip, data["nip"])
-        self.assertEqual(obj.nip, data["regon"])
-
-    def test_data_fields(self):
-        data = self.serializer_class(self.obj).data
-        self.assertTrue(data["nip"], self.obj.nip)
-
-    def test_field_validation_inheritance(self):
-        serializer = ExternalIdentifierNestedSerializer(
-            data={"nip": "12345678901", "regon": "1234567890"}
-        )
-        self.assertFalse(serializer.is_valid(), serializer.errors)
-
-    def test_update_nip(self):
-        serializer = ExternalIdentifierNestedSerializer(
-            instance=self.obj, data={"nip": "1111111111"}
-        )
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        obj = serializer.save()
-        self.assertEqual(serializer.data["nip"], "1111111111")
-        self.assertEqual(obj.nip, "1111111111")
+from ..factories import InstitutionFactory
 
 
 class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
@@ -93,13 +21,12 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         default_data = {
             "name": "Polska Fundacja Narodowa",
             "administrative_unit": self.admin_unit.pk,
-            "address": {
-                "email": "test@test.test",
-                "city": "Dzierżoniów",
-                "epuap": "asdfg",
-                "house_no": "666",
-            },
-            "external_identifier": {"nip": "1234567890", "regon": "1234567890"},
+            "email": "test@test.test",
+            "city": "Dzierżoniów",
+            "epuap": "asdfg",
+            "house_no": "666",
+            "nip": "1234567890",
+            "regon": "1234567890",
         }
         for field in skip:
             del default_data[field]
@@ -117,16 +44,14 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         obj = serializer.save()
         self.assertEqual(obj.name, "Polska Fundacja Narodowa")
 
-    def test_nested_address_fields(self):
+    def test_address_fields(self):
         data = self.serializer_class(self.obj).data
-        self.assertEqual(data["address"]["house_no"], self.obj.address.house_no)
-        self.assertEqual(data["address"]["city"], self.obj.address.city)
+        self.assertEqual(data["house_no"], self.obj.house_no)
+        self.assertEqual(data["city"], self.obj.city)
 
-    def test_data__external_identifier_field(self):
+    def test_external_identifier_field(self):
         data = self.serializer_class(self.obj).data
-        self.assertEqual(
-            data["external_identifier"]["regon"], self.obj.external_identifier.regon
-        )
+        self.assertEqual(data["regon"], self.obj.regon)
 
     def test_validate_administrative_unit(self):
         admin_unit = JednostkaAdministracyjnaFactory()
@@ -149,28 +74,28 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertEqual(serializer.data["name"], "Inna nazwa sprawy")
         self.assertEqual(obj.name, "Inna nazwa sprawy")
 
-    def test_update_nested_address(self):
+    def test_update_address(self):
         self.login_required()
         serializer = self.serializer_class(
             self.obj,
-            data={"address": {"email": "new.email@asdf.pl"}},
+            data={"email": "new.email@asdf.pl"},
             context={"request": self.request},
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
-        self.assertEqual(serializer.data["address"]["email"], "new.email@asdf.pl")
-        self.assertEqual(obj.address.email, "new.email@asdf.pl")
+        self.assertEqual(serializer.data["email"], "new.email@asdf.pl")
+        self.assertEqual(obj.email, "new.email@asdf.pl")
 
     def test_update_nested_external_identifier(self):
         self.login_required()
         serializer = self.serializer_class(
             instance=self.obj,
-            data={"external_identifier": {"nip": "1111111111"}},
+            data={"nip": "1111111111"},
             context={"request": self.request},
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
-        self.assertEqual(serializer.data["external_identifier"]["nip"], "1111111111")
-        self.assertEqual(obj.external_identifier.nip, "1111111111")
+        self.assertEqual(serializer.data["nip"], "1111111111")
+        self.assertEqual(obj.nip, "1111111111")
