@@ -11,10 +11,10 @@ import styles from './index.less';
 export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
 export interface LoginItemType {
-  UserName: React.FC<WrappedLoginItemProps>;
-  Password: React.FC<WrappedLoginItemProps>;
-  Mobile: React.FC<WrappedLoginItemProps>;
-  Captcha: React.FC<WrappedLoginItemProps>;
+  UserName: FC<WrappedLoginItemProps>;
+  Password: FC<WrappedLoginItemProps>;
+  Mobile: FC<WrappedLoginItemProps>;
+  Captcha: FC<WrappedLoginItemProps>;
 }
 
 export interface LoginItemProps extends Partial<FormItemProps> {
