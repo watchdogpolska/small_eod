@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
 import { Card, Typography, Alert } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-export default () => (
-  <PageHeaderWrapper content=" 这个页面只有 admin 权限才能查看">
+export default (): ReactNode => (
+  <PageHeaderWrapper content="This page can be viewed only with admin privillages">
     <Card>
       <Alert
-        message="umi ui 现已发布，欢迎使用 npm run ui 启动体验。"
+        message="Umi UI ready"
         type="success"
         showIcon
         banner
