@@ -1,5 +1,5 @@
 import { Button, Col, Input, Row, Form, message } from 'antd';
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, FC } from 'react';
 
 import omit from 'omit.js';
 import { FormItemProps } from 'antd/es/form/FormItem';
@@ -57,10 +57,9 @@ const getFormItemOptions = ({
   return options;
 };
 
-const LoginItem: React.FC<LoginItemProps> = props => {
+const LoginItem: FC<LoginItemProps> = props => {
   const [count, setCount] = useState<number>(props.countDown || 0);
   const [timing, setTiming] = useState(false);
-  // 这么写是为了防止restProps中 带入 onChange, defaultValue, rules props tabUtil
   const {
     onChange,
     customProps,
@@ -80,7 +79,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
     if (result === false) {
       return;
     }
-    message.success('获取验证码成功！验证码为：1234');
+    message.success('Success! Verification code：1234');
     setTiming(true);
   }, []);
 
@@ -93,7 +92,6 @@ const LoginItem: React.FC<LoginItemProps> = props => {
           if (preSecond <= 1) {
             setTiming(false);
             clearInterval(interval);
-            // 重置秒数
             return countDown || 60;
           }
           return preSecond - 1;
@@ -105,7 +103,6 @@ const LoginItem: React.FC<LoginItemProps> = props => {
   if (!name) {
     return null;
   }
-  // get getFieldDecorator props
   const options = getFormItemOptions(props);
   const otherProps = restProps || {};
 
@@ -131,7 +128,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
                   onGetCaptcha(value);
                 }}
               >
-                {timing ? `${count} 秒` : '获取验证码'}
+                {timing ? `${count} sekundy` : 'Uzyskaj kod weryfikacyjny'}
               </Button>
             </Col>
           </Row>
