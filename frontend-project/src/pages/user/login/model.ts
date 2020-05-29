@@ -2,22 +2,7 @@ import { message } from 'antd';
 import { routerRedux } from 'dva/router';
 import { getPageQuery, setAuthority } from '@/utils/authority';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
-
-const checkIfObjectIsArrayOfStrings = (obj: unknown): boolean => {
-  if (Object.prototype.toString.call(obj) !== '[object Array]') {
-    return false;
-  }
-
-  const arr = obj as Array<unknown>;
-
-  if (arr.length < 1) {
-    return false;
-  }
-
-  return arr.every((val: unknown) => {
-    return typeof val === 'string';
-  });
-};
+import { stringify } from 'qs';
 
 const Model = {
   namespace: 'userAndlogin',
@@ -38,8 +23,8 @@ const Model = {
         const params = getPageQuery();
         let { redirect } = params;
 
-        if (checkIfObjectIsArrayOfStrings(redirect)) {
-          redirect = (redirect as string[]).join('');
+        if (typeof redirect !== 'string') {
+          redirect = stringify(redirect);
         }
 
         if (redirect) {
