@@ -39,23 +39,6 @@ export default {
       },
     ],
   },
-  /* Mobile: {
-    props: {
-      size: 'large',
-      prefix: <MobileTwoTone className={styles.prefixIcon} />,
-      placeholder: 'mobile number',
-    },
-    rules: [
-      {
-        required: true,
-        message: 'Please enter mobile number!',
-      },
-      {
-        pattern: /^1\d{10}$/,
-        message: 'Wrong mobile number format!',
-      },
-    ],
-  }, */
   Captcha: {
     props: {
       size: 'large',

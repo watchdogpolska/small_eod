@@ -26,7 +26,7 @@ const getFormItemOptions = ({ onChange, defaultValue, customProps = {}, rules })
 
 const LoginItem = props => {
   const [count, setCount] = useState(props.countDown || 0);
-  const [timing, setTiming] = useState(false); // 这么写是为了防止restProps中 带入 onChange, defaultValue, rules props tabUtil
+  const [timing, setTiming] = useState(false);
 
   const {
     onChange,
@@ -48,7 +48,7 @@ const LoginItem = props => {
       return;
     }
 
-    message.success('获取验证码成功！验证码为：1234');
+    message.success('Successfully acquired verification code：1234');
     setTiming(true);
   }, []);
   useEffect(() => {
@@ -60,8 +60,7 @@ const LoginItem = props => {
         setCount(preSecond => {
           if (preSecond <= 1) {
             setTiming(false);
-            clearInterval(interval); // 重置秒数
-
+            clearInterval(interval);
             return countDown || 60;
           }
 
@@ -101,7 +100,7 @@ const LoginItem = props => {
                   onGetCaptcha(value);
                 }}
               >
-                {timing ? `${count} 秒` : '获取验证码'}
+                {timing ? `${count} seconds` : 'Get verification code'}
               </Button>
             </Col>
           </Row>
