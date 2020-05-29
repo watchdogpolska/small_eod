@@ -3,6 +3,22 @@ import { routerRedux } from 'dva/router';
 import { getPageQuery, setAuthority } from '@/utils/authority';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
 
+const checkIfObjectIsArrayOfStrings = (obj: unknown): boolean => {
+  if (Object.prototype.toString.call(obj) !== '[object Array]') {
+    return false;
+  }
+
+  const arr = obj as Array<unknown>;
+
+  if (arr.length < 1) {
+    return false;
+  }
+
+  return arr.every((val: unknown) => {
+    return typeof val === 'string';
+  });
+};
+
 const Model = {
   namespace: 'userAndlogin',
   state: {
@@ -17,10 +33,14 @@ const Model = {
       }); // Login successfully
 
       if (response.status === 'ok') {
-        message.success('登录成功！');
+        message.success('Logged in successfully！');
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
+
+        if (checkIfObjectIsArrayOfStrings(redirect)) {
+          redirect = (redirect as string[]).join('');
+        }
 
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
@@ -52,4 +72,5 @@ const Model = {
     },
   },
 };
+
 export default Model;
