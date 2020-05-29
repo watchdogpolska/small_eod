@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import { routerRedux } from 'dva/router';
 import { getPageQuery, setAuthority } from '@/utils/authority';
-import { fakeAccountLogin, getFakeCaptcha } from './service';
+import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
 
 const Model = {
   namespace: 'userAndlogin',
