@@ -7,8 +7,8 @@ class EventSerializer(UserLogModelSerializer):
         model = Event
         fields = [
             "id",
-            "cases",
+            "case",
             "name",
             "date",
-            "comments",
+            "comment",
         ]

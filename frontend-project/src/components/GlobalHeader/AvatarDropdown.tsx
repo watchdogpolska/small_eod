@@ -1,14 +1,15 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import { ClickParam } from 'antd/es/menu';
-import { router } from 'umi';
 import { connect, Dispatch } from 'dva';
 import React, { Component } from 'react';
+import { Action } from 'redux';
+import { router } from 'umi';
+
 import { CurrentUser } from '@/models/user';
+import { ConnectState } from '@/models/connect';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import { ConnectState } from '@/models/connect';
-import { Action } from 'redux';
 
 export interface GlobalHeaderRightProps extends Partial<ConnectState> {
   currentUser?: CurrentUser;

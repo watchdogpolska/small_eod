@@ -8,7 +8,20 @@ from ..generic.models import TimestampUserLogModel
 from ..generic.validators import ExactLengthsValidator
 
 
-class AddressData(models.Model):
+class Institution(TimestampUserLogModel):
+    name = models.CharField(
+        max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
+    )
+
+    administrative_unit = models.ForeignKey(
+        to=JednostkaAdministracyjna,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to=models.Q(category__level=3),
+        verbose_name=_("Administrative division"),
+        help_text=_("Administrative division."),
+    )
     email = models.EmailField(
         blank=True, verbose_name=_("E-mail"), help_text=_("E-mail address.")
     )
@@ -45,10 +58,6 @@ class AddressData(models.Model):
         verbose_name=_("Flat number"),
         help_text=_("Flat number."),
     )
-
-
-class ExternalIdentifier(models.Model):
-
     nip = models.CharField(
         max_length=10,
         validators=[ExactLengthsValidator([10]), validators.RegexValidator("^[0-9]*$")],
@@ -66,38 +75,6 @@ class ExternalIdentifier(models.Model):
         blank=True,
         verbose_name=_("REGON"),
         help_text=_("Statistical Identification Number."),
-    )
-
-
-class Institution(TimestampUserLogModel):
-    name = models.CharField(
-        max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
-    )
-
-    administrative_unit = models.ForeignKey(
-        to=JednostkaAdministracyjna,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        limit_choices_to=models.Q(category__level=3),
-        verbose_name=_("Administrative division"),
-        help_text=_("Administrative division."),
-    )
-    address = models.OneToOneField(
-        AddressData,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("Address"),
-        help_text=_("Address of institution."),
-    )
-    external_identifier = models.OneToOneField(
-        ExternalIdentifier,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("External identifier"),
-        help_text=_("External identifier of institution."),
     )
 
     def __str__(self):

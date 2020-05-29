@@ -9,7 +9,7 @@ from ..generic.factories import (
 
 class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "case-%04d" % n)
-    comments = factory.Sequence(lambda n: "comment-%04d" % n)
+    comment = factory.Sequence(lambda n: "comment-%04d" % n)
     audited_institutions = ManyToManyPostGeneration("audited_institutions")
     responsible_users = ManyToManyPostGeneration("responsible_users")
     notified_users = ManyToManyPostGeneration("notified_users")

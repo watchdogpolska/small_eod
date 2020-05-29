@@ -19,4 +19,4 @@ class FeatureOptionFactoryTestCase(FactoryTestCaseMixin, TestCase):
         Foreign keys are created.
         """
         obj = self.create_factory()
-        self.assertIsNotNone(obj.features)
+        self.assertIsNotNone(obj.feature)
