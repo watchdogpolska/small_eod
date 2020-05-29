@@ -2,8 +2,8 @@ import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from 
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import { connect } from 'dva';
+import LoginFrom from '@/components/Login';
 import styles from './style.less';
-import LoginFrom from './components/Login';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
