@@ -15,7 +15,7 @@ export default (): ReactNode => (
   <PageHeaderWrapper>
     <Card>
       <Alert
-        message="User interfaces is now aviable. Click on icon on bottom-right to use it." // creditsy dla google translate
+        message="User interface is now aviable. Click on icon on bottom-right to use it." // creditsy dla google translate
         type="success"
         showIcon
         banner
