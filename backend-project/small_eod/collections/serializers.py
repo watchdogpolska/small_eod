@@ -14,7 +14,7 @@ signer = JWTSigner()
 class CollectionSerializer(UserLogModelSerializer):
     class Meta:
         model = Collection
-        fields = ["id", "name", "comments", "public", "expired_on", "queries"]
+        fields = ["id", "name", "comment", "public", "expired_on", "query"]
 
 
 class TokenSetSerializer(serializers.Serializer):

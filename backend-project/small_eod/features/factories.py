@@ -14,7 +14,7 @@ class FeatureFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFac
 
 
 class FeatureOptionFactory(factory.django.DjangoModelFactory):
-    features = factory.SubFactory(FeatureFactory)
+    feature = factory.SubFactory(FeatureFactory)
     name = factory.Sequence(lambda n: "featureoption-%04d" % n)
 
     class Meta:
