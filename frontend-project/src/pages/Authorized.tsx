@@ -1,10 +1,17 @@
 import React from 'react';
 import { Redirect } from 'umi';
-import { connect } from 'dva';
 import Authorized from '@/utils/Authorized';
 import { getRouteAuthority } from '@/utils/utils';
+import { ConnectState, UserModelState, Route } from '@/models/connect';
+import { connect } from 'dva';
 
-const AuthComponent = ({
+interface AuthComponentProps {
+  user: UserModelState;
+  route: Route;
+  location: Location;
+}
+
+const AuthComponent: React.FC<AuthComponentProps> = ({
   children,
   route = {
     routes: [],
@@ -27,6 +34,6 @@ const AuthComponent = ({
   );
 };
 
-export default connect(({ user }) => ({
+export default connect(({ user }: ConnectState) => ({
   user,
 }))(AuthComponent);
