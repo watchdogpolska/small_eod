@@ -1,24 +1,24 @@
 import Link from 'umi/link';
 import { Result, Button } from 'antd';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-export default () => (
+export default (): ReactNode => (
   <Result
-    status="403"
-    title="403"
+    status="500"
+    title="500"
     style={{
       background: 'none',
     }}
     subTitle={formatMessage({
-      id: 'exceptionand403.description.403',
-      defaultMessage: "Sorry, you don't have access to this page.",
+      id: 'exceptionand500.description.500',
+      defaultMessage: 'Sorry, the server is reporting an error.',
     })}
     extra={
       <Link to="/">
         <Button type="primary">
           {formatMessage({
-            id: 'exceptionand403.exception.back',
+            id: 'exceptionand500.exception.back',
             defaultMessage: 'Back Home',
           })}
         </Button>
