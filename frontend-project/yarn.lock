@@ -2665,10 +2665,10 @@
   resolved "https://registry.yarnpkg.com/@umijs/error-code-map/-/error-code-map-1.0.1.tgz#2a2dd7b4bcd11869e968264ff3dabacfabe8b874"
   integrity sha512-Q0KSpQYKTF2XWOlAxJO/SRbRhIGAp1GK1spWFbzwv3h0WvfX7pPeA05Y3p0hut7Vcjhdocnx5NduuApF4R1lGQ==
 
-"@umijs/fabric@2.0.8", "@umijs/fabric@^2.0.0":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@umijs/fabric/-/fabric-2.0.8.tgz#02a4cc104777cbeb845f58529bf1694c9f7aae68"
-  integrity sha512-SJjIMK2apxoJ2aakp/mFvu5ambNB/GSAcqL4fViWacXj6Q8kyGc1nRxJlqW9JQbIM/4a7w3RJoiZF2wPklFAnA==
+"@umijs/fabric@2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@umijs/fabric/-/fabric-2.0.9.tgz#fffbd09be89408e49da2acf6354c84674b832dd4"
+  integrity sha512-q+472w4HWvXtZVEzKHXB1XoGUcFL3dxx3jABPBzOLcSZBKJXn6/EYX3nFytIb0YE8aMxJOddfoTbtbDz9BOkJQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.18.0"
     "@typescript-eslint/parser" "^2.18.0"
@@ -2729,6 +2729,39 @@
     stylelint-config-standard "^18.3.0"
     stylelint-declaration-block-no-ignored-properties "^2.1.0"
     stylelint-order "^3.0.0"
+
+"@umijs/fabric@^2.0.0":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@umijs/fabric/-/fabric-2.0.8.tgz#02a4cc104777cbeb845f58529bf1694c9f7aae68"
+  integrity sha512-SJjIMK2apxoJ2aakp/mFvu5ambNB/GSAcqL4fViWacXj6Q8kyGc1nRxJlqW9JQbIM/4a7w3RJoiZF2wPklFAnA==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^2.18.0"
+    "@typescript-eslint/parser" "^2.18.0"
+    eslint "^6.8.0"
+    eslint-config-airbnb "^18.0.0"
+    eslint-config-airbnb-base "^13.1.0"
+    eslint-config-airbnb-typescript "^4.0.0"
+    eslint-config-prettier "^6.10.0"
+    eslint-formatter-pretty "^3.0.0"
+    eslint-plugin-babel "^5.3.0"
+    eslint-plugin-compat "^3.1.1"
+    eslint-plugin-eslint-comments "^3.1.1"
+    eslint-plugin-import "^2.17.3"
+    eslint-plugin-jest "^22.4.1"
+    eslint-plugin-jsx-a11y "^6.2.0"
+    eslint-plugin-markdown "^1.0.0"
+    eslint-plugin-promise "^4.1.1"
+    eslint-plugin-react "^7.13.0"
+    eslint-plugin-react-hooks "^2.3.0"
+    eslint-plugin-unicorn "^16.0.0"
+    stylelint "^13.2.1"
+    stylelint-config-css-modules "^2.2.0"
+    stylelint-config-prettier "^8.0.1"
+    stylelint-config-rational-order "^0.1.2"
+    stylelint-config-standard "^20.0.0"
+    stylelint-declaration-block-no-ignored-properties "^2.1.0"
+    stylelint-order "^4.0.0"
+    typescript "^3.8.3"
 
 "@umijs/hooks@^1.5.2":
   version "1.9.2"
