@@ -46,7 +46,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
     dispatch({ type: 'institutions/fetchAll' });
   }, []);
 
-  console.log(`Test: ${institutions}`);
 
   return (
     <Form {...layout} form={form}>
