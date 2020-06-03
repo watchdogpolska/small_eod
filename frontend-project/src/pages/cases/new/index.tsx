@@ -3,7 +3,7 @@ import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
 import React, { useEffect, FunctionComponent } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { queryInstitutions } from '@/services/cases';
+import { Institution } from '@/models/institutions';
 import { User } from '@/models/users';
 
 interface Tag {
@@ -13,6 +13,7 @@ interface Tag {
 interface CasesNewFormProps {
   tags: Tag[];
   users: User[];
+  institutions: Institution[];
   dispatch: Function;
 }
 
@@ -28,28 +29,19 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const institutionsNames = [];
-
-const fetchInstitutions = () => {
-  const queryPromise = queryInstitutions();
-  queryPromise.then((data) => {
-    data.results.forEach((result) => {
-      institutionsNames.push(result.name);
-    });
-  });
-}
-
-const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispatch }) => {
+const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, institutions, dispatch }) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
     form.submit();
   };
   useEffect(() => {
-    fetchInstitutions();
     dispatch({ type: 'tags/fetchAll' });
     dispatch({ type: 'users/fetchAll' });
+    dispatch({ type: 'institutions/fetchAll' });
   }, []);
+
+  console.log(`Test: ${institutions}`);
 
   return (
     <Form {...layout} form={form}>
@@ -146,8 +138,10 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                     id: 'cases-new.form.audited-institution.placeholder',
                   })}
                 >
-                  {institutionsNames.map(institutionName => (
-                    <Option key={institutionName}>{institutionName}</Option>
+                {institutions.map(institution => (
+                    <Option key={institution.id} value={institution.id}>
+                      {institution.name}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>
@@ -158,7 +152,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.notified-users.label' })}
-                name="notified-users"
+                name="notified-users"Option
               >
                 <Select
                   mode="multiple"
@@ -209,4 +203,4 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
   );
 };
 
-export default connect(({ tags, users }: any) => ({ tags, users }))(CasesNewForm);
+export default connect(({ tags, users, institutions }: any) => ({ tags, users, institutions }))(CasesNewForm);
