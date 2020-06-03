@@ -33,7 +33,7 @@ export interface InstitutionModelType {
 }
 const defaultInstitutionsState: Institution[] = [];
 
-const InstitutionsModel = {
+const InstitutionsModel: InstitutionModelType = {
   namespace: 'institutions',
   state: defaultInstitutionsState,
   effects: {
