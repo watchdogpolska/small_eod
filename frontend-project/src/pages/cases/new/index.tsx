@@ -46,7 +46,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
     dispatch({ type: 'institutions/fetchAll' });
   }, []);
 
-
   return (
     <Form {...layout} form={form}>
       <PageHeaderWrapper content={formatMessage({ id: 'cases-new.page-header-content' })}>
