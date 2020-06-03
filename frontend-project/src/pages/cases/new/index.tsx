@@ -29,7 +29,12 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, institutions, dispatch }) => {
+const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
+  tags,
+  users,
+  institutions,
+  dispatch,
+}) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
@@ -138,7 +143,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, insti
                     id: 'cases-new.form.audited-institution.placeholder',
                   })}
                 >
-                {institutions.map(institution => (
+                  {institutions.map(institution => (
                     <Option key={institution.id} value={institution.id}>
                       {institution.name}
                     </Option>
@@ -152,7 +157,8 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, insti
             <Col span={16}>
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.notified-users.label' })}
-                name="notified-users"Option
+                name="notified-users"
+                Option
               >
                 <Select
                   mode="multiple"
@@ -203,4 +209,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, insti
   );
 };
 
-export default connect(({ tags, users, institutions }: any) => ({ tags, users, institutions }))(CasesNewForm);
+export default connect(({ tags, users, institutions }: any) => ({ tags, users, institutions }))(
+  CasesNewForm,
+);

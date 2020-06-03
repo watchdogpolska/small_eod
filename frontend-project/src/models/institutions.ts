@@ -4,34 +4,34 @@ import { AnyAction } from 'redux';
 import { Reducer } from 'react';
 
 export interface Institution {
-    id: number;
-    name: string;
-    email?: string;
-    city?: string;
-    epuap?: string;
-    street?: string;
-    houseNumber?: string;
-    postalCode?: string;
-    flatNumber?: string;
-    NIP?: number;
-    regon?: number;
-  }
-  
-  export interface Payload {
-    payload: { results: Institution[] };
-  }
-  
-  export interface InstitutionModelType {
-    namespace: string;
-    state: Institution[];
-    effects: {
-      fetchAll: Effect;
-    };
-    reducers: {
-      saveAll: Reducer<Institution[], Payload>;
-    };
-  }
-  const defaultInstitutionsState: Institution[] = [];
+  id: number;
+  name: string;
+  email?: string;
+  city?: string;
+  epuap?: string;
+  street?: string;
+  houseNumber?: string;
+  postalCode?: string;
+  flatNumber?: string;
+  NIP?: number;
+  regon?: number;
+}
+
+export interface Payload {
+  payload: { results: Institution[] };
+}
+
+export interface InstitutionModelType {
+  namespace: string;
+  state: Institution[];
+  effects: {
+    fetchAll: Effect;
+  };
+  reducers: {
+    saveAll: Reducer<Institution[], Payload>;
+  };
+}
+const defaultInstitutionsState: Institution[] = [];
 
 const InstitutionsModel = {
   namespace: 'institutions',
