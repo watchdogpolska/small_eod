@@ -54,27 +54,6 @@ export default {
     address: '西湖区工专路 77 号',
     phone: '0752-268888888',
   },
-  // GET POST 可省略
-  'GET /api/users': [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-  ],
   'POST /api/login/account': (req: Request, res: Response) => {
     const { password, userName, type } = req.body;
     if (password === 'ant.design' && userName === 'admin') {

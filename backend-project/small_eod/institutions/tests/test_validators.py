@@ -1,7 +1,7 @@
 from django.forms import modelform_factory
 from django.test import TestCase
 
-from ..models import ExternalIdentifier, Institution
+from ..models import Institution
 from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
@@ -14,7 +14,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `nip` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("nip",))
+        f = modelform_factory(Institution, fields=("nip",))
 
         form = f(data=dict(nip="abc"))
         self.assertFalse(form.is_valid())
@@ -29,7 +29,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `nip` accepts length of 10 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("nip",))
+        f = modelform_factory(Institution, fields=("nip",))
 
         chars_9 = "111111111"
         self.assertEqual(len(chars_9), 9)
@@ -51,7 +51,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `regon` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("regon",))
+        f = modelform_factory(Institution, fields=("regon",))
 
         form = f(data=dict(regon="abc"))
         self.assertFalse(form.is_valid())
@@ -66,7 +66,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `regon` accepts length of 10 or 14 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("regon",))
+        f = modelform_factory(Institution, fields=("regon",))
 
         chars_9 = "111111111"
         self.assertEqual(len(chars_9), 9)

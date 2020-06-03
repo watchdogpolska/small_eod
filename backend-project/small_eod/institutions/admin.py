@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from .models import Institution, ExternalIdentifier, AddressData
+from .models import Institution
 
 
 admin.site.register(Institution)
-admin.site.register(ExternalIdentifier)
-admin.site.register(AddressData)
