@@ -3,7 +3,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Typography, Alert } from 'antd';
 import styles from './Welcome.less';
 
-const CodePreview: FC<{}> = ({ children }) => (
+const CodePreview: FC = ({ children }) => (
   <pre className={styles.pre}>
     <code>
       <Typography.Text copyable>{children}</Typography.Text>
@@ -15,7 +15,7 @@ export default (): ReactNode => (
   <PageHeaderWrapper>
     <Card>
       <Alert
-        message="User interfaces is now aviable. Click on icon on bottom-right to use it." // creditsy dla google translate
+        message="User interface is now aviable. Click on icon on bottom-right to use it." // creditsy dla google translate
         type="success"
         showIcon
         banner
