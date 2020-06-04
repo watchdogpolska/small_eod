@@ -100,7 +100,7 @@ export default {
               component: './user/register',
             },
             {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
@@ -148,7 +148,7 @@ export default {
               authority: ['admin', 'user'],
             },
             {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
