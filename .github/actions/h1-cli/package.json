@@ -1,0 +1,19 @@
+{
+  "name": "h1-cli-actions",
+  "version": "1.0.0",
+  "description": "Set up HyperOne CLI on GitHub Actions",
+  "main": "dist/start.js",
+  "scripts": {
+    "build": "ncc build src/start.js",
+    "test": "RUNNER_TOOL_CACHE=$(pwd)/cache RUNNER_TEMP=$(pwd)/cache INPUT_VERSION=latest INPUT_SCOPE=h1 nodejs src/start.js"
+  },
+  "author": "Adam Dobrawy",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/tool-cache": "^1.5.5"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.3"
+  }
+}

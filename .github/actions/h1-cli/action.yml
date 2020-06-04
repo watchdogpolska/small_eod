@@ -1,0 +1,20 @@
+name: Set up HyperOne CLI on GitHub Actions
+author: Adam Dobrawy
+
+inputs:
+  version:
+    description: |-
+      Version of the CLI to install. If unspecified or set to "latest",
+      the latest available CLI version will be installed. Example: "1.10".
+    default: latest
+    required: false
+  scope:
+    description: |-
+      Scope of the CLI to install. If unspecified "h1" CLI version will 
+      be installed. Example: "h1", "rbx".
+    default: h1
+    required: false
+
+runs:
+  using: node12
+  main: dist/index.js
