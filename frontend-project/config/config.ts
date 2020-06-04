@@ -88,7 +88,7 @@ export default {
               component: './user/login',
             },
             {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
@@ -136,7 +136,7 @@ export default {
               authority: ['admin', 'user'],
             },
             {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
