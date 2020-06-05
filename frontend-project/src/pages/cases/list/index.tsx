@@ -44,6 +44,10 @@ const TableList: FC<{}> = () => {
         </>
       ),
     },
+    {
+      title: formatMessage({ id: 'cases-list.table.columns.letterCount.title' }),
+      dataIndex: 'letterCount',
+    },
   ];
   return <Table type="cases" columns={columns} fetchData={fetchCasesPage} />;
 };

@@ -7,5 +7,6 @@ export default {
   'cases-list.table.columns.createdOn.title': 'Created',
   'cases-list.table.columns.modifiedOn.title': 'Modified',
   'cases-list.table.columns.tags.title': 'Tags',
+  'cases-list.table.columns.letterCount.title': 'Number of letters',
   'cases-list.table.total': 'Total',
 };
