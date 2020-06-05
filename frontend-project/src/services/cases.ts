@@ -5,7 +5,7 @@ export interface Case {
   name: string;
   audited_institutions: number;
   comment: string;
-  tags: [number];
+  tags: [string];
   responsible_users: [number];
   notified_users: [number];
   featureoptions: [number];

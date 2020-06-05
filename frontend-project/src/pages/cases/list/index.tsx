@@ -1,4 +1,6 @@
 import { ProColumns } from '@ant-design/pro-table';
+import { Tag } from 'antd';
+
 import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
@@ -22,14 +24,25 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.createdOn.title' }),
       dataIndex: 'createdOn',
+      render: createdOn => createdOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'cases-list.table.columns.modifiedOn.title' }),
       dataIndex: 'modifiedOn',
+      render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'cases-list.table.columns.tags.title' }),
       dataIndex: 'tags',
+      render: tags => (
+        <>
+          {tags.map(tag => (
+            <Tag color="blue" key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </>
+      ),
     },
   ];
   return <Table type="cases" columns={columns} fetchData={fetchCasesPage} />;
