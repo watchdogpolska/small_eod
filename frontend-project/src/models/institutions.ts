@@ -1,7 +1,6 @@
 import { fetchAll } from '@/services/institutions';
 import { Effect, EffectsCommandMap } from 'dva';
-import { AnyAction } from 'redux';
-import { Reducer } from 'react';
+import { AnyAction, Reducer } from 'redux';
 
 export interface Institution {
   id: number;
@@ -17,10 +16,6 @@ export interface Institution {
   regon?: number;
 }
 
-export interface Payload {
-  payload: { results: Institution[] };
-}
-
 export interface InstitutionModelType {
   namespace: string;
   state: Institution[];
@@ -28,7 +23,7 @@ export interface InstitutionModelType {
     fetchAll: Effect;
   };
   reducers: {
-    saveAll: Reducer<Institution[], Payload>;
+    saveAll: Reducer<Institution[], AnyAction>;
   };
 }
 const defaultInstitutionsState: Institution[] = [];

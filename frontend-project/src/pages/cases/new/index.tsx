@@ -156,7 +156,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
               <Form.Item
                 label={formatMessage({ id: 'cases-new.form.notified-users.label' })}
                 name="notified-users"
-                Option
               >
                 <Select
                   mode="multiple"
