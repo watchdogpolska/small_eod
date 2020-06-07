@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Redirect } from 'umi';
 import Authorized from '@/utils/Authorized';
 import { getRouteAuthority } from '@/utils/utils';
@@ -11,7 +11,7 @@ interface AuthComponentProps {
   location: Location;
 }
 
-const AuthComponent: React.FC<AuthComponentProps> = ({
+const AuthComponent: FunctionComponent<AuthComponentProps> = ({
   children,
   route = {
     routes: [],

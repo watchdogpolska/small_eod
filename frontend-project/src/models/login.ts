@@ -1,4 +1,4 @@
-import { stringify } from 'querystring';
+import { stringify } from 'qs';
 import { router } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
@@ -21,7 +21,6 @@ export interface LoginModelType {
     changeLoginStatus: any;
   };
 }
-
 const Model: LoginModelType = {
   namespace: 'login',
 
@@ -37,14 +36,22 @@ const Model: LoginModelType = {
         payload: response,
       });
       // Login successfully
+
       if (response.status === 'ok') {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        let { redirect } = params as { redirect: string };
+        let { redirect } = params;
+
+        if (typeof redirect !== 'string') {
+          redirect = stringify(redirect);
+        }
+
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
+
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
+
             if (redirect.match(/^\/.*#/)) {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
             }
@@ -53,6 +60,7 @@ const Model: LoginModelType = {
             return;
           }
         }
+
         router.replace(redirect || '/');
       }
     },
