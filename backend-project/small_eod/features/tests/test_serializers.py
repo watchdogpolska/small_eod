@@ -25,6 +25,6 @@ class FeatureSerializerTestCase(TestCase):
             context={"request": self.request},
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
-        features = serializer.save()
+        feature = serializer.save()
         self.assertTrue(FeatureOption.objects.count(), 2)
-        self.assertEqual(FeatureOption.objects.first().features, features)
+        self.assertEqual(FeatureOption.objects.first().feature, feature)

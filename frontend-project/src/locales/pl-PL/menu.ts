@@ -4,4 +4,5 @@ export default {
   'menu.home': 'Strona główna',
   'menu.institutions': 'Instytucje',
   'menu.institutions.new': 'Nowa',
+  'menu.letters': 'Listy',
 };
