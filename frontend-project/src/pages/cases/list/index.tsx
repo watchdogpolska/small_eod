@@ -6,6 +6,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Case, fetchCasesPage } from '@/services/cases';
 import Table from '@/components/Table';
+import { Institution } from '@/components/Table/Institution';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<Case>[] = [
@@ -16,6 +17,13 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.audited_institutions.title' }),
       dataIndex: 'auditedInstitutions',
+      render: (auditedInstitutions: [number]) => (
+        <>
+          {auditedInstitutions.map(auditedInstitution => (
+            <Institution id={auditedInstitution} key={auditedInstitution} />
+          ))}
+        </>
+      ),
     },
     {
       title: formatMessage({ id: 'cases-list.table.columns.comment.title' }),
@@ -34,7 +42,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.tags.title' }),
       dataIndex: 'tags',
-      render: tags => (
+      render: (tags: [number]) => (
         <>
           {tags.map(tag => (
             <Tag color="blue" key={tag}>

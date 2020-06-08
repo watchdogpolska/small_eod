@@ -3,7 +3,7 @@ import smallEodSDK from '@/utils/sdk';
 
 export interface Case {
   name: string;
-  audited_institutions: number;
+  auditedInstitutions: [number];
   comment: string;
   tags: [string];
   responsible_users: [number];
