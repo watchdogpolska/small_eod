@@ -7,6 +7,7 @@ export default {
   'menu.admin': 'admin',
   'menu.cases': 'Cases',
   'menu.cases.new': 'New',
+  'menu.cases.list': 'List',
   'menu.exception': 'Exception',
   'menu.exception.not-find': '404',
   'menu.exception.not-permission': '403',

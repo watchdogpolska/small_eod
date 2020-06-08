@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { Spin } from 'antd';
 
 import { fetchInstitution } from '@/services/institutions';
 
@@ -12,5 +13,5 @@ export const Institution: FC<{ id: number }> = props => {
     fetchData();
   }, []);
 
-  return <div>{name}</div>;
+  return name ? <div>{name}</div> : <Spin />;
 };
