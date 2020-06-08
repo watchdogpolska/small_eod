@@ -19,9 +19,7 @@ export interface Institution {
 }
 
 export const fetchInstitution = async (id: number): Promise<Institution> => {
-  smallEodSDK.InstitutionsApi();
-
-  const response = await smallEodSDK.institutionsRead(id);
+  const response = await new smallEodSDK.InstitutionsApi().institutionsRead(id);
   return response;
 };
 
