@@ -157,10 +157,10 @@
     use-merge-value "^1.0.1"
     warning "^4.0.3"
 
-"@ant-design/pro-table@2.3.4":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/@ant-design/pro-table/-/pro-table-2.3.4.tgz#b9708709859daeffd73bb45be86fca5c88217487"
-  integrity sha512-iJeiXjFA9+hjWejeGMtZo7J3uxqs8DgqeEixIYidjr8+BL4iTGpIJ6/XECm/gAxMeBkPbozTblHvPOeIM+prag==
+"@ant-design/pro-table@2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@ant-design/pro-table/-/pro-table-2.3.5.tgz#16c24ef2f4e088528acdd84e0752c563fe88141f"
+  integrity sha512-qoY/ZQ+bCQ2mRF4LahAW/9CjXUPLDttFK3pY0DMIbELa3dwoLdd1pQGzS45Qf7TuyAfmeaM2w5yIGRQNjjmbkQ==
   dependencies:
     "@ant-design/icons" "^4.1.0"
     antd "^4.1.5"
@@ -170,12 +170,12 @@
     lodash.tonumber "^4.0.3"
     moment "^2.24.0"
     rc-resize-observer "^0.2.1"
-    rc-util "^4.20.5"
+    rc-util "^5.0.1"
     react-dnd "^10.0.2"
     react-dnd-html5-backend "^10.0.2"
     unstated-next "^1.1.0"
     use-json-comparison "^1.0.5"
-    use-media-antd-query "1.0.1"
+    use-media-antd-query "1.0.2"
     use-merge-value "^1.0.1"
 
 "@ant-design/react-slick@~0.26.1":
@@ -15510,7 +15510,7 @@ rc-upload@~3.0.4:
     babel-runtime "6.x"
     classnames "^2.2.5"
 
-rc-util@4.x, rc-util@^4.0.4, rc-util@^4.1.1, rc-util@^4.10.0, rc-util@^4.11.0, rc-util@^4.12.0, rc-util@^4.13.0, rc-util@^4.14.0, rc-util@^4.15.3, rc-util@^4.15.7, rc-util@^4.16.1, rc-util@^4.17.0, rc-util@^4.20.0, rc-util@^4.20.1, rc-util@^4.20.3, rc-util@^4.20.5, rc-util@^4.20.6, rc-util@^4.3.0, rc-util@^4.4.0, rc-util@^4.5.0, rc-util@^4.5.1, rc-util@^4.6.0, rc-util@^4.8.0, rc-util@^4.9.0:
+rc-util@4.x, rc-util@^4.0.4, rc-util@^4.1.1, rc-util@^4.10.0, rc-util@^4.11.0, rc-util@^4.12.0, rc-util@^4.13.0, rc-util@^4.14.0, rc-util@^4.15.3, rc-util@^4.15.7, rc-util@^4.16.1, rc-util@^4.17.0, rc-util@^4.20.0, rc-util@^4.20.1, rc-util@^4.20.3, rc-util@^4.20.6, rc-util@^4.3.0, rc-util@^4.4.0, rc-util@^4.5.0, rc-util@^4.5.1, rc-util@^4.6.0, rc-util@^4.8.0, rc-util@^4.9.0:
   version "4.20.6"
   resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.20.6.tgz#57e6a57dac3d9133bedb36ee9d6125eeae0930ff"
   integrity sha512-LTT+s9JXHL6Xf3lwDGBGem0w4/CBoMDafKBuB3szCoVrxHzakKnYpdQi2eoNfDQh0FrdFPhL922oChbZT98H+g==
@@ -15519,6 +15519,14 @@ rc-util@4.x, rc-util@^4.0.4, rc-util@^4.1.1, rc-util@^4.10.0, rc-util@^4.11.0, r
     prop-types "^15.5.10"
     react-is "^16.12.0"
     react-lifecycles-compat "^3.0.4"
+    shallowequal "^1.1.0"
+
+rc-util@^5.0.1:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.0.4.tgz#297bd719b1bd00b3c947a884ab7ef0a07c55dce6"
+  integrity sha512-cd19RCrE0DJH6UcJ9+V3eaXA/5sNWyVKOKkWl8ZM2OqgNzVb8fv0obf/TkuvSN43tmTsgqY8k7OqpFYHhmef8g==
+  dependencies:
+    react-is "^16.12.0"
     shallowequal "^1.1.0"
 
 rc-virtual-list@^1.1.0, rc-virtual-list@^1.1.2:
@@ -19580,7 +19588,14 @@ use-json-comparison@^1.0.3, use-json-comparison@^1.0.5:
   resolved "https://registry.yarnpkg.com/use-json-comparison/-/use-json-comparison-1.0.5.tgz#d41a72d65fcf4cf72acc85c8f3980e2173809d63"
   integrity sha512-P/AgEKXphcN0L/8G5wLfbEz88mZQ9ayHS1OVESZaS2nxkN/msDWTGE8E1e9HXOWCZ9yoAfDrbVKAmTYpsYupFA==
 
-use-media-antd-query@1.0.1, use-media-antd-query@^1.0.1:
+use-media-antd-query@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/use-media-antd-query/-/use-media-antd-query-1.0.2.tgz#cbda1bdfb99cd20b0121a361c3d1331ca499ba58"
+  integrity sha512-9exG6pzEtkwtJIM2loE5/lBdNeJHoX0/CYA8NVwC0UPaiCcpHKAEyj9sEa+dju7ERPaU0//gG8+Q6I7Jr265Eg==
+  dependencies:
+    react-responsive "^8.0.1"
+
+use-media-antd-query@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/use-media-antd-query/-/use-media-antd-query-1.0.1.tgz#7b052cc89ce9cb3220d7217e36b483742227f3ea"
   integrity sha512-PACSJHFfX4N7k6cTJwuqJOTNCFWLxTnP8zuXWp1OApmny13FrU3IL4STRxtW8jyWg/GariJQYcitNyvdVw2HLw==
