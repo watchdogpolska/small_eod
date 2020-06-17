@@ -1,6 +1,5 @@
 import { ProColumns } from '@ant-design/pro-table';
 import { Tag } from 'antd';
-
 import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
