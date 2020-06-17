@@ -4,13 +4,13 @@ import React, { FC, useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 
-interface Table {
+interface TableProps {
   type: string;
   columns: ProColumns<{}>[];
   fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<{}>>;
 }
 
-const Table: FC<Table> = props => {
+const Table: FC<TableProps> = props => {
   const actionRef = useRef<ActionType>();
 
   const showTotal = (total: number, range: number[]) =>
