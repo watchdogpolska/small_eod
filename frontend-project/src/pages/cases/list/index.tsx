@@ -5,7 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Case, fetchCasesPage } from '@/services/cases';
 import Table from '@/components/Table';
-import { Institution } from '@/components/Table/Institution';
+import { InstitutionName } from '@/components/Table/InstitutionName';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<Case>[] = [
@@ -19,7 +19,7 @@ const TableList: FC<{}> = () => {
       render: (auditedInstitutions: [number]) => (
         <>
           {auditedInstitutions.map(auditedInstitution => (
-            <Institution id={auditedInstitution} key={auditedInstitution} />
+            <InstitutionName id={auditedInstitution} key={auditedInstitution} />
           ))}
         </>
       ),

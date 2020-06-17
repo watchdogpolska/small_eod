@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import { fetchInstitution } from '@/services/institutions';
 
-export const Institution: FC<{ id: number }> = props => {
+export const InstitutionName: FC<{ id: number }> = props => {
   const [name, setName] = useState('');
   useEffect(() => {
     const fetchData = async () => {
