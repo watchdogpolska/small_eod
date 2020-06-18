@@ -18,4 +18,3 @@ class CollectionFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory
 
     class Meta:
         model = Collection
-        django_get_or_create = ("pk",)

@@ -11,7 +11,6 @@ class FeatureFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFac
 
     class Meta:
         model = Feature
-        django_get_or_create = ("pk",)
 
 
 class FeatureOptionFactory(factory.django.DjangoModelFactory):
@@ -20,4 +19,3 @@ class FeatureOptionFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = FeatureOption
-        django_get_or_create = ("pk",)

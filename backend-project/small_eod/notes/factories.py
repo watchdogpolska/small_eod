@@ -11,4 +11,3 @@ class NoteFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     class Meta:
         model = Note
-        django_get_or_create = ("pk",)

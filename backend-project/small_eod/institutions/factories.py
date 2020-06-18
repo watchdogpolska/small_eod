@@ -4,7 +4,7 @@ import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
 from teryt_tree.factories import JednostkaAdministracyjnaFactory
-
+from ..generic.factories import ManyToManyPostGeneration
 from .models import Institution
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
 
@@ -27,4 +27,3 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     class Meta:
         model = Institution
-        django_get_or_create = ("pk",)

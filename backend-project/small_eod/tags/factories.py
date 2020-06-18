@@ -21,4 +21,3 @@ class TagNamespaceFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     class Meta:
         model = TagNamespace
-        django_get_or_create = ("pk",)

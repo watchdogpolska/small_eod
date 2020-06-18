@@ -18,4 +18,3 @@ class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactor
 
     class Meta:
         model = Case
-        django_get_or_create = ("pk",)

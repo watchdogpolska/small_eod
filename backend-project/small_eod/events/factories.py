@@ -14,4 +14,3 @@ class EventFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     class Meta:
         model = Event
-        django_get_or_create = ("pk",)
