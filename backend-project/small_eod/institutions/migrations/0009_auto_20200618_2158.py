@@ -11,14 +11,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='institution',
-            name='comment',
-            field=models.CharField(blank=True, help_text='Comment for this case.', max_length=256, verbose_name='Comment'),
-        ),
-        migrations.AddField(
-            model_name='institution',
-            name='tags',
-            field=models.ManyToManyField(blank=True, help_text='Choose tags.', to='tags.Tag', verbose_name='Tags'),
-        ),
+        # migrations.AddField(
+        #     model_name='institution',
+        #     name='comment',
+        #     field=models.CharField(blank=True, help_text='Comment for this case.', max_length=256, verbose_name='Comment'),
+        # ),
+        # migrations.AddField(
+        #     model_name='institution',
+        #     name='tags',
+        #     field=models.ManyToManyField(blank=True, help_text='Choose tags.', to='tags.Tag', verbose_name='Tags'),
+        # ),
     ]
