@@ -23,6 +23,12 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
+      render: direction =>
+        formatMessage(
+          direction === 'IN'
+            ? { id: 'letters-list.table.direction.in' }
+            : { id: 'letters-list.table.direction.out' },
+        ),
     },
   ];
 
