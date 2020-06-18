@@ -26,4 +26,4 @@ class InstitutionAdmin(admin.ModelAdmin):
     # }
 
 
-admin.site.register(Institution, InstitutionAdmin)
+# admin.site.register(Institution, InstitutionAdmin)
