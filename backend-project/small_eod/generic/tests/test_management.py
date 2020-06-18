@@ -2,7 +2,6 @@ from io import StringIO
 
 from django.test import TestCase
 from django.core.management import call_command
-from ...letters.models import Letter
 
 
 class InitDataTestCase(TestCase):
@@ -16,6 +15,8 @@ class InitDataTestCase(TestCase):
         )
 
     def test_create_letter(self):
+        from ...letters.models import Letter
+
         stdout = StringIO()
 
         call_command(

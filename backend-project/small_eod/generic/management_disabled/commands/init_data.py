@@ -1,11 +1,8 @@
 from django.core.management.base import BaseCommand
 
-# from small_eod.administrative_units.factories
-from small_eod.letters.factories import LetterFactory
-
-
 class Command(BaseCommand):
-    help = "Create initiala test data"
+    help = "Create initial test data"
 
     def handle(self, *args, **options):
+        from small_eod.letters.factories import LetterFactory
         LetterFactory.create_batch(size=10)

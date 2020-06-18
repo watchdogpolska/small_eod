@@ -74,15 +74,6 @@ class Institution(TimestampUserLogModel):
         verbose_name=_("REGON"),
         help_text=_("Statistical Identification Number."),
     )
-    # tags = models.ManyToManyField(
-    #     to='tags.Tag', blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
-    # )
-    comment = models.CharField(
-        max_length=256,
-        blank=True,
-        verbose_name=_("Comment"),
-        help_text=_("Comment for this institution."),
-    )
 
     def __str__(self):
         return f"{self.name} ({self.pk})"

@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import Tag, TagNamespace
+from .models import Tag
 
 admin.site.register(Tag)
-admin.site.register(TagNamespace)
