@@ -13,13 +13,16 @@ from .models import Institution
 
 class InstitutionAdmin(admin.ModelAdmin):
     # raw_id_fields = ["tags"]
-    list_display = ["name",
-     "comment",
-      "created_on", "modified_on", 
-    # display_tags
+    list_display = [
+        "name",
+        # "comment",
+        "created_on",
+        "modified_on",
+        #  display_tags
     ]
-    search_fields = ["name", 
-    # "comment"
+    search_fields = [
+        "name",
+        # "comment"
     ]
 
     # autocomplete_lookup_fields = {
