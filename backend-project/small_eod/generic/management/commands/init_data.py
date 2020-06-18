@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand
 
 # from small_eod.administrative_units.factories
 from small_eod.letters.factories import LetterFactory
-from teryt_tree import models
 
 
 class Command(BaseCommand):
