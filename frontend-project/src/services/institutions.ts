@@ -1,5 +1,28 @@
 import smallEodSDK from '@/utils/sdk';
 
+export interface Institution {
+  name: string;
+  administrativeUnit: string;
+  modifiedBy: number;
+  createdBy: number;
+  modifiedOn: string;
+  createdOn: string;
+  email: string;
+  city: string;
+  epuap: string;
+  street: string;
+  houseNo: string;
+  postalCode: string;
+  flatNo: string;
+  nip: string;
+  regon: string;
+}
+
+export const fetchInstitution = async (id: number): Promise<Institution> => {
+  const response = await new smallEodSDK.InstitutionsApi().institutionsRead(id);
+  return response;
+};
+
 function fetchAllPages(page) {
   if (page.next) {
     const params = new URL(page.next).searchParams;

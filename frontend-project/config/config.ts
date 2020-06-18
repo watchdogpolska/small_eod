@@ -109,6 +109,12 @@ export default {
                   path: '/cases/new',
                   component: './cases/new',
                 },
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/cases/list',
+                  component: './cases/list',
+                },
               ],
             },
             {
