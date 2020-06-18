@@ -3,6 +3,7 @@ import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import React, { FC, useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
+import { ChannelName } from '@/components/Table/ChannelName';
 import { Letter, fetchLettersPage } from '@/services/letters';
 
 const TableList: FC<{}> = () => {
@@ -23,6 +24,12 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.channel.title' }),
+      dataIndex: 'channel',
+      render: (channel: number) =>
+        typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
     },
   ];
 

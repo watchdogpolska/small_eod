@@ -4,6 +4,7 @@ export default {
   'letters-list.table.columns.comment.title': 'Comment',
   'letters-list.table.columns.direction.title': 'Direction',
   'letters-list.table.columns.identifier.title': 'Identifier',
+  'letters-list.table.columns.channel.title': 'Channel',
   'letters-list.table.columns.name.title': 'Name',
   'letters-list.table.total': 'Total',
 };
