@@ -24,6 +24,16 @@ const TableList: FC<{}> = () => {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
     },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.createdOn.title' }),
+      dataIndex: 'createdOn',
+      render: createdOn => createdOn.toLocaleString(),
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.modifiedOn.title' }),
+      dataIndex: 'modifiedOn',
+      render: modifiedOn => modifiedOn.toLocaleString(),
+    },
   ];
 
   const showTotal = (total, range) =>
