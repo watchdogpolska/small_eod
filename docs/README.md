@@ -245,7 +245,7 @@ Wyróżniamy następujące elementy:
 * Note - notatka wprowadzona przez użytkownika
 * Event - dane na temat wydarzenia terminarza
 * User - dane na temat użytkowników systemu
-* Description - słownik opisów listów
+* DocumentType - słownik rodzajów listów
 * AdministrativeUnit - jednostki podziału terytorialnego
 
 Szczegółowy model danych został udokumentowany w ```./swagger.yaml```. Wizualizacja możliwa poprzez [Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/dev/docs/swagger.yaml) lub [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/dev/docs/swagger.yaml).
@@ -325,10 +325,10 @@ System wyróżnia następujące uprawnienia:
 * User.view
 * User.delete
 * User.create
-* Description.change
-* Description.view
-* Description.delete
-* Description.create
+* DocumentType.change
+* DocumentType.view
+* DocumentType.delete
+* DocumentType.create
 * AdministrativeUnit.change
 * AdministrativeUnit.view
 * AdministrativeUnit.delete

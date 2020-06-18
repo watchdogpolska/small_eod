@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from ..factories import DescriptionFactory, LetterFactory
-from ..models import Description, Letter
+from ..factories import DocumentTypeFactory, LetterFactory
+from ..models import DocumentType, Letter
 from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
@@ -10,6 +10,6 @@ class LetterFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = Letter
 
 
-class DescriptionFactoryTestCase(FactoryTestCaseMixin, TestCase):
-    FACTORY = DescriptionFactory
-    MODEL = Description
+class DocumentTypeFactoryTestCase(FactoryTestCaseMixin, TestCase):
+    FACTORY = DocumentTypeFactory
+    MODEL = DocumentType

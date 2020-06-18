@@ -85,22 +85,30 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
-class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
 
     def validate_item(self, item):
-        self.assertEqual(item["name"], self.obj.name)
+        self.assertEqual(item["comment"], self.obj.comment)
+        self.assertEqual(item["documentType"], self.obj.document_type.pk)
 
     def test_create_minimum(self):
         self.login_required()
-        name = "testowa-nazwa"
+        comment = "testowy-opis"
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),
-            data={"name": name},
+            data={"comment": comment},
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 201, response.json())
         item = response.json()
-        self.assertEqual(item["name"], name)
+        self.assertEqual(item["comment"], comment)
+
+    def get_update_data(self):
+        return {"comment": f"{self.obj.comment}-updated"}
+
+    def validate_update_item(self, item):
+        self.assertEqual(item["id"], self.obj.pk)
+        self.assertEqual(item["comment"], f"{self.obj.comment}-updated")
