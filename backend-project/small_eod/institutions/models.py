@@ -1,7 +1,6 @@
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from ..tags.models import Tag
 from teryt_tree.models import JednostkaAdministracyjna
 
 from ..generic.models import TimestampUserLogModel
@@ -75,9 +74,9 @@ class Institution(TimestampUserLogModel):
         verbose_name=_("REGON"),
         help_text=_("Statistical Identification Number."),
     )
-    tags = models.ManyToManyField(
-        to=Tag, blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
-    )
+    # tags = models.ManyToManyField(
+    #     to='tags.Tag', blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
+    # )
     comment = models.CharField(
         max_length=256,
         blank=True,
