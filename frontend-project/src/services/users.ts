@@ -4,7 +4,7 @@ function fetchAllPages(page) {
   if (page.next) {
     const params = new URL(page.next).searchParams;
     return smallEodSDK
-      .tagsList({
+      .usersList({
         limit: params.get('limit'),
         offset: params.get('offset'),
       })

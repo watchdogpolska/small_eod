@@ -3,6 +3,7 @@ import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
 import React, { useEffect, FunctionComponent } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { Institution } from '@/models/institutions';
 import { User } from '@/models/users';
 
 interface Tag {
@@ -12,6 +13,7 @@ interface Tag {
 interface CasesNewFormProps {
   tags: Tag[];
   users: User[];
+  institutions: Institution[];
   dispatch: Function;
 }
 
@@ -27,7 +29,12 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispatch }) => {
+const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
+  tags,
+  users,
+  institutions,
+  dispatch,
+}) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
@@ -36,6 +43,7 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
   useEffect(() => {
     dispatch({ type: 'tags/fetchAll' });
     dispatch({ type: 'users/fetchAll' });
+    dispatch({ type: 'institutions/fetchAll' });
   }, []);
 
   return (
@@ -132,7 +140,13 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
                   placeholder={formatMessage({
                     id: 'cases-new.form.audited-institution.placeholder',
                   })}
-                />
+                >
+                  {institutions.map(institution => (
+                    <Option key={institution.id} value={institution.id}>
+                      {institution.name}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -192,4 +206,6 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({ tags, users, dispa
   );
 };
 
-export default connect(({ tags, users }: any) => ({ tags, users }))(CasesNewForm);
+export default connect(({ tags, users, institutions }: any) => ({ tags, users, institutions }))(
+  CasesNewForm,
+);

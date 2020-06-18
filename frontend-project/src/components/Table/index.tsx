@@ -1,12 +1,19 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ProTable, { ActionType } from '@ant-design/pro-table';
+import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import React, { FC, useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { PaginationParams, PaginationResponse } from '@/services/common.d';
 
-const Table: FC<{ type: string; columns; fetchData }> = props => {
+interface TableProps {
+  type: string;
+  columns: ProColumns<{}>[];
+  fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<{}>>;
+}
+
+const Table: FC<TableProps> = props => {
   const actionRef = useRef<ActionType>();
 
-  const showTotal = (total, range) =>
+  const showTotal = (total: number, range: number[]) =>
     `${range[0]}-${range[1]} / ${formatMessage({ id: `${props.type}-list.table.total` })} ${total}`;
 
   return (
