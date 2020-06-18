@@ -18,3 +18,4 @@ class ChannelFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     class Meta:
         model = Channel
+        django_get_or_create = ("pk",)

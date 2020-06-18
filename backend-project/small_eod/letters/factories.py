@@ -37,3 +37,4 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     class Meta:
         model = Letter
+        django_get_or_create = ("pk",)

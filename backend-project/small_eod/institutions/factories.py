@@ -23,6 +23,8 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     administrative_unit = factory.SubFactory(
         JednostkaAdministracyjnaFactory, category__level=3
     )
+    tags = ManyToManyPostGeneration("tags")
 
     class Meta:
         model = Institution
+        django_get_or_create = ("pk",)

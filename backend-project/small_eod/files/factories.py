@@ -11,3 +11,4 @@ class FileFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = File
+        django_get_or_create = ("pk",)
