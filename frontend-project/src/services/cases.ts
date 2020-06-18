@@ -3,12 +3,12 @@ import smallEodSDK from '@/utils/sdk';
 
 export interface Case {
   name: string;
-  auditedInstitutions: [number];
+  auditedInstitutions: number[];
   comment: string;
-  tags: [string];
-  responsible_users: [number];
-  notified_users: [number];
-  featureoptions: [number];
+  tags: string[];
+  responsible_users: number[];
+  notified_users: number[];
+  featureoptions: number[];
   createdBy: number;
   createdOn: string;
   id: number;
