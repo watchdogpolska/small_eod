@@ -24,6 +24,11 @@ const TableList: FC<{}> = () => {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
     },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
+      dataIndex: 'attachment',
+      render: (attachment: []) => attachment.length,
+    },
   ];
 
   const showTotal = (total, range) =>
