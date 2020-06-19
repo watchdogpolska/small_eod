@@ -16,6 +16,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         with tempfile.NamedTemporaryFile() as fp:
             fp.write(urllib.request.urlopen(URL).read())
-            call_command("load_terc", "--input", fp.name)
+            call_command("load_terc", "--input", fp.name, stdout=self.stdout)
 
         LetterFactory.create_batch(size=10)
