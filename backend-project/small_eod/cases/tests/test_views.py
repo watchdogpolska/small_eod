@@ -17,9 +17,6 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
     serializer_class = CaseSerializer
     factory_class = CaseFactory
 
-    def get_ommited_fields(self):
-        return super().get_ommited_fields() + ["tags"]
-
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
 
@@ -35,15 +32,15 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
         item = response.json()
         self.assertEqual(item["name"], name)
 
-    def test_create_with_tag(self):
+    def test_update_with_tag(self):
         self.login_required()
         tags = [TagFactory().name]
-        response = self.client.post(
-            self.get_url(name="list", **self.get_extra_kwargs()),
-            data={"tags": tags, **self.get_create_data()},
+        response = self.client.put(
+            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
+            data={**self.get_create_data(), "tags": tags},
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 201, response.json())
+        self.assertEqual(response.status_code, 200, response.json())
         item = response.json()
         self.assertCountEqual(item["tags"], tags)
 
