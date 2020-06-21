@@ -19,6 +19,8 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
+      render: (direction: string) =>
+        formatMessage({ id: `letters-list.table.direction.${direction.toLowerCase()}` }),
     },
   ];
 

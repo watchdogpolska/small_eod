@@ -5,4 +5,6 @@ export default {
   'letters-list.table.columns.direction.title': 'Direction',
   'letters-list.table.columns.identifier.title': 'Identifier',
   'letters-list.table.total': 'Total',
+  'letters-list.table.direction.in': 'received',
+  'letters-list.table.direction.out': 'sent',
 };

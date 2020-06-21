@@ -5,4 +5,6 @@ export default {
   'letters-list.table.columns.direction.title': 'Kierunek',
   'letters-list.table.columns.identifier.title': 'Identyfikator',
   'letters-list.table.total': 'Łącznie',
+  'letters-list.table.direction.in': 'odebrane',
+  'letters-list.table.direction.out': 'wysłane',
 };
