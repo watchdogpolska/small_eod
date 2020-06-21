@@ -5,6 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { ChannelName } from '@/components/Table/ChannelName';
 import { Letter, fetchLettersPage } from '@/services/letters';
+import { InstitutionName } from '@/components/Table/InstitutionName';
 
 const TableList: FC<{}> = () => {
   const actionRef = useRef<ActionType>();
@@ -28,6 +29,11 @@ const TableList: FC<{}> = () => {
       dataIndex: 'channel',
       render: (channel: number) =>
         typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
+      dataIndex: 'institution',
+      render: (institution: number) => <InstitutionName id={institution} />,
     },
   ];
 

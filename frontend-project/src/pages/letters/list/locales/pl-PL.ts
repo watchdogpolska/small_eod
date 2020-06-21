@@ -5,6 +5,7 @@ export default {
   'letters-list.table.columns.direction.title': 'Kierunek',
   'letters-list.table.columns.identifier.title': 'Identyfikator',
   'letters-list.table.columns.channel.title': 'Kanał',
+  'letters-list.table.columns.audited_institutions.title': 'Instytucja',
   'letters-list.table.total': 'Łącznie',
   'letters-list.table.direction.in': 'odebrane',
   'letters-list.table.direction.out': 'wysłane',
