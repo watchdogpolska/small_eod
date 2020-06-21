@@ -40,13 +40,12 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
         tags = [TagFactory().name]
         response = self.client.post(
             self.get_url(name="list", **self.get_extra_kwargs()),
-            data=dict(tags=tags, ***self.get_create_data()),
+            data={"tags": tags, **self.get_create_data()},
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 201, response.json())
         item = response.json()
-        self.assertCountEqual(item["tag"], tags)
-
+        self.assertCountEqual(item["tags"], tags)
 
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
