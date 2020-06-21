@@ -5,6 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { ChannelName } from '@/components/Table/ChannelName';
 import { Letter, fetchLettersPage } from '@/services/letters';
+import { CaseName } from '@/components/Table/CaseName';
 import { InstitutionName } from '@/components/Table/InstitutionName';
 
 const TableList: FC<{}> = () => {
@@ -31,9 +32,24 @@ const TableList: FC<{}> = () => {
         typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
     },
     {
+      title: formatMessage({ id: 'letters-list.table.columns.case.title' }),
+      dataIndex: 'case',
+      render: (_case: number) => (typeof _case === 'number' ? <CaseName id={_case} /> : _case),
+    },
+    {
       title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
       dataIndex: 'institution',
       render: (institution: number) => <InstitutionName id={institution} />,
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.createdOn.title' }),
+      dataIndex: 'createdOn',
+      render: createdOn => createdOn.toLocaleString(),
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.modifiedOn.title' }),
+      dataIndex: 'modifiedOn',
+      render: modifiedOn => modifiedOn.toLocaleString(),
     },
   ];
 
