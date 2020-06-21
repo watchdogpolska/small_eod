@@ -25,6 +25,11 @@ const TableList: FC<{}> = () => {
         formatMessage({ id: `letters-list.table.direction.${direction.toLowerCase()}` }),
     },
     {
+      title: formatMessage({ id: 'letters-list.table.columns.date.title' }),
+      dataIndex: 'date',
+      render: (date: string) => date.toLocaleString(),
+    },
+    {
       title: formatMessage({ id: 'letters-list.table.columns.case.title' }),
       dataIndex: 'case',
       render: (_case: number) => (typeof _case === 'number' ? <CaseName id={_case} /> : _case),

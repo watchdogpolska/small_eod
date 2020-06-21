@@ -4,6 +4,7 @@ export default {
   'letters-list.table.columns.comment.title': 'Comment',
   'letters-list.table.columns.direction.title': 'Direction',
   'letters-list.table.columns.identifier.title': 'Identifier',
+  'letters-list.table.columns.date.title': 'Received date / Sent date',
   'letters-list.table.columns.attachment.title': 'Attachments',
   'letters-list.table.columns.case.title': 'Case',
   'letters-list.table.columns.audited_institutions.title': 'Institution',
