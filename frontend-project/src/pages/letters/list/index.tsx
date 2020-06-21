@@ -9,10 +9,6 @@ const TableList: FC<{}> = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<Letter>[] = [
     {
-      title: formatMessage({ id: 'letters-list.table.columns.name.title' }),
-      dataIndex: 'name',
-    },
-    {
       title: formatMessage({ id: 'letters-list.table.columns.identifier.title' }),
       dataIndex: 'identifier',
     },
