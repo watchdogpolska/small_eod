@@ -10,10 +10,6 @@ const TableList: FC<{}> = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<Letter>[] = [
     {
-      title: formatMessage({ id: 'letters-list.table.columns.name.title' }),
-      dataIndex: 'name',
-    },
-    {
       title: formatMessage({ id: 'letters-list.table.columns.identifier.title' }),
       dataIndex: 'identifier',
     },
@@ -24,6 +20,8 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.direction.title' }),
       dataIndex: 'direction',
+      render: (direction: string) =>
+        formatMessage({ id: `letters-list.table.direction.${direction.toLowerCase()}` }),
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
