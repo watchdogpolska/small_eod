@@ -9,7 +9,7 @@ class FactoryTestCaseMixin:
     FACTORY = Type[DjangoModelFactory]
     MODEL = Type[Model]
 
-    FACTORY_COUNT = 2
+    FACTORY_COUNT = 4
 
     @classmethod
     def create_factory(cls):
@@ -29,12 +29,16 @@ class FactoryTestCaseMixin:
 
     @tag("FactoryCreateObjectsMixin")
     def test_factories_simple(self):
+        print(self.MODEL.objects.all().count())
         self._test_factory_object(msg="simple", count=1)
+        print(self.MODEL.objects.all().count())
 
     @tag("FactoryCreateObjectsMixin")
     def test_factories_many(self):
+        print(self.MODEL.objects.all().count())
         for x in range(1, self.FACTORY_COUNT):
             self._test_factory_object(msg="many", count=x)
+        print(self.MODEL.objects.all().count())
 
     # def test_print_to_console(self):
     #     """

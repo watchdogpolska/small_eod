@@ -15,12 +15,5 @@ class UserWithCaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
     MODEL = User
     FACTORY = UserWithCaseFactory
 
-    def test_magda(self):
-        print("pomidorowa")
-        case = CaseFactory()
-        print(case.responsible_users.all())
-        user = UserWithCaseFactory(hook__case=case)
-        print(user)
-        print(case.responsible_users.all())
 
 

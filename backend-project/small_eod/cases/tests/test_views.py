@@ -47,7 +47,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         return dict(case_pk=self.case.pk)
 
     def get_extra_factory_kwargs(self):
-        return {'hook__case': self.case}
+        return {'hook__case': self.case, 'hook__user_type': self.user_type}
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
