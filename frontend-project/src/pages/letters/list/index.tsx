@@ -32,6 +32,11 @@ const TableList: FC<{}> = () => {
         typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
     },
     {
+      title: formatMessage({ id: 'letters-list.table.columns.date.title' }),
+      dataIndex: 'date',
+      render: (date: string) => date.toLocaleString(),
+    },
+    {
       title: formatMessage({ id: 'letters-list.table.columns.case.title' }),
       dataIndex: 'case',
       render: (_case: number) => (typeof _case === 'number' ? <CaseName id={_case} /> : _case),
@@ -50,6 +55,11 @@ const TableList: FC<{}> = () => {
       title: formatMessage({ id: 'letters-list.table.columns.modifiedOn.title' }),
       dataIndex: 'modifiedOn',
       render: modifiedOn => modifiedOn.toLocaleString(),
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
+      dataIndex: 'attachment',
+      render: (attachment: []) => attachment.length,
     },
   ];
 
