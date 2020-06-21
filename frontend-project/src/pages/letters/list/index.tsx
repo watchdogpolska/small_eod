@@ -4,6 +4,7 @@ import React, { FC, useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Letter, fetchLettersPage } from '@/services/letters';
+import { InstitutionName } from '@/components/Table/InstitutionName';
 
 const TableList: FC<{}> = () => {
   const actionRef = useRef<ActionType>();
@@ -21,6 +22,11 @@ const TableList: FC<{}> = () => {
       dataIndex: 'direction',
       render: (direction: string) =>
         formatMessage({ id: `letters-list.table.direction.${direction.toLowerCase()}` }),
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
+      dataIndex: 'institution',
+      render: (institution: number) => <InstitutionName id={institution} />,
     },
   ];
 
