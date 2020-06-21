@@ -7,11 +7,16 @@ from django.utils import timezone
 from ..users.factories import UserFactory
 
 
-def _m2m_post_add(attr, obj, create, extracted, **kwargs):
+def _m2m_post_add(attr, obj, create, extracted, size=0, factory_cls=None, **kwargs):
     if not create:
         return
     if extracted:
         getattr(obj, attr).set(extracted)
+        return
+    if size > 0:
+        if not factory_cls:
+            raise Exception(f'Missing "factory_class" for {attr}')
+        getattr(obj, attr).set(factory_cls.create_batch(size=size))
 
 
 class AbstractTimestampUserFactory(factory.Factory):
@@ -23,16 +28,24 @@ class AbstractTimestampUserFactory(factory.Factory):
 
 
 class ManyToManyPostGeneration(factory.PostGeneration):
-    def __init__(self, m2m_field_name):
+    def __init__(
+        self, m2m_field_name, size=0, factory_cls=None,
+    ):
         super().__init__(function=None)
         self.m2m_field_name = m2m_field_name
-        self.function = lambda obj, create, extracted, **kwargs: _m2m_post_add(
-            attr=self.m2m_field_name,
-            obj=obj,
-            create=create,
-            extracted=extracted,
-            **kwargs,
-        )
+
+        def generator(obj, create, extracted, **kwargs):
+            kwargs.setdefault("size", size)
+            return _m2m_post_add(
+                attr=self.m2m_field_name,
+                obj=obj,
+                create=create,
+                extracted=extracted,
+                factory_cls=factory_cls,
+                **kwargs,
+            )
+
+        self.function = generator
 
 
 class PolishFaker(factory.Faker):
