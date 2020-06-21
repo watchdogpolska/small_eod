@@ -44,6 +44,11 @@ const TableList: FC<{}> = () => {
       dataIndex: 'modifiedOn',
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
+      dataIndex: 'attachment',
+      render: (attachment: []) => attachment.length,
+    },
   ];
 
   const showTotal = (total, range) =>
