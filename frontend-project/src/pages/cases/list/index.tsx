@@ -16,7 +16,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.audited_institutions.title' }),
       dataIndex: 'auditedInstitutions',
-      render: (auditedInstitutions: [number]) => (
+      render: (auditedInstitutions: number[]) => (
         <>
           {auditedInstitutions.map(auditedInstitution => (
             <InstitutionName id={auditedInstitution} key={auditedInstitution} />
@@ -41,7 +41,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.tags.title' }),
       dataIndex: 'tags',
-      render: (tags: [number]) => (
+      render: (tags: number[]) => (
         <>
           {tags.map(tag => (
             <Tag color="blue" key={tag}>
