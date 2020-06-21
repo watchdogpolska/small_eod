@@ -85,7 +85,7 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
-class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
