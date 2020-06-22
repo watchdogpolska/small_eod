@@ -4,7 +4,7 @@ TEST?=small_eod
 
 start: wait_mysql wait_minio
 	docker-compose up -d
-	
+
 stop:
 	docker-compose stop
 
@@ -65,5 +65,5 @@ createsuperuser: wait_minio
 
 test-local: lint build check test
 
-openapi: 
+openapi:
 	docker-compose run --rm backend python manage.py generate_swagger

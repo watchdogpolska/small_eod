@@ -103,26 +103,30 @@ W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://g
 
 ## Testy automatyczne
 
-Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Wszelkie proponowane zmiany z wykorzystaniem [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
-
-Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych, ale przed ich dodaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile).
-
-W celu wykonanie testów automatycznych formatowania należy wykonać:
-
-```bash
-make lint
-```
-
-Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
-
-```bash
-make fmt
-```
+Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Sa one uruchamine w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
 
 W celu wykonania testów automatycznych backendu należy wykonać:
 
 ```bash
 make test-django-backend
+```
+
+## Statycnza kontrola kodu
+
+Statycznaa kontrolu kodu w projekcie służy do sprawdzenia, czy kod spełnia określone standardy jakości. Wszystkie sprawdzenia kodu statycznego można uruchamiać za pomocą [pre-commit run](https://pre-commit.com/).
+Sa one weryfikowane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+
+W celu wykonanie kontroli statycznej kodu należy wykonać:
+
+```bash
+pre-commit run --all-files
+```
+
+To turn on pre-commit checks for commit operations in git, enter:
+
+Aby włączyć automatyczne sprawadzanie kodu przed stworzeniem zmiany (`commit`), wykonaj polecenie:
+```bash
+pre-commit install
 ```
 
 ### Materiały dodatkowe

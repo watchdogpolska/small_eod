@@ -1,0 +1,51 @@
+---
+default_stages: [commit, push]
+default_language_version:
+  # force all unspecified python hooks to run python3
+  python: python3
+minimum_pre_commit_version: "1.20.0"
+repos:
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.1.7
+    hooks:
+      - id: forbid-tabs
+        exclude: ^Makefile$
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-executables-have-shebangs
+      - id: trailing-whitespace
+      - id: fix-encoding-pragma
+        args:
+          - --remove
+  - repo: local
+    hooks:
+      - id: update-extras
+        name: "make pyupgrade"
+        entry: "make pyupgrade"
+        language: system
+        files: .py$
+        pass_filenames: false
+        require_serial: true
+      - id: update-extras
+        name: "make fmt"
+        entry: "make fmt"
+        language: system
+        files: .py$
+        pass_filenames: false
+        require_serial: true
+      - id: update-extras
+        name: "make lint"
+        entry: "make lint"
+        language: system
+        files: .py$
+        pass_filenames: false
+        require_serial: true

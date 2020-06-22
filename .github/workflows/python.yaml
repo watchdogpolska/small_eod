@@ -34,7 +34,7 @@ jobs:
         name: openapi.yaml
         path: ./openapi.yaml
     - uses: actions/upload-artifact@v1
-      # see https://github.com/actions/upload-artifact/issues/11 
+      # see https://github.com/actions/upload-artifact/issues/11
       # for remove duplicated actions
       with:
         name: openapi.json

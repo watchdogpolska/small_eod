@@ -1,9 +1,9 @@
 labelPRBasedOnFilePath:
-  front-end: 
+  front-end:
     - 'frontend-project/**'
-  back-end: 
+  back-end:
     - 'backend-project/**'
-  ci: 
+  ci:
     - '.github/**'
     - Makefile
     - docker-compose.yml
