@@ -33,8 +33,9 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
 
         self.login_required()
         response = self.client.get(
-            f"{self.get_url(name='list')}?query={query}",
+            f"{self.get_url(name='list')}",
             content_type="application/json",
+            data={"query": query},
         )
         self.assertEqual(response.status_code, 200, response.json())
         names = [item["name"] for item in response.json()["results"]]
