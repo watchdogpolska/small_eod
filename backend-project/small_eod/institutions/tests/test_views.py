@@ -33,7 +33,7 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
 
         self.login_required()
         response = self.client.get(
-            f"{self.get_url(name='list')}",
+            self.get_url(name='list'),
             content_type="application/json",
             data={"query": query},
         )
