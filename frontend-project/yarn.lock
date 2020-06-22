@@ -2709,10 +2709,10 @@
   resolved "https://registry.yarnpkg.com/@umijs/error-code-map/-/error-code-map-1.0.1.tgz#2a2dd7b4bcd11869e968264ff3dabacfabe8b874"
   integrity sha512-Q0KSpQYKTF2XWOlAxJO/SRbRhIGAp1GK1spWFbzwv3h0WvfX7pPeA05Y3p0hut7Vcjhdocnx5NduuApF4R1lGQ==
 
-"@umijs/fabric@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@umijs/fabric/-/fabric-2.1.0.tgz#4187a465d2357f59d083d1dfcdd3da15964543a0"
-  integrity sha512-PfYx/MT0TxJNHa2k05/ZfqpIN6xeUFZySYv69EreCqZqc5VKuP4h0A7m9/jRt/SxSRBGOLttH6iOye0yWLFgLg==
+"@umijs/fabric@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@umijs/fabric/-/fabric-2.1.1.tgz#bda9b21f6071178b984dcb4dcfb77a791a396475"
+  integrity sha512-M5BeWSs3wN+pBmKVyWDEI4GoyEwDMN0mQnU44HdcjCj4ZRnguIqN6KBzoSV6+4DR/Y7GgYUcMNaPj7Q2OmmVJA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.1.0"
     "@typescript-eslint/parser" "^3.1.0"

@@ -93,7 +93,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
-    "@umijs/fabric": "2.1.0",
+    "@umijs/fabric": "2.1.1",
     "chalk": "^3.0.0",
     "check-prettier": "^1.0.3",
     "cross-env": "^6.0.0",
