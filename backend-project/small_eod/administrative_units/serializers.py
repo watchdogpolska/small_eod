@@ -1,5 +1,4 @@
-from teryt_tree.models import JednostkaAdministracyjna
-
+from .models import JednostkaAdministracyjna
 from rest_framework import serializers
 
 
