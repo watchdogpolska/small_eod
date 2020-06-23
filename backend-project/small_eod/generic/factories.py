@@ -73,4 +73,4 @@ class FuzzyRegon(factory.fuzzy.BaseFuzzyAttribute):
 class RGBColorFuzzyAttribute(factory.fuzzy.BaseFuzzyAttribute):
     def fuzz(self):
         n = factory.random.randgen.randint(0, 999999)
-        return "{:06d}".format(n)
+        return f"{n:06d}"

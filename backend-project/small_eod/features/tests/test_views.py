@@ -55,7 +55,7 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     queries_less_than_limit = 5
 
     def get_extra_kwargs(self):
-        return dict(feature_pk=self.obj.features.pk)
+        return dict(feature_pk=self.obj.feature.pk)
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])

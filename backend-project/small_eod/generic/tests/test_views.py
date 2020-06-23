@@ -61,7 +61,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
     def get_url(self, name, **kwargs):
         if not self.basename:
             raise NotImplementedError("get_url must be overridden or basename defined")
-        return reverse("{}-{}".format(self.basename, name), kwargs=kwargs)
+        return reverse(f"{self.basename}-{name}", kwargs=kwargs)
 
     def get_url_list(self):
         return self.get_url(name="list", **self.get_extra_kwargs())

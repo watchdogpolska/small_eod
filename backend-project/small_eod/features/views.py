@@ -13,4 +13,4 @@ class FeatureOptionViewSet(viewsets.ModelViewSet):
     model = FeatureOption
 
     def get_queryset(self):
-        return self.model.objects.filter(features=self.kwargs["feature_pk"])
+        return self.model.objects.filter(feature=self.kwargs["feature_pk"])

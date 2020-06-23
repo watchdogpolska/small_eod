@@ -1,5 +1,5 @@
-import defaultSettings from './defaultSettings';
 import slash from 'slash2';
+import defaultSettings from './defaultSettings';
 import themePluginConfig from './themePluginConfig';
 const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 
@@ -88,19 +88,7 @@ export default {
               component: './user/login',
             },
             {
-              name: 'register-result',
-              icon: 'smile',
-              path: '/user/register-result',
-              component: './user/register-result',
-            },
-            {
-              name: 'register',
-              icon: 'smile',
-              path: '/user/register',
-              component: './user/register',
-            },
-            {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
@@ -121,26 +109,19 @@ export default {
                   path: '/cases/new',
                   component: './cases/new',
                 },
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/cases/list',
+                  component: './cases/list',
+                },
               ],
             },
             {
-              name: 'account',
-              icon: 'user',
-              path: '/account',
-              routes: [
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: 'settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
-              ],
+              name: 'letters',
+              icon: 'FileTextOutlined',
+              path: '/letters',
+              component: './letters/list',
             },
             {
               name: 'institutions',
@@ -156,88 +137,12 @@ export default {
               ],
             },
             {
-              path: '/form_',
-              icon: 'form',
-              name: 'Kanały',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
-            },
-            {
-              path: '/profile',
-              name: 'Osoby',
-              icon: 'profile',
-              routes: [
-                {
-                  name: 'basic',
-                  icon: 'smile',
-                  path: '/profile/basic',
-                  component: './profile/basic',
-                },
-                {
-                  name: 'advanced',
-                  icon: 'smile',
-                  path: '/profile/advanced',
-                  component: './profile/advanced',
-                },
-              ],
-            },
-            {
-              path: '/Slowniki',
-              icon: 'form',
-              name: 'Słowniki',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
-            },
-            {
-              path: '/tagi',
-              icon: 'form',
-              name: 'Tagi',
-              routes: [
-                {
-                  name: 'step-form',
-                  icon: 'smile',
-                  path: '/form/step-form',
-                  component: './form/step-form',
-                },
-                {
-                  name: 'advanced-form',
-                  icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
-                },
-              ],
-            },
-            {
               path: '/',
-              redirect: '/dashboard/analysis',
+              redirect: '/cases/new',
               authority: ['admin', 'user'],
             },
             {
-              component: '404',
+              component: './exception/404',
             },
           ],
         },
