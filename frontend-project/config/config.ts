@@ -27,11 +27,11 @@ const plugins = [
       },
       pwa: pwa
         ? {
-            workboxPluginMode: 'InjectManifest',
-            workboxOptions: {
-              importWorkboxFrom: 'local',
-            },
-          }
+          workboxPluginMode: 'InjectManifest',
+          workboxOptions: {
+            importWorkboxFrom: 'local',
+          },
+        }
         : false, // default close dll, because issue https://github.com/ant-design/ant-design-pro/issues/4665
       // dll features https://webpack.js.org/plugins/dll-plugin/
       // dll: {
@@ -52,14 +52,35 @@ const plugins = [
 ];
 
 if (isAntDesignProPreview) {
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
   plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
 }
+
+export interface BasicSectionSettings {
+  newPath?: string,
+  newComponentSkip?: boolean,
+  listPath?: string,
+  listComponentSkip?: boolean,
+}
+
+const basicSectionRoutes = (name, options: BasicSectionSettings={}) => ({
+  name,
+  icon: 'FileTextOutlined',
+  path: `/${name}`,
+  routes: [
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: options.newPath || `/${name}/new`,
+      ...options.newComponentSkip ? {} : {component: `./${name}/new`},
+    },
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: options.newPath || `/${name}/list`,
+      ...options.listComponentSkip ? {} : {component: `./${name}/list`},
+    },
+  ],
+})
 
 export default {
   plugins,
@@ -98,44 +119,45 @@ export default {
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
-            {
-              name: 'cases',
-              icon: 'FileTextOutlined',
-              path: '/cases',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/cases/new',
-                  component: './cases/new',
-                },
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/cases/list',
-                  component: './cases/list',
-                },
-              ],
-            },
-            {
-              name: 'letters',
-              icon: 'FileTextOutlined',
-              path: '/letters',
-              component: './letters/list',
-            },
-            {
-              name: 'institutions',
-              icon: 'HomeOutlined',
-              path: '/institutions',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/institutions/new',
-                  component: './institutions/new',
-                },
-              ],
-            },
+            basicSectionRoutes('cases'),
+            basicSectionRoutes('letters', {
+              newPath: `///admin/letters/letter/add`,
+              newComponentSkip: true,
+            }),
+            basicSectionRoutes('institutions', {
+              listPath: '/admin/institutions/institution/',
+              listComponentSkip: true,
+            }),
+            basicSectionRoutes('channels', {
+              newPath: '/admin/channels/channel/add',
+              newComponentSkip: true,
+              listPath: '/admin/channels/channel/',
+              listComponentSkip: true,
+            }),
+            basicSectionRoutes('tags', {
+              newPath: '/admin/tags/tag/add',
+              newComponentSkip: true,
+              listPath: '/admin/tags/tag/',
+              listComponentSkip: true,
+            }),
+            basicSectionRoutes('features', {
+              newPath: '/admin/feature/features/add',
+              newComponentSkip: true,
+              listPath: '/admin/feature/features/',
+              listComponentSkip: true,
+            }),
+            basicSectionRoutes('collections', {
+              newPath: '/admin/collection/collections/add',
+              newComponentSkip: true,
+              listPath: '/admin/collection/collections/',
+              listComponentSkip: true,
+            }),
+            basicSectionRoutes('users', {
+              newPath: '/admin/user/users/add',
+              newComponentSkip: true,
+              listPath: '/admin/user/users/',
+              listComponentSkip: true,
+            }),
             {
               path: '/',
               redirect: '/cases/new',
