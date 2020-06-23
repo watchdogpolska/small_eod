@@ -44,7 +44,8 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
       dataIndex: 'institution',
-      render: (institution: number) => <InstitutionName id={institution} />,
+      render: (institution: number) =>
+        typeof institution === 'number' ? <InstitutionName id={institution} /> : institution,
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.createdOn.title' }),
