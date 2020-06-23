@@ -1,5 +1,6 @@
 .PHONY: all test clean docs
 
+REFERENCE_OPENAPI?="https://dev.small-eod.siecobywatelska.pl/api/swagger.json"
 TEST?=small_eod
 
 start: wait_mysql wait_minio
@@ -26,6 +27,10 @@ test-openapi-spec:
 	docker-compose run --rm backend python manage.py generate_swagger --format json -o openapi.json
 	docker run -v $$(pwd)/backend-project/openapi.json:/openapi.json --rm p1c2u/openapi-spec-validator --schema 2.0 /openapi.json
 	docker-compose run --rm backend rm openapi.json
+
+diff_openapi: SHELL:=/bin/bash
+diff_openapi:
+	diff -c -C 10 <( docker-compose run -T --rm backend python manage.py generate_swagger --format json | jq '.' ) <( curl -s "${REFERENCE_OPENAPI}"  | jq '.') || true
 
 wait_mysql:
 	docker-compose up -d db
