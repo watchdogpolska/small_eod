@@ -30,7 +30,7 @@ test-openapi-spec:
 
 diff_openapi: SHELL:=/bin/bash
 diff_openapi:
-	diff -c -C 10 <( docker-compose run -T --rm backend python manage.py generate_swagger --format json | jq '.' ) <( curl -s "${REFERENCE_OPENAPI}"  | jq '.') || true
+	diff -c -C 10 <( curl -s "${REFERENCE_OPENAPI}"  | jq '.') <( docker-compose run -T --rm backend python manage.py generate_swagger --format json | jq '.' ) || true
 
 wait_mysql:
 	docker-compose up -d db

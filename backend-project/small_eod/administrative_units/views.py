@@ -4,6 +4,6 @@ from .models import JednostkaAdministracyjna
 from .serializers import AdministrativeUnitSerializer
 
 
-class JednostkaAdministracyjnaViewSet(viewsets.ModelViewSet):
+class JednostkaAdministracyjnaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = JednostkaAdministracyjna.objects.all()
     serializer_class = AdministrativeUnitSerializer
