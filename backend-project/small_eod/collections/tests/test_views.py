@@ -78,7 +78,7 @@ class TokenCreateAPIView(AuthenticatedMixin, TestCase):
         self.assertEqual(resp.status_code, 201, resp.json())
 
 
-class NoteViewSetTestCase(
+class NoteCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
     basename = "collection-note"
@@ -107,7 +107,7 @@ class NoteViewSetTestCase(
         self.assertEqual(response.status_code, 200)
 
 
-class CaseViewSetTestCase(
+class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
 
