@@ -4,4 +4,5 @@ import factory.fuzzy
 
 
 class JednostkaAdministracyjnaFactory(OriginalFactory):
+    # TODO: Move changes upstream
     pk = factory.fuzzy.FuzzyText(length=7)
