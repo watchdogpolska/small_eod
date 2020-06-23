@@ -1,6 +1,5 @@
 from random import randint
 from django.test import TestCase
-import sys
 
 from teryt_tree.factories import CategoryFactory
 from ..factories import JednostkaAdministracyjnaFactory
