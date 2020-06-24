@@ -69,7 +69,7 @@ const defaultFooterDom = (
       {
         key: 'github',
         title: 'small-eod – GitHub', // <GithubOutlined />,
-        href: 'github.com/watchdogpolska/small_eod/',
+        href: 'https://github.com/watchdogpolska/small_eod/',
         blankTarget: true,
       },
       {
