@@ -14,7 +14,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.documentType.title' }),
       dataIndex: 'documentType',
-      render: (documentType: number | null) =>
+      render: (documentType: number | string) =>
         typeof documentType === 'number' ? <DocumentTypeName id={documentType} /> : documentType,
     },
     {
@@ -34,7 +34,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.channel.title' }),
       dataIndex: 'channel',
-      render: (channel: number | null) =>
+      render: (channel: number | string) =>
         typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
     },
     {
@@ -45,13 +45,13 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.case.title' }),
       dataIndex: 'case',
-      render: (_case: number | null) =>
+      render: (_case: number | string) =>
         typeof _case === 'number' ? <CaseName id={_case} /> : _case,
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.audited_institution.title' }),
       dataIndex: 'institution',
-      render: (institution: number | null) =>
+      render: (institution: number | string) =>
         typeof institution === 'number' ? <InstitutionName id={institution} /> : institution,
     },
     {
