@@ -42,7 +42,7 @@ const TableList: FC<{}> = () => {
       render: (_case: number) => (typeof _case === 'number' ? <CaseName id={_case} /> : _case),
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
+      title: formatMessage({ id: 'letters-list.table.columns.audited_institution.title' }),
       dataIndex: 'institution',
       render: (institution: number) => <InstitutionName id={institution} />,
     },
