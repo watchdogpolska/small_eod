@@ -1,6 +1,6 @@
 import factory.fuzzy
 
-from .models import Letter, Description
+from .models import Letter, DocumentType
 from ..cases.factories import CaseFactory
 from ..channels.factories import ChannelFactory
 from ..generic.factories import (
@@ -11,11 +11,11 @@ from ..generic.factories import (
 from ..institutions.factories import InstitutionFactory
 
 
-class DescriptionFactory(factory.DjangoModelFactory):
+class DocumentTypeFactory(factory.DjangoModelFactory):
     name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
 
     class Meta:
-        model = Description
+        model = DocumentType
 
 
 class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
@@ -25,7 +25,6 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
     ordering = factory.fuzzy.FuzzyInteger(0, 100)
     direction = factory.fuzzy.FuzzyChoice(("IN", "OUT"))
 
-    name = factory.Sequence(lambda n: "letter-%04d" % n)
     comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)
     excerpt = factory.Sequence(lambda n: "letter-excerpt-%04d" % n)
     identifier = factory.Sequence(lambda n: "letter-identifier-%04d" % n)
@@ -33,7 +32,7 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
     case = factory.SubFactory(CaseFactory)
     channel = factory.SubFactory(ChannelFactory)
     institution = factory.SubFactory(InstitutionFactory)
-    description = factory.SubFactory(DescriptionFactory)
+    document_type = factory.SubFactory(DocumentTypeFactory)
 
     class Meta:
         model = Letter

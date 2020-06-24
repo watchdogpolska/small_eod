@@ -8,11 +8,9 @@ from ..institutions.models import Institution
 from django.utils.timezone import datetime
 
 
-class Description(models.Model):
+class DocumentType(models.Model):
     name = models.CharField(
-        max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of letter."),
+        max_length=256, verbose_name=_("Document type"), help_text=_("Type of letter"),
     )
 
 
@@ -40,11 +38,6 @@ class Letter(TimestampUserLogModel):
             "Indicates whether the document has "
             + "final content or is, for example, a draft"
         ),
-    )
-    name = models.CharField(
-        max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of the letter."),
     )
     ordering = models.IntegerField(
         default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
@@ -88,10 +81,10 @@ class Letter(TimestampUserLogModel):
         blank=True,
         null=True,
     )
-    description = models.ForeignKey(
-        to=Description,
+    document_type = models.ForeignKey(
+        to=DocumentType,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Description of letter."),
+        verbose_name=_("Document type of letter."),
         null=True,
         blank=True,
     )
