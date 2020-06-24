@@ -38,6 +38,8 @@ export async function fetchLettersPage({
     offset: pageSize * (current - 1),
   });
 
+  console.log(sdkResponse.results);
+
   return {
     data: sdkResponse.results,
     total: sdkResponse.count,

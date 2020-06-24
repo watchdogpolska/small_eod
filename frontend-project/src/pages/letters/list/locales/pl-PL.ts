@@ -11,6 +11,7 @@ export default {
   'letters-list.table.columns.audited_institution.title': 'Audytowana instytucja',
   'letters-list.table.columns.createdOn.title': 'Utworzono',
   'letters-list.table.columns.modifiedOn.title': 'Zmodyfikowano',
+  'letters-list.table.columns.documentType.title': 'Typ dokumentu',
   'letters-list.table.total': 'Łącznie',
   'letters-list.table.direction.in': 'odebrane',
   'letters-list.table.direction.out': 'wysłane',
