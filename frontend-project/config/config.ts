@@ -62,7 +62,7 @@ export interface BasicSectionSettings {
   listComponentSkip?: boolean,
 }
 
-const basicSectionRoutes = (name, options: BasicSectionSettings={}) => ({
+const basicSectionRoutes = (name: string, options: BasicSectionSettings={}) => ({
   name,
   icon: 'FileTextOutlined',
   path: `/${name}`,
