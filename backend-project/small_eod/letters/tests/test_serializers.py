@@ -101,5 +101,5 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         self.attachment = FileFactory(letter=self.obj)
         self.attachment2 = FileFactory(letter=self.obj)
         data = self.serializer_class(self.obj).data
-        self.assertEqual(data["attachment"][0]["name"], self.attachment.name)
-        self.assertEqual(data["attachment"][1]["name"], self.attachment2.name)
+        self.assertEqual(data["attachments"][0]["name"], self.attachment.name)
+        self.assertEqual(data["attachments"][1]["name"], self.attachment2.name)

@@ -29,7 +29,7 @@ class LetterSerializer(UserLogModelSerializer):
     channel = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=Channel.objects.all()
     )
-    attachment = FileSerializer(many=True, read_only=True)
+    attachments = FileSerializer(many=True, read_only=True)
 
     class Meta:
         model = Letter
@@ -42,7 +42,7 @@ class LetterSerializer(UserLogModelSerializer):
             "identifier",
             "institution",
             "case",
-            "attachment",
+            "attachments",
             "ordering",
             "comment",
             "excerpt",
