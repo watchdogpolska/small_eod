@@ -42,12 +42,6 @@ jobs:
     - name: Docker-compose logs
       run: docker-compose logs
       if: failure()
-    - name: Trigger SDK regenerate
-      uses: peter-evans/repository-dispatch@v1
-      with:
-        token: ${{ secrets.SDK_REPO_TOKEN }}
-        event-type: pushed
-        repository: watchdogpolska/small-eod-sdk-javascript
   push:
     runs-on: ubuntu-latest
     if: "github.ref == 'refs/heads/master'"
@@ -65,3 +59,9 @@ jobs:
       run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
     - name: Push image
       run: docker push docker-registry.siecobywatelska.pl/small_eod:latest
+    - name: Trigger SDK regenerate
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.SDK_REPO_TOKEN }}
+        event-type: pushed
+        repository: watchdogpolska/small-eod-sdk-javascript
