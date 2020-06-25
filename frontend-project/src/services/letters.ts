@@ -7,7 +7,7 @@ interface File {
 }
 
 export interface Letter {
-  attachment: File[];
+  attachments: File[];
   case: number;
   channel: number;
   comment: string;
