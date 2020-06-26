@@ -131,7 +131,32 @@
     umi-utils "^1.5.1"
     yargs-parser "^16.1.0"
 
-"@ant-design/pro-layout@4.11.4", "@ant-design/pro-layout@^4.7.3":
+"@ant-design/pro-layout@5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@ant-design/pro-layout/-/pro-layout-5.0.17.tgz#d9baf216db3dfccfd0e582885a3cb717f79fe258"
+  integrity sha512-GzP5JcLvaxB4x+8VN6x7kiP0TBeOfmnf90nQ2uMyWB72UOWReSr4gsD36l9pkB96DoJhfVTI8erAT1dcjYs3VA==
+  dependencies:
+    "@ant-design/icons" "^4.0.0"
+    "@umijs/route-utils" "^1.0.5"
+    classnames "^2.2.6"
+    hash.js "^1.1.7"
+    history "^4.10.1"
+    lodash.isequal "^4.5.0"
+    memoize-one "^5.1.1"
+    omit.js "^1.0.0"
+    path-to-regexp "2.4.0"
+    qs "^6.9.0"
+    rc-resize-observer "^0.2.1"
+    react-copy-to-clipboard "^5.0.1"
+    react-responsive "^8.0.1"
+    react-router-dom "5.1.2"
+    unstated-next "^1.1.0"
+    use-json-comparison "^1.0.3"
+    use-media-antd-query "^1.0.1"
+    use-merge-value "^1.0.1"
+    warning "^4.0.3"
+
+"@ant-design/pro-layout@^4.7.3":
   version "4.11.4"
   resolved "https://registry.yarnpkg.com/@ant-design/pro-layout/-/pro-layout-4.11.4.tgz#d3289aaee52c6f062f460f7b7d1f1a301ccf0241"
   integrity sha512-XfrOeCJyEs1YjOetplkpLrsfZnysmJ4g/Hz73o13HyD90cGK3utZicCp17O7yS7OvoUToA9SuCzRr3hOIQxsLA==
@@ -2837,6 +2862,16 @@
     cross-spawn "^7.0.0"
     debug "^4.1.1"
     user-home "^2.0.0"
+
+"@umijs/route-utils@^1.0.5":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@umijs/route-utils/-/route-utils-1.0.16.tgz#60336959761e89c152289b80f7172d2b6410bf38"
+  integrity sha512-JmhSYcDRSi/Nsoiqa036t5duhpXakWxdFifAll0GOpny3DPZQwXP2Iw4yh7cXFs3upU9SX23aDAq0bVt/dd5UQ==
+  dependencies:
+    hash.js "^1.1.7"
+    lodash.isequal "^4.5.0"
+    memoize-one "^5.1.1"
+    path-to-regexp "2.4.0"
 
 "@umijs/use-request@^1.4.2":
   version "1.4.2"
