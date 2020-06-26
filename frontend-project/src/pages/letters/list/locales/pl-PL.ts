@@ -3,7 +3,7 @@ export default {
   'letters-list.table-header-title': 'Lista listów',
   'letters-list.table.columns.comment.title': 'Komentarz',
   'letters-list.table.columns.direction.title': 'Kierunek',
-  'letters-list.table.columns.identifier.title': 'Sygnatura',
+  'letters-list.table.columns.referenceNumber.title': 'Sygnatura',
   'letters-list.table.columns.channel.title': 'Kanał',
   'letters-list.table.columns.date.title': 'Data odbioru / Data wysłania',
   'letters-list.table.columns.attachment.title': 'Załączniki',

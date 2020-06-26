@@ -3,7 +3,7 @@ export default {
   'letters-list.table-header-title': 'Letters list',
   'letters-list.table.columns.comment.title': 'Comment',
   'letters-list.table.columns.direction.title': 'Direction',
-  'letters-list.table.columns.identifier.title': 'Reference number',
+  'letters-list.table.columns.referenceNumber.title': 'Reference number',
   'letters-list.table.columns.channel.title': 'Channel',
   'letters-list.table.columns.date.title': 'Received date / Sent date',
   'letters-list.table.columns.attachment.title': 'Attachments',

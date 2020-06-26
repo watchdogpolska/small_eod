@@ -27,7 +27,7 @@ class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
 
     comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)
     excerpt = factory.Sequence(lambda n: "letter-excerpt-%04d" % n)
-    identifier = factory.Sequence(lambda n: "letter-identifier-%04d" % n)
+    reference_number = factory.Sequence(lambda n: "letter-reference_number-%04d" % n)
 
     case = factory.SubFactory(CaseFactory)
     channel = factory.SubFactory(ChannelFactory)
