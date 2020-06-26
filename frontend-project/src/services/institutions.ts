@@ -18,11 +18,6 @@ export interface Institution {
   regon: string;
 }
 
-export const fetchInstitution = async (id: number): Promise<Institution> => {
-  const response = await new smallEodSDK.InstitutionsApi().institutionsRead(id);
-  return response;
-};
-
 function fetchAllPages(page) {
   if (page.next) {
     const params = new URL(page.next).searchParams;

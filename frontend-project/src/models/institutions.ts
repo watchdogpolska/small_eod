@@ -3,8 +3,8 @@ import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction, Reducer } from 'redux';
 
 export interface Institution {
-  id?: number;
-  name?: string;
+  id: number;
+  name: string;
   email?: string;
   city?: string;
   epuap?: string;
