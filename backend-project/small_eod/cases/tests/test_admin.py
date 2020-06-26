@@ -19,9 +19,9 @@ class TestCaseAddAdmin(TestAddAdminMixin, AuthenticatedMixin, TestCase):
     model = Case
 
     def test_should_display_form(self):
-        self.login_required(is_staff=True, is_superuser=True)
+        self.login_reqired(is_staff=True, is_superuser=True)
         response = self.client.get(self.get_url(), follow=True)
         self.assertIn(
-            f"<title>Add {self.model_name} | Grappelli</title>",
+            f"<title>Add {self.model._meta.model_name} | Grappelli</title>",
             response.content.decode(),
         )
