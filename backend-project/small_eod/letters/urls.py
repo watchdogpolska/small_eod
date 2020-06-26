@@ -3,14 +3,14 @@ from .views import (
     LetterViewSet,
     FileViewSet,
     PresignedUploadFileView,
-    DescriptionViewSet,
+    DocumentTypeViewSet,
 )
 
 from django.urls import path, include
 
 router = routers.SimpleRouter()
 router.register("letters", LetterViewSet)
-router.register("descriptions", DescriptionViewSet)
+router.register("document_types", DocumentTypeViewSet)
 
 file_router = routers.NestedSimpleRouter(router, "letters", lookup="letter")
 file_router.register("files", FileViewSet, basename="letter-files")

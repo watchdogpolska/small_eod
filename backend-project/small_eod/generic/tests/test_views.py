@@ -23,7 +23,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin):
     def get_url(self, name, **kwargs):
         if not self.basename:
             raise NotImplementedError("get_url must be overridden or basename defined")
-        return reverse("{}-{}".format(self.basename, name), kwargs=kwargs)
+        return reverse(f"{self.basename}-{name}", kwargs=kwargs)
 
     def get_url_list(self):
         return self.get_url(name="list", **self.get_extra_kwargs())
@@ -60,14 +60,14 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin):
 
 class UpdateViewSetMixin:
     def get_update_data(self):
-        if not hasattr(self.obj, "name") and not self.serializer_class:
+        if not hasattr(self.obj, "name"):
             raise NotImplementedError(
                 "get_update_data must be overridden, because no 'name' field"
             )
         return {"name": f"{self.obj.name}-updated"}
 
     def validate_update_item(self, item):
-        if not self.obj.name and not self.serializer_class:
+        if not self.obj.name:
             raise NotImplementedError(
                 "validate_update_item must be defined, because no 'name' field"
             )

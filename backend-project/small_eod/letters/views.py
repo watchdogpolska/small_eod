@@ -4,10 +4,10 @@ from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Letter, Description
+from .models import Letter, DocumentType
 from .serializers import (
     LetterSerializer,
-    DescriptionSerializer,
+    DocumentTypeSerializer,
     SignRequestSerializer,
 )
 from ..files.serializers import FileSerializer
@@ -19,9 +19,9 @@ class LetterViewSet(viewsets.ModelViewSet):
     serializer_class = LetterSerializer
 
 
-class DescriptionViewSet(viewsets.ModelViewSet):
-    queryset = Description.objects.all()
-    serializer_class = DescriptionSerializer
+class DocumentTypeViewSet(viewsets.ModelViewSet):
+    queryset = DocumentType.objects.all()
+    serializer_class = DocumentTypeSerializer
 
 
 class FileViewSet(

@@ -3,18 +3,23 @@ import smallEodSDK from '@/utils/sdk';
 
 export interface Case {
   name: string;
-  auditedInstitutions: [number];
+  auditedInstitutions: number[];
   comment: string;
-  tags: [string];
-  responsible_users: [number];
-  notified_users: [number];
-  featureoptions: [number];
+  tags: string[];
+  responsible_users: number[];
+  notified_users: number[];
+  featureoptions: number[];
   createdBy: number;
   createdOn: string;
   id: number;
   modifiedBy: number;
   modifiedOn: string;
 }
+
+export const fetchCase = async (id: number): Promise<Case> => {
+  const response = await new smallEodSDK.CasesApi().casesRead(id);
+  return response;
+};
 
 export async function fetchCasesPage({
   current,
