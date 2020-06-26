@@ -17,14 +17,23 @@ class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):
     @classmethod
     def create_factory(cls):
         return cls.FACTORY.create(
-            audited_institutions=InstitutionFactory.create_batch(size=2),
-            responsible_users=UserFactory.create_batch(size=2),
-            notified_users=UserFactory.create_batch(size=2),
-            tags=TagFactory.create_batch(size=2),
-            featureoptions=FeatureOptionFactory.create_batch(size=2),
+            audited_institutions__size=2,
+            responsible_users__size=2,
+            notified_users__size=2,
+            tags__size=2,
+            featureoptions__size=2,
         )
 
-    def test_many_to_many(self):
+    def test_set_implicit_many_to_many(self):
+        case = self.create_factory()
+
+        self.assertEqual(case.audited_institutions.count(), 2)
+        self.assertEqual(case.responsible_users.count(), 2)
+        self.assertEqual(case.notified_users.count(), 2)
+        self.assertEqual(case.tags.count(), 2)
+        self.assertEqual(case.featureoptions.count(), 2)
+
+    def test_set_explicit_many_to_many(self):
         """
         Check if related objects are created.
         """
