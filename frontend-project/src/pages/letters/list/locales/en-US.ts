@@ -6,7 +6,7 @@ export default {
   'letters-list.table.columns.referenceNumber.title': 'Reference number',
   'letters-list.table.columns.channel.title': 'Channel',
   'letters-list.table.columns.date.title': 'Received date / Sent date',
-  'letters-list.table.columns.attachment.title': 'Attachments',
+  'letters-list.table.columns.attachments.title': 'Attachments',
   'letters-list.table.columns.case.title': 'Case',
   'letters-list.table.columns.audited_institution.title': 'Audited institution',
   'letters-list.table.columns.createdOn.title': 'Created',

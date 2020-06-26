@@ -6,7 +6,7 @@ export default {
   'letters-list.table.columns.referenceNumber.title': 'Sygnatura',
   'letters-list.table.columns.channel.title': 'Kanał',
   'letters-list.table.columns.date.title': 'Data odbioru / Data wysłania',
-  'letters-list.table.columns.attachment.title': 'Załączniki',
+  'letters-list.table.columns.attachments.title': 'Załączniki',
   'letters-list.table.columns.case.title': 'Sprawa',
   'letters-list.table.columns.audited_institution.title': 'Audytowana instytucja',
   'letters-list.table.columns.createdOn.title': 'Utworzono',
