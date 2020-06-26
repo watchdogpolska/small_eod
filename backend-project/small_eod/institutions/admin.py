@@ -3,4 +3,8 @@ from django.contrib import admin
 from .models import Institution
 
 
-admin.site.register(Institution)
+class InstitutionAdmin(admin.ModelAdmin):
+    search_fields = ["name", "city"]
+
+
+admin.site.register(Institution, InstitutionAdmin)
