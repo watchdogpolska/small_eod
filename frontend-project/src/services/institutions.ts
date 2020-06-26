@@ -42,7 +42,9 @@ function fetchAllPages(page) {
 }
 
 export async function fetchAll() {
-  smallEodSDK.InstitutionsApi();
+  return new smallEodSDK.InstitutionsApi().institutionsList().then(page => fetchAllPages(page));
+}
 
-  return smallEodSDK.institutionsList().then(page => fetchAllPages(page));
+export async function fetchOne(id: number) {
+  return new smallEodSDK.InstitutionsApi().institutionsRead(id);
 }
