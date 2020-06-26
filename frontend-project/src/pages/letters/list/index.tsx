@@ -65,9 +65,9 @@ const TableList: FC<{}> = () => {
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
-      dataIndex: 'attachment',
-      render: (attachment: []) => attachment.length,
+      title: formatMessage({ id: 'letters-list.table.columns.attachments.title' }),
+      dataIndex: 'attachments',
+      render: (attachments: []) => attachments.length,
     },
   ];
 
