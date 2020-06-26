@@ -18,8 +18,8 @@ const TableList: FC<{}> = () => {
         typeof documentType === 'number' ? <DocumentTypeName id={documentType} /> : documentType,
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.identifier.title' }),
-      dataIndex: 'identifier',
+      title: formatMessage({ id: 'letters-list.table.columns.referenceNumber.title' }),
+      dataIndex: 'referenceNumber',
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.comment.title' }),
@@ -65,9 +65,9 @@ const TableList: FC<{}> = () => {
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
-      dataIndex: 'attachment',
-      render: (attachment: []) => attachment.length,
+      title: formatMessage({ id: 'letters-list.table.columns.attachments.title' }),
+      dataIndex: 'attachments',
+      render: (attachments: []) => attachments.length,
     },
   ];
 

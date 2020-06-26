@@ -39,7 +39,7 @@ class LetterSerializer(UserLogModelSerializer):
             "channel",
             "final",
             "date",
-            "identifier",
+            "reference_number",
             "institution",
             "case",
             "attachments",

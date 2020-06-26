@@ -61,7 +61,7 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
             "channel": self.channel.pk,
             "final": True,
             "date": datetime.now() + timedelta(days=1),
-            "identifier": "ssj2",
+            "reference_number": "ssj2",
             "institution": self.institution.pk,
             "case": self.case.pk,
             "ordering": 90,

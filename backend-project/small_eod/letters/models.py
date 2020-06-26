@@ -54,10 +54,10 @@ class Letter(TimestampUserLogModel):
         help_text=_("Excerpt of letter."),
         blank=True,
     )
-    identifier = models.CharField(
+    reference_number = models.CharField(
         max_length=256,
-        verbose_name=_("Identifier"),
-        help_text=_("Identifier of letter."),
+        verbose_name=_("Reference number"),
+        help_text=_("Reference number of letter."),
         blank=True,
     )
     case = models.ForeignKey(
