@@ -41,7 +41,7 @@ const InstitutionsModel: InstitutionModelType = {
         payload: response,
       });
     },
-    *fetchOne(payload: AnyAction, { call, put }: EffectsCommandMap) {
+    *fetchOne({ payload }: AnyAction, { call, put }: EffectsCommandMap) {
       const response = yield call(fetchOne, payload);
       yield put({
         type: 'saveOne',
@@ -54,8 +54,7 @@ const InstitutionsModel: InstitutionModelType = {
       return payload.results;
     },
     saveOne(state, { payload }) {
-      console.log(payload);
-      return payload.results;
+      return [...state, payload];
     },
   },
 };

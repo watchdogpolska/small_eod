@@ -11,12 +11,13 @@ export interface InstitutionNameProps {
 }
 
 const InstitutionName: FC<InstitutionNameProps> = ({ id, institutions, dispatch }) => {
+  const institution = institutions.find(value => value.id === id);
   useEffect(() => {
-    // dispatch({ type: 'institutions/fetchOne', payload: id });
+    if (!institution) {
+      dispatch({ type: 'institutions/fetchOne', payload: id });
+    }
   }, []);
-  console.log('ok');
-
-  return <div>ok</div>;
+  return <div>{institution ? institution.name : <Spin />}</div>;
 };
 
 export default connect(({ institutions }: any) => ({ institutions }))(InstitutionName);
