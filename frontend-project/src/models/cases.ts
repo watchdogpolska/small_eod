@@ -43,7 +43,13 @@ const CasesModel: CaseModelType = {
   },
   reducers: {
     saveOne(state, { payload }) {
-      return [...state, payload];
+      let newState: Case[];
+      if (state.find(value => value.id === payload.id)) {
+        newState = state;
+      } else {
+        newState = [...state, payload];
+      }
+      return newState;
     },
   },
 };

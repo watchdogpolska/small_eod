@@ -11,13 +11,11 @@ export interface CaseNameProps {
 }
 
 const CaseName: FC<CaseNameProps> = ({ id, cases, dispatch }) => {
-  const oneCase = cases.find(value => value.id === id);
   useEffect(() => {
-    if (!oneCase) {
-      dispatch({ type: 'cases/fetchOne', payload: id });
-    }
+    dispatch({ type: 'cases/fetchOne', payload: id });
   }, []);
-  console.log(oneCase);
+  const oneCase = cases.find(value => value.id === id);
+
   return <div>{oneCase ? oneCase.name : <Spin />}</div>;
 };
 
