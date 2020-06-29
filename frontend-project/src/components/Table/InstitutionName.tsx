@@ -11,12 +11,10 @@ export interface InstitutionNameProps {
 }
 
 const InstitutionName: FC<InstitutionNameProps> = ({ id, institutions, dispatch }) => {
-  const institution = institutions.find(value => value.id === id);
   useEffect(() => {
-    if (!institution) {
-      dispatch({ type: 'institutions/fetchOne', payload: id });
-    }
+    dispatch({ type: 'institutions/fetchOne', payload: id });
   }, []);
+  const institution = institutions.find(value => value.id === id);
   return <div>{institution ? institution.name : <Spin />}</div>;
 };
 
