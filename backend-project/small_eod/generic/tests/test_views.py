@@ -96,14 +96,14 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
 
 class UpdateViewSetMixin:
     def get_update_data(self):
-        if not hasattr(self.obj, "name") and not self.serializer_class:
+        if not hasattr(self.obj, "name"):
             raise NotImplementedError(
                 "get_update_data must be overridden, because no 'name' field"
             )
         return {"name": f"{self.obj.name}-updated"}
 
     def validate_update_item(self, item):
-        if not self.obj.name and not self.serializer_class:
+        if not self.obj.name:
             raise NotImplementedError(
                 "validate_update_item must be defined, because no 'name' field"
             )

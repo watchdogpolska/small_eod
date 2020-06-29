@@ -1,7 +1,6 @@
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
 from teryt_tree.models import JednostkaAdministracyjna
 
 from ..generic.models import TimestampUserLogModel
@@ -12,7 +11,6 @@ class Institution(TimestampUserLogModel):
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
     )
-
     administrative_unit = models.ForeignKey(
         to=JednostkaAdministracyjna,
         on_delete=models.CASCADE,
@@ -75,6 +73,17 @@ class Institution(TimestampUserLogModel):
         blank=True,
         verbose_name=_("REGON"),
         help_text=_("Statistical Identification Number."),
+    )
+
+    comment = models.CharField(
+        max_length=256,
+        blank=True,
+        verbose_name=_("Comment"),
+        help_text=_("Comment for this case."),
+    )
+
+    tags = models.ManyToManyField(
+        to="tags.Tag", blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
     )
 
     def __str__(self):

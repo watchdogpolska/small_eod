@@ -44,7 +44,6 @@ class CollectionViewSetTestCase(
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
-    queries_less_than_limit = 7
 
     def get_collection(self):
         return self.obj
@@ -83,7 +82,6 @@ class NoteCollectionViewSetTestCase(
 ):
     basename = "collection-note"
     factory_class = NoteFactory
-    queries_less_than_limit = 7
 
     def setUp(self):
         super().setUp()
@@ -106,7 +104,6 @@ class NoteCollectionViewSetTestCase(
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
 
-
 class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
@@ -124,4 +121,3 @@ class CaseCollectionViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
-
