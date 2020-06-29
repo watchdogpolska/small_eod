@@ -4,9 +4,7 @@ from ...users.mixins import AuthenticatedMixin
 
 
 class NumQueriesLimitMixin:
-
-    def get_extra_factory_kwargs(self):
-        return dict()
+    queries_less_than_limit = 10
 
     def test_num_queries_for_list(self):
         self.login_required()
@@ -23,7 +21,7 @@ class NumQueriesLimitMixin:
         assert response.json()["count"] > 0
 
         # number of queries after adding 5 new instances
-        self.new_objs = self.factory_class.create_batch(size=5, **self.get_extra_factory_kwargs())
+        self.new_objs = self.factory_class.create_batch(size=5)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
@@ -53,7 +51,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
     def setUp(self):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
-        self.obj = self.factory_class(**self.get_extra_factory_kwargs())
+        self.obj = self.factory_class()
 
     def get_extra_kwargs(self):
         return dict()

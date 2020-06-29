@@ -89,7 +89,7 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
-    queries_less_than_limit = 7
+    queries_less_than_limit = 11
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)

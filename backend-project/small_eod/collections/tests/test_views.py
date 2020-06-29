@@ -125,16 +125,3 @@ class CaseCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
 
-    def test_num_queries_for_list(self):
-        self.login_required()
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)
-
-        second_case = CaseFactory()
-        self.collection = CollectionFactory(
-            queries=str(self.obj.id) + "," + str(second_case.id)
-        )
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)

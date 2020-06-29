@@ -8,7 +8,7 @@ from ...generic.tests.test_views import (
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
 )
-from ...users.factories import UserWithCaseFactory
+from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
@@ -16,7 +16,7 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
-    queries_less_than_limit = 15
+    queries_less_than_limit = 35
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
@@ -48,7 +48,7 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
     user_type = None
-    factory_class = UserWithCaseFactory
+    factory_class = UserFactory
     serializer_class = UserSerializer
     queries_less_than_limit = 50
 
@@ -58,9 +58,6 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
 
     def get_extra_kwargs(self):
         return dict(case_pk=self.case.pk)
-
-    def get_extra_factory_kwargs(self):
-        return {'hook__case': self.case, 'hook__user_type': self.user_type}
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])

@@ -9,7 +9,6 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
     basename = "user"
     serializer_class = UserSerializer
     factory_class = UserFactory
-    queries_less_than_limit = 5
 
     def validate_item(self, item):
         self.assertEqual(item["username"], self.obj.username)
