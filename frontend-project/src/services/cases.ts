@@ -16,11 +16,6 @@ export interface Case {
   modifiedOn: string;
 }
 
-export const fetchCase = async (id: number): Promise<Case> => {
-  const response = await new smallEodSDK.CasesApi().casesRead(id);
-  return response;
-};
-
 export async function fetchCasesPage({
   current,
   pageSize,
@@ -37,3 +32,7 @@ export async function fetchCasesPage({
     total: sdkResponse.count,
   };
 }
+
+export const fetchOne = async (id: number): Promise<Case> => {
+  return new smallEodSDK.CasesApi().casesRead(id);
+};
