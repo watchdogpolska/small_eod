@@ -78,7 +78,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Inject website ssh-hostkey
-      run: cat .github/h1-publickey.pub > ~/.ssh/known_hosts;
+      run: cat .github/h1-known-hosts > ~/.ssh/known_hosts;
     - name: Deploy update
       run: make deploy_backend
       env:
