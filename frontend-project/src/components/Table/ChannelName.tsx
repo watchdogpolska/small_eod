@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Spin } from 'antd';
-
-import { fetchChannel } from '@/services/channel';
+import { Channel } from '@/models/channels';
 
 export const ChannelName: FC<{ id: number }> = props => {
   const [name, setName] = useState('');
