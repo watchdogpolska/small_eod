@@ -98,7 +98,7 @@ class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
 
-    basename = "collection-cases"
+    basename = "collection-case"
     factory_class = CaseFactory
 
     def setUp(self):
