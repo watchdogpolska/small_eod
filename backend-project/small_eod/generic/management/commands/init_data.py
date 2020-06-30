@@ -1,4 +1,3 @@
-import argparse
 import urllib.request
 
 from django.core.management.base import BaseCommand
