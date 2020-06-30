@@ -31,10 +31,10 @@ const InstitutionsModel: ChannelModelType = {
   namespace: 'channels',
   state: defaultChannelsState,
   effects: {
-    *fetchOne(_: AnyAction, { call, put }: EffectsCommandMap) {
-      const response = yield call(fetchOne);
+    *fetchOne({ payload }: AnyAction, { call, put }: EffectsCommandMap) {
+      const response = yield call(fetchOne, payload);
       yield put({
-        type: 'saveAll',
+        type: 'saveOne',
         payload: response,
       });
     },
