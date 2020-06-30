@@ -115,7 +115,7 @@ make test-django-backend
 
 Statyczna kontrola kodu w projekcie służy do sprawdzenia, czy kod spełnia określone standardy jakości. Wszystkie sprawdzenia kodu statycznego można uruchamiać za pomocą [pre-commit run](https://pre-commit.com/). Są one także weryfikowane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
 
-W celu wykonanie kontroli statycznej kodu należy wykonać:
+W celu wykonania kontroli statycznej kodu należy wykonać:
 
 ```bash
 make lint
