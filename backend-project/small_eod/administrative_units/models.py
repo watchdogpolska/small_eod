@@ -2,4 +2,5 @@ from teryt_tree.models import JednostkaAdministracyjna
 
 
 class AdministrativeUnit(JednostkaAdministracyjna):
-    pass
+    class Meta:
+        proxy = True

@@ -99,13 +99,13 @@ class InstitutionValidatorsTestCase(TestCase):
 
         administrative_unit = AdministrativeUnitFactory(category__level=3)
         self.assertEqual(administrative_unit.category.level, 3)
-        form = f(data=dict(administrative_unit=administrative_unit))
-        self.assertTrue(form.is_valid())
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
+        self.assertTrue(form.is_valid(), form.errors)
 
     def test_level_3_negative(self):
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
         administrative_unit = AdministrativeUnitFactory(category__level=1)
         self.assertEqual(administrative_unit.category.level, 1)
-        form = f(data=dict(administrative_unit=administrative_unit))
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
         self.assertFalse(form.is_valid())
