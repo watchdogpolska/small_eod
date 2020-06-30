@@ -1,8 +1,5 @@
-from teryt_tree.factories import JednostkaAdministracyjnaFactory as OriginalFactory
-import factory
-import factory.fuzzy
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
-class JednostkaAdministracyjnaFactory(OriginalFactory):
-    # TODO: Move changes upstream
-    pk = factory.fuzzy.FuzzyText(length=7)
+class AdministrativeUnitFactory(JednostkaAdministracyjnaFactory):
+    pass

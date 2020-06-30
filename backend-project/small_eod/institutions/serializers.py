@@ -1,5 +1,5 @@
 from .models import (
-    JednostkaAdministracyjna,
+    AdministrativeUnit,
     Institution,
 )
 from rest_framework import serializers
@@ -8,7 +8,7 @@ from ..generic.serializers import UserLogModelSerializer
 
 class InstitutionSerializer(UserLogModelSerializer):
     administrative_unit = serializers.PrimaryKeyRelatedField(
-        many=False, queryset=JednostkaAdministracyjna.objects.all(),
+        many=False, queryset=AdministrativeUnit.objects.all(),
     )
 
     class Meta:
@@ -33,7 +33,7 @@ class InstitutionSerializer(UserLogModelSerializer):
         ]
 
     def validate_administrative_unit(self, admin):
-        admin_unit = JednostkaAdministracyjna.objects.get(pk=admin.id)
+        admin_unit = AdministrativeUnit.objects.get(pk=admin.id)
         if admin_unit.category.level != 3:
             raise serializers.ValidationError(
                 "Administrative unit should be of level 3 (community)"

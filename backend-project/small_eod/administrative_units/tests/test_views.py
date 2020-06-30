@@ -1,14 +1,14 @@
 from django.test import TestCase
 
-from ..factories import JednostkaAdministracyjnaFactory
+from ..factories import AdministrativeUnitFactory
 from ..serializers import AdministrativeUnitSerializer
 from ...generic.tests.test_views import ReadOnlyViewSetMixin
 
 
-class CaseViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
+class AdministrativeUnitViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
     basename = "administrative_unit"
     serializer_class = AdministrativeUnitSerializer
-    factory_class = JednostkaAdministracyjnaFactory
+    factory_class = AdministrativeUnitFactory
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)

@@ -1,13 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
-from .views import JednostkaAdministracyjnaViewSet
+from .views import AdministrativeUnitViewSet
 
 router = SimpleRouter()
 router.register(
-    "administrative_units",
-    JednostkaAdministracyjnaViewSet,
-    basename="administrative_unit",
+    "administrative_units", AdministrativeUnitViewSet, basename="administrative_unit",
 )
 
 urlpatterns = [
