@@ -26,26 +26,19 @@ repos:
       - id: fix-encoding-pragma
         args:
           - --remove
-  - repo: local
+  - repo: https://github.com/ambv/black
+    rev: stable
     hooks:
-      - id: update-extras
-        name: "make pyupgrade"
-        entry: "make pyupgrade"
-        language: system
-        files: .py$
-        pass_filenames: false
-        require_serial: true
-      - id: update-extras
-        name: "make fmt"
-        entry: "make fmt"
-        language: system
-        files: .py$
-        pass_filenames: false
-        require_serial: true
-      - id: update-extras
-        name: "make lint"
-        entry: "make lint"
-        language: system
-        files: .py$
-        pass_filenames: false
-        require_serial: true
+    - id: black
+      files: backend-project
+      exclude: migrations
+      args:
+        - --config
+        - ./backend-project/pyproject.toml
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+    - id: flake8
+      files: backend-project
+      args:
+        - --config=./backend-project/flake8.cfg

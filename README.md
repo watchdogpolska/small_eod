@@ -9,7 +9,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 
 ## Założenia
 
-* system rozwijany będzie małymi etapami, aby jak najszybciej dostarczał wartość dla biura Stowarzysznia
+* system rozwijany będzie małymi etapami, aby jak najszybciej dostarczał wartość dla biura Stowarzyszenia
 * w początkowych etapach system będzie przeznaczony do archiwizacji dokumentów pochodzących z różnych mediów
 * w przyszłości system będzie służył także do:
 
@@ -85,7 +85,7 @@ W celu uruchomienia środowiska aplikacji wymagane jest:
 
 Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo [Docker dla webdevelopera - #01 - Czym jest Docker?](https://www.youtube.com/watch?v=P4ZC3cFN0WQ).
 
-W celu uruchomienia projektu należy wykonąc:
+W celu uruchomienia projektu należy wykonać:
 
 ```bash
 docker-compose up
@@ -103,7 +103,7 @@ W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://g
 
 ## Testy automatyczne
 
-Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Sa one uruchamine w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Sa one uruchamiane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
 
 W celu wykonania testów automatycznych backendu należy wykonać:
 
@@ -111,20 +111,18 @@ W celu wykonania testów automatycznych backendu należy wykonać:
 make test-django-backend
 ```
 
-## Statycnza kontrola kodu
+## Statyczna kontrola kodu
 
-Statycznaa kontrolu kodu w projekcie służy do sprawdzenia, czy kod spełnia określone standardy jakości. Wszystkie sprawdzenia kodu statycznego można uruchamiać za pomocą [pre-commit run](https://pre-commit.com/).
-Sa one weryfikowane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+Statyczna kontrola kodu w projekcie służy do sprawdzenia, czy kod spełnia określone standardy jakości. Wszystkie sprawdzenia kodu statycznego można uruchamiać za pomocą [pre-commit run](https://pre-commit.com/). Są one także weryfikowane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
 
 W celu wykonanie kontroli statycznej kodu należy wykonać:
 
 ```bash
-pre-commit run --all-files
+make lint
 ```
 
-To turn on pre-commit checks for commit operations in git, enter:
+Aby włączyć automatyczne sprawdzanie kodu przed stworzeniem zmiany (`commit`), wykonaj polecenie:
 
-Aby włączyć automatyczne sprawadzanie kodu przed stworzeniem zmiany (`commit`), wykonaj polecenie:
 ```bash
 pre-commit install
 ```
