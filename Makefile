@@ -41,9 +41,6 @@ migrate:
 makemigrations:
 	docker-compose run --rm backend python manage.py makemigrations
 
-pyupgrade:
-	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade --py37-plus
-
 lint:
 	pre-commit run --all-files
 

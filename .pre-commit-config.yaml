@@ -42,3 +42,9 @@ repos:
       files: backend-project
       args:
         - --config=./backend-project/flake8.cfg
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.6.2
+    hooks:
+    - id: pyupgrade
+      args:
+        - --py37-plus
