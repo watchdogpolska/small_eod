@@ -13,7 +13,7 @@ class File(models.Model):
     letter = models.ForeignKey(
         to=Letter,
         on_delete=models.CASCADE,
-        related_name="attachment",
+        related_name="attachments",
         verbose_name=_("Letter"),
         help_text=_("Related letter."),
     )

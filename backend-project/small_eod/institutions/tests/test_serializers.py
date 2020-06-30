@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..serializers import InstitutionSerializer
 from ...generic.mixins import AuthRequiredMixin
-from teryt_tree.factories import AdministrativeUnitFactory
+from ...administrative_units.factories import AdministrativeUnitFactory
 from ..factories import InstitutionFactory
 
 

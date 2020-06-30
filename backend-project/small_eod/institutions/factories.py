@@ -3,8 +3,8 @@ import string
 import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
-from teryt_tree.factories import AdministrativeUnitFactory
-
+from ..administrative_units.factories import AdministrativeUnitFactory
+from ..generic.factories import ManyToManyPostGeneration
 from .models import Institution
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
 
@@ -23,6 +23,7 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     administrative_unit = factory.SubFactory(
         AdministrativeUnitFactory, category__level=3
     )
+    tags = ManyToManyPostGeneration("tags")
 
     class Meta:
         model = Institution

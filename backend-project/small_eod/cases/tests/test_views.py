@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
+from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
@@ -30,6 +31,18 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
         self.assertEqual(response.status_code, 201, response.json())
         item = response.json()
         self.assertEqual(item["name"], name)
+
+    def test_update_with_tag(self):
+        self.login_required()
+        tags = [TagFactory().name]
+        response = self.client.put(
+            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
+            data={**self.get_create_data(), "tags": tags},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200, response.json())
+        item = response.json()
+        self.assertCountEqual(item["tags"], tags)
 
 
 class UserViewSetMixin(ReadOnlyViewSetMixin):
