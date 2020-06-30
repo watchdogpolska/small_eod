@@ -1,5 +1,5 @@
 .PHONY: all test clean docs
-
+GIT_COMMIT := $(shell git rev-parse HEAD)
 TEST?=small_eod
 FRONTEND?=5ed7d87d8073de470f295685
 BACKEND?=5ed804ed8073de470f2984e2
@@ -85,8 +85,7 @@ deploy_backend:
 	h1 website ssh --website ${BACKEND} --command 'rm -r /data/env'
 	h1 website ssh --website ${BACKEND} --command 'virtualenv /data/env';
 	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin ${BRANCH}'
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f origin/${BRANCH}'
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py collectstatic --noinput'
+	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
+	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
 	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
 	h1 website restart --website ${BACKEND}
