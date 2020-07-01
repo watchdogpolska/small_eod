@@ -1,6 +1,6 @@
 Django==3.0.8
 django-environ==0.4.5
-django-teryt-tree==0.16.2
+django-teryt-tree==0.16.3
 djangorestframework==3.11.0
 psycopg2-binary==2.8.5
 django-extensions==3.0.1
