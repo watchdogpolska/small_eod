@@ -121,7 +121,20 @@ export default {
               name: 'letters',
               icon: 'FileTextOutlined',
               path: '/letters',
-              component: './letters/list',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/letters/list',
+                  component: './letters/list',
+                },
+                {
+                  name: 'documentTypes',
+                  icon: 'FileTextOutlined',
+                  path: '/letters/documentTypes',
+                  component: './letters/documentTypes',
+                },
+              ],
             },
             {
               name: 'institutions',

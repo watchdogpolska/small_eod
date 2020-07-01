@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Spin } from 'antd';
 
-import { fetchDocumentType } from '@/services/documentType';
+import { fetchDocumentType } from '@/services/documentTypes';
 
 export const DocumentTypeName: FC<{ id: number }> = props => {
   const [name, setName] = useState('');
