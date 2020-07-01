@@ -8,7 +8,7 @@ export default {
   'menu.cases': 'Cases',
   'menu.cases.new': 'New',
   'menu.cases.list': 'List',
-  'menu.cases.tags': 'Tags',
+  'menu.tags': 'Tags',
   'menu.exception': 'Exception',
   'menu.exception.not-find': '404',
   'menu.exception.not-permission': '403',
