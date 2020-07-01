@@ -50,11 +50,11 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
     user_type = None
     factory_class = UserFactory
     serializer_class = UserSerializer
-    queries_less_than_limit = 50
 
     def setUp(self):
-        self.case = CaseFactory()
         super().setUp()
+        field_dict = {self.__class__.user_type: [self.obj.pk]}
+        self.case = CaseFactory(**field_dict)
 
     def get_extra_kwargs(self):
         return dict(case_pk=self.case.pk)
@@ -71,6 +71,14 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
         self.assertEqual(
             len(response.json().get(self.paginated_response_results_key)), 0
         )
+
+    def test_num_queries_for_list(self):
+        # TODO
+        pass
+
+    def test_num_queries_for_detail(self):
+        # TODO
+        pass
 
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):

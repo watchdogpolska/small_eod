@@ -46,3 +46,12 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
         parsed_refresh_response = exchange_response.json()
         self.assertIn("accessToken", parsed_refresh_response)
         self.assertIn("refreshToken", parsed_refresh_response)
+
+    # TODO
+    def test_num_queries_for_list(self):
+        pass
+
+    # TODO
+    def test_num_queries_for_detail(self):
+        pass
+

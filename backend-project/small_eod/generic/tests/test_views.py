@@ -12,21 +12,18 @@ class NumQueriesLimitMixin:
             raise NotImplementedError(
                 "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
             )
-        print("existing ", self.factory_class._meta.model.objects.all().count())
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
-        response_count = response.json()["count"]
-        print(response_count)
-        assert response.json()["count"] > 0
+        first_step_response_count = response.json()["count"]
+        assert first_step_response_count == 1
 
         # number of queries after adding 5 new instances
-        self.new_objs = self.factory_class.create_batch(size=5)
+        self.factory_class.create_batch(size=5)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
-        print(response.json()["count"])
-        assert response.json()["count"] == response_count + 5
+        assert response.json()["count"] == first_step_response_count + 5
 
     def test_num_queries_for_detail(self):
         self.login_required()
