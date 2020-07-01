@@ -17,6 +17,8 @@ export default {
   'menu.institutions': 'Institutions',
   'menu.institutions.new': 'New',
   'menu.letters': 'Letters',
+  'menu.letters.list': 'Letters',
+  'menu.letters.channels': 'Channels',
   'menu.login': 'Login',
   'menu.more-blocks': 'More Blocks',
   'menu.register': 'Register',

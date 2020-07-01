@@ -121,7 +121,20 @@ export default {
               name: 'letters',
               icon: 'FileTextOutlined',
               path: '/letters',
-              component: './letters/list',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/letters/list',
+                  component: './letters/list',
+                },
+                {
+                  name: 'channels',
+                  icon: 'HomeOutlined',
+                  path: '/letters/channels',
+                  component: './letters/channels',
+                },
+              ],
             },
             {
               name: 'institutions',

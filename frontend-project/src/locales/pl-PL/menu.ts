@@ -6,4 +6,6 @@ export default {
   'menu.institutions': 'Instytucje',
   'menu.institutions.new': 'Nowa',
   'menu.letters': 'Listy',
+  'menu.letters.list': 'Lista',
+  'menu.letters.channels': 'Kanały',
 };
