@@ -115,6 +115,12 @@ export default {
                   path: '/cases/list',
                   component: './cases/list',
                 },
+                {
+                  name: 'tags',
+                  icon: 'FileTextOutlined',
+                  path: '/cases/tags',
+                  component: './cases/tags',
+                },
               ],
             },
             {
