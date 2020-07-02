@@ -93,16 +93,6 @@ class NoteCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
-    def test_num_queries_for_list(self):
-        self.login_required()
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)
-
-        NoteFactory(case=self.obj.case)
-        with self.assertNumQueriesLessThan(self.queries_less_than_limit):
-            response = self.client.get(self.get_url_list())
-        self.assertEqual(response.status_code, 200)
 
 class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase

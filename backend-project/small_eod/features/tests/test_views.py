@@ -52,7 +52,6 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "feature-featureoption"
     factory_class = FeatureOptionFactory
     serializer_class = FeatureOptionSerializer
-    queries_less_than_limit = 5
 
     def get_extra_kwargs(self):
         return dict(feature_pk=self.obj.feature.pk)

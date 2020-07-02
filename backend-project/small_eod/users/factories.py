@@ -12,8 +12,3 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
         django_get_or_create = ("username",)
-
-
-def _add_obj(obj, create, extracted, **kwargs):
-    if 'case' in kwargs:
-        return getattr(kwargs['case'], kwargs['user_type']).add(obj)
