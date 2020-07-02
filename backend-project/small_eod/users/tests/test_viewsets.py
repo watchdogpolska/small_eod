@@ -54,4 +54,3 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, TestCase):
     # TODO
     def test_num_queries_for_detail(self):
         pass
-

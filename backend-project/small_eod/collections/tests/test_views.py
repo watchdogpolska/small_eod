@@ -93,6 +93,14 @@ class NoteCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def test_num_queries_for_list(self):
+        # TODO
+        pass
+
+    def test_num_queries_for_detail(self):
+        # TODO
+        pass
+
 
 class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
