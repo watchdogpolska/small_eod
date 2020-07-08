@@ -5,7 +5,7 @@ from ...users.mixins import AuthenticatedMixin
 
 class NumQueriesLimitMixin:
     queries_less_than_limit = 10
-    initial_count = 1
+    initial_count = 0
 
     def test_num_queries_for_list(self):
         self.login_required()
@@ -17,13 +17,13 @@ class NumQueriesLimitMixin:
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
         first_step_response_count = response.json()["count"]
-        assert first_step_response_count == self.initial_count + 1
+        self.assertEqual(first_step_response_count, self.initial_count + 1)
         self.increase_num_queries_list()
         # number of queries after adding 5 new instances
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
-        assert response.json()["count"] == first_step_response_count + 5
+        self.assertEqual(response.json()["count"], first_step_response_count + 5)
 
     def increase_num_queries_list(self):
         self.factory_class.create_batch(size=5)
