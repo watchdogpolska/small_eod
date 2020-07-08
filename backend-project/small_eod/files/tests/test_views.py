@@ -16,10 +16,5 @@ class FileViewSetTestCase(GenericViewSetMixin, TestCase):
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
 
-    def test_num_queries_for_list(self):
-        # TODO
-        pass
-
-    def test_num_queries_for_detail(self):
-        # TODO
-        pass
+    def increase_num_queries_list(self):
+        self.factory_class.create_batch(letter=self.obj.letter, size=5)

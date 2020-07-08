@@ -6,7 +6,7 @@ from ..users.serializers import UserSerializer
 
 
 class CaseViewSet(viewsets.ModelViewSet):
-    queryset = Case.objects.with_counter().all()
+    queryset = Case.objects.with_counter().with_nested_resource().all()
     serializer_class = CaseCountSerializer
 
 

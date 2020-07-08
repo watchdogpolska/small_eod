@@ -16,14 +16,15 @@ class NumQueriesLimitMixin:
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
         first_step_response_count = response.json()["count"]
-        assert first_step_response_count == 1
-
+        self.increase_num_queries_list()
         # number of queries after adding 5 new instances
-        self.factory_class.create_batch(size=5)
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
         assert response.json()["count"] == first_step_response_count + 5
+
+    def increase_num_queries_list(self):
+        self.factory_class.create_batch(size=5)
 
     def test_num_queries_for_detail(self):
         self.login_required()
@@ -34,6 +35,24 @@ class NumQueriesLimitMixin:
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_detail())
         self.assertEqual(response.status_code, 200)
+
+
+class RelatedM2MMixin:
+    """
+    Allows to create parent resource of M2M relationship
+    for nested viewsets.
+    """
+
+    related_field = None
+    parent_factory_class = None
+
+    def setUp(self):
+        super().setUp()
+        self.parent = self.parent_factory_class(**{self.related_field: [self.obj.pk]})
+
+    def increase_num_queries_list(self):
+        for obj in self.factory_class.create_batch(size=5):
+            getattr(self.parent, self.related_field).add(obj)
 
 
 class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):

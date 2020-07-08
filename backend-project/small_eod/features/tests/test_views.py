@@ -39,14 +39,6 @@ class FeatureViewSetTestCase(GenericViewSetMixin, TestCase):
         self.assertEqual(item["name"], name)
         self.assertEqual(item["featureoptions"][0]["name"], optionname)
 
-    def test_num_queries_for_list(self):
-        # TODO
-        pass
-
-    def test_num_queries_for_detail(self):
-        # TODO
-        pass
-
 
 class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     basename = "feature-featureoption"
@@ -59,10 +51,5 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
 
-    def test_num_queries_for_list(self):
-        # TODO
-        pass
-
-    def test_num_queries_for_detail(self):
-        # TODO
-        pass
+    def increase_num_queries_list(self):
+        self.factory_class.create_batch(feature=self.obj.feature, size=5)
