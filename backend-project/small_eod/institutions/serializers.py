@@ -4,12 +4,15 @@ from .models import (
 )
 from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
+from ..tags.serializers import TagSerializer
 
 
 class InstitutionSerializer(UserLogModelSerializer):
     administrative_unit = serializers.PrimaryKeyRelatedField(
         many=False, queryset=JednostkaAdministracyjna.objects.all(),
     )
+
+    tags = TagSerializer(read_only=True, many=True)
 
     class Meta:
         model = Institution
@@ -30,6 +33,8 @@ class InstitutionSerializer(UserLogModelSerializer):
             "flat_no",
             "nip",
             "regon",
+            "comment",
+            "tags",
         ]
 
     def validate_administrative_unit(self, admin):

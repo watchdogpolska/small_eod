@@ -16,6 +16,9 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+        self.assertEqual(item["comment"], self.obj.comment)
+        for i, tag in enumerate(item["tags"]):
+            self.assertEqual(tag["name"], self.obj.tags.all()[i].name)
 
     @parameterized.expand(
         [
