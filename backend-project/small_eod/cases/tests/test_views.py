@@ -17,7 +17,6 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
-    queries_less_than_limit = 11
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
