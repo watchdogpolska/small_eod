@@ -5,7 +5,11 @@ from .models import (
 from ..tags.models import Tag
 from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
+<<<<<<< HEAD
 from ..tags.fields import TagField
+=======
+from ..tags.serializers import TagSerializer
+>>>>>>> 7be475e... Add tests according to the issue
 
 
 class InstitutionSerializer(UserLogModelSerializer):
@@ -13,7 +17,11 @@ class InstitutionSerializer(UserLogModelSerializer):
         many=False, queryset=JednostkaAdministracyjna.objects.all(),
     )
 
+<<<<<<< HEAD
     tags = TagField()
+=======
+    tags = TagSerializer(read_only=True, many=True)
+>>>>>>> 7be475e... Add tests according to the issue
 
     class Meta:
         model = Institution
