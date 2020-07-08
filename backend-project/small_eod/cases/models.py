@@ -14,7 +14,7 @@ class CaseQuerySet(models.QuerySet):
             letter_count=models.Count("letter"), note_count=models.Count("note")
         )
 
-    def with_nested_resource(self):
+    def with_nested_resources(self):
         return (
             self.prefetch_related("featureoptions")
             .prefetch_related("responsible_users")
