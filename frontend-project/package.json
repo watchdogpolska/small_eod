@@ -48,7 +48,7 @@
     "@ant-design/compatible": "^0.0.1-rc.0",
     "@ant-design/icons": "^4.0.0-alpha.19",
     "@ant-design/pro-layout": "4.11.4",
-    "@ant-design/pro-table": "2.4.1",
+    "@ant-design/pro-table": "2.4.2",
     "@antv/l7": "^2.0.0",
     "@antv/l7-maps": "^2.0.0",
     "@types/lodash.isequal": "^4.5.5",
