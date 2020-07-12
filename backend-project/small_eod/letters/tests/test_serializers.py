@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from ..serializers import LetterSerializer, DocumentTypeSerializer
 
 from ...generic.mixins import AuthRequiredMixin
+from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ..factories import LetterFactory, DocumentTypeFactory
 from ...files.factories import FileFactory
 from ...channels.factories import ChannelFactory
@@ -13,7 +14,7 @@ from ...institutions.factories import InstitutionFactory
 from ...cases.factories import CaseFactory
 
 
-class DocumentTypeSerializerTestCase(TestCase):
+class DocumentTypeSerializerTestCase(ResourceSerializerMixin, TestCase):
     serializer_class = DocumentTypeSerializer
     factory_class = DocumentTypeFactory
 
@@ -41,7 +42,7 @@ class DocumentTypeSerializerTestCase(TestCase):
         self.assertEqual(obj.name, "Not so important letter")
 
 
-class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
+class LetterSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):
     serializer_class = LetterSerializer
     factory_class = LetterFactory
 
