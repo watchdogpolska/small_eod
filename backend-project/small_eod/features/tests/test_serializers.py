@@ -1,9 +1,7 @@
 from django.test import TestCase
-from rest_framework.test import APIRequestFactory, force_authenticate
 
 from ..models import FeatureOption
 from ..serializers import FeatureSerializer
-from ...users.factories import UserFactory
 from ...generic.mixins import AuthRequiredMixin
 from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ..factories import FeatureFactory
