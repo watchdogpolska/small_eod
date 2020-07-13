@@ -14,7 +14,7 @@ export interface Channel {
   epuap: boolean;
 }
 
-export async function fetchChannelsPage({
+export async function fetchPage({
   current,
   pageSize,
 }: PaginationParams): Promise<PaginationResponse<Channel>> {
@@ -30,6 +30,5 @@ export async function fetchChannelsPage({
 }
 
 export const fetchChannel = async (id: number): Promise<Channel> => {
-  const response = await new smallEodSDK.ChannelsApi().channelsRead(id);
-  return response;
+  return new smallEodSDK.ChannelsApi().channelsRead(id);
 };
