@@ -6,10 +6,14 @@ from ..tags.models import Tag
 from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
 <<<<<<< HEAD
+<<<<<<< HEAD
 from ..tags.fields import TagField
 =======
 from ..tags.serializers import TagSerializer
 >>>>>>> 7be475e... Add tests according to the issue
+=======
+from ..tags.fields import TagField
+>>>>>>> 6eb55e9... Add serializer tests
 
 
 class InstitutionSerializer(UserLogModelSerializer):
@@ -18,10 +22,14 @@ class InstitutionSerializer(UserLogModelSerializer):
     )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     tags = TagField()
 =======
     tags = TagSerializer(read_only=True, many=True)
 >>>>>>> 7be475e... Add tests according to the issue
+=======
+    tags = TagField()
+>>>>>>> 6eb55e9... Add serializer tests
 
     class Meta:
         model = Institution

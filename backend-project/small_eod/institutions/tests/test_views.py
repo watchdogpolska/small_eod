@@ -19,10 +19,14 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
         self.assertEqual(item["comment"], self.obj.comment)
         for i, tag in enumerate(item["tags"]):
 <<<<<<< HEAD
+<<<<<<< HEAD
             self.assertEqual(tag, self.obj.tags.all()[i].name)
 =======
             self.assertEqual(tag["name"], self.obj.tags.all()[i].name)
 >>>>>>> 7be475e... Add tests according to the issue
+=======
+            self.assertEqual(tag, self.obj.tags.all()[i].name)
+>>>>>>> 6eb55e9... Add serializer tests
 
     @parameterized.expand(
         [
