@@ -2,9 +2,10 @@ from .models import (
     JednostkaAdministracyjna,
     Institution,
 )
+from ..tags.models import Tag
 from rest_framework import serializers
 from ..generic.serializers import UserLogModelSerializer
-from ..tags.serializers import TagSerializer
+from ..tags.fields import TagField
 
 
 class InstitutionSerializer(UserLogModelSerializer):
@@ -12,7 +13,7 @@ class InstitutionSerializer(UserLogModelSerializer):
         many=False, queryset=JednostkaAdministracyjna.objects.all(),
     )
 
-    tags = TagSerializer(read_only=True, many=True)
+    tags = TagField()
 
     class Meta:
         model = Institution
@@ -46,8 +47,26 @@ class InstitutionSerializer(UserLogModelSerializer):
         return admin
 
     def create(self, validated_data):
+        tag = [
+            Tag.objects.get_or_create(name=tag)[0] for tag in validated_data.pop("tags")
+        ]
         administrative_unit = validated_data.pop("administrative_unit")
         institution = super().create(validated_data)
+        institution.tags.set(tag)
         institution.administrative_unit = administrative_unit
         institution.save()
+        return institution
+
+    def update(self, instance, validated_data):
+        tags = (
+            [
+                Tag.objects.get_or_create(name=tag)[0]
+                for tag in validated_data.pop("tags")
+            ]
+            if "tags" in validated_data
+            else None
+        )
+        institution = super().update(instance, validated_data)
+        if tags:
+            institution.tags.set(tags)
         return institution
