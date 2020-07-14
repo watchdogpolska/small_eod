@@ -9,9 +9,11 @@ router.register("cases", CaseViewSet, basename="case")
 
 user_router = NestedSimpleRouter(router, "cases", lookup="case")
 user_router.register(
-    "responsibleUser", ResponsibleUserViewSet, basename="case-responsible_user"
+    "responsibleUsers", ResponsibleUserViewSet, basename="case-responsible_user"
 )
-user_router.register("notifiedUser", NotifiedUserViewSet, basename="case-notified_user")
+user_router.register(
+    "notifiedUsers", NotifiedUserViewSet, basename="case-notified_user"
+)
 
 urlpatterns = [
     path("", include(router.urls)),
