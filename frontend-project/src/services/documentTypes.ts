@@ -5,7 +5,7 @@ export interface DocumentType {
   name: string;
 }
 
-export async function fetchDocumentTypesPage({
+export async function fetchPage({
   current,
   pageSize,
 }: PaginationParams): Promise<PaginationResponse<DocumentType>> {

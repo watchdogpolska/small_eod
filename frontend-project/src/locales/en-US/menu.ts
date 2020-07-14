@@ -18,7 +18,7 @@ export default {
   'menu.institutions.new': 'New',
   'menu.letters': 'Letters',
   'menu.letters.list': 'List',
-  'menu.letters.documentTypes': 'Document Types',
+  'menu.letters.documentTypes': 'Document types',
   'menu.login': 'Login',
   'menu.more-blocks': 'More Blocks',
   'menu.register': 'Register',

@@ -1,11 +1,16 @@
 import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { connect } from 'dva';
 
-import { DocumentType, fetchDocumentTypesPage } from '@/services/documentTypes';
+import { DocumentType } from '@/services/documentTypes';
 import Table from '@/components/Table';
+import { PaginationParams, PaginationResponse } from '@/services/common';
 
-const TableList: FC<{}> = () => {
+const TableList: FC<{ dispatch: Function }> = ({ dispatch }) => {
+  const fetchData = (parameter: PaginationParams): Promise<PaginationResponse<DocumentType>> => {
+    return dispatch({ type: 'documentTypes/fetchPage', payload: parameter });
+  };
   const columns: ProColumns<DocumentType>[] = [
     {
       title: formatMessage({ id: 'documentTypes-list.table.columns.name.title' }),
@@ -13,7 +18,7 @@ const TableList: FC<{}> = () => {
     },
   ];
 
-  return <Table type="documentTypes" columns={columns} fetchData={fetchDocumentTypesPage} />;
+  return <Table type="documentTypes" columns={columns} fetchData={fetchData} />;
 };
 
-export default TableList;
+export default connect()(TableList);

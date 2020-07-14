@@ -1,6 +1,6 @@
 export default {
-  'documentTypes-list.page-header-content': 'Document types list',
-  'documentTypes-list.table-header-title': 'Document types list',
+  'documentTypes-list.page-header-content': 'List of document types',
+  'documentTypes-list.table-header-title': 'List of document types',
   'documentTypes-list.table.columns.name.title': 'Name',
   'documentTypes-list.table.total': 'Total',
 };
