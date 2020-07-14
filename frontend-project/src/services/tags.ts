@@ -28,7 +28,7 @@ function fetchAllPages(page: Page) {
   return page;
 }
 
-export async function fetchTagsPage({
+export async function fetchPage({
   current,
   pageSize,
 }: PaginationParams): Promise<PaginationResponse<Tag>> {
@@ -45,6 +45,5 @@ export async function fetchTagsPage({
 
 export async function fetchAll() {
   smallEodSDK.TagsApi();
-
   return smallEodSDK.tagsList().then(page => fetchAllPages(page));
 }
