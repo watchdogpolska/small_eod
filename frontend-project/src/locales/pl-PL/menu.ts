@@ -8,4 +8,5 @@ export default {
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
   'menu.letters.documentTypes': 'Typy dokumentów',
+  'menu.users': 'Użytkownicy',
 };

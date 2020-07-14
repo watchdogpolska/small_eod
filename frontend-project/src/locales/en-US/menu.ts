@@ -19,6 +19,7 @@ export default {
   'menu.letters': 'Letters',
   'menu.letters.list': 'List',
   'menu.letters.documentTypes': 'Document types',
+  'menu.users': 'Users',
   'menu.login': 'Login',
   'menu.more-blocks': 'More Blocks',
   'menu.register': 'Register',

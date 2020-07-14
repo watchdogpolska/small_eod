@@ -13,7 +13,6 @@ export interface Channel {
   epuap: boolean;
 }
 
-export const fetchChannel = async (id: number): Promise<Channel> => {
-  const response = await new smallEodSDK.ChannelsApi().channelsRead(id);
-  return response;
+export const fetchOne = async (id: number): Promise<Channel> => {
+  return new smallEodSDK.ChannelsApi().channelsRead(id);
 };
