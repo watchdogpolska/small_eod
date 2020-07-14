@@ -1,5 +1,6 @@
-import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
+
+import { PaginationParams, PaginationResponse } from '@/services/common.d';
 
 export interface Channel {
   id: number;
@@ -13,6 +14,10 @@ export interface Channel {
   email: boolean;
   epuap: boolean;
 }
+
+export const fetchOne = async (id: number): Promise<Channel> => {
+  return new smallEodSDK.ChannelsApi().channelsRead(id);
+};
 
 export async function fetchPage({
   current,
@@ -28,7 +33,3 @@ export async function fetchPage({
     total: sdkResponse.count,
   };
 }
-
-export const fetchChannel = async (id: number): Promise<Channel> => {
-  return new smallEodSDK.ChannelsApi().channelsRead(id);
-};

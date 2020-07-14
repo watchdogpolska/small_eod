@@ -1,18 +1,20 @@
-import { fetchPage, Channel } from '@/services/channels';
+import { fetchPage, fetchOne, Channel } from '@/services/channels';
 import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction, Reducer } from 'redux';
 
 export interface ChannelModelType {
   namespace: string;
-  state: { data: Channel[]; total: number };
+  state: Channel[];
   effects: {
     fetchPage: Effect;
+    fetchOne: Effect;
   };
   reducers: {
     savePage: Reducer<Channel[], AnyAction>;
+    saveOne: Reducer<Channel[], AnyAction>;
   };
 }
-const defaultChannelsState: { data: Channel[]; total: number } = { data: [], total: 0 };
+const defaultChannelsState: Channel[] = [];
 
 const ChannelsModel: ChannelModelType = {
   namespace: 'channels',
@@ -26,10 +28,20 @@ const ChannelsModel: ChannelModelType = {
       });
       return response;
     },
+    *fetchOne({ payload }: AnyAction, { call, put }: EffectsCommandMap) {
+      const response = yield call(fetchOne, payload);
+      yield put({
+        type: 'saveOne',
+        payload: response,
+      });
+    },
   },
   reducers: {
     savePage(_, { payload }) {
-      return payload;
+      return payload.data;
+    },
+    saveOne(state, { payload }) {
+      return state.find(value => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };
