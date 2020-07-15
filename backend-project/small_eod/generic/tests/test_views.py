@@ -40,14 +40,16 @@ class NumQueriesLimitMixin:
         initial_queries = len(connection.queries)
 
         # Validate for short list
-        response = self.client.get(self.get_url_list())
+        self.client.get(self.get_url_list())
         first_step_queries = initial_queries - len(connection.queries)
 
         # Extend list
         self.increase_num_queries_list()
 
         # Validate for list with more instances
-        second_step_queries = len(connection.queries) - first_step_queries - initial_queries
+        second_step_queries = (
+            len(connection.queries) - first_step_queries - initial_queries
+        )
         self.assertEqual(second_step_queries, first_step_queries)
 
     def increase_num_queries_list(self):
