@@ -15,7 +15,7 @@ from ..files.models import File
 
 
 class LetterViewSet(viewsets.ModelViewSet):
-    queryset = Letter.objects.all()
+    queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
 
 

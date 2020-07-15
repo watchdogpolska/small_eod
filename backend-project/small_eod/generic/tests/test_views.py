@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.db import connection
 
 from ...users.mixins import AuthenticatedMixin
 
@@ -13,17 +14,41 @@ class NumQueriesLimitMixin:
             raise NotImplementedError(
                 "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
             )
+
+        # Validate for short list
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
         first_step_response_count = response.json()["count"]
         self.assertEqual(first_step_response_count, self.initial_count + 1)
+
+        # Extend list
         self.increase_num_queries_list()
-        # number of queries after adding 5 new instances
+
+        # Validate for list with more instances
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
             response = self.client.get(self.get_url_list())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["count"], first_step_response_count + 5)
+
+    def test_no_increase_queries_for_list(self):
+        if not hasattr(self, "get_url_list"):
+            raise NotImplementedError(
+                "NumQueriesLimit mixin must be used alongside the ReadOnlyViewSetMixin"
+            )
+        # Initial condition
+        initial_queries = len(connection.queries)
+
+        # Validate for short list
+        response = self.client.get(self.get_url_list())
+        first_step_queries = initial_queries - len(connection.queries)
+
+        # Extend list
+        self.increase_num_queries_list()
+
+        # Validate for list with more instances
+        second_step_queries = len(connection.queries) - first_step_queries - initial_queries
+        self.assertEqual(second_step_queries, first_step_queries)
 
     def increase_num_queries_list(self):
         self.factory_class.create_batch(size=5)
