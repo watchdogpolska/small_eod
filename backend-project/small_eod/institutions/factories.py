@@ -7,6 +7,7 @@ from ..administrative_units.factories import JednostkaAdministracyjnaFactory
 from ..generic.factories import ManyToManyPostGeneration
 from .models import Institution
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
+from ..tags.factories import TagFactory
 
 
 class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
@@ -23,7 +24,8 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     administrative_unit = factory.SubFactory(
         JednostkaAdministracyjnaFactory, category__level=3
     )
-    tags = ManyToManyPostGeneration("tags")
+    comment = factory.Sequence(lambda n: "comment-%04d" % n)
+    tags = ManyToManyPostGeneration("tags", size=2, factory_cls=TagFactory)
 
     class Meta:
         model = Institution
