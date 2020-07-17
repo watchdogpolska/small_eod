@@ -4,9 +4,9 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Letter, fetchLettersPage } from '@/services/letters';
 import Table from '@/components/Table';
-import { ChannelName } from '@/components/Table/ChannelName';
-import { InstitutionName } from '@/components/Table/InstitutionName';
-import { CaseName } from '@/components/Table/CaseName';
+import ChannelName from '@/components/Table/ChannelName';
+import InstitutionName from '@/components/Table/InstitutionName';
+import CaseName from '@/components/Table/CaseName';
 import { DocumentTypeName } from '@/components/Table/DocumentTypeName';
 
 const TableList: FC<{}> = () => {
