@@ -6,7 +6,7 @@ from ...generic.tests.test_views import GenericViewSetMixin
 
 
 class FileViewSetTestCase(GenericViewSetMixin, TestCase):
-    basename = "letter-files"
+    basename = "letter-file"
     serializer_class = FileSerializer
     factory_class = FileFactory
 

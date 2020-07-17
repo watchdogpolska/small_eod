@@ -137,6 +137,12 @@ export default {
               ],
             },
             {
+              name: 'users',
+              icon: 'FileTextOutlined',
+              path: '/users',
+              component: './users/list',
+            },
+            {
               path: '/',
               redirect: '/cases/new',
               authority: ['admin', 'user'],
