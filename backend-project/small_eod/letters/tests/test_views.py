@@ -116,32 +116,31 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
         self.assertEqual(item["id"], self.obj.pk)
         self.assertEqual(item["comment"], f"{self.obj.comment}-updated")
 
-    def test_ordering(self):
+    def create_test_list(self, url, field, reversed=False):
+        param = '-' + field if reversed else field
+        response_ordered = self.client.get(url, {'ordering': param})
+        if "__" in field:
+            f = field.split('__')[0]
+            ff = field.split('__')[1]
+            model = apps.get_model(f + 's', f)
+            test_list = [model.objects.filter(pk=obj[f]).values()[0][ff] for obj in response_ordered.json()['results']]
+            print(test_list)
+        else:
+            test_list = [obj[field] for obj in response_ordered.json()['results']]
+        return test_list
 
+    def test_ordering(self):
         self.login_required()
-        self.factory_class.create_batch(size=2)
+        self.factory_class.create_batch(size=5)
         url = self.get_url_list()
         for field in self.ordering_fields:
-            response_ordered = self.client.get(url, {'ordering': field})
-            if "__" in field:
-                f = field.split('__')[0]
-                model = apps.get_model(f+'s', f)
-                test_list = [model.objects.filter(pk=obj[f])[0].name for obj in response_ordered.json()['results']]
-            else:
-                test_list = [obj[field] for obj in response_ordered.json()['results']]
+            test_list = self.create_test_list(url,field)
             self.assertEqual(test_list, sorted(test_list))
 
     def test_ordering_descending(self):
-
         self.login_required()
-        self.factory_class.create_batch(size=2)
+        self.factory_class.create_batch(size=5)
         url = self.get_url_list()
         for field in self.ordering_fields:
-            response_ordered = self.client.get(url, {'ordering': "-{0}".format(field)})
-            if "__" in field:
-                f = field.split('__')[0]
-                model = apps.get_model(f + 's', f)
-                test_list = [model.objects.filter(pk=obj[f])[0].name for obj in response_ordered.json()['results']]
-            else:
-                test_list = [obj[field] for obj in response_ordered.json()['results']]
+            test_list = self.create_test_list(url, field, reversed=True)
             self.assertEqual(test_list, sorted(test_list)[::-1])

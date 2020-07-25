@@ -94,7 +94,6 @@ paths:
       parameters:
         - *metaPaginationLimit
         - *metaPaginationOffset
-        - *metaOrdering
         - name: institution
           in: query
           description: Institution ID or NULL
