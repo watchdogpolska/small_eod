@@ -14,6 +14,13 @@ x-paginationOffset: &metaPaginationOffset
   schema:
     type: integer
     format: int32
+x-ordering: &metaOrdering
+  name: ordering
+  in: query
+  description: Order by a single field or by multiple fields separated by commas; field name preceded by "-" for descending order
+  required: false
+  schema:
+    type: string
 x-errorResponse:
   default: &metaErrorResponse
     description: unexpected error
@@ -87,6 +94,7 @@ paths:
       parameters:
         - *metaPaginationLimit
         - *metaPaginationOffset
+        - *metaOrdering
         - name: institution
           in: query
           description: Institution ID or NULL
@@ -388,6 +396,7 @@ paths:
       parameters:
         - *metaPaginationLimit
         - *metaPaginationOffset
+        - *metaOrdering
         - name: case
           in: query
           description: Case ID
