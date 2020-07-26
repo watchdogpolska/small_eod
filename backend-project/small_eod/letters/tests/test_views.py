@@ -1,6 +1,5 @@
 from django.urls import reverse
 from django.test import TestCase
-from django.apps import apps
 import requests
 from io import BytesIO
 
@@ -87,6 +86,12 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
+def to_camel_case(s):
+    import string
+
+    return s[0].lower() + string.capwords(s, sep="_").replace("_", "")[1:] if s else s
+
+
 class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
     basename = "letter"
     serializer_class = LetterSerializer
@@ -116,17 +121,21 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
         self.assertEqual(item["id"], self.obj.pk)
         self.assertEqual(item["comment"], f"{self.obj.comment}-updated")
 
-    def create_test_list(self, url, field, reversed=False):
-        param = '-' + field if reversed else field
-        response_ordered = self.client.get(url, {'ordering': param})
+    def create_test_list(self, url, field, reverse=False):
+        param = "-" + field if reverse else field
+        response_ordered = self.client.get(url, {"ordering": param})
         if "__" in field:
-            f = field.split('__')[0]
-            ff = field.split('__')[1]
-            model = apps.get_model(f + 's', f)
-            test_list = [model.objects.filter(pk=obj[f]).values()[0][ff] for obj in response_ordered.json()['results']]
-            print(test_list)
+            f = field.split("__")[0]
+            f_camel = to_camel_case(f)
+            ff = field.split("__")[1]
+            model = getattr(self.serializer_class.Meta.model, f).field.related_model
+            test_list = [
+                model.objects.filter(pk=obj[f_camel]).values()[0][ff]
+                for obj in response_ordered.json()["results"]
+            ]
         else:
-            test_list = [obj[field] for obj in response_ordered.json()['results']]
+            field = to_camel_case(field)
+            test_list = [obj[field] for obj in response_ordered.json()["results"]]
         return test_list
 
     def test_ordering(self):
@@ -134,7 +143,7 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
         self.factory_class.create_batch(size=5)
         url = self.get_url_list()
         for field in self.ordering_fields:
-            test_list = self.create_test_list(url,field)
+            test_list = self.create_test_list(url, field)
             self.assertEqual(test_list, sorted(test_list))
 
     def test_ordering_descending(self):
@@ -142,5 +151,5 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
         self.factory_class.create_batch(size=5)
         url = self.get_url_list()
         for field in self.ordering_fields:
-            test_list = self.create_test_list(url, field, reversed=True)
+            test_list = self.create_test_list(url, field, reverse=True)
             self.assertEqual(test_list, sorted(test_list)[::-1])
