@@ -167,3 +167,26 @@ class AuthorshipViewSetMixin:
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(response.json()["createdBy"], self.user.id)
         self.assertEqual(response.json()["modifiedBy"], self.user.id)
+
+
+class OrderingViewSetMixin:
+    def create_ref_list(self, field):
+        model = self.serializer_class.Meta.model
+        ref_list = list(
+            model.objects.all().order_by(*field.split(",")).values_list("id", flat=True)
+        )
+        return ref_list
+
+    def create_test_list(self, url, field):
+        self.login_required()
+        response_ordered = self.client.get(url, {"ordering": field})
+        test_list = [obj["id"] for obj in response_ordered.json()["results"]]
+        return test_list
+
+    def test_ordering(self):
+        self.factory_class.create_batch(size=5)
+        url = self.get_url_list()
+        for field in self.ordering_fields:
+            test_list = self.create_test_list(url, field)
+            ref_list = self.create_ref_list(field)
+            self.assertEqual(test_list, ref_list)

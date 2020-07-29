@@ -8,10 +8,10 @@ from rest_framework.test import APITestCase
 
 from ..factories import LetterFactory
 from ..serializers import LetterSerializer
-from ..views import LetterViewSet
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    OrderingViewSetMixin,
 )
 from ...users.mixins import AuthenticatedMixin
 
@@ -86,17 +86,19 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
-def to_camel_case(s):
-    import string
-
-    return s[0].lower() + string.capwords(s, sep="_").replace("_", "")[1:] if s else s
-
-
-class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class LetterViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
-    ordering_fields = LetterViewSet.ordering_fields
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["comment"], self.obj.comment)
@@ -120,36 +122,3 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
     def validate_update_item(self, item):
         self.assertEqual(item["id"], self.obj.pk)
         self.assertEqual(item["comment"], f"{self.obj.comment}-updated")
-
-    def create_test_list(self, url, field, reverse=False):
-        param = "-" + field if reverse else field
-        response_ordered = self.client.get(url, {"ordering": param})
-        if "__" in field:
-            f = field.split("__")[0]
-            f_camel = to_camel_case(f)
-            ff = field.split("__")[1]
-            model = getattr(self.serializer_class.Meta.model, f).field.related_model
-            test_list = [
-                model.objects.filter(pk=obj[f_camel]).values()[0][ff]
-                for obj in response_ordered.json()["results"]
-            ]
-        else:
-            field = to_camel_case(field)
-            test_list = [obj[field] for obj in response_ordered.json()["results"]]
-        return test_list
-
-    def test_ordering(self):
-        self.login_required()
-        self.factory_class.create_batch(size=5)
-        url = self.get_url_list()
-        for field in self.ordering_fields:
-            test_list = self.create_test_list(url, field)
-            self.assertEqual(test_list, sorted(test_list))
-
-    def test_ordering_descending(self):
-        self.login_required()
-        self.factory_class.create_batch(size=5)
-        url = self.get_url_list()
-        for field in self.ordering_fields:
-            test_list = self.create_test_list(url, field, reverse=True)
-            self.assertEqual(test_list, sorted(test_list)[::-1])

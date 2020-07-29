@@ -3,7 +3,11 @@ from django.urls import reverse
 
 from ..factories import CollectionFactory
 from ..serializers import CollectionSerializer
-from ...generic.tests.test_views import ReadOnlyViewSetMixin, GenericViewSetMixin
+from ...generic.tests.test_views import (
+    ReadOnlyViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+)
 from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
 from ...users.mixins import AuthenticatedMixin
@@ -38,12 +42,13 @@ class TokenAuthorizationTestCaseMixin:
 
 
 class CollectionViewSetTestCase(
-    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, TestCase
+    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
 ):
 
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
+    ordering_fields = ["name", "-public", "expired_on,name"]
 
     def get_collection(self):
         return self.obj

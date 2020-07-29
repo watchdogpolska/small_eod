@@ -20,20 +20,25 @@ class LetterViewSet(viewsets.ModelViewSet):
     queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
-    ordering_fields = (
+    ordering_fields = [
+        "id",
         "direction",
         "channel__name",
         "final",
         "date",
-        "case__name",
-        "comment",
-        "document_type__name",
         "reference_number",
+        "institution__name",
+        "case__name",
+        "attachments",
+        "ordering",
+        "comment",
+        "excerpt",
+        "document_type__name",
         "created_on",
         "created_by__username",
         "modified_on",
         "modified_by__username",
-    )
+    ]
 
 
 class DocumentTypeViewSet(viewsets.ModelViewSet):

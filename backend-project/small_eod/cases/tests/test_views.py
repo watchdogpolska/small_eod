@@ -7,15 +7,25 @@ from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
+    OrderingViewSetMixin,
 )
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
-class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class CaseViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
