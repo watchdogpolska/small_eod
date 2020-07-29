@@ -3,7 +3,6 @@ import defaultSettings from './defaultSettings';
 import themePluginConfig from './themePluginConfig';
 const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 
-
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
 const plugins = [
@@ -199,13 +198,13 @@ export default {
   },
   chainWebpack: config => {
     config.module.rule('small-eod-client').parser({ amd: false });
-    config
-      .plugin('env')
-      .use(require.resolve('webpack/lib/DefinePlugin'), [{
+    config.plugin('env').use(require.resolve('webpack/lib/DefinePlugin'), [
+      {
         build_sha: JSON.stringify(process.env.COMMIT_SHA),
         build_branch: JSON.stringify(process.env.COMMIT_BRANCH),
-        build_date: JSON.stringify(new Date().toISOString())
-      }]);
+        build_date: JSON.stringify(new Date().toISOString()),
+      },
+    ]);
   },
   // proxy: {
   //   '/server/api/': {

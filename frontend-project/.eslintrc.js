@@ -5,6 +5,6 @@ module.exports = {
     page: true,
     build_sha: 'readonly',
     build_branch: 'readonly',
-    build_date: 'readonly'
+    build_date: 'readonly',
   },
 };

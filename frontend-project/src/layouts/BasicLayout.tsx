@@ -73,7 +73,10 @@ const defaultFooterDom = (
             small-eod – GitHub <GithubOutlined />
           </>
         ),
-        href: typeof build_sha === 'undefined' ? 'https://github.com/watchdogpolska/small_eod/' : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
+        href:
+          typeof build_sha === 'undefined'
+            ? 'https://github.com/watchdogpolska/small_eod/'
+            : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
         blankTarget: true,
       },
       {
