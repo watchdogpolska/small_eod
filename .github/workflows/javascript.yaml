@@ -26,3 +26,6 @@ jobs:
     - name: Build
       run: yarn build
       working-directory: ./frontend-project/
+      env:
+        COMMIT_SHA: '{{github.sha}}'
+        COMMIT_BRANCH: '{{github.ref}}'
