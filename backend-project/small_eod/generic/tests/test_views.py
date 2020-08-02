@@ -8,6 +8,15 @@ class NumQueriesLimitMixin:
     queries_less_than_limit = 10
     initial_count = 0
 
+    def setUp(self):
+        if not hasattr(self, "assertNumQueriesLessThan"):
+            raise Exception(
+                "Use '{required}' as base classes to support {base}".format(
+                    required="test_plus.test.TestCase", base="NumQueriesLimitMixin"
+                )
+            )
+        return super().setUp()
+
     def test_num_queries_for_list(self):
         self.login_required()
         if not hasattr(self, "get_url_list"):
@@ -97,6 +106,7 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
         if not self.factory_class:
             raise NotImplementedError("factory_class must be defined")
         self.obj = self.factory_class()
+        return super().setUp()
 
     def get_extra_kwargs(self):
         return dict()
