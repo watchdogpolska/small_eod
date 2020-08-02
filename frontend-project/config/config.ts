@@ -118,6 +118,12 @@ export default {
               ],
             },
             {
+              name: 'tags',
+              icon: 'FileTextOutlined',
+              path: '/tags',
+              component: './tags/list',
+            },
+            {
               name: 'letters',
               icon: 'FileTextOutlined',
               path: '/letters',
