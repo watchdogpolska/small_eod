@@ -27,6 +27,8 @@ jobs:
       run: make check
     - name: Show settings
       run: make settings
+    - name: Diff OpenAPI
+      run: make diff_openapi
     - name: Test
       run: ./backend-project/contrib/github/script.sh
     - name: Send coverage report

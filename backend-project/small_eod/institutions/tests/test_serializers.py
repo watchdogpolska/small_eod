@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from ..serializers import InstitutionSerializer
 from ...generic.mixins import AuthRequiredMixin
-from teryt_tree.factories import JednostkaAdministracyjnaFactory
+from ...administrative_units.factories import AdministrativeUnitFactory
 from ..factories import InstitutionFactory
 
 
@@ -12,7 +12,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
 
     def setUp(self):
         super().setUp()
-        self.admin_unit = JednostkaAdministracyjnaFactory(category__level=3)
+        self.admin_unit = AdministrativeUnitFactory(category__level=3)
         self.obj = self.factory_class()
 
     def get_default_data(self, new_data=None, skip=None):
@@ -69,7 +69,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
             self.assertEqual(tag, self.obj.tags.all()[i].name)
 
     def test_validate_administrative_unit(self):
-        admin_unit = JednostkaAdministracyjnaFactory()
+        admin_unit = AdministrativeUnitFactory()
         serializer = self.serializer_class(
             data=self.get_default_data(new_data={"administrative_unit": admin_unit.pk}),
             context={"request": self.request},

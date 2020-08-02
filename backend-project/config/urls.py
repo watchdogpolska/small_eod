@@ -48,6 +48,7 @@ urlpatterns = [
     path("api/", include("small_eod.cases.urls")),
     path("api/", include("small_eod.letters.urls")),
     path("api/", include("small_eod.features.urls")),
+    path("api/", include("small_eod.administrative_units.urls")),
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),
     re_path(
