@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.test import TestCase
+from test_plus.test import TestCase
 import requests
 from io import BytesIO
 
@@ -89,6 +89,7 @@ class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCas
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
+    queries_less_than_limit = 11
 
     def validate_item(self, item):
         self.assertEqual(item["comment"], self.obj.comment)

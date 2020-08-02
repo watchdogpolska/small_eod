@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import InstitutionFactory
 from ..serializers import InstitutionSerializer
