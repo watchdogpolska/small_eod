@@ -27,6 +27,8 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
             "house_no": "666",
             "nip": "1234567890",
             "regon": "1234567890",
+            "comment": "To są testowe dane",
+            "tags": ["fundacje testowe"],
         }
         for field in skip:
             del default_data[field]
@@ -43,6 +45,10 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
         self.assertEqual(obj.name, "Polska Fundacja Narodowa")
+        self.assertEqual(obj.comment, "To są testowe dane")
+        tags = ["fundacje testowe"]
+        for i, tag in enumerate(obj.tags.all()):
+            self.assertEqual(tag.name, tags[i])
 
     def test_address_fields(self):
         data = self.serializer_class(self.obj).data
@@ -52,6 +58,15 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
     def test_external_identifier_field(self):
         data = self.serializer_class(self.obj).data
         self.assertEqual(data["regon"], self.obj.regon)
+
+    def test_comment_field(self):
+        data = self.serializer_class(self.obj).data
+        self.assertEqual(data["comment"], self.obj.comment)
+
+    def test_tags_filed(self):
+        data = self.serializer_class(self.obj).data
+        for i, tag in enumerate(data["tags"]):
+            self.assertEqual(tag, self.obj.tags.all()[i].name)
 
     def test_validate_administrative_unit(self):
         admin_unit = AdministrativeUnitFactory()
@@ -99,3 +114,29 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         obj = serializer.save()
         self.assertEqual(serializer.data["nip"], "1111111111")
         self.assertEqual(obj.nip, "1111111111")
+
+    def test_update_comment(self):
+        self.login_required()
+        serializer = self.serializer_class(
+            self.obj,
+            data={"comment": "To jest nowy komentarz"},
+            context={"request": self.request},
+            partial=True,
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertEqual(serializer.data["comment"], "To jest nowy komentarz")
+        self.assertEqual(obj.comment, "To jest nowy komentarz")
+
+    def test_update_tags(self):
+        self.login_required()
+        serializer = self.serializer_class(
+            self.obj,
+            data={"tags": ["inne fundacje"]},
+            context={"request": self.request},
+            partial=True,
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertEqual(serializer.data["tags"], ["inne fundacje"])
+        self.assertEqual(obj.tags.all()[0].name, "inne fundacje")

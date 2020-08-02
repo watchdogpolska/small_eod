@@ -1,6 +1,22 @@
+import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
 
-function fetchAllPages(page) {
+export interface User {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: number;
+}
+
+export interface Page {
+  results: User[];
+  count: number;
+  next: string;
+  previous: string;
+}
+
+function fetchAllPages(page: Page) {
   if (page.next) {
     const params = new URL(page.next).searchParams;
     return smallEodSDK
@@ -16,6 +32,21 @@ function fetchAllPages(page) {
   }
 
   return page;
+}
+
+export async function fetchUsersPage({
+  current,
+  pageSize,
+}: PaginationParams): Promise<PaginationResponse<User>> {
+  const sdkResponse = await new smallEodSDK.UsersApi().usersList({
+    limit: pageSize,
+    offset: pageSize * (current - 1),
+  });
+
+  return {
+    data: sdkResponse.results,
+    total: sdkResponse.count,
+  };
 }
 
 export async function fetchAll() {

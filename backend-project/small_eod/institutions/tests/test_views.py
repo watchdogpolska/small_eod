@@ -16,6 +16,9 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+        self.assertEqual(item["comment"], self.obj.comment)
+        for i, tag in enumerate(item["tags"]):
+            self.assertEqual(tag, self.obj.tags.all()[i].name)
 
     @parameterized.expand(
         [
@@ -39,4 +42,5 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
         )
         self.assertEqual(response.status_code, 200, response.json())
         names = [item["name"] for item in response.json()["results"]]
-        self.assertEqual(expected_names, names)
+
+        self.assertCountEqual(expected_names, names)
