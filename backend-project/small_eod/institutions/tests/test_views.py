@@ -42,4 +42,5 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
         )
         self.assertEqual(response.status_code, 200, response.json())
         names = [item["name"] for item in response.json()["results"]]
-        self.assertEqual(expected_names, names)
+
+        self.assertCountEqual(expected_names, names)

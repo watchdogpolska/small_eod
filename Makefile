@@ -17,12 +17,18 @@ clean:
 build:
 	docker-compose build backend
 
-test: wait_mysql wait_minio test-django-backend test-openapi-spec
+test: wait_mysql wait_minio test_backend test_openapi_spec
 
-test-django-backend:
-	docker-compose run backend python manage.py test --keepdb --verbosity=2 ${TEST}
+test_backend:
+	docker-compose run backend coverage run manage.py test --keepdb --verbosity=2 ${TEST}
 
-test-openapi-spec:
+coverage_html_backend:
+	docker-compose run backend coverage html
+
+coverage_send_backend:
+	docker-compose run -e GITHUB_ACTIONS -e GITHUB_REF -e GITHUB_SHA -e GITHUB_HEAD_REF -e GITHUB_REPOSITORY -e GITHUB_RUN_ID -e GITHUB_TOKEN -e COVERALLS_REPO_TOKEN backend coveralls
+
+test_openapi_spec:
 	docker-compose run --rm backend python manage.py generate_swagger --format json -o openapi.json
 	docker run -v $$(pwd)/backend-project/openapi.json:/openapi.json --rm p1c2u/openapi-spec-validator --schema 2.0 /openapi.json
 	docker-compose run --rm backend rm openapi.json
@@ -63,7 +69,7 @@ settings:
 createsuperuser: wait_minio
 	docker-compose run --rm -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
 
-test-local: lint build check test
+test_local: lint build check test
 
 openapi: 
 	docker-compose run --rm backend python manage.py generate_swagger
