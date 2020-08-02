@@ -1,6 +1,9 @@
 .PHONY: all test clean docs
-
+GIT_COMMIT := $(shell git rev-parse HEAD)
 TEST?=small_eod
+FRONTEND?=5ed7d87d8073de470f295685
+BACKEND?=5ed804ed8073de470f2984e2
+BRANCH?=dev
 
 start: wait_mysql wait_minio
 	docker-compose up -d
@@ -73,3 +76,22 @@ test_local: lint build check test
 
 openapi: 
 	docker-compose run --rm backend python manage.py generate_swagger
+
+build_balancer:
+	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:latest balancer/
+
+push_balancer:
+	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:latest
+
+deploy_frontend:
+	docker-compose run frontend bash -c 'yarn && yarn build'
+	rsync -av --delete frontend-project/dist/ ${FRONTEND}@$$(h1 website show --website ${FRONTEND} --query '[].{fqdn:fqdn}' --output tsv):/data/public
+
+deploy_backend:
+	h1 website ssh --website ${BACKEND} --command 'rm -r /data/env'
+	h1 website ssh --website ${BACKEND} --command 'virtualenv /data/env';
+	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
+	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
+	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
+	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
+	h1 website restart --website ${BACKEND}
