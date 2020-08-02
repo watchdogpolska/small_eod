@@ -1,36 +1,33 @@
-import { fetchOne } from '@/services/channels';
+import { fetchPage, fetchOne, Channel } from '@/services/channels';
 import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction, Reducer } from 'redux';
-
-export interface Channel {
-  id: number;
-  name: string;
-  city: boolean;
-  voivodeship: boolean;
-  flatNo: boolean;
-  street: boolean;
-  postalCode: boolean;
-  houseNo: boolean;
-  email: boolean;
-  epuap: boolean;
-}
 
 export interface ChannelModelType {
   namespace: string;
   state: Channel[];
   effects: {
+    fetchPage: Effect;
     fetchOne: Effect;
   };
   reducers: {
+    savePage: Reducer<Channel[], AnyAction>;
     saveOne: Reducer<Channel[], AnyAction>;
   };
 }
 const defaultChannelsState: Channel[] = [];
 
-const InstitutionsModel: ChannelModelType = {
+const ChannelsModel: ChannelModelType = {
   namespace: 'channels',
   state: defaultChannelsState,
   effects: {
+    *fetchPage({ payload }: AnyAction, { call, put }: EffectsCommandMap) {
+      const response = yield call(fetchPage, payload);
+      yield put({
+        type: 'savePage',
+        payload: response,
+      });
+      return response;
+    },
     *fetchOne({ payload }: AnyAction, { call, put }: EffectsCommandMap) {
       const response = yield call(fetchOne, payload);
       yield put({
@@ -40,9 +37,12 @@ const InstitutionsModel: ChannelModelType = {
     },
   },
   reducers: {
+    savePage(_, { payload }) {
+      return payload.data;
+    },
     saveOne(state, { payload }) {
       return state.find(value => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };
-export default InstitutionsModel;
+export default ChannelsModel;
