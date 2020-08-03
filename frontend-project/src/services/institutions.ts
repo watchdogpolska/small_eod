@@ -22,7 +22,7 @@ function fetchAllPages(page) {
   if (page.next) {
     const params = new URL(page.next).searchParams;
     return smallEodSDK
-      .tagsList({
+      .institutionsList({
         limit: params.get('limit'),
         offset: params.get('offset'),
       })
@@ -37,7 +37,8 @@ function fetchAllPages(page) {
 }
 
 export async function fetchAll() {
-  return new smallEodSDK.InstitutionsApi().institutionsList().then(page => fetchAllPages(page));
+  smallEodSDK.InstitutionsApi();
+  return smallEodSDK.institutionsList().then(page => fetchAllPages(page));
 }
 
 export async function fetchOne(id: number) {

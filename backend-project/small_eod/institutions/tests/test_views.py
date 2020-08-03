@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import InstitutionFactory
 from ..serializers import InstitutionSerializer
@@ -13,6 +13,7 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
     basename = "institution"
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
+    queries_less_than_limit = 11
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
@@ -42,4 +43,5 @@ class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, Te
         )
         self.assertEqual(response.status_code, 200, response.json())
         names = [item["name"] for item in response.json()["results"]]
-        self.assertEqual(expected_names, names)
+
+        self.assertCountEqual(expected_names, names)

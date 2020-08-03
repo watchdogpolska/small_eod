@@ -1,7 +1,8 @@
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from teryt_tree.models import JednostkaAdministracyjna
+
+from ..administrative_units.models import AdministrativeUnit
 
 from ..generic.models import TimestampUserLogModel
 from ..generic.validators import ExactLengthsValidator
@@ -12,7 +13,7 @@ class Institution(TimestampUserLogModel):
         max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
     )
     administrative_unit = models.ForeignKey(
-        to=JednostkaAdministracyjna,
+        to=AdministrativeUnit,
         on_delete=models.CASCADE,
         null=True,
         blank=True,

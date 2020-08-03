@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from unittest.mock import patch
 from ..factories import UserFactory
 from ..serializers import UserSerializer
@@ -14,6 +14,7 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase):
         "-email",
         "last_name,-id",
     ]
+    initial_count = 1
 
     def validate_item(self, item):
         self.assertEqual(item["username"], self.obj.username)

@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import EventFactory
 from ..serializers import EventSerializer

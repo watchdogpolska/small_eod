@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from django.urls import reverse
 
 from ..factories import CollectionFactory
@@ -98,6 +98,12 @@ class NoteCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def increase_num_queries_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
+
 
 class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
@@ -105,6 +111,7 @@ class CaseCollectionViewSetTestCase(
 
     basename = "collection-case"
     factory_class = CaseFactory
+    queries_less_than_limit = 11
 
     def setUp(self):
         super().setUp()
@@ -115,3 +122,10 @@ class CaseCollectionViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_num_queries_list(self):
+        children = self.factory_class.create_batch(size=5)
+        self.collection.query = ",".join(
+            [str(child.pk) for child in children] + [self.collection.query]
+        )
+        self.collection.save()

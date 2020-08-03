@@ -1,0 +1,24 @@
+name: Load-balancer image
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+    - 'balancer/**'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build production image
+      run: make build_balancer
+    - name: "Docker login"
+      env:
+        DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
+    - name: Push image
+      run: make push_balancer

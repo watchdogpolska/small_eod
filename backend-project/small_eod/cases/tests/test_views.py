@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
@@ -8,6 +8,7 @@ from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
+    RelatedM2MMixin,
     OrderingViewSetMixin,
 )
 from ...users.factories import UserFactory
@@ -58,6 +59,7 @@ class CaseViewSetTestCase(
 
 class UserViewSetMixin(ReadOnlyViewSetMixin, OrderingViewSetMixin):
     user_type = None
+class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
     factory_class = UserFactory
     serializer_class = UserSerializer
     #ordering_fields = [
@@ -70,17 +72,17 @@ class UserViewSetMixin(ReadOnlyViewSetMixin, OrderingViewSetMixin):
         super().setUp()
         field_dict = {self.__class__.user_type: [self.obj.pk]}
         self.case = CaseFactory(**field_dict)
+    parent_factory_class = CaseFactory
 
     def get_extra_kwargs(self):
-        return dict(case_pk=self.case.pk)
+        return dict(case_pk=self.parent.pk)
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
 
     def test_list_no_users(self):
         self.login_required()
-        field_dict = {self.__class__.user_type: []}
-        self.case = CaseFactory(**field_dict)
+        getattr(self.parent, self.related_field).set([])
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -89,7 +91,7 @@ class UserViewSetMixin(ReadOnlyViewSetMixin, OrderingViewSetMixin):
 
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
-    user_type = "notified_users"
+    related_field = "notified_users"
     basename = "case-notified_user"
 
     #def get_queryset(self):
@@ -97,7 +99,7 @@ class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
 
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
-    user_type = "responsible_users"
+    related_field = "responsible_users"
     basename = "case-responsible_user"
 
     #def get_queryset(self):

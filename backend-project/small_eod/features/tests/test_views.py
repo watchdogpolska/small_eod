@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..serializers import FeatureSerializer, FeatureOptionSerializer
@@ -51,3 +51,6 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_num_queries_list(self):
+        self.factory_class.create_batch(feature=self.obj.feature, size=5)

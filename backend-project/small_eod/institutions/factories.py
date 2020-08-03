@@ -3,7 +3,7 @@ import string
 import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
-from ..administrative_units.factories import JednostkaAdministracyjnaFactory
+from ..administrative_units.factories import AdministrativeUnitFactory
 from ..generic.factories import ManyToManyPostGeneration
 from .models import Institution
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
@@ -22,7 +22,7 @@ class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     regon = FuzzyRegon()
     nip = FuzzyText(length=10, chars=string.digits)
     administrative_unit = factory.SubFactory(
-        JednostkaAdministracyjnaFactory, category__level=3
+        AdministrativeUnitFactory, category__level=3
     )
     comment = factory.Sequence(lambda n: "comment-%04d" % n)
     tags = ManyToManyPostGeneration("tags", size=2, factory_cls=TagFactory)
