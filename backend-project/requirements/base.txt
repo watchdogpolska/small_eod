@@ -1,4 +1,4 @@
-Django==3.0.8
+Django==3.0.9
 django-environ==0.4.5
 django-teryt-tree==0.16.3
 djangorestframework==3.11.0
