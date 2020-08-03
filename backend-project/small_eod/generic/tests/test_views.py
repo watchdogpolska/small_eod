@@ -170,15 +170,19 @@ class AuthorshipViewSetMixin:
 
 
 class OrderingViewSetMixin:
-    def create_ref_list(self, field):
+    def get_queryset(self):
         model = self.serializer_class.Meta.model
+        return model.objects.all()
+
+    def create_ref_list(self, field):
         ref_list = list(
-            model.objects.all().order_by(*field.split(",")).values_list("id", flat=True)
+            self.get_queryset().order_by(*field.split(",")).values_list("id", flat=True)
         )
         return ref_list
 
     def create_test_list(self, url, field):
         self.login_required()
+        print(self.request.user)
         response_ordered = self.client.get(url, {"ordering": field})
         test_list = [obj["id"] for obj in response_ordered.json()["results"]]
         return test_list
@@ -189,4 +193,5 @@ class OrderingViewSetMixin:
         for field in self.ordering_fields:
             test_list = self.create_test_list(url, field)
             ref_list = self.create_ref_list(field)
+            print(field, "ref", ref_list, "test", test_list)
             self.assertEqual(test_list, ref_list)

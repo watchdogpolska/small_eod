@@ -29,6 +29,14 @@ class CaseViewSet(viewsets.ModelViewSet):
 
 class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    ordering_fields = (
+        "id",
+        "username", 
+        "email", 
+        "first_name", 
+        "last_name",
+    )
 
     def get_queryset(self):
         return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
@@ -36,6 +44,14 @@ class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class NotifiedUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    ordering_fields = (
+        "id",
+        "username", 
+        "email", 
+        "first_name", 
+        "last_name",
+    )
 
     def get_queryset(self):
         return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()

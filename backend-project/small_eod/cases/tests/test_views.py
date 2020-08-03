@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
+#from ..models import Case
 from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
@@ -55,10 +56,15 @@ class CaseViewSetTestCase(
         self.assertCountEqual(item["tags"], tags)
 
 
-class UserViewSetMixin(ReadOnlyViewSetMixin):
+class UserViewSetMixin(ReadOnlyViewSetMixin, OrderingViewSetMixin):
     user_type = None
     factory_class = UserFactory
     serializer_class = UserSerializer
+    #ordering_fields = [
+    #    "last_name",
+    #    "-email",
+    #    "last_name,-id",
+    #]
 
     def setUp(self):
         super().setUp()
@@ -86,7 +92,13 @@ class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
     user_type = "notified_users"
     basename = "case-notified_user"
 
+    #def get_queryset(self):
+    #   return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
+
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
     user_type = "responsible_users"
     basename = "case-responsible_user"
+
+    #def get_queryset(self):
+    #    return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
