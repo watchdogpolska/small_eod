@@ -9,10 +9,7 @@ class FeatureViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase
     basename = "feature"
     serializer_class = FeatureSerializer
     factory_class = FeatureFactory
-    ordering_fields = [
-        "-name", 
-        "min_options", 
-        "max_options,id"]
+    ordering_fields = ["-name", "min_options", "max_options,id"]
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)

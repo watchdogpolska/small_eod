@@ -5,7 +5,9 @@ from ..serializers import AdministrativeUnitSerializer
 from ...generic.tests.test_views import ReadOnlyViewSetMixin, OrderingViewSetMixin
 
 
-class AdministrativeUnitViewSetTestCase(ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase):
+class AdministrativeUnitViewSetTestCase(
+    ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "administrative_unit"
     serializer_class = AdministrativeUnitSerializer
     factory_class = AdministrativeUnitFactory

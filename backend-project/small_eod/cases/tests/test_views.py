@@ -70,7 +70,9 @@ class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
         return dict(case_pk=self.parent.pk)
 
     def get_pk_list(self):
-        pk_list = [obj[0] for obj in getattr(self.parent, self.related_field).values_list()]
+        pk_list = [
+            obj[0] for obj in getattr(self.parent, self.related_field).values_list()
+        ]
         return pk_list
 
     def validate_item(self, item):
@@ -91,7 +93,7 @@ class NotifiedUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCa
     basename = "case-notified_user"
 
     def get_queryset(self):
-       return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
+        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
 
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):

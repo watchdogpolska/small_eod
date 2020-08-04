@@ -261,7 +261,6 @@ class AuthorshipViewSetMixin:
 
 
 class OrderingViewSetMixin:
-
     def get_model(self):
         return self.serializer_class.Meta.model
 
@@ -272,7 +271,10 @@ class OrderingViewSetMixin:
     def create_ref_list(self, field):
         model = self.get_model()
         ref_list = list(
-            model.objects.all().filter(pk__in=self.get_pk_list()).order_by(*field.split(",")).values_list("id", flat=True)
+            model.objects.all()
+            .filter(pk__in=self.get_pk_list())
+            .order_by(*field.split(","))
+            .values_list("id", flat=True)
         )
         return ref_list
 

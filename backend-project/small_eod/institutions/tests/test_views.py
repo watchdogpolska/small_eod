@@ -10,7 +10,9 @@ from ...generic.tests.test_views import (
 from parameterized import parameterized
 
 
-class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase):
+class InstitutionViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "institution"
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory

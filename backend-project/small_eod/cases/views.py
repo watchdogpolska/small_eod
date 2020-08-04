@@ -32,9 +32,9 @@ class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     ordering_fields = (
         "id",
-        "username", 
-        "email", 
-        "first_name", 
+        "username",
+        "email",
+        "first_name",
         "last_name",
     )
 
@@ -47,9 +47,9 @@ class NotifiedUserViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     ordering_fields = (
         "id",
-        "username", 
-        "email", 
-        "first_name", 
+        "username",
+        "email",
+        "first_name",
         "last_name",
     )
 

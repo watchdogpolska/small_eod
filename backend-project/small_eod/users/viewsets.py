@@ -12,8 +12,8 @@ class UserViewSet(viewsets.ReadOnlyViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     ordering_fields = [
         "id",
-        "username", 
-        "email", 
-        "first_name", 
+        "username",
+        "email",
+        "first_name",
         "last_name",
     ]
