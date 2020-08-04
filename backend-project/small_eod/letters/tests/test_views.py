@@ -92,6 +92,7 @@ class LetterViewSetTestCase(
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
+    queries_less_than_limit = 10
     ordering_fields = [
         "comment",
         "-comment",
@@ -99,7 +100,6 @@ class LetterViewSetTestCase(
         "created_by__username",
         "-created_by__username,comment",
     ]
-    queries_less_than_limit = 11
 
     def validate_item(self, item):
         self.assertEqual(item["comment"], self.obj.comment)

@@ -42,7 +42,14 @@ class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
     permission_classes = [IsAuthenticated | CollectionDirectTokenPermission]
     filter_backends = (DjangoFilterBackend, OrderingFilter)
-    ordering_fields = ["id", "name", "comment", "public", "expired_on", "query"]
+    ordering_fields = [
+        "id", 
+        "name", 
+        "comment", 
+        "public", 
+        "expired_on", 
+        "query"
+        ]
 
 
 class TokenCreateAPIView(APIView):

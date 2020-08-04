@@ -98,7 +98,7 @@ class NoteCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
-    def increase_num_queries_list(self):
+    def increase_list(self):
         children = self.factory_class.create_batch(case=self.obj.case, size=5)
         self.collection.query = ",".join(
             [str(child.case.pk) for child in children] + [self.collection.query]
@@ -123,7 +123,7 @@ class CaseCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
 
-    def increase_num_queries_list(self):
+    def increase_list(self):
         children = self.factory_class.create_batch(size=5)
         self.collection.query = ",".join(
             [str(child.pk) for child in children] + [self.collection.query]

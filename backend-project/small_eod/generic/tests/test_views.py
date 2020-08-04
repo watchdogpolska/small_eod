@@ -32,7 +32,7 @@ class NumQueriesLimitMixin:
         self.assertEqual(first_step_response_count, self.initial_count + 1)
 
         # Extend list
-        self.increase_num_queries_list()
+        self.increase_list()
 
         # Validate for list with more instances
         with self.assertNumQueriesLessThan(self.queries_less_than_limit):
@@ -53,16 +53,13 @@ class NumQueriesLimitMixin:
         first_step_queries = initial_queries - len(connection.queries)
 
         # Extend list
-        self.increase_num_queries_list()
+        self.increase_list()
 
         # Validate for list with more instances
         second_step_queries = (
             len(connection.queries) - first_step_queries - initial_queries
         )
         self.assertEqual(second_step_queries, first_step_queries)
-
-    def increase_num_queries_list(self):
-        self.factory_class.create_batch(size=5)
 
     def test_num_queries_for_detail(self):
         self.login_required()
@@ -88,7 +85,7 @@ class RelatedM2MMixin:
         super().setUp()
         self.parent = self.parent_factory_class(**{self.related_field: [self.obj.pk]})
 
-    def increase_num_queries_list(self):
+    def increase_list(self):
         for obj in self.factory_class.create_batch(size=5):
             getattr(self.parent, self.related_field).add(obj)
 
@@ -147,6 +144,9 @@ class ReadOnlyViewSetMixin(AuthenticatedMixin, NumQueriesLimitMixin):
 
     def validate_item(self, item):
         raise NotImplementedError("validate_item must be overridden")
+
+    def increase_list(self):
+        self.factory_class.create_batch(size=5)
 
 
 class UpdateViewSetMixin:
@@ -261,28 +261,28 @@ class AuthorshipViewSetMixin:
 
 
 class OrderingViewSetMixin:
-    def get_queryset(self):
+    
+    def get_pk_list(self):
         model = self.serializer_class.Meta.model
-        return model.objects.all()
+        return [obj.pk for obj in model.objects.all()]
 
     def create_ref_list(self, field):
+        model = self.serializer_class.Meta.model
         ref_list = list(
-            self.get_queryset().order_by(*field.split(",")).values_list("id", flat=True)
+            model.objects.all().filter(pk__in=self.get_pk_list()).order_by(*field.split(",")).values_list("id", flat=True)
         )
         return ref_list
 
     def create_test_list(self, url, field):
         self.login_required()
-        print(self.request.user)
         response_ordered = self.client.get(url, {"ordering": field})
         test_list = [obj["id"] for obj in response_ordered.json()["results"]]
         return test_list
 
     def test_ordering(self):
-        self.factory_class.create_batch(size=5)
+        self.increase_list()
         url = self.get_url_list()
         for field in self.ordering_fields:
             test_list = self.create_test_list(url, field)
             ref_list = self.create_ref_list(field)
-            print(field, "ref", ref_list, "test", test_list)
             self.assertEqual(test_list, ref_list)

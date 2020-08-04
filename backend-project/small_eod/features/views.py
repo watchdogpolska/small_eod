@@ -9,7 +9,12 @@ class FeatureViewSet(viewsets.ModelViewSet):
     queryset = Feature.objects.prefetch_related("featureoptions").all()
     serializer_class = FeatureSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
-    ordering_fields = ["id", "name", "min_options", "max_options", "featureoptions"]
+    ordering_fields = [
+        "id", 
+        "name", 
+        "min_options", 
+        "max_options", 
+        "featureoptions"]
 
 
 class FeatureOptionViewSet(viewsets.ModelViewSet):

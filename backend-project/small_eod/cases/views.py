@@ -11,7 +11,7 @@ class CaseViewSet(viewsets.ModelViewSet):
     queryset = Case.objects.with_counter().with_nested_resources().all()
     serializer_class = CaseCountSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
-    ordering_fields = (
+    ordering_fields = [
         "id",
         "comment",
         "audited_institutions__name",
@@ -24,7 +24,7 @@ class CaseViewSet(viewsets.ModelViewSet):
         "modified_by__username",
         "created_on",
         "modified_on",
-    )
+    ]
 
 
 class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):

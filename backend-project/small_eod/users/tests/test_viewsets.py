@@ -9,12 +9,11 @@ class UserViewSetTestCase(ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase):
     basename = "user"
     serializer_class = UserSerializer
     factory_class = UserFactory
-    ordering_fields = [
-        "last_name",
-        "-email",
-        "last_name,-id",
-    ]
     initial_count = 1
+    ordering_fields = [
+        "email",
+        "email,-id",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["username"], self.obj.username)

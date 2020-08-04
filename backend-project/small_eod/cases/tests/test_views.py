@@ -2,7 +2,7 @@ from test_plus.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
-#from ..models import Case
+from ..models import Case
 from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
@@ -57,25 +57,21 @@ class CaseViewSetTestCase(
         self.assertCountEqual(item["tags"], tags)
 
 
-class UserViewSetMixin(ReadOnlyViewSetMixin, OrderingViewSetMixin):
-    user_type = None
 class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
     factory_class = UserFactory
     serializer_class = UserSerializer
-    #ordering_fields = [
-    #    "last_name",
-    #    "-email",
-    #    "last_name,-id",
-    #]
-
-    def setUp(self):
-        super().setUp()
-        field_dict = {self.__class__.user_type: [self.obj.pk]}
-        self.case = CaseFactory(**field_dict)
     parent_factory_class = CaseFactory
+    ordering_fields = [
+        "-email",
+        "email,-id",
+    ]
 
     def get_extra_kwargs(self):
         return dict(case_pk=self.parent.pk)
+
+    def get_pk_list(self):
+        pk_list = [obj[0] for obj in getattr(self.parent, self.related_field).values_list()]
+        return pk_list
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
@@ -90,17 +86,17 @@ class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
         )
 
 
-class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
+class NotifiedUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):
     related_field = "notified_users"
     basename = "case-notified_user"
 
-    #def get_queryset(self):
-    #   return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
+    def get_queryset(self):
+       return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
 
 
-class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
+class ResponsibleUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):
     related_field = "responsible_users"
     basename = "case-responsible_user"
 
-    #def get_queryset(self):
-    #    return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
+    def get_queryset(self):
+        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
