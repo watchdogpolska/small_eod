@@ -157,10 +157,10 @@
     use-merge-value "^1.0.1"
     warning "^4.0.3"
 
-"@ant-design/pro-table@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@ant-design/pro-table/-/pro-table-2.4.3.tgz#43cd9cf83373700b3345b95116f6d18c6a31517a"
-  integrity sha512-It0mu4z+kBz6WtgX4u1PZSeWt50Khu+UgdoHD1i8wliVml0PT6AAlnZq6Y0BA2hbh0XyMZdPqqwXQ8zzj4/RtQ==
+"@ant-design/pro-table@2.4.4":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@ant-design/pro-table/-/pro-table-2.4.4.tgz#2d503ae5ce7446cb84db6c0edd0279fe99d1f957"
+  integrity sha512-Zwbk1UWjiuotFCrA00Sada9pv8JhcWd0CvzhhgVgTLUynsPDwnXCgyKRRNB6YpBYPZABo+K12umaairO7D33cQ==
   dependencies:
     "@ant-design/icons" "^4.1.0"
     antd "^4.1.5"
