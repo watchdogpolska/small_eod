@@ -125,6 +125,22 @@ W celu wykonania testów automatycznych backendu należy wykonać:
 make test-django-backend
 ```
 
+## Wdrożenie automatyczne
+
+Każda zmiana znajdująca się na gałęzi ```dev``` jest wdrażana z wykorzystaniem GitHub Actions do usługi [*Strona* od HyperOne](https://www.hyperone.com/services/compute/website/), która jest usługą klasy platform-as-a-service.
+
+Publiczny dostęp do środowiska testowego odbywa się z wykorzystaniem adresu: ```dev.small-eod.siecobywatelska.pl```. Dostępne jest konto użytkownika ```root``` z hasłem ```root```. W przypadku uszkodzenia konta – utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new).
+
+Dla potrzeb środowiska testowego w HyperOne zostały uruchomione:
+
+* dwie odrębne usługi *Strona*:
+  * dla back-endu – oparte o środowisko wykonawcze `h1cr.io/website/python-passenger:3.7`
+  * dla front-endu – oparte o środowisko wykonawcze `h1cr.io/website/nginx-static:latest`
+* usługa *[Baza danych](https://www.hyperone.com/services/storage/database/)* w wariancie PostgreSQL 11
+* kontenery w klasycznej infrastrukturze Stowarzyszenia (bazującej na *[Wirtualnych Maszynach](https://www.hyperone.com/services/compute/vm/)* HyperOne):
+  * Minio – dla usługi składowania plików – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
+  * Balancer – dla zintegrowania usług *Strona* – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
+
 ### Materiały dodatkowe
 
 * [Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.md)

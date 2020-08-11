@@ -4,7 +4,7 @@ from .serializers import FeatureSerializer, FeatureOptionSerializer
 
 
 class FeatureViewSet(viewsets.ModelViewSet):
-    queryset = Feature.objects.all()
+    queryset = Feature.objects.prefetch_related("featureoptions").all()
     serializer_class = FeatureSerializer
 
 

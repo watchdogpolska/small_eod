@@ -2,7 +2,7 @@ from django.forms import modelform_factory
 from django.test import TestCase
 
 from ..models import Institution
-from teryt_tree.factories import JednostkaAdministracyjnaFactory
+from ...administrative_units.factories import AdministrativeUnitFactory
 
 
 class ExternalIdentifierValidatorsTestCase(TestCase):
@@ -97,15 +97,15 @@ class InstitutionValidatorsTestCase(TestCase):
         """
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
-        administrative_unit = JednostkaAdministracyjnaFactory(category__level=3)
+        administrative_unit = AdministrativeUnitFactory(category__level=3)
         self.assertEqual(administrative_unit.category.level, 3)
-        form = f(data=dict(administrative_unit=administrative_unit))
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
         self.assertTrue(form.is_valid())
 
     def test_level_3_negative(self):
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
-        administrative_unit = JednostkaAdministracyjnaFactory(category__level=1)
+        administrative_unit = AdministrativeUnitFactory(category__level=1)
         self.assertEqual(administrative_unit.category.level, 1)
-        form = f(data=dict(administrative_unit=administrative_unit))
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
         self.assertFalse(form.is_valid())
