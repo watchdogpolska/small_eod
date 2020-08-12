@@ -7,4 +7,5 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = [
             "name",
+            "id",
         ]

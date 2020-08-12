@@ -1,19 +1,25 @@
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-import React, { FC, useRef } from 'react';
+import { ProColumns } from '@ant-design/pro-table';
+import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-import { ChannelName } from '@/components/Table/ChannelName';
 import { Letter, fetchLettersPage } from '@/services/letters';
+import Table from '@/components/Table';
+import ChannelName from '@/components/Table/ChannelName';
 import { CaseName } from '@/components/Table/CaseName';
-import { InstitutionName } from '@/components/Table/InstitutionName';
+import InstitutionName from '@/components/Table/InstitutionName';
+import { DocumentTypeName } from '@/components/Table/DocumentTypeName';
 
 const TableList: FC<{}> = () => {
-  const actionRef = useRef<ActionType>();
   const columns: ProColumns<Letter>[] = [
     {
-      title: formatMessage({ id: 'letters-list.table.columns.identifier.title' }),
-      dataIndex: 'identifier',
+      title: formatMessage({ id: 'letters-list.table.columns.documentType.title' }),
+      dataIndex: 'documentType',
+      render: (documentType: number | string) =>
+        typeof documentType === 'number' ? <DocumentTypeName id={documentType} /> : documentType,
+    },
+    {
+      title: formatMessage({ id: 'letters-list.table.columns.referenceNumber.title' }),
+      dataIndex: 'referenceNumber',
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.comment.title' }),
@@ -28,7 +34,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.channel.title' }),
       dataIndex: 'channel',
-      render: (channel: number) =>
+      render: (channel: number | string) =>
         typeof channel === 'number' ? <ChannelName id={channel} /> : channel,
     },
     {
@@ -39,12 +45,14 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'letters-list.table.columns.case.title' }),
       dataIndex: 'case',
-      render: (_case: number) => (typeof _case === 'number' ? <CaseName id={_case} /> : _case),
+      render: (_case: number | string) =>
+        typeof _case === 'number' ? <CaseName id={_case} /> : _case,
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.audited_institutions.title' }),
+      title: formatMessage({ id: 'letters-list.table.columns.audited_institution.title' }),
       dataIndex: 'institution',
-      render: (institution: number) => <InstitutionName id={institution} />,
+      render: (institution: number | string) =>
+        typeof institution === 'number' ? <InstitutionName id={institution} /> : institution,
     },
     {
       title: formatMessage({ id: 'letters-list.table.columns.createdOn.title' }),
@@ -57,35 +65,13 @@ const TableList: FC<{}> = () => {
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: 'letters-list.table.columns.attachment.title' }),
-      dataIndex: 'attachment',
-      render: (attachment: []) => attachment.length,
+      title: formatMessage({ id: 'letters-list.table.columns.attachments.title' }),
+      dataIndex: 'attachments',
+      render: (attachments: []) => attachments.length,
     },
   ];
 
-  const showTotal = (total, range) =>
-    `${range[0]}-${range[1]} / ${formatMessage({ id: 'letters-list.table.total' })} ${total}`;
-
-  return (
-    <PageHeaderWrapper content={formatMessage({ id: 'letters-list.page-header-content' })}>
-      <ProTable<Letter>
-        headerTitle={formatMessage({ id: 'letters-list.table-header-title' })}
-        actionRef={actionRef}
-        rowKey="id"
-        tableAlertRender={false}
-        request={fetchLettersPage}
-        columns={columns}
-        rowSelection={false}
-        search={false}
-        options={false}
-        pagination={{
-          pageSize: 20,
-          showSizeChanger: false,
-          showTotal,
-        }}
-      />
-    </PageHeaderWrapper>
-  );
+  return <Table type="letters" columns={columns} fetchData={fetchLettersPage} />;
 };
 
 export default TableList;

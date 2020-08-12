@@ -58,24 +58,43 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 Ant Design Pro"
+    copyright="2019 Sieć Obywatelska Watchdog Polska"
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
+        key: 'Sieć Obywatelska',
+        title: 'Sieć Obywatelska Watchdog Polska',
+        href: 'https://siecobywatelska.pl',
         blankTarget: true,
       },
       {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
+        key: `GitHub – Build time: ${build_date}`,
+        title: (
+          <>
+            small-eod – GitHub <GithubOutlined />
+          </>
+        ),
+        href:
+          typeof build_sha === 'undefined'
+            ? 'https://github.com/watchdogpolska/small_eod/'
+            : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        key: 'redoc',
+        title: 'small-eod – API ReDoc',
+        href: '/api/redoc/',
+        blankTarget: true,
+      },
+      {
+        key: 'swagger',
+        title: 'small-eod – API Swagger',
+        href: '/api/swagger/',
+        blankTarget: true,
+      },
+      {
+        key: 'drf',
+        title: 'small-eod - API DRF',
+        href: '/api/swagger/',
         blankTarget: true,
       },
     ]}

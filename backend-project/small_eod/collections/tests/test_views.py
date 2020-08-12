@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from django.urls import reverse
 
 from ..factories import CollectionFactory
@@ -77,7 +77,7 @@ class TokenCreateAPIView(AuthenticatedMixin, TestCase):
         self.assertEqual(resp.status_code, 201, resp.json())
 
 
-class NoteViewSetTestCase(
+class NoteCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
     basename = "collection-note"
@@ -93,13 +93,20 @@ class NoteViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def increase_num_queries_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
 
-class CaseViewSetTestCase(
+
+class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
 
-    basename = "collection-cases"
+    basename = "collection-case"
     factory_class = CaseFactory
+    queries_less_than_limit = 11
 
     def setUp(self):
         super().setUp()
@@ -110,3 +117,10 @@ class CaseViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_num_queries_list(self):
+        children = self.factory_class.create_batch(size=5)
+        self.collection.query = ",".join(
+            [str(child.pk) for child in children] + [self.collection.query]
+        )
+        self.collection.save()

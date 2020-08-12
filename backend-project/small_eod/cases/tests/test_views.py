@@ -1,11 +1,13 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
+from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
+    RelatedM2MMixin,
 )
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
@@ -31,27 +33,33 @@ class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase)
         item = response.json()
         self.assertEqual(item["name"], name)
 
+    def test_update_with_tag(self):
+        self.login_required()
+        tags = [TagFactory().name]
+        response = self.client.put(
+            self.get_url(name="detail", **self.get_extra_kwargs(), pk=self.obj.pk),
+            data={**self.get_create_data(), "tags": tags},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200, response.json())
+        item = response.json()
+        self.assertCountEqual(item["tags"], tags)
 
-class UserViewSetMixin(ReadOnlyViewSetMixin):
-    user_type = None
+
+class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
     factory_class = UserFactory
     serializer_class = UserSerializer
-
-    def setUp(self):
-        super().setUp()
-        field_dict = {self.__class__.user_type: [self.obj.pk]}
-        self.case = CaseFactory(**field_dict)
+    parent_factory_class = CaseFactory
 
     def get_extra_kwargs(self):
-        return dict(case_pk=self.case.pk)
+        return dict(case_pk=self.parent.pk)
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
 
     def test_list_no_users(self):
         self.login_required()
-        field_dict = {self.__class__.user_type: []}
-        self.case = CaseFactory(**field_dict)
+        getattr(self.parent, self.related_field).set([])
         response = self.client.get(self.get_url(name="list", **self.get_extra_kwargs()))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -60,10 +68,10 @@ class UserViewSetMixin(ReadOnlyViewSetMixin):
 
 
 class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
-    user_type = "notified_users"
+    related_field = "notified_users"
     basename = "case-notified_user"
 
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
-    user_type = "responsible_users"
+    related_field = "responsible_users"
     basename = "case-responsible_user"

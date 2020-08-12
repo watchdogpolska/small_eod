@@ -14,7 +14,7 @@ router = routers.SimpleRouter()
 router.register("collections", CollectionViewSet)
 
 case_router = routers.NestedSimpleRouter(router, "collections", lookup="collection")
-case_router.register("cases", CaseViewSet, basename="collection-cases")
+case_router.register("cases", CaseViewSet, basename="collection-case")
 
 event_router = routers.NestedSimpleRouter(case_router, "cases", lookup="case")
 event_router.register("events", EventViewSet, basename="collection-event")

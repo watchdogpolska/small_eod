@@ -20,7 +20,7 @@ export interface DefaultSettings {
 export default {
   navTheme: 'dark',
   primaryColor: 'daybreak',
-  layout: 'sidemenu',
+  layout: 'topmenu',
   contentWidth: 'Fluid',
   fixedHeader: false,
   autoHideHeader: false,
@@ -29,7 +29,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'Ant Design Pro',
+  title: 'small-eod',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;
