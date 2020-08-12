@@ -20,8 +20,8 @@ export interface DefaultSettings {
 export default {
   navTheme: 'dark',
   primaryColor: 'daybreak',
-  layout: "topmenu",
-  contentWidth: "Fluid",
+  layout: 'topmenu',
+  contentWidth: 'Fluid',
   fixedHeader: false,
   autoHideHeader: false,
   fixSiderbar: false,
