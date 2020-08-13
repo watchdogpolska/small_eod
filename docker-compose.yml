@@ -50,6 +50,9 @@ services:
   frontend:
     build:
       context: ./frontend-project
+    environment:
+      COMMIT_SHA: '${COMMIT_SHA:-unknown_sha}'
+      COMMIT_BRANCH: '${COMMIT_BRANCH:-unknown_branch}'
     volumes:
       - ./frontend-project:/code
     expose:
