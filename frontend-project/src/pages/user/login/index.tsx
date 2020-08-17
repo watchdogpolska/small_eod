@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { connect } from 'dva';
 import LoginFrom from '@/components/Login';
 import styles from './style.less';
+import { Dispatch } from 'redux';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
@@ -22,7 +23,12 @@ const LoginMessage = ({ content }: LoginMessageProps) => (
   />
 );
 
-const Login = props => {
+interface UserLoginProps {
+  dispatch: Dispatch;
+  submitting: boolean;
+}
+
+const UserLogin = (props: UserLoginProps) => {
   const { userAndlogin = {}, submitting } = props;
   const { status, type: loginType } = userAndlogin;
   const [autoLogin, setAutoLogin] = useState(true);
@@ -89,4 +95,4 @@ const Login = props => {
 export default connect(({ userAndlogin, loading }) => ({
   userAndlogin,
   submitting: loading.effects['userAndlogin/login'],
-}))(Login);
+}))(UserLogin);
