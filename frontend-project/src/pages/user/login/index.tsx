@@ -3,8 +3,9 @@ import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import LoginFrom from '@/components/Login';
-import styles from './style.less';
 import { Dispatch } from 'redux';
+import { LoginModelState, LoginModelType } from '@/models/login';
+import styles from './style.less';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
@@ -23,9 +24,10 @@ const LoginMessage = ({ content }: LoginMessageProps) => (
   />
 );
 
-interface UserLoginProps {
+export interface UserLoginProps {
   dispatch: Dispatch;
   submitting: boolean;
+  userAndlogin: LoginModelState;
 }
 
 const UserLogin = (props: UserLoginProps) => {
@@ -92,7 +94,12 @@ const UserLogin = (props: UserLoginProps) => {
   );
 };
 
-export default connect(({ userAndlogin, loading }) => ({
-  userAndlogin,
+export interface LoginConnectProps {
+  userAndlogin: LoginModelState;
+  loading: LoginModelType;
+}
+
+export default connect(({ userAndlogin, loading }: LoginConnectProps) => ({
+  state: userAndlogin,
   submitting: loading.effects['userAndlogin/login'],
 }))(UserLogin);
