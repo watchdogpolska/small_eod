@@ -1,4 +1,3 @@
-import datetime
 import string
 
 import factory.fuzzy
@@ -69,7 +68,7 @@ class FuzzyTrueOrFalseOrNone(factory.fuzzy.FuzzyChoice):
 class FuzzyDateTimeFromNow(factory.fuzzy.FuzzyDateTime):
     def __init__(self, max_days: int = None, **kwargs):
         kwargs["start_dt"] = timezone.now()
-        kwargs["end_dt"] = timezone.now() + datetime.timedelta(days=max_days)
+        kwargs["end_dt"] = timezone.now() + timezone.timedelta(days=max_days)
         super().__init__(**kwargs)
 
 

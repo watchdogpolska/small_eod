@@ -1,5 +1,5 @@
 from django.test import TestCase
-from datetime import datetime, timedelta
+from django.utils.timezone import datetime, timedelta
 
 from ..serializers import LetterSerializer, DocumentTypeSerializer
 
@@ -80,6 +80,15 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         self.login_required()
         serializer = self.serializer_class(
             data=self.get_default_data(), context={"request": self.request}
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertEqual(obj.comment, "comment")
+
+    def test_save_minimum(self):
+        self.login_required()
+        serializer = self.serializer_class(
+            data={"comment": "comment"}, context={"request": self.request}
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()

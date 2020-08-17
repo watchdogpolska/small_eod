@@ -5,7 +5,7 @@ from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
 from ..institutions.models import Institution
-from django.utils.timezone import datetime
+from django.utils import timezone
 
 
 class DocumentType(models.Model):
@@ -29,7 +29,7 @@ class Letter(TimestampUserLogModel):
     date = models.DateTimeField(
         verbose_name=_("Date"),
         help_text=_("Date of sending or receiving."),
-        default=datetime.now,
+        default=timezone.now,
     )
     final = models.BooleanField(
         verbose_name=_("Final version"),

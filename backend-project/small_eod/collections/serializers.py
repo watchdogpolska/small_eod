@@ -1,6 +1,6 @@
 from rest_framework.fields import CharField
 from rest_framework import serializers
-from datetime import timedelta
+from django.utils import timezone
 from .models import Collection
 from .fields import DurationField
 from ..generic.serializers import UserLogModelSerializer
@@ -23,7 +23,7 @@ class TokenSetSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         lifetime = (
-            timedelta(seconds=validated_data["lifetime"])
+            timezone.timedelta(seconds=validated_data["lifetime"])
             if self.validated_data["lifetime"]
             else None
         )
