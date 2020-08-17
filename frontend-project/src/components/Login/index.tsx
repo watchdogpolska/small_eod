@@ -21,7 +21,7 @@ export interface LoginProps {
   children: React.ReactElement<typeof LoginTab>[];
 }
 
-interface LoginType extends FC<LoginProps> {
+export interface LoginType extends FC<LoginProps> {
   Tab: typeof LoginTab;
   Submit: typeof LoginSubmit;
   UserName: FC<LoginItemProps>;

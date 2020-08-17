@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import LoginFrom from '@/components/Login';
 import { Dispatch } from 'redux';
 import { LoginModelState, LoginModelType } from '@/models/login';
+import { LoginParams } from '@/services/login';
 import styles from './style.less';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
@@ -36,7 +37,7 @@ const UserLogin = (props: UserLoginProps) => {
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState('account');
 
-  const handleSubmit = values => {
+  const handleSubmit = (values: LoginParams) => {
     const { dispatch } = props;
     dispatch({
       type: 'login/login',
