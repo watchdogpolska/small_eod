@@ -7,7 +7,11 @@ import styles from './style.less';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
-const LoginMessage = ({ content }) => (
+export interface LoginMessageProps {
+  content: string;
+}
+
+const LoginMessage = ({ content }: LoginMessageProps) => (
   <Alert
     style={{
       marginBottom: 24,
