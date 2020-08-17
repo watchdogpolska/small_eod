@@ -2,7 +2,6 @@ from test_plus.test import TestCase
 
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
-from ..models import Case
 from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
@@ -92,13 +91,7 @@ class NotifiedUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCa
     related_field = "notified_users"
     basename = "case-notified_user"
 
-    def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()
-
 
 class ResponsibleUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):
     related_field = "responsible_users"
     basename = "case-responsible_user"
-
-    def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
