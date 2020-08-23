@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import File
 from ..files.apps import minio_app
 from django.conf import settings
-from datetime import timedelta
+from django.utils import timezone
 
 
 class FileSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class FileSerializer(serializers.ModelSerializer):
 
     def get_download_url(self, obj):
         return minio_app.presigned_get_object(
-            settings.MINIO_BUCKET, obj.path, expires=timedelta(hours=3)
+            settings.MINIO_BUCKET, obj.path, expires=timezone.timedelta(hours=3)
         )
 
     class Meta:

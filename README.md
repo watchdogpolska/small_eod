@@ -32,7 +32,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 System składa się z następujących komponentów:
 
 * Back-end - Django, dostępny w podkatalogu ```backend-project```
-* Front-end - Vue / React, dostępny w podkatalogu ```frontend-project```
+* Front-end - React, dostępny w podkatalogu ```frontend-project```
 * Minio - podsystem składowania plików binarnych (dokumenty, zdjęcia itp.)
 * Baza danych PostgreSQL
 
@@ -96,7 +96,7 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:80
 W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-docker-compose run web python manage.py createsuperuser
+docker-compose run backend python manage.py createsuperuser
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
@@ -124,6 +124,22 @@ W celu wykonania testów automatycznych backendu należy wykonać:
 ```bash
 make test-django-backend
 ```
+
+## Wdrożenie automatyczne
+
+Każda zmiana znajdująca się na gałęzi ```dev``` jest wdrażana z wykorzystaniem GitHub Actions do usługi [*Strona* od HyperOne](https://www.hyperone.com/services/compute/website/), która jest usługą klasy platform-as-a-service.
+
+Publiczny dostęp do środowiska testowego odbywa się z wykorzystaniem adresu: ```dev.small-eod.siecobywatelska.pl```. Dostępne jest konto użytkownika ```root``` z hasłem ```root```. W przypadku uszkodzenia konta – utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new).
+
+Dla potrzeb środowiska testowego w HyperOne zostały uruchomione:
+
+* dwie odrębne usługi *Strona*:
+  * dla back-endu – oparte o środowisko wykonawcze `h1cr.io/website/python-passenger:3.7`
+  * dla front-endu – oparte o środowisko wykonawcze `h1cr.io/website/nginx-static:latest`
+* usługa *[Baza danych](https://www.hyperone.com/services/storage/database/)* w wariancie PostgreSQL 11
+* kontenery w klasycznej infrastrukturze Stowarzyszenia (bazującej na *[Wirtualnych Maszynach](https://www.hyperone.com/services/compute/vm/)* HyperOne):
+  * Minio – dla usługi składowania plików – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
+  * Balancer – dla zintegrowania usług *Strona* – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
 
 ### Materiały dodatkowe
 

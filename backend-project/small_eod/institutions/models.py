@@ -2,13 +2,25 @@ from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from teryt_tree.models import JednostkaAdministracyjna
+from ..administrative_units.models import AdministrativeUnit
 
 from ..generic.models import TimestampUserLogModel
 from ..generic.validators import ExactLengthsValidator
 
 
-class AddressData(models.Model):
+class Institution(TimestampUserLogModel):
+    name = models.CharField(
+        max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
+    )
+    administrative_unit = models.ForeignKey(
+        to=AdministrativeUnit,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to=models.Q(category__level=3),
+        verbose_name=_("Administrative division"),
+        help_text=_("Administrative division."),
+    )
     email = models.EmailField(
         blank=True, verbose_name=_("E-mail"), help_text=_("E-mail address.")
     )
@@ -45,10 +57,6 @@ class AddressData(models.Model):
         verbose_name=_("Flat number"),
         help_text=_("Flat number."),
     )
-
-
-class ExternalIdentifier(models.Model):
-
     nip = models.CharField(
         max_length=10,
         validators=[ExactLengthsValidator([10]), validators.RegexValidator("^[0-9]*$")],
@@ -68,36 +76,15 @@ class ExternalIdentifier(models.Model):
         help_text=_("Statistical Identification Number."),
     )
 
-
-class Institution(TimestampUserLogModel):
-    name = models.CharField(
-        max_length=256, verbose_name=_("Name"), help_text=_("Name of institution")
+    comment = models.CharField(
+        max_length=256,
+        blank=True,
+        verbose_name=_("Comment"),
+        help_text=_("Comment for this case."),
     )
 
-    administrative_unit = models.ForeignKey(
-        to=JednostkaAdministracyjna,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        limit_choices_to=models.Q(category__level=3),
-        verbose_name=_("Administrative division"),
-        help_text=_("Administrative division."),
-    )
-    address = models.OneToOneField(
-        AddressData,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("Address"),
-        help_text=_("Address of institution."),
-    )
-    external_identifier = models.OneToOneField(
-        ExternalIdentifier,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("External identifier"),
-        help_text=_("External identifier of institution."),
+    tags = models.ManyToManyField(
+        to="tags.Tag", blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
     )
 
     def __str__(self):

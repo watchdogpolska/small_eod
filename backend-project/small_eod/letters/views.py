@@ -4,10 +4,10 @@ from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Letter, Description
+from .models import Letter, DocumentType
 from .serializers import (
     LetterSerializer,
-    DescriptionSerializer,
+    DocumentTypeSerializer,
     SignRequestSerializer,
 )
 from ..files.serializers import FileSerializer
@@ -15,13 +15,13 @@ from ..files.models import File
 
 
 class LetterViewSet(viewsets.ModelViewSet):
-    queryset = Letter.objects.all()
+    queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
 
 
-class DescriptionViewSet(viewsets.ModelViewSet):
-    queryset = Description.objects.all()
-    serializer_class = DescriptionSerializer
+class DocumentTypeViewSet(viewsets.ModelViewSet):
+    queryset = DocumentType.objects.all()
+    serializer_class = DocumentTypeSerializer
 
 
 class FileViewSet(
@@ -47,8 +47,6 @@ class PresignedUploadFileView(APIView):
     @swagger_auto_schema(request_body=SignRequestSerializer)
     def post(self, request, format=None):
         serializer = SignRequestSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        serializer.is_valid(raise_exception=True)
         serializer.save()  # Trigger .create(..)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

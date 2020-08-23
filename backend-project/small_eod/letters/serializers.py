@@ -1,46 +1,85 @@
 from uuid import uuid4
 from django.conf import settings
 from rest_framework import serializers
-from .models import Letter, Description
+from .models import Letter, DocumentType
 from ..generic.serializers import UserLogModelSerializer
+from ..cases.models import Case
+from ..institutions.models import Institution
+from ..channels.models import Channel
 from ..files.apps import minio_app
+from ..files.serializers import FileSerializer
 
-from small_eod.files.serializers import FileSerializer
+
+class DocumentTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentType
+        fields = ["name"]
 
 
 class LetterSerializer(UserLogModelSerializer):
-    attachment = FileSerializer(many=True, read_only=True)
+    document_type = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=DocumentType.objects.all()
+    )
+    case = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Case.objects.all()
+    )
+    institution = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Institution.objects.all()
+    )
+    channel = serializers.PrimaryKeyRelatedField(
+        many=False, default=None, queryset=Channel.objects.all()
+    )
+    attachments = FileSerializer(many=True, read_only=True)
 
     class Meta:
         model = Letter
         fields = [
             "id",
-            "name",
             "direction",
             "channel",
             "final",
             "date",
-            "identifier",
+            "reference_number",
             "institution",
-            "address",
             "case",
-            "attachment",
+            "attachments",
             "ordering",
             "comment",
             "excerpt",
+            "document_type",
             "created_on",
             "created_by",
             "modified_on",
             "modified_by",
         ]
 
+    def create(self, validated_data):
+        channel = validated_data.pop("channel")
+        document_type = validated_data.pop("document_type")
+        institution = validated_data.pop("institution")
+        case = validated_data.pop("case")
 
-class DescriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Description
-        fields = [
-            "name",
-        ]
+        letter = super().create(validated_data)
+        letter.channel = channel
+        letter.document_type = document_type
+        letter.institution = institution
+        letter.case = case
+        letter.save()
+        return letter
+
+    def update(self, instance, validated_data):
+        """
+        nested - variable storing representations of the nested objects
+        of LetterSerializer (Channel, Address and DocumentType).
+        Iterating over those 3 and updating fields of the related objects,
+        using key-value pairs from PATCH request.
+        """
+        nested = []
+        for nested_object in nested:
+            for attr, value in nested_object["data"].items():
+                setattr(nested_object["instance"], attr, value)
+            nested_object["instance"].save()
+        return super().update(instance, validated_data)
 
 
 class SignRequestSerializer(serializers.Serializer):

@@ -234,7 +234,7 @@ Model danych jest dostępny w dokumentacji API.
 
 Wyróżniamy następujące elementy:
 
-* Dictionary - dane na temat słowników danych statystycznych
+* Feature - dane na temat cech i wartości oceny statystycznej
 * Case - dane na temat sprawy
 * Institution - informacje o instytucjach
 * Tag - dodatkowa konfiguracja prezentacji znaczników
@@ -245,7 +245,7 @@ Wyróżniamy następujące elementy:
 * Note - notatka wprowadzona przez użytkownika
 * Event - dane na temat wydarzenia terminarza
 * User - dane na temat użytkowników systemu
-* Description - słownik opisów listów
+* DocumentType - słownik rodzajów listów
 * AdministrativeUnit - jednostki podziału terytorialnego
 
 Szczegółowy model danych został udokumentowany w ```./swagger.yaml```. Wizualizacja możliwa poprzez [Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/dev/docs/swagger.yaml) lub [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/watchdogpolska/small_eod/dev/docs/swagger.yaml).
@@ -276,10 +276,14 @@ W front-endzie przekłada się to na sekcje prezentacji kolekcji, która może z
 
 System wyróżnia następujące uprawnienia:
 
-* Dictionary.change
-* Dictionary.view
-* Dictionary.delete
-* Dictionary.create
+* Feature.change
+* Feature.view
+* Feature.delete
+* Feature.create
+* FeatureOption.change
+* FeatureOption.view
+* FeatureOption.delete
+* FeatureOption.create
 * Case.change
 * Case.view
 * Case.delete
@@ -321,10 +325,10 @@ System wyróżnia następujące uprawnienia:
 * User.view
 * User.delete
 * User.create
-* Description.change
-* Description.view
-* Description.delete
-* Description.create
+* DocumentType.change
+* DocumentType.view
+* DocumentType.delete
+* DocumentType.create
 * AdministrativeUnit.change
 * AdministrativeUnit.view
 * AdministrativeUnit.delete

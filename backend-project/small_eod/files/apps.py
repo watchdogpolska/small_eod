@@ -1,6 +1,6 @@
 from minio import Minio, PostPolicy
 from django.conf import settings
-from datetime import timedelta
+from django.utils.timezone import timedelta
 from django.utils import timezone
 from django.apps import AppConfig
 
@@ -16,7 +16,7 @@ class MinioApp(Minio):
 
 
 minio_app = MinioApp(
-    settings.MINIO_URL.replace("http://", ""),
+    settings.MINIO_URL.replace("http://", "").replace("https://", ""),
     settings.MINIO_ACCESS_KEY,
     settings.MINIO_SECRET_KEY,
     secure="https" in settings.MINIO_URL,

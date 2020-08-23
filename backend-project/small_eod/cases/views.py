@@ -6,7 +6,7 @@ from ..users.serializers import UserSerializer
 
 
 class CaseViewSet(viewsets.ModelViewSet):
-    queryset = Case.objects.with_counter().all()
+    queryset = Case.objects.with_counter().with_nested_resources().all()
     serializer_class = CaseCountSerializer
 
 
@@ -14,11 +14,11 @@ class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_user.all()
+        return Case.objects.get(pk=self.kwargs["case_pk"]).responsible_users.all()
 
 
 class NotifiedUserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_user.all()
+        return Case.objects.get(pk=self.kwargs["case_pk"]).notified_users.all()

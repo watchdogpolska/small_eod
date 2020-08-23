@@ -3,7 +3,7 @@ from django.conf import settings
 
 from ..institutions.models import Institution
 from ..generic.models import TimestampUserLogModel
-from ..dictionaries.models import Feature
+from ..features.models import FeatureOption
 from ..tags.models import Tag
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,6 +12,15 @@ class CaseQuerySet(models.QuerySet):
     def with_counter(self):
         return self.annotate(
             letter_count=models.Count("letter"), note_count=models.Count("note")
+        )
+
+    def with_nested_resources(self):
+        return (
+            self.prefetch_related("featureoptions")
+            .prefetch_related("responsible_users")
+            .prefetch_related("notified_users")
+            .prefetch_related("audited_institutions")
+            .prefetch_related("tags")
         )
 
 
@@ -23,39 +32,40 @@ class Case(TimestampUserLogModel):
     )
     comment = models.CharField(
         max_length=256,
+        blank=True,
         verbose_name=_("Comment"),
         help_text=_("Comment for this case."),
     )
 
-    tag = models.ManyToManyField(
-        to=Tag, blank=True, verbose_name=_("Tag"), help_text=_("Choose tag.")
+    tags = models.ManyToManyField(
+        to=Tag, blank=True, verbose_name=_("Tags"), help_text=_("Choose tags.")
     )
-    feature = models.ManyToManyField(
-        to=Feature,
+    featureoptions = models.ManyToManyField(
+        to=FeatureOption,
         blank=True,
-        verbose_name=_("Feature"),
-        help_text=_("Features for this case."),
+        verbose_name=_("Feature options"),
+        help_text=_("Features options for this case."),
     )
 
-    audited_institution = models.ManyToManyField(
+    audited_institutions = models.ManyToManyField(
         to=Institution,
         blank=True,
-        verbose_name="Audited institution",
-        help_text=_("Case audits this Institution."),
+        verbose_name="Audited institutions",
+        help_text=_("Case audits this Institutions."),
     )
-    notified_user = models.ManyToManyField(
+    notified_users = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name="case_notified_user",
+        related_name="notified_about_case_set",
         blank=True,
-        verbose_name=_("Notified user"),
-        help_text=_("User who will receive notification."),
+        verbose_name=_("Notified users"),
+        help_text=_("Users who will receive notifications."),
     )
-    responsible_user = models.ManyToManyField(
+    responsible_users = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
-        related_name="case_responsible_user",
+        related_name="responsible_for_case_set",
         blank=True,
-        verbose_name=_("Responsible user"),
-        help_text=_("User who is responsible for this case."),
+        verbose_name=_("Responsible users"),
+        help_text=_("Users who is responsible for this case."),
     )
 
     def __str__(self):

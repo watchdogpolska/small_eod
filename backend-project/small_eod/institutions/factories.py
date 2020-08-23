@@ -3,23 +3,14 @@ import string
 import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
-from teryt_tree.factories import JednostkaAdministracyjnaFactory
-
-from .models import AddressData, ExternalIdentifier, Institution
+from ..administrative_units.factories import AdministrativeUnitFactory
+from ..generic.factories import ManyToManyPostGeneration
+from .models import Institution
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
+from ..tags.factories import TagFactory
 
 
-class ExternalIdentifierFactory(DjangoModelFactory):
-
-    regon = FuzzyRegon()
-    nip = FuzzyText(length=10, chars=string.digits)
-
-    class Meta:
-        model = ExternalIdentifier
-
-
-class AddressDataFactory(DjangoModelFactory):
-
+class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     city = PolishFaker("city")
     flat_no = PolishFaker("building_number")
     street = PolishFaker("street_name")
@@ -27,19 +18,14 @@ class AddressDataFactory(DjangoModelFactory):
     house_no = PolishFaker("building_number")
     email = PolishFaker("email")
     epuap = factory.Sequence(lambda n: "/epuap-%04d/SkrytkaESP" % n)
-
-    class Meta:
-        model = AddressData
-
-
-class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
-
-    address = factory.SubFactory(AddressDataFactory)
     name = factory.Sequence(lambda n: "name-%04d" % n)
-    external_identifier = factory.SubFactory(ExternalIdentifierFactory)
+    regon = FuzzyRegon()
+    nip = FuzzyText(length=10, chars=string.digits)
     administrative_unit = factory.SubFactory(
-        JednostkaAdministracyjnaFactory, category__level=3
+        AdministrativeUnitFactory, category__level=3
     )
+    comment = factory.Sequence(lambda n: "comment-%04d" % n)
+    tags = ManyToManyPostGeneration("tags", size=2, factory_cls=TagFactory)
 
     class Meta:
         model = Institution

@@ -1,8 +1,8 @@
 from django.forms import modelform_factory
 from django.test import TestCase
 
-from ..models import ExternalIdentifier, Institution
-from teryt_tree.factories import JednostkaAdministracyjnaFactory
+from ..models import Institution
+from ...administrative_units.factories import AdministrativeUnitFactory
 
 
 class ExternalIdentifierValidatorsTestCase(TestCase):
@@ -14,7 +14,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `nip` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("nip",))
+        f = modelform_factory(Institution, fields=("nip",))
 
         form = f(data=dict(nip="abc"))
         self.assertFalse(form.is_valid())
@@ -29,7 +29,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `nip` accepts length of 10 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("nip",))
+        f = modelform_factory(Institution, fields=("nip",))
 
         chars_9 = "111111111"
         self.assertEqual(len(chars_9), 9)
@@ -51,7 +51,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `regon` accepts only digits.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("regon",))
+        f = modelform_factory(Institution, fields=("regon",))
 
         form = f(data=dict(regon="abc"))
         self.assertFalse(form.is_valid())
@@ -66,7 +66,7 @@ class ExternalIdentifierValidatorsTestCase(TestCase):
         """
         `regon` accepts length of 10 or 14 only.
         """
-        f = modelform_factory(ExternalIdentifier, fields=("regon",))
+        f = modelform_factory(Institution, fields=("regon",))
 
         chars_9 = "111111111"
         self.assertEqual(len(chars_9), 9)
@@ -97,15 +97,15 @@ class InstitutionValidatorsTestCase(TestCase):
         """
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
-        administrative_unit = JednostkaAdministracyjnaFactory(category__level=3)
+        administrative_unit = AdministrativeUnitFactory(category__level=3)
         self.assertEqual(administrative_unit.category.level, 3)
-        form = f(data=dict(administrative_unit=administrative_unit))
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
         self.assertTrue(form.is_valid())
 
     def test_level_3_negative(self):
         f = modelform_factory(Institution, fields=("administrative_unit",))
 
-        administrative_unit = JednostkaAdministracyjnaFactory(category__level=1)
+        administrative_unit = AdministrativeUnitFactory(category__level=1)
         self.assertEqual(administrative_unit.category.level, 1)
-        form = f(data=dict(administrative_unit=administrative_unit))
+        form = f(data=dict(administrative_unit=administrative_unit.pk))
         self.assertFalse(form.is_valid())
