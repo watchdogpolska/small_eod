@@ -61,5 +61,7 @@ class LetterAdmin(admin.ModelAdmin):
         "case__name",
     ]
 
+    raw_id_fields = ["institution", "case"]
+
 
 admin.site.register(Letter, LetterAdmin)
