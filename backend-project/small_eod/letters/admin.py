@@ -53,5 +53,13 @@ class LetterAdmin(admin.ModelAdmin):
                    "case",
                    "channel"]
 
+    search_fields = [
+        "document_type__name",
+        "comment",
+        "reference_number",
+        "institution__name",
+        "case__name",
+    ]
+
 
 admin.site.register(Letter, LetterAdmin)
