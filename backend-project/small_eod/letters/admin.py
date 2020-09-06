@@ -47,5 +47,11 @@ class LetterAdmin(admin.ModelAdmin):
     ]
     inlines = [FileInlineAdmin]
 
+    list_filter = ["institution",
+                   "document_type",
+                   "direction",
+                   "case",
+                   "channel"]
+
 
 admin.site.register(Letter, LetterAdmin)
