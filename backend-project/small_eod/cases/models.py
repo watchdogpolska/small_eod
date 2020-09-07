@@ -70,5 +70,9 @@ class Case(TimestampUserLogModel):
         help_text=_("Users who is responsible for this case."),
     )
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("id__iexact", "name__icontains",)
+
     def __str__(self):
         return self.name
