@@ -63,5 +63,9 @@ class LetterAdmin(admin.ModelAdmin):
 
     raw_id_fields = ["institution", "case"]
 
+    autocomplete_lookup_fields = {
+        "fk": ["institution", "case"],
+    }
+
 
 admin.site.register(Letter, LetterAdmin)
