@@ -38,6 +38,8 @@ class LetterAdmin(admin.ModelAdmin):
         "date",
         "final",
         "comment",
+        "created_on",
+        "modified_on",
         "excerpt",
         "reference_number",
         link_to_case,
