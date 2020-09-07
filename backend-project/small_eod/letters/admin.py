@@ -25,8 +25,9 @@ get_attachment_status.short_description = _("Attachment")
 get_attachment_status.boolean = True
 
 
-class FileInlineAdmin(admin.StackedInline):
+class FileInlineAdmin(admin.TabularInline):
     model = File
+    extra = 1
 
 
 class LetterAdmin(admin.ModelAdmin):
@@ -75,5 +76,6 @@ class LetterAdmin(admin.ModelAdmin):
             .get_queryset(request)
             .select_related("channel", "institution", "case")
         )
+
 
 admin.site.register(Letter, LetterAdmin)
