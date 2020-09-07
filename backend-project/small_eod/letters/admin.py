@@ -69,5 +69,11 @@ class LetterAdmin(admin.ModelAdmin):
         "fk": ["institution", "case"],
     }
 
+    def get_queryset(self, request):
+        return (
+            super()
+            .get_queryset(request)
+            .select_related("channel", "institution", "case")
+        )
 
 admin.site.register(Letter, LetterAdmin)
