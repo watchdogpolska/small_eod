@@ -11,7 +11,7 @@ def link_to_case(obj):
     if not obj.case_id:
         return None
     url = reverse("admin:cases_case_changelist") + "?pk__exact=" + str(obj.case_id)
-    return format_html('<a href="{}">{}</a>'.format(url, obj.case))
+    return format_html(f'<a href="{url}">{obj.case}</a>')
 
 
 link_to_case.short_description = _("Case")
