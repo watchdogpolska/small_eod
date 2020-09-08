@@ -72,7 +72,10 @@ class Case(TimestampUserLogModel):
 
     @staticmethod
     def autocomplete_search_fields():
-        return ("id__iexact", "name__icontains",)
+        return (
+            "id__iexact",
+            "name__icontains",
+        )
 
     def __str__(self):
         return self.name
