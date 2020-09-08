@@ -50,11 +50,7 @@ class LetterAdmin(admin.ModelAdmin):
     ]
     inlines = [FileInlineAdmin]
 
-    list_filter = ["institution",
-                   "document_type",
-                   "direction",
-                   "case",
-                   "channel"]
+    list_filter = ["institution", "document_type", "direction", "case", "channel"]
 
     search_fields = [
         "document_type__name",
