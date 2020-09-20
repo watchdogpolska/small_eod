@@ -16,7 +16,9 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--minimum", action="store_true", help="Use minimum set of data",
+            "--minimum",
+            action="store_true",
+            help="Use minimum set of data",
         )
 
     def handle(self, minimum, *args, **options):

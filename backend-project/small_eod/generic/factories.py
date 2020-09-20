@@ -28,7 +28,10 @@ class AbstractTimestampUserFactory(factory.Factory):
 
 class ManyToManyPostGeneration(factory.PostGeneration):
     def __init__(
-        self, m2m_field_name, size=0, factory_cls=None,
+        self,
+        m2m_field_name,
+        size=0,
+        factory_cls=None,
     ):
         super().__init__(function=None)
         self.m2m_field_name = m2m_field_name

@@ -25,7 +25,8 @@ class DocumentTypeViewSet(viewsets.ModelViewSet):
 
 
 class FileViewSet(
-    viewsets.ModelViewSet, viewsets.GenericViewSet,
+    viewsets.ModelViewSet,
+    viewsets.GenericViewSet,
 ):
     model = File
     serializer_class = FileSerializer
