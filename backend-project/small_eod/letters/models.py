@@ -10,7 +10,9 @@ from django.utils import timezone
 
 class DocumentType(models.Model):
     name = models.CharField(
-        max_length=256, verbose_name=_("Document type"), help_text=_("Type of letter"),
+        max_length=256,
+        verbose_name=_("Document type"),
+        help_text=_("Type of letter"),
     )
 
 

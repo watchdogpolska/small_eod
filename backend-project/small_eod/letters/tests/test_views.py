@@ -57,7 +57,7 @@ class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Download file content
-        minio_download_resp = requests.get(url=response.json()["downloadUrl"],)
+        minio_download_resp = requests.get(url=response.json()["downloadUrl"])
         self.assertEqual(minio_download_resp.status_code, status.HTTP_200_OK)
         self.assertEqual(minio_download_resp.content, content)
 

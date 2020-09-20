@@ -32,7 +32,8 @@ class TokenAuthorizationTestCaseMixin:
         self.client.logout()
 
         resp = self.client.get(
-            path=self.get_url_detail(), data={"authorization": token},
+            path=self.get_url_detail(),
+            data={"authorization": token},
         )
         self.assertEqual(resp.status_code, 200)
 

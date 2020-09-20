@@ -10,7 +10,8 @@ from ..tags.fields import TagField
 
 class InstitutionSerializer(UserLogModelSerializer):
     administrative_unit = serializers.PrimaryKeyRelatedField(
-        many=False, queryset=AdministrativeUnit.objects.all(),
+        many=False,
+        queryset=AdministrativeUnit.objects.all(),
     )
 
     tags = TagField()
