@@ -1,4 +1,5 @@
 import factory.fuzzy
+from factory.django import DjangoModelFactory
 from ..generic.factories import AbstractTimestampUserFactory
 from .models import Note
 from ..cases.factories import CaseFactory

@@ -1,4 +1,5 @@
 import factory.fuzzy
+from factory.django import DjangoModelFactory
 
 from .models import Letter, DocumentType
 from ..cases.factories import CaseFactory
