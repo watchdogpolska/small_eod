@@ -5,15 +5,25 @@ from ..serializers import InstitutionSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    OrderingViewSetMixin,
 )
 from parameterized import parameterized
 
 
-class InstitutionViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class InstitutionViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "institution"
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
     queries_less_than_limit = 11
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)

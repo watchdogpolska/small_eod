@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from drf_yasg.utils import swagger_auto_schema
 from .serializers import UserSerializer, User
 from django.conf import settings
@@ -26,6 +28,14 @@ class UserViewSet(viewsets.ModelViewSet):
         client_secret=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
         scopes=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE,
     )
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    ordering_fields = [
+        "id",
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+    ]
 
     def get_permissions(self):
         if self.action in ["auth", "exchange", "refresh"]:

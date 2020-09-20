@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
+from .models import Letter, DocumentType
 
-from .models import Letter
 from ..files.models import File
 
 
@@ -75,3 +75,4 @@ class LetterAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Letter, LetterAdmin)
+admin.site.register(DocumentType)
