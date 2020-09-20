@@ -5,12 +5,14 @@ from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
 from ..institutions.models import Institution
-from django.utils.timezone import datetime
+from django.utils import timezone
 
 
 class DocumentType(models.Model):
     name = models.CharField(
-        max_length=256, verbose_name=_("Document type"), help_text=_("Type of letter"),
+        max_length=256,
+        verbose_name=_("Document type"),
+        help_text=_("Type of letter"),
     )
 
 
@@ -29,7 +31,7 @@ class Letter(TimestampUserLogModel):
     date = models.DateTimeField(
         verbose_name=_("Date"),
         help_text=_("Date of sending or receiving."),
-        default=datetime.now,
+        default=timezone.now,
     )
     final = models.BooleanField(
         verbose_name=_("Final version"),

@@ -5,7 +5,9 @@ from .views import AdministrativeUnitViewSet
 
 router = SimpleRouter()
 router.register(
-    "administrative_units", AdministrativeUnitViewSet, basename="administrative_unit",
+    "administrative_units",
+    AdministrativeUnitViewSet,
+    basename="administrative_unit",
 )
 
 urlpatterns = [

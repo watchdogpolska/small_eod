@@ -8,15 +8,25 @@ from ...generic.tests.test_views import (
     ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
     RelatedM2MMixin,
+    OrderingViewSetMixin,
 )
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 
 
-class CaseViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class CaseViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "case"
     serializer_class = CaseSerializer
     factory_class = CaseFactory
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
@@ -50,9 +60,19 @@ class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
     factory_class = UserFactory
     serializer_class = UserSerializer
     parent_factory_class = CaseFactory
+    ordering_fields = [
+        "-email",
+        "email,-id",
+    ]
 
     def get_extra_kwargs(self):
         return dict(case_pk=self.parent.pk)
+
+    def get_pk_list(self):
+        pk_list = [
+            obj[0] for obj in getattr(self.parent, self.related_field).values_list()
+        ]
+        return pk_list
 
     def validate_item(self, item):
         self.assertEqual(self.obj.username, item["username"])
@@ -67,11 +87,11 @@ class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):
         )
 
 
-class NotifiedUserViewSetTestCase(UserViewSetMixin, TestCase):
+class NotifiedUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):
     related_field = "notified_users"
     basename = "case-notified_user"
 
 
-class ResponsibleUserViewSetTestCase(UserViewSetMixin, TestCase):
+class ResponsibleUserViewSetTestCase(UserViewSetMixin, OrderingViewSetMixin, TestCase):
     related_field = "responsible_users"
     basename = "case-responsible_user"

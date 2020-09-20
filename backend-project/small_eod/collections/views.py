@@ -2,6 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from drf_yasg.utils import swagger_auto_schema
 from django.utils.decorators import method_decorator
 
@@ -39,6 +41,8 @@ class CollectionViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
     permission_classes = [IsAuthenticated | CollectionDirectTokenPermission]
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    ordering_fields = ["id", "name", "comment", "public", "expired_on", "query"]
 
 
 class TokenCreateAPIView(APIView):

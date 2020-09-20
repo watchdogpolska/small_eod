@@ -1,6 +1,6 @@
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
-from datetime import datetime
+from django.utils import timezone
 import jwt
 
 
@@ -35,7 +35,7 @@ class JWTSigner:
         }
 
         if lifetime:
-            expire_at = datetime.datetime.now() + lifetime
+            expire_at = timezone.now() + lifetime
             claim["exp"] = int(expire_at.strftime("%s"))
 
         claim.update(extra or {})

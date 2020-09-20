@@ -1,9 +1,10 @@
 from django.test import TestCase
-from datetime import datetime, timedelta
+from django.utils.timezone import datetime, timedelta
 
 from ..serializers import LetterSerializer, DocumentTypeSerializer
 
 from ...generic.mixins import AuthRequiredMixin
+from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ..factories import LetterFactory, DocumentTypeFactory
 from ...files.factories import FileFactory
 from ...channels.factories import ChannelFactory
@@ -13,7 +14,7 @@ from ...institutions.factories import InstitutionFactory
 from ...cases.factories import CaseFactory
 
 
-class DocumentTypeSerializerTestCase(TestCase):
+class DocumentTypeSerializerTestCase(ResourceSerializerMixin, TestCase):
     serializer_class = DocumentTypeSerializer
     factory_class = DocumentTypeFactory
 
@@ -41,7 +42,7 @@ class DocumentTypeSerializerTestCase(TestCase):
         self.assertEqual(obj.name, "Not so important letter")
 
 
-class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
+class LetterSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):
     serializer_class = LetterSerializer
     factory_class = LetterFactory
 
@@ -80,6 +81,15 @@ class LetterSerializerTestCase(AuthRequiredMixin, TestCase):
         self.login_required()
         serializer = self.serializer_class(
             data=self.get_default_data(), context={"request": self.request}
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        obj = serializer.save()
+        self.assertEqual(obj.comment, "comment")
+
+    def test_save_minimum(self):
+        self.login_required()
+        serializer = self.serializer_class(
+            data={"comment": "comment"}, context={"request": self.request}
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()

@@ -32,6 +32,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      if: github.event_name == 'push'
     - uses: actions/upload-artifact@v1
       with:
         name: openapi.yaml

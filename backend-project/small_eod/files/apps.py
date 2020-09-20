@@ -1,6 +1,6 @@
 from minio import Minio, PostPolicy
 from django.conf import settings
-from datetime import timedelta
+from django.utils.timezone import timedelta
 from django.utils import timezone
 from django.apps import AppConfig
 

@@ -5,7 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 
 class Channel(TimestampUserLogModel):
     name = models.CharField(
-        max_length=25, verbose_name=_("Name"), help_text=_("Channel's name."),
+        max_length=25,
+        verbose_name=_("Name"),
+        help_text=_("Channel's name."),
     )
     city = models.BooleanField(
         default=False,
