@@ -11,14 +11,14 @@ from ..generic.factories import (
 from ..institutions.factories import InstitutionFactory
 
 
-class DocumentTypeFactory(factory.DjangoModelFactory):
+class DocumentTypeFactory(DjangoModelFactory):
     name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
 
     class Meta:
         model = DocumentType
 
 
-class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+class LetterFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     final = FuzzyTrueOrFalse()
     date = FuzzyDateTimeFromNow(max_days=10)
