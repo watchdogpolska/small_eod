@@ -3,6 +3,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 
 from .models import Letter, DocumentType
 from .serializers import (
@@ -17,6 +19,26 @@ from ..files.models import File
 class LetterViewSet(viewsets.ModelViewSet):
     queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    ordering_fields = [
+        "id",
+        "direction",
+        "channel__name",
+        "final",
+        "date",
+        "reference_number",
+        "institution__name",
+        "case__name",
+        "attachments",
+        "ordering",
+        "comment",
+        "excerpt",
+        "document_type__name",
+        "created_on",
+        "created_by__username",
+        "modified_on",
+        "modified_by__username",
+    ]
 
 
 class DocumentTypeViewSet(viewsets.ModelViewSet):

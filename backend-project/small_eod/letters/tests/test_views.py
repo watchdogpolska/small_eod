@@ -11,6 +11,7 @@ from ..serializers import LetterSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    OrderingViewSetMixin,
 )
 from ...users.mixins import AuthenticatedMixin
 
@@ -85,11 +86,20 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
-class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class LetterViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
-    queries_less_than_limit = 11
+    queries_less_than_limit = 10
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["comment"], self.obj.comment)
