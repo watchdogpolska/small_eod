@@ -17,3 +17,6 @@ class File(models.Model):
         verbose_name=_("Letter"),
         help_text=_("Related letter."),
     )
+
+    def __str__(self):
+        return self.name
