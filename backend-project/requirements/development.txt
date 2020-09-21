@@ -1,6 +1,6 @@
 -r production.txt
 coveralls==2.1.2
-django-debug-toolbar==3.0
+django-debug-toolbar==3.1
 factory-boy==3.0.1
 lxml==4.5.2
 requests==2.24.0
