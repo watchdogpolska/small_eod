@@ -98,6 +98,8 @@ class LetterAdmin(admin.ModelAdmin):
         "fk": ["institution", "case"],
     }
 
+    actions = [download_selected_letters]
+
     def get_queryset(self, request):
         return (
             super()
