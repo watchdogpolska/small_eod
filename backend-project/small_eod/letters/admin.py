@@ -46,7 +46,10 @@ def download_selected_letters(modeladmin, request, queryset):
 
                 r = requests.get(file_path, stream=True)
 
-                z.write_iter(f"{case_id}-{case_name}/{ordering}-{filename}", r.raw)
+                z.write_iter(
+                    f"{case_id}-{case_name}/{ordering}-{filename}",
+                    r.iter_content(chunk_size=128),
+                )
 
     response = StreamingHttpResponse(
         streaming_content=z,
