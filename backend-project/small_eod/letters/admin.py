@@ -54,6 +54,9 @@ def download_selected_letters(modeladmin, request, queryset):
     return response
 
 
+download_selected_letters.short_description = _("Download selected letters")
+
+
 class FileInlineAdmin(admin.TabularInline):
     model = File
     extra = 1
