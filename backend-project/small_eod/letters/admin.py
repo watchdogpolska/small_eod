@@ -30,6 +30,30 @@ get_attachment_status.short_description = _("Attachment")
 get_attachment_status.boolean = True
 
 
+def download_selected_letters(modeladmin, request, queryset):
+    z = zipstream.ZipFile()
+    for letter in queryset:
+        if letter.attachments.all().exists():
+            case_name = letter.case.name if letter.case else "unknown"
+            case_name = unicodedata.normalize("NFKD", case_name.replace("/", "__"))
+            case_id = letter.case.id or "unknown"
+            ordering = letter.ordering
+
+            for file in letter.attachments.all():
+                file_path = file.path
+                filename = basename(file_path)
+
+                r = requests.get(file_path, stream=True)
+
+                z.write_iter(f"{case_id}-{case_name}/{ordering}-{filename}", r.raw)
+
+    response = StreamingHttpResponse(
+        streaming_content=z, content_type="application/zip",
+    )
+    response["Content-Disposition"] = 'attachment; filename="letters.zip"'
+    return response
+
+
 class FileInlineAdmin(admin.TabularInline):
     model = File
     extra = 1
