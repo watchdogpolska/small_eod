@@ -1,17 +1,20 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
+import { connect } from 'dva';
+
 import { Spin } from 'antd';
+import { Channel } from '@/services/channels';
 
-import { fetchChannel } from '@/services/channel';
+export interface ChannelNameProps {
+  id: number;
+  channels: Channel[];
+  dispatch: Function;
+}
 
-export const ChannelName: FC<{ id: number }> = props => {
-  const [name, setName] = useState('');
+const ChannelName: FC<ChannelNameProps> = ({ id, channels, dispatch }) => {
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchChannel(props.id);
-      setName(result.name);
-    };
-    fetchData();
+    dispatch({ type: 'channels/fetchOne', payload: id });
   }, []);
-
-  return name ? <div>{name}</div> : <Spin />;
+  const channel = channels.find(value => value.id === id);
+  return <div>{channel ? channel.name : <Spin />}</div>;
 };
+export default connect(({ channels }: any) => ({ channels }))(ChannelName);

@@ -1,9 +1,8 @@
-from teryt_tree.models import JednostkaAdministracyjna
-
+from .models import AdministrativeUnit
 from rest_framework import serializers
 
 
 class AdministrativeUnitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = JednostkaAdministracyjna
+        model = AdministrativeUnit
         fields = ["id", "parent", "name", "category", "slug", "updated_on", "active"]

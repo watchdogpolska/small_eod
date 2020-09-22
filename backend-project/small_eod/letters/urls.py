@@ -3,20 +3,20 @@ from .views import (
     LetterViewSet,
     FileViewSet,
     PresignedUploadFileView,
-    DescriptionViewSet,
+    DocumentTypeViewSet,
 )
 
 from django.urls import path, include
 
 router = routers.SimpleRouter()
 router.register("letters", LetterViewSet)
-router.register("descriptions", DescriptionViewSet)
+router.register("documentTypes", DocumentTypeViewSet)
 
 file_router = routers.NestedSimpleRouter(router, "letters", lookup="letter")
-file_router.register("files", FileViewSet, basename="letter-files")
+file_router.register("files", FileViewSet, basename="letter-file")
 
 urlpatterns = [
     path("", include(router.urls)),
     path("", include(file_router.urls)),
-    path("letters/file/sign", PresignedUploadFileView.as_view(), name="file_upload"),
+    path("letters/files/sign", PresignedUploadFileView.as_view(), name="file_upload"),
 ]

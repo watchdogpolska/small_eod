@@ -1,9 +1,13 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from django.urls import reverse
 
 from ..factories import CollectionFactory
 from ..serializers import CollectionSerializer
-from ...generic.tests.test_views import ReadOnlyViewSetMixin, GenericViewSetMixin
+from ...generic.tests.test_views import (
+    ReadOnlyViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+)
 from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
 from ...users.mixins import AuthenticatedMixin
@@ -32,18 +36,20 @@ class TokenAuthorizationTestCaseMixin:
         self.client.logout()
 
         resp = self.client.get(
-            path=self.get_url_detail(), data={"authorization": token},
+            path=self.get_url_detail(),
+            data={"authorization": token},
         )
         self.assertEqual(resp.status_code, 200)
 
 
 class CollectionViewSetTestCase(
-    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, TestCase
+    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
 ):
 
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
+    ordering_fields = ["name", "-public", "expired_on,name"]
 
     def get_collection(self):
         return self.obj
@@ -77,7 +83,7 @@ class TokenCreateAPIView(AuthenticatedMixin, TestCase):
         self.assertEqual(resp.status_code, 201, resp.json())
 
 
-class NoteViewSetTestCase(
+class NoteCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
     basename = "collection-note"
@@ -93,13 +99,20 @@ class NoteViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
 
-class CaseViewSetTestCase(
+
+class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
 
-    basename = "collection-cases"
+    basename = "collection-case"
     factory_class = CaseFactory
+    queries_less_than_limit = 11
 
     def setUp(self):
         super().setUp()
@@ -110,3 +123,10 @@ class CaseViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(size=5)
+        self.collection.query = ",".join(
+            [str(child.pk) for child in children] + [self.collection.query]
+        )
+        self.collection.save()

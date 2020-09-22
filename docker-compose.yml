@@ -3,7 +3,7 @@ version: '3.4'
 services:
   nginx:
     # https://hub.docker.com/_/nginx
-    image: nginx:1.19.0-alpine
+    image: nginx:1.19.2-alpine
     ports:
       - "8000:8000"
     volumes:
@@ -15,7 +15,7 @@ services:
 
   db:
     # https://hub.docker.com/_/postgres
-    image: postgres:12.3-alpine
+    image: postgres:12.4-alpine
     expose:
       - "5432"
     volumes:
@@ -50,6 +50,9 @@ services:
   frontend:
     build:
       context: ./frontend-project
+    environment:
+      COMMIT_SHA: '${COMMIT_SHA:-unknown_sha}'
+      COMMIT_BRANCH: '${COMMIT_BRANCH:-unknown_branch}'
     volumes:
       - ./frontend-project:/code
     expose:

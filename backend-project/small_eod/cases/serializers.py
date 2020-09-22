@@ -63,6 +63,21 @@ class CaseSerializer(UserLogModelSerializer):
         case.featureoptions.set(featureoptions)
         return case
 
+    def update(self, instance, validated_data):
+
+        tags = (
+            [
+                Tag.objects.get_or_create(name=tag)[0]
+                for tag in validated_data.pop("tags")
+            ]
+            if "tags" in validated_data
+            else None
+        )
+        case = super().update(instance, validated_data)
+        if tags:
+            case.tags.set(tags)
+        return case
+
     def validate_featureoptions(self, value):
         """
         Check that featureoptions match minimum & maximum of options

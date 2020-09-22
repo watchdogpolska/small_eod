@@ -5,14 +5,14 @@ from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
 from ..institutions.models import Institution
-from django.utils.timezone import datetime
+from django.utils import timezone
 
 
-class Description(models.Model):
+class DocumentType(models.Model):
     name = models.CharField(
         max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of letter."),
+        verbose_name=_("Document type"),
+        help_text=_("Type of letter"),
     )
 
 
@@ -31,7 +31,7 @@ class Letter(TimestampUserLogModel):
     date = models.DateTimeField(
         verbose_name=_("Date"),
         help_text=_("Date of sending or receiving."),
-        default=datetime.now,
+        default=timezone.now,
     )
     final = models.BooleanField(
         verbose_name=_("Final version"),
@@ -40,11 +40,6 @@ class Letter(TimestampUserLogModel):
             "Indicates whether the document has "
             + "final content or is, for example, a draft"
         ),
-    )
-    name = models.CharField(
-        max_length=256,
-        verbose_name=_("Description"),
-        help_text=_("Description of the letter."),
     )
     ordering = models.IntegerField(
         default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
@@ -61,10 +56,10 @@ class Letter(TimestampUserLogModel):
         help_text=_("Excerpt of letter."),
         blank=True,
     )
-    identifier = models.CharField(
+    reference_number = models.CharField(
         max_length=256,
-        verbose_name=_("Identifier"),
-        help_text=_("Identifier of letter."),
+        verbose_name=_("Reference number"),
+        help_text=_("Reference number of letter."),
         blank=True,
     )
     case = models.ForeignKey(
@@ -88,10 +83,13 @@ class Letter(TimestampUserLogModel):
         blank=True,
         null=True,
     )
-    description = models.ForeignKey(
-        to=Description,
+    document_type = models.ForeignKey(
+        to=DocumentType,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Description of letter."),
+        verbose_name=_("Document type of letter."),
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        return _("Letter #{}").format(self.pk)

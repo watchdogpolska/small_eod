@@ -118,10 +118,29 @@ export default {
               ],
             },
             {
+              name: 'tags',
+              icon: 'FileTextOutlined',
+              path: '/tags',
+              component: './tags/list',
+            },
+            {
               name: 'letters',
               icon: 'FileTextOutlined',
               path: '/letters',
-              component: './letters/list',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/letters/list',
+                  component: './letters/list',
+                },
+                {
+                  name: 'channels',
+                  icon: 'HomeOutlined',
+                  path: '/letters/channels',
+                  component: './letters/channels',
+                },
+              ],
             },
             {
               name: 'institutions',
@@ -135,6 +154,12 @@ export default {
                   component: './institutions/new',
                 },
               ],
+            },
+            {
+              name: 'users',
+              icon: 'FileTextOutlined',
+              path: '/users',
+              component: './users/list',
             },
             {
               path: '/',
@@ -192,6 +217,13 @@ export default {
   },
   chainWebpack: config => {
     config.module.rule('small-eod-client').parser({ amd: false });
+    config.plugin('env').use(require.resolve('webpack/lib/DefinePlugin'), [
+      {
+        build_sha: JSON.stringify(process.env.COMMIT_SHA),
+        build_branch: JSON.stringify(process.env.COMMIT_BRANCH),
+        build_date: JSON.stringify(new Date().toISOString()),
+      },
+    ]);
   },
   // proxy: {
   //   '/server/api/': {

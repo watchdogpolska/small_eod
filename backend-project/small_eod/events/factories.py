@@ -1,11 +1,12 @@
 import factory.fuzzy
+from factory.django import DjangoModelFactory
 
 from .models import Event
 from ..cases.factories import CaseFactory
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyDateTimeFromNow
 
 
-class EventFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+class EventFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     case = factory.SubFactory(CaseFactory)
     date = FuzzyDateTimeFromNow(max_days=10)
