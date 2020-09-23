@@ -1,17 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
+import { connect } from 'dva';
 
-import { fetchCase } from '@/services/cases';
+import { Case } from '@/models/cases';
 
-export const CaseName: FC<{ id: number }> = props => {
-  const [name, setName] = useState('');
+export interface CaseNameProps {
+  id: number;
+  cases: Case[];
+  dispatch: Function;
+}
+
+const CaseName: FC<CaseNameProps> = ({ id, cases, dispatch }) => {
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchCase(props.id);
-      setName(result.name);
-    };
-    fetchData();
+    dispatch({ type: 'cases/fetchOne', payload: id });
   }, []);
+  const oneCase = cases.find(value => value.id === id);
 
-  return name ? <div>{name}</div> : <Spin />;
+  return <div>{oneCase ? oneCase.name : <Spin />}</div>;
 };
+
+export default connect(({ cases }: any) => ({ cases }))(CaseName);
