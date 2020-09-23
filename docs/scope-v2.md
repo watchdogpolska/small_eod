@@ -28,8 +28,8 @@ Aplikacja powinna uwzględniać:
 
 Dla systemu przyjęto następujące wymagania dostępności:
 
-* RPO – (TODO: Ustalić z Zarządem)
-* RTO – (TODO: Ustalić z Zarządem)
+* RPO – 1 dni
+* RTO – 3 dni
 
 ## Zakres funkcjonalności
 
