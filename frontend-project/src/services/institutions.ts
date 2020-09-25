@@ -1,4 +1,5 @@
 import smallEodSDK from '@/utils/sdk';
+import { PaginationParams, PaginationResponse } from '@/services/common.d';
 
 export interface Institution {
   name: string;
@@ -16,6 +17,8 @@ export interface Institution {
   flatNo: string;
   nip: string;
   regon: string;
+  comment: string;
+  tags: string[];
 }
 
 function fetchAllPages(page) {
@@ -34,6 +37,21 @@ function fetchAllPages(page) {
   }
 
   return page;
+}
+
+export async function fetchInstitutionPage({
+  current,
+  pageSize,
+}: PaginationParams): Promise<PaginationResponse<Institution>> {
+  const sdkResponse = await new smallEodSDK.InstitutionsApi().institutionsList({
+    limit: pageSize,
+    offset: pageSize * (current - 1),
+  });
+
+  return {
+    data: sdkResponse.results,
+    total: sdkResponse.count,
+  };
 }
 
 export async function fetchAll() {
