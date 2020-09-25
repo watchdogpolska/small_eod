@@ -1,5 +1,4 @@
 import QueryString, { parse } from 'qs';
-import { reloadAuthorized } from './Authorized'; // use localStorage to store the authority info, which might be sent from server in actual project.
 
 export const getAuthority = (str?: string): string | string[] => {
   const authorityString =
@@ -25,12 +24,6 @@ export const getAuthority = (str?: string): string | string[] => {
   }
 
   return authority;
-};
-export const setAuthority = (authority: string | string[]): void => {
-  const proAuthority = typeof authority === 'string' ? [authority] : authority;
-  localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority)); // auto reload
-
-  reloadAuthorized();
 };
 
 export const getPageQuery = (): QueryString.ParsedQs => {
