@@ -31,6 +31,8 @@ jobs:
       env:
         COMMIT_SHA: '{{github.sha}}'
         COMMIT_BRANCH: '{{github.ref}}'
+    - name: Test
+      run: yarn test
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
