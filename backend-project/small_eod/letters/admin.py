@@ -1,4 +1,10 @@
+import requests
+import unicodedata
+import zipstream as zipstream
+from os.path import basename
+
 from django.contrib import admin
+from django.http import StreamingHttpResponse
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
@@ -23,6 +29,37 @@ def get_attachment_status(obj):
 
 get_attachment_status.short_description = _("Attachment")
 get_attachment_status.boolean = True
+
+
+def download_selected_letters(modeladmin, request, queryset):
+    z = zipstream.ZipFile()
+    for letter in queryset:
+        if letter.attachments.all().exists():
+            case_name = letter.case.name if letter.case else "unknown"
+            case_name = unicodedata.normalize("NFKD", case_name.replace("/", "__"))
+            case_id = letter.case.id or "unknown"
+            ordering = letter.ordering
+
+            for file in letter.attachments.all():
+                file_path = file.path
+                filename = basename(file_path)
+
+                r = requests.get(file_path, stream=True)
+
+                z.write_iter(
+                    f"{case_id}-{case_name}/{ordering}-{filename}",
+                    r.iter_content(chunk_size=128),
+                )
+
+    response = StreamingHttpResponse(
+        streaming_content=z,
+        content_type="application/zip",
+    )
+    response["Content-Disposition"] = 'attachment; filename="letters.zip"'
+    return response
+
+
+download_selected_letters.short_description = _("Download selected letters")
 
 
 class FileInlineAdmin(admin.TabularInline):
@@ -65,6 +102,8 @@ class LetterAdmin(admin.ModelAdmin):
     autocomplete_lookup_fields = {
         "fk": ["institution", "case"],
     }
+
+    actions = [download_selected_letters]
 
     def get_queryset(self, request):
         return (
