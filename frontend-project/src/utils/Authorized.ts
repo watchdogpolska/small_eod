@@ -5,8 +5,15 @@ import { getAuthority } from './authority';
 let Authorized = RenderAuthorize(getAuthority());
 
 // Reload the rights component
-const reloadAuthorized = (): void => {
+export const reloadAuthorized = (): void => {
   Authorized = RenderAuthorize(getAuthority());
+};
+
+export const setAuthority = (authority: string | string[]): void => {
+  const proAuthority = typeof authority === 'string' ? [authority] : authority;
+  localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority)); // auto reload
+
+  reloadAuthorized();
 };
 
 /**
@@ -15,5 +22,4 @@ const reloadAuthorized = (): void => {
  */
 window.reloadAuthorized = reloadAuthorized;
 
-export { reloadAuthorized };
 export default Authorized;
