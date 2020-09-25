@@ -18,4 +18,6 @@ const InstitutionName: FC<InstitutionNameProps> = ({ id, institutions, dispatch 
   return <div>{institution ? institution.name : <Spin />}</div>;
 };
 
-export default connect(({ institutions }: any) => ({ institutions }))(InstitutionName);
+export default connect(({ institutions }: InstitutionNameProps) => ({ institutions }))(
+  InstitutionName,
+);

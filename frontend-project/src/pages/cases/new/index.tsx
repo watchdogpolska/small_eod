@@ -206,6 +206,8 @@ const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
   );
 };
 
-export default connect(({ tags, users, institutions }: any) => ({ tags, users, institutions }))(
-  CasesNewForm,
-);
+export default connect(({ tags, users, institutions }: CasesNewFormProps) => ({
+  tags,
+  users,
+  institutions,
+}))(CasesNewForm);

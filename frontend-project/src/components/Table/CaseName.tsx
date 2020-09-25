@@ -19,4 +19,4 @@ const CaseName: FC<CaseNameProps> = ({ id, cases, dispatch }) => {
   return <div>{oneCase ? oneCase.name : <Spin />}</div>;
 };
 
-export default connect(({ cases }: any) => ({ cases }))(CaseName);
+export default connect(({ cases }: CaseNameProps) => ({ cases }))(CaseName);
