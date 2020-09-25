@@ -1,5 +1,6 @@
 import smallEodSDK from '@/utils/sdk';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
+
 export interface Institution {
   name: string;
   administrativeUnit: string;
