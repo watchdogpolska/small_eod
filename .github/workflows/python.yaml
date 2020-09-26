@@ -29,7 +29,11 @@ jobs:
       run: make settings
     - name: Diff OpenAPI
       run: make diff_openapi
-    - name: Test
+    - name: Wait for services
+      run: make wait_mysql wait_minio migrate
+    - name: Python test
+      run: make test
+    - name: System test
       run: ./backend-project/contrib/github/script.sh
     - name: Send coverage report
       run: make coverage_send_backend
