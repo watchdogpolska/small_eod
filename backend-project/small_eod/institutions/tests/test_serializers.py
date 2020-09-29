@@ -7,7 +7,8 @@ from ...administrative_units.factories import AdministrativeUnitFactory
 from ..factories import InstitutionFactory
 
 
-class InstitutionSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):
+class InstitutionSerializerTestCase(
+    ResourceSerializerMixin, AuthRequiredMixin, TestCase):
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
 
