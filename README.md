@@ -85,7 +85,7 @@ W celu uruchomienia środowiska aplikacji wymagane jest:
 
 Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo [Docker dla webdevelopera - #01 - Czym jest Docker?](https://www.youtube.com/watch?v=P4ZC3cFN0WQ).
 
-W celu uruchomienia projektu należy wykonąc:
+W celu uruchomienia projektu należy wykonać:
 
 ```bash
 docker-compose up
@@ -97,6 +97,12 @@ W celu utworzenia konta administratora należy wykonać:
 
 ```bash
 docker-compose run backend python manage.py createsuperuser
+```
+
+W celu utworzenia próbnych danych należy wykonać:
+
+```bash
+docker-compose run backend python manage.py init_data
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
@@ -119,7 +125,7 @@ Większość problemów w formatowania można naprawić z wykorzystaniem automat
 make fmt
 ```
 
-W celu wykonania testów automatycznych backendu należy wykonać:
+W celu wykonania testów automatycznych back-endu należy wykonać:
 
 ```bash
 make test-django-backend
