@@ -8,7 +8,8 @@ from ..factories import InstitutionFactory
 
 
 class InstitutionSerializerTestCase(
-    ResourceSerializerMixin, AuthRequiredMixin, TestCase):
+    ResourceSerializerMixin, AuthRequiredMixin, TestCase
+):
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
 
@@ -45,7 +46,7 @@ class InstitutionSerializerTestCase(
     def test_save(self):
         self.login_required()
         serializer = self.serializer_class(
-             data=self.get_default_data(), context=self.get_serializer_context()
+            data=self.get_default_data(), context=self.get_serializer_context()
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
