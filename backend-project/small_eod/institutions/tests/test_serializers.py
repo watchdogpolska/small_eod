@@ -2,11 +2,12 @@ from django.test import TestCase
 
 from ..serializers import InstitutionSerializer
 from ...generic.mixins import AuthRequiredMixin
+from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ...administrative_units.factories import AdministrativeUnitFactory
 from ..factories import InstitutionFactory
 
 
-class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
+class InstitutionSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):
     serializer_class = InstitutionSerializer
     factory_class = InstitutionFactory
 
@@ -14,6 +15,9 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         super().setUp()
         self.admin_unit = AdministrativeUnitFactory(category__level=3)
         self.obj = self.factory_class()
+
+    def get_serializer_context(self):
+        return {"request": self.request}
 
     def get_default_data(self, new_data=None, skip=None):
         new_data = new_data or {}
@@ -40,7 +44,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
     def test_save(self):
         self.login_required()
         serializer = self.serializer_class(
-            data=self.get_default_data(), context={"request": self.request}
+             data=self.get_default_data(), context=self.get_serializer_context()
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         obj = serializer.save()
@@ -72,7 +76,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         admin_unit = AdministrativeUnitFactory()
         serializer = self.serializer_class(
             data=self.get_default_data(new_data={"administrative_unit": admin_unit.pk}),
-            context={"request": self.request},
+            context=self.get_serializer_context(),
         )
         self.assertFalse(serializer.is_valid(), serializer.errors)
 
@@ -81,7 +85,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         serializer = self.serializer_class(
             self.obj,
             data={"name": "Inna nazwa sprawy"},
-            context={"request": self.request},
+            context=self.get_serializer_context(),
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -94,7 +98,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         serializer = self.serializer_class(
             self.obj,
             data={"email": "new.email@asdf.pl"},
-            context={"request": self.request},
+            context=self.get_serializer_context(),
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -107,7 +111,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         serializer = self.serializer_class(
             instance=self.obj,
             data={"nip": "1111111111"},
-            context={"request": self.request},
+            context=self.get_serializer_context(),
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -120,7 +124,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         serializer = self.serializer_class(
             self.obj,
             data={"comment": "To jest nowy komentarz"},
-            context={"request": self.request},
+            context=self.get_serializer_context(),
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -133,7 +137,7 @@ class InstitutionSerializerTestCase(AuthRequiredMixin, TestCase):
         serializer = self.serializer_class(
             self.obj,
             data={"tags": ["inne fundacje"]},
-            context={"request": self.request},
+            context=self.get_serializer_context(),
             partial=True,
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
