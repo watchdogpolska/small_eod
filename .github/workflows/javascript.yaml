@@ -33,6 +33,7 @@ jobs:
         COMMIT_BRANCH: '{{github.ref}}'
     - name: Test
       run: yarn test
+      working-directory: ./frontend-project/
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
