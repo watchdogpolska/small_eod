@@ -212,7 +212,11 @@ class TagAdmin(ImportExportMixin, admin.ModelAdmin):
     resource_class = TagResource
 
 
-admin.site.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ["name", "user"]
+
+
+admin.site.register(Person, PersonAdmin)
 admin.site.register(Dictionary)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Channel)
