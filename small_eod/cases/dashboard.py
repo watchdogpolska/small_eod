@@ -61,7 +61,10 @@ class CustomIndexDashboard(Dashboard):
         # append a group for "Administration" & "Applications"
         self.children.append(
             CustomAppList(
-                _("System"), column=1, css_classes=("grp-closed",), models=SYSTEM_APP,
+                _("System"),
+                column=1,
+                css_classes=("grp-closed",),
+                models=SYSTEM_APP,
             )
         )
         self.children.append(
@@ -91,6 +94,9 @@ class CustomIndexDashboard(Dashboard):
         # append a recent actions module
         self.children.append(
             modules.RecentActions(
-                _("Recent Actions"), limit=5, collapsible=False, column=3,
+                _("Recent Actions"),
+                limit=5,
+                collapsible=False,
+                column=3,
             )
         )

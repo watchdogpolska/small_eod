@@ -76,8 +76,13 @@ class Migration(migrations.Migration):
             preserve_default=False,
         ),
         migrations.RunPython(set_name_fk),
-        migrations.RemoveField(model_name="letter", name="name",),
+        migrations.RemoveField(
+            model_name="letter",
+            name="name",
+        ),
         migrations.RenameField(
-            model_name="letter", old_name="name_fk", new_name="name",
+            model_name="letter",
+            old_name="name_fk",
+            new_name="name",
         ),
     ]
