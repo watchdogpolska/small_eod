@@ -44,7 +44,9 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=100, verbose_name="Name")),
                 ("comment", models.TextField(blank=True)),
             ],
-            options={"ordering": ["created"],},
+            options={
+                "ordering": ["created"],
+            },
         ),
         migrations.CreateModel(
             name="Institution",
@@ -77,7 +79,9 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=100, verbose_name="Name")),
                 ("comment", models.TextField(blank=True)),
             ],
-            options={"ordering": ["created"],},
+            options={
+                "ordering": ["created"],
+            },
         ),
         migrations.CreateModel(
             name="Letter",
@@ -142,6 +146,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"ordering": ["data"],},
+            options={
+                "ordering": ["data"],
+            },
         ),
     ]

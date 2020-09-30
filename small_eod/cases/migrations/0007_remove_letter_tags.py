@@ -19,5 +19,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(migrate_tags_from_letter_to_case),
-        migrations.RemoveField(model_name="letter", name="tags",),
+        migrations.RemoveField(
+            model_name="letter",
+            name="tags",
+        ),
     ]

@@ -45,7 +45,10 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=100, verbose_name="Name")),
             ],
-            options={"verbose_name_plural": "Channels", "verbose_name": "Channel",},
+            options={
+                "verbose_name_plural": "Channels",
+                "verbose_name": "Channel",
+            },
         ),
         migrations.CreateModel(
             name="Person",
@@ -86,7 +89,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name_plural": "Persons", "verbose_name": "Person",},
+            options={
+                "verbose_name_plural": "Persons",
+                "verbose_name": "Person",
+            },
         ),
         migrations.CreateModel(
             name="Tag",
@@ -118,7 +124,10 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=100, verbose_name="Name")),
             ],
-            options={"verbose_name_plural": "Tags", "verbose_name": "Tag",},
+            options={
+                "verbose_name_plural": "Tags",
+                "verbose_name": "Tag",
+            },
         ),
         migrations.AlterModelOptions(
             name="case",

@@ -69,7 +69,11 @@ class LetterInline(admin.StackedInline):
         "institution",
     ]
 
-    autocomplete_lookup_fields = {"fk": ["institution",]}
+    autocomplete_lookup_fields = {
+        "fk": [
+            "institution",
+        ]
+    }
 
 
 class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
@@ -93,7 +97,8 @@ def download_selected_letters(modeladmin, request, queryset):
             ),
         )
     response = StreamingHttpResponse(
-        streaming_content=z, content_type="application/zip",
+        streaming_content=z,
+        content_type="application/zip",
     )
     response["Content-Disposition"] = 'attachment; filename="letters.zip"'
     return response
@@ -134,7 +139,9 @@ class CaseAdmin(admin.ModelAdmin):
     }
 
     autocomplete_lookup_fields = {
-        "fk": ["audited_institution",],
+        "fk": [
+            "audited_institution",
+        ],
         "m2m": ["responsible_people", "tags"],
     }
 

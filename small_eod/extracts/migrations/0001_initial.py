@@ -46,6 +46,9 @@ class Migration(migrations.Migration):
                 ("attachments_count", models.TextField()),
                 ("date", models.TextField()),
             ],
-            options={"verbose_name": "Mails", "verbose_name_plural": "Mails",},
+            options={
+                "verbose_name": "Mails",
+                "verbose_name_plural": "Mails",
+            },
         ),
     ]
