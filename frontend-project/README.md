@@ -1,65 +1,58 @@
-Szybka instrukcja dla frontendu:</br>
+# small_eod frontend
 
-Repozytorium</br> Ścieżka do właściwego folderu:</br> small_eod/frontend-project/ </br></br> 1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork").</br> 2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br> 3.W edytorze kodu otwórz folder "frontend-project".</br> 4.W terminalu wpisz npm i, a następnie npm start.</br> 5.Commituj zawsze na branchu dev. </br></br>
+Zawiera pliki odpowiedzialne za frontend aplikacji small_eod.
+Został on napisany z wykorzystaniem:
 
-Dostęp do wersji DEMO</br> https://demo.small-eod.siecobywatelska.pl/admin/</br> -> napisz na slacku w sprawie loginu i hasła </br> </br> API</br> https://api.dev.small-eod.siecobywatelska.pl/api/docs/</br> -> napisz na slacku w sprawie loginu i hasła
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Less](http://lesscss.org/)
+- [AntDesign Pro](https://pro.ant.design/)
 
-</br></br></br></br></br></br></br></br></br></br></br>
+## Instrukcja instalacji
 
-# Ant Design Pro
+### Wymagane składniki
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+- [Node.js](https://nodejs.org/en/download/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
 
-## Environment Prepare
+### Instalacja
 
-Install `node_modules`:
+1. [Utwórz własny fork repozytorium](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)
+(krok nie jest konieczny, jeżeli nie zamierzasz wprowadzać zmian do oryginalnego repozytorium)
 
-```bash
-npm install
-```
+2. Skopiuj repozytorium na swój dysk:
 
-or
+    ```shell
+    git clone git@github.com:<nazwa profilu>/small_eod.git
+    ```
 
-```bash
-yarn
-```
+3. Przejdź do katalogu zawierającego frontend
 
-## Provided Scripts
+   ```shell
+   cd small_eod/frontend-project
+   ```
 
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+4. Zainstaluj zależności za pomocą narzędzia yarn
 
-Scripts provided in `package.json`. It's safe to modify or add additional script:
+   ```shell
+   yarn
+   ```
 
-### Start project
+5. Projekt możesz uruchomić poleceniem
 
-```bash
-npm start
-```
+   ```shell
+   yarn start
+   ```
 
-### Build project
+   a testy
 
-```bash
-npm run build
-```
+   ```shell
+   yarn test
+   ```
 
-### Check code style
+## Dostęp do wersji demo
 
-```bash
-npm run lint
-```
-
-You can also use script to auto fix some lint error:
-
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+W sprawie dostępu do [wersji demo](https://demo.small-eod.siecobywatelska.pl/admin/) napisz na Slacku.
+Dostęp do [API](https://api.dev.small-eod.siecobywatelska.pl/api/docs/) również wymaga loginu i hasła,
+które można otrzymać na Slacku.
