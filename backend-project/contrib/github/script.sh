@@ -1,11 +1,6 @@
 #!/bin/sh
 set -eux
-make wait_mysql wait_minio migrate
 docker-compose up -d
-# verify that user able to create user
-make createsuperuser
-# run test suite
-make test
 # verify integration of services
 sleep 5 # for http server start
 # verify that user able to view login form
