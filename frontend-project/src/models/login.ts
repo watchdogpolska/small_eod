@@ -23,6 +23,7 @@ export interface LoginModelType {
     changeLoginStatus: Reducer<LoginModelState>;
   };
 }
+
 const Model: LoginModelType = {
   namespace: 'login',
 
