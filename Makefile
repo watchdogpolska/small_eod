@@ -8,7 +8,7 @@ BRANCH?=dev
 
 start: wait_mysql wait_minio
 	docker-compose up -d
-	
+
 stop:
 	docker-compose stop
 
@@ -63,7 +63,7 @@ lint:
 	docker run --rm -v /$$(pwd)/backend-project:/data cytopia/black --check .
 
 fmt:
-	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
+	docker run --rm --user $$(id -u):$$(id -u) -v /$$(pwd):/data cytopia/black ./backend-project
 
 check: wait_mysql wait_minio
 	docker-compose run --rm backend python manage.py makemigrations --check
@@ -79,7 +79,7 @@ createsuperuser: wait_minio
 
 test_local: lint build check test
 
-openapi: 
+openapi:
 	docker-compose run --rm backend python manage.py generate_swagger
 
 build_balancer:
