@@ -51,9 +51,3 @@ Został on napisany z wykorzystaniem:
    ```shell
    yarn test
    ```
-
-## Dostęp do wersji demo
-
-W sprawie dostępu do [wersji demo](https://demo.small-eod.siecobywatelska.pl/admin/) napisz na Slacku.
-Dostęp do [API](https://api.dev.small-eod.siecobywatelska.pl/api/docs/) również wymaga loginu i hasła,
-które można otrzymać na Slacku.
