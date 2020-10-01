@@ -7,7 +7,7 @@ Został on napisany z wykorzystaniem:
 - [Redux](https://redux.js.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Less](http://lesscss.org/)
-- [AntDesign Pro](https://pro.ant.design/)
+- [AntDesign](https://ant.design/)
 
 ## Instrukcja instalacji
 
