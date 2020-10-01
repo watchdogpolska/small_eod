@@ -15,7 +15,7 @@ Został on napisany z wykorzystaniem:
 
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://yarnpkg.com/getting-started/install)
-- [npm](https://www.npmjs.com/get-npm)(na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
+- [npm](https://www.npmjs.com/get-npm) (na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
 
 ### Instalacja
 
