@@ -1,21 +1,6 @@
-import { fetchOne } from '@/services/cases';
+import { fetchOne, Case } from '@/services/cases';
 import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction, Reducer } from 'redux';
-
-export interface Case {
-  name: string;
-  auditedInstitutions: number[];
-  comment: string;
-  tags: string[];
-  responsible_users: number[];
-  notified_users: number[];
-  featureoptions: number[];
-  createdBy: number;
-  createdOn: string;
-  id: number;
-  modifiedBy: number;
-  modifiedOn: string;
-}
 
 export type CaseModelState = Case[];
 
