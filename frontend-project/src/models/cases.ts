@@ -17,17 +17,19 @@ export interface Case {
   modifiedOn: string;
 }
 
+export type CaseModelState = Case[];
+
 export interface CaseModelType {
   namespace: string;
-  state: Case[];
+  state: CaseModelState;
   effects: {
     fetchOne: Effect;
   };
   reducers: {
-    saveOne: Reducer<Case[], AnyAction>;
+    saveOne: Reducer<CaseModelState, AnyAction>;
   };
 }
-const defaultCasesState: Case[] = [];
+const defaultCasesState: CaseModelState = [];
 
 const CasesModel: CaseModelType = {
   namespace: 'cases',
