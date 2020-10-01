@@ -18,12 +18,27 @@ services:
     image: postgres:12.4-alpine
     expose:
       - "5432"
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - ./backend-project/contrib/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
       # /var/lib/postgresql/data
     environment:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'pass'
+
+  migration_db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'small_eod'
+    ports:
+      - "127.0.0.1:3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./backend-project/small_eod/migration_v1/sql_scripts:/docker-entrypoint-initdb.d:ro
 
   backend:
     build:
@@ -37,6 +52,7 @@ services:
       - media:/code/media
     environment:
       DATABASE_URL: postgres://user:pass@db:5432/small_eod
+      MIGRATION_DATABASE_URL: mysql://root:pass@migration_db/small_eod
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
       MINIO_URL: http://minio:9000

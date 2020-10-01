@@ -4,6 +4,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
     && apt-get install -y \
+    libmariadbclient-dev-compat \
     gcc \
     wait-for-it \
     && rm -rf /var/lib/apt/lists/*
