@@ -30,7 +30,6 @@ class LetterViewSet(viewsets.ModelViewSet):
         "institution__name",
         "case__name",
         "attachments",
-        "ordering",
         "comment",
         "excerpt",
         "document_type__name",

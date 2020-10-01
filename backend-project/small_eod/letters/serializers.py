@@ -43,7 +43,6 @@ class LetterSerializer(UserLogModelSerializer):
             "institution",
             "case",
             "attachments",
-            "ordering",
             "comment",
             "excerpt",
             "document_type",

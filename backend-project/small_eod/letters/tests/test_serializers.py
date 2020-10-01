@@ -65,7 +65,6 @@ class LetterSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestC
             "reference_number": "ssj2",
             "institution": self.institution.pk,
             "case": self.case.pk,
-            "ordering": 90,
             "comment": "comment",
             "excerpt": "No idea what this field does",
             "document_type": self.document_type.pk,
@@ -101,7 +100,6 @@ class LetterSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestC
         # datetime.strptime(data["date"], "%Y-%m-%dT%H:%M:%S.%f%Z"),
         # self.obj.date) #TODO
         self.assertEqual(data["direction"], self.obj.direction)
-        self.assertEqual(data["ordering"], self.obj.ordering)
 
     def test_nested_fields(self):
         data = self.serializer_class(self.obj).data
