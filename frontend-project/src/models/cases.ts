@@ -14,6 +14,7 @@ export interface CaseModelType {
     saveOne: Reducer<CaseModelState, AnyAction>;
   };
 }
+
 const defaultCasesState: CaseModelState = [];
 
 const CasesModel: CaseModelType = {
