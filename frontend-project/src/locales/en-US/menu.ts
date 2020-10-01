@@ -17,6 +17,7 @@ export default {
   'menu.home': 'Home',
   'menu.institutions': 'Institutions',
   'menu.institutions.new': 'New',
+  'menu.institutions.list': 'List',
   'menu.letters': 'Letters',
   'menu.letters.list': 'List',
   'menu.letters.channels': 'Channels',

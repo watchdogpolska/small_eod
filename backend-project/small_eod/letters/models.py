@@ -90,3 +90,6 @@ class Letter(TimestampUserLogModel):
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        return _("Letter #{}").format(self.pk)

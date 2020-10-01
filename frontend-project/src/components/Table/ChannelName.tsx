@@ -17,4 +17,4 @@ const ChannelName: FC<ChannelNameProps> = ({ id, channels, dispatch }) => {
   const channel = channels.find(value => value.id === id);
   return <div>{channel ? channel.name : <Spin />}</div>;
 };
-export default connect(({ channels }: any) => ({ channels }))(ChannelName);
+export default connect(({ channels }: ChannelNameProps) => ({ channels }))(ChannelName);

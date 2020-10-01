@@ -6,6 +6,7 @@ export default {
   'menu.home': 'Strona główna',
   'menu.institutions': 'Instytucje',
   'menu.institutions.new': 'Nowa',
+  'menu.institutions.list': 'Lista',
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
   'menu.letters.channels': 'Kanały',

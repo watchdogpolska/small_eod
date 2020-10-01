@@ -1,6 +1,6 @@
 # Small_EOD
 
-![Build Status](https://github.com/watchdogpolska/small_eod/workflows/Django%20application/badge.svg?branch=dev) ![Build Status](https://github.com/watchdogpolska/small_eod/workflows/YAML%20files/badge.svg?branch=dev)
+![Build Status](https://github.com/watchdogpolska/small_eod/workflows/Django%20application/badge.svg?branch=dev) ![Build Status](https://github.com/watchdogpolska/small_eod/workflows/YAML%20files/badge.svg?branch=dev) [![Slack join](https://img.shields.io/badge/slack-CodeForPozna%C5%84/%23watchdog-yello.svg?logo=slack)](https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU)
 
 System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczególności w zakresie:
 
@@ -74,6 +74,8 @@ Projekt realizowany jest zgodnie z filozofią open-source. Szczegółowe informa
 
 Zadania do wykonania są zarejestrowane jako zagadnienia oznaczone etykietą [good first issue](https://github.com/watchdogpolska/small_eod/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) w portalu GitHub. W celu ich realizacji wystarczy komentarz o rozpoczęciu prac, a następnie utworzenie żądania wcielenia zmian (pull request).
 
+Bieżąca komunikacja projektu odbywa się z wykorzystaniem Slacka organizacji [CodeForPoznań](https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU) na kanale #watchdog. Odbywają się regularne spotkania statusowe (szczegóły w zagadnieniu [https://github.com/watchdogpolska/small_eod/issues/547](#547)), gdzie można uzyskać wprowadzenie w projekt, dowiedzieć się na temat zadań i usunąć inne trudności we współpracy. 
+
 ## Uruchomienie projektu
 
 W celu ułatwienia rozwoju projektu wykorzystywane jest oprogramowanie Docker. Umożliwia ona uruchomienie wszystkich usług niezbędnych do pracy nad projektem. Usługi zostały opisane w pliku ```docker-compose.yml```.
@@ -97,6 +99,12 @@ W celu utworzenia konta administratora należy wykonać:
 
 ```bash
 docker-compose run backend python manage.py createsuperuser
+```
+
+W celu utworzenia próbnych danych należy wykonać:
+
+```bash
+docker-compose run backend python manage.py init_data
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
