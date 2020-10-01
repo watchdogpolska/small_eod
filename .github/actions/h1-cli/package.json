@@ -10,7 +10,7 @@
   "author": "Adam Dobrawy",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/tool-cache": "^1.5.5"
   },
   "devDependencies": {
