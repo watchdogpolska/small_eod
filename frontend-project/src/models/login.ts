@@ -1,7 +1,7 @@
 import { stringify } from 'qs';
 import { router } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+import { setAuthority } from '@/utils/Authorized';
 import { getPageQuery } from '@/utils/utils';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
@@ -20,7 +20,7 @@ export interface LoginModelType {
     logout: Effect;
   };
   reducers: {
-    changeLoginStatus: Reducer;
+    changeLoginStatus: Reducer<LoginModelState>;
   };
 }
 const Model: LoginModelType = {
