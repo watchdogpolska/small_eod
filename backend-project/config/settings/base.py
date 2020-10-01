@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "small_eod.events",
     "small_eod.administrative_units",
     "small_eod.authkey",
+    "small_eod.migration_v1",
 ]
 
 MIDDLEWARE = [
@@ -97,7 +98,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {"default": env.db()}
+DATABASES = {
+    "default": env.db(),
+    "migration": env.db("MIGRATION_DATABASE_URL"),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -174,3 +178,25 @@ MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")
 MINIO_URL = env("MINIO_URL")
 MINIO_BUCKET = env("MINIO_BUCKET", default="files")
+
+# Very basic logging config
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "migrator": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
