@@ -29,7 +29,7 @@ class TagNamespace(TimestampUserLogModel):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=256, verbose_name=_("Tag"))
+    name = models.CharField(max_length=256, verbose_name=_("Tag"), unique=True)
 
     def __str__(self):
         return self.name

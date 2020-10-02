@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 
 class File(models.Model):
     path = models.CharField(
-        max_length=200, verbose_name=_("Path"), help_text=_("Path to file.")
+        max_length=355, verbose_name=_("Path"), help_text=_("Path to file.")
     )
     name = models.CharField(
-        max_length=100, verbose_name=_("Name"), help_text=_("Name of file.")
+        max_length=255, verbose_name=_("Name"), help_text=_("Name of file.")
     )
     letter = models.ForeignKey(
         to=Letter,

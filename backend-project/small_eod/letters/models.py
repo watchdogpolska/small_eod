@@ -13,6 +13,7 @@ class DocumentType(models.Model):
         max_length=256,
         verbose_name=_("Document type"),
         help_text=_("Type of letter"),
+        unique=True,
     )
 
 
@@ -41,8 +42,7 @@ class Letter(TimestampUserLogModel):
             + "final content or is, for example, a draft"
         ),
     )
-    comment = models.CharField(
-        max_length=256,
+    comment = models.TextField(
         verbose_name=_("Comment"),
         help_text=_("Comment for letter."),
         blank=True,
