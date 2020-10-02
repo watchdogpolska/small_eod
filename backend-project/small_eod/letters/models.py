@@ -41,9 +41,6 @@ class Letter(TimestampUserLogModel):
             + "final content or is, for example, a draft"
         ),
     )
-    ordering = models.IntegerField(
-        default=0, verbose_name=_("Ordering"), help_text=_("Order of letter.")
-    )
     comment = models.CharField(
         max_length=256,
         verbose_name=_("Comment"),

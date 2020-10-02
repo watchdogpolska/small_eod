@@ -38,16 +38,15 @@ def download_selected_letters(modeladmin, request, queryset):
             case_name = letter.case.name if letter.case else "unknown"
             case_name = unicodedata.normalize("NFKD", case_name.replace("/", "__"))
             case_id = letter.case.id or "unknown"
-            ordering = letter.ordering
-
+            ordering = 0
             for file in letter.attachments.all():
                 file_path = file.path
                 filename = basename(file_path)
-
+                ordering += 1
                 r = requests.get(file_path, stream=True)
 
                 z.write_iter(
-                    f"{case_id}-{case_name}/{ordering}-{filename}",
+                    f"{case_id}-{case_name}/{ordering:02d}-{filename}",
                     r.iter_content(chunk_size=128),
                 )
 

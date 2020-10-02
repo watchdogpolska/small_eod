@@ -23,7 +23,6 @@ class LetterFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     final = FuzzyTrueOrFalse()
     date = FuzzyDateTimeFromNow(max_days=10)
-    ordering = factory.fuzzy.FuzzyInteger(0, 100)
     direction = factory.fuzzy.FuzzyChoice(("IN", "OUT"))
 
     comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)
