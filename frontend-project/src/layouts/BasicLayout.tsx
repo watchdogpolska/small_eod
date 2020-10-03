@@ -67,16 +67,19 @@ const defaultFooterDom = (
         blankTarget: true,
       },
       {
-        key: `GitHub – Build time: ${build_date}`,
+        key:
+          typeof BUILD_DATE === 'undefined'
+            ? 'GitHub'
+            : `GitHub – Build time: ${BUILD_DATE}`,
         title: (
           <>
             small-eod – GitHub <GithubOutlined />
           </>
         ),
         href:
-          typeof build_sha === 'undefined'
+          typeof BUILD_SHA === 'undefined'
             ? 'https://github.com/watchdogpolska/small_eod/'
-            : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
+            : `https://github.com/watchdogpolska/small_eod/commit/${BUILD_SHA}`,
         blankTarget: true,
       },
       {
@@ -170,8 +173,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           return first ? (
             <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
           ) : (
-            <span>{route.breadcrumbName}</span>
-          );
+              <span>{route.breadcrumbName}</span>
+            );
         }}
         footerRender={() => defaultFooterDom}
         menuDataRender={menuDataRender}
