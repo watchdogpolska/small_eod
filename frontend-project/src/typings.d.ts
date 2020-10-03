@@ -30,9 +30,9 @@ interface Window {
 }
 declare let ga: Function;
 
-declare let build_date: date;
-declare let build_branch: string;
-declare let build_sha: string;
+declare const build_date: date;
+declare const build_branch: string;
+declare const build_sha: string;
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 declare let ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: 'site' | undefined;
