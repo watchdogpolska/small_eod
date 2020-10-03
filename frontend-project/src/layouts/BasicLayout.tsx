@@ -67,19 +67,16 @@ const defaultFooterDom = (
         blankTarget: true,
       },
       {
-        key:
-          typeof BUILD_DATE === 'undefined'
-            ? 'GitHub'
-            : `GitHub – Build time: ${BUILD_DATE}`,
+        key: `GitHub – Build time: ${build_date}`,
         title: (
           <>
             small-eod – GitHub <GithubOutlined />
           </>
         ),
         href:
-          typeof BUILD_SHA === 'undefined'
+          typeof build_sha === 'undefined'
             ? 'https://github.com/watchdogpolska/small_eod/'
-            : `https://github.com/watchdogpolska/small_eod/commit/${BUILD_SHA}`,
+            : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
         blankTarget: true,
       },
       {

@@ -225,9 +225,9 @@ export default {
     config.module.rule('small-eod-client').parser({ amd: false });
     config.plugin('env').use(require.resolve('webpack/lib/DefinePlugin'), [
       {
-        BUILD_SHA: JSON.stringify(process.env.COMMIT_SHA),
-        BUILD_BRANCH: JSON.stringify(process.env.COMMIT_BRANCH),
-        BUILD_DATE: JSON.stringify(new Date().toISOString()),
+        build_sha: JSON.stringify(process.env.COMMIT_SHA),
+        build_branch: JSON.stringify(process.env.COMMIT_BRANCH),
+        build_date: JSON.stringify(new Date().toISOString()),
       },
     ]);
   },
