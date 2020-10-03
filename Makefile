@@ -89,7 +89,7 @@ push_balancer:
 	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:latest
 
 deploy_frontend:
-	docker-compose run frontend bash -c 'yarn && yarn build'
+	docker-compose run -e REACT_APP_ENV=prod frontend bash -c 'yarn && yarn build'
 	rsync -av --delete frontend-project/dist/ ${FRONTEND}@$$(h1 website show --website ${FRONTEND} --query '[].{fqdn:fqdn}' --output tsv):/data/public
 
 deploy_backend:
