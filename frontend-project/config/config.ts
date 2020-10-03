@@ -134,13 +134,20 @@ export default {
                   path: '/letters/list',
                   component: './letters/list',
                 },
-                {
-                  name: 'channels',
-                  icon: 'HomeOutlined',
-                  path: '/letters/channels',
-                  component: './letters/channels',
-                },
               ],
+            },
+            {
+              name: 'channels',
+              icon: 'FileTextOutlined',
+              path: '/channels',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/channels',
+                  component: './channels/list',
+                },
+              ]
             },
             {
               name: 'institutions',
