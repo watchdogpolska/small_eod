@@ -74,7 +74,7 @@ const defaultFooterDom = (
           </>
         ),
         href:
-          typeof build_sha === 'undefined'
+          typeof build_sha === 'undefined' || build_sha === 'unknown_sha'
             ? 'https://github.com/watchdogpolska/small_eod/'
             : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
         blankTarget: true,
