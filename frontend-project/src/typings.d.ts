@@ -30,7 +30,7 @@ interface Window {
 }
 declare let ga: Function;
 
-declare const build_date: date;
+declare const build_date: string;
 declare const build_branch: string;
 declare const build_sha: string;
 // preview.pro.ant.design only do not use in your production ;
