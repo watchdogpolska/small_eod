@@ -55,12 +55,8 @@ migrate:
 makemigrations:
 	docker-compose run --rm backend python manage.py makemigrations
 
-pyupgrade:
-	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade --py37-plus
-
 lint:
-	docker run --rm -v /$$(pwd)/backend-project:/apps alpine/flake8 .
-	docker run --rm -v /$$(pwd)/backend-project:/data cytopia/black --check .
+	pre-commit run --all-files
 
 fmt:
 	docker run --rm --user $$(id -u):$$(id -u) -v /$$(pwd):/data cytopia/black ./backend-project

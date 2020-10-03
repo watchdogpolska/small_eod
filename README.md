@@ -9,7 +9,7 @@ System służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczegól
 
 ## Założenia
 
-* system rozwijany będzie małymi etapami, aby jak najszybciej dostarczał wartość dla biura Stowarzysznia
+* system rozwijany będzie małymi etapami, aby jak najszybciej dostarczał wartość dla biura Stowarzyszenia
 * w początkowych etapach system będzie przeznaczony do archiwizacji dokumentów pochodzących z różnych mediów
 * w przyszłości system będzie służył także do:
 
@@ -111,26 +111,28 @@ W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://g
 
 ## Testy automatyczne
 
-Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Wszelkie proponowane zmiany z wykorzystaniem [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Sa one uruchamiane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
 
-Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych, ale przed ich dodaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile).
+W celu wykonania testów automatycznych backendu należy wykonać:
 
-W celu wykonanie testów automatycznych formatowania należy wykonać:
+```bash
+make test-django-backend
+```
+
+## Statyczna kontrola kodu
+
+Statyczna kontrola kodu w projekcie służy do sprawdzenia, czy kod spełnia określone standardy jakości. Wszystkie sprawdzenia kodu statycznego można uruchamiać za pomocą [pre-commit run](https://pre-commit.com/). Są one także weryfikowane w środowisku [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
+
+W celu wykonania kontroli statycznej kodu należy wykonać:
 
 ```bash
 make lint
 ```
 
-Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
+Aby włączyć automatyczne sprawdzanie kodu przed stworzeniem zmiany (`commit`), wykonaj polecenie:
 
 ```bash
-make fmt
-```
-
-W celu wykonania testów automatycznych back-endu należy wykonać:
-
-```bash
-make test-django-backend
+pre-commit install
 ```
 
 ## Wdrożenie automatyczne

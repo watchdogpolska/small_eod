@@ -17,10 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Pyupgrade
-      run: make pyupgrade
-    - name: Lint
-      run: make lint
     - name: Build
       run: make build
     - name: Migration check
@@ -46,7 +42,7 @@ jobs:
         name: openapi.yaml
         path: ./openapi.yaml
     - uses: actions/upload-artifact@v1
-      # see https://github.com/actions/upload-artifact/issues/11 
+      # see https://github.com/actions/upload-artifact/issues/11
       # for remove duplicated actions
       with:
         name: openapi.json
