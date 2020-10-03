@@ -3,6 +3,8 @@ export default {
   'menu.cases.new': 'Nowa',
   'menu.cases.list': 'Lista',
   'menu.tags': 'Tagi',
+  'menu.tags.new': 'Nowy',
+  'menu.tags.list': 'Lista',
   'menu.home': 'Strona główna',
   'menu.institutions': 'Instytucje',
   'menu.institutions.new': 'Nowa',
@@ -10,6 +12,7 @@ export default {
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
   'menu.channels': 'Kanały',
+  'menu.channels.new': 'Nowy',
   'menu.channels.list': 'Lista',
   'menu.users': 'Użytkownicy',
 };
