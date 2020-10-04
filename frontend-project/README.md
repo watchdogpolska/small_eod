@@ -1,65 +1,66 @@
-Szybka instrukcja dla frontendu:</br>
+# small_eod frontend
 
-Repozytorium</br> Ścieżka do właściwego folderu:</br> small_eod/frontend-project/ </br></br> 1.Zrób forka repozytorium (w prawym górnym rogu przeglądarki znajduje się ikona z napisem "fork").</br> 2.Sklonuj repozytorium do wybranego folderu na swoim komputerze.</br> 3.W edytorze kodu otwórz folder "frontend-project".</br> 4.W terminalu wpisz npm i, a następnie npm start.</br> 5.Commituj zawsze na branchu dev. </br></br>
+Zawiera pliki odpowiedzialne za frontend aplikacji small_eod. Został on napisany z wykorzystaniem:
 
-Dostęp do wersji DEMO</br> https://demo.small-eod.siecobywatelska.pl/admin/</br> -> napisz na slacku w sprawie loginu i hasła </br> </br> API</br> https://api.dev.small-eod.siecobywatelska.pl/api/docs/</br> -> napisz na slacku w sprawie loginu i hasła
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Less](http://lesscss.org/)
+- [AntDesign](https://ant.design/)
 
-</br></br></br></br></br></br></br></br></br></br></br>
+## Instrukcja instalacji
 
-# Ant Design Pro
+### Wymagane składniki
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+- [Node.js](https://nodejs.org/en/download/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [npm](https://www.npmjs.com/get-npm) (na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
 
-## Environment Prepare
+### Instalacja
 
-Install `node_modules`:
+1. [Utwórz własny fork repozytorium](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) (krok nie jest konieczny, jeżeli nie zamierzasz wprowadzać zmian do oryginalnego repozytorium)
 
-```bash
-npm install
-```
+2. Pobierz repozytorium na swój dysk z wykorzystaniem polecenia:
 
-or
+   ```shell
+   git clone git@github.com:<nazwa profilu>/small_eod.git
+   ```
 
-```bash
-yarn
-```
+3. Przejdź do katalogu zawierającego frontend z wykorzystaniem polecenia:
 
-## Provided Scripts
+   ```shell
+   cd small_eod/frontend-project
+   ```
 
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+4. Zainstaluj zależności za pomocą narzędzia yarn z wykorzystaniem polecenia:
 
-Scripts provided in `package.json`. It's safe to modify or add additional script:
+   ```shell
+   yarn
+   ```
 
-### Start project
+5. Projekt możesz uruchomić poleceniem:
 
-```bash
-npm start
-```
+   ```shell
+   yarn start
+   ```
 
-### Build project
+   W celu jego poprawnego działania musisz mieć poprawnie uruchomiony backend (serwer API). Możesz wykorzystać ogólnodostępne deweloperskie API poprzez uruchomienie poleceniem:
 
-```bash
-npm run build
-```
+   ```shell
+   yarn start:public-api
+   ```
 
-### Check code style
+6. W celu uruchomienia testów wykonaj polecenie:
 
-```bash
-npm run lint
-```
+   ```shell
+   yarn test
+   ```
 
-You can also use script to auto fix some lint error:
+## Zmienne środowiskowe
 
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+|      Nazwa      |                 Opis                 |    Domyślna wartość    |
+| --------------- | ------------------------------------ | ---------------------- |
+| `API_URL`       | adres URL serwera API (back-end)     | `http://backend:8000/` |
+| `COMMIT_SHA`    | identyfikator SHA commitu dla buildu | undefined              |
+| `COMMIT_BRANCH` | identyfikator gałęzi dla buildu      | undefined              |
+| `REACT_APP_ENV` | rodzaj środowiska React              | `dev`                  |

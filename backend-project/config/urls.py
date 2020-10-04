@@ -26,6 +26,7 @@ from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
 from rest_framework import routers
 from rest_framework import permissions
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r"channels", ChannelViewSet)
@@ -66,3 +67,6 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
     ]
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
