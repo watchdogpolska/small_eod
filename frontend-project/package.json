@@ -20,6 +20,7 @@
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\"",
     "start": "umi dev",
+    "start:public-api": "API_URL=\"https://dev.small-eod.siecobywatelska.pl/\" yarn start",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "test": "jest",
