@@ -9,6 +9,7 @@ export default {
   'menu.institutions.list': 'Lista',
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
-  'menu.letters.channels': 'Kanały',
+  'menu.channels': 'Kanały',
+  'menu.channels.list': 'Lista',
   'menu.users': 'Użytkownicy',
 };
