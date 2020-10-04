@@ -124,6 +124,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
+  const reactEnv = process.env.REACT_APP_ENV || 'dev';
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
@@ -183,15 +184,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           {children}
         </Authorized>
       </ProLayout>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={config =>
-          dispatch({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+      {reactEnv && reactEnv !== 'prod' && (
+        <SettingDrawer
+          settings={settings}
+          onSettingChange={config =>
+            dispatch({
+              type: 'settings/changeSetting',
+              payload: config,
+            })
+          }
+        />
+      )}
     </>
   );
 };
