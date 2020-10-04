@@ -1,7 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row } from 'antd';
 import { connect } from 'dva';
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect, FC } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 interface TagNewFormProps {
@@ -18,7 +18,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const TagNewForm: FunctionComponent<TagNewFormProps> = () => {
+const TagNewForm: FC<TagNewFormProps> = () => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
