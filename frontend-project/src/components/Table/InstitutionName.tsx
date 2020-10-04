@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
 import { connect } from 'dva';
 
-import { Institution } from '@/models/institutions';
+import { Institution } from '@/services/institutions';
 
 export interface InstitutionNameProps {
   id: number;
