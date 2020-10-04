@@ -2,23 +2,24 @@ import smallEodSDK from '@/utils/sdk';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 
 export interface Institution {
+  id: number;
   name: string;
   administrativeUnit: string;
   modifiedBy: number;
   createdBy: number;
   modifiedOn: string;
   createdOn: string;
-  email: string;
-  city: string;
-  epuap: string;
-  street: string;
-  houseNo: string;
-  postalCode: string;
-  flatNo: string;
-  nip: string;
-  regon: string;
-  comment: string;
-  tags: string[];
+  email?: string;
+  city?: string;
+  epuap?: string;
+  street?: string;
+  houseNumber?: string;
+  postalCode?: string;
+  flatNumber?: string;
+  NIP?: string;
+  regon?: string;
+  comment?: string;
+  tags?: string[];
 }
 
 function fetchAllPages(page) {
