@@ -124,7 +124,20 @@ export default {
               name: 'tags',
               icon: 'FileTextOutlined',
               path: '/tags',
-              component: './tags/list',
+              routes: [
+                {
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/tags/new',
+                  component: './tags/new',
+                },
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/tags',
+                  component: './tags/list',
+                },
+              ],
             },
             {
               name: 'letters',
@@ -141,13 +154,19 @@ export default {
             },
             {
               name: 'channels',
-              icon: 'FileTextOutlined',
+              icon: 'HomeOutlined',
               path: '/channels',
               routes: [
                 {
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/channels/new',
+                  component: './channels/new',
+                },
+                {
                   name: 'list',
-                  icon: 'HomeOutlined',
-                  path: '/channels',
+                  icon: 'FileTextOutlined',
+                  path: '/channels/list',
                   component: './channels/list',
                 },
               ]
