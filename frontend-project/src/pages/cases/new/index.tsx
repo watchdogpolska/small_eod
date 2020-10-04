@@ -29,12 +29,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm: FC<CasesNewFormProps> = ({
-  tags,
-  users,
-  institutions,
-  dispatch,
-}) => {
+const CasesNewForm: FC<CasesNewFormProps> = ({ tags, users, institutions, dispatch }) => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {

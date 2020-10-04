@@ -57,9 +57,7 @@ export default class PromiseRender<T, K> extends React.Component<
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-  checkIsInstantiation = (
-    target: React.ReactNode | React.ComponentClass,
-  ): React.FC => {
+  checkIsInstantiation = (target: React.ReactNode | React.ComponentClass): React.FC => {
     if (isComponentClass(target)) {
       const Target = target as React.ComponentClass;
       return (props: any) => <Target {...props} />;
