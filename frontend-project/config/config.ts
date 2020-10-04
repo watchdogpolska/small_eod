@@ -5,6 +5,9 @@ const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in yo
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
+
+const backend_url = process.env.API_URL || 'http://backend:8000/';
+
 const plugins = [
   ['umi-plugin-antd-icon-config', {}],
   [
@@ -235,7 +238,7 @@ export default {
     ['api', 'admin', 'static', 'media'].map(x => [
       `/${x}/`,
       {
-        target: 'http://backend:8000/',
+        target: backend_url,
         changeOrigin: true,
       },
     ]),
