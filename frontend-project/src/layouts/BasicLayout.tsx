@@ -88,13 +88,13 @@ const defaultFooterDom = (
       {
         key: 'swagger',
         title: 'small-eod – API Swagger',
-        href: '/api/swagger/',
+        href: '/api/docs/',
         blankTarget: true,
       },
       {
         key: 'drf',
         title: 'small-eod - API DRF',
-        href: '/api/swagger/',
+        href: '/api/',
         blankTarget: true,
       },
     ]}
