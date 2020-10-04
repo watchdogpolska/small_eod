@@ -98,22 +98,20 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:80
 W celu utworzenia konta administratora należy wykonać:
 
 ```bash
-docker-compose run backend python manage.py createsuperuser
+./scripts/create_user.sh
 ```
 
 W celu utworzenia próbnych danych należy wykonać:
 
 ```bash
-docker-compose run backend python manage.py init_data
+./scripts/init_data.sh
 ```
 
 W razie problemów z uruchomieniem projektu utwórz [nowe zagadnienie](https://github.com/watchdogpolska/small_eod/issues/new)
 
 ## Testy automatyczne
 
-Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Wszelkie proponowane zmiany z wykorzystaniem [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions).
-
-Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych, ale przed ich dodaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile).
+Projekt wykorzystuje testy automatyczne, które zapewniają weryfikacje wszystkich wprowadzonych zmian. Wszelkie zmiany w repozytorium uruchamiają serie testów automatycznych  z wykorzystaniem [GitHub Actions](https://github.com/watchdogpolska/small_eod/actions). Przed ich zdalnym wykonaniem masz możliwość wykonania testów lokalnie za pomocą [Makefile](https://en.wikipedia.org/wiki/Makefile).
 
 W celu wykonanie testów automatycznych formatowania należy wykonać:
 
@@ -121,7 +119,7 @@ W celu wykonanie testów automatycznych formatowania należy wykonać:
 make lint
 ```
 
-Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
+Wiele problemów w formatowaniu można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
 
 ```bash
 make fmt
@@ -130,7 +128,7 @@ make fmt
 W celu wykonania testów automatycznych back-endu należy wykonać:
 
 ```bash
-make test-django-backend
+make backend_test
 ```
 
 ## Wdrożenie automatyczne
@@ -152,7 +150,7 @@ Dla potrzeb środowiska testowego w HyperOne zostały uruchomione:
 ## Dostęp do wersji demo
 
 W sprawie dostępu do [wersji demo](https://demo.small-eod.siecobywatelska.pl/admin/) napisz na Slacku.
-Dostęp do [API](https://api.dev.small-eod.siecobywatelska.pl/api/docs/) również wymaga loginu i hasła,
+Dostęp do [API](https://dev.small-eod.siecobywatelska.pl/api/docs/) również wymaga loginu i hasła,
 które można otrzymać na Slacku.
 
 ### Materiały dodatkowe

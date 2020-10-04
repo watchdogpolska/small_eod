@@ -1,102 +1,109 @@
-.PHONY: all test clean docs
-REFERENCE_OPENAPI?="https://dev.small-eod.siecobywatelska.pl/api/swagger.json"
-GIT_COMMIT := $(shell git rev-parse HEAD)
 TEST?=small_eod
-FRONTEND?=5ed7d87d8073de470f295685
-BACKEND?=5ed804ed8073de470f2984e2
-BRANCH?=dev
 
+.PHONY: start
 start: wait_mysql wait_minio
 	docker-compose up -d
 
+.PHONY: stop
 stop:
 	docker-compose stop
 
-logs:
-	docker-compose logs --tail 100 -f
-
+.PHONY: clean
 clean:
 	docker-compose down
 
+.PHONY: build
 build:
-	docker-compose build backend
+	docker-compose build
 
-test: wait_mysql wait_minio test_backend test_openapi_spec
+.PHONY: test
+test: backend_test frontend_test
 
-test_backend:
-	docker-compose run backend coverage run manage.py test --keepdb --verbosity=2 ${TEST}
+.PHONY: lint
+lint: backend_lint frontend_lint
 
-coverage_html_backend:
-	docker-compose run backend coverage html
+.PHONY: check
+check: backend_check
 
-coverage_send_backend:
-	docker-compose run -e GITHUB_ACTIONS -e GITHUB_REF -e GITHUB_SHA -e GITHUB_HEAD_REF -e GITHUB_REPOSITORY -e GITHUB_RUN_ID -e GITHUB_TOKEN -e COVERALLS_REPO_TOKEN backend coveralls
+.PHONY: logs
+logs:
+	docker-compose logs --tail 100 -f
 
-test_openapi_spec:
-	docker-compose run --rm backend python manage.py generate_swagger --format json -o openapi.json
-	docker run -v $$(pwd)/backend-project/openapi.json:/openapi.json --rm p1c2u/openapi-spec-validator --schema 2.0 /openapi.json
-	docker-compose run --rm backend rm openapi.json
-
-diff_openapi: SHELL:=/bin/bash
-diff_openapi:
-	diff -c -C 10 <( curl -s "${REFERENCE_OPENAPI}"  | jq '.') <( docker-compose run -T --rm backend python manage.py generate_swagger --format json | jq '.' ) || true
-
+# Waiters
+.PHONY: wait_mysql
 wait_mysql:
 	docker-compose up -d db
 	docker-compose run --rm backend bash -c 'wait-for-it db:5432'
 
+.PHONY: wait_minio
 wait_minio:
 	docker-compose up -d minio
 	docker-compose run --rm backend bash -c 'wait-for-it minio:9000'
 
-migrate:
-	docker-compose run --rm backend python manage.py migrate
+.PHONY: wait_frontend
+wait_frontend:
+	docker-compose up -d frontend
+	docker-compose run --rm backend bash -c 'wait-for-it -t 200 frontend:8000'
 
-makemigrations:
-	docker-compose run --rm backend python manage.py makemigrations
+.PHONY: wait_backend
+wait_backend: wait_mysql wait_minio
+	docker-compose up -d backend
+	docker-compose run --rm backend bash -c 'wait-for-it backend:8000'
 
-pyupgrade:
-	docker run --rm -v /$$(pwd)/backend-project:/data quay.io/watchdogpolska/pyupgrade --py37-plus
+# Back-end section
+# All targets should start with "backend_"
+.PHONY: backend_test
+backend_test:
+	make -C backend-project test
 
-lint:
-	docker run --rm -v /$$(pwd)/backend-project:/apps alpine/flake8 .
-	docker run --rm -v /$$(pwd)/backend-project:/data cytopia/black --check .
+.PHONY: backend_lint
+backend_lint:
+	make -C backend-project lint
 
-fmt:
-	docker run --rm --user $$(id -u):$$(id -u) -v /$$(pwd):/data cytopia/black ./backend-project
+.PHONY: fmt
+backend_fmt:
+	make -C backend-project fmt
 
-check: wait_mysql wait_minio
-	docker-compose run --rm backend python manage.py makemigrations --check
+.PHONY: backend_check
+backend_check: wait_mysql wait_minio
+	make -C backend-project check
 
-migrations: wait_mysql wait_minio
-	docker-compose run --rm backend python manage.py makemigrations
+.PHONY: backend_migrate
+backend_migrate:
+	make -C backend-project migrate
 
-settings:
-	docker-compose run --rm backend python manage.py diffsettings
+.PHONY: backend_migrations
+backend_migrations:
+	make -C backend-project migrations
 
-createsuperuser: wait_minio
-	docker-compose run --rm -e DJANGO_SUPERUSER_PASSWORD=root backend python manage.py createsuperuser --username root --email root@example.com --noinput
+# Frontend section
+# All targets should start with "frontend_"
+.PHONY: frontend_build
+frontend_build:
+	make -C frontend-project build
 
-test_local: lint build check test
+.PHONY: frontend_lint
+frontend_lint:
+	make -C frontend-project lint
 
-openapi:
-	docker-compose run --rm backend python manage.py generate_swagger
+.PHONY: frontend_test
+frontend_test:
+	make -C frontend-project test
 
-build_balancer:
-	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:latest balancer/
+.PHONY: frontend_fmt
+frontend_fmt:
+	make -C frontend-project fmt
 
-push_balancer:
-	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:latest
+.PHONY: frontend_install
+frontend_install:
+	make -C frontend-project install
 
-deploy_frontend:
-	docker-compose run -e REACT_APP_ENV=prod frontend bash -c 'yarn && yarn build'
-	rsync -av --delete frontend-project/dist/ ${FRONTEND}@$$(h1 website show --website ${FRONTEND} --query '[].{fqdn:fqdn}' --output tsv):/data/public
+# Balancer section
+# All targets should start with "balancer_"
+.PHONY: balancer_build
+balancer_build:
+	make -C balancer build
 
-deploy_backend:
-	h1 website ssh --website ${BACKEND} --command 'rm -r /data/env'
-	h1 website ssh --website ${BACKEND} --command 'virtualenv /data/env';
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
-	h1 website restart --website ${BACKEND}
+.PHONY: balancer_push
+balancer_push:
+	make -C balancer push

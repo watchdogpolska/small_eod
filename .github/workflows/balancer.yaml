@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build production image
-      run: make build_balancer
+      run: make balancer_build
     - name: "Docker login"
       env:
         DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
@@ -21,4 +21,4 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
     - name: Push image
-      run: make push_balancer
+      run: make balancer_push

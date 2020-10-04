@@ -15,25 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Node 12.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
     - name: Install
-      run: yarn
-      working-directory: ./frontend-project/
+      run: make frontend_install
     - name: Lint
-      run: yarn lint
-      working-directory: ./frontend-project/
+      run: make frontend_lint
+    - name: Test
+      run: make frontend_test
     - name: Build
-      run: yarn build
-      working-directory: ./frontend-project/
+      run: make frontend_build
       env:
         COMMIT_SHA: '{{github.sha}}'
         COMMIT_BRANCH: '{{github.ref}}'
-    - name: Test
-      run: yarn test
-      working-directory: ./frontend-project/
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
@@ -49,8 +41,7 @@ jobs:
     - name: Inject website ssh-hostkey
       run: echo '${{ secrets.SSH_KNOWN_HOSTS }}' >> ~/.ssh/known_hosts;
     - name: Deploy update
-      run: make deploy_frontend
+      run: ./scripts/deploy_frontend.sh
       env:
         HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
-        HYPERONE_EARLY_ADOPTERS: 'true'
         HYPERONE_PROJECT: '587707232a57b6fd80f04bc1'

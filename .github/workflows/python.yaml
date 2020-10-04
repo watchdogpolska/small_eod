@@ -17,40 +17,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Pyupgrade
-      run: make pyupgrade
     - name: Lint
       run: make lint
     - name: Build
-      run: make build
+      run: make backend_build
     - name: Migration check
-      run: make check
+      run: make backend_check
     - name: Show settings
-      run: make settings
+      run: ./scripts/show_backend_settings.sh
     - name: Diff OpenAPI
-      run: make diff_openapi
+      run: ./scripts/show_diff_openapi.sh
     - name: Wait for services
-      run: make wait_mysql wait_minio migrate
+      run: make wait_backend
     - name: Python test
       run: make test
     - name: System test
-      run: ./backend-project/contrib/github/script.sh
+      run: ./scripts/test/integration.sh
     - name: Send coverage report
-      run: make coverage_send_backend
+      run: make -C backend-project coverage_send
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       if: github.event_name == 'push'
-    - uses: actions/upload-artifact@v1
+    - name: 'Archive OpenAPI specification'
+    - run: ./scripts/save_openapi.sh
+    - uses: actions/upload-artifact@v2
       with:
-        name: openapi.yaml
-        path: ./openapi.yaml
-    - uses: actions/upload-artifact@v1
-      # see https://github.com/actions/upload-artifact/issues/11 
-      # for remove duplicated actions
-      with:
-        name: openapi.json
-        path: ./openapi.json
+        name: openapi
+        path: ./openapi.*
     - name: Docker-compose logs
       run: docker-compose logs
       if: failure()
@@ -92,8 +86,7 @@ jobs:
     - name: Inject website ssh-hostkey
       run: cat .github/h1-known-hosts > ~/.ssh/known_hosts;
     - name: Deploy update
-      run: make deploy_backend
+      run: ./scripts/deploy_backend.sh
       env:
         HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
-        HYPERONE_EARLY_ADOPTERS: 'true'
         HYPERONE_PROJECT: '587707232a57b6fd80f04bc1'
