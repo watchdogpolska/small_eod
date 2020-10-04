@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import CheckPermissions from './CheckPermissions';
 
 /**
@@ -50,9 +50,9 @@ const authorize = (authority: string, error?: React.ReactNode) => {
    * 防止传入字符串时找不到staticContext造成报错
    * String parameters can cause staticContext not found error
    */
-  let classError: boolean | React.FC = false;
+  let classError: boolean | FC = false;
   if (error) {
-    classError = (() => error) as React.FC;
+    classError = (() => error) as FC;
   }
   if (!authority) {
     throw new Error('authority is required');

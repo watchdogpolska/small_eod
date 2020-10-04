@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Spin } from 'antd';
 import isEqual from 'lodash/isEqual';
 import { isComponentClass } from './Secured';
@@ -11,7 +11,7 @@ interface PromiseRenderProps<T, K> {
 }
 
 interface PromiseRenderState {
-  component: React.ComponentClass | React.FC;
+  component: React.ComponentClass | FC;
 }
 
 export default class PromiseRender<T, K> extends React.Component<
@@ -57,7 +57,7 @@ export default class PromiseRender<T, K> extends React.Component<
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-  checkIsInstantiation = (target: React.ReactNode | React.ComponentClass): React.FC => {
+  checkIsInstantiation = (target: React.ReactNode | React.ComponentClass): FC => {
     if (isComponentClass(target)) {
       const Target = target as React.ComponentClass;
       return (props: any) => <Target {...props} />;
