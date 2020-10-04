@@ -1,7 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect, FC } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Institution } from '@/models/institutions';
 import { User } from '@/models/users';
@@ -29,7 +29,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CasesNewForm: FunctionComponent<CasesNewFormProps> = ({
+const CasesNewForm: FC<CasesNewFormProps> = ({
   tags,
   users,
   institutions,

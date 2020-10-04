@@ -10,13 +10,13 @@ interface AuthorizedProps {
   noMatch?: React.ReactNode;
 }
 
-type IAuthorizedType = React.FunctionComponent<AuthorizedProps> & {
+type IAuthorizedType = React.FC<AuthorizedProps> & {
   Secured: typeof Secured;
   check: typeof check;
   AuthorizedRoute: typeof AuthorizedRoute;
 };
 
-const Authorized: React.FunctionComponent<AuthorizedProps> = ({
+const Authorized: React.FC<AuthorizedProps> = ({
   children,
   authority,
   noMatch = (

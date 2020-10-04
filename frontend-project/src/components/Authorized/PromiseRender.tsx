@@ -11,7 +11,7 @@ interface PromiseRenderProps<T, K> {
 }
 
 interface PromiseRenderState {
-  component: React.ComponentClass | React.FunctionComponent;
+  component: React.ComponentClass | React.FC;
 }
 
 export default class PromiseRender<T, K> extends React.Component<
@@ -59,7 +59,7 @@ export default class PromiseRender<T, K> extends React.Component<
   // Secured is not instantiated
   checkIsInstantiation = (
     target: React.ReactNode | React.ComponentClass,
-  ): React.FunctionComponent => {
+  ): React.FC => {
     if (isComponentClass(target)) {
       const Target = target as React.ComponentClass;
       return (props: any) => <Target {...props} />;
