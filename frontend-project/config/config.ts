@@ -1,6 +1,8 @@
 import slash from 'slash2';
 import defaultSettings from './defaultSettings';
-const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
+const { pwa } = defaultSettings;
+
+const backend_url = process.env.API_URL || 'http://backend:8000/';
 
 const plugins = [
   ['umi-plugin-antd-icon-config', {}],
@@ -108,7 +110,20 @@ export default {
               name: 'tags',
               icon: 'FileTextOutlined',
               path: '/tags',
-              component: './tags/list',
+              routes: [
+                {
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/tags/new',
+                  component: './tags/new',
+                },
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/tags',
+                  component: './tags/list',
+                },
+              ],
             },
             {
               name: 'letters',
@@ -121,13 +136,26 @@ export default {
                   path: '/letters/list',
                   component: './letters/list',
                 },
-                {
-                  name: 'channels',
-                  icon: 'HomeOutlined',
-                  path: '/letters/channels',
-                  component: './letters/channels',
-                },
               ],
+            },
+            {
+              name: 'channels',
+              icon: 'HomeOutlined',
+              path: '/channels',
+              routes: [
+                {
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/channels/new',
+                  component: './channels/new',
+                },
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/channels/list',
+                  component: './channels/list',
+                },
+              ]
             },
             {
               name: 'institutions',
@@ -218,7 +246,7 @@ export default {
     ['api', 'admin', 'static', 'media'].map(x => [
       `/${x}/`,
       {
-        target: 'http://backend:8000/',
+        target: backend_url,
         changeOrigin: true,
       },
     ]),
