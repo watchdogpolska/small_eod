@@ -110,7 +110,7 @@
     "jsdom-global": "^3.0.2",
     "lint-staged": "^9.0.0",
     "node-fetch": "^2.6.0",
-    "prettier": "2.*",
+    "prettier": "^2.1.2",
     "pro-download": "1.0.1",
     "react-test-renderer": "^16.13.1",
     "stylelint": "^13.0.0",
