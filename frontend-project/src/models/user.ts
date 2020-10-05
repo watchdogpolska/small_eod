@@ -28,8 +28,8 @@ export interface UserModelType {
     fetchCurrent: Effect;
   };
   reducers: {
-    saveCurrentUser: Reducer;
-    changeNotifyCount: Reducer;
+    saveCurrentUser: Reducer<UserModelState>;
+    changeNotifyCount: Reducer<UserModelState>;
   };
 }
 

@@ -74,7 +74,7 @@ Projekt realizowany jest zgodnie z filozofią open-source. Szczegółowe informa
 
 Zadania do wykonania są zarejestrowane jako zagadnienia oznaczone etykietą [good first issue](https://github.com/watchdogpolska/small_eod/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) w portalu GitHub. W celu ich realizacji wystarczy komentarz o rozpoczęciu prac, a następnie utworzenie żądania wcielenia zmian (pull request).
 
-Bieżąca komunikacja projektu odbywa się z wykorzystaniem Slacka organizacji [CodeForPoznań](https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU) na kanale #watchdog. Odbywają się regularne spotkania statusowe (szczegóły w zagadnieniu [https://github.com/watchdogpolska/small_eod/issues/547](#547)), gdzie można uzyskać wprowadzenie w projekt, dowiedzieć się na temat zadań i usunąć inne trudności we współpracy. 
+Bieżąca komunikacja projektu odbywa się z wykorzystaniem Slacka organizacji [CodeForPoznań](https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU) na kanale #watchdog. Odbywają się regularne spotkania statusowe (szczegóły w zagadnieniu [https://github.com/watchdogpolska/small_eod/issues/547](#547)), gdzie można uzyskać wprowadzenie w projekt, dowiedzieć się na temat zadań i usunąć inne trudności we współpracy.
 
 ## Uruchomienie projektu
 
@@ -148,6 +148,12 @@ Dla potrzeb środowiska testowego w HyperOne zostały uruchomione:
 * kontenery w klasycznej infrastrukturze Stowarzyszenia (bazującej na *[Wirtualnych Maszynach](https://www.hyperone.com/services/compute/vm/)* HyperOne):
   * Minio – dla usługi składowania plików – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
   * Balancer – dla zintegrowania usług *Strona* – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
+
+## Dostęp do wersji demo
+
+W sprawie dostępu do [wersji demo](https://demo.small-eod.siecobywatelska.pl/admin/) napisz na Slacku.
+Dostęp do [API](https://api.dev.small-eod.siecobywatelska.pl/api/docs/) również wymaga loginu i hasła,
+które można otrzymać na Slacku.
 
 ### Materiały dodatkowe
 

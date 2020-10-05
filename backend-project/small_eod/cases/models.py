@@ -32,8 +32,7 @@ class Case(TimestampUserLogModel):
         verbose_name=_("Name"),
         help_text=_("Case's name."),
     )
-    comment = models.CharField(
-        max_length=256,
+    comment = models.TextField(
         blank=True,
         verbose_name=_("Comment"),
         help_text=_("Comment for this case."),

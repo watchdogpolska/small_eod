@@ -5,7 +5,7 @@ import ProLayout, {
   DefaultFooter,
   SettingDrawer,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Link } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -74,7 +74,7 @@ const defaultFooterDom = (
           </>
         ),
         href:
-          typeof build_sha === 'undefined'
+          typeof build_sha === 'undefined' || build_sha === 'unknown_sha'
             ? 'https://github.com/watchdogpolska/small_eod/'
             : `https://github.com/watchdogpolska/small_eod/commit/${build_sha}`,
         blankTarget: true,
@@ -88,20 +88,20 @@ const defaultFooterDom = (
       {
         key: 'swagger',
         title: 'small-eod – API Swagger',
-        href: '/api/swagger/',
+        href: '/api/docs/',
         blankTarget: true,
       },
       {
         key: 'drf',
         title: 'small-eod - API DRF',
-        href: '/api/swagger/',
+        href: '/api/',
         blankTarget: true,
       },
     ]}
   />
 );
 
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
+const BasicLayout: FC<BasicLayoutProps> = props => {
   const {
     dispatch,
     children,
@@ -124,6 +124,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
+  const reactEnv = process.env.REACT_APP_ENV || 'dev';
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
@@ -183,15 +184,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           {children}
         </Authorized>
       </ProLayout>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={config =>
-          dispatch({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+      {reactEnv && reactEnv !== 'prod' && (
+        <SettingDrawer
+          settings={settings}
+          onSettingChange={config =>
+            dispatch({
+              type: 'settings/changeSetting',
+              payload: config,
+            })
+          }
+        />
+      )}
     </>
   );
 };

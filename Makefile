@@ -8,7 +8,7 @@ BRANCH?=dev
 
 start: wait_mysql wait_minio
 	docker-compose up -d
-	
+
 stop:
 	docker-compose stop
 
@@ -63,7 +63,7 @@ lint:
 	docker run --rm -v /$$(pwd)/backend-project:/data cytopia/black --check .
 
 fmt:
-	docker run --rm -v /$$(pwd):/data cytopia/black ./backend-project
+	docker run --rm --user $$(id -u):$$(id -u) -v /$$(pwd):/data cytopia/black ./backend-project
 
 check: wait_mysql wait_minio
 	docker-compose run --rm backend python manage.py makemigrations --check
@@ -79,7 +79,7 @@ createsuperuser: wait_minio
 
 test_local: lint build check test
 
-openapi: 
+openapi:
 	docker-compose run --rm backend python manage.py generate_swagger
 
 build_balancer:
@@ -89,7 +89,7 @@ push_balancer:
 	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:latest
 
 deploy_frontend:
-	docker-compose run frontend bash -c 'yarn && yarn build'
+	docker-compose run -e REACT_APP_ENV=prod frontend bash -c 'yarn && yarn build'
 	rsync -av --delete frontend-project/dist/ ${FRONTEND}@$$(h1 website show --website ${FRONTEND} --query '[].{fqdn:fqdn}' --output tsv):/data/public
 
 deploy_backend:
