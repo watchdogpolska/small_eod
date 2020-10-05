@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
 import { connect } from 'dva';
 
-import { Case } from '@/models/cases';
+import { Case } from '@/services/cases';
 
 export interface CaseNameProps {
   id: number;
