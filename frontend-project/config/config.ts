@@ -169,7 +169,7 @@ export default {
                   path: '/channels/list',
                   component: './channels/list',
                 },
-              ]
+              ],
             },
             {
               name: 'institutions',
