@@ -1,31 +1,6 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
-
-interface File {
-  downloadUrl: string;
-  letter: number;
-}
-
-export interface Letter {
-  attachments: File[];
-  case: number;
-  channel: number;
-  comment: string;
-  createdBy: number;
-  createdOn: string;
-  date: string;
-  description: number;
-  direction: string;
-  excerpt: string;
-  final: boolean;
-  id: number;
-  reference_number: string;
-  institution: number;
-  modifiedBy: number;
-  modifiedOn: string;
-  name: string;
-  ordering: number;
-}
+import { Letter } from '@/services/swagger';
 
 export async function fetchLettersPage({
   current,

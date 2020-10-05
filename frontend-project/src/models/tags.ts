@@ -1,6 +1,7 @@
-import { fetchAll, fetchPage, Tag } from '@/services/tags';
+import { fetchAll, fetchPage } from '@/services/tags';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { Tag } from '@/services/swagger';
 
 export type TagDefaultState = Tag[];
 

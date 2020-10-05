@@ -1,19 +1,7 @@
 import smallEodSDK from '@/utils/sdk';
 
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
-
-export interface Channel {
-  id: number;
-  name: string;
-  city: boolean;
-  voivodeship: boolean;
-  flatNo: boolean;
-  street: boolean;
-  postalCode: boolean;
-  houseNo: boolean;
-  email: boolean;
-  epuap: boolean;
-}
+import { Channel } from '@/services/swagger';
 
 export const fetchOne = async (id: number): Promise<Channel> => {
   return new smallEodSDK.ChannelsApi().channelsRead(id);

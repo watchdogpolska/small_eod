@@ -1,6 +1,7 @@
-import { fetchOne, Case } from '@/services/cases';
+import { fetchOne } from '@/services/cases';
 import { Effect, EffectsCommandMap } from 'dva';
 import { AnyAction, Reducer } from 'redux';
+import { Case } from '@/services/swagger';
 
 export type CaseModelState = Case[];
 

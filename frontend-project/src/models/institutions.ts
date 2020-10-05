@@ -1,22 +1,9 @@
 import { fetchAll, fetchOne } from '@/services/institutions';
 import { Effect } from 'dva';
 import { AnyAction, Reducer } from 'redux';
+import { Institution } from '@/services/swagger';
 
 export type InstitutionsModelState = Institution[];
-
-export interface Institution {
-  id: number;
-  name: string;
-  email?: string;
-  city?: string;
-  epuap?: string;
-  street?: string;
-  houseNumber?: string;
-  postalCode?: string;
-  flatNumber?: string;
-  NIP?: number;
-  regon?: number;
-}
 
 const defaultInstitutionsState: InstitutionsModelState = [];
 

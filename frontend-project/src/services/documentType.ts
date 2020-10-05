@@ -1,8 +1,6 @@
 import smallEodSDK from '@/utils/sdk';
 
-export interface DocumentType {
-  name: string;
-}
+import { DocumentType } from '@/services/swagger';
 
 export const fetchDocumentType = async (id: number): Promise<DocumentType> => {
   const response = await new smallEodSDK.DocumentTypesApi().documentTypesRead(id);
