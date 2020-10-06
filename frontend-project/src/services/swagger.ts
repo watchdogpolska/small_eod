@@ -1,3 +1,4 @@
+/* eslint-disable */
 // This file is generated, do not manually edit this file
 // Update and use '@/scripts/generate_interface.js' instead
 
@@ -101,6 +102,7 @@ export interface Letter {
   institution: number;
   case: number;
   attachments: File[];
+  ordering: number;
   comment: string;
   excerpt: string;
   documentType: number;
@@ -122,7 +124,6 @@ export interface TokenSet {
 }
 
 export interface DocumentType {
-  id: number;
   name: string;
 }
 
@@ -176,8 +177,8 @@ export interface SignRequest {
 }
 
 export interface Tag {
-  id: number;
   name: string;
+  id: number;
 }
 
 export interface Request {
@@ -193,4 +194,3 @@ export interface TokenResponse {
 export interface RefreshTokenRequest {
   refreshToken: string;
 }
-
