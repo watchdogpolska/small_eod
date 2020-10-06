@@ -10,6 +10,8 @@ const main = async () => {
   console.log('// This file is generated, do not manually edit this file');
   console.log("// Update and use '@/scripts/generate_interface.js' instead");
   console.log('');
+  console.log('type Possible<T> = T | undefined | null');
+  console.log('');
   for (const [name, schema] of Object.entries(spec.definitions)) {
     console.log(`export interface ${name} {`);
     for (const [pname, pvalue] of Object.entries(schema.properties)) {
