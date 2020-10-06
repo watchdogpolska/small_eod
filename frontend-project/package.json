@@ -9,7 +9,6 @@
     "deploy": "npm run site && npm run gh-pages",
     "fetch:blocks": "pro fetch-blocks --branch antd@4 && npm run prettier",
     "format-imports": "cross-env import-sort --write '**/*.{js,jsx,ts,tsx}'",
-    "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
