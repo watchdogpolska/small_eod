@@ -2,11 +2,9 @@
 // This file is generated, do not manually edit this file
 // Update and use '@/scripts/generate_interface.js' instead
 
-type Possible<T> = T | undefined | null;
-
 export interface AdministrativeUnit {
   id: string;
-  parent: string;
+  parent: string | null;
   name: string;
   category: number;
   slug: string;
@@ -173,8 +171,7 @@ export interface SignRequest {
   name: string;
   method: string;
   url: string;
-  // Unsupported type 'object' in SignRequest/formData
-  formData: any;
+  formData: unknown;
   path: string;
 }
 
