@@ -4,7 +4,8 @@ import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import Table from '@/components/Table';
-import { Institution, fetchInstitutionPage } from '@/services/institutions';
+import { fetchInstitutionPage } from '@/services/institutions';
+import { Institution } from '@/services/definitions';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<Institution>[] = [

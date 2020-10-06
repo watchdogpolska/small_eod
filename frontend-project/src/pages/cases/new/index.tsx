@@ -3,8 +3,7 @@ import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import { connect } from 'dva';
 import React, { useEffect, FC } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Institution } from '@/models/institutions';
-import { User } from '@/models/users';
+import { Institution, User } from '@/services/definitions';
 
 interface Tag {
   name: string;

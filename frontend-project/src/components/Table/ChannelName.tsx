@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { Spin } from 'antd';
-import { Channel } from '@/services/channels';
+import { Channel } from '@/services/definitions';
 
 export interface ChannelNameProps {
   id: number;
