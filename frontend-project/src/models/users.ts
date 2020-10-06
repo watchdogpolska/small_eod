@@ -1,7 +1,7 @@
 import { fetchAll } from '@/services/users';
 import { Effect } from 'dva';
 import { Reducer } from 'react';
-import { User } from '@/services/swagger';
+import { User } from './definitions';
 
 export type UsersModelState = User[];
 

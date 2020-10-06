@@ -1,7 +1,7 @@
 import { fetchPage, fetchOne } from '@/services/channels';
 import { Effect } from 'dva';
 import { AnyAction, Reducer } from 'redux';
-import { Channel } from '@/services/swagger';
+import { Channel } from './definitions';
 import { CaseModelState } from './cases';
 
 export type ChannelModelState = Channel[];

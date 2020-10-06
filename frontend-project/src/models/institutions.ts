@@ -1,7 +1,7 @@
 import { fetchAll, fetchOne } from '@/services/institutions';
 import { Effect } from 'dva';
 import { AnyAction, Reducer } from 'redux';
-import { Institution } from '@/services/swagger';
+import { Institution } from './definitions';
 
 export type InstitutionsModelState = Institution[];
 
