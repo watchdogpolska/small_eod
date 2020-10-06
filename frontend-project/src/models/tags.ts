@@ -1,7 +1,7 @@
 import { fetchAll, fetchPage } from '@/services/tags';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import { Tag } from './definitions';
+import { Tag } from '@/services/definitions';
 
 export type TagDefaultState = Tag[];
 

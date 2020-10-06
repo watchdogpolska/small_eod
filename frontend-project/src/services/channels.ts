@@ -1,7 +1,7 @@
 import smallEodSDK from '@/utils/sdk';
 
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
-import { Channel } from '@/services/swagger';
+import { Channel } from './definitions';
 
 export const fetchOne = async (id: number): Promise<Channel> => {
   return new smallEodSDK.ChannelsApi().channelsRead(id);

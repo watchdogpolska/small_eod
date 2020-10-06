@@ -1,6 +1,6 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
-import { Letter } from '@/services/swagger';
+import { Letter } from './definitions';
 
 export async function fetchLettersPage({
   current,

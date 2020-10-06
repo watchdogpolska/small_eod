@@ -1,6 +1,6 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
-import { Case } from '@/services/swagger';
+import { Case } from './definitions';
 
 export async function fetchCasesPage({
   current,

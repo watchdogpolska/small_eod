@@ -1,6 +1,6 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
-import { Tag } from '@/services/swagger';
+import { Tag } from './definitions';
 
 export interface Page {
   results: Tag[];

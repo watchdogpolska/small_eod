@@ -1,6 +1,6 @@
 import smallEodSDK from '@/utils/sdk';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
-import { Institution } from '@/services/swagger';
+import { Institution } from './definitions';
 
 function fetchAllPages(page) {
   if (page.next) {
