@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
+    "noEmit": true,
     "module": "esnext",
     "target": "esnext",
     "lib": ["esnext", "dom"],
