@@ -16,7 +16,7 @@
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:prettier": "check-prettier lint",
+    "lint:prettier": "prettier --check \"**/*\"",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\"",
     "start": "umi dev",
@@ -96,7 +96,6 @@
     "@types/react-helmet": "^5.0.13",
     "@umijs/fabric": "2.1.1",
     "chalk": "^3.0.0",
-    "check-prettier": "^1.0.3",
     "cross-env": "^6.0.0",
     "cross-port-killer": "^1.1.1",
     "enzyme": "^3.9.0",
@@ -111,7 +110,7 @@
     "jsdom-global": "^3.0.2",
     "lint-staged": "^9.0.0",
     "node-fetch": "^2.6.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.1.2",
     "pro-download": "1.0.1",
     "react-test-renderer": "^16.13.1",
     "stylelint": "^13.0.0",
@@ -123,12 +122,5 @@
   },
   "engines": {
     "node": ">=10.0.0"
-  },
-  "checkFiles": [
-    "src/**/*.js*",
-    "src/**/*.ts*",
-    "src/**/*.less",
-    "config/**/*.js*",
-    "scripts/**/*.js"
-  ]
+  }
 }
