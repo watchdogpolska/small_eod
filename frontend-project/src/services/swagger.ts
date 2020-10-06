@@ -2,6 +2,8 @@
 // This file is generated, do not manually edit this file
 // Update and use '@/scripts/generate_interface.js' instead
 
+type Possible<T> = T | undefined | null;
+
 export interface AdministrativeUnit {
   id: string;
   parent: string;
