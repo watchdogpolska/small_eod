@@ -17,6 +17,10 @@ interface Window {
   reloadAuthorized: () => void;
 }
 
-declare let ga: Function;
+/* eslint-disable no-use-before-define */
+declare const build_date: ?string;
+declare const build_branch: ?string;
+declare const build_sha: ?string;
+/* eslint-enable no-use-before-define */
 
 declare const REACT_APP_ENV: 'test' | 'dev' | 'pre' | false;
