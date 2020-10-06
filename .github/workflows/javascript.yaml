@@ -25,6 +25,9 @@ jobs:
     - name: Lint
       run: yarn lint
       working-directory: ./frontend-project/
+    - name: Typecheck
+      run: yarn tsc
+      working-directory: ./frontend-project/
     - name: Build
       run: yarn build
       working-directory: ./frontend-project/
