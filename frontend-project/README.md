@@ -58,7 +58,7 @@ Zawiera pliki odpowiedzialne za frontend aplikacji small_eod. Został on napisan
 
 ## Zmienne środowiskowe
 
-|      Nazwa      |                 Opis                 |    Domyślna wartość    |
+| Nazwa           | Opis                                 | Domyślna wartość       |
 | --------------- | ------------------------------------ | ---------------------- |
 | `API_URL`       | adres URL serwera API (back-end)     | `http://backend:8000/` |
 | `COMMIT_SHA`    | identyfikator SHA commitu dla buildu | undefined              |

@@ -5,7 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import { Case, fetchCasesPage } from '@/services/cases';
 import Table from '@/components/Table';
-import { InstitutionName } from '@/components/Table/InstitutionName';
+import InstitutionName from '@/components/Table/InstitutionName';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<Case>[] = [
