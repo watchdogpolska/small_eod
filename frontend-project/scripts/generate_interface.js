@@ -3,6 +3,7 @@ const fs = require('fs');
 const main = async () => {
     if (process.argv.length < 3) {
         console.error(`${process.argv.slice(0, 2).join("")} [specification-file]`);
+        process.exit(-1);
     }
     const spec = JSON.parse(await fs.promises.readFile(process.argv[2]));
     console.log('// This file is generated, do not manually edit this file');
