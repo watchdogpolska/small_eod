@@ -7,7 +7,6 @@ const main = async () => {
     process.exit(-1);
   }
   const spec = JSON.parse(await fs.promises.readFile(process.argv[2]));
-  console.log('/* eslint-disable */');
   console.log('// This file is generated, do not manually edit this file');
   console.log("// Update and use '@/scripts/generate_interface.js' instead");
   console.log('');

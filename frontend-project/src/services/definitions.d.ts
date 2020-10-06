@@ -1,4 +1,3 @@
-/* eslint-disable */
 // This file is generated, do not manually edit this file
 // Update and use '@/scripts/generate_interface.js' instead
 
