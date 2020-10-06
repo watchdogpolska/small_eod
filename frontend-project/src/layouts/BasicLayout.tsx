@@ -5,7 +5,7 @@ import ProLayout, {
   DefaultFooter,
   SettingDrawer,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Link } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -101,7 +101,7 @@ const defaultFooterDom = (
   />
 );
 
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
+const BasicLayout: FC<BasicLayoutProps> = props => {
   const {
     dispatch,
     children,

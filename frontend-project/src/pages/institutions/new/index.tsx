@@ -1,6 +1,6 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 const layout = {
@@ -12,7 +12,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const InstitutionsNewForm: FunctionComponent = () => {
+const InstitutionsNewForm: FC = () => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
