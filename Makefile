@@ -99,4 +99,4 @@ deploy_backend:
 	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
 	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
 	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
-	h1 website restart --website ${BACKEND}
+	h1 website restart --query '[].{id:id,state:state}' --website ${BACKEND}
