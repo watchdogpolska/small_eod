@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
-import { Channel } from '@/services/channels';
+import { Channel } from '@/services/definitions';
 import Table from '@/components/Table';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 

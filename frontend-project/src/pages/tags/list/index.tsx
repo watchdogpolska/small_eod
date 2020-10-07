@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 
-import { Tag } from '@/services/tags';
+import { Tag } from '@/services/definitions';
 import Table from '@/components/Table';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 

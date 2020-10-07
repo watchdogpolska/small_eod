@@ -1,9 +1,7 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
+import { Tag } from './definitions';
 
-export interface Tag {
-  name: string;
-}
 export interface Page {
   results: Tag[];
   count: number;

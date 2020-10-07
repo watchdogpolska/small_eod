@@ -2,7 +2,8 @@ import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-import { Letter, fetchLettersPage } from '@/services/letters';
+import { fetchLettersPage } from '@/services/letters';
+import { Letter } from '@/services/definitions';
 import Table from '@/components/Table';
 import ChannelName from '@/components/Table/ChannelName';
 import InstitutionName from '@/components/Table/InstitutionName';

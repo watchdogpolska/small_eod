@@ -3,7 +3,8 @@ import { Tag } from 'antd';
 import React, { FC } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-import { Case, fetchCasesPage } from '@/services/cases';
+import { Case } from '@/services/definitions';
+import { fetchCasesPage } from '@/services/cases';
 import Table from '@/components/Table';
 import InstitutionName from '@/components/Table/InstitutionName';
 
