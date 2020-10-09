@@ -44,7 +44,7 @@ const InstitutionsModel: InstitutionModelType = {
       return payload.results;
     },
     saveOne(state, { payload }) {
-      return state.find(value => value.id === payload.id) ? state : [...state, payload];
+      return state.find((value) => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };

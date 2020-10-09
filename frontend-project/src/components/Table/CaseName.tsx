@@ -14,7 +14,7 @@ const CaseName: FC<CaseNameProps> = ({ id, cases, dispatch }) => {
   useEffect(() => {
     dispatch({ type: 'cases/fetchOne', payload: id });
   }, []);
-  const oneCase = cases.find(value => value.id === id);
+  const oneCase = cases.find((value) => value.id === id);
 
   return <div>{oneCase ? oneCase.name : <Spin />}</div>;
 };

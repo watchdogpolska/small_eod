@@ -20,7 +20,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'institutions-list.table.columns.createdOn.title' }),
       dataIndex: 'createdOn',
-      render: createdOn => createdOn.toLocaleString(),
+      render: (createdOn) => createdOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'institutions-list.table.columns.modifiedOn.title' }),
@@ -32,7 +32,7 @@ const TableList: FC<{}> = () => {
       dataIndex: 'tags',
       render: (tags: number[]) => (
         <>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <Tag color="blue" key={tag}>
               {tag}
             </Tag>

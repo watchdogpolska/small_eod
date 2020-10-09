@@ -11,7 +11,7 @@ interface SelectLangProps {
   className?: string;
 }
 
-const SelectLang: FC<SelectLangProps> = props => {
+const SelectLang: FC<SelectLangProps> = (props) => {
   const { className } = props;
   const selectedLang = getLocale();
 
@@ -28,7 +28,7 @@ const SelectLang: FC<SelectLangProps> = props => {
   };
   const langMenu = (
     <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={changeLang}>
-      {locales.map(locale => (
+      {locales.map((locale) => (
         <Menu.Item key={locale}>
           <span role="img" aria-label={languageLabels[locale]}>
             {languageIcons[locale]}

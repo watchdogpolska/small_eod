@@ -19,7 +19,7 @@ const TableList: FC<{}> = () => {
       dataIndex: 'auditedInstitutions',
       render: (auditedInstitutions: number[]) => (
         <>
-          {auditedInstitutions.map(auditedInstitution => (
+          {auditedInstitutions.map((auditedInstitution) => (
             <InstitutionName id={auditedInstitution} key={auditedInstitution} />
           ))}
         </>
@@ -32,19 +32,19 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'cases-list.table.columns.createdOn.title' }),
       dataIndex: 'createdOn',
-      render: createdOn => createdOn.toLocaleString(),
+      render: (createdOn) => createdOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'cases-list.table.columns.modifiedOn.title' }),
       dataIndex: 'modifiedOn',
-      render: modifiedOn => modifiedOn.toLocaleString(),
+      render: (modifiedOn) => modifiedOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'cases-list.table.columns.tags.title' }),
       dataIndex: 'tags',
       render: (tags: number[]) => (
         <>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <Tag color="blue" key={tag}>
               {tag}
             </Tag>

@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import { fetchDocumentType } from '@/services/documentType';
 
-export const DocumentTypeName: FC<{ id: number }> = props => {
+export const DocumentTypeName: FC<{ id: number }> = (props) => {
   const [name, setName] = useState('');
   useEffect(() => {
     const fetchData = async () => {

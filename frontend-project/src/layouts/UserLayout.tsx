@@ -17,7 +17,7 @@ export interface UserLayoutProps {
   location: Location;
 }
 
-const UserLayout: FC<UserLayoutProps> = props => {
+const UserLayout: FC<UserLayoutProps> = (props) => {
   const {
     route = {
       routes: [],

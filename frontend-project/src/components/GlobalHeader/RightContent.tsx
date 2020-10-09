@@ -20,7 +20,7 @@ const ENVTagColor = {
   pre: '#87d068',
 };
 
-const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
+const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
   const reactEnv = process.env.REACT_APP_ENV || 'dev';
   const { theme, layout } = props;
   let className = styles.right;

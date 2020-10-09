@@ -32,7 +32,7 @@ const CasesModel: CaseModelType = {
   },
   reducers: {
     saveOne(state, { payload }) {
-      return state.find(value => value.id === payload.id) ? state : [...state, payload];
+      return state.find((value) => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };

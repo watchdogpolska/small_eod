@@ -51,7 +51,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
  */
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
-  menuList.map(item => {
+  menuList.map((item) => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
@@ -101,7 +101,7 @@ const defaultFooterDom = (
   />
 );
 
-const BasicLayout: FC<BasicLayoutProps> = props => {
+const BasicLayout: FC<BasicLayoutProps> = (props) => {
   const {
     dispatch,
     children,
@@ -187,7 +187,7 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
       {reactEnv && reactEnv !== 'prod' && (
         <SettingDrawer
           settings={settings}
-          onSettingChange={config =>
+          onSettingChange={(config) =>
             dispatch({
               type: 'settings/changeSetting',
               payload: config,

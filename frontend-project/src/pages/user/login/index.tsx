@@ -75,7 +75,7 @@ const UserLogin = (props: UserLoginProps) => {
           />
         </Tab>
         <div>
-          <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
+          <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
             Zaloguj autmatycznie
           </Checkbox>
           {/* <a

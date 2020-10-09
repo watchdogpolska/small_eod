@@ -17,7 +17,7 @@ function fetchAllPages(page: Page) {
         limit: params.get('limit'),
         offset: params.get('offset'),
       })
-      .then(newPage => {
+      .then((newPage) => {
         const nextPage = newPage;
         nextPage.results = page.results.concat(nextPage.results);
         return fetchAllPages(nextPage);
@@ -43,5 +43,5 @@ export async function fetchPage({
 
 export async function fetchAll() {
   smallEodSDK.TagsApi();
-  return smallEodSDK.tagsList().then(page => fetchAllPages(page));
+  return smallEodSDK.tagsList().then((page) => fetchAllPages(page));
 }

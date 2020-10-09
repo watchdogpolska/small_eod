@@ -14,7 +14,7 @@ const InstitutionName: FC<InstitutionNameProps> = ({ id, institutions, dispatch 
   useEffect(() => {
     dispatch({ type: 'institutions/fetchOne', payload: id });
   }, []);
-  const institution = institutions.find(value => value.id === id);
+  const institution = institutions.find((value) => value.id === id);
   return <div>{institution ? institution.name : <Spin />}</div>;
 };
 

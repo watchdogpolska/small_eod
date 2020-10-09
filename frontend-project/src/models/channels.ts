@@ -46,7 +46,7 @@ const ChannelsModel: ChannelModelType = {
       return payload.data;
     },
     saveOne(state, { payload }) {
-      return state.find(value => value.id === payload.id) ? state : [...state, payload];
+      return state.find((value) => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };

@@ -10,7 +10,7 @@ function fetchAllPages(page) {
         limit: params.get('limit'),
         offset: params.get('offset'),
       })
-      .then(newPage => {
+      .then((newPage) => {
         const nextPage = newPage;
         nextPage.results = page.results.concat(nextPage.results);
         return fetchAllPages(nextPage);
@@ -37,7 +37,7 @@ export async function fetchInstitutionPage({
 
 export async function fetchAll() {
   smallEodSDK.InstitutionsApi();
-  return smallEodSDK.institutionsList().then(page => fetchAllPages(page));
+  return smallEodSDK.institutionsList().then((page) => fetchAllPages(page));
 }
 
 export async function fetchOne(id: number) {

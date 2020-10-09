@@ -95,7 +95,7 @@ const CasesNewForm: FC<CasesNewFormProps> = ({ tags, users, institutions, dispat
                   mode="tags"
                   placeholder={formatMessage({ id: 'cases-new.form.tags.placeholder' })}
                 >
-                  {tags.map(tag => (
+                  {tags.map((tag) => (
                     <Option key={tag.name} value={tag.name}>
                       {tag.name}
                     </Option>
@@ -135,7 +135,7 @@ const CasesNewForm: FC<CasesNewFormProps> = ({ tags, users, institutions, dispat
                     id: 'cases-new.form.audited-institution.placeholder',
                   })}
                 >
-                  {institutions.map(institution => (
+                  {institutions.map((institution) => (
                     <Option key={institution.id} value={institution.id}>
                       {institution.name}
                     </Option>
@@ -155,7 +155,7 @@ const CasesNewForm: FC<CasesNewFormProps> = ({ tags, users, institutions, dispat
                   mode="multiple"
                   placeholder={formatMessage({ id: 'cases-new.form.notified-users.placeholder' })}
                 >
-                  {users.map(user => (
+                  {users.map((user) => (
                     <Option key={user.id} value={user.id}>
                       {user.username}
                     </Option>
@@ -176,7 +176,7 @@ const CasesNewForm: FC<CasesNewFormProps> = ({ tags, users, institutions, dispat
                     id: 'cases-new.form.responsible-users.placeholder',
                   })}
                 >
-                  {users.map(user => (
+                  {users.map((user) => (
                     <Option key={user.id} value={user.id}>
                       {user.username}
                     </Option>
