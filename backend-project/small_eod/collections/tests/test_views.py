@@ -10,6 +10,7 @@ from ...generic.tests.test_views import (
 )
 from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
+from ...events.factories import EventFactory
 from ...users.mixins import AuthenticatedMixin
 
 
@@ -130,3 +131,26 @@ class CaseCollectionViewSetTestCase(
             [str(child.pk) for child in children] + [self.collection.query]
         )
         self.collection.save()
+
+
+class EventCollectionViewSetTestCase(
+    TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
+):
+    basename = "collection-event"
+    factory_class = EventFactory
+
+    def setUp(self):
+        super().setUp()
+        self.collection = CollectionFactory(query=str(self.obj.case.id))
+
+    def get_extra_kwargs(self):
+        return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
