@@ -11,6 +11,7 @@ from ...generic.tests.test_views import (
 from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
 from ...events.factories import EventFactory
+from ...letters.factories import LetterFactory
 from ...users.mixins import AuthenticatedMixin
 
 
@@ -148,6 +149,30 @@ class EventCollectionViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
+
+
+class LetterCollectionViewSetTestCase(
+    TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
+):
+    basename = "collection-letter"
+    factory_class = LetterFactory
+    queries_less_than_limit = 13
+
+    def setUp(self):
+        super().setUp()
+        self.collection = CollectionFactory(query=str(self.obj.case.id))
+
+    def get_extra_kwargs(self):
+        return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.reference_number, item["referenceNumber"])
 
     def increase_list(self):
         children = self.factory_class.create_batch(case=self.obj.case, size=5)
