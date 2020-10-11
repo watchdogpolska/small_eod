@@ -71,7 +71,7 @@ class CollectionTokenSecuredViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated | CollectionMemberTokenPermission]
 
 
-class CaseViewSet(CollectionTokenSecuredViewSet):
+class CaseCollectionViewSet(CollectionTokenSecuredViewSet):
     serializer_class = CaseSerializer
 
     def get_queryset(self):
@@ -95,16 +95,16 @@ class BaseSubCollection(CollectionTokenSecuredViewSet):
         return self.model.objects.filter(case=case).all()
 
 
-class EventViewSet(BaseSubCollection):
+class EventCollectionViewSet(BaseSubCollection):
     serializer_class = EventSerializer
     model = Event
 
 
-class NoteViewSet(BaseSubCollection):
+class NoteCollectionViewSet(BaseSubCollection):
     serializer_class = NoteSerializer
     model = Note
 
 
-class LetterViewSet(BaseSubCollection):
+class LetterCollectionViewSet(BaseSubCollection):
     serializer_class = LetterSerializer
     model = Letter
