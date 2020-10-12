@@ -177,6 +177,19 @@ export default {
               ],
             },
             {
+              name: 'features',
+              icon: 'FileTextOutlined',
+              path: '/features',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/features/list',
+                  component: './features/list',
+                },
+              ],
+            },
+            {
               name: 'users',
               icon: 'FileTextOutlined',
               path: '/users',

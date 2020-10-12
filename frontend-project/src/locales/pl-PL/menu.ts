@@ -11,6 +11,8 @@ export default {
   'menu.institutions.list': 'Lista',
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
+  'menu.features': 'Cechy',
+  'menu.features.list': 'Lista',
   'menu.channels': 'Kanały',
   'menu.channels.new': 'Nowy',
   'menu.channels.list': 'Lista',
