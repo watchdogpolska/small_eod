@@ -4,7 +4,7 @@ django-teryt-tree==0.16.3
 djangorestframework==3.11.1
 psycopg2-binary==2.8.6
 django-extensions==3.0.9
-drf-nested-routers==0.91
+drf-nested-routers==0.92
 djangorestframework-camel-case==1.2.0
 djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.1
