@@ -12,7 +12,7 @@ Dokumentacja API zgodna z Swagger 2.0 może zostać wygenerowana z wykorzystani
 python manage.py generate_swagger
 ```
 
-Dokumentacja bazuje na `drf_yasg`, dzięki czemu współpracuje ona z generatorami SDK
+Dokumentacja bazuje na `drf_yasg2`, dzięki czemu współpracuje ona z generatorami SDK
 
 ## SDK
 
