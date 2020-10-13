@@ -58,7 +58,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 Sieć Obywatelska Watchdog Polska"
+    copyright="2019-2020 Sieć Obywatelska Watchdog Polska"
     links={[
       {
         key: 'Sieć Obywatelska',
