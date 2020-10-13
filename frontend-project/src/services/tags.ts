@@ -45,3 +45,7 @@ export async function fetchAll() {
   smallEodSDK.TagsApi();
   return smallEodSDK.tagsList().then(page => fetchAllPages(page));
 }
+export async function create(value: Tag) {
+  smallEodSDK.TagsApi();
+  return smallEodSDK.tagsCreate(value);
+}

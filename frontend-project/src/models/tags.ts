@@ -1,4 +1,4 @@
-import { fetchAll, fetchPage } from '@/services/tags';
+import { fetchAll, fetchPage, create } from '@/services/tags';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import { Tag } from '@/services/definitions';
@@ -9,6 +9,7 @@ export interface TagModelType {
   namespace: string;
   state: Tag[];
   effects: {
+    create: Effect;
     fetchAll: Effect;
     fetchPage: Effect;
   };
@@ -23,6 +24,17 @@ const TagsModel: TagModelType = {
   namespace: 'tags',
   state: defaultTagsState,
   effects: {
+    *create({ payload }, { call, post }) {
+      const response = yield call(create, payload);
+      yield post({
+        payload: response,
+      });
+      // save successfully
+
+      if (response.status === 'ok') {
+        console.log('zapis ok');
+      }
+    },
     *fetchAll(_, { call, put }) {
       const response = yield call(fetchAll);
       yield put({
