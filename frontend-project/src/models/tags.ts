@@ -1,7 +1,9 @@
 import { fetchAll, fetchPage, create } from '@/services/tags';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { router } from 'umi';
 import { Tag } from '@/services/definitions';
+import { openNotificationWithIcon } from '@/models/global';
 
 export type TagDefaultState = Tag[];
 
@@ -24,15 +26,14 @@ const TagsModel: TagModelType = {
   namespace: 'tags',
   state: defaultTagsState,
   effects: {
-    *create({ payload }, { call, post }) {
+    *create({ payload }, { call }) {
       const response = yield call(create, payload);
-      yield post({
-        payload: response,
-      });
       // save successfully
-
-      if (response.status === 'ok') {
-        console.log('zapis ok');
+      if (response.response.status === 201) {
+        openNotificationWithIcon('success', 'Zapis prawidlowy');
+        router.replace('/tags');
+      } else {
+        openNotificationWithIcon('error', 'Zapis nieprawidlowy');
       }
     },
     *fetchAll(_, { call, put }) {

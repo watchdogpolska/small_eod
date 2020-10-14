@@ -21,20 +21,17 @@ const tailLayout = {
 
 const TagNewForm: FC<TagNewFormProps> = ({ dispatch }) => {
   const [form] = Form.useForm();
-  const onSubmit = (value: Tag) => {
+  const handleSubmit = (value: Tag) => {
     dispatch({
       type: 'tags/create',
       payload: { ...value },
     });
   };
-  const onFinish = (): void => {
-    onSubmit(form.getFieldsValue() as Tag);
-  };
 
   useEffect(() => {}, []);
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={handleSubmit}>
       <PageHeaderWrapper content={formatMessage({ id: 'tags-new.page-header-content' })}>
         <Card bordered={false}>
           <Row>
