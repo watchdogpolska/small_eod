@@ -27,13 +27,16 @@ const TagsModel: TagModelType = {
   state: defaultTagsState,
   effects: {
     *create({ payload }, { call }) {
-      const response = yield call(create, payload);
-      // save successfully
-      if (response.response.status === 201) {
-        openNotificationWithIcon('success', 'Zapis prawidlowy');
-        router.replace('/tags');
-      } else {
-        openNotificationWithIcon('error', 'Zapis nieprawidlowy');
+      try {
+        const response = yield call(create, payload);
+        openNotificationWithIcon('success', `Zapis prawidlowy ID: ${response.id}`);
+        router.replace(`/tags/`);
+      } catch (err) {
+        if (err.response.status === 400 && err.response.body.name) {
+          err.response.body.name.forEach(message => openNotificationWithIcon('error', message));
+        } else {
+          openNotificationWithIcon('error', err.response.body.detail);
+        }
       }
     },
     *fetchAll(_, { call, put }) {
