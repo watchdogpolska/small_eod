@@ -6,14 +6,12 @@ export interface GlobalModelState {
 
 export const openNotificationWithIcon = (type, msg) => {
   notification[type]({
-    message: msg,
-    description:
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    message: type,
+    description: msg,
   });
 };
 const GlobalModel = {
   namespace: 'global',
-
   state: {
     collapsed: false,
   },

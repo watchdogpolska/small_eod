@@ -29,7 +29,7 @@ const TagsModel: TagModelType = {
     *create({ payload }, { call }) {
       try {
         const response = yield call(create, payload);
-        openNotificationWithIcon('success', `Zapis prawidlowy ID: ${response.id}`);
+        openNotificationWithIcon('success', `Zapis prawidlowy ID: ${response.data.id}`);
         router.replace(`/tags/`);
       } catch (err) {
         if (err.response.status === 400 && err.response.body.name) {
