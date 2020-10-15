@@ -4,6 +4,7 @@ import { Reducer } from 'redux';
 import { router } from 'umi';
 import { Tag } from '@/services/definitions';
 import { openNotificationWithIcon } from '@/models/global';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 export type TagDefaultState = Tag[];
 
@@ -29,13 +30,24 @@ const TagsModel: TagModelType = {
     *create({ payload }, { call }) {
       try {
         const response = yield call(create, payload);
-        openNotificationWithIcon('success', `Zapis prawidlowy ID: ${response.data.id}`);
+        openNotificationWithIcon(
+          'success',
+          formatMessage({ id: 'tags-new.page-create-notiffy-success' }) + response.data.id,
+        );
         router.replace(`/tags/`);
       } catch (err) {
         if (err.response.status === 400 && err.response.body.name) {
-          err.response.body.name.forEach(message => openNotificationWithIcon('error', message));
+          err.response.body.name.forEach(message =>
+            openNotificationWithIcon(
+              'error',
+              formatMessage({ id: 'tags-new.page-create-notiffy-error' }) + message,
+            ),
+          );
         } else {
-          openNotificationWithIcon('error', err.response.body.detail);
+          openNotificationWithIcon(
+            'error',
+            formatMessage({ id: 'tags-new.page-create-notiffy-error' }) + err.response.body.detail,
+          );
         }
       }
     },
