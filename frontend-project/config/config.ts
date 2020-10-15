@@ -120,7 +120,7 @@ export default {
                 {
                   name: 'list',
                   icon: 'HomeOutlined',
-                  path: '/tags',
+                  path: '/tags/list',
                   component: './tags/list',
                 },
               ],
