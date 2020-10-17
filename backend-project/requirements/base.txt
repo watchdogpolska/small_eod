@@ -1,7 +1,7 @@
 Django==3.1.2
 django-environ==0.4.5
 django-teryt-tree==0.16.3
-djangorestframework==3.11.1
+djangorestframework==3.12.1
 psycopg2-binary==2.8.6
 django-extensions==3.0.9
 drf-nested-routers==0.92
