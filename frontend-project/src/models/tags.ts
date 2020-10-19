@@ -34,7 +34,7 @@ const TagsModel: TagModelType = {
           'success',
           formatMessage({ id: 'tags-new.page-create-notiffy-success' }) + response.data.id,
         );
-        router.replace(`/tags/`);
+        router.replace(`/tags/list`);
       } catch (err) {
         if (err.response.status === 400 && err.response.body.name) {
           err.response.body.name.forEach(message =>
