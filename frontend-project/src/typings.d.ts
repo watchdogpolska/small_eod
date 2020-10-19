@@ -18,9 +18,9 @@ interface Window {
 }
 
 /* eslint-disable no-use-before-define */
-declare const build_date: ?string;
-declare const build_branch: ?string;
-declare const build_sha: ?string;
+declare const BUILD_DATE: ?string;
+declare const BUILD_BRANCH: ?string;
+declare const BUILD_SHA: ?string;
 /* eslint-enable no-use-before-define */
 
 declare const REACT_APP_ENV: 'test' | 'dev' | 'pre' | false;
