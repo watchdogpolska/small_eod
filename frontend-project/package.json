@@ -90,7 +90,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
-    "@umijs/fabric": "2.1.1",
+    "@umijs/fabric": "2.3.0",
     "chalk": "^3.0.0",
     "cross-env": "^6.0.0",
     "cross-port-killer": "^1.1.1",
