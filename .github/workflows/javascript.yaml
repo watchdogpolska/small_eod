@@ -14,7 +14,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Node 12.x
       uses: actions/setup-node@v1
       with:
@@ -43,7 +43,7 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup H1-CLI
       uses: ./.github/actions/h1-cli
     - uses: webfactory/ssh-agent@v0.3.0
