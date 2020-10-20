@@ -16,7 +16,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Pyupgrade
       run: make pyupgrade
     - name: Lint
@@ -60,7 +60,7 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Build production image
       run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:latest backend-project/
     - name: "Docker login"
@@ -83,7 +83,7 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup H1-CLI
       uses: ./.github/actions/h1-cli
     - uses: webfactory/ssh-agent@v0.3.0
