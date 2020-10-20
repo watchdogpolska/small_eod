@@ -1,7 +1,7 @@
 import React from 'react';
 import { DefaultFooter as AntFooter } from '@ant-design/pro-layout';
 import { GithubOutlined } from '@ant-design/icons';
-import icon from '../../assets/powered-by-vercel.svg';
+import iconVercel from '../../assets/powered-by-vercel.svg';
 import styles from './DefaultFooter.less';
 
 const DefaultFooter = () => {
@@ -29,10 +29,10 @@ const DefaultFooter = () => {
           blankTarget: true,
         },
         {
-          key: `Powered with vexel`,
+          key: `Powered with vercel`,
           title: (
             <>
-              <img className={styles.logo_vercel} alt="Powered with vexel" src={icon} />
+              <img className={styles.logo_vercel} alt="Powered with vercel" src={iconVercel} />
             </>
           ),
           href: 'https://vercel.com',
