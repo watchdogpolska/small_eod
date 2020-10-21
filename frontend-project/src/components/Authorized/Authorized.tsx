@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Result } from 'antd';
 import check, { IAuthorityType } from './CheckPermissions';
 
@@ -10,13 +10,13 @@ interface AuthorizedProps {
   noMatch?: React.ReactNode;
 }
 
-type IAuthorizedType = React.FunctionComponent<AuthorizedProps> & {
+type IAuthorizedType = FC<AuthorizedProps> & {
   Secured: typeof Secured;
   check: typeof check;
   AuthorizedRoute: typeof AuthorizedRoute;
 };
 
-const Authorized: React.FunctionComponent<AuthorizedProps> = ({
+const Authorized: FC<AuthorizedProps> = ({
   children,
   authority,
   noMatch = (

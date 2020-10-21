@@ -1,10 +1,10 @@
 from rest_framework_nested import routers
 from .views import (
     CollectionViewSet,
-    CaseViewSet,
-    EventViewSet,
-    LetterViewSet,
-    NoteViewSet,
+    CaseCollectionViewSet,
+    EventCollectionViewSet,
+    LetterCollectionViewSet,
+    NoteCollectionViewSet,
     TokenCreateAPIView,
 )
 
@@ -14,16 +14,16 @@ router = routers.SimpleRouter()
 router.register("collections", CollectionViewSet)
 
 case_router = routers.NestedSimpleRouter(router, "collections", lookup="collection")
-case_router.register("cases", CaseViewSet, basename="collection-cases")
+case_router.register("cases", CaseCollectionViewSet, basename="collection-case")
 
 event_router = routers.NestedSimpleRouter(case_router, "cases", lookup="case")
-event_router.register("events", EventViewSet, basename="collection-event")
+event_router.register("events", EventCollectionViewSet, basename="collection-event")
 
 note_router = routers.NestedSimpleRouter(case_router, "cases", lookup="case")
-note_router.register("notes", NoteViewSet, basename="collection-note")
+note_router.register("notes", NoteCollectionViewSet, basename="collection-note")
 
 letter_router = routers.NestedSimpleRouter(case_router, "cases", lookup="case")
-letter_router.register("letters", LetterViewSet, basename="collection-letter")
+letter_router.register("letters", LetterCollectionViewSet, basename="collection-letter")
 
 urlpatterns = [
     path("", include(router.urls)),

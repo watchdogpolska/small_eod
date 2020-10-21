@@ -1,10 +1,12 @@
 import { stringify } from 'qs';
 import { router } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+import { setAuthority } from '@/utils/Authorized';
 import { getPageQuery } from '@/utils/utils';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export interface StateType {
+export interface LoginModelState {
   status?: 'ok' | 'error';
   type?: string;
   currentAuthority?: 'user' | 'guest' | 'admin';
@@ -12,15 +14,16 @@ export interface StateType {
 
 export interface LoginModelType {
   namespace: string;
-  state: StateType;
+  state: LoginModelState;
   effects: {
-    login: any;
-    logout: any;
+    login: Effect;
+    logout: Effect;
   };
   reducers: {
-    changeLoginStatus: any;
+    changeLoginStatus: Reducer<LoginModelState>;
   };
 }
+
 const Model: LoginModelType = {
   namespace: 'login',
 

@@ -10,21 +10,21 @@ interface TableProps {
   fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<{}>>;
 }
 
-const Table: FC<TableProps> = props => {
+const Table: FC<TableProps> = ({ type, columns, fetchData }) => {
   const actionRef = useRef<ActionType>();
 
   const showTotal = (total: number, range: number[]) =>
-    `${range[0]}-${range[1]} / ${formatMessage({ id: `${props.type}-list.table.total` })} ${total}`;
+    `${range[0]}-${range[1]} / ${formatMessage({ id: `${type}-list.table.total` })} ${total}`;
 
   return (
-    <PageHeaderWrapper content={formatMessage({ id: `${props.type}-list.page-header-content` })}>
+    <PageHeaderWrapper content={formatMessage({ id: `${type}-list.page-header-content` })}>
       <ProTable
-        headerTitle={formatMessage({ id: `${props.type}-list.table-header-title` })}
+        headerTitle={formatMessage({ id: `${type}-list.table-header-title` })}
         actionRef={actionRef}
         rowKey="id"
+        request={fetchData}
         tableAlertRender={false}
-        request={props.fetchData}
-        columns={props.columns}
+        columns={columns}
         rowSelection={false}
         search={false}
         options={false}

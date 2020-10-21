@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/api/(?<path>.*)", "dest": "https://dev.small-eod.siecobywatelska.pl/api/$path" },
+    {
+      "src": "/static/(?<path>.*)",
+      "dest": "https://dev.small-eod.siecobywatelska.pl/static/$path"
+    },
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ],
+  "github": {
+    "silent": true
+  }
+}

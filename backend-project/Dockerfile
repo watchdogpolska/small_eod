@@ -34,6 +34,7 @@ CMD ["bash", "-c", "python manage.py collectstatic --no-input && wait-for-it db:
 
 # DEVELOPMENT BUILD
 FROM dev_settings AS dev
+# Add git required by coveralls
 RUN pip install --no-cache-dir -r $REQS_FILE
 COPY . /code/
 CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

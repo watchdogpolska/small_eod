@@ -5,7 +5,7 @@ import ProLayout, {
   DefaultFooter,
   SettingDrawer,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Link } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -58,31 +58,50 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 Ant Design Pro"
+    copyright="2019-2020 Sieć Obywatelska Watchdog Polska"
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
+        key: 'Sieć Obywatelska',
+        title: 'Sieć Obywatelska Watchdog Polska',
+        href: 'https://siecobywatelska.pl',
         blankTarget: true,
       },
       {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
+        key: `GitHub – Build time: ${BUILD_DATE}`,
+        title: (
+          <>
+            small-eod – GitHub <GithubOutlined />
+          </>
+        ),
+        href:
+          typeof BUILD_SHA === 'undefined' || BUILD_SHA === 'unknown_sha'
+            ? 'https://github.com/watchdogpolska/small_eod/'
+            : `https://github.com/watchdogpolska/small_eod/commit/${BUILD_SHA}`,
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        key: 'redoc',
+        title: 'small-eod – API ReDoc',
+        href: '/api/redoc/',
+        blankTarget: true,
+      },
+      {
+        key: 'swagger',
+        title: 'small-eod – API Swagger',
+        href: '/api/docs/',
+        blankTarget: true,
+      },
+      {
+        key: 'drf',
+        title: 'small-eod - API DRF',
+        href: '/api/',
         blankTarget: true,
       },
     ]}
   />
 );
 
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
+const BasicLayout: FC<BasicLayoutProps> = props => {
   const {
     dispatch,
     children,
@@ -105,6 +124,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
+  const reactEnv = process.env.REACT_APP_ENV || 'dev';
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
@@ -164,15 +184,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           {children}
         </Authorized>
       </ProLayout>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={config =>
-          dispatch({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+      {reactEnv && reactEnv !== 'prod' && (
+        <SettingDrawer
+          settings={settings}
+          onSettingChange={config =>
+            dispatch({
+              type: 'settings/changeSetting',
+              payload: config,
+            })
+          }
+        />
+      )}
     </>
   );
 };

@@ -1,4 +1,5 @@
 import factory.fuzzy
+from factory.django import DjangoModelFactory
 
 from .models import Letter, DocumentType
 from ..cases.factories import CaseFactory
@@ -11,18 +12,17 @@ from ..generic.factories import (
 from ..institutions.factories import InstitutionFactory
 
 
-class DocumentTypeFactory(factory.DjangoModelFactory):
+class DocumentTypeFactory(DjangoModelFactory):
     name = factory.Sequence(lambda n: "name-desscription-%04d" % n)
 
     class Meta:
         model = DocumentType
 
 
-class LetterFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+class LetterFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     final = FuzzyTrueOrFalse()
     date = FuzzyDateTimeFromNow(max_days=10)
-    ordering = factory.fuzzy.FuzzyInteger(0, 100)
     direction = factory.fuzzy.FuzzyChoice(("IN", "OUT"))
 
     comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)

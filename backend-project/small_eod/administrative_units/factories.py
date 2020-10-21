@@ -1,8 +1,5 @@
-from teryt_tree.models import JednostkaAdministracyjna
-from teryt_tree.factories import JednostkaAdministracyjnaFactory as OriginalFactory
+from teryt_tree.factories import JednostkaAdministracyjnaFactory
 
 
-class JednostkaAdministracyjnaFactory(OriginalFactory):
-    class Meta:
-        model = JednostkaAdministracyjna
-        django_get_or_create = ("pk",)
+class AdministrativeUnitFactory(JednostkaAdministracyjnaFactory):
+    pass

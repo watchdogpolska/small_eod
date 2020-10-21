@@ -1,17 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
+import { connect } from 'dva';
 
-import { fetchInstitution } from '@/services/institutions';
+import { Institution } from '@/services/definitions';
 
-export const InstitutionName: FC<{ id: number }> = props => {
-  const [name, setName] = useState('');
+export interface InstitutionNameProps {
+  id: number;
+  institutions: Institution[];
+  dispatch: Function;
+}
+
+const InstitutionName: FC<InstitutionNameProps> = ({ id, institutions, dispatch }) => {
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchInstitution(props.id);
-      setName(result.name);
-    };
-    fetchData();
+    dispatch({ type: 'institutions/fetchOne', payload: id });
   }, []);
-
-  return name ? <div>{name}</div> : <Spin />;
+  const institution = institutions.find(value => value.id === id);
+  return <div>{institution ? institution.name : <Spin />}</div>;
 };
+
+export default connect(({ institutions }: InstitutionNameProps) => ({ institutions }))(
+  InstitutionName,
+);

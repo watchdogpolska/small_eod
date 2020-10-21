@@ -1,41 +1,40 @@
-import { fetchAll } from '@/services/institutions';
-import { Effect, EffectsCommandMap } from 'dva';
+import { fetchAll, fetchOne } from '@/services/institutions';
+import { Effect } from 'dva';
 import { AnyAction, Reducer } from 'redux';
+import { Institution } from '@/services/definitions';
 
-export interface Institution {
-  id: number;
-  name: string;
-  email?: string;
-  city?: string;
-  epuap?: string;
-  street?: string;
-  houseNumber?: string;
-  postalCode?: string;
-  flatNumber?: string;
-  NIP?: number;
-  regon?: number;
-}
+export type InstitutionsModelState = Institution[];
+
+const defaultInstitutionsState: InstitutionsModelState = [];
 
 export interface InstitutionModelType {
   namespace: string;
-  state: Institution[];
+  state: InstitutionsModelState;
   effects: {
     fetchAll: Effect;
+    fetchOne: Effect;
   };
   reducers: {
-    saveAll: Reducer<Institution[], AnyAction>;
+    saveAll: Reducer<InstitutionsModelState, AnyAction>;
+    saveOne: Reducer<InstitutionsModelState, AnyAction>;
   };
 }
-const defaultInstitutionsState: Institution[] = [];
 
 const InstitutionsModel: InstitutionModelType = {
   namespace: 'institutions',
   state: defaultInstitutionsState,
   effects: {
-    *fetchAll(_: AnyAction, { call, put }: EffectsCommandMap) {
+    *fetchAll(_, { call, put }) {
       const response = yield call(fetchAll);
       yield put({
         type: 'saveAll',
+        payload: response,
+      });
+    },
+    *fetchOne({ payload }, { call, put }) {
+      const response = yield call(fetchOne, payload);
+      yield put({
+        type: 'saveOne',
         payload: response,
       });
     },
@@ -43,6 +42,9 @@ const InstitutionsModel: InstitutionModelType = {
   reducers: {
     saveAll(_, { payload }) {
       return payload.results;
+    },
+    saveOne(state, { payload }) {
+      return state.find(value => value.id === payload.id) ? state : [...state, payload];
     },
   },
 };

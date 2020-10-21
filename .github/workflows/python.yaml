@@ -16,7 +16,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Pyupgrade
       run: make pyupgrade
     - name: Lint
@@ -27,13 +27,25 @@ jobs:
       run: make check
     - name: Show settings
       run: make settings
-    - name: Test
+    - name: Diff OpenAPI
+      run: make diff_openapi
+    - name: Wait for services
+      run: make wait_mysql wait_minio migrate
+    - name: Python test
+      run: make test
+    - name: System test
       run: ./backend-project/contrib/github/script.sh
-    - uses: actions/upload-artifact@v1
+    - name: Send coverage report
+      run: make coverage_send_backend
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      if: github.event_name == 'push'
+    - uses: actions/upload-artifact@v2
       with:
         name: openapi.yaml
         path: ./openapi.yaml
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       # see https://github.com/actions/upload-artifact/issues/11 
       # for remove duplicated actions
       with:
@@ -44,13 +56,13 @@ jobs:
       if: failure()
   push:
     runs-on: ubuntu-latest
-    if: "github.ref == 'refs/heads/dev'"
+    if: github.ref == 'refs/heads/dev'
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Build production image
-      run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod:latest backend-project/
+      run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:latest backend-project/
     - name: "Docker login"
       env:
         DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
@@ -58,10 +70,30 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
     - name: Push image
-      run: docker push docker-registry.siecobywatelska.pl/small_eod:latest
+      run: docker push docker-registry.siecobywatelska.pl/small_eod/backend:latest
     - name: Trigger SDK regenerate
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.SDK_REPO_TOKEN }}
         event-type: pushed
         repository: watchdogpolska/small-eod-sdk-javascript
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    needs:
+      - test
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup H1-CLI
+      uses: ./.github/actions/h1-cli
+    - uses: webfactory/ssh-agent@v0.3.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Inject website ssh-hostkey
+      run: cat .github/h1-known-hosts > ~/.ssh/known_hosts;
+    - name: Deploy update
+      run: make deploy_backend
+      env:
+        HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
+        HYPERONE_EARLY_ADOPTERS: 'true'
+        HYPERONE_PROJECT: '587707232a57b6fd80f04bc1'

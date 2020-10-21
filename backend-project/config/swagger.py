@@ -1,4 +1,4 @@
-from drf_yasg import openapi
+from drf_yasg2 import openapi
 
 info = openapi.Info(
     title="Small_EOD",

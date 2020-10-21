@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
-from drf_yasg.views import get_schema_view
+from drf_yasg2.views import get_schema_view
 from .swagger import info
 from small_eod.channels.views import ChannelViewSet
 from small_eod.events.views import EventViewSet
@@ -26,6 +26,7 @@ from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
 from rest_framework import routers
 from rest_framework import permissions
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r"channels", ChannelViewSet)
@@ -48,6 +49,7 @@ urlpatterns = [
     path("api/", include("small_eod.cases.urls")),
     path("api/", include("small_eod.letters.urls")),
     path("api/", include("small_eod.features.urls")),
+    path("api/", include("small_eod.administrative_units.urls")),
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),
     re_path(
@@ -65,3 +67,6 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
     ]
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)

@@ -1,11 +1,17 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 from django.urls import reverse
 
 from ..factories import CollectionFactory
 from ..serializers import CollectionSerializer
-from ...generic.tests.test_views import ReadOnlyViewSetMixin, GenericViewSetMixin
+from ...generic.tests.test_views import (
+    ReadOnlyViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+)
 from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
+from ...events.factories import EventFactory
+from ...letters.factories import LetterFactory
 from ...users.mixins import AuthenticatedMixin
 
 
@@ -32,18 +38,20 @@ class TokenAuthorizationTestCaseMixin:
         self.client.logout()
 
         resp = self.client.get(
-            path=self.get_url_detail(), data={"authorization": token},
+            path=self.get_url_detail(),
+            data={"authorization": token},
         )
         self.assertEqual(resp.status_code, 200)
 
 
 class CollectionViewSetTestCase(
-    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, TestCase
+    TokenAuthorizationTestCaseMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
 ):
 
     basename = "collection"
     serializer_class = CollectionSerializer
     factory_class = CollectionFactory
+    ordering_fields = ["name", "-public", "expired_on,name"]
 
     def get_collection(self):
         return self.obj
@@ -93,13 +101,20 @@ class NoteCollectionViewSetTestCase(
     def validate_item(self, item):
         self.assertEqual(self.obj.comment, item["comment"])
 
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
+
 
 class CaseCollectionViewSetTestCase(
     TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
 ):
 
-    basename = "collection-cases"
+    basename = "collection-case"
     factory_class = CaseFactory
+    queries_less_than_limit = 11
 
     def setUp(self):
         super().setUp()
@@ -110,3 +125,57 @@ class CaseCollectionViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(size=5)
+        self.collection.query = ",".join(
+            [str(child.pk) for child in children] + [self.collection.query]
+        )
+        self.collection.save()
+
+
+class EventCollectionViewSetTestCase(
+    TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
+):
+    basename = "collection-event"
+    factory_class = EventFactory
+
+    def setUp(self):
+        super().setUp()
+        self.collection = CollectionFactory(query=str(self.obj.case.id))
+
+    def get_extra_kwargs(self):
+        return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
+
+
+class LetterCollectionViewSetTestCase(
+    TokenAuthorizationTestCaseMixin, ReadOnlyViewSetMixin, TestCase
+):
+    basename = "collection-letter"
+    factory_class = LetterFactory
+    queries_less_than_limit = 13
+
+    def setUp(self):
+        super().setUp()
+        self.collection = CollectionFactory(query=str(self.obj.case.id))
+
+    def get_extra_kwargs(self):
+        return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
+
+    def validate_item(self, item):
+        self.assertEqual(self.obj.reference_number, item["referenceNumber"])
+
+    def increase_list(self):
+        children = self.factory_class.create_batch(case=self.obj.case, size=5)
+        self.collection.query = ",".join(
+            [str(child.case.pk) for child in children] + [self.collection.query]
+        )
