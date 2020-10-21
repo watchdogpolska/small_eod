@@ -22,7 +22,7 @@ export default {
   'menu.features.list': 'List',
   'menu.letters': 'Letters',
   'menu.letters.list': 'List',
-  'menu.letters.documentTypes': 'Document types',
+  'menu.letters.documentTypes': 'Document Types',
   'menu.letters.channels': 'Channels',
   'menu.users': 'Users',
   'menu.login': 'Login',
