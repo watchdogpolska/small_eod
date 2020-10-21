@@ -18,4 +18,4 @@ const DocumentTypeName: FC<DocumentTypeNameProps> = ({ id, documentTypes, dispat
 
   return <div>{documentType ? documentType.name : <Spin />}</div>;
 };
-export default connect(({ documentTypes }: any) => ({ documentTypes }))(DocumentTypeName);
+export default connect(({ documentTypes }: DocumentTypeNameProps) => ({ documentTypes }))(DocumentTypeName);
