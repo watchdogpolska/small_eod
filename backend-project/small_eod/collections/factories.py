@@ -1,4 +1,5 @@
 import factory.fuzzy
+from factory.django import DjangoModelFactory
 
 from .models import Collection
 from ..generic.factories import (
@@ -8,7 +9,7 @@ from ..generic.factories import (
 )
 
 
-class CollectionFactory(AbstractTimestampUserFactory, factory.DjangoModelFactory):
+class CollectionFactory(AbstractTimestampUserFactory, DjangoModelFactory):
     # todo add `query`
     name = factory.Sequence(lambda n: "collection-%04d" % n)
     public = FuzzyTrueOrFalse()

@@ -1,4 +1,4 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..serializers import FileSerializer
 from ..factories import FileFactory
@@ -15,3 +15,6 @@ class FileViewSetTestCase(GenericViewSetMixin, TestCase):
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+
+    def increase_list(self):
+        self.factory_class.create_batch(letter=self.obj.letter, size=5)

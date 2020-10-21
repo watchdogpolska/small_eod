@@ -13,7 +13,7 @@ from ..files.serializers import FileSerializer
 class DocumentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocumentType
-        fields = ["name"]
+        fields = ["id", "name"]
 
 
 class LetterSerializer(UserLogModelSerializer):
@@ -43,7 +43,6 @@ class LetterSerializer(UserLogModelSerializer):
             "institution",
             "case",
             "attachments",
-            "ordering",
             "comment",
             "excerpt",
             "document_type",

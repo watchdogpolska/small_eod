@@ -36,3 +36,5 @@ screenshot
 .eslintcache
 
 build
+
+.vercel

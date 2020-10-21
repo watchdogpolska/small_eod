@@ -14,15 +14,25 @@ class CaseQuerySet(models.QuerySet):
             letter_count=models.Count("letter"), note_count=models.Count("note")
         )
 
+    def with_nested_resources(self):
+        return (
+            self.prefetch_related("featureoptions")
+            .prefetch_related("responsible_users")
+            .prefetch_related("notified_users")
+            .prefetch_related("audited_institutions")
+            .prefetch_related("tags")
+        )
+
 
 class Case(TimestampUserLogModel):
     objects = CaseQuerySet.as_manager()
 
     name = models.CharField(
-        max_length=256, verbose_name=_("Name"), help_text=_("Case's name."),
-    )
-    comment = models.CharField(
         max_length=256,
+        verbose_name=_("Name"),
+        help_text=_("Case's name."),
+    )
+    comment = models.TextField(
         blank=True,
         verbose_name=_("Comment"),
         help_text=_("Comment for this case."),
@@ -58,6 +68,13 @@ class Case(TimestampUserLogModel):
         verbose_name=_("Responsible users"),
         help_text=_("Users who is responsible for this case."),
     )
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return (
+            "id__iexact",
+            "name__icontains",
+        )
 
     def __str__(self):
         return self.name

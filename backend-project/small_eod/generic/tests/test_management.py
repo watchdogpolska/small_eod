@@ -9,10 +9,14 @@ class InitDataTestCase(TestCase):
     def test_success_two_run(self):
         stdout = StringIO()
         call_command(
-            "init_data", stdout=stdout,
+            "init_data",
+            "--minimum",
+            stdout=stdout,
         )
         call_command(
-            "init_data", stdout=stdout,
+            "init_data",
+            "--minimum",
+            stdout=stdout,
         )
 
     def test_create_letter(self):
@@ -20,6 +24,8 @@ class InitDataTestCase(TestCase):
         stdout = StringIO()
 
         call_command(
-            "init_data", stdout=stdout,
+            "init_data",
+            "--minimum",
+            stdout=stdout,
         )
         self.assertNotEqual(Letter.objects.count(), 0)

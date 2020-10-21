@@ -3,11 +3,18 @@ import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import LoginFrom from '@/components/Login';
+import { Dispatch } from 'redux';
+import { LoginModelState, LoginModelType } from '@/models/login';
+import { LoginParams } from '@/services/login';
 import styles from './style.less';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
-const LoginMessage = ({ content }) => (
+export interface LoginMessageProps {
+  content: string;
+}
+
+const LoginMessage = ({ content }: LoginMessageProps) => (
   <Alert
     style={{
       marginBottom: 24,
@@ -18,13 +25,19 @@ const LoginMessage = ({ content }) => (
   />
 );
 
-const Login = props => {
+export interface UserLoginProps {
+  dispatch: Dispatch;
+  submitting: boolean;
+  userAndlogin: LoginModelState;
+}
+
+const UserLogin = (props: UserLoginProps) => {
   const { userAndlogin = {}, submitting } = props;
   const { status, type: loginType } = userAndlogin;
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState('account');
 
-  const handleSubmit = values => {
+  const handleSubmit = (values: LoginParams) => {
     const { dispatch } = props;
     dispatch({
       type: 'login/login',
@@ -82,7 +95,12 @@ const Login = props => {
   );
 };
 
-export default connect(({ userAndlogin, loading }) => ({
-  userAndlogin,
+export interface LoginConnectProps {
+  userAndlogin: LoginModelState;
+  loading: LoginModelType;
+}
+
+export default connect(({ userAndlogin, loading }: LoginConnectProps) => ({
+  state: userAndlogin,
   submitting: loading.effects['userAndlogin/login'],
-}))(Login);
+}))(UserLogin);

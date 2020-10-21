@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Layout: React.FC = ({ children }) => <>{children}</>;
+const Layout: FC = ({ children }) => <>{children}</>;
 
 export default Layout;

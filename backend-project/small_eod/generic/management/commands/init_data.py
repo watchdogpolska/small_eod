@@ -1,7 +1,8 @@
-from django.core.management.base import BaseCommand
 import urllib.request
+
+from django.core.management.base import BaseCommand
 from django.core.management import call_command
-from small_eod.letters.factories import LetterFactory
+from ....letters.factories import LetterFactory
 import tempfile
 
 URL = (
@@ -13,9 +14,19 @@ URL = (
 class Command(BaseCommand):
     help = "Create initial test data"
 
-    def handle(self, *args, **options):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--minimum",
+            action="store_true",
+            help="Use minimum set of data",
+        )
+
+    def handle(self, minimum, *args, **options):
         with tempfile.NamedTemporaryFile() as fp:
             fp.write(urllib.request.urlopen(URL).read())
-            call_command("load_terc", "--input", fp.name, stdout=self.stdout)
+            args = ["--input", fp.name]
+            if minimum:
+                args = args + ["--limit", 50]
+            call_command("load_terc", *args, stdout=self.stdout)
 
         LetterFactory.create_batch(size=10)

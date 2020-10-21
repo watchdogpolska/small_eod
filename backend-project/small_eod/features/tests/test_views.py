@@ -1,14 +1,15 @@
-from django.test import TestCase
+from test_plus.test import TestCase
 
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..serializers import FeatureSerializer, FeatureOptionSerializer
-from ...generic.tests.test_views import GenericViewSetMixin
+from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
 
 
-class FeatureViewSetTestCase(GenericViewSetMixin, TestCase):
+class FeatureViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
     basename = "feature"
     serializer_class = FeatureSerializer
     factory_class = FeatureFactory
+    ordering_fields = ["-name", "min_options", "max_options,id"]
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
@@ -50,3 +51,6 @@ class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
 
     def validate_item(self, item):
         self.assertEqual(self.obj.name, item["name"])
+
+    def increase_list(self):
+        self.factory_class.create_batch(feature=self.obj.feature, size=5)

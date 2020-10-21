@@ -1,4 +1,3 @@
-import datetime
 import string
 
 import factory.fuzzy
@@ -29,7 +28,10 @@ class AbstractTimestampUserFactory(factory.Factory):
 
 class ManyToManyPostGeneration(factory.PostGeneration):
     def __init__(
-        self, m2m_field_name, size=0, factory_cls=None,
+        self,
+        m2m_field_name,
+        size=0,
+        factory_cls=None,
     ):
         super().__init__(function=None)
         self.m2m_field_name = m2m_field_name
@@ -69,7 +71,7 @@ class FuzzyTrueOrFalseOrNone(factory.fuzzy.FuzzyChoice):
 class FuzzyDateTimeFromNow(factory.fuzzy.FuzzyDateTime):
     def __init__(self, max_days: int = None, **kwargs):
         kwargs["start_dt"] = timezone.now()
-        kwargs["end_dt"] = timezone.now() + datetime.timedelta(days=max_days)
+        kwargs["end_dt"] = timezone.now() + timezone.timedelta(days=max_days)
         super().__init__(**kwargs)
 
 

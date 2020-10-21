@@ -1,10 +1,9 @@
 import slash from 'slash2';
 import defaultSettings from './defaultSettings';
-import themePluginConfig from './themePluginConfig';
-const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
+const { pwa } = defaultSettings;
 
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
-const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
+const backend_url = process.env.API_URL || 'http://backend:8000/';
+
 const plugins = [
   ['umi-plugin-antd-icon-config', {}],
   [
@@ -50,16 +49,6 @@ const plugins = [
     },
   ],
 ];
-
-if (isAntDesignProPreview) {
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
-  plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
-}
 
 export default {
   plugins,
@@ -118,6 +107,25 @@ export default {
               ],
             },
             {
+              name: 'tags',
+              icon: 'FileTextOutlined',
+              path: '/tags',
+              routes: [
+                {
+                  name: 'new',
+                  icon: 'FileAddOutlined',
+                  path: '/tags/new',
+                  component: './tags/new',
+                },
+                {
+                  name: 'list',
+                  icon: 'HomeOutlined',
+                  path: '/tags/list',
+                  component: './tags/list',
+                },
+              ],
+            },
+            {
               name: 'letters',
               icon: 'FileTextOutlined',
               path: '/letters',
@@ -147,6 +155,25 @@ export default {
                   path: '/institutions/new',
                   component: './institutions/new',
                 },
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/institutions/list',
+                  component: './institutions/list',
+                },
+              ],
+            },
+            {
+              name: 'features',
+              icon: 'FileTextOutlined',
+              path: '/features',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/features/list',
+                  component: './features/list',
+                },
               ],
             },
             {
@@ -171,10 +198,6 @@ export default {
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
-  },
-  define: {
-    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
-      ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
@@ -211,12 +234,21 @@ export default {
   },
   chainWebpack: config => {
     config.module.rule('small-eod-client').parser({ amd: false });
+    config.plugin('env').use(require.resolve('webpack/lib/DefinePlugin'), [
+      {
+        BUILD_SHA: JSON.stringify(process.env.COMMIT_SHA),
+        BUILD_BRANCH: JSON.stringify(process.env.COMMIT_BRANCH),
+        BUILD_DATE: JSON.stringify(new Date().toISOString()),
+      },
+    ]);
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: Object.fromEntries(
+    ['api', 'admin', 'static', 'media'].map(x => [
+      `/${x}/`,
+      {
+        target: backend_url,
+        changeOrigin: true,
+      },
+    ]),
+  ),
 };

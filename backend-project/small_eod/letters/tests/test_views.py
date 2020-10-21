@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.test import TestCase
+from test_plus.test import TestCase
 import requests
 from io import BytesIO
 
@@ -11,6 +11,7 @@ from ..serializers import LetterSerializer
 from ...generic.tests.test_views import (
     GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    OrderingViewSetMixin,
 )
 from ...users.mixins import AuthenticatedMixin
 
@@ -57,7 +58,7 @@ class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Download file content
-        minio_download_resp = requests.get(url=response.json()["downloadUrl"],)
+        minio_download_resp = requests.get(url=response.json()["downloadUrl"])
         self.assertEqual(minio_download_resp.status_code, status.HTTP_200_OK)
         self.assertEqual(minio_download_resp.content, content)
 
@@ -85,10 +86,20 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
         self.assertIn("id", response.data)
 
 
-class LetterViewSetTestCase(AuthorshipViewSetMixin, GenericViewSetMixin, TestCase):
+class LetterViewSetTestCase(
+    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+):
     basename = "letter"
     serializer_class = LetterSerializer
     factory_class = LetterFactory
+    queries_less_than_limit = 10
+    ordering_fields = [
+        "comment",
+        "-comment",
+        "created_on",
+        "created_by__username",
+        "-created_by__username,comment",
+    ]
 
     def validate_item(self, item):
         self.assertEqual(item["comment"], self.obj.comment)

@@ -1,25 +1,6 @@
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
-
-export interface Case {
-  name: string;
-  auditedInstitutions: number[];
-  comment: string;
-  tags: string[];
-  responsible_users: number[];
-  notified_users: number[];
-  featureoptions: number[];
-  createdBy: number;
-  createdOn: string;
-  id: number;
-  modifiedBy: number;
-  modifiedOn: string;
-}
-
-export const fetchCase = async (id: number): Promise<Case> => {
-  const response = await new smallEodSDK.CasesApi().casesRead(id);
-  return response;
-};
+import { Case } from './definitions';
 
 export async function fetchCasesPage({
   current,
@@ -37,3 +18,7 @@ export async function fetchCasesPage({
     total: sdkResponse.count,
   };
 }
+
+export const fetchOne = async (id: number): Promise<Case> => {
+  return new smallEodSDK.CasesApi().casesRead(id);
+};
