@@ -18,3 +18,5 @@ zipstream-new==1.1.8
 # add packaging - hard requirements of drf-yasg2
 # see https://github.com/JoelLefkowitz/drf-yasg/pull/44
 packaging>=18.0
+icalendar==4.0.7
+django-fullurl==1.1

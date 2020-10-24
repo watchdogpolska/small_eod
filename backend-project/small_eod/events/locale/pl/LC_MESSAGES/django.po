@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-24 11:18+0200\n"
+"PO-Revision-Date: 2020-10-24 11:19+0200\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: models.py:8
+msgid "Date"
+msgstr "Data"
+
+#: models.py:8
+msgid "Date of event."
+msgstr "Data wydarzenia"
+
+#: models.py:10
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:10
+msgid "Name of event."
+msgstr "Nazwa wydarzenia"
+
+#: models.py:13
+msgid "Comment"
+msgstr "Komentarz"
+
+#: models.py:13
+msgid "Comment text."
+msgstr "Treść komentarza"
+
+#: models.py:18 templates/events/calendar_description.txt:4
+msgid "Case"
+msgstr "Sprawa"
+
+#: models.py:19
+msgid "Case for this event."
+msgstr "Sprawa dla tego wydarzenia"
+
+#: templates/events/calendar_description.txt:5
+msgid "Audited institution"
+msgstr "Kontrolowana instytucja"
+
+#: views.py:33
+msgid "small-eod - events"
+msgstr "small-eod - wydarzenia"

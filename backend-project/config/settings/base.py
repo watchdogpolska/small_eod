@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg2",
     "teryt_tree",
+    "fullurl",
     "small_eod.users",
     "small_eod.generic",
     "small_eod.tags",
