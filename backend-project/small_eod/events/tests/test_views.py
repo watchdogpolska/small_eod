@@ -26,7 +26,7 @@ class EventViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get("Content-Type"), "text/calendar")
-        body = response.content.decode('utf-8')
+        body = response.content.decode("utf-8")
         self.assertIn(self.obj.name, body)
         self.assertIn(self.obj.comment, body)
         self.assertIn(self.obj.case.name, body)
