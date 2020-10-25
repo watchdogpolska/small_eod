@@ -1,13 +1,14 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row } from 'antd';
 import { connect } from 'dva';
+import { AnyAction, Dispatch } from 'redux';
 import React, { useEffect, FC } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Tag } from '@/services/definitions';
 
 interface TagNewFormProps {
   name: string;
-  dispatch: Function;
+  dispatch: Dispatch<AnyAction>;
 }
 
 const layout = {
