@@ -3,7 +3,7 @@ import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import { router } from 'umi';
 import { Tag } from '@/services/definitions';
-import { openNotificationWithIcon } from '@/models/notification';
+import { openNotificationWithIcon } from '@/models/global';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 export type TagDefaultState = Tag[];
