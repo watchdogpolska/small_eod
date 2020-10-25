@@ -35,7 +35,7 @@ const DefaultFooter = () => {
               <img className={styles.logo_vercel} alt="Powered with vercel" src={iconVercel} />
             </>
           ),
-          href: 'https://vercel.com',
+          href: 'http://vercel.com/?utm_source=watchdogpolska&utm_campaign=small_eod',
           blankTarget: true,
         },
         {
