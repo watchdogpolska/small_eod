@@ -1,4 +1,5 @@
-import { DefaultFooter, getMenuData, getPageTitle, MenuDataItem } from '@ant-design/pro-layout';
+import { getMenuData, getPageTitle, MenuDataItem } from '@ant-design/pro-layout';
+import DefaultFooter from '@/components/GlobalFooter/DefaultFooter';
 import { Helmet } from 'react-helmet';
 import { Link } from 'umi';
 import React, { FC } from 'react';

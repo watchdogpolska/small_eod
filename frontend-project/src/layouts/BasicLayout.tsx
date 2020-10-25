@@ -2,14 +2,13 @@ import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
   Settings,
-  DefaultFooter,
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect, FC } from 'react';
 import { Link } from 'umi';
-import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
+import DefaultFooter from '@/components/GlobalFooter/DefaultFooter';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
@@ -55,51 +54,6 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
-
-const defaultFooterDom = (
-  <DefaultFooter
-    copyright="2019-2020 Sieć Obywatelska Watchdog Polska"
-    links={[
-      {
-        key: 'Sieć Obywatelska',
-        title: 'Sieć Obywatelska Watchdog Polska',
-        href: 'https://siecobywatelska.pl',
-        blankTarget: true,
-      },
-      {
-        key: `GitHub – Build time: ${BUILD_DATE}`,
-        title: (
-          <>
-            small-eod – GitHub <GithubOutlined />
-          </>
-        ),
-        href:
-          typeof BUILD_SHA === 'undefined' || BUILD_SHA === 'unknown_sha'
-            ? 'https://github.com/watchdogpolska/small_eod/'
-            : `https://github.com/watchdogpolska/small_eod/commit/${BUILD_SHA}`,
-        blankTarget: true,
-      },
-      {
-        key: 'redoc',
-        title: 'small-eod – API ReDoc',
-        href: '/api/redoc/',
-        blankTarget: true,
-      },
-      {
-        key: 'swagger',
-        title: 'small-eod – API Swagger',
-        href: '/api/docs/',
-        blankTarget: true,
-      },
-      {
-        key: 'drf',
-        title: 'small-eod - API DRF',
-        href: '/api/',
-        blankTarget: true,
-      },
-    ]}
-  />
-);
 
 const BasicLayout: FC<BasicLayoutProps> = props => {
   const {
@@ -174,7 +128,7 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
             <span>{route.breadcrumbName}</span>
           );
         }}
-        footerRender={() => defaultFooterDom}
+        footerRender={() => <DefaultFooter />}
         menuDataRender={menuDataRender}
         rightContentRender={() => <RightContent />}
         {...props}
