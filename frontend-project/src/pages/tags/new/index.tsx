@@ -23,13 +23,20 @@ const tailLayout = {
 const TagNewForm: FC<TagNewFormProps> = ({ dispatch }) => {
   const [form] = Form.useForm();
   const handleSubmit = (value: Tag) => {
-    dispatch({
-      type: 'tags/create',
-      payload: { ...value },
-    });
+    // dispatch({
+    //   type: 'tags/create',
+    //   payload: { ...value },
+    // });
+    const response = {
+      name: [`To pole jest wymagane ${Math.random()}.`]
+    };
+    form.setFields(Object
+        .entries(response)
+        .map(([name, errors]) => ({ name, errors }))
+    );
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <Form {...layout} form={form} onFinish={handleSubmit}>
@@ -42,7 +49,7 @@ const TagNewForm: FC<TagNewFormProps> = ({ dispatch }) => {
                 name="name"
                 rules={[
                   {
-                    required: true,
+                    // required: true,
                     message: formatMessage({ id: 'tags-new.form.name.required-error' }),
                   },
                 ]}
