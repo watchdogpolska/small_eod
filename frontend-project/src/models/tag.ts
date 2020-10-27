@@ -21,12 +21,10 @@ export interface TagModelType {
     changeTagStatus: Reducer<TagModelState>;
   };
 }
-
+const TagState: TagModelState = { status: 1, tag: { name: '', id: 0 } };
 const TagModel: TagModelType = {
   namespace: 'tag',
-  state: {
-    status: undefined,
-  },
+  state: TagState,
   effects: {
     *create({ payload }, { call, put }) {
       try {

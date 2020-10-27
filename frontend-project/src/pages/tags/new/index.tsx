@@ -22,15 +22,16 @@ const tailLayout = {
 };
 const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
   const [form] = Form.useForm();
+
   const handleSubmit = (value: Tag) => {
     const { dispatch } = props;
     dispatch({
       type: 'tag/create',
       payload: { ...value },
     });
-    form.setFields(Object.entries(props.tagState.tag).map(([name, errors]) => ({ name, errors })));
   };
 
+  form.setFields(Object.entries(props?.tagState.tag).map(([name, errors]) => ({ name, errors })));
   useEffect(() => {}, []);
 
   return (
