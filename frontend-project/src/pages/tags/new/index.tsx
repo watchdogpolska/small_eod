@@ -1,5 +1,5 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Alert } from 'antd';
+import { Button, Col, Card, Form, Input, Row } from 'antd';
 import { connect } from 'dva';
 import { AnyAction, Dispatch } from 'redux';
 import React, { useEffect, FC } from 'react';
@@ -10,7 +10,7 @@ import { TagModelState } from '@/models/tag';
 export interface TagNewFormProps {
   dispatch: Dispatch<AnyAction>;
   submitting: boolean;
-  createdTag: TagModelState;
+  TagState: TagModelState;
 }
 const layout = {
   labelCol: { span: 8 },
@@ -20,22 +20,6 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
-
-export interface TagMessageProps {
-  content: string;
-}
-const TagMessage = ({ content }: TagMessageProps) => (
-  <Alert
-    style={{
-      marginLeft: 300,
-      marginBottom: 24,
-    }}
-    message={content}
-    type="error"
-    showIcon
-  />
-);
-
 const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
   const [form] = Form.useForm();
   const handleSubmit = (value: Tag) => {
@@ -44,6 +28,7 @@ const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
       type: 'tag/create',
       payload: { ...value },
     });
+    form.setFields(Object.entries(props.TagState.tag).map(([name, errors]) => ({ name, errors })));
   };
 
   useEffect(() => {}, []);
@@ -66,7 +51,6 @@ const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
               >
                 <Input placeholder={formatMessage({ id: 'tags-new.form.name.placeholder' })} />
               </Form.Item>
-              {props.createdTag.tag?.name && <TagMessage content={props.createdTag.tag?.name} />}
             </Col>
           </Row>
           <Row>
@@ -84,4 +68,4 @@ const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
   );
 };
 
-export default connect(state => ({ createdTag: (state as any).tag }))(TagNewForm);
+export default connect(state => ({ TagState: (state as any).tag }))(TagNewForm);
