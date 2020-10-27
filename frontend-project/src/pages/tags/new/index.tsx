@@ -10,7 +10,7 @@ import { TagModelState } from '@/models/tag';
 export interface TagNewFormProps {
   dispatch: Dispatch<AnyAction>;
   submitting: boolean;
-  TagState: TagModelState;
+  tagState: TagModelState;
 }
 const layout = {
   labelCol: { span: 8 },
@@ -28,7 +28,7 @@ const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
       type: 'tag/create',
       payload: { ...value },
     });
-    form.setFields(Object.entries(props.TagState.tag).map(([name, errors]) => ({ name, errors })));
+    form.setFields(Object.entries(props.tagState.tag).map(([name, errors]) => ({ name, errors })));
   };
 
   useEffect(() => {}, []);
@@ -68,4 +68,4 @@ const TagNewForm: FC<TagNewFormProps> = (props: TagNewFormProps) => {
   );
 };
 
-export default connect(state => ({ TagState: (state as any).tag }))(TagNewForm);
+export default connect(state => ({ tagState: (state as any).tag }))(TagNewForm);
