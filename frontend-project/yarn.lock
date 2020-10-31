@@ -13558,6 +13558,11 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
+openapi-ts-interfaces-generator@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/openapi-ts-interfaces-generator/-/openapi-ts-interfaces-generator-0.0.4.tgz#0025e407d4711004683f78545c2b15430bcb658a"
+  integrity sha512-4UMFWJkylbDI/uEuJPz9UxWEBZpHq6agShTI+WCujnx1uU4EFkNYOspcqa158wGO4u6tI9nPs+JvTKzyjsCb4A==
+
 opencollective-postinstall@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
