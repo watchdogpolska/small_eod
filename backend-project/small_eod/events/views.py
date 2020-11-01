@@ -32,12 +32,12 @@ class EventViewSet(viewsets.ModelViewSet):
     }
 
     def get_authenticators(self):
-        if self.name == 'Ical':
+        if self.name == "Ical":
             return [AuthKeyAuthentication()]
         return super().get_authenticators()
 
     def get_permissions(self):
-        if self.name == 'Ical':
+        if self.name == "Ical":
             return [AuthKeyPermission()]
         return super().get_permissions()
 

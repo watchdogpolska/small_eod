@@ -6,7 +6,9 @@ from .parser import get_token
 class AuthKeyPermission(permissions.BasePermission):
     def get_required_scopes(self, view):
         if hasattr(view, "required_scopes_map") and hasattr(view, "name"):
-            return view.required_scopes_map.get(view.name, getattr(view, "required_scopes", []))
+            return view.required_scopes_map.get(
+                view.name, getattr(view, "required_scopes", [])
+            )
         return getattr(view, "required_scopes", [])
 
     def has_permission(self, request, view):

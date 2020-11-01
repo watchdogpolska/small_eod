@@ -27,4 +27,4 @@ class ScopeFactory(DjangoModelFactory):
 
     class Meta:
         model = Scope
-        django_get_or_create = ('name',)
+        django_get_or_create = ("name",)

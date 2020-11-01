@@ -1,11 +1,12 @@
-from django.db import models
 import binascii
 import os
+
 from django.utils.timezone import now, timedelta
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-from ..generic.models import TimestampUserLogModel
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
+from ..generic.models import TimestampUserLogModel
 
 update_interval = timedelta(minutes=15)
 

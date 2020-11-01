@@ -27,23 +27,21 @@ class EventViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
         self.assertEqual(response.status_code, 403)
 
     def get_with_key(self, *args, key, **kwargs):
-        return self.client.get(*args, **kwargs,
-            HTTP_AUTHORIZATION='Bearer {}'.format(key.token)
+        return self.client.get(
+            *args, **kwargs, HTTP_AUTHORIZATION="Bearer {}".format(key.token)
         )
 
     def test_ical_fail_authorization(self):
         key = KeyFactory(scopes=())
         response = self.get_with_key(
-            path=self.get_url(name="ical", **self.get_extra_kwargs()),
-            key=key
+            path=self.get_url(name="ical", **self.get_extra_kwargs()), key=key
         )
         self.assertEqual(response.status_code, 403)
 
     def test_ical_validate_response_format(self):
-        key = KeyFactory(scopes=('export_ical', ))
+        key = KeyFactory(scopes=("export_ical",))
         response = self.get_with_key(
-            path=self.get_url(name="ical", **self.get_extra_kwargs()),
-            key=key
+            path=self.get_url(name="ical", **self.get_extra_kwargs()), key=key
         )
         self.assertEqual(response.status_code, 200)
 
