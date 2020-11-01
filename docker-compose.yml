@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     # https://hub.docker.com/_/postgres
-    image: postgres:12.4-alpine
+    image: postgres:12.4-alpine@sha256:4c493832e4865189e3cab86281a1706a074ea6796b525a7f191b3f48546c25a8
     expose:
       - "5432"
     volumes:
@@ -50,7 +50,7 @@ services:
 
   minio:
     # https://hub.docker.com/r/minio/minio/
-    image: minio/minio:RELEASE.2020-01-16T22-40-29Z
+    image: minio/minio:RELEASE.2020-01-16T22-40-29Z@sha256:6ea470e8fa46b4f86230bd44fc6b7f1dd4f7ca04c5d710f98cdfeff7622a55d2
     ports:
       - "9000:9000"
     expose:
