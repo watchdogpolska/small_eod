@@ -160,6 +160,7 @@ które można otrzymać na Slacku.
 * [Konfiguracja środowiska z użyciem IntelliJ PyCharm](./docs/pycharm/README.md)
 
 ### Wsparcie Vercel
+
 Projekt wspierany jest przez firmę Vercel
 
 [<img src="frontend-project/src/assets/powered-by-vercel.svg" width="150px">](http://vercel.com/?utm_source=watchdogpolska&utm_campaign=small_eod)
