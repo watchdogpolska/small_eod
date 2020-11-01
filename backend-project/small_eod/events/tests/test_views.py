@@ -28,7 +28,7 @@ class EventViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
 
     def get_with_key(self, *args, key, **kwargs):
         return self.client.get(
-            *args, **kwargs, HTTP_AUTHORIZATION="Bearer {}".format(key.token)
+            *args, **kwargs, HTTP_AUTHORIZATION=f"Bearer {key.token}"
         )
 
     def test_ical_fail_authorization(self):
