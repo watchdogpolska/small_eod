@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "small_eod.notes",
     "small_eod.events",
     "small_eod.administrative_units",
+    "small_eod.authkey",
 ]
 
 MIDDLEWARE = [

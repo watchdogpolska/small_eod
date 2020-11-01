@@ -10,6 +10,8 @@ from django.utils.translation import ugettext as _
 from drf_yasg2.utils import swagger_auto_schema
 from .models import Event
 from .serializers import EventSerializer
+from ..authkey.permissions import AuthKeyPermission
+from ..authkey.authentication import AuthKeyAuthentication
 from rest_framework import status
 
 
@@ -25,6 +27,19 @@ class EventViewSet(viewsets.ModelViewSet):
         "comment",
     ]
     calendar_description_template = "events/calendar_description.txt"
+    required_scopes_map = {
+        "Ical": ["export_ical"],
+    }
+
+    def get_authenticators(self):
+        if self.name == 'Ical':
+            return [AuthKeyAuthentication()]
+        return super().get_authenticators()
+
+    def get_permissions(self):
+        if self.name == 'Ical':
+            return [AuthKeyPermission()]
+        return super().get_permissions()
 
     @swagger_auto_schema(
         method="get",
