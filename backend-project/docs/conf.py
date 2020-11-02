@@ -40,6 +40,13 @@ extensions = [
     "sphinx.ext.graphviz"
 ]
 
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3/", None),
+    "django": (
+        "https://docs.djangoproject.com/en/3.1/",None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master/contents.html", None),
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
