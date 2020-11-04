@@ -25,7 +25,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: 'administrative-units-list.table.columns.updatedOn.title' }),
       dataIndex: 'updatedOn',
-      render: updatedOn => updatedOn.toLocaleString(),
+      render: (updatedOn: Date) => updatedOn.toLocaleString(),
     },
     {
       title: formatMessage({ id: 'administrative-units-list.table.columns.active.title' }),
