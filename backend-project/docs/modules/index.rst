@@ -1,0 +1,7 @@
+Moduły
+======
+
+.. toctree::
+   :glob:
+
+   *
