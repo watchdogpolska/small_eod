@@ -7,6 +7,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="google_login")),
+    path("", include("small_eod.events.urls")),
     path("admin/", admin.site.urls),
     path("grappelli/", include("grappelli.urls")),
     path("accounts/", include("allauth.urls")),

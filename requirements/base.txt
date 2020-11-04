@@ -8,3 +8,5 @@ django-github-revision==0.0.3
 django-import-export==1.2.0
 django==2.2.9
 zipstream==1.1.4
+icalendar==4.0.7
+django-fullurl==1.1

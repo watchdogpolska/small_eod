@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     "small_eod.cases.apps.CasesConfig",
     "small_eod.extracts",
     "small_eod.users",
+    "small_eod.events",
+    "small_eod.authkey",
     "grappelli.dashboard",
     "grappelli",
     "import_export",
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "fullurl",
 ]
 
 MIDDLEWARE = [
