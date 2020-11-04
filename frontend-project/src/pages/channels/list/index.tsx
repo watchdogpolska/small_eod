@@ -2,22 +2,11 @@ import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import { Channel } from '@/services/definitions';
 import Table from '@/components/Table';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
-
-export interface IconProps {
-  arg: boolean;
-}
-
-const Icon: FC<IconProps> = ({ arg }) =>
-  arg ? (
-    <CheckCircleTwoTone twoToneColor="#52C41A" />
-  ) : (
-    <CloseCircleTwoTone twoToneColor="#EB2F96" />
-  );
+import Icon from '@/components/Icons/checkIcon';
 
 const TableList: FC<{ dispatch: Function }> = ({ dispatch }) => {
   const fetchData = (parameter: PaginationParams): Promise<PaginationResponse<{}>> => {

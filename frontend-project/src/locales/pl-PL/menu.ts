@@ -9,6 +9,8 @@ export default {
   'menu.institutions': 'Instytucje',
   'menu.institutions.new': 'Nowa',
   'menu.institutions.list': 'Lista',
+  'menu.administrative-units': 'Jednostki administracyjne',
+  'menu.administrative-units.list': 'Lista',
   'menu.letters': 'Listy',
   'menu.letters.list': 'Lista',
   'menu.features': 'Cechy',

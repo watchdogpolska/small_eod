@@ -20,6 +20,8 @@ export default {
   'menu.institutions.list': 'List',
   'menu.features': 'Features',
   'menu.features.list': 'List',
+  'menu.administrative-units': 'Administrative units',
+  'menu.administrative-units.list': 'List',
   'menu.letters': 'Letters',
   'menu.letters.list': 'List',
   'menu.letters.channels': 'Channels',
