@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from ..cases.models import Case
 from ..authkey.models import TimestampUserLogModel
-from django.conf import settings
 
 
 class Event(TimestampUserLogModel):
