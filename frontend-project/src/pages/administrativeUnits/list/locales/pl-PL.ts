@@ -5,4 +5,5 @@ export default {
   'administrative-units-list.table.columns.slug.title': 'Identyfikator redakcyjny',
   'administrative-units-list.table.columns.updatedOn.title': 'Zaktualizowano',
   'administrative-units-list.table.columns.active.title': 'Aktywny',
+  'administrative-units-list.table.columns.active.parent': 'Jednostka nadrzędna',
 };

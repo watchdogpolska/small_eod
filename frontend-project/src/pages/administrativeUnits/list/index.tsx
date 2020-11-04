@@ -6,6 +6,7 @@ import Table from '@/components/Table';
 import { fetchAdministrativeUnitsPage } from '@/services/administrativeUnits';
 import { AdministrativeUnit } from '@/services/definitions';
 import CheckIcon from '@/components/Icons/checkIcon';
+import AdministrativeUnitParent from './parent';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<AdministrativeUnit>[] = [
@@ -30,6 +31,11 @@ const TableList: FC<{}> = () => {
       title: formatMessage({ id: 'administrative-units-list.table.columns.active.title' }),
       dataIndex: 'active',
       render: (active: boolean) => <CheckIcon arg={active} />,
+    },
+    {
+      title: formatMessage({ id: 'administrative-units-list.table.columns.active.parent' }),
+      dataIndex: 'parent',
+      render: (parent: string | null) => <AdministrativeUnitParent id={parent} />,
     },
   ];
 

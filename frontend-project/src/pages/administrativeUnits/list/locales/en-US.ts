@@ -5,4 +5,5 @@ export default {
   'administrative-units-list.table.columns.slug.title': 'Slug',
   'administrative-units-list.table.columns.updatedOn.title': 'Updated on',
   'administrative-units-list.table.columns.active.title': 'Active',
+  'administrative-units-list.table.columns.active.parent': 'Parent unit',
 };
