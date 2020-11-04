@@ -21,7 +21,7 @@ export interface AdministrativeUnitModelType {
 }
 
 const AdministrativeUnitsModel: AdministrativeUnitModelType = {
-  namespace: 'AdministrativeUnits',
+  namespace: 'administrativeUnits',
   state: defaultAdministrativeUnitsState,
   effects: {
     *fetchAll(_, { call, put }) {

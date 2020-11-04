@@ -1,14 +1,24 @@
 import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
+import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 
+import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import Table from '@/components/Table';
-import { fetchAdministrativeUnitsPage } from '@/services/administrativeUnits';
 import { AdministrativeUnit } from '@/services/definitions';
 import CheckIcon from '@/components/Icons/checkIcon';
 import AdministrativeUnitParent from './parent';
 
-const TableList: FC<{}> = () => {
+const TableList: FC<{ dispatch: Function }> = ({ dispatch }) => {
+  const fetchData = (
+    parameter: PaginationParams,
+  ): Promise<PaginationResponse<AdministrativeUnit[]>> => {
+    return dispatch({
+      type: 'administrativeUnits/fetchPage',
+      payload: parameter,
+    });
+  };
+
   const columns: ProColumns<AdministrativeUnit>[] = [
     {
       title: formatMessage({ id: 'administrative-units-list.table.columns.name.title' }),
@@ -39,9 +49,7 @@ const TableList: FC<{}> = () => {
     },
   ];
 
-  return (
-    <Table type="administrative-units" columns={columns} fetchData={fetchAdministrativeUnitsPage} />
-  );
+  return <Table type="administrative-units" columns={columns} fetchData={fetchData} />;
 };
 
-export default TableList;
+export default connect()(TableList);
