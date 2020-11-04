@@ -190,6 +190,19 @@ export default {
               ],
             },
             {
+              name: 'administrative-units',
+              icon: 'BankOutlined',
+              path: '/administrative-units',
+              routes: [
+                {
+                  name: 'list',
+                  icon: 'FileTextOutlined',
+                  path: '/administrative-units/list',
+                  component: './administrativeUnits/list',
+                },
+              ],
+            },
+            {
               name: 'users',
               icon: 'FileTextOutlined',
               path: '/users',
