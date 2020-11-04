@@ -10,7 +10,8 @@ function fetchAllPages(page) {
         limit: params.get('limit'),
         offset: params.get('offset'),
       })
-      .then(nextPage => {
+      .then(newPage => {
+        const nextPage = newPage;
         nextPage.results = page.results.concat(nextPage.results);
         return fetchAllPages(nextPage);
       });
