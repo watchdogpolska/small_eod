@@ -10,9 +10,14 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+import inspect
 import os
 import sys
+
 import django
+from django.urls import get_resolver
+from django.utils.encoding import force_text
+from django.utils.html import strip_tags
 
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -81,3 +86,86 @@ except ImportError:
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+def process_django_model(app, what, name, obj, options, lines):
+    # This causes import errors if left outside the function
+    from django.db import models
+
+    # Only look at objects that inherit from Django's base model class
+    if inspect.isclass(obj) and issubclass(obj, models.Model):
+        # Grab the field list from the meta class
+        fields = obj._meta.fields
+
+        for field in fields:
+            # Decode and strip any html out of the field's help text
+            help_text = strip_tags(force_text(field.help_text))
+
+            # Decode and capitalize the verbose name, for use if there isn't
+            # any help text
+            verbose_name = force_text(field.verbose_name).capitalize()
+
+            if help_text:
+                # Add the model field to the end of the docstring as a param
+                # using the help text as the description
+                lines.append(":param {}: {}".format(field.attname, help_text))
+            else:
+                # Add the model field to the end of the docstring as a param
+                # using the verbose name as the description
+                lines.append(":param {}: {}".format(field.attname, verbose_name))
+
+            # Add the field's type to the docstring
+            if isinstance(
+                field, (models.ForeignKey, models.OneToOneField, models.ManyToManyField)
+            ):
+                lines.append(
+                    ":type %s: %s to :class:`%s.%s`"
+                    % (
+                        field.attname,
+                        type(field).__name__,
+                        field.related_model.__module__,
+                        field.related_model.__name__,
+                    )
+                )
+            else:
+                lines.append(":type {}: {}".format(field.attname, type(field).__name__))
+    # Return the extended docstring
+    return lines
+
+
+def process_django_view(app, what, name, obj, options, lines):
+    res = get_resolver()
+    flat_patterns = []
+
+    def walker(flat_patterns, urlpatterns, namespace=None):
+        for pattern in urlpatterns:
+            if hasattr(pattern, "url_patterns"):
+                walker(flat_patterns, pattern.url_patterns, pattern.namespace)
+            else:
+                urlname = (
+                    "{}:{}".format(namespace, pattern.name)
+                    if namespace
+                    else pattern.name
+                )
+                flat_patterns.append([urlname, pattern.callback])
+
+    walker(flat_patterns, res.url_patterns)
+    for urlname, callback in flat_patterns:
+        if (
+            hasattr(callback, "view_class") and callback.view_class == obj
+        ) or callback == obj:
+            lines.append(":param url_name: ``%s``\n" % urlname)
+    return lines
+
+
+def process_django_form(app, what, name, obj, options, lines):
+    from django import forms
+
+    if inspect.isclass(obj) and issubclass(obj, (forms.Form, forms.ModelForm)):
+        for fieldname, field in obj.base_fields.items():
+            lines.append(":param {}: {}".format(fieldname, field.label))
+
+
+def setup(app):
+    app.connect("autodoc-process-docstring", process_django_model)
+    app.connect("autodoc-process-docstring", process_django_view)
+    app.connect("autodoc-process-docstring", process_django_form)
