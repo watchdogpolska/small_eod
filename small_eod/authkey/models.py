@@ -18,22 +18,22 @@ class TimestampUserLogModel(models.Model):
         auto_now_add=True, verbose_name=_("Date of creation")
     )
 
-    created_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.DO_NOTHING,
-        related_name="%(class)s_created_by",
-        null=True,
-        blank=True,
-        verbose_name=_("Created by"),
-    )
-    modified_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.DO_NOTHING,
-        related_name="%(class)s_modified_by",
-        null=True,
-        blank=True,
-        verbose_name=_("Modified by"),
-    )
+    # created_by = models.ForeignKey(
+    #     to=settings.AUTH_USER_MODEL,
+    #     on_delete=models.DO_NOTHING,
+    #     related_name="%(class)s_created_by",
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Created by"),
+    # )
+    # modified_by = models.ForeignKey(
+    #     to=settings.AUTH_USER_MODEL,
+    #     on_delete=models.DO_NOTHING,
+    #     related_name="%(class)s_modified_by",
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Modified by"),
+    # )
 
     class Meta:
         abstract = True

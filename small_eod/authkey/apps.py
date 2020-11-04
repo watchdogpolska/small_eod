@@ -1,5 +1,7 @@
 from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
 
 
 class AuthtokenConfig(AppConfig):
     name = "small_eod.authkey"
+    verbose_name = _("Auth token")
