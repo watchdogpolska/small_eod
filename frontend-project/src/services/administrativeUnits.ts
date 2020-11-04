@@ -40,6 +40,6 @@ export async function fetchAll() {
   return smallEodSDK.administrativeUnitsList().then(page => fetchAllPages(page));
 }
 
-export async function fetchOne(id: number): Promise<AdministrativeUnit> {
+export async function fetchOne(id: number | string): Promise<AdministrativeUnit> {
   return new smallEodSDK.AdministrativeUnitsApi().administrativeUnitsRead(id);
 }

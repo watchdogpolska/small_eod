@@ -7,7 +7,15 @@ import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import Table from '@/components/Table';
 import { AdministrativeUnit } from '@/services/definitions';
 import CheckIcon from '@/components/Icons/checkIcon';
-import AdministrativeUnitParent from './parent';
+import { fetchOne } from '@/services/administrativeUnits';
+
+const getNameForUnitId = async (id: string | number | null): Promise<string> => {
+  if (!id) {
+    return formatMessage({ id: 'administrative-units-list.table.parent-missing' });
+  }
+  const unit = await fetchOne(id);
+  return unit.name;
+};
 
 const TableList: FC<{ dispatch: Function }> = ({ dispatch }) => {
   const fetchData = (
@@ -45,7 +53,7 @@ const TableList: FC<{ dispatch: Function }> = ({ dispatch }) => {
     {
       title: formatMessage({ id: 'administrative-units-list.table.columns.active.parent' }),
       dataIndex: 'parent',
-      render: (parent: string | null) => <AdministrativeUnitParent id={parent} />,
+      render: (parent: string | null) => getNameForUnitId(parent),
     },
   ];
 

@@ -1,4 +1,5 @@
 export default {
+  'administrative-units-list.table-header-title': 'Administrative units',
   'administrative-units-list.page-header-content': 'Administrative units list',
   'administrative-units-list.table.columns.name.title': 'Name',
   'administrative-units-list.table.columns.category.title': 'Category',
@@ -6,4 +7,5 @@ export default {
   'administrative-units-list.table.columns.updatedOn.title': 'Updated on',
   'administrative-units-list.table.columns.active.title': 'Active',
   'administrative-units-list.table.columns.active.parent': 'Parent unit',
+  'administrative-units-list.table.parent-missing': 'None',
 };
