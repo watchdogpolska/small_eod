@@ -38,6 +38,7 @@ class TimestampUserLogModel(models.Model):
     class Meta:
         abstract = True
 
+
 def generate_token():
     return binascii.hexlify(os.urandom(20)).decode()
 
@@ -47,6 +48,7 @@ class Scope(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
     class Meta:
         verbose_name = _("Scope")
         verbose_name_plural = _("Scopes")
@@ -84,4 +86,3 @@ class Key(TimestampUserLogModel):
     class Meta:
         verbose_name = _("Key")
         verbose_name_plural = _("Keys")
-
