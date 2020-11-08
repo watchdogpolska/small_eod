@@ -48,8 +48,8 @@ extensions = [
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "django": (
-        "https://docs.djangoproject.com/en/3.1/",None),
-    "sphinx": ("https://www.sphinx-doc.org/en/master/contents.html", None),
+        "https://docs.djangoproject.com/en/3.1/","https://docs.djangoproject.com/en/3.1/_objects/"),
+    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
 }
 
 # Add any paths that contain templates here, relative to this directory.
