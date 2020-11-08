@@ -99,16 +99,16 @@ AdministrativeUnit
 
 Klasy uprawnień mają następujące znaczenie:
 
-* change - edycja wszystkich elementów danego typu
-* view - wyświetlanie wszystkich elementów danego typu
-* delete - usunięcie wszystkich elementów danego typu
-* change_own - edycja elementów danego typu utworzonych przez tego samego użytkownika
-* change_all - edycja elementów danego typu utworzonych przez dowolnego użytkownika
+    * change - edycja wszystkich elementów danego typu
+    * view - wyświetlanie wszystkich elementów danego typu
+    * delete - usunięcie wszystkich elementów danego typu
+    * change_own - edycja elementów danego typu utworzonych przez tego samego użytkownika
+    * change_all - edycja elementów danego typu utworzonych przez dowolnego użytkownika
 
 W celu kontroli dostępu wykorzystywane jest:
 
-* uwierzytelnianie poprzez GSuite - oznaczone w dokumentacji API jako ```sessionAuth```
-* uwierzytelnianie hasłem - wyłącznie w celach administracyjnych, tożsame z oznaczeniem w API jako ```sessionAuth```
-* uwierzytelnianie token JWT - oznaczone w dokumentacji API jako ```bearerAuth```.
+    * uwierzytelnianie poprzez GSuite - oznaczone w dokumentacji API jako ``sessionAuth``
+    * uwierzytelnianie hasłem - wyłącznie w celach administracyjnych, tożsame z oznaczeniem w API jako ``sessionAuth``
+    * uwierzytelnianie token JWT - oznaczone w dokumentacji API jako ``bearerAuth``.
 
 Dokumentacja API pomija uwierzytelnianie w ten sposób jako standardowy protokół.

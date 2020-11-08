@@ -18,9 +18,9 @@ Kolekcje będą stanowiły także podstawę do integracji z oprogramowaniem zew
 
 W back-endzie powyższe przekłada się na:
 
-* ścieżka ```/collection/{collectionId}/*``` zawiera ```*/case/*/note```, ```*/case/*/letter``` i ```*/case/*/*event```
-* ścieżki ```/collection/{collectionId}/case/*``` są wyłącznie do odczytu (metoda GET), aby umożliwić wyłącznie odczyt danych
-* ścieżki ```/collection/{collectionId}/case/*``` posiadają zdefiniowane inne formy uwierzytelniania (parametr ```security``` zawierający ```bearerAuth```)
+* ścieżka ``/collection/{collectionId}/*`` zawiera ``*/case/*/note``, ``*/case/*/letter`` i ``*/case/*/*event``
+* ścieżki ``/collection/{collectionId}/case/*`` są wyłącznie do odczytu (metoda GET), aby umożliwić wyłącznie odczyt danych
+* ścieżki ``/collection/{collectionId}/case/*`` posiadają zdefiniowane inne formy uwierzytelniania (parametr ``security`` zawierający ``bearerAuth``)
 
 W front-endzie przekłada się to na sekcje prezentacji kolekcji, która może zawierać uproszczony interfejs do odczytu. Podobne mechanizmy w interfejsie użytkownika:
 
