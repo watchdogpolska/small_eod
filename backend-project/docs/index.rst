@@ -10,6 +10,7 @@ Witam w dokumentacji Small_EOD!
    :maxdepth: 2
    :caption: Spis treści:
 
+   interesariusze.rst
    modules/index
 
 
