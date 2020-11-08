@@ -1,8 +1,8 @@
 Kolekecje
 =========
 
-Opis
-----
+Założenia
+---------
 
 Moduł odpowiedzialny za luźne zgrupowania spraw, które będą w szczególny sposób udostępniane na zewnątrz systemu wyłącznie do odczytu.
 
@@ -25,6 +25,8 @@ W back-endzie powyższe przekłada się na:
 W front-endzie przekłada się to na sekcje prezentacji kolekcji, która może zawierać uproszczony interfejs do odczytu. Podobne mechanizmy w interfejsie użytkownika:
 
 * udostępnienie katalogu w Google Drive - widok odczytu folderu dla użytkownika, który posiada link jest inny niż użytkownika, który jest uwierzytelniony i zarządza dokumentami
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 Architektura
 ------------

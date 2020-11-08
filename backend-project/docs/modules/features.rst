@@ -2,7 +2,7 @@ Cechy
 =====
 
 Założenia
-----
+---------
 
 Moduł odpowiedzialny za cechy i wartości oceny statystycznej.
 

@@ -1,8 +1,8 @@
 Wydarzenia
-=========
+==========
 
-Opis
-----
+Założenia
+---------
 
 Moduł odpowiedzialny za prezentowanie danych wydarzenia.
 
