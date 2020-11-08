@@ -3,15 +3,27 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Witam w dokumentacji Small_EOD!
+Witamy w dokumentacji Small_EOD!
 =====================================
+
+Podstawowym celem projektu jest zbudowanie systemu, który służący do usprawnienia obiegu dokumentów Stowarzyszenia, w szczególności w zakresie:
+
+   * obiegu korespondencji w zakresie spraw sądowych
+   * archiwizacji dokumentacji
+
+Celem wszelkich podejmowanych przez Stowarzyszenia działań jest realizacja celów statutowych Stowarzyszenia tj. upowszechnianie i ochrona wolności i praw człowieka oraz swobód obywatelskich, a także działań wspomagających rozwój demokracji oraz wspieranie działań monitorujących i edukacyjnych, w szczególności podejmowanych przez członków i członkinie Stowarzyszenia i osoby z nimi współpracujące, na rzecz zwiększenia przejrzystości i uczciwości życia publicznego.
+
+--------------------
 
 .. toctree::
    :maxdepth: 2
    :caption: Spis treści:
 
-   interesariusze.rst
-   modules/index
+   description/zalozenia.rst
+   description/interesariusze.rst
+   description/przypadki_uzycia.rst
+   description/udzial_w_projekcie.rst
+   description/architektura.rst
 
 
 
