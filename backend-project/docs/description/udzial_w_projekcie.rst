@@ -3,7 +3,7 @@ Udział w projekcie
 
 W celu rozwoju projektu kod źródłowy projektu można pobrać za pomocą komendy git:
 
-.. code-block:: python
+.. code-block:: bash
    
    git clone git@github.com:watchdogpolska/small_eod.git
 
@@ -39,7 +39,7 @@ Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo `Docker dla
 
 W celu uruchomienia projektu należy wykonać:
 
-.. code-block:: python
+.. code-block:: bash
     
     docker-compose up
 
@@ -48,14 +48,14 @@ Po pomyślnym uruchomieniu projektu środowisko pod adresem `http://localhost:80
 
 W celu utworzenia konta administratora należy wykonać:
 
-.. code-block:: python
+.. code-block:: bash
 
     docker-compose run backend python manage.py createsuperuser
 
 
 W celu utworzenia próbnych danych należy wykonać:
 
-.. code-block:: python
+.. code-block:: bash
 
     docker-compose run backend python manage.py init_data
 
@@ -71,21 +71,21 @@ Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych,
 
 W celu wykonanie testów automatycznych formatowania należy wykonać:
 
-.. code-block:: python
+.. code-block:: bash
     
     make lint
 
 
 Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
 
-.. code-block:: python
+.. code-block:: bash
     
     make fmt
 
 
 W celu wykonania testów automatycznych back-endu należy wykonać:
 
-.. code-block:: python
+.. code-block:: bash
 
     make test-django-backend
 
