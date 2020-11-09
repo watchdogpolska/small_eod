@@ -6,7 +6,6 @@ Założenia
 
 Moduł odpowiedzialny za prezentowanie danych wydarzenia.
 
---------------------------------------------------------
 
 Architektura
 ------------

@@ -6,7 +6,6 @@ Założenia
 
 Moduł odpowiedzialny za notatki wprowadzone przez użytkownika.
 
---------------------------------------------------------------
 
 Architektura
 ------------

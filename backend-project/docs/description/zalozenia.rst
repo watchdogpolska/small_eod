@@ -9,7 +9,6 @@ Zarządzanie
 * System będzie otwarty na wdrożenie w innych podmiotach, które podejmują niezależnie działania zbieżne z celami Stowarzyszenia [#ZA4]
 * System będzie rozwijany w sposób umożliwiający włączenie nowych osób, także w niewielkim stopniu zaangażowania [#ZA5]
 
----------------------
 
 Technologia
 ---------------------
@@ -21,10 +20,9 @@ W doborze technologii preferowane będą rozwiązania, które umożliwiają ogra
 
 Uwaga: Na dzień 1 października 2019 roku `HyperOne <https://www.hyperone.com/>`_ udostępnia Stowarzyszeniu zasoby informatyczne bez opłat. W ofercie posiada usługi tj. Wirtualne Maszyny, Bazy Danych (PostgreSQL i MySQL), Kontenery. W przygotowaniu są usługi tj. skład obiektowy (~Amazon S3, Swift), SMTP-as-a-service (~SendGrid, ~Mailgun), Kubernetes-as-a-service (Amazon EKS, Google Kubernetes Engine).
 
----------------------
 
 Funkcjonalności
---------------------------
+-----------------
 * W początkowych etapach system będzie przeznaczony do archiwizacji dokumentów pochodzących z różnych kanałów tj.
     
     * poczta tradycyjna
@@ -45,7 +43,6 @@ Funkcjonalności
 * Platforma udostępnia skuteczne API
 * Uwierzytelnienie z wykorzystaniem GSuite
 
----------------------
 
 Panel zarządzania
 ------------------

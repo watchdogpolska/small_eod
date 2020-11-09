@@ -15,7 +15,6 @@ Dodatkowe uwagi:
     * Back-end udostępnia dokumentacja REST API zgodną z Swagger
     * Została opracowana biblioteka: `small-eod-sdk-javascript <https://github.com/watchdogpolska/small-eod-sdk-javascript/>`_
 
--------------------
 
 Backend
 ^^^^^^^^^
@@ -31,8 +30,6 @@ Dostępny w podkatalogu ``backend-project``.
 
    ../modules/index.rst
 
-
--------------------
 
 Frontend
 ^^^^^^^^^

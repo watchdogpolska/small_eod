@@ -6,7 +6,6 @@ Założenia
 
 Dodatkowa konfiguracja prezentacji znaczników.
 
--------------------------------------------------------------------------
 
 Architektura
 ------------

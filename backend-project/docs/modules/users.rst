@@ -6,7 +6,6 @@ Założenia
 
 Moduł odpowiedzialny za informacje na temat użytkowników.
 
----------------------------------------------------------
 
 Architektura
 ------------

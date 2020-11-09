@@ -33,7 +33,6 @@ Podane dane nie spełniają reguł walidacji – system wyświetla komunikat bł
 * List jest dostępny na liście listów w sprawie.
 * List nie jest dostępny na liście listów nie przypisanych.
 
-----------------------------------------------------------------------------------
 
 Rejestrowanie teczki sprawy
 ----------------------------
@@ -64,7 +63,6 @@ Podane dane nie spełniają reguł walidacji – system wyświetla komunikat bł
 * List jest dostępny na liście listów w sprawie.
 * List nie jest dostępny na liście listów nie przypisanych.
 
------------------------------------
 
 Utworzenie kolekcji
 -------------------

@@ -6,7 +6,6 @@ Założenia
 
 Moduł odpowiedzialny za konfigurację kanałów komunikacji.
 
----------------------------------------------------------
 
 Architektura
 ------------

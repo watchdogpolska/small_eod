@@ -9,7 +9,6 @@ Wewnętrzni
     * archiwista - osoba, która zajmuje się rejestrowaniem dokumentacji Stowarzyszenia, posiada dokłądną wiedzę na temat reguł rejestrowania dokumentacji
 * Administratorzy – opiekunowie techniczni, prawo zarządzania użytkownikami
 
-------------------------------------------
 
 Zewnętrzni
 ----------

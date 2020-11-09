@@ -113,13 +113,11 @@ Dostęp do wersji demo
 ^^^^^^^^^^^^^^^^^^^^^^^
 W sprawie dostępu do `wersji demo <https://demo.small-eod.siecobywatelska.pl/admin/>`_ napisz na Slacku.
 
-------------------------
 
 Materiały dodatkowe
 ^^^^^^^^^^^^^^^^^^^^^^^
 `Konfiguracja środowiska z użyciem IntelliJ PyCharm <https://github.com/watchdogpolska/small_eod/blob/dev/docs/pycharm/README.md>`_
 
-------------------------
 
 Wsparcie Vercel
 ^^^^^^^^^^^^^^^^^^^^^^^

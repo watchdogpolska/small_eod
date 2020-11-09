@@ -6,7 +6,6 @@ Założenia
 
 Moduł odpowiedzialny za informację o instytucjach.
 
---------------------------------------------------
 
 Architektura
 ------------

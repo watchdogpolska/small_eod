@@ -13,7 +13,6 @@ Podstawowym celem projektu jest zbudowanie systemu, który służący do usprawn
 
 Celem wszelkich podejmowanych przez Stowarzyszenia działań jest realizacja celów statutowych Stowarzyszenia tj. upowszechnianie i ochrona wolności i praw człowieka oraz swobód obywatelskich, a także działań wspomagających rozwój demokracji oraz wspieranie działań monitorujących i edukacyjnych, w szczególności podejmowanych przez członków i członkinie Stowarzyszenia i osoby z nimi współpracujące, na rzecz zwiększenia przejrzystości i uczciwości życia publicznego.
 
---------------------
 
 .. toctree::
    :maxdepth: 2

@@ -7,7 +7,6 @@ Wymagane składniki
     * `Yarn <https://yarnpkg.com/getting-started/install>`_
     * `npm <https://www.npmjs.com/get-npm>`_ (na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
 
--------------------
 
 Instalacja
 ----------
@@ -52,7 +51,6 @@ Instalacja
         
         yarn test
    
--------------------  
 
 Zmienne środowiskowe
 --------------------
