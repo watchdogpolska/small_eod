@@ -14,7 +14,7 @@ Zarządzanie
 Technologia
 ---------------------
 W doborze technologii preferowane będą rozwiązania, które umożliwiają ograniczenie kosztów utrzymania, w szczególności osobowych i licencyjnych [#ZT1] tj.:
-
+    
     * wykorzystanie środowisk chmurowych
     * wykorzystanie konteneryzacji
     * aktywne utrzymywane w długoletniej perspektywie.
@@ -26,18 +26,22 @@ Uwaga: Na dzień 1 października 2019 roku `HyperOne <https://www.hyperone.com/>
 Funkcjonalności
 --------------------------
 * W początkowych etapach system będzie przeznaczony do archiwizacji dokumentów pochodzących z różnych kanałów tj.
+    
     * poczta tradycyjna
     * poczta e-mail
     * Envelo
 
 * W przyszłości system będzie służył także do:
+    
     * zarządzanie przebiegiem procesu sporządzenia pism
     * powiadamiania o nowych pismach
     * kontroli terminów
     * wysyłkę pism poprzez:
+        
         * Envelo
         * ePUAP
         * poczta tradycyjna
+        
 * Platforma udostępnia skuteczne API
 * Uwierzytelnienie z wykorzystaniem GSuite
 
@@ -56,13 +60,13 @@ Technologia
 Struktura Panelu Zarządzania
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Struktura **Panelu Zarządzania** składa się z trzech sekcji:
-
+    
     * sekcji publicznej
     * sekcji prezentacji kolekcji
     * sekcji edycji
 
 Sekcje publiczna umożliwia:
-
+    
     * zalogowanie do sekcji edycji z wykorzystaniem GSuite
     * uzyskanie podstawowych informacji o projekcie (3-4 zdania)
     * odesłanie do GitHub w celu uzyskania szczegółowych informacji o projekcie
@@ -72,12 +76,14 @@ Sekcja prezentacji kolekcji umożliwi zapoznanie się (tylko do odczytu) z spraw
 W V2 możemy zacząć od prezentowania wszystkich danych w postaci tabelarycznej.
 
 Sekcja edycji umożliwia:
-
+    
     * odczyt, dodanie i dodanie jednostek administracyjnych (zaimportowanych wstępnie z bazy TERYT)
     * odczyt, dodanie i edycje spraw z uwzględnieniem:
+        
         * adaptacji do uprawnień użytkownika
         * filtrowania wyszukiwanych spraw – zob. obecne  ``./ui/v1/case_list.png``
         * edycja sprawy umożliwia określenie:
+            
             * instytucji - na podstawie kolekcji instytucji
             * wskazania wartości pól danych statycznych - zgodnie z regułami danego słownika
             * użytkowników odpowiedzialnych
@@ -85,7 +91,9 @@ Sekcja edycji umożliwia:
         * uzyskanie uzyskania chronologicznej wiedzy na temat elementów powiązanych (listów, notatek, wydarzeń) – zob. pokrewne ``./ui/v1/porady_case_view.png``
         * możliwość wyboru opisu listów wyłącznie spośród przewidzianych wcześniej opisów listów
         * możliwości dodania bez znaczącej zmiany kontekstu sprawy (UX) - zob. obecne ``./ui/v1/case_change.png``:
+            
             * wielu listu z uwzględnieniem:
+                
                 * dodania wielu plików do sprawy
                 * wykorzystanie drag-and-drop plików
                 * zarządzania kolejnością listów
