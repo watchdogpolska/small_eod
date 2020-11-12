@@ -6,25 +6,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events', '0001_initial'),
+        ("events", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='event',
-            options={'ordering': ['created_on'], 'verbose_name': 'Events', 'verbose_name_plural': 'Events'},
+            name="event",
+            options={
+                "ordering": ["created_on"],
+                "verbose_name": "Events",
+                "verbose_name_plural": "Events",
+            },
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='created_by',
+            model_name="event",
+            name="created_by",
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='modified_by',
+            model_name="event",
+            name="modified_by",
         ),
         migrations.AlterField(
-            model_name='event',
-            name='comment',
-            field=models.TextField(help_text='Comment text.', max_length=256, verbose_name='Comment'),
+            model_name="event",
+            name="comment",
+            field=models.TextField(
+                help_text="Comment text.", max_length=256, verbose_name="Comment"
+            ),
         ),
     ]
