@@ -18,22 +18,22 @@ class TimestampUserLogModel(models.Model):
         auto_now_add=True, verbose_name=_("Date of creation")
     )
 
-    created_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.DO_NOTHING,
-        related_name="%(class)s_created_by",
-        null=True,
-        blank=True,
-        verbose_name=_("Created by"),
-    )
-    modified_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.DO_NOTHING,
-        related_name="%(class)s_modified_by",
-        null=True,
-        blank=True,
-        verbose_name=_("Modified by"),
-    )
+    # created_by = models.ForeignKey(
+    #     to=settings.AUTH_USER_MODEL,
+    #     on_delete=models.DO_NOTHING,
+    #     related_name="%(class)s_created_by",
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Created by"),
+    # )
+    # modified_by = models.ForeignKey(
+    #     to=settings.AUTH_USER_MODEL,
+    #     on_delete=models.DO_NOTHING,
+    #     related_name="%(class)s_modified_by",
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Modified by"),
+    # )
 
     class Meta:
         abstract = True
@@ -48,6 +48,10 @@ class Scope(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        verbose_name = _("Scope")
+        verbose_name_plural = _("Scopes")
 
 
 class Key(TimestampUserLogModel):
@@ -78,3 +82,7 @@ class Key(TimestampUserLogModel):
         if save:
             self.save()
         return True
+
+    class Meta:
+        verbose_name = _("Key")
+        verbose_name_plural = _("Keys")

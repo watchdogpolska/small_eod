@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-05 01:12+0100\n"
+"PO-Revision-Date: 2020-11-05 01:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: admin.py:13
+msgid "Missing scope 'export_ical'"
+msgstr "Brakujący zakres 'export_ical'"
+
+#: admin.py:15
+msgid "View calendar"
+msgstr "Zobacz kalendarz"
+
+#: apps.py:7
+msgid "Auth token"
+msgstr "Token uwierzytelniania"
+
+#: models.py:15
+msgid "Date of the modification"
+msgstr "Data modyfikacji"
+
+#: models.py:18
+msgid "Date of creation"
+msgstr "Data utworzenia"
+
+#: models.py:46
+msgid "Name"
+msgstr "Nazwa"
+
+#: models.py:51
+msgid "Scope"
+msgstr "Zakres"
+
+#: models.py:52 models.py:66
+msgid "Scopes"
+msgstr "Zakresy"
+
+#: models.py:61
+msgid "Token"
+msgstr "Token"
+
+#: models.py:67
+msgid "Date of last used"
+msgstr "Data ostatniego użycia"
+
+#: models.py:85
+msgid "Key"
+msgstr "Klucz"
+
+#: models.py:86
+msgid "Keys"
+msgstr "Klucze"

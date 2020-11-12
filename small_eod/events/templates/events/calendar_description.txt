@@ -2,4 +2,4 @@
 {{obj.comment}}
 ----
 {% trans 'Case' %}: {{obj.case}} ({% fullurl 'admin:events_event_change' object_id=obj.case.pk %})
-{% trans 'Audited institution' %}: {{obj.case.audited_institutions.objects.all | join:", " | default:"-"}}
+{% trans 'Audited institution' %}: {{obj.case.audited_institution | default:"-"}}
