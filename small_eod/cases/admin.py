@@ -12,7 +12,7 @@ from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportMixin
-
+from small_eod.events.models import Event
 from small_eod.cases.models import (
     Letter,
     Institution,
@@ -76,6 +76,11 @@ class LetterInline(admin.StackedInline):
     }
 
 
+class EventInline(admin.StackedInline):
+    model = Event
+    extra = 0
+
+
 class InstitutionTagFilter(admin.RelatedOnlyFieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
@@ -108,7 +113,7 @@ download_selected_letters.short_description = _("Download selected letters")
 
 
 class CaseAdmin(admin.ModelAdmin):
-    inlines = [LetterInline]
+    inlines = [LetterInline, EventInline]
     list_display = [
         "name",
         "audited_institution",
