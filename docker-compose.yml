@@ -23,6 +23,7 @@ services:
       - ./backend-project:/code
       - static:/code/static
       - media:/code/media
+      - ./docs:/docs
     environment:
       DATABASE_URL: postgres://user:pass@db:5432/small_eod
       MINIO_ACCESS_KEY: test
