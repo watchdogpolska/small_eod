@@ -45,6 +45,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", schema_view.with_ui("redoc"), name="api_redocs"),
     path("api/", include("small_eod.collections.urls")),
     path("api/", include("small_eod.cases.urls")),
     path("api/", include("small_eod.letters.urls")),
