@@ -15,7 +15,6 @@ Dodatkowe uwagi:
     * Back-end udostępnia dokumentacja REST API zgodną z Swagger
     * Została opracowana biblioteka: `small-eod-sdk-javascript <https://github.com/watchdogpolska/small-eod-sdk-javascript/>`_
 
-
 Backend
 ^^^^^^^^^
 Backend utworzony z wykorzystaniem: 
@@ -23,13 +22,7 @@ Backend utworzony z wykorzystaniem:
     * `Django <https://www.djangoproject.com>`_
     * `Django Rest Framework <https://www.django-rest-framework.org>`_
 
-Dostępny w podkatalogu ``backend-project``.
-
-.. toctree::
-   :maxdepth: 3
-
-   ../backend/modules/index.rst
-
+Szczegółowa dokumentacja dostępna w sekcji "Backend".
 
 Frontend
 ^^^^^^^^^
@@ -41,9 +34,4 @@ Frontend został napisany z wykorzystaniem:
     * `Less <http://lesscss.org/>`_
     * `AntDesign <https://ant.design/>`_
 
-Dostępny w podkatalogu ``frontend-project``.
-
-.. toctree::
-   :maxdepth: 3
-
-   ../frontend/frontend.rst
+Szczegółowa dokumentacja dostępna w sekcji "Frontend".

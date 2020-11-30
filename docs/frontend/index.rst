@@ -1,15 +1,17 @@
-Instrukcja instalacji
-======================
+Instalacja
+==========
 
 Wymagane składniki
 -------------------
-    * `Node.js <https://nodejs.org/en/download/>`_
-    * `Yarn <https://yarnpkg.com/getting-started/install>`_
-    * `npm <https://www.npmjs.com/get-npm>`_ (na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
+
+  * `Node.js <https://nodejs.org/en/download/>`_
+  * `Yarn <https://yarnpkg.com/getting-started/install>`_
+  * `npm <https://www.npmjs.com/get-npm>`_ (na niektórych dystrybucjach Linuxa Node.js nie jest domyślnie instalowany z npm)
 
 
-Instalacja
+Procedura
 ----------
+
 #. Utwórz własny `fork repozytorium <https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo>`_ (krok nie jest konieczny, jeżeli nie zamierzasz wprowadzać zmian do oryginalnego repozytorium)
 
 #. Pobierz repozytorium na swój dysk z wykorzystaniem polecenia:

@@ -13,18 +13,35 @@ Podstawowym celem projektu jest zbudowanie systemu, który służący do usprawn
 
 Celem wszelkich podejmowanych przez Stowarzyszenia działań jest realizacja celów statutowych Stowarzyszenia tj. upowszechnianie i ochrona wolności i praw człowieka oraz swobód obywatelskich, a także działań wspomagających rozwój demokracji oraz wspieranie działań monitorujących i edukacyjnych, w szczególności podejmowanych przez członków i członkinie Stowarzyszenia i osoby z nimi współpracujące, na rzecz zwiększenia przejrzystości i uczciwości życia publicznego.
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Omówienie
+
+   overview/goals.rst
+   overview/stakeholders.rst
+   overview/use_cases.rst
+   overview/architecture.rst
+   overview/contribution.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Spis treści:
+   :caption: Back-end
 
-   description/zalozenia.rst
-   description/interesariusze.rst
-   description/przypadki_uzycia.rst
-   description/udzial_w_projekcie.rst
-   description/architektura.rst
+   backend/index.rst
+   backend/modules/index.rst
+   backend/acl.rst
 
+.. toctree::
+   :maxdepth: 2
+   :caption: SDK
 
+   sdk/index.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Front-end
+
+   frontend/index.rst
 
 Indices and tables
 ==================
