@@ -21,4 +21,4 @@ const CaseName: FC<CaseNameProps> = ({ id, cases }) => {
   return <>{oneCase.name}</>;
 };
 
-export default connect(props => props)(CaseName);
+export default connect(({ cases }: CaseNameProps) => ({ cases }))(CaseName);
