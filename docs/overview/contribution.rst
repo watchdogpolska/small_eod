@@ -91,7 +91,7 @@ W celu wygenerowania aktualnej wersji niniejszej dokumentacji należy wykonać:
 
 .. code-block:: bash
 
-    docker-compose run --workdir /docs backend sh -c 'apt-get update && apt-get install make && make html'
+    make docs
 
 Wdrożenie automatyczne
 ----------------------
