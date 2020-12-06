@@ -1,24 +1,11 @@
-import { PaginationParams, PaginationResponse } from '@/services/common.d';
+import { ReadWriteService } from '@/services/service';
 import smallEodSDK from '@/utils/sdk';
 import { Case } from './definitions';
 
-export async function fetchCasesPage({
-  current,
-  pageSize,
-}: PaginationParams): Promise<PaginationResponse<Case>> {
-  smallEodSDK.CasesApi();
-
-  const sdkResponse = await smallEodSDK.casesList({
-    limit: pageSize,
-    offset: pageSize * (current - 1),
-  });
-
-  return {
-    data: sdkResponse.results,
-    total: sdkResponse.count,
-  };
-}
-
-export const fetchOne = async (id: number): Promise<Case> => {
-  return new smallEodSDK.CasesApi().casesRead(id);
-};
+export const CasesService = ReadWriteService<Case>({
+  readPage: props => new smallEodSDK.CasesApi().casesListWithHttpInfo(props),
+  readOne: id => new smallEodSDK.CasesApi().casesReadWithHttpInfo(id),
+  create: data => new smallEodSDK.CasesApi().casesCreateWithHttpInfo(data),
+  update: (id, data) => new smallEodSDK.CasesApi().casesUpdateWithHttpInfo(id, data),
+  remove: id => new smallEodSDK.CasesApi().casesDeleteWithHttpInfo(id),
+});
