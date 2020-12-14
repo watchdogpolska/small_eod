@@ -50,6 +50,32 @@ const plugins = [
   ],
 ];
 
+const casesRoutes = {
+  name: 'cases',
+  icon: 'FileTextOutlined',
+  path: '/cases',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/cases/list',
+      component: './cases/CasesListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/cases/new',
+      component: './cases/CasesDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/cases/edit/:id',
+      component: './cases/CasesDetailView',
+      hideInMenu: true,
+    },
+  ],
+};
+
 export default {
   plugins,
   hash: true,
@@ -87,25 +113,7 @@ export default {
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
-            {
-              name: 'cases',
-              icon: 'FileTextOutlined',
-              path: '/cases',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/cases/new',
-                  component: './cases/new',
-                },
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/cases/list',
-                  component: './cases/list',
-                },
-              ],
-            },
+            casesRoutes,
             {
               name: 'tags',
               icon: 'FileTextOutlined',

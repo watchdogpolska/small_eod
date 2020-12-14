@@ -2,7 +2,6 @@ import { fetchPage, fetchOne } from '@/services/channels';
 import { Effect } from 'dva';
 import { AnyAction, Reducer } from 'redux';
 import { Channel } from '@/services/definitions';
-import { CaseModelState } from './cases';
 
 export type ChannelModelState = Channel[];
 
@@ -15,7 +14,7 @@ export interface ChannelModelType {
   };
   reducers: {
     savePage: Reducer<ChannelModelState, AnyAction>;
-    saveOne: Reducer<CaseModelState, AnyAction>;
+    saveOne: Reducer<ChannelModelState, AnyAction>;
   };
 }
 
