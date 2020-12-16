@@ -8,7 +8,7 @@ import Table from '@/components/Table';
 import ChannelName from '@/components/Table/ChannelName';
 import InstitutionName from '@/components/Table/InstitutionName';
 import CaseName from '@/components/Table/CaseName';
-import { DocumentTypeName } from '@/components/Table/DocumentTypeName';
+import DocumentTypeName from '@/components/Table/DocumentTypeName';
 
 const TableList: FC<{}> = () => {
   const columns: ProColumns<Letter>[] = [

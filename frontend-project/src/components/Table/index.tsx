@@ -1,25 +1,29 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
-import React, { FC, useRef } from 'react';
+import React, { MutableRefObject } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
+import { localeKeys } from '../../locales/pl-PL';
 
-interface TableProps {
+interface TableProps<T> {
   type: string;
-  columns: ProColumns<{}>[];
-  fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<{}>>;
+  columns: ProColumns<T>[];
+  fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<T>>;
+  pageHeader?: string;
+  tableHeader?: string;
+  actionRef?: MutableRefObject<ActionType>;
 }
 
-const Table: FC<TableProps> = ({ type, columns, fetchData }) => {
-  const actionRef = useRef<ActionType>();
-
+function Table<T>({ type, columns, fetchData, pageHeader, tableHeader, actionRef }: TableProps<T>) {
   const showTotal = (total: number, range: number[]) =>
-    `${range[0]}-${range[1]} / ${formatMessage({ id: `${type}-list.table.total` })} ${total}`;
+    `${range[0]}-${range[1]} / ${formatMessage({ id: localeKeys.lists.total })} ${total}`;
 
   return (
-    <PageHeaderWrapper content={formatMessage({ id: `${type}-list.page-header-content` })}>
+    <PageHeaderWrapper
+      content={formatMessage({ id: pageHeader || `${type}-list.page-header-content` })}
+    >
       <ProTable
-        headerTitle={formatMessage({ id: `${type}-list.table-header-title` })}
+        headerTitle={formatMessage({ id: tableHeader || `${type}-list.table-header-title` })}
         actionRef={actionRef}
         rowKey="id"
         request={fetchData}
@@ -36,6 +40,6 @@ const Table: FC<TableProps> = ({ type, columns, fetchData }) => {
       />
     </PageHeaderWrapper>
   );
-};
+}
 
 export default Table;

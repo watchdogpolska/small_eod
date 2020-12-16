@@ -18,7 +18,7 @@
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\"",
     "start": "umi dev",
-    "start:public-api": "API_URL=\"https://dev.small-eod.siecobywatelska.pl/\" yarn start",
+    "start:public-api": "cross-env API_URL=\"https://dev.small-eod.siecobywatelska.pl/\" yarn start",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "test": "jest",
@@ -55,7 +55,7 @@
     "antd": "^4.0.0-rc.1",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.16",
-    "jest": "26.5.2",
+    "jest": "26.6.3",
     "lodash": "^4.17.11",
     "lodash-decorators": "^6.0.0",
     "lodash.isequal": "^4.5.0",
@@ -90,7 +90,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
-    "@umijs/fabric": "2.1.1",
+    "@umijs/fabric": "2.3.1",
     "chalk": "^3.0.0",
     "cross-env": "^6.0.0",
     "cross-port-killer": "^1.1.1",
@@ -112,7 +112,8 @@
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.2",
     "umi-plugin-pro": "^1.0.2",
-    "umi-types": "^0.5.0"
+    "umi-types": "^0.5.0",
+    "vercel": "^20.1.2"
   },
   "engines": {
     "node": ">=10.0.0"

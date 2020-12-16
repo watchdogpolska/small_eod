@@ -50,6 +50,32 @@ const plugins = [
   ],
 ];
 
+const casesRoutes = {
+  name: 'cases',
+  icon: 'FileTextOutlined',
+  path: '/cases',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/cases/list',
+      component: './cases/CasesListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/cases/new',
+      component: './cases/CasesDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/cases/edit/:id',
+      component: './cases/CasesDetailView',
+      hideInMenu: true,
+    },
+  ],
+};
+
 export default {
   plugins,
   hash: true,
@@ -87,25 +113,7 @@ export default {
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
-            {
-              name: 'cases',
-              icon: 'FileTextOutlined',
-              path: '/cases',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/cases/new',
-                  component: './cases/new',
-                },
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/cases/list',
-                  component: './cases/list',
-                },
-              ],
-            },
+            casesRoutes,
             {
               name: 'tags',
               icon: 'FileTextOutlined',
@@ -120,7 +128,7 @@ export default {
                 {
                   name: 'list',
                   icon: 'HomeOutlined',
-                  path: '/tags',
+                  path: '/tags/list',
                   component: './tags/list',
                 },
               ],
@@ -249,9 +257,9 @@ export default {
     config.module.rule('small-eod-client').parser({ amd: false });
     config.plugin('env').use(require.resolve('webpack/lib/DefinePlugin'), [
       {
-        build_sha: JSON.stringify(process.env.COMMIT_SHA),
-        build_branch: JSON.stringify(process.env.COMMIT_BRANCH),
-        build_date: JSON.stringify(new Date().toISOString()),
+        BUILD_SHA: JSON.stringify(process.env.COMMIT_SHA),
+        BUILD_BRANCH: JSON.stringify(process.env.COMMIT_BRANCH),
+        BUILD_DATE: JSON.stringify(new Date().toISOString()),
       },
     ]);
   },

@@ -6,6 +6,7 @@ RUN apt-get update \
     && apt-get install -y \
     gcc \
     wait-for-it \
+    gettext \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /code

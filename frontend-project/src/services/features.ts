@@ -1,24 +1,11 @@
-import { PaginationParams, PaginationResponse } from '@/services/common.d';
+import { ReadWriteService } from '@/services/service';
 import smallEodSDK from '@/utils/sdk';
 import { Feature } from './definitions';
 
-export async function fetchFeaturesPage({
-  current,
-  pageSize,
-}: PaginationParams): Promise<PaginationResponse<Feature>> {
-  smallEodSDK.FeaturesApi();
-
-  const sdkResponse = await smallEodSDK.featuresList({
-    limit: pageSize,
-    offset: pageSize * (current - 1),
-  });
-
-  return {
-    data: sdkResponse.results,
-    total: sdkResponse.count,
-  };
-}
-
-export const fetchOne = async (id: number): Promise<Feature> => {
-  return new smallEodSDK.FeaturesApi().featuresRead(id);
-};
+export const FeaturesService = ReadWriteService<Feature>({
+  readPage: props => new smallEodSDK.FeaturesApi().featuresListWithHttpInfo(props),
+  readOne: id => new smallEodSDK.FeaturesApi().featuesReadWithHttpInfo(id),
+  create: data => new smallEodSDK.FeaturesApi().featuesCreateWithHttpInfo(data),
+  update: (id, data) => new smallEodSDK.FeaturesApi().featuesUpdateWithHttpInfo(id, data),
+  remove: id => new smallEodSDK.FeaturesApi().featuesDeleteWithHttpInfo(id),
+});

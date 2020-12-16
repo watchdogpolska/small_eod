@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
-    "drf_yasg",
+    "drf_yasg2",
     "teryt_tree",
+    "fullurl",
     "small_eod.users",
     "small_eod.generic",
     "small_eod.tags",
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     "small_eod.notes",
     "small_eod.events",
     "small_eod.administrative_units",
+    "small_eod.authkey",
 ]
 
 MIDDLEWARE = [

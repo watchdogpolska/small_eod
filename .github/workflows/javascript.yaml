@@ -3,57 +3,57 @@ name: JavaScript files
 on:
   push:
     paths:
-    - 'frontend-project/**'
-    - '.github/**'
+      - "frontend-project/**"
+      - ".github/**"
   pull_request:
     paths:
-    - 'frontend-project/**'
-    - '.github/**'
+      - "frontend-project/**"
+      - ".github/**"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Node 12.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-    - name: Install
-      run: yarn
-      working-directory: ./frontend-project/
-    - name: Lint
-      run: yarn lint
-      working-directory: ./frontend-project/
-    - name: Typecheck
-      run: yarn tsc
-      working-directory: ./frontend-project/
-    - name: Build
-      run: yarn build
-      working-directory: ./frontend-project/
-      env:
-        COMMIT_SHA: '{{github.sha}}'
-        COMMIT_BRANCH: '{{github.ref}}'
-    - name: Test
-      run: yarn test
-      working-directory: ./frontend-project/
+      - uses: actions/checkout@v2
+      - name: Set up Node 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: Install
+        run: yarn
+        working-directory: ./frontend-project/
+      - name: Lint
+        run: yarn lint
+        working-directory: ./frontend-project/
+      - name: Typecheck
+        run: yarn tsc
+        working-directory: ./frontend-project/
+      - name: Build
+        run: yarn build
+        working-directory: ./frontend-project/
+        env:
+          COMMIT_SHA: "{{github.sha}}"
+          COMMIT_BRANCH: "{{github.ref}}"
+      - name: Test
+        run: yarn test
+        working-directory: ./frontend-project/
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup H1-CLI
-      uses: ./.github/actions/h1-cli
-    - uses: webfactory/ssh-agent@v0.3.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Inject website ssh-hostkey
-      run: echo '${{ secrets.SSH_KNOWN_HOSTS }}' >> ~/.ssh/known_hosts;
-    - name: Deploy update
-      run: make deploy_frontend
-      env:
-        HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
-        HYPERONE_EARLY_ADOPTERS: 'true'
-        HYPERONE_PROJECT: '587707232a57b6fd80f04bc1'
+      - uses: actions/checkout@v2
+      - name: Setup H1-CLI
+        uses: ./.github/actions/h1-cli
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Inject website ssh-hostkey
+        run: echo '${{ secrets.SSH_KNOWN_HOSTS }}' >> ~/.ssh/known_hosts;
+      - name: Deploy update
+        run: make deploy_frontend
+        env:
+          HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
+          HYPERONE_EARLY_ADOPTERS: "true"
+          HYPERONE_PROJECT: "587707232a57b6fd80f04bc1"

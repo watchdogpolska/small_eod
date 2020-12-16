@@ -16,7 +16,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Pyupgrade
       run: make pyupgrade
     - name: Lint
@@ -41,11 +41,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       if: github.event_name == 'push'
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
         name: openapi.yaml
         path: ./openapi.yaml
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       # see https://github.com/actions/upload-artifact/issues/11 
       # for remove duplicated actions
       with:
@@ -60,7 +60,7 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Build production image
       run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:latest backend-project/
     - name: "Docker login"
@@ -83,10 +83,10 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup H1-CLI
       uses: ./.github/actions/h1-cli
-    - uses: webfactory/ssh-agent@v0.3.0
+    - uses: webfactory/ssh-agent@v0.4.1
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Inject website ssh-hostkey

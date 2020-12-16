@@ -5,9 +5,11 @@ import { IconType } from 'antd/lib/notification';
 export interface GlobalModelState {
   collapsed: boolean;
 }
+
 export const openNotificationWithIcon = (message: IconType, description: ReactNode) => {
   notification[message]({ message, description });
 };
+
 const GlobalModel = {
   namespace: 'global',
   state: {
