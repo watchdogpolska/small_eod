@@ -25,7 +25,6 @@ function fetchAllPages(page: Page) {
   }
   return page;
 }
-
 export async function fetchPage({
   current,
   pageSize,
@@ -44,4 +43,7 @@ export async function fetchPage({
 export async function fetchAll() {
   smallEodSDK.TagsApi();
   return smallEodSDK.tagsList().then(page => fetchAllPages(page));
+}
+export async function create(value: Tag): Promise<Tag> {
+  return new smallEodSDK.TagsApi().tagsCreateWithHttpInfo(value);
 }

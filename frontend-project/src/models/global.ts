@@ -1,17 +1,17 @@
 import { notification } from 'antd';
+import { ReactNode } from 'react';
 import { IconType } from 'antd/lib/notification';
 
 export interface GlobalModelState {
   collapsed: boolean;
 }
 
-export const openNotificationWithIcon = (message: IconType, title: string, description: string) => {
-  notification[message]({ message: title, description });
+export const openNotificationWithIcon = (message: IconType, description: ReactNode) => {
+  notification[message]({ message, description });
 };
 
 const GlobalModel = {
   namespace: 'global',
-
   state: {
     collapsed: false,
   },
