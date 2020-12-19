@@ -45,7 +45,11 @@ function TagsListView() {
   async function fetchPage(props: PaginationParams): Promise<PaginationResponse<Tag>> {
     const response = await TagsService.fetchPage(props);
     if (response.status === 'failed') {
-      openNotificationWithIcon('error', formatMessage({ id: localeKeys.error }));
+      openNotificationWithIcon(
+        'error',
+        formatMessage({ id: localeKeys.error }),
+        formatMessage({ id: localeKeys.lists.failedDownload }),
+      );
       return { data: [], total: 0 };
     }
     return response.data;
