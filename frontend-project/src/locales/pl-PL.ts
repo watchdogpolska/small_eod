@@ -7,11 +7,13 @@ import { menuLocale } from './pl-PL/menu';
 import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/pl-PL';
 import { globalsLocale } from './pl-PL/globals';
+import { tagsLocale } from '@/pages/tags/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,
   ...globalsLocale,
   ...casesLocale,
+  ...tagsLocale,
 });
 export const localeKeys = keys;
 

@@ -14,7 +14,7 @@ import { openNotificationWithIcon } from '@/models/global';
 
 interface CasesDetailViewProps {
   cases: ReduxResourceState<Case>;
-  tags: Tag[];
+  tags: ReduxResourceState<Tag>;
   users: User[];
   institutions: Institution[];
   features: ReduxResourceState<Feature>;
@@ -176,7 +176,7 @@ function CasesDetailView({
                   mode="tags"
                   placeholder={formatMessage({ id: localeKeys.cases.detailView.placeholders.tags })}
                 >
-                  {tags.map(tag => (
+                  {tags.data.map(tag => (
                     <Option key={tag.name} value={tag.name}>
                       {tag.name}
                     </Option>
