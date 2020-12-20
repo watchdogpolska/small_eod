@@ -9,7 +9,6 @@ import router from 'umi/router';
 import { localeKeys } from '../../locales/pl-PL';
 import { RouterTypes } from 'umi';
 import { ServiceResponse } from '@/services/service';
-import smallEodSDK from '@/utils/sdk';
 import { openNotificationWithIcon } from '@/models/global';
 
 interface ChannelsDetailViewProps {
@@ -32,7 +31,6 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const editedChannel = channels.data.find(value => value.id === Number(match.params.id));
   const [form] = Form.useForm();
-  (window as any).se = smallEodSDK;
   function onRequestDone(response: ServiceResponse<Channel>) {
     setIsSubmitting(false);
     if (response.status === 'success') {
