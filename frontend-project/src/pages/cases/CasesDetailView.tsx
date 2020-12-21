@@ -100,7 +100,13 @@ function CasesDetailView({
     if (isEdit) dispatch({ type: 'cases/fetchOne', payload: { id: Number(match.params.id) } });
   }, []);
 
-  if (cases.isLoading || features.isLoading || (isEdit && !editedCase) || isSubmitting) {
+  if (
+    cases.isLoading ||
+    tags.isLoading ||
+    features.isLoading ||
+    (isEdit && !editedCase) ||
+    isSubmitting
+  ) {
     return (
       <Row justify="center">
         <Col>
