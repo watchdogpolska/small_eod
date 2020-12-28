@@ -128,6 +128,32 @@ const documentTypesRoutes = {
   ],
 };
 
+const eventsRoutes = {
+  name: 'events',
+  icon: 'FileTextOutlined',
+  path: '/events',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/events',
+      component: './events/EventsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/events/new',
+      component: './events/EventsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/events/edit/:id',
+      component: './events/EventsDetailView',
+      hideInMenu: true,
+    },
+  ],
+};
+
 export default {
   plugins,
   hash: true,
@@ -268,6 +294,7 @@ export default {
               redirect: '/cases/new',
               authority: ['admin', 'user'],
             },
+            eventsRoutes,
             {
               component: './exception/404',
             },

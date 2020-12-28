@@ -12,6 +12,7 @@ import { channelsLocale } from '../pages/channels/locales/en-US';
 import { usersLocale } from '../pages/users/locales/en-US';
 import { tagsLocale } from '../pages/tags/locales/en-US';
 import { documentTypesLocale } from '../pages/documentTypes/locales/en-US';
+import { eventsLocale } from '@/pages/events/locales/en-US';
 
 const [labels] = structuredLocale({
   ...menuLocale,
@@ -21,6 +22,7 @@ const [labels] = structuredLocale({
   ...tagsLocale,
   ...usersLocale,
   ...documentTypesLocale,
+  ...eventsLocale,
 });
 
 const Locale = {
