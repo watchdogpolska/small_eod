@@ -9,12 +9,14 @@ import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/en-US';
 import { globalsLocale } from './en-US/globals';
 import { tagsLocale } from '@/pages/tags/locales/en-US';
+import { usersLocale } from '../pages/users/locales/en-US';
 
 const [labels] = structuredLocale({
   ...menuLocale,
   ...globalsLocale,
   ...casesLocale,
   ...tagsLocale,
+  ...usersLocale,
 });
 
 const Locale = {
