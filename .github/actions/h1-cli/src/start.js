@@ -4,10 +4,10 @@ const https = require('https');
 const os = require('os');
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
-const package = require('../package.json');
+const packageInfo = require('../package.json');
 
 const headers = {
-    'User-Agent': `${package.name}/${package.version} (${os.type()} ${os.release()}; ${process.platform}; ${process.arch}) node/${process.versions.node}`,
+    'User-Agent': `${packageInfo.name}/${packageInfo.version} (${os.type()} ${os.release()}; ${process.platform}; ${process.arch}) node/${process.versions.node}`,
 };
 
 const fetch = (url) => new Promise((resolve, reject) =>
