@@ -82,6 +82,9 @@ test_local: lint build check test
 openapi:
 	docker-compose run --rm backend python manage.py generate_swagger
 
+docs:
+	docker-compose run backend bash -c 'cd ../docs&&sphinx-build -b html -d _build/doctrees . _build/html'
+
 build_balancer:
 	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:latest balancer/
 
