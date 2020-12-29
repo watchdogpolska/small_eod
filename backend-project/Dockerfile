@@ -7,7 +7,12 @@ RUN apt-get update \
     gcc \
     wait-for-it \
     gettext \
+    make \
     && rm -rf /var/lib/apt/lists/*
+# make - required for docs build
+# wait-for-it - required for dependencies waiting eg. wait to database start
+# gcc - for required for some python
+# gettext - regenerate locales
 
 WORKDIR /code
 COPY requirements/*.txt /code/requirements/

@@ -8,3 +8,5 @@ Pipfile.lock
 .env
 
 /dev-data
+
+_build/

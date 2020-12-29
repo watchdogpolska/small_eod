@@ -14,7 +14,7 @@ import { openNotificationWithIcon } from '@/models/global';
 
 interface CasesDetailViewProps {
   cases: ReduxResourceState<Case>;
-  tags: Tag[];
+  tags: ReduxResourceState<Tag>;
   users: User[];
   institutions: Institution[];
   features: ReduxResourceState<Feature>;
@@ -100,7 +100,13 @@ function CasesDetailView({
     if (isEdit) dispatch({ type: 'cases/fetchOne', payload: { id: Number(match.params.id) } });
   }, []);
 
-  if (cases.isLoading || features.isLoading || (isEdit && !editedCase) || isSubmitting) {
+  if (
+    cases.isLoading ||
+    tags.isLoading ||
+    features.isLoading ||
+    (isEdit && !editedCase) ||
+    isSubmitting
+  ) {
     return (
       <Row justify="center">
         <Col>
@@ -176,7 +182,7 @@ function CasesDetailView({
                   mode="tags"
                   placeholder={formatMessage({ id: localeKeys.cases.detailView.placeholders.tags })}
                 >
-                  {tags.map(tag => (
+                  {tags.data.map(tag => (
                     <Option key={tag.name} value={tag.name}>
                       {tag.name}
                     </Option>
