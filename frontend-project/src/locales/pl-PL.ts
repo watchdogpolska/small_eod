@@ -8,8 +8,9 @@ import { menuLocale } from './pl-PL/menu';
 import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/pl-PL';
 import { globalsLocale } from './pl-PL/globals';
-
 import { usersLocale } from '../pages/users/locales/pl-PL';
+import { tagsLocale } from '@/pages/tags/locales/pl-PL';
+import { documentTypesLocale } from '@/pages/documentTypes/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,
@@ -17,6 +18,7 @@ const [labels, keys] = structuredLocale({
   ...casesLocale,
   ...tagsLocale,
   ...usersLocale,
+  ...documentTypesLocale,
 });
 export const localeKeys = keys;
 
