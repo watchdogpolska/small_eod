@@ -3137,7 +3137,7 @@ const main = async () => {
     const platform = os.platform();
     const scope = core.getInput('scope', { required: true });
     const tool_name = `${scope}-cli`;
-    tool_path = await tc.find(tool_name, version);
+    const tool_path = await tc.find(tool_name, version);
     if (!tool_path) {
         const asset_url = await fetchAssetUrl(version, platform, scope);
         tool_path = await downloadExtract(asset_url);
@@ -4916,7 +4916,7 @@ module.exports = bytesToUuid;
 /***/ 731:
 /***/ (function(module) {
 
-module.exports = {"name":"h1-cli-actions","version":"1.0.0","description":"Set up HyperOne CLI on GitHub Actions","main":"dist/start.js","scripts":{"build":"ncc build src/start.js","test":"RUNNER_TOOL_CACHE=$(pwd)/cache RUNNER_TEMP=$(pwd)/cache INPUT_VERSION=latest INPUT_SCOPE=h1 nodejs src/start.js"},"author":"Adam Dobrawy","license":"MIT","dependencies":{"@actions/core":"^1.2.6","@actions/tool-cache":"^1.6.1"},"devDependencies":{"@zeit/ncc":"^0.22.3"}};
+module.exports = {"name":"h1-cli-actions","version":"1.0.0","description":"Set up HyperOne CLI on GitHub Actions","main":"dist/start.js","scripts":{"build":"ncc build src/start.js","test":"RUNNER_TOOL_CACHE=$(pwd)/cache RUNNER_TEMP=$(pwd)/cache INPUT_VERSION=latest INPUT_SCOPE=h1 nodejs src/start.js"},"author":"Adam Dobrawy","license":"MIT","dependencies":{"@actions/core":"^1.2.6","@actions/tool-cache":"^1.6.1"},"devDependencies":{"@zeit/ncc":"0.22.3"}};
 
 /***/ }),
 
