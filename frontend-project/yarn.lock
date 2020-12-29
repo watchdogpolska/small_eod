@@ -5690,7 +5690,12 @@ cross-env@6.0.3:
   dependencies:
     cross-spawn "^7.0.0"
 
-cross-port-killer@1.2.1, cross-port-killer@^1.1.1:
+cross-port-killer@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/cross-port-killer/-/cross-port-killer-1.3.0.tgz#66305ed1f6134333ea451baac6fc7b06c998a4b4"
+  integrity sha512-c52ohEZ8MEJEAc6jpe4c5LmInNIasjxswasbjGXraOphXZlltLHM+50rM6vEQm5eL2uNc4RqSdOTMcGdZe5EPQ==
+
+cross-port-killer@^1.1.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/cross-port-killer/-/cross-port-killer-1.2.1.tgz#30f5912dba758e25ae250feb16687a472142c8ef"
   integrity sha512-44xPEKbWl55Imjxq5wAWqBhtZpj07OUSP32v2B+gvxyVv6SUBKDowuMCvAf2r2e+obpjpHNjpe846MTIpK2f+g==
