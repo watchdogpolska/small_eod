@@ -105,10 +105,6 @@ function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
       </Row>
     );
   }
-  console.log({
-    ...editedEvent,
-    date: toDatetimeLocal(new Date(editedEvent.date)),
-  });
   if (isEdit)
     form.setFieldsValue({
       ...editedEvent,
