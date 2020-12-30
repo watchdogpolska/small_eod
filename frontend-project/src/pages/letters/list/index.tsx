@@ -24,25 +24,12 @@ const TableList: FC<{}> = () => {
 
   function onRemove(id: number): Promise<void> {
     return new Promise((resolve, reject) => {
-      const onResponse = (response: ServiceResponse<number>) => {
-        if (response.status === 'failed') {
-          openNotificationWithIcon(
-            'error',
-            formatMessage({ id: localeKeys.error }),
-            `${formatMessage({ id: 'letters-list.table.notification.remove' })} ${id}`,
-          );
-
-          reject();
-        } else {
-          resolve();
-        }
-      };
-
       dispatch({
         type: 'letters/remove',
         payload: {
           id,
-          onResponse,
+          onResponse: (response: ServiceResponse<number>) =>
+            response.status === 'failed' ? reject() : resolve(),
         },
       });
     });
@@ -51,6 +38,12 @@ const TableList: FC<{}> = () => {
   const [modal, showModal] = useConfirmationModal(
     {
       onSuccess: () => tableActionRef.current.reload(),
+      onFailure: id =>
+        openNotificationWithIcon(
+          'error',
+          formatMessage({ id: localeKeys.error }),
+          `${formatMessage({ id: 'letters-list.table.notification.remove' })} ${id}`,
+        ),
     },
     onRemove,
   );

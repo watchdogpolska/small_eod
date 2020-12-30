@@ -3,25 +3,27 @@ import { Modal, Button } from 'antd';
 import { localeKeys } from '@/locales/pl-PL';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-type ConfirmationProps = {
+type ConfirmationProps<T> = {
   title?: string;
   onSuccess?: () => void;
-  onFailure?: (error: Error) => void;
+  onFailure?: (args: T) => void;
 };
 
-type ConfirmationModalProps = ConfirmationProps & {
+type ConfirmationModalProps<T> = ConfirmationProps<T> & {
   title: string;
+  submitArgs: T;
   hideModal: () => void;
   onSubmit: () => void;
 };
 
-const ConfirmationModal = ({
+const ConfirmationModal = <T extends {}>({
   onSubmit,
   title,
   onSuccess,
   onFailure,
   hideModal,
-}: ConfirmationModalProps) => {
+  submitArgs,
+}: ConfirmationModalProps<T>) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isInProgress, setIsInProgress] = useState(false);
 
@@ -39,7 +41,7 @@ const ConfirmationModal = ({
       onSuccess();
     } catch (error) {
       if (onFailure) {
-        onFailure(error);
+        onFailure(submitArgs);
       }
     } finally {
       setIsInProgress(false);
@@ -79,7 +81,7 @@ const ConfirmationModal = ({
 };
 
 export const useConfirmationModal = <T extends {}>(
-  props: ConfirmationProps,
+  props: ConfirmationProps<T>,
   onSubmit: (args: T) => void,
 ) => {
   const [modal, setModal] = useState(null);
@@ -91,6 +93,7 @@ export const useConfirmationModal = <T extends {}>(
       <ConfirmationModal
         {...props}
         {...(title ? { title } : undefined)}
+        submitArgs={args}
         onSubmit={() => onSubmit(args)}
         hideModal={hideModal}
       />,
