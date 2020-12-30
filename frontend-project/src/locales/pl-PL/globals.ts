@@ -12,4 +12,9 @@ export const globalsLocale = {
     save: 'Zapisz',
     reset: 'Wyczyść',
   },
+  modal: {
+    confirm: 'Potwierdź',
+    cancel: 'Anuluj',
+    description: 'Czy chcesz kontynuować?',
+  },
 };

@@ -16,4 +16,5 @@ export default {
   'letters-list.table.direction.in': 'odebrane',
   'letters-list.table.direction.out': 'wysłane',
   'letters-list.table.notification.remove': 'Nie udało się usuąć listu',
+  'letters-list.table.modal.remove.title': 'Czy chcesz usunąć list {referenceNumber}?',
 };

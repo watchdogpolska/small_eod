@@ -16,29 +16,44 @@ import { ServiceResponse } from '@/services/service';
 import { PaginationParams, PaginationResponse } from '@/services/common';
 import { LettersService } from '@/services/letters';
 import { localeKeys } from '@/locales/pl-PL';
+import { useConfirmationModal } from '@/components/Modals/Confirmation';
 
 const TableList: FC<{}> = () => {
   const dispatch = useDispatch();
   const tableActionRef = useRef<ActionType>();
 
-  function onRemove(id: number) {
-    dispatch({
-      type: 'letters/remove',
-      payload: {
-        id,
-        onResponse: (response: ServiceResponse<number>) => {
-          if (response.status === 'failed') {
-            openNotificationWithIcon(
-              'error',
-              formatMessage({ id: localeKeys.error }),
-              `${formatMessage({ id: 'letters-list.table.notification.remove' })} ${id}`,
-            );
-          }
-          tableActionRef.current.reload();
+  function onRemove(id: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const onResponse = (response: ServiceResponse<number>) => {
+        if (response.status === 'failed') {
+          openNotificationWithIcon(
+            'error',
+            formatMessage({ id: localeKeys.error }),
+            `${formatMessage({ id: 'letters-list.table.notification.remove' })} ${id}`,
+          );
+
+          reject();
+        } else {
+          resolve();
+        }
+      };
+
+      dispatch({
+        type: 'letters/remove',
+        payload: {
+          id,
+          onResponse,
         },
-      },
+      });
     });
   }
+
+  const [modal, showModal] = useConfirmationModal(
+    {
+      onSuccess: () => tableActionRef.current.reload(),
+    },
+    onRemove,
+  );
 
   async function fetchPage(props: PaginationParams): Promise<PaginationResponse<Letter>> {
     const response = await LettersService.fetchPage(props);
@@ -115,7 +130,7 @@ const TableList: FC<{}> = () => {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, { id, referenceNumber }: Letter) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
             <Button
@@ -123,7 +138,19 @@ const TableList: FC<{}> = () => {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() =>
+                showModal(
+                  id,
+                  formatMessage(
+                    {
+                      id: 'letters-list.table.modal.remove.title',
+                    },
+                    {
+                      referenceNumber: referenceNumber || '',
+                    },
+                  ),
+                )
+              }
             />
           </Tooltip>
         </Space>
@@ -132,7 +159,10 @@ const TableList: FC<{}> = () => {
   ];
 
   return (
-    <Table type="letters" columns={columns} actionRef={tableActionRef} fetchData={fetchPage} />
+    <>
+      <Table type="letters" columns={columns} actionRef={tableActionRef} fetchData={fetchPage} />
+      {modal}
+    </>
   );
 };
 
