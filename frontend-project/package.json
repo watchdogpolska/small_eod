@@ -87,7 +87,7 @@
     "@types/jest": "24.9.1",
     "@types/lodash": "4.14.166",
     "@types/qs": "6.9.3",
-    "@types/react": "16.9.35",
+    "@types/react": "16.14.2",
     "@types/react-dom": "16.9.10",
     "@types/react-helmet": "5.0.16",
     "@umijs/fabric": "2.3.1",
