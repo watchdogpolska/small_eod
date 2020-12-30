@@ -1,20 +1,13 @@
-import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import smallEodSDK from '@/utils/sdk';
 import { Letter } from './definitions';
+import { ReadWriteService } from './service';
 
-export async function fetchLettersPage({
-  current,
-  pageSize,
-}: PaginationParams): Promise<PaginationResponse<Letter>> {
-  smallEodSDK.LettersApi();
+const sdk = new smallEodSDK.LettersApi();
 
-  const sdkResponse = await smallEodSDK.lettersList({
-    limit: pageSize,
-    offset: pageSize * (current - 1),
-  });
-
-  return {
-    data: sdkResponse.results,
-    total: sdkResponse.count,
-  };
-}
+export const LettersService = ReadWriteService<Letter>({
+  readPage: props => sdk.lettersListWithHttpInfo(props),
+  readOne: id => sdk.lettersReadWithHttpInfo(id),
+  create: data => sdk.lettersCreateWithHttpInfo(data),
+  update: (id, data) => sdk.lettersUpdateWithHttpInfo(id, data),
+  remove: id => sdk.lettersDeleteWithHttpInfo(id),
+});

@@ -1,3 +1,4 @@
+import { tagsLocale } from '@/pages/tags/locales/pl-PL';
 import component from './pl-PL/component';
 import globalHeader from './pl-PL/globalHeader';
 import pwa from './pl-PL/pwa';
@@ -7,7 +8,6 @@ import { menuLocale } from './pl-PL/menu';
 import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/pl-PL';
 import { globalsLocale } from './pl-PL/globals';
-import { tagsLocale } from '@/pages/tags/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,

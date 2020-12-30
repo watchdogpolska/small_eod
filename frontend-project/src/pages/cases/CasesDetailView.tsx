@@ -6,11 +6,11 @@ import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Institution, User, Tag, Case, Feature } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { localeKeys } from '../../locales/pl-PL';
 import { RouterTypes } from 'umi';
 import { ServiceResponse } from '@/services/service';
 import smallEodSDK from '@/utils/sdk';
 import { openNotificationWithIcon } from '@/models/global';
+import { localeKeys } from '../../locales/pl-PL';
 
 interface CasesDetailViewProps {
   cases: ReduxResourceState<Case>;

@@ -15,4 +15,5 @@ export default {
   'letters-list.table.total': 'Łącznie',
   'letters-list.table.direction.in': 'odebrane',
   'letters-list.table.direction.out': 'wysłane',
+  'letters-list.table.notification.remove': 'Nie udało się usuąć listu',
 };
