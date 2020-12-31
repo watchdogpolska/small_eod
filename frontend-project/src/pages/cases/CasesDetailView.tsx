@@ -8,14 +8,13 @@ import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
 import { RouterTypes } from 'umi';
 import { ServiceResponse } from '@/services/service';
-import smallEodSDK from '@/utils/sdk';
 import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
 
 interface CasesDetailViewProps {
   cases: ReduxResourceState<Case>;
   tags: ReduxResourceState<Tag>;
-  users: User[];
+  users: ReduxResourceState<User>;
   institutions: Institution[];
   features: ReduxResourceState<Feature>;
   match: RouterTypes['match'] & { params: { id: string | undefined } };
@@ -46,11 +45,11 @@ function CasesDetailView({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const editedCase = cases.data.find(value => value.id === Number(match.params.id));
   const [form] = Form.useForm();
-  (window as any).se = smallEodSDK;
+
   function onRequestDone(response: ServiceResponse<Case>) {
     setIsSubmitting(false);
     if (response.status === 'success') {
-      router.push('/cases/list');
+      router.push('/cases');
     } else if (response.statusCode === 400) {
       form.setFields(
         Array.from(
@@ -103,6 +102,7 @@ function CasesDetailView({
   if (
     cases.isLoading ||
     tags.isLoading ||
+    users.isLoading ||
     features.isLoading ||
     (isEdit && !editedCase) ||
     isSubmitting
@@ -205,7 +205,6 @@ function CasesDetailView({
               >
                 <Select
                   mode="multiple"
-                  disabled={features.isLoading}
                   placeholder={formatMessage({
                     id: localeKeys.cases.detailView.placeholders.features,
                   })}
@@ -253,7 +252,7 @@ function CasesDetailView({
                     id: localeKeys.cases.detailView.placeholders.notifiedUsers,
                   })}
                 >
-                  {users.map(user => (
+                  {users.data.map(user => (
                     <Option key={user.id} value={user.id}>
                       {user.username}
                     </Option>
@@ -274,7 +273,7 @@ function CasesDetailView({
                     id: localeKeys.cases.detailView.placeholders.responsibleUsers,
                   })}
                 >
-                  {users.map(user => (
+                  {users.data.map(user => (
                     <Option key={user.id} value={user.id}>
                       {user.username}
                     </Option>

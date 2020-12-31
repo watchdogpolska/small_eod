@@ -120,10 +120,10 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
           },
           ...routers,
         ]}
-        itemRender={(route, params, routes, paths) => {
-          const first = routes.indexOf(route) === 0;
-          return first ? (
-            <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+        itemRender={(route, _, routes) => {
+          const lastBreadcrumbItem = routes.indexOf(route) === routes.length - 1;
+          return !lastBreadcrumbItem ? (
+            <Link to={route.path}>{route.breadcrumbName}</Link>
           ) : (
             <span>{route.breadcrumbName}</span>
           );
