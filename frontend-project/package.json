@@ -80,7 +80,7 @@
     "use-merge-value": "1.0.1"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "1.0.20",
+    "@ant-design/pro-cli": "1.0.25",
     "@types/classnames": "2.2.11",
     "@types/express": "4.17.9",
     "@types/history": "4.7.8",
