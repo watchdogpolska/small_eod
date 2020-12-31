@@ -1,12 +1,12 @@
 import { PaginationParams, PaginationResponse } from '@/services/common';
+import { Effect, EffectsCommandMap } from 'dva';
+import { AnyAction, Reducer } from 'redux';
 import {
   PostData,
   ReadOnlyServiceType,
   ReadWriteServiceType,
   ServiceResponse,
 } from '../services/service';
-import { Effect, EffectsCommandMap } from 'dva';
-import { AnyAction, Reducer } from 'redux';
 
 interface Payload<T> extends AnyAction {
   payload: T;

@@ -1,5 +1,5 @@
 export const globalsLocale = {
-  error: 'Błąd',
+  error: 'Error',
   lists: {
     edit: 'Edit',
     delete: 'Delete',
@@ -11,5 +11,10 @@ export const globalsLocale = {
   form: {
     save: 'Save',
     reset: 'Reset',
+  },
+  modal: {
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    description: 'Are you sure you want to proceed?',
   },
 };
