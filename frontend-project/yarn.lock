@@ -20386,7 +20386,12 @@ use-media-antd-query@^1.0.1:
   dependencies:
     react-responsive "^8.0.1"
 
-use-merge-value@1.0.1, use-merge-value@^1.0.1:
+use-merge-value@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/use-merge-value/-/use-merge-value-1.0.2.tgz#6da9de949a1ec9d08cbc2b43832fe2a214f502dc"
+  integrity sha512-xY9IHP56kjyGsXYk8r5/ZPgpvFuM4lfoN6dFRA60WEa+Xc5izR/N/zOKMO/2j4x5lZALVv19u8+r59CS6+X+Yw==
+
+use-merge-value@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/use-merge-value/-/use-merge-value-1.0.1.tgz#51f27c34e381f98dc4a010e71cfb5862fedde26b"
   integrity sha512-GXmzGbxDhtun+UQnUhDy7d+mRUvN6pewkSDhOSVeGlIqu0YjrVVbK+CxyU7CWaiE4u0jGAagYJ0wVizAYYqBhw==
