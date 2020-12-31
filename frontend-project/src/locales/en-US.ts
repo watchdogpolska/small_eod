@@ -1,3 +1,4 @@
+import { tagsLocale } from '@/pages/tags/locales/en-US';
 import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
 import { menuLocale } from './en-US/menu';

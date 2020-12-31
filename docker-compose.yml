@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     # https://hub.docker.com/_/postgres
-    image: postgres:12.4-alpine@sha256:4c493832e4865189e3cab86281a1706a074ea6796b525a7f191b3f48546c25a8
+    image: postgres:12.5-alpine@sha256:ff96c87ca0040cee0decb8d1f4137eb62498ab060cadbb6b3e51f5193be552c7
     expose:
       - "5432"
     volumes:
@@ -23,6 +23,7 @@ services:
       - ./backend-project:/code
       - static:/code/static
       - media:/code/media
+      - ./docs:/docs
     environment:
       DATABASE_URL: postgres://user:pass@db:5432/small_eod
       MINIO_ACCESS_KEY: test

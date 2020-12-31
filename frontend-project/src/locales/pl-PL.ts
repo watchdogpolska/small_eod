@@ -1,3 +1,4 @@
+import { tagsLocale } from '@/pages/tags/locales/pl-PL';
 import component from './pl-PL/component';
 import globalHeader from './pl-PL/globalHeader';
 import pwa from './pl-PL/pwa';
