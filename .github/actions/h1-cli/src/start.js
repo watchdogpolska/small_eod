@@ -63,7 +63,7 @@ const main = async () => {
     const platform = os.platform();
     const scope = core.getInput('scope', { required: true });
     const tool_name = `${scope}-cli`;
-    const tool_path = await tc.find(tool_name, version);
+    let tool_path = await tc.find(tool_name, version);
     if (!tool_path) {
         const asset_url = await fetchAssetUrl(version, platform, scope);
         tool_path = await downloadExtract(asset_url);
