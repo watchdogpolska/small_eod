@@ -9,7 +9,7 @@ import BaseLocales from './pl-PL';
 import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/en-US';
 import { globalsLocale } from './en-US/globals';
-import { tagsLocale } from '@/pages/tags/locales/en-US';
+
 import { usersLocale } from '../pages/users/locales/en-US';
 
 const [labels] = structuredLocale({
@@ -41,8 +41,10 @@ if (new Set(Object.keys(BaseLocales)) !== new Set(Object.keys(Locale))) {
   const missingBaseLocaleKeys = Array.from(localeSet).filter(lKey => !baseLocaleSet.has(lKey));
 
   if (missingLocaleKeys.length > 0)
+    // eslint-disable-next-line no-console
     console.error(`Missing locale keys: ${missingLocaleKeys.join(', ')}`);
   if (missingBaseLocaleKeys.length > 0)
+    // eslint-disable-next-line no-console
     console.error(`Missing base locale keys: ${missingBaseLocaleKeys.join(', ')}`);
 }
 
