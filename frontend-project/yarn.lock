@@ -13196,7 +13196,7 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-nan@^2.12.1, nan@^2.14.0:
+nan@^2.12.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
   integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
@@ -13363,13 +13363,6 @@ node-notifier@^8.0.0:
     shellwords "^0.1.1"
     uuid "^8.3.0"
     which "^2.0.2"
-
-node-pty@^0.10.0-beta3:
-  version "0.10.0-beta9"
-  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-0.10.0-beta9.tgz#e5a795f9b53948346803cb71bac4ffc02e7909f0"
-  integrity sha512-Qm6uSH30FUcAhJ9s76C+lgvTsOW2cHUbkIGjCdOVCL0c7S4DxsmKBRgjcr+guUK9d9KwfuZHeSjXYWjpJFPe4w==
-  dependencies:
-    nan "^2.14.0"
 
 node-releases@^1.1.13, node-releases@^1.1.53:
   version "1.1.56"
@@ -19497,10 +19490,10 @@ uglifyjs-webpack-plugin@1.3.0:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
-umi-build-dev@1.18.5:
-  version "1.18.5"
-  resolved "https://registry.yarnpkg.com/umi-build-dev/-/umi-build-dev-1.18.5.tgz#2dbae6bc44826d44f8b03b3a29ec268f4381b031"
-  integrity sha512-A5qWwAuggEpVdgvOGilopJRuAwlXMkbhD23uiE9GFQ06lDiqkiKPG3uSuxSG5F42mPNfaqHq/nIT5Vs9qidimw==
+umi-build-dev@1.18.7:
+  version "1.18.7"
+  resolved "https://registry.yarnpkg.com/umi-build-dev/-/umi-build-dev-1.18.7.tgz#8af2aecd925d7d2c1c0cfe426c7e0c2febdcf060"
+  integrity sha512-s97+Sotgfxrodz43gMW6jMwpu2km6fpUlTP0NcsYqVzA8azVmsvNOw8XjCINjEiNgYVCOt2MRqrfBSE7lS9Ghg==
   dependencies:
     "@babel/code-frame" "7.0.0"
     "@babel/generator" "7.4.4"
@@ -19824,10 +19817,10 @@ umi-ui-theme@1.2.4:
   dependencies:
     less-vars-to-js "1.3.0"
 
-umi-ui@1.5.6:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/umi-ui/-/umi-ui-1.5.6.tgz#49129c7baa7c81687f4552400ed433b007458267"
-  integrity sha512-gPq0RZB5m5Lh03jXWBqy8XMTTklZY6AbqBeuDcDpsdmk5hV7N7TGEM9PkFCTuQVU5A2XrWuAJX0xlnAsjkHPcg==
+umi-ui@1.5.9:
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/umi-ui/-/umi-ui-1.5.9.tgz#8382d54b800ddbafcb720b2900542dd6094507e7"
+  integrity sha512-SG/oi7s+uw1opz50EyfIx8ILmYawFMFNMfUfpfknd9BgEa9Lxg8B24Ep8X4RwI+oZWTZ00nFFuJ7Iaf/OKZYDg==
   dependencies:
     "@umijs/launch-editor" "^1.0.0"
     binary-mirror-config "1.20.3"
@@ -19851,11 +19844,9 @@ umi-ui@1.5.6:
     rimraf "3.0.0"
     semver "6.3.0"
     sockjs "0.3.19"
-    umi-build-dev "1.18.5"
+    umi-build-dev "1.18.7"
     umi-ui-theme "1.2.4"
     user-home "2.0.0"
-  optionalDependencies:
-    node-pty "^0.10.0-beta3"
 
 umi-uni18n@^1.1.6:
   version "1.1.6"
@@ -19933,10 +19924,10 @@ umi-webpack-bundle-analyzer@^3.5.0:
     opener "^1.5.1"
     ws "^6.0.0"
 
-umi@2.13.13:
-  version "2.13.13"
-  resolved "https://registry.yarnpkg.com/umi/-/umi-2.13.13.tgz#9a9ac4053f606419cc21faf664715809b1f45316"
-  integrity sha512-eZTWxfKXMk/lt9V5pEZZA3JEMnHK4LdIWkHKWtAYHSB4P/1Qd10yQ24A8MTIBIw1g6tesSPDT7aK4LI/+Yq/cA==
+umi@2.13.16:
+  version "2.13.16"
+  resolved "https://registry.yarnpkg.com/umi/-/umi-2.13.16.tgz#cc9655e9861d3fb3ac3814715ba8be2a86d756bb"
+  integrity sha512-nG+6RErYwXyMOUPTsYD+akNUDmlYp73rGzwohw7kPm4dbeKiXCQg3mFjmzJknnDO1Hqp949oJH4UvQ6HwFPYsg==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/runtime" "7.4.5"
@@ -19951,9 +19942,9 @@ umi@2.13.13:
     resolve-cwd "3.0.0"
     semver "6.1.1"
     signale "1.4.0"
-    umi-build-dev "1.18.5"
+    umi-build-dev "1.18.7"
     umi-core "1.9.9"
-    umi-ui "1.5.6"
+    umi-ui "1.5.9"
     umi-utils "1.7.2"
     update-notifier "3.0.0"
     yargs-parser "13.1.1"
