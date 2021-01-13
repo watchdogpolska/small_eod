@@ -109,10 +109,10 @@
   resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-2.1.1.tgz#7b9c08dffd4f5d41db667d9dbe5e0107d0bd9a4a"
   integrity sha512-jCH+k2Vjlno4YWl6g535nHR09PwCEmTBKAG6VqF+rhkrSPRLfgpU2maagwbZPLjaHuU5Jd1DFQ2KJpQuI6uG8w==
 
-"@ant-design/pro-cli@1.0.25":
-  version "1.0.25"
-  resolved "https://registry.yarnpkg.com/@ant-design/pro-cli/-/pro-cli-1.0.25.tgz#b5edb3f1440760b179e11d2b5b6d60b0ba28fe76"
-  integrity sha512-kF6pYg9uAo6xR9DyLMaPmYhEqe/n0nxfTPxojT4A5eendDQDVagD8rX6JrI5JaCSdC2/+fO/5oAkyMbXQIcfcA==
+"@ant-design/pro-cli@1.0.28":
+  version "1.0.28"
+  resolved "https://registry.yarnpkg.com/@ant-design/pro-cli/-/pro-cli-1.0.28.tgz#daa4915b15da24c30580376b7454f6483670ab2b"
+  integrity sha512-LVasfdjlz0wDnxt7ob7r14xQYClcNv7Yhfpz1rkB4XEUW0AUkZMGB/6CaeL9RekAKnqZnclC/Z3OLPDA+O8hlQ==
   dependencies:
     "@babel/core" "^7.5.4"
     "@babel/generator" "^7.5.0"
@@ -139,7 +139,7 @@
     prettier "^2.0.2"
     rimraf "^3.0.0"
     semver "^7.0.0"
-    typescript "^3.5.3"
+    typescript "^4.0.0"
     umi-utils "^1.5.1"
     yargs-parser "^20.0.0"
 
