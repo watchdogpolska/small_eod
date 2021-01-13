@@ -5,7 +5,7 @@
   ],
   "packageRules": [
     {
-      "depTypeList": ["minor", "patch", "pin", "digest", "devDependencies"],
+      "depTypeList": ["minor", "patch", "pin", "devDependencies"],
       "automerge": true
     }
   ],
