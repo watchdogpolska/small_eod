@@ -64,7 +64,7 @@
     "omit.js": "2.0.2",
     "path-to-regexp": "2.4.0",
     "prop-types": "15.7.2",
-    "qs": "6.9.4",
+    "qs": "6.9.5",
     "react": "16.14.0",
     "react-copy-to-clipboard": "5.0.2",
     "react-dom": "16.14.0",
