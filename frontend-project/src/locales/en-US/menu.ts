@@ -37,6 +37,11 @@ export const menuLocale = {
       edit: 'Edit',
       list: 'List',
     },
-    users: 'Users',
+    users: {
+      self: 'Users',
+      new: 'New',
+      edit: 'Edit',
+      list: 'List',
+    },
   },
 };

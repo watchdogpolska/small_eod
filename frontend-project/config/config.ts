@@ -58,7 +58,7 @@ const casesRoutes = {
     {
       name: 'list',
       icon: 'FileTextOutlined',
-      path: '/cases/list',
+      path: '/cases',
       component: './cases/CasesListView',
     },
     {
@@ -71,6 +71,32 @@ const casesRoutes = {
       name: 'edit',
       path: '/cases/edit/:id',
       component: './cases/CasesDetailView',
+      hideInMenu: true,
+    },
+  ],
+};
+
+const usersRoutes = {
+  name: 'users',
+  icon: 'FileTextOutlined',
+  path: '/users',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/users',
+      component: './users/UsersListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/users/new',
+      component: './users/UsersDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/users/edit/:id',
+      component: './users/UsersDetailView',
       hideInMenu: true,
     },
   ],
@@ -209,12 +235,7 @@ export default {
                 },
               ],
             },
-            {
-              name: 'users',
-              icon: 'FileTextOutlined',
-              path: '/users',
-              component: './users/list',
-            },
+            usersRoutes,
             {
               path: '/',
               redirect: '/cases/new',

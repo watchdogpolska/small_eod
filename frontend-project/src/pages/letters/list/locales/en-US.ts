@@ -15,4 +15,6 @@ export default {
   'letters-list.table.total': 'Total',
   'letters-list.table.direction.in': 'received',
   'letters-list.table.direction.out': 'sent',
+  'letters-list.table.notification.remove': 'Cannot delete list',
+  'letters-list.table.modal.remove.title': 'Do you want to delete {referenceNumber} letter?',
 };

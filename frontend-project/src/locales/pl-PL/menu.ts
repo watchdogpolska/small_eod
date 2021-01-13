@@ -37,6 +37,11 @@ export const menuLocale = {
       edit: 'Edycja',
       list: 'Lista',
     },
-    users: 'Użytkownicy',
+    users: {
+      self: 'Użytkownicy',
+      new: 'Nowy',
+      edit: 'Edycja',
+      list: 'Lista',
+    },
   },
 };

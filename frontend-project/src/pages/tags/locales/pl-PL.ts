@@ -3,6 +3,7 @@ export const tagsLocale = {
     fields: {
       name: 'Nazwa',
     },
+    modal: { remove: { title: 'Czy chcesz usunąć tag {name}?' } },
     list: {
       pageHeaderContent: 'Lista tagów',
       failedRemove: 'Nie udało się usunąć tagu.',

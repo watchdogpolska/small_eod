@@ -14,6 +14,7 @@ import { PaginationParams, PaginationResponse } from '@/services/common';
 import { openNotificationWithIcon } from '@/models/global';
 import { ServiceResponse } from '@/services/service';
 import { localeKeys } from '@/locales/pl-PL';
+import { useConfirmationModal } from '@/components/Modals/Confirmation';
 
 function TagsListView() {
   const dispatch = useDispatch();
@@ -24,23 +25,30 @@ function TagsListView() {
   }
 
   function onRemove(id: number) {
-    dispatch({
-      type: 'tags/remove',
-      payload: {
-        id,
-        onResponse: (response: ServiceResponse<number>) => {
-          if (response.status === 'failed') {
-            openNotificationWithIcon(
-              'error',
-              formatMessage({ id: localeKeys.error }),
-              `${formatMessage({ id: localeKeys.tags.list.failedRemove })} ${id}`,
-            );
-          }
-          tableActionRef.current.reload();
+    return new Promise<void>((resolve, reject) => {
+      dispatch({
+        type: 'tags/remove',
+        payload: {
+          id,
+          onResponse: (response: ServiceResponse<number>) =>
+            response.status === 'failed' ? reject() : resolve(),
         },
-      },
+      });
     });
   }
+
+  const [modal, showModal] = useConfirmationModal(
+    {
+      onSuccess: () => tableActionRef.current.reload(),
+      onFailure: id =>
+        openNotificationWithIcon(
+          'error',
+          formatMessage({ id: localeKeys.error }),
+          `${formatMessage({ id: localeKeys.tags.list.failedRemove })} ${id}`,
+        ),
+    },
+    onRemove,
+  );
 
   async function fetchPage(props: PaginationParams): Promise<PaginationResponse<Tag>> {
     const response = await TagsService.fetchPage(props);
@@ -64,7 +72,7 @@ function TagsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, { id, name }: Tag) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
@@ -80,7 +88,19 @@ function TagsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() =>
+                showModal(
+                  id,
+                  formatMessage(
+                    {
+                      id: localeKeys.tags.modal.remove.title,
+                    },
+                    {
+                      name: name || '',
+                    },
+                  ),
+                )
+              }
             />
           </Tooltip>
         </Space>
@@ -88,14 +108,17 @@ function TagsListView() {
     },
   ];
   return (
-    <Table
-      type="cases"
-      columns={columns}
-      fetchData={fetchPage}
-      pageHeader={localeKeys.tags.list.pageHeaderContent}
-      tableHeader={localeKeys.tags.list.table.header}
-      actionRef={tableActionRef}
-    />
+    <>
+      <Table
+        type="cases"
+        columns={columns}
+        fetchData={fetchPage}
+        pageHeader={localeKeys.tags.list.pageHeaderContent}
+        tableHeader={localeKeys.tags.list.table.header}
+        actionRef={tableActionRef}
+      />
+      {modal}
+    </>
   );
 }
 

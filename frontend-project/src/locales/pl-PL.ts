@@ -1,3 +1,4 @@
+import { tagsLocale } from '@/pages/tags/locales/pl-PL';
 import component from './pl-PL/component';
 import globalHeader from './pl-PL/globalHeader';
 import pwa from './pl-PL/pwa';
@@ -9,6 +10,7 @@ import { casesLocale } from '../pages/cases/locales/pl-PL';
 import { globalsLocale } from './pl-PL/globals';
 import { channelsLocale } from '../pages/channels/locales/pl-PL';
 import { tagsLocale } from '@/pages/tags/locales/pl-PL';
+import { usersLocale } from '../pages/users/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,
@@ -16,6 +18,7 @@ const [labels, keys] = structuredLocale({
   ...casesLocale,
   ...channelsLocale,
   ...tagsLocale,
+  ...usersLocale,
 });
 export const localeKeys = keys;
 
