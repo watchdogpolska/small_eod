@@ -109,7 +109,7 @@
     "pro-download": "1.0.1",
     "react-test-renderer": "16.14.0",
     "stylelint": "13.5.0",
-    "ts-jest": "26.0.0",
+    "ts-jest": "26.4.4",
     "typescript": "3.9.3",
     "umi-plugin-pro": "1.0.3",
     "umi-types": "0.5.14",
