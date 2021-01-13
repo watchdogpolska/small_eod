@@ -19778,7 +19778,15 @@ umi-plugin-ui@1.5.3:
     styled-components "^4.4.0"
     umi-ui-tasks "1.3.12"
 
-umi-request@1.3.1, umi-request@^1.2.17:
+umi-request@1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/umi-request/-/umi-request-1.3.5.tgz#2af7e9fbaaeed0086c07d8c4876b3af65c084aea"
+  integrity sha512-PqGz1mbLTkLjvL7ovM5Tmx/ChfY819T6P6VIsp4n15Lldn9Q85VYil4WuHSPpnur7I0thbWBuMnfLY7j5QWstg==
+  dependencies:
+    isomorphic-fetch "^2.2.1"
+    qs "^6.9.1"
+
+umi-request@^1.2.17:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/umi-request/-/umi-request-1.3.1.tgz#ae64c757082fd9f16c76ac0b3adb373d1dfc4de2"
   integrity sha512-lIw7yCdeLzrpgDkFBNKzthA+EY+W+qNISXIybRReQa/CjFSVRskjfHHlHRhx/i2+W4u4+ea+AoO7rxcvdfLk4w==
