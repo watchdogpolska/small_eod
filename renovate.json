@@ -3,6 +3,12 @@
     "config:base",
     "default:automergeDigest"
   ],
+  "packageRules": [
+    {
+      "depTypeList": ["minor", "patch", "pin", "digest", "devDependencies"],
+      "automerge": true
+    }
+  ],
   "docker": {
     "pinDigests": true
   }
