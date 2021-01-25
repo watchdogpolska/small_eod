@@ -7,7 +7,12 @@
     {
       "depTypeList": ["minor", "patch", "pin", "devDependencies"],
       "automerge": true
+    },
+    {
+      "packagePatterns": ["^@types/"],
+      "automerge": true
     }
+  ]
   ],
   "docker": {
     "pinDigests": true
