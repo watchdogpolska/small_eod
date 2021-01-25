@@ -2,6 +2,8 @@ name: Django application
 
 on:
   push:
+    branches: 
+      - dev
     paths:
     - 'backend-project/**'
     - '.github/**'
