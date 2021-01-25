@@ -11,8 +11,11 @@
     {
       "packagePatterns": ["^@types/"],
       "automerge": true
+    },
+    {
+      "extends": ["packages:linters"],
+      "automerge": true
     }
-  ]
   ],
   "docker": {
     "pinDigests": true
