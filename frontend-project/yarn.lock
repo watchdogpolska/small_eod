@@ -19818,10 +19818,10 @@ umi-plugin-pro-block@1.3.6:
   dependencies:
     debug "^4.1.0"
 
-umi-plugin-pro@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/umi-plugin-pro/-/umi-plugin-pro-1.0.3.tgz#03d5b4efbeeaa30122e7ee5e73e938fe6a9a9403"
-  integrity sha512-v0TW4d9bbnZ9nKGaCOuvbn16d7W4IYyxwNEcQlUnZOfzNG2H2OD4hQy/D3cTPSPeM7zehF5AuzAv0yZvE8pYQw==
+umi-plugin-pro@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/umi-plugin-pro/-/umi-plugin-pro-2.0.1.tgz#44eb960b4862610a9ba9a14c57b920281280e102"
+  integrity sha512-Y+SYGEGRHM1Ihidc9h65k5Fn9EC5nMqj+bf+ooc29VF7Kq2PsK52bHrZ8Vt4dErMJgbcpXSP8noRK91pr6CHjA==
 
 umi-plugin-react@1.15.8:
   version "1.15.8"

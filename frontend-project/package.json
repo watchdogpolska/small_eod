@@ -111,7 +111,7 @@
     "stylelint": "13.5.0",
     "ts-jest": "26.4.4",
     "typescript": "3.9.3",
-    "umi-plugin-pro": "1.0.3",
+    "umi-plugin-pro": "2.0.1",
     "umi-types": "0.5.14",
     "vercel": "21.1.0"
   },
