@@ -98,7 +98,7 @@
     insert-css "^2.0.0"
     rc-util "^5.0.1"
 
-"@ant-design/icons@^4.0.0", "@ant-design/icons@^4.0.0-alpha.19", "@ant-design/icons@^4.0.0-rc.0", "@ant-design/icons@^4.1.0":
+"@ant-design/icons@^4.0.0", "@ant-design/icons@^4.0.0-rc.0", "@ant-design/icons@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-4.1.0.tgz#444edcc3822d5b43b2b038d6f893cd7f7dfcc48d"
   integrity sha512-R1aIPJboGq4nVYwW7s0v/V2g6yiY27Kec5ldfK3mWHskw7bihPOKwxkHbITuSJcVNJsSvA6LNMlKZoY1u8DIKQ==
@@ -19746,12 +19746,12 @@ umi-notify@^0.1.1:
     chalk "^2.4.1"
     is-ali-env "^0.1.4"
 
-umi-plugin-antd-icon-config@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/umi-plugin-antd-icon-config/-/umi-plugin-antd-icon-config-1.0.3.tgz#fef23ef0289ff5b1b0112e634fddc6d36f50fb1b"
-  integrity sha512-MLsElFHzSLPvU3cNyiY5GCy9TiA55Pz0ZHx8/9cCgiVNu2x8luCqy5SJrjd706sArkuh78d2324mRCDYW1FNaA==
+umi-plugin-antd-icon-config@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/umi-plugin-antd-icon-config/-/umi-plugin-antd-icon-config-2.0.3.tgz#43fa2c6e332e083476448384b17e934f196656a0"
+  integrity sha512-OmxZfx4OIcNhptzI8/RGsdNNp6MSZbNOiAJYC7KhtS8dmeF/kPaStjRW4pGo+YNYC6QPQzXdfByjSW32ObVWow==
   dependencies:
-    "@ant-design/icons" "^4.0.0-alpha.19"
+    "@ant-design/icons" "^4.0.0"
 
 umi-plugin-dll@1.6.1:
   version "1.6.1"
