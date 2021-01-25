@@ -146,7 +146,7 @@ GITHUB_REVISION_REPO_URL = "https://github.com/watchdogpolska/small_eod"
 LOGIN_REDIRECT_URL = "/admin/"
 SITE_ID = 1
 
-GRAPPELLI_ADMIN_TITLE = 'U Dobrawego'
+GRAPPELLI_ADMIN_TITLE = "U Dobrawego"
 GRAPPELLI_INDEX_DASHBOARD = "small_eod.cases.dashboard.CustomIndexDashboard"
 
 SOCIALACCOUNT_PROVIDERS = {
