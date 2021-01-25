@@ -6513,20 +6513,20 @@ detect-conflict@^1.0.0:
   resolved "https://registry.yarnpkg.com/detect-conflict/-/detect-conflict-1.0.1.tgz#088657a66a961c05019db7c4230883b1c6b4176e"
   integrity sha1-CIZXpmqWHAUBnbfEIwiDsca0F24=
 
-detect-indent@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
-  integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
-
-detect-newline@3.1.0, detect-newline@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
-  integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
+detect-indent@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
+  integrity sha1-OHHMCmoALow+Wzz38zYmRnXwa50=
 
 detect-newline@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
   integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
+
+detect-newline@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
+  integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
 detect-node@^2.0.4:
   version "2.0.4"
@@ -8347,7 +8347,7 @@ fast-glob@^2.0.2, fast-glob@^2.2.6:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-glob@^3.0.3, fast-glob@^3.1.1:
+fast-glob@^3.1.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.2.tgz#ade1a9d91148965d4bf7c51f72e1ca662d32e63d"
   integrity sha512-UDV82o4uQyljznxwMxyVRJgZZt3O5wENYojjzbaGEGZgeOxkLFf+V4cnUD+krzb2F72E18RhamkMZ7AdeggF7A==
@@ -9012,11 +9012,6 @@ gh-got@^5.0.0:
     got "^6.2.0"
     is-plain-obj "^1.1.0"
 
-git-hooks-list@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/git-hooks-list/-/git-hooks-list-1.0.3.tgz#be5baaf78203ce342f2f844a9d2b03dba1b45156"
-  integrity sha512-Y7wLWcrLUXwk2noSka166byGCvhMtDRpgHdzCno1UQv/n/Hegp++a2xBWJL1lJarnKD3SWaljD+0z1ztqxuKyQ==
-
 git-up@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/git-up/-/git-up-4.0.1.tgz#cb2ef086653640e721d2042fe3104857d89007c0"
@@ -9160,20 +9155,6 @@ globals@^12.1.0:
   integrity sha512-BWICuzzDvDoH54NHKCseDanAhE3CeDorgDL5MT6LMXXj2WCnd9UC2szdk4AWLfjdgNBCXLUanXYcpBBKOSWGwg==
   dependencies:
     type-fest "^0.8.1"
-
-globby@10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-10.0.0.tgz#abfcd0630037ae174a88590132c2f6804e291072"
-  integrity sha512-3LifW9M4joGZasyYPz2A1U74zbC/45fvpXUvO/9KbSa+VV0aGZarWkfdgKyR9sExNP0t0x0ss/UMJpNpcaTspw==
-  dependencies:
-    "@types/glob" "^7.1.1"
-    array-union "^2.1.0"
-    dir-glob "^3.0.1"
-    fast-glob "^3.0.3"
-    glob "^7.1.3"
-    ignore "^5.1.1"
-    merge2 "^1.2.3"
-    slash "^3.0.0"
 
 globby@7.1.1, globby@^7.1.1:
   version "7.1.1"
@@ -9856,7 +9837,7 @@ ignore@^4.0.3, ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-ignore@^5.0.4, ignore@^5.0.5, ignore@^5.0.6, ignore@^5.1.1, ignore@^5.1.4:
+ignore@^5.0.4, ignore@^5.0.5, ignore@^5.0.6, ignore@^5.1.4:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.6.tgz#643194ad4bf2712f37852e386b6998eff0db2106"
   integrity sha512-cgXgkypZBcCnOgSihyeqbo6gjIaIyDqPQB7Ra4vhE9m6kigdGoQDMHjviFhRZo3IMlRy6yElosoviMs5YxZXUA==
@@ -10650,15 +10631,15 @@ is-path-inside@^3.0.1:
   resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-3.0.2.tgz#f5220fc82a3e233757291dddc9c5877f2a1f3017"
   integrity sha512-/2UGPSgmtqwo1ktx8NDHjuPwZWmHhO+gj0f93EkhLB5RgW9RZevWYYlIkS6zePc6U2WpOdQYIwHe9YC4DWEBVg==
 
-is-plain-obj@2.1.0, is-plain-obj@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
-  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
-
 is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
   integrity sha1-caUMhCnfync8kqOQpKA7OfzVHT4=
+
+is-plain-obj@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
+  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
 
 is-plain-object@3.0.0:
   version "3.0.0"
@@ -18022,22 +18003,18 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
-sort-object-keys@^1.1.3:
+sort-object-keys@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/sort-object-keys/-/sort-object-keys-1.1.3.tgz#bff833fe85cab147b34742e45863453c1e190b45"
   integrity sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==
 
-sort-package-json@^1.22.1:
-  version "1.42.2"
-  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-1.42.2.tgz#ac7e1a6abc1b2c8836768f8d9dfe790d9f3b44e6"
-  integrity sha512-B4cIYKeBdNUJXHPxe0G+x3uHHpSWSgJ3z62+W1C28wT1whkEhrz/B3r9lSyW+VVhz1rc+ymGmNkr1mJ323w0xQ==
+sort-package-json@1.22.1:
+  version "1.22.1"
+  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-1.22.1.tgz#384ce7a098cd13be4109800d5ce2f0cf7826052e"
+  integrity sha512-uVINQraFQvnlzNHFnQOT4MYy0qonIEzKwhrI2yrTiQjNo5QF4h3ffrnCk7a95QAwoK/RdkO/w8W9tJIcaOWC7g==
   dependencies:
-    detect-indent "^6.0.0"
-    detect-newline "3.1.0"
-    git-hooks-list "1.0.3"
-    globby "10.0.0"
-    is-plain-obj "2.1.0"
-    sort-object-keys "^1.1.3"
+    detect-indent "^5.0.0"
+    sort-object-keys "^1.1.2"
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -19061,10 +19038,10 @@ svgo@^1.0.0, svgo@^1.1.1:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sylvanas@^0.4.0:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/sylvanas/-/sylvanas-0.4.3.tgz#e40ce0e651bd9f57b3a4738ce4aecbfd84eb649f"
-  integrity sha512-iuo8eo3XS4t4JHLd+0i7DWg6WXzRQs6DL2F06pHxmkd4PJkhU+8ilQVC+TX4OoYg0w+CtdHxyU9GHf2cVHT9XA==
+sylvanas@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/sylvanas/-/sylvanas-0.4.0.tgz#b990b2a422fa040d7bb8c11f661c2e6d3cd2e8bc"
+  integrity sha512-fqHe+DJh9KsPPKR6oJdPXqejtr1kn7K6Kn01JfoYtehFvSWZWTPzzbt5C6a1TTzOf1mGLfY8oadOq8Th/GBIXQ==
   dependencies:
     "@babel/core" "^7.4.5"
     "@babel/plugin-syntax-decorators" "^7.2.0"
@@ -19676,10 +19653,10 @@ uglifyjs-webpack-plugin@1.3.0:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
-umi-build-dev@1.18.7:
-  version "1.18.7"
-  resolved "https://registry.yarnpkg.com/umi-build-dev/-/umi-build-dev-1.18.7.tgz#8af2aecd925d7d2c1c0cfe426c7e0c2febdcf060"
-  integrity sha512-s97+Sotgfxrodz43gMW6jMwpu2km6fpUlTP0NcsYqVzA8azVmsvNOw8XjCINjEiNgYVCOt2MRqrfBSE7lS9Ghg==
+umi-build-dev@1.18.8:
+  version "1.18.8"
+  resolved "https://registry.yarnpkg.com/umi-build-dev/-/umi-build-dev-1.18.8.tgz#d77db88f5dd54b66df8d1a5ac938a04e562531cd"
+  integrity sha512-E0ba02GlPLdkuMSwgbhdZPt4v9oIcoR6uzPBKgMMDa2Tc8s8UuLIGQtObISr5Rg7FdPNi7ZBbcBqF344WXRQGA==
   dependencies:
     "@babel/code-frame" "7.0.0"
     "@babel/generator" "7.4.4"
@@ -19736,9 +19713,9 @@ umi-build-dev@1.18.7:
     serve-static "1.14.1"
     signale "1.4.0"
     sockjs "0.3.19"
-    sort-package-json "^1.22.1"
+    sort-package-json "1.22.1"
     stringify-object "3.3.0"
-    sylvanas "^0.4.0"
+    sylvanas "0.4.0"
     terminal-link "1.3.0"
     umi-core "1.9.9"
     umi-history "0.1.2"
@@ -20011,10 +19988,10 @@ umi-ui-theme@1.2.4:
   dependencies:
     less-vars-to-js "1.3.0"
 
-umi-ui@1.5.9:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/umi-ui/-/umi-ui-1.5.9.tgz#8382d54b800ddbafcb720b2900542dd6094507e7"
-  integrity sha512-SG/oi7s+uw1opz50EyfIx8ILmYawFMFNMfUfpfknd9BgEa9Lxg8B24Ep8X4RwI+oZWTZ00nFFuJ7Iaf/OKZYDg==
+umi-ui@1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/umi-ui/-/umi-ui-1.5.10.tgz#e03c160e444026e6ff0b724258e14ac3905ef5ba"
+  integrity sha512-T58MdTn4/1IPsZ/QwQSZEraH0IxX9m55xSK+WQEN/XP1qo5pJKOncdxoTSOJNE0/R5yMwKWWzsXpafNsjC5/bw==
   dependencies:
     "@umijs/launch-editor" "^1.0.0"
     binary-mirror-config "1.20.3"
@@ -20038,7 +20015,7 @@ umi-ui@1.5.9:
     rimraf "3.0.0"
     semver "6.3.0"
     sockjs "0.3.19"
-    umi-build-dev "1.18.7"
+    umi-build-dev "1.18.8"
     umi-ui-theme "1.2.4"
     user-home "2.0.0"
 
@@ -20118,10 +20095,10 @@ umi-webpack-bundle-analyzer@^3.5.0:
     opener "^1.5.1"
     ws "^6.0.0"
 
-umi@2.13.16:
-  version "2.13.16"
-  resolved "https://registry.yarnpkg.com/umi/-/umi-2.13.16.tgz#cc9655e9861d3fb3ac3814715ba8be2a86d756bb"
-  integrity sha512-nG+6RErYwXyMOUPTsYD+akNUDmlYp73rGzwohw7kPm4dbeKiXCQg3mFjmzJknnDO1Hqp949oJH4UvQ6HwFPYsg==
+umi@2.13.17:
+  version "2.13.17"
+  resolved "https://registry.yarnpkg.com/umi/-/umi-2.13.17.tgz#7e49f16fb67e205f4d496c2a87990bc31284035f"
+  integrity sha512-OW0tpCIVwv4Y5gxnAjKW0cVoCpxFRw4u8l5Zhcxn6l9QhoJbdjB3ExoFoUNGrtqWU56pAsZ/ZhDIqYaedwnBrg==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/runtime" "7.4.5"
@@ -20136,9 +20113,9 @@ umi@2.13.16:
     resolve-cwd "3.0.0"
     semver "6.1.1"
     signale "1.4.0"
-    umi-build-dev "1.18.7"
+    umi-build-dev "1.18.8"
     umi-core "1.9.9"
-    umi-ui "1.5.9"
+    umi-ui "1.5.10"
     umi-utils "1.7.2"
     update-notifier "3.0.0"
     yargs-parser "13.1.1"
