@@ -41,8 +41,7 @@ function CasesDetailView({
   const dispatch = useDispatch();
   const isEdit = Boolean(match.params.id);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const editedCase = cases.data.find(value => value.id === Number(match.params.id));
-  const editedCase = undefined;
+  const editedCase = cases.data.find(value => value.id === Number(match.params.id));
   const [form] = Form.useForm();
 
   function onRequestDone(response: ServiceResponse<Case>) {
