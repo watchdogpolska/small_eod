@@ -5,16 +5,14 @@ import ProLayout, {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect, FC } from 'react';
-import { Link } from 'umi';
+import { Link, connect, Dispatch, formatMessage } from 'umi';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import DefaultFooter from '@/components/GlobalFooter/DefaultFooter';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
-import { Dispatch } from 'redux';
-import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+
 import logo from '../assets/logo.svg';
 
 const noMatch = (

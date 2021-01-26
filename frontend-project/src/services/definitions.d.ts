@@ -123,6 +123,7 @@ export interface TokenSet {
 }
 
 export interface DocumentType {
+  id: number;
   name: string;
 }
 

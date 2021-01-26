@@ -1,11 +1,9 @@
 import React from 'react';
 import { PageLoading } from '@ant-design/pro-layout';
-import { Redirect } from 'umi';
+import { Redirect, connect, Dispatch } from 'umi';
 import { stringify } from 'querystring';
 import { ConnectState } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
-import { connect } from 'dva';
-import { Dispatch } from 'redux';
 
 interface SecurityLayoutProps {
   loading?: boolean;

@@ -1,12 +1,10 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
 import React, { useEffect, useState } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { formatMessage, FormattedMessage, connect, useDispatch, history } from 'umi';
 import { Institution, User, Tag, Case, Feature } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';
-import router from 'umi/router';
-import { RouterTypes } from 'umi';
+
 import { ServiceResponse } from '@/services/service';
 import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
@@ -17,7 +15,7 @@ interface CasesDetailViewProps {
   users: ReduxResourceState<User>;
   institutions: Institution[];
   features: ReduxResourceState<Feature>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
+  match: { params: { id: string | undefined } };
 }
 
 const { TextArea } = Input;
@@ -43,13 +41,14 @@ function CasesDetailView({
   const dispatch = useDispatch();
   const isEdit = Boolean(match.params.id);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const editedCase = cases.data.find(value => value.id === Number(match.params.id));
+  // const editedCase = cases.data.find(value => value.id === Number(match.params.id));
+  const editedCase = undefined;
   const [form] = Form.useForm();
 
   function onRequestDone(response: ServiceResponse<Case>) {
     setIsSubmitting(false);
     if (response.status === 'success') {
-      router.push('/cases');
+      history.push('/cases');
     } else if (response.statusCode === 400) {
       form.setFields(
         Array.from(

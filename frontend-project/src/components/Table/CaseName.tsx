@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { connect, useDispatch } from 'umi';
 
 import { Case } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';

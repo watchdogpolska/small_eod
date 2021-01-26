@@ -2,8 +2,9 @@ import { Tooltip, Tag } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { ConnectState } from '@/models/connect';
-import { Action } from 'redux';
-import { Dispatch, connect } from 'dva';
+import type { Dispatch } from 'umi';
+import { connect } from 'umi';
+
 import Avatar from './AvatarDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
@@ -12,7 +13,7 @@ export type SiderTheme = 'light' | 'dark';
 export interface GlobalHeaderRightProps {
   theme?: SiderTheme;
   layout: 'sidemenu' | 'topmenu';
-  dispatch: Dispatch<Action<any>>;
+  dispatch: Dispatch;
 }
 const ENVTagColor = {
   dev: 'orange',

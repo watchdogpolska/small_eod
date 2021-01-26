@@ -1,14 +1,12 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, useDispatch, Link, history } from 'umi';
 import { User } from '@/services/definitions';
 import { UsersService } from '@/services/users';
 import Table from '@/components/Table';
-import router from 'umi/router';
+
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useDispatch } from 'dva';
-import { Link } from 'umi';
 import { PaginationParams, PaginationResponse } from '@/services/common';
 import { openNotificationWithIcon } from '@/models/global';
 import { ServiceResponse } from '@/services/service';
@@ -19,7 +17,7 @@ function UsersListView() {
   const tableActionRef = useRef<ActionType>();
 
   function onEdit(id: number) {
-    router.push(`/users/edit/${id}`);
+    history.push(`/users/edit/${id}`);
   }
 
   function onRemove(id: number) {

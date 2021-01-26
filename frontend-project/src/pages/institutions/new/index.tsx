@@ -1,7 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Select } from 'antd';
 import React, { FC } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { formatMessage, FormattedMessage } from 'umi';
 
 const layout = {
   labelCol: { span: 8 },

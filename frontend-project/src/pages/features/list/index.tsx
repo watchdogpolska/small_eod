@@ -1,6 +1,6 @@
 import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 import Table from '@/components/Table';
 import { Feature } from '@/services/definitions';

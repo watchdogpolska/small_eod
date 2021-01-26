@@ -1,6 +1,6 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
 import React, { FC, useRef } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, useDispatch } from 'umi';
 
 import { Letter } from '@/services/definitions';
 import Table from '@/components/Table';
@@ -10,7 +10,7 @@ import CaseName from '@/components/Table/CaseName';
 import DocumentTypeName from '@/components/Table/DocumentTypeName';
 import { Button, Space, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { useDispatch } from 'dva';
+
 import { openNotificationWithIcon } from '@/models/global';
 import { ServiceResponse } from '@/services/service';
 import { PaginationParams, PaginationResponse } from '@/services/common';

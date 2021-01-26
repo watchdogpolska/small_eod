@@ -1,15 +1,14 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tag, Tooltip } from 'antd';
 import React, { useRef } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, Link, useDispatch, history } from 'umi';
 import { Case } from '@/services/definitions';
 import { CasesService } from '@/services/cases';
 import Table from '@/components/Table';
 import InstitutionName from '@/components/Table/InstitutionName';
-import router from 'umi/router';
+
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useDispatch } from 'dva';
-import { Link } from 'umi';
+
 import { PaginationParams, PaginationResponse } from '@/services/common';
 import { openNotificationWithIcon } from '@/models/global';
 import { ServiceResponse } from '@/services/service';
@@ -20,7 +19,7 @@ function CasesListView() {
   const tableActionRef = useRef<ActionType>();
 
   function onEdit(id: number) {
-    router.push(`/cases/edit/${id}`);
+    history.push(`/cases/edit/${id}`);
   }
 
   function onRemove(id: number) {

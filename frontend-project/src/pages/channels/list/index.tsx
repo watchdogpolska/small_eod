@@ -1,7 +1,7 @@
 import { ProColumns } from '@ant-design/pro-table';
 import React, { FC } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { connect, formatMessage } from 'umi';
+
 import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import { Channel } from '@/services/definitions';

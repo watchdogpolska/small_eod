@@ -1,10 +1,8 @@
 import { stringify } from 'qs';
-import { router } from 'umi';
+import { history, Effect, Reducer } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/Authorized';
 import { getPageQuery } from '@/utils/utils';
-import { Effect } from 'dva';
-import { Reducer } from 'redux';
 
 export interface LoginModelState {
   status?: 'ok' | 'error';
@@ -64,7 +62,7 @@ const Model: LoginModelType = {
           }
         }
 
-        router.replace(redirect || '/');
+        history.replace(redirect || '/');
       }
     },
 
@@ -72,7 +70,7 @@ const Model: LoginModelType = {
       const { redirect } = getPageQuery();
       // Note: There may be security issues, please note
       if (window.location.pathname !== '/user/login' && !redirect) {
-        router.replace({
+        history.replace({
           pathname: '/user/login',
           search: stringify({
             redirect: window.location.href,

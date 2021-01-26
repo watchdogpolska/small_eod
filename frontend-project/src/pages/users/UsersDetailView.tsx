@@ -1,19 +1,18 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { connect, useDispatch, formatMessage, FormattedMessage, history } from 'umi';
 import React, { useEffect, useState } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+
 import { User } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';
-import router from 'umi/router';
-import { RouterTypes } from 'umi';
+
 import { ServiceResponse } from '@/services/service';
 import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
 
 interface UsersDetailViewProps {
   users: ReduxResourceState<User>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
+  match: { params: { id: string | undefined } };
 }
 
 const layout = {
@@ -35,7 +34,7 @@ function UsersDetailView({ users, match }: UsersDetailViewProps) {
   function onRequestDone(response: ServiceResponse<User>) {
     setIsSubmitting(false);
     if (response.status === 'success') {
-      router.push('/users');
+      history.push('/users');
     } else if (response.statusCode === 400) {
       form.setFields(
         Array.from(

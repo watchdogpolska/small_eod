@@ -1,8 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row } from 'antd';
-import { connect } from 'dva';
+import { connect, formatMessage, FormattedMessage } from 'umi';
 import React, { useEffect, FC } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 interface ChannelNewFormProps {
   name: String;

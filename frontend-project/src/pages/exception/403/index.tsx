@@ -1,7 +1,6 @@
-import Link from 'umi/link';
+import { Link, formatMessage } from 'umi';
 import { Result, Button } from 'antd';
 import React, { ReactNode } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
 
 export default (): ReactNode => (
   <Result

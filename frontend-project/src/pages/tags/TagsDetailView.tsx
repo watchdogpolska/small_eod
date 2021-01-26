@@ -1,12 +1,11 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Col, Card, Form, Input, Row, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { connect, useDispatch, formatMessage, FormattedMessage, history } from 'umi';
 import React, { useEffect, useState } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+
 import { Tag } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';
-import router from 'umi/router';
-import { RouterTypes } from 'umi';
+
 import { ServiceResponse } from '@/services/service';
 import smallEodSDK from '@/utils/sdk';
 import { openNotificationWithIcon } from '@/models/global';
@@ -14,7 +13,7 @@ import { localeKeys } from '../../locales/pl-PL';
 
 interface TagsDetailViewProps {
   tags: ReduxResourceState<Tag>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
+  match: { params: { id: string | undefined } };
 }
 
 const layout = {
@@ -36,7 +35,7 @@ function TagsDetailView({ tags, match }: TagsDetailViewProps) {
   function onRequestDone(response: ServiceResponse<Tag>) {
     setIsSubmitting(false);
     if (response.status === 'success') {
-      router.push('/tags/list');
+      history.push('/tags/list');
     } else if (response.statusCode === 400) {
       form.setFields(
         Array.from(

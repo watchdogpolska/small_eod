@@ -1,10 +1,9 @@
 import { getMenuData, getPageTitle, MenuDataItem } from '@ant-design/pro-layout';
 import DefaultFooter from '@/components/GlobalFooter/DefaultFooter';
 import { Helmet } from 'react-helmet';
-import { Link } from 'umi';
+import { Link, connect, formatMessage } from 'umi';
 import React, { FC } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
-import { connect } from 'dva';
+
 import SelectLang from '@/components/SelectLang';
 import { ConnectState, Route } from '@/models/connect';
 import logo from '../assets/logo.svg';

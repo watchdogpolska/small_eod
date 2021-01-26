@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'antd';
 import { localeKeys } from '@/locales/pl-PL';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 type ConfirmationProps<T> = {
   title?: string;

@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
-import { connect } from 'dva';
+import { connect } from 'umi';
 
-import { DocumentType } from '@/models/documentTypes';
+import { DocumentType } from '@/services/definitions';
 
 export interface DocumentTypeNameProps {
   id: number;
@@ -14,9 +14,9 @@ const DocumentTypeName: FC<DocumentTypeNameProps> = ({ id, documentTypes, dispat
   useEffect(() => {
     dispatch({ type: 'documentTypes/fetchOne', payload: id });
   }, []);
-  const documentType = documentTypes.find(value => value.id === id);
-
-  return <div>{documentType ? documentType.name : <Spin />}</div>;
+  const oneDocumentType = documentTypes.find(value => value.id === id);
+  if (!oneDocumentType) return <Spin />;
+  return <>{oneDocumentType.name}</>;
 };
 export default connect(({ documentTypes }: DocumentTypeNameProps) => ({ documentTypes }))(
   DocumentTypeName,

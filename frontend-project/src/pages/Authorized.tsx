@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { Redirect } from 'umi';
+import { Redirect, connect } from 'umi';
 import Authorized from '@/utils/Authorized';
 import { getRouteAuthority } from '@/utils/utils';
 import { ConnectState, UserModelState, Route } from '@/models/connect';
-import { connect } from 'dva';
 
 interface AuthComponentProps {
   user: UserModelState;

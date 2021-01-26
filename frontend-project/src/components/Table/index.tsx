@@ -1,7 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import React, { MutableRefObject } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import { localeKeys } from '../../locales/pl-PL';
 

@@ -1,6 +1,7 @@
 import { PaginationParams, PaginationResponse } from '@/services/common';
-import { Effect, EffectsCommandMap } from 'dva';
-import { AnyAction, Reducer } from 'redux';
+import { Effect, Action, Reducer } from 'umi';
+import type { EffectsCommandMap } from 'dva';
+
 import {
   PostData,
   ReadOnlyServiceType,
@@ -8,9 +9,10 @@ import {
   ServiceResponse,
 } from '../services/service';
 
-interface Payload<T> extends AnyAction {
+export interface Payload<T> extends Action {
   payload: T;
 }
+
 interface PayloadWithCallback<T> extends Payload<T> {
   payload: T & { onResponse?: (props: ServiceResponse<T>) => void };
 }
@@ -32,8 +34,8 @@ export type ReadOnlyReduxResourceT<T> = {
     fetchOne: Effect;
   };
   reducers: {
-    incrementIO: Reducer<ReduxResourceState<T>, AnyAction>;
-    decrementIO: Reducer<ReduxResourceState<T>, AnyAction>;
+    incrementIO: Reducer<ReduxResourceState<T>, Action>;
+    decrementIO: Reducer<ReduxResourceState<T>, Action>;
     saveAll: Reducer<ReduxResourceState<T>, Payload<ServiceResponse<Array<T>>>>;
     savePage: Reducer<ReduxResourceState<T>, Payload<ServiceResponse<PaginationResponse<T>>>>;
     saveOne: Reducer<ReduxResourceState<T>, Payload<ServiceResponse<T>>>;

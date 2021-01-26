@@ -1,10 +1,9 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import { ClickParam } from 'antd/es/menu';
-import { connect, Dispatch } from 'dva';
+import { connect, history } from 'umi';
+import type { Dispatch } from 'umi';
 import React, { Component } from 'react';
-import { Action } from 'redux';
-import { router } from 'umi';
 
 import { CurrentUser } from '@/models/user';
 import { ConnectState } from '@/models/connect';
@@ -14,7 +13,7 @@ import styles from './index.less';
 export interface GlobalHeaderRightProps extends Partial<ConnectState> {
   currentUser?: CurrentUser;
   menu?: boolean;
-  dispatch: Dispatch<Action<'login/logout'>>;
+  dispatch: Dispatch;
 }
 
 class AvatarDropdown extends Component<GlobalHeaderRightProps> {
@@ -33,7 +32,7 @@ class AvatarDropdown extends Component<GlobalHeaderRightProps> {
       return;
     }
 
-    router.push(`/account/${key}`);
+    history.push(`/account/${key}`);
   };
 
   render(): React.ReactNode {

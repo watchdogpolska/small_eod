@@ -1,15 +1,14 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, Link, useDispatch, history } from 'umi';
 
 import { Tag } from '@/services/definitions';
 import { TagsService } from '@/services/tags';
 import Table from '@/components/Table';
-import router from 'umi/router';
+
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useDispatch } from 'dva';
-import { Link } from 'umi';
+
 import { PaginationParams, PaginationResponse } from '@/services/common';
 import { openNotificationWithIcon } from '@/models/global';
 import { ServiceResponse } from '@/services/service';
@@ -21,7 +20,7 @@ function TagsListView() {
   const tableActionRef = useRef<ActionType>();
 
   function onEdit(id: number) {
-    router.push(`/tags/edit/${id}`);
+    history.push(`/tags/edit/${id}`);
   }
 
   function onRemove(id: number) {

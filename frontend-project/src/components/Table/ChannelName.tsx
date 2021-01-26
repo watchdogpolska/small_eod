@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 
 import { Spin } from 'antd';
 import { Channel } from '@/services/definitions';
@@ -14,7 +14,8 @@ const ChannelName: FC<ChannelNameProps> = ({ id, channels, dispatch }) => {
   useEffect(() => {
     dispatch({ type: 'channels/fetchOne', payload: id });
   }, []);
-  const channel = channels.find(value => value.id === id);
-  return <div>{channel ? channel.name : <Spin />}</div>;
+  const oneChannel = channels.find(value => value.id === id);
+  if (!oneChannel) return <Spin />;
+  return <>{oneChannel.name}</>;
 };
 export default connect(({ channels }: ChannelNameProps) => ({ channels }))(ChannelName);
