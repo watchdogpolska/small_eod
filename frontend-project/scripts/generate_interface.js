@@ -35,7 +35,7 @@ const main = async () => {
       if (nullable) {
         console.log(`  ${pname}: ${type} | null;`);
       } else {
-        console.log(`  ${pname}: ${type}`);
+        console.log(`  ${pname}: ${type};`);
       }
     }
     console.log(`}`);

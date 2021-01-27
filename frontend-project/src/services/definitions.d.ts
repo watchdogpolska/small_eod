@@ -101,7 +101,6 @@ export interface Letter {
   institution: number;
   case: number;
   attachments: File[];
-  ordering: number;
   comment: string;
   excerpt: string;
   documentType: number;
@@ -123,6 +122,7 @@ export interface TokenSet {
 }
 
 export interface DocumentType {
+  id: number;
   name: string;
 }
 
@@ -175,8 +175,8 @@ export interface SignRequest {
 }
 
 export interface Tag {
-  name: string;
   id: number;
+  name: string;
 }
 
 export interface Request {
