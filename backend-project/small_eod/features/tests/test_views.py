@@ -1,8 +1,8 @@
 from test_plus.test import TestCase
 
-from ..factories import FeatureFactory, FeatureOptionFactory
-from ..serializers import FeatureSerializer, FeatureOptionSerializer
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
+from ..factories import FeatureFactory, FeatureOptionFactory
+from ..serializers import FeatureOptionSerializer, FeatureSerializer
 
 
 class FeatureViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):

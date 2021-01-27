@@ -4,7 +4,7 @@ Udział w projekcie
 W celu rozwoju projektu kod źródłowy projektu można pobrać za pomocą komendy git:
 
 .. code-block:: bash
-   
+
    git clone git@github.com:watchdogpolska/small_eod.git
 
 W przypadku pracy w środowisku ``Windows/Mac`` można wykorzystać `GitHub Desktop <https://desktop.github.com/>`_. W celu pobrania należy `postępować zgodnie z instrukcją <https://help.github.com/en/desktop/contributing-to-projects/cloning-a-repository-from-github-to-github-desktop>`_.
@@ -19,7 +19,7 @@ Zadania do wykonania są zarejestrowane jako zagadnienia oznaczone etykietą goo
 Komunikacja w projekcie
 ------------------------
 
-Bieżąca komunikacja projektu odbywa się z wykorzystaniem Slacka organizacji `CodeForPoznań <https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU>`_ na kanale **#watchdog**. 
+Bieżąca komunikacja projektu odbywa się z wykorzystaniem Slacka organizacji `CodeForPoznań <https://join.slack.com/t/codeforpoznan/shared_invite/enQtNjQ5MTU1MDI0NDA0LWNhYTA3NGQ0MmQ5ODgxODE3ODJlZjc3NWE0NTMzZjhmNDBkN2QwMzNhYWY5OWQ5MGE2OGM3NjAyODBlY2VjNjU>`_ na kanale **#watchdog**.
 Odbywają się regularne spotkania statusowe (`szczegóły <https://github.com/watchdogpolska/small_eod/issues/547>`_), gdzie można uzyskać wprowadzenie w projekt, dowiedzieć się na temat zadań i usunąć inne trudności we współpracy.
 
 Uruchamianie projektu
@@ -37,7 +37,7 @@ Aby dowiedzieć się więcej o oprogramowaniem zapoznaj się z wideo `Docker dla
 W celu uruchomienia projektu należy wykonać:
 
 .. code-block:: bash
-    
+
     docker-compose up
 
 
@@ -67,14 +67,14 @@ Wszelkie zmiany w repozytorium będą uruchamiały serie testów automatycznych,
 W celu wykonanie testów automatycznych formatowania należy wykonać:
 
 .. code-block:: bash
-    
+
     make lint
 
 
 Większość problemów w formatowania można naprawić z wykorzystaniem automatycznego formatowania za pomocą wykonania:
 
 .. code-block:: bash
-    
+
     make fmt
 
 
@@ -101,12 +101,12 @@ Każda zmiana znajdująca się na gałęzi ``dev`` jest wdrażana z wykorzystan
 Dla potrzeb środowiska testowego w HyperOne zostały uruchomione:
 
 * dwie odrębne usługi *Strona*:
-    
+
     * dla back-endu – oparte o środowisko wykonawcze ``h1cr.io/website/python-passenger:3.7``
     * dla front-endu – oparte o środowisko wykonawcze ``h1cr.io/website/nginx-static:latest``
 * usługa `Baza danych <https://www.hyperone.com/services/storage/database/>`_ w wariancie PostgreSQL 11
 * kontenery w klasycznej infrastrukturze Stowarzyszenia (bazującej na `Wirtualnych Maszynach <https://www.hyperone.com/services/compute/vm/)* HyperOne>`_:
-    
+
     * Minio – dla usługi składowania plików – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
     * Balancer – dla zintegrowania usług *Strona* – do momentu opracowania zarządzanej usługi przez dostawcę usług chmurowych
 

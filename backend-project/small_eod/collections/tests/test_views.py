@@ -1,18 +1,18 @@
-from test_plus.test import TestCase
 from django.urls import reverse
+from test_plus.test import TestCase
 
-from ..factories import CollectionFactory
-from ..serializers import CollectionSerializer
-from ...generic.tests.test_views import (
-    ReadOnlyViewSetMixin,
-    GenericViewSetMixin,
-    OrderingViewSetMixin,
-)
-from ...notes.factories import NoteFactory
 from ...cases.factories import CaseFactory
 from ...events.factories import EventFactory
+from ...generic.tests.test_views import (
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    ReadOnlyViewSetMixin,
+)
 from ...letters.factories import LetterFactory
+from ...notes.factories import NoteFactory
 from ...users.mixins import AuthenticatedMixin
+from ..factories import CollectionFactory
+from ..serializers import CollectionSerializer
 
 
 class TokenAuthorizationTestCaseMixin:

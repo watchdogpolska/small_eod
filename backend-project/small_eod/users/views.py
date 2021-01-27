@@ -1,19 +1,21 @@
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
-from drf_yasg2.utils import swagger_auto_schema
-from .serializers import UserSerializer, User
 from django.conf import settings
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg2.utils import swagger_auto_schema
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from .providers import GoogleProvider
 from .serializers import (
+    RefreshTokenRequestSerializer,
     RequestSerializer,
     TokenResponseSerializer,
-    RefreshTokenRequestSerializer,
+    User,
+    UserSerializer,
 )
-from rest_framework_simplejwt.tokens import RefreshToken
-from .providers import GoogleProvider
 
 
 class UserViewSet(viewsets.ModelViewSet):

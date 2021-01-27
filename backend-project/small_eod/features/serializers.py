@@ -1,7 +1,8 @@
-from .models import Feature, FeatureOption
 from rest_framework import serializers
-from ..generic.serializers import UserLogModelSerializer
 from rest_framework.serializers import ModelSerializer
+
+from ..generic.serializers import UserLogModelSerializer
+from .models import Feature, FeatureOption
 
 
 class FeatureOptionSerializer(ModelSerializer):

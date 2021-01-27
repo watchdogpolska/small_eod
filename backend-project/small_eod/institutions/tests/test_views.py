@@ -1,13 +1,13 @@
+from parameterized import parameterized
 from test_plus.test import TestCase
 
-from ..factories import InstitutionFactory
-from ..serializers import InstitutionSerializer
 from ...generic.tests.test_views import (
-    GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    GenericViewSetMixin,
     OrderingViewSetMixin,
 )
-from parameterized import parameterized
+from ..factories import InstitutionFactory
+from ..serializers import InstitutionSerializer
 
 
 class InstitutionViewSetTestCase(

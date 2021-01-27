@@ -1,6 +1,7 @@
 from django.db import models
-from ..letters.models import Letter
 from django.utils.translation import ugettext_lazy as _
+
+from ..letters.models import Letter
 
 
 class File(models.Model):

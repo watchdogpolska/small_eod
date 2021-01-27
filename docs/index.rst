@@ -1,7 +1,7 @@
 .. Small_EOD documentation master file, created by
    sphinx-quickstart on Sun Nov 15 15:47:27 2020.
    You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+   contain the root ``toctree`` directive.
 
 Witamy w dokumentacji Small_EOD!
 =====================================

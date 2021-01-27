@@ -1,11 +1,11 @@
-from django.db import models
 from django.conf import settings
-
-from ..institutions.models import Institution
-from ..generic.models import TimestampUserLogModel
-from ..features.models import FeatureOption
-from ..tags.models import Tag
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from ..features.models import FeatureOption
+from ..generic.models import TimestampUserLogModel
+from ..institutions.models import Institution
+from ..tags.models import Tag
 
 
 class CaseQuerySet(models.QuerySet):

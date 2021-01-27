@@ -1,8 +1,8 @@
-from django.urls import path, include
-from rest_framework_nested.routers import NestedSimpleRouter
+from django.urls import include, path
 from rest_framework.routers import SimpleRouter
+from rest_framework_nested.routers import NestedSimpleRouter
 
-from .views import CaseViewSet, ResponsibleUserViewSet, NotifiedUserViewSet
+from .views import CaseViewSet, NotifiedUserViewSet, ResponsibleUserViewSet
 
 router = SimpleRouter()
 router.register("cases", CaseViewSet, basename="case")

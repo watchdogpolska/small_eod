@@ -1,7 +1,7 @@
 import factory.fuzzy
 
-from .models import FeatureOption, Feature
 from ..generic.factories import AbstractTimestampUserFactory
+from .models import Feature, FeatureOption
 
 
 class FeatureFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactory):

@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from ..generic.models import TimestampUserLogModel
+
 from ..cases.models import Case
+from ..generic.models import TimestampUserLogModel
 
 
 class Event(TimestampUserLogModel):

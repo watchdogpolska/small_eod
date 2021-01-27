@@ -35,4 +35,3 @@ Model
 
 .. automodule:: small_eod.collections.models
    :members:
-

@@ -1,8 +1,8 @@
 from django.test import TestCase
 
+from ...generic.tests.mixins import FactoryTestCaseMixin
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..models import Feature, FeatureOption
-from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class FeatureFactoryTestCase(FactoryTestCaseMixin, TestCase):

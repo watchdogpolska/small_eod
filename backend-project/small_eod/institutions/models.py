@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from ..administrative_units.models import AdministrativeUnit
-
 from ..generic.models import TimestampUserLogModel
 from ..generic.validators import ExactLengthsValidator
 

@@ -13,20 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, re_path, include
 from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path, re_path
 from drf_yasg2.views import get_schema_view
-from .swagger import info
+from rest_framework import permissions, routers
+
 from small_eod.channels.views import ChannelViewSet
 from small_eod.events.views import EventViewSet
 from small_eod.institutions.views import InstitutionViewSet
 from small_eod.notes.views import NoteViewSet
 from small_eod.tags.views import TagViewSet
 from small_eod.users.views import UserViewSet
-from rest_framework import routers
-from rest_framework import permissions
-from django.conf.urls.static import static
+
+from .swagger import info
 
 router = routers.DefaultRouter()
 router.register(r"channels", ChannelViewSet)

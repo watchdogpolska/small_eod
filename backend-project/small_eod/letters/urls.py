@@ -1,12 +1,12 @@
+from django.urls import include, path
 from rest_framework_nested import routers
-from .views import (
-    LetterViewSet,
-    FileViewSet,
-    PresignedUploadFileView,
-    DocumentTypeViewSet,
-)
 
-from django.urls import path, include
+from .views import (
+    DocumentTypeViewSet,
+    FileViewSet,
+    LetterViewSet,
+    PresignedUploadFileView,
+)
 
 router = routers.SimpleRouter()
 router.register("letters", LetterViewSet)

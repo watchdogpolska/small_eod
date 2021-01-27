@@ -1,6 +1,7 @@
 from django.db import models
-from ..generic.models import TimestampUserLogModel
 from django.utils.translation import ugettext_lazy as _
+
+from ..generic.models import TimestampUserLogModel
 
 
 class Channel(TimestampUserLogModel):

@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.db import connection
+from django.urls import reverse
 
 from ...users.mixins import AuthenticatedMixin
 

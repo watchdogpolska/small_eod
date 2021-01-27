@@ -1,10 +1,10 @@
 from django.test import TestCase
 
-from ..serializers import InstitutionSerializer
+from ...administrative_units.factories import AdministrativeUnitFactory
 from ...generic.mixins import AuthRequiredMixin
 from ...generic.tests.test_serializers import ResourceSerializerMixin
-from ...administrative_units.factories import AdministrativeUnitFactory
 from ..factories import InstitutionFactory
+from ..serializers import InstitutionSerializer
 
 
 class InstitutionSerializerTestCase(

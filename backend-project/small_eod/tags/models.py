@@ -1,8 +1,8 @@
-from django.db import models
 from django.core.validators import RegexValidator
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from ..generic.models import TimestampUserLogModel
-from django.utils.translation import ugettext_lazy as _
 
 
 class TagNamespace(TimestampUserLogModel):

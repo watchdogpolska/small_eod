@@ -442,7 +442,7 @@ paths:
           description: The id of the letter to retrieve
           schema:
             type: number
-            format: letterId       
+            format: letterId
       responses:
         '200':
           description: Expected response to a valid request

@@ -1,14 +1,11 @@
 import factory
 
-from .models import Case
 from ..features.factories import FeatureOptionFactory
-from ..tags.factories import TagFactory
+from ..generic.factories import AbstractTimestampUserFactory, ManyToManyPostGeneration
 from ..institutions.factories import InstitutionFactory
+from ..tags.factories import TagFactory
 from ..users.factories import UserFactory
-from ..generic.factories import (
-    AbstractTimestampUserFactory,
-    ManyToManyPostGeneration,
-)
+from .models import Case
 
 
 class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactory):

@@ -1,9 +1,9 @@
 import binascii
 import os
 
-from django.utils.timezone import now, timedelta
-from django.db import models
 from django.conf import settings
+from django.db import models
+from django.utils.timezone import now, timedelta
 from django.utils.translation import gettext_lazy as _
 
 from ..generic.models import TimestampUserLogModel

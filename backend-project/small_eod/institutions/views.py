@@ -1,12 +1,12 @@
 from django.utils.decorators import method_decorator
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg2 import openapi
 from drf_yasg2.utils import swagger_auto_schema
 from rest_framework import viewsets
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 
-from .serializers import InstitutionSerializer
 from .models import Institution
+from .serializers import InstitutionSerializer
 
 
 @method_decorator(
