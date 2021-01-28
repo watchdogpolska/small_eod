@@ -199,6 +199,7 @@ class Letter(TimeStampedModel):
     direction = models.CharField(
         max_length=50, choices=DIRECTION, verbose_name=_("Direction")
     )
+    event = models.DateTimeField(verbose_name=_("Event time"), null=True, blank=True)
     institution = models.ForeignKey(
         to=Institution,
         verbose_name=_("Institution"),

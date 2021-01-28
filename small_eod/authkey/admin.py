@@ -9,8 +9,14 @@ from .models import Scope, Key
 def get_event_ical_link(obj):
     if not obj.scopes.filter(name="export_ical").exists():
         return _("Missing scope 'export_ical'")
-    uri = "{}?token={}".format(reverse("event-ical-list"), obj.token)
-    return safe('<a href="{}">{}</a>'.format(uri, _("View calendar")))
+    event_url = "{}?token={}".format(reverse("event-ical-list"), obj.token)
+    letter_url = "{}?token={}".format(reverse("letter-ical-list"), obj.token)
+    return safe(
+        _("View calendar for {event_link} or {letter_link}").format(
+            event_link='<a href="{}">{}</a>'.format(event_url, _("event")),
+            letter_link='<a href="{}">{}</a>'.format(letter_url, _("letter")),
+        )
+    )
 
 
 get_event_ical_link.short_description = "Calendar"

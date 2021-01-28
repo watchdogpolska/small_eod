@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 01:12+0100\n"
-"PO-Revision-Date: 2020-11-05 01:12+0100\n"
+"POT-Creation-Date: 2021-01-28 06:35+0100\n"
+"PO-Revision-Date: 2021-01-28 06:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -20,13 +20,22 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: admin.py:13
+#: admin.py:11
 msgid "Missing scope 'export_ical'"
 msgstr "Brakujący zakres 'export_ical'"
 
 #: admin.py:15
-msgid "View calendar"
-msgstr "Zobacz kalendarz"
+#, python-brace-format
+msgid "View calendar for {event_link} or {letter_link}"
+msgstr "Zobacz kalendarz dla {event_link} lub {letter_link}"
+
+#: admin.py:16
+msgid "event"
+msgstr "wydarzeń"
+
+#: admin.py:17
+msgid "letter"
+msgstr "listów"
 
 #: apps.py:7
 msgid "Auth token"
@@ -40,30 +49,33 @@ msgstr "Data modyfikacji"
 msgid "Date of creation"
 msgstr "Data utworzenia"
 
-#: models.py:46
+#: models.py:47
 msgid "Name"
 msgstr "Nazwa"
 
-#: models.py:51
+#: models.py:53
 msgid "Scope"
 msgstr "Zakres"
 
-#: models.py:52 models.py:66
+#: models.py:54 models.py:68
 msgid "Scopes"
 msgstr "Zakresy"
 
-#: models.py:61
+#: models.py:63
 msgid "Token"
 msgstr "Token"
 
-#: models.py:67
+#: models.py:69
 msgid "Date of last used"
 msgstr "Data ostatniego użycia"
 
-#: models.py:85
+#: models.py:87
 msgid "Key"
 msgstr "Klucz"
 
-#: models.py:86
+#: models.py:88
 msgid "Keys"
 msgstr "Klucze"
+
+#~ msgid "View calendar"
+#~ msgstr "Zobacz kalendarz"

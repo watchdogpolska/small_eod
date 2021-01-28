@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-11 02:04+0100\n"
-"PO-Revision-Date: 2020-01-11 02:04+0100\n"
+"POT-Creation-Date: 2021-01-28 06:28+0100\n"
+"PO-Revision-Date: 2021-01-28 06:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -28,23 +28,24 @@ msgstr "Tagi"
 msgid "View {} letters"
 msgstr "Zobacz {} listów"
 
-#: admin.py:43 models.py:241
+#: admin.py:43 models.py:242
 msgid "Letters"
 msgstr "Listy"
 
-#: admin.py:53 models.py:105 models.py:218
+#: admin.py:53 models.py:105 models.py:219
+#: templates/cases/letter/calendar_description.txt:4
 msgid "Case"
 msgstr "Sprawa"
 
-#: admin.py:60 models.py:221
+#: admin.py:60 models.py:222
 msgid "Attachment"
 msgstr "Załącznik"
 
-#: admin.py:78
+#: admin.py:87
 msgid "Institution tags by letters"
 msgstr "Tagi instytucji poprzez listy"
 
-#: admin.py:102
+#: admin.py:112
 msgid "Download selected letters"
 msgstr "Pobierz wybrane listy"
 
@@ -56,15 +57,15 @@ msgstr "Sprawy"
 msgid "System"
 msgstr "System"
 
-#: dashboard.py:69
+#: dashboard.py:72
 msgid "Application"
 msgstr "Aplikacja"
 
-#: dashboard.py:79
+#: dashboard.py:82
 msgid "Support"
 msgstr "Wsparcie techniczne"
 
-#: dashboard.py:94
+#: dashboard.py:97
 msgid "Recent Actions"
 msgstr "Ostatnie akcje"
 
@@ -112,7 +113,7 @@ msgstr "Słownik"
 msgid "Dictinaries"
 msgstr "Słowniki"
 
-#: models.py:31 models.py:161 models.py:224
+#: models.py:31 models.py:161 models.py:225
 msgid "Comment"
 msgstr "Komentarz"
 
@@ -120,11 +121,11 @@ msgstr "Komentarz"
 msgid "Responsble person"
 msgstr "Osoba odpowiedzialna"
 
-#: models.py:38
+#: models.py:38 templates/cases/letter/calendar_description.txt:5
 msgid "Audited institution"
 msgstr "Kontrolowana instytucja"
 
-#: models.py:116 models.py:227
+#: models.py:116 models.py:228
 msgid "Channel"
 msgstr "Kanał"
 
@@ -148,7 +149,7 @@ msgstr "Osoby"
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:178 models.py:204
+#: models.py:178 models.py:205
 msgid "Institution"
 msgstr "Instytucja"
 
@@ -180,27 +181,31 @@ msgstr "wysłane"
 msgid "Direction"
 msgstr "Kierunek"
 
-#: models.py:205
+#: models.py:202
+msgid "Event time"
+msgstr "Czas wydarzenia"
+
+#: models.py:206
 msgid "From whom / to whom"
 msgstr "Od kogo / do kogo"
 
-#: models.py:209
+#: models.py:210
 msgid "Date of receipt / Date of dispatch"
 msgstr "Data odbioru / Data wysłania"
 
-#: models.py:211
+#: models.py:212
 msgid "Identifier"
 msgstr "Sygnatura"
 
-#: models.py:223
+#: models.py:224
 msgid "Ordering"
 msgstr "Kolejność"
 
-#: models.py:234
+#: models.py:235
 msgid "Letter #{}"
 msgstr "List #{}"
 
-#: models.py:240
+#: models.py:241
 msgid "Letter"
 msgstr "List"
 

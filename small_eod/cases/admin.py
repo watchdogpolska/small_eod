@@ -187,6 +187,7 @@ class LetterAdmin(admin.ModelAdmin):
         "created",
         "modified",
         "channel",
+        "event",
         get_attachment_status,
     ]
     list_filter = ["institution", "name", "direction", "case", "channel"]
