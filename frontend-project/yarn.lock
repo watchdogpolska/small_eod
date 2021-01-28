@@ -3086,10 +3086,10 @@
     ts-node "8.9.1"
     typescript "3.9.3"
 
-"@vercel/python@1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-1.2.4.tgz#f87373907e067f44798c9a883cb358666bdb05a5"
-  integrity sha512-XD3G8RxBZYed50v3Gi1DCxrDremRUwX5rbkYtuS3LJwYB3cxdksc0BhHjds2gexcPljeyTFN2JDZ2weIJn8NhA==
+"@vercel/python@1.2.5-canary.0":
+  version "1.2.5-canary.0"
+  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-1.2.5-canary.0.tgz#084ef041545ace37dd7227069fdd1c4da50f70d7"
+  integrity sha512-kS7vNNr75Vb5yASlInKODzdYu173t5NIzZL5Zbdh23Wo4YQZOf12/hfEdbaQRcxsuJXmNccfRC397UcT8XYS6w==
 
 "@vercel/ruby@1.2.5":
   version "1.2.5"
@@ -18005,13 +18005,6 @@ slice-ansi@^4.0.0:
     "@babel/cli" "^7.0.0"
     superagent "^5.3.0"
 
-"small_eod_client@https://github.com/watchdogpolska/small-eod-sdk-javascript.git#3fc27f41ef27b47f46deaff5f594a5d5fe0be5fe":
-  version "1.0.4"
-  resolved "https://github.com/watchdogpolska/small-eod-sdk-javascript.git#3fc27f41ef27b47f46deaff5f594a5d5fe0be5fe"
-  dependencies:
-    "@babel/cli" "^7.0.0"
-    superagent "^5.3.0"
-
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -20665,15 +20658,15 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-vercel@21.2.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-21.2.0.tgz#c049d1ba516e75b7ea3ac0c481046db93237eead"
-  integrity sha512-r6XVbfDNCX+nyb8ljEHcl0MtggX8rgxg5N7pMgxQQDj9vofSLFf7yeUgTL4BIK/jqTFKGWe/iMmlvrCWMjpziQ==
+vercel@21.2.1:
+  version "21.2.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-21.2.1.tgz#afaa6f281bd23e61902adef4a21d1a508cffadf5"
+  integrity sha512-5IOJPIzp4J/7NhqyJoFRUrjbrcGM8ok/N8jN+AnoeHRpThd2WmRE5OqHtVZeuaPlmOKYtUcBxEFu/omEtYpbbQ==
   dependencies:
     "@vercel/build-utils" "2.8.0"
     "@vercel/go" "1.1.7"
     "@vercel/node" "1.9.0"
-    "@vercel/python" "1.2.4"
+    "@vercel/python" "1.2.5-canary.0"
     "@vercel/ruby" "1.2.5"
     update-notifier "4.1.0"
 
