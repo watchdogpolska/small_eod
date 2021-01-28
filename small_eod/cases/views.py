@@ -10,6 +10,16 @@ from ..authkey.models import Key
 calendar_description_template = "cases/letter/calendar_description.txt"
 
 
+def get_uuid(obj, description):
+    import hashlib
+
+    m = hashlib.sha256()
+    m.update(obj.name)
+    m.update(obj.event.timestamp())
+    m.update(description)
+    m.digest()
+
+
 def ical(request):
     t = loader.get_template(calendar_description_template)
 
@@ -38,7 +48,7 @@ def ical(request):
         categories = [obj.case]
         if obj.case.audited_institution:
             categories.append(obj.case.audited_institution)
-        letter.add("uid", url)
+        letter.add("uid", get_uuid(obj, description))
         letter.add("dtstart", obj.event)
         letter.add("dtstamp", obj.event)
         letter.add("summary", obj.name)
