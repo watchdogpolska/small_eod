@@ -1,5 +1,7 @@
 {% load i18n fullurl %}
 {{obj.comment}}
+{% if obj.case %}
 ----
 {% trans 'Case' %}: {{obj.case}} ({% fullurl 'admin:cases_case_change' object_id=obj.case.pk %})
 {% trans 'Audited institution' %}: {{obj.case.audited_institution | default:"-"}}
+{% endif %}
