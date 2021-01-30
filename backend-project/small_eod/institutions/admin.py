@@ -13,10 +13,10 @@ display_tags.short_description = _("Tags")
 
 
 class InstitutionAdmin(admin.ModelAdmin):
+    search_fields = ["name", "comment", "city"]
     raw_id_fields = ["tags"]
     list_display = ["name", "comment", "created_on", "modified_on", display_tags]
     search_fields = ["name", "comment"]
-
     autocomplete_lookup_fields = {
         "m2m": ["tags"],
     }
