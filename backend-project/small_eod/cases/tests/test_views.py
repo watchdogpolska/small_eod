@@ -12,10 +12,15 @@ from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
+from ...search.tests.mixins import SearchQueryMixin
 
 
 class CaseViewSetTestCase(
-    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+    AuthorshipViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
 ):
     basename = "case"
     serializer_class = CaseSerializer
@@ -54,31 +59,6 @@ class CaseViewSetTestCase(
         self.assertEqual(response.status_code, 200, response.json())
         item = response.json()
         self.assertCountEqual(item["tags"], tags)
-
-    def test_search_by_pk(self):
-        self.login_required()
-        second_case = CaseFactory()
-        response = self.client.get(
-            self.get_url(name="list", **self.get_extra_kwargs()),
-            data={"query": f"id:{second_case.pk}"},
-        )
-        self.assertEqual(response.status_code, 200, response.json())
-        item = response.json()["results"]
-        self.assertEqual(len(item), 1)
-        self.assertEqual(item[0]["id"], second_case.pk)
-
-    def test_search_invalid(self):
-        self.login_required()
-        response = self.client.get(
-            self.get_url(name="list", **self.get_extra_kwargs()),
-            data={"query": "id:"},
-        )
-        self.assertEqual(response.status_code, 400, response.json())
-        item = response.json()
-        self.assertEqual(
-            item["query"][0],
-            "Expected end of text, found ':'  (at char 2), (line:1, col:3)",
-        )
 
 
 class UserViewSetMixin(RelatedM2MMixin, ReadOnlyViewSetMixin):

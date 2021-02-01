@@ -5,8 +5,12 @@ from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixi
 from ..factories import EventFactory
 from ..serializers import EventSerializer
 
+from ...search.tests.mixins import SearchQueryMixin
 
-class EventViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
+
+class EventViewSetTestCase(
+    GenericViewSetMixin, OrderingViewSetMixin, SearchQueryMixin, TestCase
+):
     basename = "event"
     serializer_class = EventSerializer
     factory_class = EventFactory

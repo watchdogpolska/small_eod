@@ -9,9 +9,15 @@ from ...generic.tests.test_views import (
 from ..factories import InstitutionFactory
 from ..serializers import InstitutionSerializer
 
+from ...search.tests.mixins import SearchQueryMixin
+
 
 class InstitutionViewSetTestCase(
-    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+    AuthorshipViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
 ):
     basename = "institution"
     serializer_class = InstitutionSerializer

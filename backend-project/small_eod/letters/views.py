@@ -10,12 +10,14 @@ from ..files.models import File
 from ..files.serializers import FileSerializer
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
+from .filterset import LetterFilterSet
 
 
 class LetterViewSet(viewsets.ModelViewSet):
     queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = LetterFilterSet
     ordering_fields = [
         "id",
         "direction",

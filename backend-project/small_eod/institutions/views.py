@@ -4,7 +4,7 @@ from drf_yasg2 import openapi
 from drf_yasg2.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
-
+from .filterset import InstitutionFilterSet
 from .models import Institution
 from .serializers import InstitutionSerializer
 
@@ -26,6 +26,7 @@ class InstitutionViewSet(viewsets.ModelViewSet):
     queryset = Institution.objects.all()
     serializer_class = InstitutionSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = InstitutionFilterSet
     ordering_fields = [
         "id",
         "modified_by__username",
@@ -46,10 +47,3 @@ class InstitutionViewSet(viewsets.ModelViewSet):
         "comment",
         "tags__name",
     ]
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        query = self.request.GET.get("query")
-        if query:
-            qs = qs.filter(name__icontains=query)
-        return qs

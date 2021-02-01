@@ -14,12 +14,14 @@ from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
 from .models import Event
 from .serializers import EventSerializer
+from .filterset import EventFilterSet
 
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = EventFilterSet
     ordering_fields = [
         "id",
         "case__name",

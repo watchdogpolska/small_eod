@@ -14,6 +14,7 @@ from ...generic.tests.test_views import (
 from ...users.mixins import AuthenticatedMixin
 from ..factories import LetterFactory
 from ..serializers import LetterSerializer
+from ...search.tests.mixins import SearchQueryMixin
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
@@ -87,7 +88,11 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
 
 
 class LetterViewSetTestCase(
-    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+    AuthorshipViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
 ):
     basename = "letter"
     serializer_class = LetterSerializer
