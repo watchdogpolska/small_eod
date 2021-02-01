@@ -1,9 +1,11 @@
 from unittest import mock
-from django.test import SimpleTestCase
-from ..filter import SearchFilter
+
 from django.db.models import Q
-from .fixtures import DemoSearchSet
+from django.test import SimpleTestCase
+
+from ..filter import SearchFilter
 from ..grammar import parse
+from .fixtures import DemoSearchSet
 
 
 class SearchFilterTestCase(SimpleTestCase):

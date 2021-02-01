@@ -1,13 +1,15 @@
 from unittest import TestCase
+
 from pyparsing import pyparsing_test
+
 from ..grammar import (
-    searchTerm,
-    SearchTerm,
-    field_expr,
     FieldExpr,
-    search_expr,
     OperationAnd,
     OperationOr,
+    SearchTerm,
+    field_expr,
+    search_expr,
+    searchTerm,
 )
 
 

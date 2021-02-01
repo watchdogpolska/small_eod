@@ -1,13 +1,11 @@
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
 from ..users.serializers import UserSerializer
+from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
-from ..users.serializers import UserSerializer
-from .filterset import CaseFilterSet
 
 
 class CaseViewSet(viewsets.ModelViewSet):

@@ -1,4 +1,5 @@
 from django_filters.filters import CharFilter
+
 from .field import SearchField
 
 

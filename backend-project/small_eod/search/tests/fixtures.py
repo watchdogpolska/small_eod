@@ -1,5 +1,6 @@
-from ..searchset import BaseSearchSet
 from django.db.models import Q
+
+from ..searchset import BaseSearchSet
 
 
 class DemoSearchSet(BaseSearchSet):

@@ -1,5 +1,7 @@
 from unittest import TestCase
+
 from django.db.models import Q
+
 from ..grammar import parse
 from .fixtures import DemoSearchSet
 

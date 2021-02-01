@@ -1,15 +1,14 @@
 from pyparsing import (
-    Word,
-    Suppress,
     CaselessLiteral,
-    infixNotation,
-    pyparsing_unicode,
-    removeQuotes,
-    opAssoc,
     FollowedBy,
+    Suppress,
+    Word,
+    infixNotation,
+    opAssoc,
+    pyparsing_unicode,
     quotedString,
+    removeQuotes,
 )
-
 
 printables = pyparsing_unicode.printables
 alphas = pyparsing_unicode.alphas

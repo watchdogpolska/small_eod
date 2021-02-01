@@ -1,7 +1,8 @@
-from ..search.filter import SearchFilter
-from .searchset import CaseSearchSet
-from .models import Case
 from django_filters.filterset import FilterSet
+
+from ..search.filter import SearchFilter
+from .models import Case
+from .searchset import CaseSearchSet
 
 
 class CaseFilterSet(FilterSet):

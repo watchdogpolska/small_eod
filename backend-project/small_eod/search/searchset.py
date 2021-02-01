@@ -1,11 +1,6 @@
 from django.db.models import Q
-from .grammar import (
-    OperationAnd,
-    OperationOr,
-    OperationNot,
-    SearchTerm,
-    FieldExpr,
-)
+
+from .grammar import FieldExpr, OperationAnd, OperationNot, OperationOr, SearchTerm
 
 
 class BaseSearchSet:

@@ -1,7 +1,8 @@
 from django import forms
-from .grammar import parse
-from pyparsing import ParseException
 from django.core.exceptions import ValidationError
+from pyparsing import ParseException
+
+from .grammar import parse
 
 
 class SearchField(forms.CharField):
