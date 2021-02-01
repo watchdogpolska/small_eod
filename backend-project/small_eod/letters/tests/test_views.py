@@ -11,10 +11,10 @@ from ...generic.tests.test_views import (
     GenericViewSetMixin,
     OrderingViewSetMixin,
 )
+from ...search.tests.mixins import SearchQueryMixin
 from ...users.mixins import AuthenticatedMixin
 from ..factories import LetterFactory
 from ..serializers import LetterSerializer
-from ...search.tests.mixins import SearchQueryMixin
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):

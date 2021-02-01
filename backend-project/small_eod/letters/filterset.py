@@ -1,7 +1,8 @@
-from ..search.filter import SearchFilter
-from .searchset import LetterSearchSet
-from .models import Letter
 from django_filters.filterset import FilterSet
+
+from ..search.filter import SearchFilter
+from .models import Letter
+from .searchset import LetterSearchSet
 
 
 class LetterFilterSet(FilterSet):

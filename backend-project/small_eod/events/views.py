@@ -12,9 +12,9 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
+from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
-from .filterset import EventFilterSet
 
 
 class EventViewSet(viewsets.ModelViewSet):

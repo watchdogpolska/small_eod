@@ -1,10 +1,9 @@
 from test_plus.test import TestCase
 
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import NoteFactory
 from ..serializers import NoteSerializer
-
-from ...search.tests.mixins import SearchQueryMixin
 
 
 class NoteViewSetTestCase(

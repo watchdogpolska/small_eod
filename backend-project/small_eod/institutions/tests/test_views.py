@@ -6,10 +6,9 @@ from ...generic.tests.test_views import (
     GenericViewSetMixin,
     OrderingViewSetMixin,
 )
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import InstitutionFactory
 from ..serializers import InstitutionSerializer
-
-from ...search.tests.mixins import SearchQueryMixin
 
 
 class InstitutionViewSetTestCase(

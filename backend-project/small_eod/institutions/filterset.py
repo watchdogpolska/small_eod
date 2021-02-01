@@ -1,7 +1,8 @@
-from ..search.filter import SearchFilter
-from .searchset import InstitutionSearchSet
-from .models import Institution
 from django_filters.filterset import FilterSet
+
+from ..search.filter import SearchFilter
+from .models import Institution
+from .searchset import InstitutionSearchSet
 
 
 class InstitutionFilterSet(FilterSet):

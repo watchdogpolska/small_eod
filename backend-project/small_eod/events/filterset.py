@@ -1,7 +1,8 @@
-from ..search.filter import SearchFilter
-from .searchset import EventSearchSet
-from .models import Event
 from django_filters.filterset import FilterSet
+
+from ..search.filter import SearchFilter
+from .models import Event
+from .searchset import EventSearchSet
 
 
 class EventFilterSet(FilterSet):

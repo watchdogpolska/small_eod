@@ -7,12 +7,12 @@ from ...generic.tests.test_views import (
     ReadOnlyViewSetMixin,
     RelatedM2MMixin,
 )
+from ...search.tests.mixins import SearchQueryMixin
 from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
 from ..factories import CaseFactory
 from ..serializers import CaseSerializer
-from ...search.tests.mixins import SearchQueryMixin
 
 
 class CaseViewSetTestCase(
