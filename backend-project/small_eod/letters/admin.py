@@ -1,16 +1,16 @@
-import requests
 import unicodedata
-import zipstream as zipstream
 from os.path import basename
 
+import requests
+import zipstream
 from django.contrib import admin
 from django.http import StreamingHttpResponse
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-from .models import Letter, DocumentType
 
 from ..files.models import File
+from .models import DocumentType, Letter
 
 
 def link_to_case(obj):

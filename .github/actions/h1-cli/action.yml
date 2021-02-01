@@ -10,7 +10,7 @@ inputs:
     required: false
   scope:
     description: |-
-      Scope of the CLI to install. If unspecified "h1" CLI version will 
+      Scope of the CLI to install. If unspecified "h1" CLI version will
       be installed. Example: "h1", "rbx".
     default: h1
     required: false

@@ -1,17 +1,17 @@
 from test_plus.test import TestCase
 
-from ..factories import CaseFactory
-from ..serializers import CaseSerializer
-from ...tags.factories import TagFactory
 from ...generic.tests.test_views import (
-    GenericViewSetMixin,
-    ReadOnlyViewSetMixin,
     AuthorshipViewSetMixin,
-    RelatedM2MMixin,
+    GenericViewSetMixin,
     OrderingViewSetMixin,
+    ReadOnlyViewSetMixin,
+    RelatedM2MMixin,
 )
+from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
 from ...users.serializers import UserSerializer
+from ..factories import CaseFactory
+from ..serializers import CaseSerializer
 
 
 class CaseViewSetTestCase(

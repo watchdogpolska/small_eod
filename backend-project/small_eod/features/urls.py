@@ -1,10 +1,7 @@
+from django.urls import include, path
 from rest_framework_nested import routers
-from .views import (
-    FeatureViewSet,
-    FeatureOptionViewSet,
-)
 
-from django.urls import path, include
+from .views import FeatureOptionViewSet, FeatureViewSet
 
 router = routers.SimpleRouter()
 router.register("features", FeatureViewSet)

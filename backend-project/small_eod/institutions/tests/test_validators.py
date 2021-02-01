@@ -1,8 +1,8 @@
 from django.forms import modelform_factory
 from django.test import TestCase
 
-from ..models import Institution
 from ...administrative_units.factories import AdministrativeUnitFactory
+from ..models import Institution
 
 
 class ExternalIdentifierValidatorsTestCase(TestCase):

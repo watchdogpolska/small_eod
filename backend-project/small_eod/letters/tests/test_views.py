@@ -1,19 +1,19 @@
-from django.urls import reverse
-from test_plus.test import TestCase
-import requests
 from io import BytesIO
 
+import requests
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from test_plus.test import TestCase
 
-from ..factories import LetterFactory
-from ..serializers import LetterSerializer
 from ...generic.tests.test_views import (
-    GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    GenericViewSetMixin,
     OrderingViewSetMixin,
 )
 from ...users.mixins import AuthenticatedMixin
+from ..factories import LetterFactory
+from ..serializers import LetterSerializer
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):

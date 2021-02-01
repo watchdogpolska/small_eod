@@ -1,0 +1,47 @@
+default_language_version:
+    python: python3.8
+
+repos:
+-   repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    - id: black
+      pass_filenames: true
+      args: ["--config", "backend-project/pyproject.toml"]
+      exclude: "migrations/"
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.4
+    hooks:
+    - id: flake8
+      pass_filenames: true
+      # this seems to need to be here in addition to setup.cfg
+      exclude: vendored|__init__.py|examples
+      additional_dependencies:
+      - flake8-tidy-imports
+      args: ["--config", "backend-project/setup.cfg"]
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    - id: check-json
+    - id: check-yaml
+    - id: check-merge-conflict
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+      exclude: .*\.md
+    - id: debug-statements
+    - id: mixed-line-ending
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v2.7.4
+    hooks:
+    - id: pyupgrade
+      args: ["--py38-plus"]
+-   repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.7.0
+    hooks:
+    -   id: rst-backticks
+-   repo: https://github.com/PyCQA/isort
+    rev: '5.6.4'  # Use the revision sha / tag you want to point at
+    hooks:
+    -   id: isort
+        args: ["--settings-file", "backend-project/pyproject.toml"]
+        exclude: "migrations/"

@@ -1,8 +1,9 @@
-from rest_framework import serializers
-from .models import File
-from ..files.apps import minio_app
 from django.conf import settings
 from django.utils import timezone
+from rest_framework import serializers
+
+from ..files.apps import minio_app
+from .models import File
 
 
 class FileSerializer(serializers.ModelSerializer):

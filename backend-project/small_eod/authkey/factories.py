@@ -1,8 +1,8 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from .models import Key, Scope
 from ..users.factories import UserFactory
+from .models import Key, Scope
 
 
 class KeyFactory(DjangoModelFactory):

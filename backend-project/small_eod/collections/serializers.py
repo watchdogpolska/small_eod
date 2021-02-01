@@ -1,9 +1,10 @@
-from rest_framework.fields import CharField
-from rest_framework import serializers
 from django.utils import timezone
-from .models import Collection
-from .fields import DurationField
+from rest_framework import serializers
+from rest_framework.fields import CharField
+
 from ..generic.serializers import UserLogModelSerializer
+from .fields import DurationField
+from .models import Collection
 from .signer import JWTSigner
 
 MINUTE = 60

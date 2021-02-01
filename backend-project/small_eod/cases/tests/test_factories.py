@@ -1,12 +1,12 @@
 from django.test import TestCase
 
-from ..factories import CaseFactory
-from ..models import Case
 from ...features.factories import FeatureOptionFactory
 from ...generic.tests.mixins import FactoryTestCaseMixin
 from ...institutions.factories import InstitutionFactory
 from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
+from ..factories import CaseFactory
+from ..models import Case
 
 
 class CaseFactoryTestCase(FactoryTestCaseMixin, TestCase):

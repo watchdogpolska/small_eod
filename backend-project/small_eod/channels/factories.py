@@ -1,8 +1,8 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
+from ..generic.factories import AbstractTimestampUserFactory, FuzzyTrueOrFalse
 from .models import Channel
-from ..generic.factories import FuzzyTrueOrFalse, AbstractTimestampUserFactory
 
 
 class ChannelFactory(AbstractTimestampUserFactory, DjangoModelFactory):

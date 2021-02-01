@@ -1,14 +1,14 @@
 labelPRBasedOnFilePath:
-  front-end: 
+  front-end:
     - 'frontend-project/**'
   front-end-deps:
     - 'frontend-project/yarn.lock'
     - 'frontend-project/package.json'
-  back-end: 
+  back-end:
     - 'backend-project/**'
   back-end-deps:
     - 'backend-project/requirements/**'
-  ci: 
+  ci:
     - '.github/**'
     - Makefile
     - docker-compose.yml

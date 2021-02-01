@@ -1,28 +1,28 @@
-from rest_framework import viewsets, status
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg2.utils import swagger_auto_schema
+from rest_framework import status, viewsets
+from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
-from drf_yasg2.utils import swagger_auto_schema
-from django.utils.decorators import method_decorator
 
-from .models import Collection
-from .serializers import CollectionSerializer, TokenSetSerializer
-from ..cases.serializers import CaseSerializer
 from ..cases.models import Case
-from ..notes.serializers import NoteSerializer
-from ..notes.models import Note
-from ..events.serializers import EventSerializer
+from ..cases.serializers import CaseSerializer
 from ..events.models import Event
-from ..letters.serializers import LetterSerializer
+from ..events.serializers import EventSerializer
 from ..letters.models import Letter
-from django.shortcuts import get_object_or_404
+from ..letters.serializers import LetterSerializer
+from ..notes.models import Note
+from ..notes.serializers import NoteSerializer
+from .models import Collection
 from .permissions import (
-    CollectionMemberTokenPermission,
     CollectionDirectTokenPermission,
+    CollectionMemberTokenPermission,
 )
-from django.conf import settings
+from .serializers import CollectionSerializer, TokenSetSerializer
 
 SECURITY_SCHEMAS = list(settings.SWAGGER_SETTINGS["SECURITY_REQUIREMENTS"]) + [
     {"CollectionToken": []}

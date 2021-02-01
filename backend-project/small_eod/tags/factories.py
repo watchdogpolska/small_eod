@@ -1,8 +1,8 @@
 import factory
 from factory.django import DjangoModelFactory
 
-from .models import Tag, TagNamespace
 from ..generic.factories import AbstractTimestampUserFactory, RGBColorFuzzyAttribute
+from .models import Tag, TagNamespace
 
 
 class TagFactory(DjangoModelFactory):

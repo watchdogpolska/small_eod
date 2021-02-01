@@ -10,3 +10,4 @@ Pipfile.lock
 /dev-data
 
 _build/
+.python-version

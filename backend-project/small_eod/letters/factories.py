@@ -1,15 +1,15 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from .models import Letter, DocumentType
 from ..cases.factories import CaseFactory
 from ..channels.factories import ChannelFactory
 from ..generic.factories import (
-    FuzzyTrueOrFalse,
-    FuzzyDateTimeFromNow,
     AbstractTimestampUserFactory,
+    FuzzyDateTimeFromNow,
+    FuzzyTrueOrFalse,
 )
 from ..institutions.factories import InstitutionFactory
+from .models import DocumentType, Letter
 
 
 class DocumentTypeFactory(DjangoModelFactory):

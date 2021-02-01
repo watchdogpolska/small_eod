@@ -1,12 +1,12 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from .models import Collection
 from ..generic.factories import (
     AbstractTimestampUserFactory,
-    FuzzyTrueOrFalse,
     FuzzyDateTimeFromNow,
+    FuzzyTrueOrFalse,
 )
+from .models import Collection
 
 
 class CollectionFactory(AbstractTimestampUserFactory, DjangoModelFactory):

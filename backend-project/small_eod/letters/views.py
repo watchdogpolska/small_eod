@@ -1,19 +1,15 @@
 from django.shortcuts import get_object_or_404
-from drf_yasg2.utils import swagger_auto_schema
-from rest_framework import viewsets, status
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg2.utils import swagger_auto_schema
+from rest_framework import status, viewsets
 from rest_framework.filters import OrderingFilter
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import Letter, DocumentType
-from .serializers import (
-    LetterSerializer,
-    DocumentTypeSerializer,
-    SignRequestSerializer,
-)
-from ..files.serializers import FileSerializer
 from ..files.models import File
+from ..files.serializers import FileSerializer
+from .models import DocumentType, Letter
+from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
 
 
 class LetterViewSet(viewsets.ModelViewSet):

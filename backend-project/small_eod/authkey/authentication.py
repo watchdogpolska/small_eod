@@ -1,5 +1,5 @@
-from rest_framework import authentication
-from rest_framework import exceptions
+from rest_framework import authentication, exceptions
+
 from .models import Key
 from .parser import get_token
 

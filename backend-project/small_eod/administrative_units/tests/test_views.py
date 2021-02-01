@@ -1,8 +1,8 @@
 from test_plus.test import TestCase
 
+from ...generic.tests.test_views import OrderingViewSetMixin, ReadOnlyViewSetMixin
 from ..factories import AdministrativeUnitFactory
 from ..serializers import AdministrativeUnitSerializer
-from ...generic.tests.test_views import ReadOnlyViewSetMixin, OrderingViewSetMixin
 
 
 class AdministrativeUnitViewSetTestCase(

@@ -1,9 +1,9 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from .models import Event
 from ..cases.factories import CaseFactory
 from ..generic.factories import AbstractTimestampUserFactory, FuzzyDateTimeFromNow
+from .models import Event
 
 
 class EventFactory(AbstractTimestampUserFactory, DjangoModelFactory):
