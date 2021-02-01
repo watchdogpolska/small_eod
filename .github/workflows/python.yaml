@@ -7,11 +7,13 @@ on:
     paths:
     - 'backend-project/**'
     - '.github/**'
+    - 'Makefile'
     - '**/docker-compose.yml'
   pull_request:
     paths:
     - 'backend-project/**'
     - '.github/**'
+    - 'Makefile'
     - '**/docker-compose.yml'
 
 jobs:
