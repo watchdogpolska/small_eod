@@ -16,7 +16,3 @@ Model
 
 .. automodule:: small_eod.administrative_units.models
    :members:
-
-
-
-

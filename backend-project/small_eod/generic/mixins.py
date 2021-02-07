@@ -1,5 +1,6 @@
-from ..users.factories import UserFactory
 from rest_framework.test import APIRequestFactory, force_authenticate
+
+from ..users.factories import UserFactory
 
 
 class AuthRequiredMixin:

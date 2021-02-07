@@ -1,5 +1,5 @@
-from .models import Note
 from ..generic.serializers import UserLogModelSerializer
+from .models import Note
 
 
 class NoteSerializer(UserLogModelSerializer):

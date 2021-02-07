@@ -1,17 +1,16 @@
 from django.test import TestCase
 from django.utils.timezone import datetime, timedelta
 
-from ..serializers import LetterSerializer, DocumentTypeSerializer
-
+from ...cases.factories import CaseFactory
+from ...channels.factories import ChannelFactory
+from ...files.factories import FileFactory
 from ...generic.mixins import AuthRequiredMixin
 from ...generic.tests.test_serializers import ResourceSerializerMixin
-from ..factories import LetterFactory, DocumentTypeFactory
-from ...files.factories import FileFactory
-from ...channels.factories import ChannelFactory
 
 # from ...channels.factories import ChannelFactory
 from ...institutions.factories import InstitutionFactory
-from ...cases.factories import CaseFactory
+from ..factories import DocumentTypeFactory, LetterFactory
+from ..serializers import DocumentTypeSerializer, LetterSerializer
 
 
 class DocumentTypeSerializerTestCase(ResourceSerializerMixin, TestCase):

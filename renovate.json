@@ -3,6 +3,23 @@
     "config:base",
     "default:automergeDigest"
   ],
+  "packageRules": [
+    {
+      "depTypeList": ["minor", "patch", "pin", "devDependencies"],
+      "automerge": true
+    },
+    {
+      "packagePatterns": ["^@types/"],
+      "automerge": true
+    },
+    {
+      "extends": ["packages:linters"],
+      "automerge": true
+    }
+  ],
+  "pre-commit": {
+    "enabled": false
+  },
   "docker": {
     "pinDigests": true
   }

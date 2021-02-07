@@ -1,5 +1,6 @@
-from .models import AdministrativeUnit
 from rest_framework import serializers
+
+from .models import AdministrativeUnit
 
 
 class AdministrativeUnitSerializer(serializers.ModelSerializer):

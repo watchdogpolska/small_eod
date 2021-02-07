@@ -1,8 +1,8 @@
 from django.test import TestCase
 
+from ...generic.tests.mixins import FactoryTestCaseMixin
 from ..factories import EventFactory
 from ..models import Event
-from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class EventFactoryTestCase(FactoryTestCaseMixin, TestCase):

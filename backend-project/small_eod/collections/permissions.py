@@ -1,7 +1,8 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
-from .signer import JWTSigner
 import jwt
 from django.urls import resolve
+from rest_framework.permissions import SAFE_METHODS, BasePermission
+
+from .signer import JWTSigner
 
 signer = JWTSigner()
 

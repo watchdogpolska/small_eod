@@ -1,8 +1,9 @@
-from rest_framework import viewsets
-from .models import Feature, FeatureOption
-from .serializers import FeatureSerializer, FeatureOptionSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
+
+from .models import Feature, FeatureOption
+from .serializers import FeatureOptionSerializer, FeatureSerializer
 
 
 class FeatureViewSet(viewsets.ModelViewSet):

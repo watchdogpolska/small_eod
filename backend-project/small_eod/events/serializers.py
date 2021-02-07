@@ -1,5 +1,5 @@
-from .models import Event
 from ..generic.serializers import UserLogModelSerializer
+from .models import Event
 
 
 class EventSerializer(UserLogModelSerializer):

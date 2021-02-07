@@ -1,14 +1,14 @@
 from django.test import TestCase
 
-from ..models import Case
-from ..serializers import CaseCountSerializer
-from ...features.factories import FeatureOptionFactory, FeatureFactory
+from ...features.factories import FeatureFactory, FeatureOptionFactory
+from ...generic.mixins import AuthRequiredMixin
+from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ...notes.factories import NoteFactory
 from ...tags.models import Tag
 from ...users.factories import UserFactory
-from ...generic.mixins import AuthRequiredMixin
-from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ..factories import CaseFactory
+from ..models import Case
+from ..serializers import CaseCountSerializer
 
 
 class CaseCountSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):

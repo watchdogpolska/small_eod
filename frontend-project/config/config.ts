@@ -102,6 +102,32 @@ const usersRoutes = {
   ],
 };
 
+const documentTypesRoutes = {
+  name: 'document-types',
+  icon: 'FileTextOutlined',
+  path: '/documentTypes',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/documentTypes',
+      component: './documentTypes/DocumentTypesListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/documentTypes/new',
+      component: './documentTypes/DocumentTypesDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/documentTypes/edit/:id',
+      component: './documentTypes/DocumentTypesDetailView',
+      hideInMenu: true,
+    },
+  ],
+};
+
 export default {
   plugins,
   hash: true,
@@ -236,6 +262,7 @@ export default {
               ],
             },
             usersRoutes,
+            documentTypesRoutes,
             {
               path: '/',
               redirect: '/cases/new',

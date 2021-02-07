@@ -5,10 +5,12 @@ on:
     paths:
       - "frontend-project/**"
       - ".github/**"
+      - 'Makefile'
   pull_request:
     paths:
       - "frontend-project/**"
       - ".github/**"
+      - 'Makefile'
 
 jobs:
   test:

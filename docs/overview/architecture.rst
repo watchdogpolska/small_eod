@@ -17,7 +17,7 @@ Dodatkowe uwagi:
 
 Backend
 ^^^^^^^^^
-Backend utworzony z wykorzystaniem: 
+Backend utworzony z wykorzystaniem:
 
     * `Django <https://www.djangoproject.com>`_
     * `Django Rest Framework <https://www.django-rest-framework.org>`_

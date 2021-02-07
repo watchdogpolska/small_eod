@@ -1,8 +1,8 @@
 from test_plus.test import TestCase
 
-from ..serializers import FileSerializer
-from ..factories import FileFactory
 from ...generic.tests.test_views import GenericViewSetMixin
+from ..factories import FileFactory
+from ..serializers import FileSerializer
 
 
 class FileViewSetTestCase(GenericViewSetMixin, TestCase):

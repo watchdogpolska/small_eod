@@ -1,16 +1,18 @@
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
+from ..users.serializers import UserSerializer
+from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
-from ..users.serializers import UserSerializer
 
 
 class CaseViewSet(viewsets.ModelViewSet):
     queryset = Case.objects.with_counter().with_nested_resources().all()
     serializer_class = CaseCountSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = CaseFilterSet
     ordering_fields = [
         "id",
         "comment",

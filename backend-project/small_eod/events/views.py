@@ -1,24 +1,27 @@
-from icalendar import Calendar, Event as IEvent
-from django.urls import reverse
-from django.template import loader
 from django.http import HttpResponse
-from rest_framework import viewsets
-from rest_framework.filters import OrderingFilter
-from rest_framework.decorators import action
-from django_filters.rest_framework import DjangoFilterBackend
+from django.template import loader
+from django.urls import reverse
 from django.utils.translation import ugettext as _
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg2.utils import swagger_auto_schema
+from icalendar import Calendar
+from icalendar import Event as IEvent
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.filters import OrderingFilter
+
+from ..authkey.authentication import AuthKeyAuthentication
+from ..authkey.permissions import AuthKeyPermission
+from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
-from ..authkey.permissions import AuthKeyPermission
-from ..authkey.authentication import AuthKeyAuthentication
-from rest_framework import status
 
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = EventFilterSet
     ordering_fields = [
         "id",
         "case__name",

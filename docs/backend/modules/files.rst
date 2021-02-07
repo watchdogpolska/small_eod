@@ -15,4 +15,3 @@ Model
 
 .. automodule:: small_eod.files.models
    :members:
-

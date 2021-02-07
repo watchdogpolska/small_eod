@@ -11,7 +11,7 @@ Rejestrowanie korespondencji przychodzącej tradycyjnej
 
 * Pracownik wybiera dodanie nowego listu
 * System wyświetla formularz dodawania nowego listu
-    
+
     * Pola wynikają z interfejsu API
     * Użytkownik pomija pole "Sprawa"
 * Użytkownik wypełnia formularz i zatwierdza dodanie listu
@@ -19,7 +19,7 @@ Rejestrowanie korespondencji przychodzącej tradycyjnej
 * Archiwista wyświetla listę listów bez przypisanych spraw.
 * Użytkownik wybiera edycje listu.
 * System wyświetla formularz edycji listu.
-    
+
     * Pola wynikają z interfejsu API
 
 **Sytuacje wyjątkowe**
@@ -44,7 +44,7 @@ Rejestrowanie teczki sprawy
 
 * Pracownik wybiera dodanie nowej sprawy
 * System wyświetla formularz dodawania nowej sprawy
-    
+
     * Pola wynikają z interfejsu API
     * Interfejs umożliwia wprowadzenie także danych wielu listów
 * Użytkownik wypełnia formularz i zatwierdza dodanie sprawy
@@ -74,7 +74,7 @@ Utworzenie kolekcji
 
 * Pracownik wybiera utworzenie nowej kolekcji
 * System wyświetla formularz dodawania nowej kolekcji
-    
+
     * Pola wynikają z interfejsu API
 * Użytkownik wypełnia formularz i zatwierdza utworzenie kolekcji
 * System weryfikuje wprowadzone dane i potwierdza ich przyjęcie.

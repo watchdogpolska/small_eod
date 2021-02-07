@@ -1,8 +1,8 @@
 from django.test import TestCase
 
+from ...generic.tests.mixins import FactoryTestCaseMixin
 from ..factories import DocumentTypeFactory, LetterFactory
 from ..models import DocumentType, Letter
-from ...generic.tests.mixins import FactoryTestCaseMixin
 
 
 class LetterFactoryTestCase(FactoryTestCaseMixin, TestCase):

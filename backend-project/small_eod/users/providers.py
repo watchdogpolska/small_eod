@@ -1,5 +1,5 @@
-from requests_oauthlib import OAuth2Session
 from django.urls import reverse
+from requests_oauthlib import OAuth2Session
 
 
 class GoogleProvider:

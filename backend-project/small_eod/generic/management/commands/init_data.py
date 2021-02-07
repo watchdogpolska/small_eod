@@ -1,9 +1,10 @@
+import tempfile
 import urllib.request
 
-from django.core.management.base import BaseCommand
 from django.core.management import call_command
+from django.core.management.base import BaseCommand
+
 from ....letters.factories import LetterFactory
-import tempfile
 
 URL = (
     "http://cdn.files.jawne.info.pl/"

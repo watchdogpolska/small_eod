@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.db import connection
+from django.urls import reverse
 
 from ...users.mixins import AuthenticatedMixin
 
@@ -158,7 +158,7 @@ class UpdateViewSetMixin:
         return {"name": f"{self.obj.name}-updated"}
 
     def validate_update_item(self, item):
-        if not self.obj.name:
+        if not hasattr(self.obj, "name"):
             raise NotImplementedError(
                 "validate_update_item must be defined, because no 'name' field"
             )

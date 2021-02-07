@@ -17,42 +17,42 @@ Procedura
 #. Pobierz repozytorium na swój dysk z wykorzystaniem polecenia:
 
     .. code-block:: bash
-    
+
         git clone git@github.com:<nazwa profilu>/small_eod.git
-   
+
 #. Przejdź do katalogu zawierającego frontend z wykorzystaniem polecenia:
 
    .. code-block:: bash
-        
+
         cd small_eod/frontend-project
 
 #. Zainstaluj zależności za pomocą narzędzia yarn z wykorzystaniem polecenia:
 
    .. code-block:: bash
-        
+
         yarn
-   
+
 
 #. Projekt możesz uruchomić poleceniem:
 
    .. code-block:: bash
-        
+
         yarn start
-   
+
 
    W celu jego poprawnego działania musisz mieć poprawnie uruchomiony backend (serwer API). Możesz wykorzystać ogólnodostępne deweloperskie API poprzez uruchomienie poleceniem:
 
    .. code-block:: bash
-        
+
         yarn start:public-api
-   
+
 
 #. W celu uruchomienia testów wykonaj polecenie:
 
    .. code-block:: bash
-        
+
         yarn test
-   
+
 
 Zmienne środowiskowe
 --------------------

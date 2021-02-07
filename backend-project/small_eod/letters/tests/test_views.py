@@ -1,19 +1,20 @@
-from django.urls import reverse
-from test_plus.test import TestCase
-import requests
 from io import BytesIO
 
+import requests
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from test_plus.test import TestCase
 
-from ..factories import LetterFactory
-from ..serializers import LetterSerializer
 from ...generic.tests.test_views import (
-    GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    GenericViewSetMixin,
     OrderingViewSetMixin,
 )
+from ...search.tests.mixins import SearchQueryMixin
 from ...users.mixins import AuthenticatedMixin
+from ..factories import LetterFactory
+from ..serializers import LetterSerializer
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
@@ -87,7 +88,11 @@ class FileCreateTestCase(AuthenticatedMixin, APITestCase):
 
 
 class LetterViewSetTestCase(
-    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+    AuthorshipViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
 ):
     basename = "letter"
     serializer_class = LetterSerializer

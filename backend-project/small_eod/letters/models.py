@@ -1,11 +1,11 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from ..cases.models import Case
 from ..channels.models import Channel
 from ..generic.models import TimestampUserLogModel
 from ..institutions.models import Institution
-from django.utils import timezone
 
 
 class DocumentType(models.Model):

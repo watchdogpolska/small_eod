@@ -19,3 +19,7 @@ exclude = '''
   | dist
 )
 '''
+
+[tool.isort]
+line_length=88
+profile="black"

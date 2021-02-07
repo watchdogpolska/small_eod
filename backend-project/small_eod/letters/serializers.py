@@ -1,13 +1,15 @@
 from uuid import uuid4
+
 from django.conf import settings
 from rest_framework import serializers
-from .models import Letter, DocumentType
-from ..generic.serializers import UserLogModelSerializer
+
 from ..cases.models import Case
-from ..institutions.models import Institution
 from ..channels.models import Channel
 from ..files.apps import minio_app
 from ..files.serializers import FileSerializer
+from ..generic.serializers import UserLogModelSerializer
+from ..institutions.models import Institution
+from .models import DocumentType, Letter
 
 
 class DocumentTypeSerializer(serializers.ModelSerializer):

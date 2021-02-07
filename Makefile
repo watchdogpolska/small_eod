@@ -24,7 +24,7 @@ build:
 test: wait_mysql wait_minio test_backend test_openapi_spec
 
 test_backend:
-	docker-compose run backend coverage run manage.py test --keepdb --verbosity=2 ${TEST}
+	docker-compose run backend coverage run manage.py test --keepdb --parallel $(nproc) --verbosity=2 ${TEST}
 
 coverage_html_backend:
 	docker-compose run backend coverage html
@@ -98,8 +98,8 @@ deploy_frontend:
 deploy_backend:
 	h1 website ssh --website ${BACKEND} --command 'rm -r /data/env'
 	h1 website ssh --website ${BACKEND} --command 'virtualenv /data/env';
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
 	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
 	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
+	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
 	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
 	h1 website restart --query '[].{id:id,state:state}' --website ${BACKEND}

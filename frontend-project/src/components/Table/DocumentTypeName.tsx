@@ -1,22 +1,23 @@
 import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
-import { connect } from 'dva';
-
-import { DocumentType } from '@/models/documentTypes';
+import { connect, useDispatch } from 'dva';
+import { ReduxResourceState } from '@/utils/reduxModel';
+import { DocumentType } from '@/services/definitions';
 
 export interface DocumentTypeNameProps {
   id: number;
-  documentTypes: DocumentType[];
-  dispatch: Function;
+  documentTypes: ReduxResourceState<DocumentType>;
 }
 
-const DocumentTypeName: FC<DocumentTypeNameProps> = ({ id, documentTypes, dispatch }) => {
+const DocumentTypeName: FC<DocumentTypeNameProps> = ({ id, documentTypes }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: 'documentTypes/fetchOne', payload: id });
+    dispatch({ type: 'documentTypes/fetchOne', payload: { id } });
   }, []);
-  const documentType = documentTypes.find(value => value.id === id);
+  const oneCase = documentTypes.data.find(value => value.id === id);
+  if (!oneCase) return <Spin />;
 
-  return <div>{documentType ? documentType.name : <Spin />}</div>;
+  return <>{oneCase.name}</>;
 };
 export default connect(({ documentTypes }: DocumentTypeNameProps) => ({ documentTypes }))(
   DocumentTypeName,

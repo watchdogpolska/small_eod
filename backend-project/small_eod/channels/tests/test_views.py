@@ -1,8 +1,8 @@
 from test_plus.test import TestCase
 
+from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
 from ..factories import ChannelFactory
 from ..serializers import ChannelSerializer
-from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
 
 
 class ChannelViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):

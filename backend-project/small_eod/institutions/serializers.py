@@ -1,11 +1,9 @@
-from .models import (
-    AdministrativeUnit,
-    Institution,
-)
-from ..tags.models import Tag
 from rest_framework import serializers
+
 from ..generic.serializers import UserLogModelSerializer
 from ..tags.fields import TagField
+from ..tags.models import Tag
+from .models import AdministrativeUnit, Institution
 
 
 class InstitutionSerializer(UserLogModelSerializer):

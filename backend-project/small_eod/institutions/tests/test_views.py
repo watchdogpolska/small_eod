@@ -1,17 +1,22 @@
+from parameterized import parameterized
 from test_plus.test import TestCase
 
-from ..factories import InstitutionFactory
-from ..serializers import InstitutionSerializer
 from ...generic.tests.test_views import (
-    GenericViewSetMixin,
     AuthorshipViewSetMixin,
+    GenericViewSetMixin,
     OrderingViewSetMixin,
 )
-from parameterized import parameterized
+from ...search.tests.mixins import SearchQueryMixin
+from ..factories import InstitutionFactory
+from ..serializers import InstitutionSerializer
 
 
 class InstitutionViewSetTestCase(
-    AuthorshipViewSetMixin, GenericViewSetMixin, OrderingViewSetMixin, TestCase
+    AuthorshipViewSetMixin,
+    GenericViewSetMixin,
+    OrderingViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
 ):
     basename = "institution"
     serializer_class = InstitutionSerializer

@@ -1,7 +1,7 @@
 from django.contrib import admin
-
-from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
+from django.utils.translation import ugettext_lazy as _
+
 from .models import Institution
 
 

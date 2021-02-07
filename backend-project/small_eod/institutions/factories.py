@@ -3,11 +3,16 @@ import string
 import factory
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyText
+
 from ..administrative_units.factories import AdministrativeUnitFactory
-from ..generic.factories import ManyToManyPostGeneration
-from .models import Institution
-from ..generic.factories import AbstractTimestampUserFactory, FuzzyRegon, PolishFaker
+from ..generic.factories import (
+    AbstractTimestampUserFactory,
+    FuzzyRegon,
+    ManyToManyPostGeneration,
+    PolishFaker,
+)
 from ..tags.factories import TagFactory
+from .models import Institution
 
 
 class InstitutionFactory(AbstractTimestampUserFactory, DjangoModelFactory):

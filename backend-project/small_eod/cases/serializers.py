@@ -1,12 +1,14 @@
-from rest_framework import serializers
 from itertools import groupby
 from operator import attrgetter
-from .models import Case
-from ..tags.models import Tag
+
+from rest_framework import serializers
+
 from ..features.models import FeatureOption
 from ..generic.serializers import UserLogModelSerializer
-from ..users.models import User
 from ..tags.fields import TagField
+from ..tags.models import Tag
+from ..users.models import User
+from .models import Case
 
 
 class CurrentUserListDefault:

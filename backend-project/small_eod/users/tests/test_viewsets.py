@@ -1,8 +1,10 @@
-from test_plus.test import TestCase
 from unittest.mock import patch
+
+from test_plus.test import TestCase
+
+from ...generic.tests.test_views import OrderingViewSetMixin, ReadOnlyViewSetMixin
 from ..factories import UserFactory
 from ..serializers import UserSerializer
-from ...generic.tests.test_views import ReadOnlyViewSetMixin, OrderingViewSetMixin
 
 
 class UserViewSetTestCase(ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase):
