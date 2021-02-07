@@ -19,7 +19,7 @@
   ],
   "pre-commit": {
     "enabled": false
-  }
+  },
   "docker": {
     "pinDigests": true
   }
