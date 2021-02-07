@@ -12,6 +12,7 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
+from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
 
@@ -20,6 +21,7 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = EventFilterSet
     ordering_fields = [
         "id",
         "case__name",

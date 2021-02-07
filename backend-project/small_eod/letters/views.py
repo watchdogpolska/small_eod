@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 
 from ..files.models import File
 from ..files.serializers import FileSerializer
+from .filterset import LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
 
@@ -16,6 +17,7 @@ class LetterViewSet(viewsets.ModelViewSet):
     queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = LetterFilterSet
     ordering_fields = [
         "id",
         "direction",

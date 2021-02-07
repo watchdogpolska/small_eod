@@ -10,4 +10,4 @@ class CaseFilterSet(FilterSet):
 
     class Meta:
         model = Case
-        fields = ["tags", "query"]
+        fields = ["query"]

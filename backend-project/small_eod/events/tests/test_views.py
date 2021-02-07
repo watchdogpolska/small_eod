@@ -2,11 +2,14 @@ from test_plus.test import TestCase
 
 from ...authkey.factories import KeyFactory
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import EventFactory
 from ..serializers import EventSerializer
 
 
-class EventViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
+class EventViewSetTestCase(
+    GenericViewSetMixin, OrderingViewSetMixin, SearchQueryMixin, TestCase
+):
     basename = "event"
     serializer_class = EventSerializer
     factory_class = EventFactory
