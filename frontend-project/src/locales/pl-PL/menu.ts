@@ -43,5 +43,11 @@ export const menuLocale = {
       edit: 'Edycja',
       list: 'Lista',
     },
+    documentTypes: {
+      self: 'Rodzaje dokumentów',
+      new: 'Nowy',
+      edit: 'Edycja',
+      list: 'Lista',
+    },
   },
 };
