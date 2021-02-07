@@ -17,6 +17,9 @@
       "automerge": true
     }
   ],
+  "pre-commit": {
+    "enabled": false
+  }
   "docker": {
     "pinDigests": true
   }
