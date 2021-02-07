@@ -1,4 +1,3 @@
-import { tagsLocale } from '@/pages/tags/locales/en-US';
 import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
 import { menuLocale } from './en-US/menu';
@@ -10,8 +9,8 @@ import { structuredLocale } from '../utils/structedLocale';
 import { casesLocale } from '../pages/cases/locales/en-US';
 import { globalsLocale } from './en-US/globals';
 import { usersLocale } from '../pages/users/locales/en-US';
-import { tagsLocale } from '@/pages/tags/locales/en-US';
-import { documentTypesLocale } from '@/pages/documentTypes/locales/en-US';
+import { tagsLocale } from '../pages/tags/locales/en-US';
+import { documentTypesLocale } from '../pages/documentTypes/locales/en-US';
 
 const [labels] = structuredLocale({
   ...menuLocale,

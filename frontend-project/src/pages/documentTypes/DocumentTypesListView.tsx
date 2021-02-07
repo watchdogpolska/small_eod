@@ -2,7 +2,6 @@ import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-
 import { DocumentType } from '@/services/definitions';
 import { DocumentTypesService } from '@/services/documentTypes';
 import Table from '@/components/Table';
@@ -44,7 +43,6 @@ function DocumentTypesListView() {
 
   async function fetchPage(props: PaginationParams): Promise<PaginationResponse<DocumentType>> {
     const response = await DocumentTypesService.fetchPage(props);
-    console.log(response);
     if (response.status === 'failed') {
       openNotificationWithIcon(
         'error',

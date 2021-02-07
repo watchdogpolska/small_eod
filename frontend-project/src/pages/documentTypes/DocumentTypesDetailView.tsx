@@ -6,10 +6,10 @@ import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { DocumentType } from '@/services/definitions';
 import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { localeKeys } from '../../locales/pl-PL';
 import { RouterTypes } from 'umi';
 import { ServiceResponse } from '@/services/service';
 import { openNotificationWithIcon } from '@/models/global';
+import { localeKeys } from '../../locales/pl-PL';
 
 interface DocumentTypesDetailViewProps {
   documentTypes: ReduxResourceState<DocumentType>;

@@ -128,7 +128,6 @@ const documentTypesRoutes = {
   ],
 };
 
-
 export default {
   plugins,
   hash: true,
