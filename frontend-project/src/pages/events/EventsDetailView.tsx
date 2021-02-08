@@ -1,16 +1,16 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Select, Space, Spin, DatePicker } from 'antd';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Spin } from 'antd';
 import { connect, useDispatch } from 'dva';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { RouterTypes } from 'umi';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Event, Case } from '@/services/definitions';
-import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
 import { localeKeys } from '../../locales/pl-PL';
-import { RouterTypes } from 'umi';
-import { ServiceResponse } from '@/services/service';
-import { openNotificationWithIcon } from '@/models/global';
-import moment from 'antd/node_modules/moment';
+import { openNotificationWithIcon } from '../../models/global';
+import { Case, Event } from '../../services/definitions';
+import { ServiceResponse } from '../../services/service';
+import { ReduxResourceState } from '../../utils/reduxModel';
 
 interface EventsDetailViewProps {
   events: ReduxResourceState<Event>;
