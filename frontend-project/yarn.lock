@@ -17998,10 +17998,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-"small_eod_client@https://github.com/watchdogpolska/small-eod-sdk-javascript.git#f9784c68db3c3ed2eff13ebf134b0e2af919587d":
+"small_eod_client@github:watchdogpolska/small-eod-sdk-javascript#0f1339fb95a24518f6240cada1eb4a2f89abefec":
   version "1.0.4"
-  uid f9784c68db3c3ed2eff13ebf134b0e2af919587d
-  resolved "https://github.com/watchdogpolska/small-eod-sdk-javascript.git#f9784c68db3c3ed2eff13ebf134b0e2af919587d"
+  uid "0f1339fb95a24518f6240cada1eb4a2f89abefec"
+  resolved "https://codeload.github.com/watchdogpolska/small-eod-sdk-javascript/tar.gz/0f1339fb95a24518f6240cada1eb4a2f89abefec"
   dependencies:
     "@babel/cli" "^7.0.0"
     superagent "^5.3.0"
@@ -19888,7 +19888,7 @@ umi-plugin-hd@1.7.0:
     postcss-plugin-px2rem "0.8.1"
     umi-hd "5.0.1"
 
-umi-plugin-locale@2.11.6:
+umi-plugin-locale@2.11.6, umi-plugin-locale@^2.11.6:
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/umi-plugin-locale/-/umi-plugin-locale-2.11.6.tgz#ea7574f939c1dcc7427695308f228f5df71880d7"
   integrity sha512-E7MV7QPfWwYZtPDFGSOZdU9XKIaqlU1c3tLkLhpKzi6VkkxendUGiqSuyjHI8xXb3UGVTSBCDFX2WcqLfKjfQg==
