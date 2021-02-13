@@ -58,7 +58,7 @@ const casesRoutes = {
     {
       name: 'list',
       icon: 'FileTextOutlined',
-      path: '/cases',
+      path: '/cases/list',
       component: './cases/CasesListView',
     },
     {
@@ -73,6 +73,7 @@ const casesRoutes = {
       component: './cases/CasesDetailView',
       hideInMenu: true,
     },
+    { exact: true, path: '/cases', redirect: '/cases/list' },
   ],
 };
 
@@ -84,7 +85,7 @@ const usersRoutes = {
     {
       name: 'list',
       icon: 'FileTextOutlined',
-      path: '/users',
+      path: '/users/list',
       component: './users/UsersListView',
     },
     {
@@ -99,6 +100,7 @@ const usersRoutes = {
       component: './users/UsersDetailView',
       hideInMenu: true,
     },
+    { exact: true, path: '/users', redirect: '/users/list' },
   ],
 };
 
@@ -125,6 +127,33 @@ const documentTypesRoutes = {
       component: './documentTypes/DocumentTypesDetailView',
       hideInMenu: true,
     },
+  ],
+};
+
+const eventsRoutes = {
+  name: 'events',
+  icon: 'FileTextOutlined',
+  path: '/events',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/events/list',
+      component: './events/EventsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/events/new',
+      component: './events/EventsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/events/edit/:id',
+      component: './events/EventsDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/events', redirect: '/events/list' },
   ],
 };
 
@@ -268,6 +297,7 @@ export default {
               redirect: '/cases/new',
               authority: ['admin', 'user'],
             },
+            eventsRoutes,
             {
               component: './exception/404',
             },

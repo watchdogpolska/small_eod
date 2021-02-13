@@ -8,7 +8,6 @@ import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
 import { RouterTypes } from 'umi';
 import { ServiceResponse } from '@/services/service';
-import smallEodSDK from '@/utils/sdk';
 import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
 
@@ -32,7 +31,6 @@ function TagsDetailView({ tags, match }: TagsDetailViewProps) {
   const editetTags = tags.data.find(value => value.id === Number(match.params.id));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form] = Form.useForm();
-  (window as any).se = smallEodSDK;
   function onRequestDone(response: ServiceResponse<Tag>) {
     setIsSubmitting(false);
     if (response.status === 'success') {

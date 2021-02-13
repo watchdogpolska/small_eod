@@ -49,5 +49,11 @@ export const menuLocale = {
       edit: 'Edycja',
       list: 'Lista',
     },
+    events: {
+      self: 'Wydarzenia',
+      new: 'Nowe',
+      edit: 'Edycja',
+      list: 'Lista',
+    },
   },
 };

@@ -1,17 +1,18 @@
+import { casesLocale } from '../pages/cases/locales/en-US';
+import { channelsLocale } from '../pages/channels/locales/en-US';
+import { documentTypesLocale } from '../pages/documentTypes/locales/en-US';
+import { eventsLocale } from '../pages/events/locales/en-US';
+import { tagsLocale } from '../pages/tags/locales/en-US';
+import { usersLocale } from '../pages/users/locales/en-US';
+import { structuredLocale } from '../utils/structedLocale';
 import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
+import { globalsLocale } from './en-US/globals';
 import { menuLocale } from './en-US/menu';
 import pwa from './en-US/pwa';
 import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import BaseLocales from './pl-PL';
-import { structuredLocale } from '../utils/structedLocale';
-import { casesLocale } from '../pages/cases/locales/en-US';
-import { globalsLocale } from './en-US/globals';
-import { channelsLocale } from '../pages/channels/locales/en-US';
-import { usersLocale } from '../pages/users/locales/en-US';
-import { tagsLocale } from '../pages/tags/locales/en-US';
-import { documentTypesLocale } from '../pages/documentTypes/locales/en-US';
 
 const [labels] = structuredLocale({
   ...menuLocale,
@@ -21,6 +22,7 @@ const [labels] = structuredLocale({
   ...tagsLocale,
   ...usersLocale,
   ...documentTypesLocale,
+  ...eventsLocale,
 });
 
 const Locale = {
