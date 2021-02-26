@@ -3067,15 +3067,15 @@
     lodash.throttle "^4.1.1"
     umi-request "^1.2.17"
 
-"@vercel/build-utils@2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-2.9.0.tgz#2bb5def3df7080a892d86e25c7bb1af35f2b8964"
-  integrity sha512-cuLqv7dI1v8TqIJYu3nR4S9FAJZoGPu3ZfV+y498gVUDpwtcAQ5sdWkiqS7jPIHG03APy6rR2cEO7sYm6Ydudw==
+"@vercel/build-utils@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-2.10.0.tgz#69b6e7f6d4572951d4c8409bd8d83a8d12c7e842"
+  integrity sha512-2Xr+bUGvNtKULVNoJacnvlyDDoYaw6x68LF0fD/dPoIX0Ihz6rKV+zO2+hQQy8oJEyQ/JdYm6yAGekf85v7RYA==
 
-"@vercel/go@1.1.8":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@vercel/go/-/go-1.1.8.tgz#18c10c0e608f83d5c67546b01b7267f943c0b01d"
-  integrity sha512-vqW1ALevLbgyIJ5YwJU05BwStWPflyB+tt0Au9Ko00BX3TOdsyzl8CX2ARtMtYW8+qtkn51z2CfasA0mC3D8vA==
+"@vercel/go@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@vercel/go/-/go-1.2.0.tgz#a8438e6d97a89de4e1c365c45347e57423375e70"
+  integrity sha512-xuoJ80QQ7Xa9ZbjUQ/QdDmi20ZqIMdxK+iFOakpFOCEyoxTnjZxyM+JJSB4AVD7k2UPaRmN14xaEg8GNMoByLQ==
 
 "@vercel/node@1.9.1-canary.0":
   version "1.9.1-canary.0"
@@ -20595,13 +20595,13 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-vercel@21.2.3:
-  version "21.2.3"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-21.2.3.tgz#385dd704f1905a77d6e0b6c63bfd7aa6dcdee710"
-  integrity sha512-PmADUVtkmxli8/KXjteMYH1SpgiGwC1+q4B2vqhyHvKVwO6pInEVwBubnLE6cobxgj5x005cbKW33vSvcDfvaQ==
+vercel@21.3.0:
+  version "21.3.0"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-21.3.0.tgz#c8dfb1d72ff979d14f0494f76143e80f4fafcc9b"
+  integrity sha512-wQz0K8iGJIBU6IBpxFvNUM7eftwR83ZRJ9O8vIxnfYotvixvCXpf9qF1gjoSiIHQwz51tunxZYQnNajg/VcdKA==
   dependencies:
-    "@vercel/build-utils" "2.9.0"
-    "@vercel/go" "1.1.8"
+    "@vercel/build-utils" "2.10.0"
+    "@vercel/go" "1.2.0"
     "@vercel/node" "1.9.1-canary.0"
     "@vercel/python" "1.2.5-canary.1"
     "@vercel/ruby" "1.2.6-canary.0"
