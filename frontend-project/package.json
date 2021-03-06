@@ -71,7 +71,7 @@
     "react-helmet": "6.1.0",
     "react-router": "5.2.0",
     "redux": "4.0.5",
-    "small_eod_client": "github:watchdogpolska/small-eod-sdk-javascript#0f1339fb95a24518f6240cada1eb4a2f89abefec",
+    "small_eod_client": "github:watchdogpolska/small-eod-sdk-javascript#6d5647ad50a9ed10e87d368b1ca9fa1755fd00fc",
     "umi": "2.13.17",
     "umi-plugin-antd-icon-config": "1.0.3",
     "umi-plugin-locale": "^2.11.6",

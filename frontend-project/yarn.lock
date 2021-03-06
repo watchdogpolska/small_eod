@@ -17929,10 +17929,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-"small_eod_client@github:watchdogpolska/small-eod-sdk-javascript#0f1339fb95a24518f6240cada1eb4a2f89abefec":
+"small_eod_client@github:watchdogpolska/small-eod-sdk-javascript#6d5647ad50a9ed10e87d368b1ca9fa1755fd00fc":
   version "1.0.4"
-  uid "0f1339fb95a24518f6240cada1eb4a2f89abefec"
-  resolved "https://codeload.github.com/watchdogpolska/small-eod-sdk-javascript/tar.gz/0f1339fb95a24518f6240cada1eb4a2f89abefec"
+  uid "6d5647ad50a9ed10e87d368b1ca9fa1755fd00fc"
+  resolved "https://codeload.github.com/watchdogpolska/small-eod-sdk-javascript/tar.gz/6d5647ad50a9ed10e87d368b1ca9fa1755fd00fc"
   dependencies:
     "@babel/cli" "^7.0.0"
     superagent "^5.3.0"
