@@ -19829,7 +19829,7 @@ umi-plugin-hd@1.7.0:
     postcss-plugin-px2rem "0.8.1"
     umi-hd "5.0.1"
 
-umi-plugin-locale@2.11.6, umi-plugin-locale@^2.11.6:
+umi-plugin-locale@2.11.6:
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/umi-plugin-locale/-/umi-plugin-locale-2.11.6.tgz#ea7574f939c1dcc7427695308f228f5df71880d7"
   integrity sha512-E7MV7QPfWwYZtPDFGSOZdU9XKIaqlU1c3tLkLhpKzi6VkkxendUGiqSuyjHI8xXb3UGVTSBCDFX2WcqLfKjfQg==
