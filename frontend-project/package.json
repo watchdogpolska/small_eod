@@ -52,7 +52,7 @@
     "@antv/l7-maps": "2.3.7",
     "@types/lodash.isequal": "4.5.5",
     "@types/react-router": "5.1.12",
-    "antd": "4.2.4",
+    "antd": "4.13.1",
     "classnames": "2.2.6",
     "dva": "2.6.0-beta.22",
     "jest": "26.6.3",
