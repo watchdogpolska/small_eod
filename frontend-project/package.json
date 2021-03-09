@@ -49,7 +49,7 @@
     "@ant-design/pro-layout": "4.11.4",
     "@ant-design/pro-table": "2.4.4",
     "@antv/l7": "2.3.7",
-    "@antv/l7-maps": "2.3.7",
+    "@antv/l7-maps": "2.3.9",
     "@types/lodash.isequal": "4.5.5",
     "@types/react-router": "5.1.12",
     "antd": "4.2.4",
