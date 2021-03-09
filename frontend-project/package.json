@@ -45,7 +45,7 @@
   ],
   "dependencies": {
     "@ant-design/compatible": "1.0.8",
-    "@ant-design/icons": "4.4.0",
+    "@ant-design/icons": "4.5.0",
     "@ant-design/pro-layout": "4.11.4",
     "@ant-design/pro-table": "2.4.4",
     "@antv/l7": "2.3.7",
