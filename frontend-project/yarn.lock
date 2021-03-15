@@ -223,28 +223,6 @@
     inversify "^5.0.1"
     load-styles "^2.0.0"
 
-"@antv/l7-core@2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@antv/l7-core/-/l7-core-2.3.7.tgz#dc67a6a359c676602ee6c71f11edf29fec62f84f"
-  integrity sha512-tfr+3y8lDcaruBCiHnyKuatkdXIBx4UucXk11aWfUPdt17pDxPVHRaCaiHDn+FGkaTSm+zTDqa4VKNJwqAMZ7A==
-  dependencies:
-    "@antv/async-hook" "^2.1.0"
-    "@antv/l7-utils" "2.3.7"
-    "@babel/runtime" "^7.7.7"
-    "@mapbox/tiny-sdf" "^1.1.1"
-    ajv "^6.10.2"
-    element-resize-event "^3.0.3"
-    eventemitter3 "^4.0.0"
-    gl-matrix "^3.1.0"
-    hammerjs "^2.0.8"
-    inversify "^5.0.1"
-    inversify-inject-decorators "^3.1.0"
-    lodash "^4.17.15"
-    merge-json-schemas "^1.0.0"
-    probe.gl "^3.1.1"
-    reflect-metadata "^0.1.13"
-    viewport-mercator-project "^6.2.1"
-
 "@antv/l7-core@2.3.9":
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/@antv/l7-core/-/l7-core-2.3.9.tgz#483f419a2def7bf5a951134474c620a338fa7216"
@@ -293,18 +271,6 @@
     polyline-miter-util "^1.0.1"
     reflect-metadata "^0.1.13"
 
-"@antv/l7-map@2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@antv/l7-map/-/l7-map-2.3.7.tgz#34784f872436f4ba64945974ae521c9d1a718ea9"
-  integrity sha512-2OMaUv2EoJZDl6VRhxGdDDqXam27JsEspwfAUpwnHrx3zHQTDXYntrhRKwGWcbeM/Fg0jEkcDGSWxSKoKBY3/Q==
-  dependencies:
-    "@antv/l7-utils" "2.3.7"
-    "@babel/runtime" "^7.7.7"
-    "@mapbox/point-geometry" "^0.1.0"
-    "@mapbox/unitbezier" "^0.0.0"
-    eventemitter3 "^4.0.4"
-    lodash "^4.17.15"
-
 "@antv/l7-map@2.3.9":
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/@antv/l7-map/-/l7-map-2.3.9.tgz#9fa147657eaeed4f4de03b13e9bddb2da5c01dc5"
@@ -316,24 +282,6 @@
     "@mapbox/unitbezier" "^0.0.0"
     eventemitter3 "^4.0.4"
     lodash "^4.17.15"
-
-"@antv/l7-maps@2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@antv/l7-maps/-/l7-maps-2.3.7.tgz#bf20030171a84815c6fcea22e5a4b589993c0982"
-  integrity sha512-ANv9YyXeMNoHw7E6mCMqsSGhDn0VfRfuy7DaE47KcR+lF6xV/OoemfABEyGgo2T4SFHsWIQa4dfK0NVJt+/FsQ==
-  dependencies:
-    "@amap/amap-jsapi-loader" "^0.0.3"
-    "@antv/l7-core" "2.3.7"
-    "@antv/l7-map" "2.3.7"
-    "@antv/l7-utils" "2.3.7"
-    "@babel/runtime" "^7.7.7"
-    "@types/amap-js-api" "^1.4.6"
-    "@types/mapbox-gl" "^1.11.2"
-    gl-matrix "^3.1.0"
-    inversify "^5.0.1"
-    load-styles "^2.0.0"
-    mapbox-gl "^1.2.1"
-    viewport-mercator-project "^6.2.1"
 
 "@antv/l7-maps@2.3.9":
   version "2.3.9"
@@ -399,15 +347,6 @@
     inversify "^5.0.1"
     lodash "^4.17.15"
     supercluster "^7.0.0"
-
-"@antv/l7-utils@2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@antv/l7-utils/-/l7-utils-2.3.7.tgz#5ae8d1809abbefee5bc06e027df962972da1a8f5"
-  integrity sha512-3EuwiO2QIybY07BB0LoAPPdhHvJw8t+UG+DjhwMg64WfQMO+zzgQJ+6vxve8goy2YxUFSgHWBYhUHwXC6Mc7pw==
-  dependencies:
-    "@babel/runtime" "^7.7.7"
-    "@turf/helpers" "^6.1.4"
-    d3-color "^1.4.0"
 
 "@antv/l7-utils@2.3.9":
   version "2.3.9"
