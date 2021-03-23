@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.db.models import Count, Prefetch
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg2.utils import swagger_auto_schema
 from rest_framework import status, viewsets
@@ -10,7 +11,15 @@ from ..files.models import File
 from ..files.serializers import FileSerializer
 from .filterset import LetterFilterSet
 from .models import DocumentType, Letter
-from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
+from ..cases.models import Case
+from ..channels.models import Channel
+from ..institutions.models import Institution
+from .serializers import (
+    DocumentTypeSerializer,
+    LetterListSerializer,
+    LetterSerializer,
+    SignRequestSerializer,
+)
 
 
 class LetterViewSet(viewsets.ModelViewSet):
@@ -36,6 +45,37 @@ class LetterViewSet(viewsets.ModelViewSet):
         "modified_on",
         "modified_by__username",
     ]
+
+    def get_queryset(self):
+        if self.action == "list":
+            return (
+                Letter.objects.annotate(attachments_count=Count("attachments"))
+                .prefetch_related(
+                    Prefetch(
+                        "document_type",
+                        queryset=DocumentType.objects.all().only("name"),
+                    ),
+                    Prefetch(
+                        "case",
+                        queryset=Case.objects.all().only("name"),
+                    ),
+                    Prefetch(
+                        "institution",
+                        queryset=Institution.objects.all().only("name"),
+                    ),
+                    Prefetch(
+                        "channel",
+                        queryset=Channel.objects.all().only("name"),
+                    ),
+                )
+                .all()
+            )
+        return super().get_queryset()
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return LetterListSerializer
+        return super().get_serializer_class()
 
 
 class DocumentTypeViewSet(viewsets.ModelViewSet):

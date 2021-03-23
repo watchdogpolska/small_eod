@@ -6,7 +6,8 @@ psycopg2-binary==2.8.6
 django-extensions==3.0.9
 drf-nested-routers==0.92.1
 djangorestframework-camel-case==1.2.0
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==4.6.0
+djangorestframework-filters==1.0.0.dev2
 drf-yasg2==1.19.4
 minio==6.0.0
 pyjwt==1.7.1

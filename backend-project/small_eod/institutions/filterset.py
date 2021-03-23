@@ -1,13 +1,13 @@
-from django_filters.filterset import FilterSet
-
+import rest_framework_filters as filters
 from ..search.filter import SearchFilter
 from .models import Institution
 from .searchset import InstitutionSearchSet
 
 
-class InstitutionFilterSet(FilterSet):
+class InstitutionFilterSet(filters.FilterSet):
     query = SearchFilter(searchset=InstitutionSearchSet())
+    name = filters.AutoFilter(lookups=["icontains"])
 
     class Meta:
         model = Institution
-        fields = ["query"]
+        fields = ["name", "query"]

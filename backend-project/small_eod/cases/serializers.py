@@ -18,6 +18,32 @@ class CurrentUserListDefault:
         return [serializer_field.context["request"].user]
 
 
+class CaseListSerializer(serializers.ModelSerializer):
+    tags = TagField()
+    letter_count = serializers.IntegerField(read_only=True)
+    audited_institutions = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field="name"
+    )
+    featureoptions = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field="name"
+    )
+
+    class Meta:
+        model = Case
+        fields = [
+            "id",
+            "comment",
+            "audited_institutions",
+            "name",
+            "featureoptions",
+            "tags",
+            "created_on",
+            "modified_on",
+            "letter_count",
+        ]
+        extra_kwargs = {"audited_institutions": {"default": []}}
+
+
 class CaseSerializer(UserLogModelSerializer):
     tags = TagField()
     featureoptions = serializers.PrimaryKeyRelatedField(

@@ -3,6 +3,7 @@ from django.template import loader
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Prefetch
 from drf_yasg2.utils import swagger_auto_schema
 from icalendar import Calendar
 from icalendar import Event as IEvent
@@ -14,11 +15,12 @@ from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
 from .filterset import EventFilterSet
 from .models import Event
-from .serializers import EventSerializer
+from ..cases.models import Case
+from .serializers import EventListSerializer, EventSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    queryset = Event.objects.prefetch_related("case").all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_class = EventFilterSet
@@ -33,6 +35,21 @@ class EventViewSet(viewsets.ModelViewSet):
     required_scopes_map = {
         "Ical": ["export_ical"],
     }
+
+    def get_queryset(self):
+        if self.action == "list":
+            Event.objects.prefetch_related(
+                Prefetch(
+                    "case",
+                    queryset=Case.objects.all().only("name"),
+                )
+            ).all()
+        return super().get_queryset()
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return EventListSerializer
+        return super().get_serializer_class()
 
     def get_authenticators(self):
         if self.name == "Ical":

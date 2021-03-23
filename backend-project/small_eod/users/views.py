@@ -16,6 +16,7 @@ from .serializers import (
     User,
     UserSerializer,
 )
+from .filterset import UserFilterSet
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -31,6 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
         scopes=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE,
     )
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = UserFilterSet
     ordering_fields = [
         "id",
         "username",

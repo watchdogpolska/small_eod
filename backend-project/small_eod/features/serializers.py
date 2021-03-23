@@ -15,14 +15,10 @@ class FeatureOptionSerializer(ModelSerializer):
         fields = ["id", "name", "feature"]
 
 
-class NestedFeatureOptionSerializer(ModelSerializer):
-    class Meta:
-        model = FeatureOptionSerializer.Meta.model
-        fields = ["id", "name"]
-
-
 class FeatureSerializer(UserLogModelSerializer):
-    featureoptions = NestedFeatureOptionSerializer(many=True, default=[])
+    featureoptions = serializers.PrimaryKeyRelatedField(
+        many=True, default=[], queryset=FeatureOption.objects.all()
+    )
 
     class Meta:
         model = Feature

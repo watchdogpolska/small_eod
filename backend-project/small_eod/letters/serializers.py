@@ -18,6 +18,40 @@ class DocumentTypeSerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+class LetterListSerializer(UserLogModelSerializer):
+    document_type = serializers.SlugRelatedField(
+        many=False, default=None, slug_field="name", read_only=True
+    )
+    case = serializers.SlugRelatedField(
+        many=False, default=None, slug_field="name", read_only=True
+    )
+    institution = serializers.SlugRelatedField(
+        many=False, default=None, slug_field="name", read_only=True
+    )
+    channel = serializers.SlugRelatedField(
+        many=False, default=None, slug_field="name", read_only=True
+    )
+    attachments_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Letter
+        fields = [
+            "id",
+            "direction",
+            "channel",
+            "final",
+            "date",
+            "reference_number",
+            "institution",
+            "case",
+            "attachments_count",
+            "comment",
+            "document_type",
+            "created_on",
+            "modified_on",
+        ]
+
+
 class LetterSerializer(UserLogModelSerializer):
     document_type = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=DocumentType.objects.all()
