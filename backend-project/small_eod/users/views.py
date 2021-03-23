@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from .filterset import UserFilterSet
 from .providers import GoogleProvider
 from .serializers import (
     RefreshTokenRequestSerializer,
@@ -16,7 +17,6 @@ from .serializers import (
     User,
     UserSerializer,
 )
-from .filterset import UserFilterSet
 
 
 class UserViewSet(viewsets.ModelViewSet):

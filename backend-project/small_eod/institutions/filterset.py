@@ -1,4 +1,5 @@
 import rest_framework_filters as filters
+
 from ..search.filter import SearchFilter
 from .models import Institution
 from .searchset import InstitutionSearchSet

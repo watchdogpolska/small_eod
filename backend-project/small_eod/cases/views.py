@@ -1,14 +1,14 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Count, Prefetch
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
+from ..features.models import FeatureOption
+from ..institutions.models import Institution
 from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer, CaseListSerializer
-from ..features.models import FeatureOption
-from ..institutions.models import Institution
 
 
 class CaseViewSet(viewsets.ModelViewSet):
