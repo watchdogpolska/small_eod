@@ -1,6 +1,13 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
+from ..administrative_units.models import AdministrativeUnit
+from ..cases.models import Case, Tag
+from ..channels.models import Channel
+from ..features.models import Feature, FeatureOption
+from ..institutions.models import Institution
+from ..letters.models import DocumentType
+from ..users.models import User
 from .filterset import (
     AdministrativeUnitAutocompleteFilterSet,
     CaseAutocompleteFilterSet,
@@ -23,13 +30,6 @@ from .serializers import (
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
-from ..administrative_units.models import AdministrativeUnit
-from ..cases.models import Case, Tag
-from ..channels.models import Channel
-from ..features.models import Feature, FeatureOption
-from ..institutions.models import Institution
-from ..letters.models import DocumentType
-from ..users.models import User
 
 
 class AdministrativeUnitAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):

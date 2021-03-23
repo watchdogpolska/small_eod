@@ -1,11 +1,11 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Prefetch
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
+from ..cases.models import Case
 from .filterset import NoteFilterSet
 from .models import Note
-from ..cases.models import Case
 from .serializers import NoteListSerializer, NoteSerializer
 
 

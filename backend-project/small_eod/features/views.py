@@ -2,13 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
-
-from rest_framework import viewsets
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
+from .filterset import FeatureFilterSet, FeatureOptionFilterSet
 from .models import Feature, FeatureOption
 from .serializers import FeatureOptionSerializer, FeatureSerializer
-from .filterset import FeatureFilterSet, FeatureOptionFilterSet
 
 
 class FeatureViewSet(viewsets.ModelViewSet):

@@ -1,9 +1,9 @@
+from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Prefetch
 from drf_yasg2.utils import swagger_auto_schema
 from icalendar import Calendar
 from icalendar import Event as IEvent
@@ -13,9 +13,9 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
+from ..cases.models import Case
 from .filterset import EventFilterSet
 from .models import Event
-from ..cases.models import Case
 from .serializers import EventListSerializer, EventSerializer
 
 
