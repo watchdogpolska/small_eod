@@ -1,25 +1,18 @@
+import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Spin } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { RouterTypes } from 'umi';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import { localeKeys } from '../../locales/pl-PL';
-import { openNotificationWithIcon } from '../../models/global';
-import { Case, Event } from '../../services/definitions';
-import { ServiceResponse } from '../../services/service';
-import { ReduxResourceState } from '../../utils/reduxModel';
-
-interface EventsDetailViewProps {
-  events: ReduxResourceState<Event>;
-  cases: ReduxResourceState<Case>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
-}
+import { DetailMatchParam } from '@/models/connect';
+import { Event } from '@/services/definitions';
+import { EventsService } from '@/services/events';
+import { FetchSelect } from '@/components/FetchSelect';
+import { AutocompleteService } from '@/services/autocomplete';
 
 const { TextArea } = Input;
-const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -30,57 +23,43 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
-  const dispatch = useDispatch();
+export default function EventsDetailView({ match }: DetailMatchParam) {
   const resourceId = match.params.id;
   const isEdit = Boolean(resourceId);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const editedEvent = events.data.find(value => value.id === Number(match.params.id));
+  const [editedItem, setEditedItem] = useState<Event | undefined>();
   const [form] = Form.useForm();
   const {
     fields,
     detailView: { errors, placeholders, editPageHeaderContent, newPageHeaderContent },
   } = localeKeys.events;
 
-  function onRequestDone(response: ServiceResponse<Event>) {
+  useEffect(() => {
+    if (isEdit)
+      EventsService.fetchOne(Number(match.params.id)).then(response => setEditedItem(response));
+  }, []);
+
+  function onError(response: any) {
     setIsSubmitting(false);
-    if (response.status === 'success') {
-      router.push('/events');
-    } else if (response.statusCode === 400) {
-      form.setFields(
-        Array.from(
-          Object.entries(response.errorBody),
-        ).map(([name, formErrors]: [string, Array<string>]) => ({ name, formErrors })),
-      );
-    } else {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        `${formatMessage({
-          id: isEdit ? errors.updateFailed : errors.createFailed,
-        })} ${response.errorText}`,
-      );
+    if (response?.statusCode === 400) {
+      form.setFields(getFormErrorFromPromiseError(response));
     }
   }
 
-  function onFinish() {
-    dispatch({
-      type: `events/${isEdit ? 'update' : 'create'}`,
-      payload: {
-        ...form.getFieldsValue(),
-        id: resourceId,
-        onResponse: onRequestDone,
-      },
-    });
+  function onSubmit() {
+    const action = isEdit ? EventsService.update : EventsService.create;
+    action({
+      ...(form.getFieldsValue() as Event),
+      id: Number(match.params.id),
+    })
+      .then(() => {
+        router.push('/events');
+      })
+      .catch(onError);
     setIsSubmitting(true);
   }
 
-  useEffect(() => {
-    dispatch({ type: 'cases/fetchAll' });
-    if (isEdit) dispatch({ type: 'events/fetchOne', payload: { id: Number(match.params.id) } });
-  }, []);
-
-  if (events.isLoading || cases.isLoading || (isEdit && !editedEvent) || isSubmitting) {
+  if ((isEdit && !editedItem) || isSubmitting) {
     return (
       <Row justify="center">
         <Col>
@@ -91,12 +70,12 @@ function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
   }
   if (isEdit)
     form.setFieldsValue({
-      ...editedEvent,
-      date: moment(editedEvent.date),
+      ...editedItem,
+      date: moment(editedItem.date),
     });
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={onSubmit}>
       <PageHeaderWrapper
         content={formatMessage({
           id: isEdit ? editPageHeaderContent : newPageHeaderContent,
@@ -135,17 +114,13 @@ function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
                   },
                 ]}
               >
-                <Select
+                <FetchSelect
+                  mode={undefined}
                   placeholder={formatMessage({
                     id: placeholders.case,
                   })}
-                >
-                  {cases.data.map(singleCase => (
-                    <Option key={singleCase.id} value={singleCase.id}>
-                      {singleCase.name}
-                    </Option>
-                  ))}
-                </Select>
+                  autocompleteFunction={AutocompleteService.cases}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -200,14 +175,9 @@ function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item {...tailLayout}>
-                <Space>
-                  <Button type="default" htmlType="reset">
-                    <FormattedMessage id={localeKeys.form.reset} />
-                  </Button>
-                  <Button type="primary" htmlType="submit">
-                    <FormattedMessage id={localeKeys.form.save} />
-                  </Button>
-                </Space>
+                <Button type="primary" htmlType="submit">
+                  <FormattedMessage id={localeKeys.form.save} />
+                </Button>
               </Form.Item>
             </Col>
           </Row>
@@ -216,5 +186,3 @@ function EventsDetailView({ events, cases, match }: EventsDetailViewProps) {
     </Form>
   );
 }
-
-export default connect((props: EventsDetailViewProps) => props)(EventsDetailView);

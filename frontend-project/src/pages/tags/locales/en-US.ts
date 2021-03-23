@@ -6,7 +6,6 @@ export const tagsLocale = {
     modal: { remove: { title: 'Do you want to delete {name} tag?' } },
     list: {
       pageHeaderContent: 'Tags list',
-      failedRemove: 'Cannot delete tag.',
       table: {
         header: 'Tags list',
       },
@@ -19,9 +18,13 @@ export const tagsLocale = {
       },
       errors: {
         name: 'Name is required',
-        updateFailed: 'Editing the tag failed.',
-        createFailed: 'Creation of the tag failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download tags',
+      removeFailed: 'Cannot delete tag.',
+      updateFailed: 'Editing the tag failed.',
+      createFailed: 'Creation of the tag failed.',
     },
   },
 };

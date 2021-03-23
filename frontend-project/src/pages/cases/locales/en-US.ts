@@ -10,11 +10,10 @@ export const casesLocale = {
       letterCount: 'Letter count',
       notifiedUsers: 'Notified users',
       responsibleUsers: 'Responsible users',
-      features: 'Features',
+      featureOptions: 'Feature options',
     },
     list: {
       pageHeaderContent: 'Cases list',
-      failedRemove: 'Cannot delete case.',
       table: {
         header: 'Cases list',
       },
@@ -29,16 +28,20 @@ export const casesLocale = {
         tags: 'Select tags',
         notifiedUsers: 'Users that will be notified about case',
         responsibleUsers: 'Users that will be responsible about case',
-        features: 'Features of a case',
+        featureOptions: 'Feature options of a case',
       },
       errors: {
         name: 'Name is required',
         comment: 'Comment is required',
-        features: 'At least one feature is required',
+        featureOptions: 'At least one feature option is required',
         tags: 'At least one tag is required',
-        updateFailed: 'Editing the case failed.',
-        createFailed: 'Creation of the case failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download cases',
+      removeFailed: 'Cannot delete case.',
+      updateFailed: 'Editing the case failed.',
+      createFailed: 'Creation of the case failed.',
     },
   },
 };

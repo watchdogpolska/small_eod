@@ -2,92 +2,61 @@ import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tag, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Case } from '@/services/definitions';
-import { CasesService } from '@/services/cases';
+import { CaseList } from '@/services/definitions';
 import Table from '@/components/Table';
-import InstitutionName from '@/components/Table/InstitutionName';
 import router from 'umi/router';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useDispatch } from 'dva';
 import { Link } from 'umi';
-import { PaginationParams, PaginationResponse } from '@/services/common';
-import { openNotificationWithIcon } from '@/models/global';
-import { ServiceResponse } from '@/services/service';
 import { localeKeys } from '@/locales/pl-PL';
+import { CasesService } from '@/services/cases';
 
-function CasesListView() {
-  const dispatch = useDispatch();
+export default function CaseListsListView() {
   const tableActionRef = useRef<ActionType>();
+  const { fields, list } = localeKeys.cases;
 
   function onEdit(id: number) {
     router.push(`/cases/edit/${id}`);
   }
 
   function onRemove(id: number) {
-    dispatch({
-      type: 'cases/remove',
-      payload: {
-        id,
-        onResponse: (response: ServiceResponse<number>) => {
-          if (response.status === 'failed') {
-            openNotificationWithIcon(
-              'error',
-              formatMessage({ id: localeKeys.error }),
-              `${formatMessage({ id: localeKeys.cases.list.failedRemove })} ${id}`,
-            );
-          }
-          tableActionRef.current?.reload();
-        },
-      },
-    });
+    CasesService.remove(id)
+      .then(() => tableActionRef.current?.reload())
+      .catch(() => tableActionRef.current?.reload());
   }
 
-  async function fetchPage(props: PaginationParams): Promise<PaginationResponse<Case>> {
-    const response = await CasesService.fetchPage(props);
-    if (response.status === 'failed') {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        formatMessage({ id: localeKeys.lists.failedDownload }),
-      );
-      return { data: [], total: 0 };
-    }
-    return response.data;
-  }
-
-  const columns: ProColumns<Case>[] = [
+  const columns: ProColumns<CaseList>[] = [
     {
-      title: formatMessage({ id: localeKeys.cases.fields.name }),
-      dataIndex: ['name', 'id'],
-      render: (_, record: Case) => <Link to={`/cases/edit/${record.id}`}>{record.name}</Link>,
+      title: formatMessage({ id: fields.name }),
+      dataIndex: 'id',
+      render: (_, record: CaseList) => <Link to={`/cases/edit/${record.id}`}>{record.name}</Link>,
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.auditedInstitutions }),
+      title: formatMessage({ id: fields.auditedInstitutions }),
       dataIndex: 'auditedInstitutions',
-      render: (auditedInstitutions: number[]) => (
+      render: (_, record) => (
         <>
-          {auditedInstitutions.map(auditedInstitution => (
-            <InstitutionName id={auditedInstitution} key={auditedInstitution} />
+          {record.auditedInstitutions.map(auditedInstitution => (
+            <Tag key={auditedInstitution}>{auditedInstitution}</Tag>
           ))}
         </>
       ),
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.comment }),
+      title: formatMessage({ id: fields.comment }),
       dataIndex: 'comment',
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.createdOn }),
+      title: formatMessage({ id: fields.createdOn }),
       dataIndex: 'createdOn',
       render: createdOn => createdOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.modifiedOn }),
+      title: formatMessage({ id: fields.modifiedOn }),
       dataIndex: 'modifiedOn',
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.tags }),
+      title: formatMessage({ id: fields.tags }),
       dataIndex: 'tags',
       render: (tags: number[]) => (
         <>
@@ -100,7 +69,7 @@ function CasesListView() {
       ),
     },
     {
-      title: formatMessage({ id: localeKeys.cases.fields.letterCount }),
+      title: formatMessage({ id: fields.letterCount }),
       dataIndex: 'letterCount',
     },
     {
@@ -133,12 +102,10 @@ function CasesListView() {
     <Table
       type="cases"
       columns={columns}
-      fetchData={fetchPage}
-      pageHeader={localeKeys.cases.list.pageHeaderContent}
-      tableHeader={localeKeys.cases.list.table.header}
+      service={CasesService}
+      pageHeader={list.pageHeaderContent}
+      tableHeader={list.table.header}
       actionRef={tableActionRef}
     />
   );
 }
-
-export default CasesListView;

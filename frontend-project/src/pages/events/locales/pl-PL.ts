@@ -8,7 +8,6 @@ export const eventsLocale = {
     },
     list: {
       pageHeaderContent: 'Lista wydarzeń',
-      failedRemove: 'Nie można usunąć wydarzenia.',
       table: {
         header: 'Lista wydarzeń',
       },
@@ -27,9 +26,13 @@ export const eventsLocale = {
         comment: 'Komentarz jest wymagany',
         date: 'Data i czas są wymagane',
         case: 'Sprawa jest wymagana',
-        updateFailed: 'Edycja wydarzenia nie powiodła się.',
-        createFailed: 'Utworzenie wydarzenia nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać wydarzeń',
+      removeFailed: 'Nie udało się usunąć wydarzenia.',
+      updateFailed: 'Edycja wydarzenia nie powiodła się.',
+      createFailed: 'Utworzenie wydarzenia nie powiodło się.',
     },
   },
 };

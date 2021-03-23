@@ -18,7 +18,7 @@
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\"",
     "start": "umi dev",
-    "start:public-api": "cross-env API_URL=\"https://dev.small-eod.siecobywatelska.pl/\" yarn start",
+    "start:public-api": "cross-env API_URL=\"http://localhost:8000\" yarn start",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "test": "jest",
@@ -78,7 +78,8 @@
     "umi-plugin-pro-block": "1.3.6",
     "umi-plugin-react": "1.15.8",
     "umi-request": "1.3.5",
-    "use-merge-value": "1.0.2"
+    "use-merge-value": "1.0.2",
+    "webpack-chain": "^6.5.1"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "2.0.4",

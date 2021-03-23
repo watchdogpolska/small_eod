@@ -1,5 +1,6 @@
 export const globalsLocale = {
   error: 'Błąd',
+  autocompleteError: 'Nie można uzyskać podpowiedzi',
   lists: {
     edit: 'Edycja',
     delete: 'Usuń',

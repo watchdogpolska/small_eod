@@ -1,4 +1,4 @@
-const SmallEodClient = require('small_eod_client');
+import * as SmallEodClient from 'small_eod_client';
 
 SmallEodClient.ApiClient.instance.basePath = '/api';
 

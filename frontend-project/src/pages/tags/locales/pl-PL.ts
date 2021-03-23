@@ -6,7 +6,6 @@ export const tagsLocale = {
     modal: { remove: { title: 'Czy chcesz usunąć tag {name}?' } },
     list: {
       pageHeaderContent: 'Lista tagów',
-      failedRemove: 'Nie udało się usunąć tagu.',
       table: {
         header: 'Lista tagów',
       },
@@ -19,9 +18,13 @@ export const tagsLocale = {
       },
       errors: {
         name: 'Nazwa jest wymagana',
-        updateFailed: 'Edycja tagu nie powiodła się.',
-        createFailed: 'Utworzenie tagu nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać tagów',
+      removeFailed: 'Nie udało się usunąć tagu.',
+      updateFailed: 'Edycja tagu nie powiodła się.',
+      createFailed: 'Utworzenie tagu nie powiodło się.',
     },
   },
 };

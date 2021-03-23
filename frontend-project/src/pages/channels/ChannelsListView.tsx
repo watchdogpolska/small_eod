@@ -10,15 +10,11 @@ import {
 } from '@ant-design/icons';
 
 import { Channel } from '@/services/definitions';
-import { ChannelsService } from '@/services/channels';
 import Table from '@/components/Table';
 import router from 'umi/router';
-import { useDispatch } from 'dva';
 import { Link } from 'umi';
-import { PaginationParams, PaginationResponse } from '@/services/common';
-import { openNotificationWithIcon } from '@/models/global';
-import { ServiceResponse } from '@/services/service';
 import { localeKeys } from '@/locales/pl-PL';
+import { ChannelsService } from '@/services/channels';
 
 export interface IconProps {
   arg: boolean;
@@ -30,89 +26,63 @@ const Icon: FC<IconProps> = ({ arg }) =>
   ) : (
     <CloseCircleTwoTone twoToneColor="#EB2F96" />
   );
-function ChannelsListView() {
-  const dispatch = useDispatch();
+export default function ChannelsListView() {
   const tableActionRef = useRef<ActionType>();
+  const { fields, list } = localeKeys.channels;
 
   function onEdit(id: number) {
     router.push(`/channels/edit/${id}`);
   }
 
   function onRemove(id: number) {
-    dispatch({
-      type: 'channels/remove',
-      payload: {
-        id,
-        onResponse: (response: ServiceResponse<number>) => {
-          if (response.status === 'failed') {
-            openNotificationWithIcon(
-              'error',
-              formatMessage({ id: localeKeys.error }),
-              formatMessage({ id: localeKeys.channels.list.failedRemove }),
-            );
-          }
-          tableActionRef.current.reload();
-        },
-      },
-    });
-  }
-
-  async function fetchPage(props: PaginationParams): Promise<PaginationResponse<Channel>> {
-    const response = await ChannelsService.fetchPage(props);
-    if (response.status === 'failed') {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        formatMessage({ id: localeKeys.lists.failedDownload }),
-      );
-      return { data: [], total: 0 };
-    }
-    return response.data;
+    ChannelsService.remove(id)
+      .then(() => tableActionRef.current?.reload())
+      .catch(() => tableActionRef.current?.reload());
   }
 
   const columns: ProColumns<Channel>[] = [
     {
-      title: formatMessage({ id: localeKeys.channels.fields.name }),
-      dataIndex: ['name', 'id'],
+      title: formatMessage({ id: fields.name }),
+      dataIndex: 'id',
       render: (_, record: Channel) => <Link to={`/channels/edit/${record.id}`}>{record.name}</Link>,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.email }),
+      title: formatMessage({ id: fields.email }),
       dataIndex: 'email',
       render: (email: boolean) => <Icon arg={email} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.epuap }),
+      title: formatMessage({ id: fields.epuap }),
       dataIndex: 'epuap',
       render: (epuap: boolean) => <Icon arg={epuap} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.city }),
+      title: formatMessage({ id: fields.city }),
       dataIndex: 'city',
       render: (city: boolean) => <Icon arg={city} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.street }),
+      title: formatMessage({ id: fields.street }),
       dataIndex: 'street',
       render: (street: boolean) => <Icon arg={street} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.houseNo }),
+      title: formatMessage({ id: fields.houseNo }),
       dataIndex: 'houseNo',
       render: (houseNo: boolean) => <Icon arg={houseNo} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.flatNo }),
+      title: formatMessage({ id: fields.flatNo }),
       dataIndex: 'flatNo',
       render: (flatNo: boolean) => <Icon arg={flatNo} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.postalCode }),
+      title: formatMessage({ id: fields.postalCode }),
       dataIndex: 'postalCode',
       render: (postalCode: boolean) => <Icon arg={postalCode} />,
     },
     {
-      title: formatMessage({ id: localeKeys.channels.fields.voivodeship }),
+      title: formatMessage({ id: fields.voivodeship }),
       dataIndex: 'voivodeship',
       render: (voivodeship: boolean) => <Icon arg={voivodeship} />,
     },
@@ -146,12 +116,10 @@ function ChannelsListView() {
     <Table
       type="channels"
       columns={columns}
-      fetchData={fetchPage}
-      pageHeader={localeKeys.channels.list.pageHeaderContent}
-      tableHeader={localeKeys.channels.list.table.header}
+      service={ChannelsService}
+      pageHeader={list.pageHeaderContent}
+      tableHeader={list.table.header}
       actionRef={tableActionRef}
     />
   );
 }
-
-export default ChannelsListView;

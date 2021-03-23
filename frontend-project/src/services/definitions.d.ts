@@ -11,6 +11,58 @@ export interface AdministrativeUnit {
   active: boolean;
 }
 
+export interface AdministrativeUnitAutocomplete {
+  id: string;
+  name: string;
+}
+
+export interface CaseAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface ChannelAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface DocumentTypeAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface FeatureOptionAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface InstitutionAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface TagAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface UserAutocomplete {
+  id: number;
+  username: string;
+}
+
+export interface CaseList {
+  id: number;
+  comment: string;
+  auditedInstitutions: string[];
+  name: string;
+  featureoptions: string[];
+  tags: string[];
+  createdOn: string;
+  modifiedOn: string;
+  letterCount: number;
+}
+
 export interface CaseCount {
   id: number;
   comment: string;
@@ -126,9 +178,18 @@ export interface DocumentType {
   name: string;
 }
 
-export interface NestedFeatureOption {
+export interface EventList {
+  id: number;
+  case: string;
+  name: string;
+  date: string;
+  comment: string;
+}
+
+export interface FeatureOption {
   id: number;
   name: string;
+  feature: number;
 }
 
 export interface Feature {
@@ -136,13 +197,7 @@ export interface Feature {
   name: string;
   minOptions: number;
   maxOptions: number;
-  featureoptions: NestedFeatureOption[];
-}
-
-export interface FeatureOption {
-  id: number;
-  name: string;
-  feature: number;
+  featureoptions: number[];
 }
 
 export interface Institution {
@@ -166,12 +221,34 @@ export interface Institution {
   tags: string[];
 }
 
+export interface LetterList {
+  id: number;
+  direction: string;
+  channel: string;
+  final: boolean;
+  date: string;
+  referenceNumber: string;
+  institution: string;
+  case: string;
+  attachmentsCount: number;
+  comment: string;
+  documentType: string;
+  createdOn: string;
+  modifiedOn: string;
+}
+
 export interface SignRequest {
   name: string;
   method: string;
   url: string;
   formData: unknown;
   path: string;
+}
+
+export interface NoteList {
+  id: number;
+  case: string;
+  comment: string;
 }
 
 export interface Tag {

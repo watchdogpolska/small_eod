@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import { connect } from 'dva';
 import LoginFrom from '@/components/Login';
 import { Dispatch } from 'redux';
-import { LoginModelState, LoginModelType } from '@/models/login';
+import { LoginModelState } from '@/models/login';
 import { LoginParams } from '@/services/login';
 import styles from './style.less';
+import { ConnectState } from '@/models/connect';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 
@@ -95,12 +96,7 @@ const UserLogin = (props: UserLoginProps) => {
   );
 };
 
-export interface LoginConnectProps {
-  userAndlogin: LoginModelState;
-  loading: LoginModelType;
-}
-
-export default connect(({ userAndlogin, loading }: LoginConnectProps) => ({
+export default connect(({ userAndlogin, loading }: ConnectState) => ({
   state: userAndlogin,
   submitting: loading.effects['userAndlogin/login'],
 }))(UserLogin);

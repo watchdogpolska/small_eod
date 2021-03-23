@@ -10,11 +10,10 @@ export const casesLocale = {
       letterCount: 'Ilość listów',
       notifiedUsers: 'Użytkownicy informowani',
       responsibleUsers: 'Użytkownicy odpowiedzialni',
-      features: 'Opcje',
+      featureOptions: 'Opcje',
     },
     list: {
       pageHeaderContent: 'Lista spraw',
-      failedRemove: 'Nie udało się usunąć sprawy.',
       table: {
         header: 'Lista spraw',
       },
@@ -29,16 +28,20 @@ export const casesLocale = {
         tags: 'Wybierz tagi',
         notifiedUsers: 'Użytkownicy, którzy będą otrzymywać informacje',
         responsibleUsers: 'Użytkownicy odpowiedzialni za daną sprawę',
-        features: 'Opcje dla danej sprawy',
+        featureOptions: 'Opcje dla danej sprawy',
       },
       errors: {
         name: 'Nazwa jest wymagana',
         comment: 'Komentarz jest wymagany',
-        features: 'Opcje są wymagane',
+        featureOptions: 'Opcje są wymagane',
         tags: 'Tagi są wymagane',
-        updateFailed: 'Edycja sprawy nie powiodła się.',
-        createFailed: 'Utworzenie sprawy nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać spraw',
+      removeFailed: 'Nie udało się usunąć sprawy.',
+      updateFailed: 'Edycja sprawy nie powiodła się.',
+      createFailed: 'Utworzenie sprawy nie powiodło się.',
     },
   },
 };

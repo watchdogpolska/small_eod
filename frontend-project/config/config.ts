@@ -157,6 +157,210 @@ const eventsRoutes = {
   ],
 };
 
+const tagsRoutes = {
+  name: 'tags',
+  icon: 'FileTextOutlined',
+  path: '/tags',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/tags/list',
+      component: './tags/TagsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/tags/new',
+      component: './tags/TagsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/tags/edit/:id',
+      component: './tags/TagsDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/tags', redirect: '/tags/list' },
+  ],
+};
+
+const channelsRoutes = {
+  name: 'channels',
+  icon: 'FileTextOutlined',
+  path: '/channels',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/channels/list',
+      component: './channels/ChannelsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/channels/new',
+      component: './channels/ChannelsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/channels/edit/:id',
+      component: './channels/ChannelsDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/channels', redirect: '/channels/list' },
+  ],
+};
+
+const featuresRoutes = {
+  name: 'features',
+  icon: 'FileTextOutlined',
+  path: '/features',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/features/list',
+      component: './features/FeaturesListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/features/new',
+      component: './features/FeaturesDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/features/edit/:id',
+      component: './features/FeaturesDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/features', redirect: '/features/list' },
+  ],
+};
+
+const featureOptionsRoutes = {
+  name: 'feature-options',
+  icon: 'FileTextOutlined',
+  path: '/featureOptions',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/featureOptions/list',
+      component: './featureOptions/FeatureOptionsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/featureOptions/new',
+      component: './featureOptions/FeatureOptionsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/featureOptions/edit/:id',
+      component: './featureOptions/FeatureOptionsDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/featureOptions', redirect: '/featureOptions/list' },
+  ],
+};
+
+const institutionsRoutes = {
+  name: 'institutions',
+  icon: 'FileTextOutlined',
+  path: '/institutions',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/institutions/list',
+      component: './institutions/InstitutionsListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/institutions/new',
+      component: './institutions/InstitutionsDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/institutions/edit/:id',
+      component: './institutions/InstitutionsDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/institutions', redirect: '/institutions/list' },
+  ],
+};
+
+const lettersRoutes = {
+  name: 'letters',
+  icon: 'FileTextOutlined',
+  path: '/letters',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/letters/list',
+      component: './letters/LettersListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/letters/new',
+      component: './letters/LettersDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/letters/edit/:id',
+      component: './letters/LettersDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/letters', redirect: '/letters/list' },
+  ],
+};
+
+const administrativeUnitsRoutes = {
+  name: 'administrative-units',
+  icon: 'FileTextOutlined',
+  path: '/administrativeUnits',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/administrativeUnits/list',
+      component: './administrativeUnits/AdministrativeUnitsListView',
+    },
+    { exact: true, path: '/administrativeUnits', redirect: '/administrativeUnits/list' },
+  ],
+};
+
+const notesRoutes = {
+  name: 'notes',
+  icon: 'FileTextOutlined',
+  path: '/notes',
+  routes: [
+    {
+      name: 'list',
+      icon: 'FileTextOutlined',
+      path: '/notes/list',
+      component: './notes/NotesListView',
+    },
+    {
+      name: 'new',
+      icon: 'FileAddOutlined',
+      path: '/notes/new',
+      component: './notes/NotesDetailView',
+    },
+    {
+      name: 'edit',
+      path: '/notes/edit/:id',
+      component: './notes/NotesDetailView',
+      hideInMenu: true,
+    },
+    { exact: true, path: '/notes', redirect: '/notes/list' },
+  ],
+};
+
 export default {
   plugins,
   hash: true,
@@ -195,109 +399,24 @@ export default {
           authority: ['admin', 'user'],
           routes: [
             casesRoutes,
-            {
-              name: 'tags',
-              icon: 'FileTextOutlined',
-              path: '/tags',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/tags/new',
-                  component: './tags/TagsDetailView',
-                },
-                {
-                  name: 'list',
-                  icon: 'HomeOutlined',
-                  path: '/tags/list',
-                  component: './tags/TagsListView',
-                },
-                {
-                  name: 'edit',
-                  path: '/tags/edit/:id',
-                  component: './tags/TagsDetailView',
-                  hideInMenu: true,
-                },
-              ],
-            },
-            {
-              name: 'letters',
-              icon: 'FileTextOutlined',
-              path: '/letters',
-              routes: [
-                {
-                  name: 'list',
-                  icon: 'HomeOutlined',
-                  path: '/letters/list',
-                  component: './letters/list',
-                },
-              ],
-            },
-            {
-              name: 'channels',
-              icon: 'HomeOutlined',
-              path: '/channels',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/channels/new',
-                  component: './channels/ChannelsDetailView',
-                },
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/channels/list',
-                  component: './channels/ChannelsListView',
-                },
-                {
-                  name: 'edit',
-                  path: '/channels/edit/:id',
-                  component: './channels/ChannelsDetailView',
-                  hideInMenu: true,
-                },
-              ],
-            },
-            {
-              name: 'institutions',
-              icon: 'HomeOutlined',
-              path: '/institutions',
-              routes: [
-                {
-                  name: 'new',
-                  icon: 'FileAddOutlined',
-                  path: '/institutions/new',
-                  component: './institutions/new',
-                },
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/institutions/list',
-                  component: './institutions/list',
-                },
-              ],
-            },
-            {
-              name: 'features',
-              icon: 'FileTextOutlined',
-              path: '/features',
-              routes: [
-                {
-                  name: 'list',
-                  icon: 'FileTextOutlined',
-                  path: '/features/list',
-                  component: './features/list',
-                },
-              ],
-            },
+            lettersRoutes,
+            eventsRoutes,
+            notesRoutes,
+
+            administrativeUnitsRoutes,
+            tagsRoutes,
+            channelsRoutes,
+            institutionsRoutes,
+            featuresRoutes,
+            featureOptionsRoutes,
             usersRoutes,
             documentTypesRoutes,
+
             {
               path: '/',
               redirect: '/cases/new',
               authority: ['admin', 'user'],
             },
-            eventsRoutes,
             {
               component: './exception/404',
             },

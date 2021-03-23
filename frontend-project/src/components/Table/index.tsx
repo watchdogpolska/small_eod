@@ -2,21 +2,33 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import React, { MutableRefObject } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import { localeKeys } from '../../locales/pl-PL';
+import { PaginationParams } from '../../services/common';
+import { ReadOnlyServiceType, ResourceWithId } from '../../services/service';
 
-interface TableProps<T> {
+interface TableProps<TList extends ResourceWithId, TDetail extends ResourceWithId = TList> {
   type: string;
-  columns: ProColumns<T>[];
-  fetchData: (parameter: PaginationParams) => Promise<PaginationResponse<T>>;
+  columns: ProColumns<TList>[];
+  service: ReadOnlyServiceType<TList, TDetail>;
   pageHeader?: string;
   tableHeader?: string;
   actionRef?: MutableRefObject<ActionType>;
 }
 
-function Table<T>({ type, columns, fetchData, pageHeader, tableHeader, actionRef }: TableProps<T>) {
+function Table<TList extends ResourceWithId, TDetail extends ResourceWithId = TList>({
+  type,
+  columns,
+  service,
+  pageHeader,
+  tableHeader,
+  actionRef,
+}: TableProps<TList, TDetail>) {
   const showTotal = (total: number, range: number[]) =>
     `${range[0]}-${range[1]} / ${formatMessage({ id: localeKeys.lists.total })} ${total}`;
+
+  function fetchFromService(props: PaginationParams) {
+    return service.fetchPage(props);
+  }
 
   return (
     <PageHeaderWrapper
@@ -26,7 +38,7 @@ function Table<T>({ type, columns, fetchData, pageHeader, tableHeader, actionRef
         headerTitle={formatMessage({ id: tableHeader || `${type}-list.table-header-title` })}
         actionRef={actionRef}
         rowKey="id"
-        request={fetchData}
+        request={fetchFromService}
         tableAlertRender={false}
         columns={columns}
         rowSelection={false}

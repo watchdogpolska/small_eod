@@ -1,11 +1,15 @@
+import { localeKeys } from '@/locales/pl-PL';
 import { ReadWriteService } from '@/services/service';
 import smallEodSDK from '@/utils/sdk';
-import { Case } from './definitions';
+import { Case, CaseList } from './definitions';
 
-export const CasesService = ReadWriteService<Case>({
-  readPage: props => new smallEodSDK.CasesApi().casesListWithHttpInfo(props),
-  readOne: id => new smallEodSDK.CasesApi().casesReadWithHttpInfo(id),
-  create: data => new smallEodSDK.CasesApi().casesCreateWithHttpInfo(data),
-  update: (id, data) => new smallEodSDK.CasesApi().casesUpdateWithHttpInfo(id, data),
-  remove: id => new smallEodSDK.CasesApi().casesDeleteWithHttpInfo(id),
+const api = new smallEodSDK.CasesApi();
+
+export const CasesService = ReadWriteService<CaseList, Case>({
+  readPage: props => api.casesList(props),
+  readOne: id => api.casesRead(id),
+  create: data => api.casesCreate(data),
+  update: (id, data) => api.casesUpdate(id, data),
+  remove: id => api.casesDelete(id),
+  translations: localeKeys.cases.errors,
 });

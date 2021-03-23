@@ -3,6 +3,7 @@ import { GlobalModelState } from './global';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 import { UserModelState } from './user';
 import { LoginModelState } from './login';
+import { RouterTypes } from 'umi/routerTypes';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 
@@ -18,13 +19,18 @@ export interface Loading {
   };
 }
 
-export interface ConnectState {
+export type ConnectState = {
   global: GlobalModelState;
   loading: Loading;
+  userAndlogin: LoginModelState;
   settings: SettingModelState;
   user: UserModelState;
   login: LoginModelState;
-}
+};
+
+export type DetailMatchParam = {
+  match: RouterTypes['match'] & { params: { id: string | undefined } };
+};
 
 export interface Route extends MenuDataItem {
   routes?: Route[];

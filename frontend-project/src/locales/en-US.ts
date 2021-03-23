@@ -1,3 +1,6 @@
+import { administrativeUnitsLocale } from '@/pages/administrativeUnits/locales/en-US';
+import { lettersLocale } from '@/pages/letters/locales/en-US';
+import { featuresLocale } from '@/pages/features/locales/en-US';
 import { casesLocale } from '../pages/cases/locales/en-US';
 import { channelsLocale } from '../pages/channels/locales/en-US';
 import { documentTypesLocale } from '../pages/documentTypes/locales/en-US';
@@ -13,6 +16,9 @@ import pwa from './en-US/pwa';
 import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import BaseLocales from './pl-PL';
+import { institutionsLocale } from '../pages/institutions/locales/en-US';
+import { featureOptionsLocale } from '../pages/featureOptions/locales/en-US';
+import { notesLocale } from '../pages/notes/locales/en-US';
 
 const [labels] = structuredLocale({
   ...menuLocale,
@@ -23,6 +29,12 @@ const [labels] = structuredLocale({
   ...usersLocale,
   ...documentTypesLocale,
   ...eventsLocale,
+  ...featuresLocale,
+  ...administrativeUnitsLocale,
+  ...lettersLocale,
+  ...institutionsLocale,
+  ...featureOptionsLocale,
+  ...notesLocale,
 });
 
 const Locale = {

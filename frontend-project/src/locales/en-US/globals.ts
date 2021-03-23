@@ -1,5 +1,6 @@
 export const globalsLocale = {
   error: 'Error',
+  autocompleteError: 'Cannot get autocomplete options',
   lists: {
     edit: 'Edit',
     delete: 'Delete',

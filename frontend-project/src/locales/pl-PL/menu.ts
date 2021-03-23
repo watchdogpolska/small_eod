@@ -55,5 +55,21 @@ export const menuLocale = {
       edit: 'Edycja',
       list: 'Lista',
     },
+    notes: {
+      self: 'Notatki',
+      new: 'Nowa',
+      edit: 'Edycja',
+      list: 'Lista',
+    },
+    featureOptions: {
+      self: 'Opcje cechy',
+      new: 'Nowa',
+      edit: 'Edycja',
+      list: 'Lista',
+    },
+    administrativeUnits: {
+      self: 'Jednostki administracyjne',
+      list: 'Lista',
+    },
   },
 };
