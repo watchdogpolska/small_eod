@@ -1,2 +1,2 @@
-FROM nginx:alpine@sha256:ef3c79a4c7307429f74cf222f9041b206acadb341239d0c09d4eb30462016d62
+FROM nginx:alpine@sha256:dcb917cfe53d7901c07892d676a3b1b6c4b3ee75e5308f27e0345e8aaf30617e
 COPY ./nginx.conf /etc/nginx/nginx.conf
