@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     # https://hub.docker.com/_/postgres
-    image: postgres:12.6-alpine@sha256:35680d0261c20c06b98ddb721d27762e96c1eeb65250ecaf80b7d9a1ceec8a22
+    image: postgres:12.6-alpine@sha256:ddff89fa65c8bf1b382eb341d7161b86c7b58097ed4077b042f8443723a11c88
     expose:
       - "5432"
     volumes:
