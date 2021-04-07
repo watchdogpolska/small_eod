@@ -10,4 +10,4 @@ class InstitutionFilterSet(FilterSet):
 
     class Meta:
         model = Institution
-        fields = ["name", "query"]
+        fields = ["query"]

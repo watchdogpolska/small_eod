@@ -14,7 +14,7 @@ printables = pyparsing_unicode.printables
 alphas = pyparsing_unicode.alphas
 nums = pyparsing_unicode.nums
 alphanums = pyparsing_unicode.alphanums
-excludedChars = "()[],:"
+excludedChars = "()[],:\"'"
 
 
 class FieldExpr:
