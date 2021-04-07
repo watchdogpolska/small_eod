@@ -2,9 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
+from .filterset import ChannelFilterSet
 from .models import Channel
 from .serializers import ChannelSerializer
-from .filterset import ChannelFilterSet
 
 
 class ChannelViewSet(viewsets.ModelViewSet):

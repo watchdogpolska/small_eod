@@ -1,8 +1,8 @@
 from django_filters.filterset import FilterSet
 
 from ..search.filter import SearchFilter
-from .models import Letter, DocumentType
-from .searchset import LetterSearchSet, DocumentTypeSearchSet
+from .models import DocumentType, Letter
+from .searchset import DocumentTypeSearchSet, LetterSearchSet
 
 
 class DocumentTypeFilterSet(FilterSet):
