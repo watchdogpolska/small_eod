@@ -14,11 +14,7 @@ from ..files.serializers import FileSerializer
 from ..institutions.models import Institution
 from .filterset import LetterFilterSet
 from .models import DocumentType, Letter
-from .serializers import (
-    DocumentTypeSerializer,
-    LetterSerializer,
-    SignRequestSerializer,
-)
+from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
 
 
 class LetterViewSet(viewsets.ModelViewSet):

@@ -1,4 +1,5 @@
 from django_filters.filterset import FilterSet
+
 from .models import Feature, FeatureOption
 
 
