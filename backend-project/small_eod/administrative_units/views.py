@@ -1,8 +1,6 @@
-from django.db.models.query import Prefetch
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
-from teryt_tree.models import Category
 
 from .filterset import AdministrativeUnitFilterSet
 from .models import AdministrativeUnit
