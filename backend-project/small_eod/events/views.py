@@ -1,4 +1,3 @@
-from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse
@@ -13,7 +12,6 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
-from ..cases.models import Case
 from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer

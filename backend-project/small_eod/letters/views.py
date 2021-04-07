@@ -1,4 +1,3 @@
-from django.db.models import Count, Prefetch
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg2.utils import swagger_auto_schema
@@ -7,11 +6,8 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..cases.models import Case
-from ..channels.models import Channel
 from ..files.models import File
 from ..files.serializers import FileSerializer
-from ..institutions.models import Institution
 from .filterset import LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer

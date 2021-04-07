@@ -1,5 +1,3 @@
-from rest_framework.serializers import SlugRelatedField
-
 from ..generic.serializers import UserLogModelSerializer
 from .models import Event
 
