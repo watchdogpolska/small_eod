@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from ..files.models import File
 from ..files.serializers import FileSerializer
-from .filterset import LetterFilterSet
+from .filterset import DocumentTypeFilterSet, LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
 
@@ -41,6 +41,7 @@ class LetterViewSet(viewsets.ModelViewSet):
 class DocumentTypeViewSet(viewsets.ModelViewSet):
     queryset = DocumentType.objects.all()
     serializer_class = DocumentTypeSerializer
+    filterset_class = DocumentTypeFilterSet
 
 
 class FileViewSet(

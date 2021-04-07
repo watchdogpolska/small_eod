@@ -10,22 +10,3 @@ from ..serializers import FeatureSerializer
 class FeatureSerializerTestCase(ResourceSerializerMixin, AuthRequiredMixin, TestCase):
     serializer_class = FeatureSerializer
     factory_class = FeatureFactory
-
-    def get_serializer_context(self):
-        return {"request": self.request}
-
-    def test_save_nested_values(self):
-        self.login_required()
-        serializer = FeatureSerializer(
-            data={
-                "name": "Czyja sprawa",
-                "min_options": 1,
-                "max_options": 2,
-                "featureoptions": [{"name": "SO-WP"}, {"name": "Klienci"}],
-            },
-            context=self.get_serializer_context(),
-        )
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        feature = serializer.save()
-        self.assertTrue(FeatureOption.objects.count(), 2)
-        self.assertEqual(FeatureOption.objects.first().feature, feature)
