@@ -1,24 +1,25 @@
 from django_filters import FilterSet
-from ..search.filter import SearchFilter
+
 from ..administrative_units.models import AdministrativeUnit
-from ..cases.models import Case
-from ..channels.models import Channel
-from ..events.models import Event
-from ..features.models import Feature, FeatureOption
-from ..institutions.models import Institution
-from ..letters.models import DocumentType, Letter
-from ..notes.models import Note
-from ..tags.models import Tag
-from ..users.models import User
 from ..administrative_units.searchset import AdministrativeUnitSearchSet
+from ..cases.models import Case
 from ..cases.searchset import CaseSearchSet
+from ..channels.models import Channel
 from ..channels.searchset import ChannelSearchSet
+from ..events.models import Event
 from ..events.searchset import EventSearchSet
-from ..features.searchset import FeatureSearchSet, FeatureOptionSearchSet
+from ..features.models import Feature, FeatureOption
+from ..features.searchset import FeatureOptionSearchSet, FeatureSearchSet
+from ..institutions.models import Institution
 from ..institutions.searchset import InstitutionSearchSet
+from ..letters.models import DocumentType, Letter
 from ..letters.searchset import DocumentTypeSearchSet, LetterSearchSet
+from ..notes.models import Note
 from ..notes.searchset import NoteSearchSet
+from ..search.filter import SearchFilter
+from ..tags.models import Tag
 from ..tags.searchset import TagSearchSet
+from ..users.models import User
 from ..users.searchset import UserSearchSet
 
 

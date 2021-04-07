@@ -16,7 +16,6 @@ from ..authkey.permissions import AuthKeyPermission
 from ..cases.models import Case
 from .filterset import EventFilterSet
 from .models import Event
-from ..cases.models import Case
 from .serializers import EventSerializer
 
 

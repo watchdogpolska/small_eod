@@ -9,8 +9,6 @@ from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
-from ..features.models import FeatureOption
-from ..institutions.models import Institution
 
 
 class CaseViewSet(viewsets.ModelViewSet):

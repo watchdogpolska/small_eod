@@ -4,9 +4,12 @@ from rest_framework import viewsets
 from ..administrative_units.models import AdministrativeUnit
 from ..cases.models import Case, Tag
 from ..channels.models import Channel
+from ..events.models import Event
 from ..features.models import Feature, FeatureOption
 from ..institutions.models import Institution
-from ..letters.models import DocumentType
+from ..letters.models import DocumentType, Letter
+from ..notes.models import Note
+from ..tags.models import Tag
 from ..users.models import User
 from .filterset import (
     AdministrativeUnitAutocompleteFilterSet,
@@ -26,8 +29,8 @@ from .serializers import (
     AdministrativeUnitAutocompleteSerializer,
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
-    EventAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
+    EventAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
@@ -36,16 +39,6 @@ from .serializers import (
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
-from ..administrative_units.models import AdministrativeUnit
-from ..cases.models import Case
-from ..channels.models import Channel
-from ..events.models import Event
-from ..features.models import Feature, FeatureOption
-from ..institutions.models import Institution
-from ..letters.models import DocumentType, Letter
-from ..notes.models import Note
-from ..tags.models import Tag
-from ..users.models import User
 
 
 class AdministrativeUnitAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
