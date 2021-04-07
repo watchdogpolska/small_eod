@@ -6,9 +6,12 @@ from .views import (
     CaseAutocompleteViewSet,
     ChannelAutocompleteViewSet,
     DocumentTypeAutocompleteViewSet,
+    EventAutocompleteViewSet,
     FeatureOptionAutocompleteViewSet,
     InstitutionAutocompleteViewSet,
-    TagsAutocompleteViewSet,
+    LetterAutocompleteViewSet,
+    NoteAutocompleteViewSet,
+    TagAutocompleteViewSet,
     UserAutocompleteViewSet,
 )
 
@@ -17,10 +20,13 @@ router.register("administrativeUnits", AdministrativeUnitAutocompleteViewSet)
 router.register("cases", CaseAutocompleteViewSet)
 router.register("channels", ChannelAutocompleteViewSet)
 router.register("documentTypes", DocumentTypeAutocompleteViewSet)
+router.register("event", EventAutocompleteViewSet)
 router.register("features", FeatureOptionAutocompleteViewSet)
 router.register("featureOptions", FeatureOptionAutocompleteViewSet)
 router.register("institutions", InstitutionAutocompleteViewSet)
-router.register("tags", TagsAutocompleteViewSet)
+router.register("letters", LetterAutocompleteViewSet)
+router.register("notes", NoteAutocompleteViewSet)
+router.register("tags", TagAutocompleteViewSet)
 router.register("users", UserAutocompleteViewSet)
 
 urlpatterns = [

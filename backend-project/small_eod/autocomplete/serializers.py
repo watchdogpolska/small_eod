@@ -1,11 +1,14 @@
 from rest_framework import serializers
 
 from ..administrative_units.models import AdministrativeUnit
-from ..cases.models import Case, Tag
+from ..cases.models import Case
 from ..channels.models import Channel
+from ..events.models import Event
 from ..features.models import Feature, FeatureOption
 from ..institutions.models import Institution
-from ..letters.models import DocumentType
+from ..letters.models import DocumentType, Letter
+from ..notes.models import Note
+from ..tags.models import Tag
 from ..users.models import User
 
 
@@ -33,6 +36,12 @@ class DocumentTypeAutocompleteSerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+class EventAutocompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ["id", "name"]
+
+
 class FeatureAutocompleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feature
@@ -49,6 +58,18 @@ class InstitutionAutocompleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Institution
         fields = ["id", "name"]
+
+
+class LetterAutocompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Letter
+        fields = ["id"]
+
+
+class NoteAutocompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ["id"]
 
 
 class TagAutocompleteSerializer(serializers.ModelSerializer):

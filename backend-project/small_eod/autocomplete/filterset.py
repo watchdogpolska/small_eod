@@ -1,90 +1,118 @@
-import rest_framework_filters as filters
-
+from django_filters import FilterSet
+from ..search.filter import SearchFilter
 from ..administrative_units.models import AdministrativeUnit
-from ..cases.models import Case, Tag
+from ..cases.models import Case
 from ..channels.models import Channel
+from ..events.models import Event
 from ..features.models import Feature, FeatureOption
 from ..institutions.models import Institution
-from ..letters.models import DocumentType
+from ..letters.models import DocumentType, Letter
+from ..notes.models import Note
+from ..tags.models import Tag
 from ..users.models import User
+from ..administrative_units.searchset import AdministrativeUnitSearchSet
+from ..cases.searchset import CaseSearchSet
+from ..channels.searchset import ChannelSearchSet
+from ..events.searchset import EventSearchSet
+from ..features.searchset import FeatureSearchSet, FeatureOptionSearchSet
+from ..institutions.searchset import InstitutionSearchSet
+from ..letters.searchset import DocumentTypeSearchSet, LetterSearchSet
+from ..notes.searchset import NoteSearchSet
+from ..tags.searchset import TagSearchSet
+from ..users.searchset import UserSearchSet
 
 
-class AdministrativeUnitAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class AdministrativeUnitAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=AdministrativeUnitSearchSet())
 
     class Meta:
         model = AdministrativeUnit
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class CaseAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class CaseAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=CaseSearchSet())
 
     class Meta:
         model = Case
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class ChannelAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class ChannelAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=ChannelSearchSet())
 
     class Meta:
         model = Channel
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class DocumentTypeAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class DocumentTypeAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=DocumentTypeSearchSet())
 
     class Meta:
         model = DocumentType
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class FeatureAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class EventAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=EventSearchSet())
+
+    class Meta:
+        model = Event
+        fields = ["query"]
+
+
+class FeatureAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=FeatureSearchSet())
 
     class Meta:
         model = Feature
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class FeatureOptionAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class FeatureOptionAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=FeatureOptionSearchSet())
 
     class Meta:
         model = FeatureOption
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class InstitutionAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class InstitutionAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=InstitutionSearchSet())
 
     class Meta:
         model = Institution
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class TagAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    name = filters.AutoFilter(lookups=["icontains"])
+class LetterAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=LetterSearchSet())
+
+    class Meta:
+        model = Letter
+        fields = ["query"]
+
+
+class NoteAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=NoteSearchSet())
+
+    class Meta:
+        model = Note
+        fields = ["query"]
+
+
+class TagAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=TagSearchSet())
 
     class Meta:
         model = Tag
-        fields = ["id", "name"]
+        fields = ["query"]
 
 
-class UserAutocompleteFilterSet(filters.FilterSet):
-    id = filters.AutoFilter(lookups=["in"])
-    username = filters.AutoFilter(lookups=["icontains"])
+class UserAutocompleteFilterSet(FilterSet):
+    query = SearchFilter(searchset=UserSearchSet())
 
     class Meta:
         model = User
-        fields = ["id", "username"]
+        fields = ["query"]

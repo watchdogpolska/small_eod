@@ -16,7 +16,6 @@ from .filterset import LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import (
     DocumentTypeSerializer,
-    LetterListSerializer,
     LetterSerializer,
     SignRequestSerializer,
 )
@@ -45,37 +44,6 @@ class LetterViewSet(viewsets.ModelViewSet):
         "modified_on",
         "modified_by__username",
     ]
-
-    def get_queryset(self):
-        if self.action == "list":
-            return (
-                Letter.objects.annotate(attachments_count=Count("attachments"))
-                .prefetch_related(
-                    Prefetch(
-                        "document_type",
-                        queryset=DocumentType.objects.all().only("name"),
-                    ),
-                    Prefetch(
-                        "case",
-                        queryset=Case.objects.all().only("name"),
-                    ),
-                    Prefetch(
-                        "institution",
-                        queryset=Institution.objects.all().only("name"),
-                    ),
-                    Prefetch(
-                        "channel",
-                        queryset=Channel.objects.all().only("name"),
-                    ),
-                )
-                .all()
-            )
-        return super().get_queryset()
-
-    def get_serializer_class(self):
-        if self.action == "list":
-            return LetterListSerializer
-        return super().get_serializer_class()
 
 
 class DocumentTypeViewSet(viewsets.ModelViewSet):

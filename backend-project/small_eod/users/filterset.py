@@ -1,11 +1,8 @@
-import rest_framework_filters as filters
-
+from django_filters.filterset import FilterSet
 from .models import User
 
 
-class UserFilterSet(filters.FilterSet):
-    username = filters.AutoFilter(lookups=["icontains"])
-
+class UserFilterSet(FilterSet):
     class Meta:
         model = User
         fields = ["username"]

@@ -8,7 +8,9 @@ from ..institutions.models import Institution
 from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
-from .serializers import CaseCountSerializer, CaseListSerializer
+from .serializers import CaseCountSerializer
+from ..features.models import FeatureOption
+from ..institutions.models import Institution
 
 
 class CaseViewSet(viewsets.ModelViewSet):
@@ -30,24 +32,6 @@ class CaseViewSet(viewsets.ModelViewSet):
         "created_on",
         "modified_on",
     ]
-
-    def get_queryset(self):
-        if self.action == "list":
-            return Case.objects.annotate(letter_count=Count("letter")).prefetch_related(
-                Prefetch(
-                    "featureoptions", queryset=FeatureOption.objects.all().only("name")
-                ),
-                Prefetch(
-                    "audited_institutions",
-                    queryset=Institution.objects.all().only("name"),
-                ),
-            )
-        return super().get_queryset()
-
-    def get_serializer_class(self):
-        if self.action == "list":
-            return CaseListSerializer
-        return super().get_serializer_class()
 
 
 class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
