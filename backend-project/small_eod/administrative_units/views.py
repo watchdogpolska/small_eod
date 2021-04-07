@@ -4,9 +4,9 @@ from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 from teryt_tree.models import Category
 
+from .filterset import AdministrativeUnitFilterSet
 from .models import AdministrativeUnit
 from .serializers import AdministrativeUnitSerializer
-from .filterset import AdministrativeUnitFilterSet
 
 
 class AdministrativeUnitViewSet(viewsets.ReadOnlyModelViewSet):
