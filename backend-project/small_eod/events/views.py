@@ -16,7 +16,8 @@ from ..authkey.permissions import AuthKeyPermission
 from ..cases.models import Case
 from .filterset import EventFilterSet
 from .models import Event
-from .serializers import EventListSerializer, EventSerializer
+from ..cases.models import Case
+from .serializers import EventSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -35,21 +36,6 @@ class EventViewSet(viewsets.ModelViewSet):
     required_scopes_map = {
         "Ical": ["export_ical"],
     }
-
-    def get_queryset(self):
-        if self.action == "list":
-            Event.objects.prefetch_related(
-                Prefetch(
-                    "case",
-                    queryset=Case.objects.all().only("name"),
-                )
-            ).all()
-        return super().get_queryset()
-
-    def get_serializer_class(self):
-        if self.action == "list":
-            return EventListSerializer
-        return super().get_serializer_class()
 
     def get_authenticators(self):
         if self.name == "Ical":

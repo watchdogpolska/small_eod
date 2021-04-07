@@ -13,9 +13,12 @@ from .filterset import (
     CaseAutocompleteFilterSet,
     ChannelAutocompleteFilterSet,
     DocumentTypeAutocompleteFilterSet,
+    EventAutocompleteFilterSet,
     FeatureAutocompleteFilterSet,
     FeatureOptionAutocompleteFilterSet,
     InstitutionAutocompleteFilterSet,
+    LetterAutocompleteFilterSet,
+    NoteAutocompleteFilterSet,
     TagAutocompleteFilterSet,
     UserAutocompleteFilterSet,
 )
@@ -23,73 +26,107 @@ from .serializers import (
     AdministrativeUnitAutocompleteSerializer,
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
+    EventAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
+    LetterAutocompleteSerializer,
+    NoteAutocompleteSerializer,
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
+from ..administrative_units.models import AdministrativeUnit
+from ..cases.models import Case
+from ..channels.models import Channel
+from ..events.models import Event
+from ..features.models import Feature, FeatureOption
+from ..institutions.models import Institution
+from ..letters.models import DocumentType, Letter
+from ..notes.models import Note
+from ..tags.models import Tag
+from ..users.models import User
 
 
 class AdministrativeUnitAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = AdministrativeUnit.objects.all()
+    queryset = AdministrativeUnit.objects.only("id", "name").all()
     serializer_class = AdministrativeUnitAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdministrativeUnitAutocompleteFilterSet
 
 
 class CaseAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Case.objects.all()
+    queryset = Case.objects.only("id", "name").all()
     serializer_class = CaseAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CaseAutocompleteFilterSet
 
 
 class ChannelAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Channel.objects.all()
+    queryset = Channel.objects.only("id", "name").all()
     serializer_class = ChannelAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ChannelAutocompleteFilterSet
 
 
 class DocumentTypeAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = DocumentType.objects.all()
+    queryset = DocumentType.objects.only("id", "name").all()
     serializer_class = DocumentTypeAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = DocumentTypeAutocompleteFilterSet
 
 
+class EventAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Event.objects.only("id", "name").all()
+    serializer_class = EventAutocompleteSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = EventAutocompleteFilterSet
+
+
 class FeatureAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Feature.objects.all()
+    queryset = Feature.objects.only("id", "name").all()
     serializer_class = FeatureAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = FeatureAutocompleteFilterSet
 
 
 class FeatureOptionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = FeatureOption.objects.all()
+    queryset = FeatureOption.objects.only("id", "name").all()
     serializer_class = FeatureOptionAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = FeatureOptionAutocompleteFilterSet
 
 
 class InstitutionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Institution.objects.all()
+    queryset = Institution.objects.only("id", "name").all()
     serializer_class = InstitutionAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = InstitutionAutocompleteFilterSet
 
 
-class TagsAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.all()
+class LetterAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Letter.objects.only("id", "name").all()
+    serializer_class = LetterAutocompleteSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = LetterAutocompleteFilterSet
+
+
+class NoteAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Note.objects.only("id", "name").all()
+    serializer_class = NoteAutocompleteSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = NoteAutocompleteFilterSet
+
+
+class TagAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.only("id", "name").all()
     serializer_class = TagAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = TagAutocompleteFilterSet
 
 
 class UserAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.only("id", "username").all()
     serializer_class = UserAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = UserAutocompleteFilterSet

@@ -1,11 +1,8 @@
-import rest_framework_filters as filters
-
+from django_filters.filterset import FilterSet
 from .models import Tag
 
 
-class TagFilter(filters.FilterSet):
-    name = filters.AutoFilter(lookups=["icontains"])
-
+class TagFilter(FilterSet):
     class Meta:
         model = Tag
         fields = ["name"]
