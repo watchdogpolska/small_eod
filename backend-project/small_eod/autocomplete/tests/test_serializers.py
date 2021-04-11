@@ -1,12 +1,12 @@
 from django.test import TestCase
 
-from ...generic.mixins import AuthRequiredMixin
-from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ...administrative_units.factories import AdministrativeUnitFactory
 from ...cases.factories import CaseFactory
 from ...channels.factories import ChannelFactory
 from ...events.factories import EventFactory
 from ...features.factories import FeatureFactory, FeatureOptionFactory
+from ...generic.mixins import AuthRequiredMixin
+from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ...institutions.factories import InstitutionFactory
 from ...letters.factories import DocumentTypeFactory
 from ...tags.factories import TagFactory

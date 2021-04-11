@@ -13,8 +13,8 @@ from ...generic.tests.test_views import (
 )
 from ...search.tests.mixins import SearchQueryMixin
 from ...users.mixins import AuthenticatedMixin
-from ..factories import LetterFactory, DocumentTypeFactory
-from ..serializers import LetterSerializer, DocumentTypeSerializer
+from ..factories import DocumentTypeFactory, LetterFactory
+from ..serializers import DocumentTypeSerializer, LetterSerializer
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):

@@ -1,14 +1,14 @@
 from test_plus.test import TestCase
 
-from ...generic.tests.test_views import ReadOnlyViewSetMixin
-from ...search.tests.mixins import SearchQueryMixin
 from ...administrative_units.factories import AdministrativeUnitFactory
 from ...cases.factories import CaseFactory
 from ...channels.factories import ChannelFactory
 from ...events.factories import EventFactory
 from ...features.factories import FeatureFactory, FeatureOptionFactory
+from ...generic.tests.test_views import ReadOnlyViewSetMixin
 from ...institutions.factories import InstitutionFactory
 from ...letters.factories import DocumentTypeFactory
+from ...search.tests.mixins import SearchQueryMixin
 from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
 
