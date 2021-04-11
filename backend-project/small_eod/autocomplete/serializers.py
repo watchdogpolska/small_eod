@@ -60,18 +60,6 @@ class InstitutionAutocompleteSerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
-class LetterAutocompleteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Letter
-        fields = ["id"]
-
-
-class NoteAutocompleteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ["id"]
-
-
 class TagAutocompleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag

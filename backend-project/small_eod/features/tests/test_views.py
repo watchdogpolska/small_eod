@@ -1,11 +1,14 @@
 from test_plus.test import TestCase
 
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import FeatureFactory, FeatureOptionFactory
 from ..serializers import FeatureOptionSerializer, FeatureSerializer
 
 
-class FeatureViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase):
+class FeatureViewSetTestCase(
+    GenericViewSetMixin, OrderingViewSetMixin, SearchQueryMixin, TestCase
+):
     basename = "feature"
     serializer_class = FeatureSerializer
     factory_class = FeatureFactory
@@ -27,7 +30,7 @@ class FeatureViewSetTestCase(GenericViewSetMixin, OrderingViewSetMixin, TestCase
         self.assertEqual(item["name"], name)
 
 
-class FeatureOptionViewSetTestCase(GenericViewSetMixin, TestCase):
+class FeatureOptionViewSetTestCase(GenericViewSetMixin, SearchQueryMixin, TestCase):
     basename = "feature_option"
     factory_class = FeatureOptionFactory
     serializer_class = FeatureOptionSerializer

@@ -13,10 +13,8 @@ from ..features.filterset import FeatureFilterSet, FeatureOptionFilterSet
 from ..features.models import Feature, FeatureOption
 from ..institutions.filterset import InstitutionFilterSet
 from ..institutions.models import Institution
-from ..letters.filterset import DocumentTypeFilterSet, LetterFilterSet
-from ..letters.models import DocumentType, Letter
-from ..notes.filterset import NoteFilterSet
-from ..notes.models import Note
+from ..letters.filterset import DocumentTypeFilterSet
+from ..letters.models import DocumentType
 from ..tags.filterset import TagFilterSet
 from ..tags.models import Tag
 from ..users.filterset import UserFilterSet
@@ -30,8 +28,6 @@ from .serializers import (
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
-    LetterAutocompleteSerializer,
-    NoteAutocompleteSerializer,
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
@@ -91,20 +87,6 @@ class InstitutionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = InstitutionAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = InstitutionFilterSet
-
-
-class LetterAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Letter.objects.only("id").all()
-    serializer_class = LetterAutocompleteSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = LetterFilterSet
-
-
-class NoteAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Note.objects.only("id").all()
-    serializer_class = NoteAutocompleteSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = NoteFilterSet
 
 
 class TagAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):

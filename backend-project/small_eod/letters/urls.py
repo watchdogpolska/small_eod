@@ -9,8 +9,8 @@ from .views import (
 )
 
 router = routers.SimpleRouter()
-router.register("letters", LetterViewSet)
-router.register("documentTypes", DocumentTypeViewSet)
+router.register("letters", LetterViewSet, "letter")
+router.register("documentTypes", DocumentTypeViewSet, "document_type")
 
 file_router = routers.NestedSimpleRouter(router, "letters", lookup="letter")
 file_router.register("files", FileViewSet, basename="letter-file")
