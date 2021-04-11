@@ -6,8 +6,7 @@ from ..channels.models import Channel
 from ..events.models import Event
 from ..features.models import Feature, FeatureOption
 from ..institutions.models import Institution
-from ..letters.models import DocumentType, Letter
-from ..notes.models import Note
+from ..letters.models import DocumentType
 from ..tags.models import Tag
 from ..users.models import User
 

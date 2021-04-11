@@ -1,6 +1,6 @@
 from test_plus.test import TestCase
 
-from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
+from ...generic.tests.test_views import GenericViewSetMixin
 from ...search.tests.mixins import SearchQueryMixin
 from ..factories import TagFactory
 from ..serializers import TagSerializer
