@@ -184,6 +184,9 @@ class GenericViewSetMixin(UpdateViewSetMixin, ReadOnlyViewSetMixin):
         else:
             return ["id"]
 
+    def validate_create_item(self, item):
+        self.validate_item(item)
+
     def test_create_plain(self):
         self.login_required()
         response = self.client.post(
@@ -194,7 +197,7 @@ class GenericViewSetMixin(UpdateViewSetMixin, ReadOnlyViewSetMixin):
         self.assertEqual(response.status_code, 201, response.json())
         item = response.json()
         self.assertNotEqual(item["id"], self.obj.pk)
-        self.validate_item(item)
+        self.validate_create_item(item)
 
     def get_create_data(self):
         if not self.serializer_class:

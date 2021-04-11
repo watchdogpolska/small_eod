@@ -3,11 +3,14 @@ from unittest.mock import patch
 from test_plus.test import TestCase
 
 from ...generic.tests.test_views import OrderingViewSetMixin, ReadOnlyViewSetMixin
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import UserFactory
 from ..serializers import UserSerializer
 
 
-class UserViewSetTestCase(ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase):
+class UserViewSetTestCase(
+    ReadOnlyViewSetMixin, OrderingViewSetMixin, SearchQueryMixin, TestCase
+):
     basename = "user"
     serializer_class = UserSerializer
     factory_class = UserFactory

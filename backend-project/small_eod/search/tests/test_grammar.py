@@ -26,6 +26,9 @@ class SearchTermTestCase(AssertParserMixin, TestCase):
     def test_unicode(self):
         self.assert_parser(searchTerm, "łódź", SearchTerm("łódź"))
 
+    def test_special_characters(self):
+        self.assert_parser(searchTerm, "search-0001", SearchTerm("search-0001"))
+
 
 class FieldExprTestCase(AssertParserMixin, TestCase):
     def test_simple(self):
@@ -33,6 +36,9 @@ class FieldExprTestCase(AssertParserMixin, TestCase):
 
     def test_unicode(self):
         self.assert_parser(field_expr, "key:ł", FieldExpr(["key", "ł"]))
+
+    def test_special_characters(self):
+        self.assert_parser(field_expr, "key:-@#!", FieldExpr(["key", "-@#!"]))
 
     def test_quote(self):
         self.assert_parser(field_expr, 'key:"value"', FieldExpr(["key", "value"]))

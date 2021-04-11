@@ -1,12 +1,13 @@
 from test_plus.test import TestCase
 
 from ...generic.tests.test_views import OrderingViewSetMixin, ReadOnlyViewSetMixin
+from ...search.tests.mixins import SearchQueryMixin
 from ..factories import AdministrativeUnitFactory
 from ..serializers import AdministrativeUnitSerializer
 
 
 class AdministrativeUnitViewSetTestCase(
-    ReadOnlyViewSetMixin, OrderingViewSetMixin, TestCase
+    ReadOnlyViewSetMixin, OrderingViewSetMixin, SearchQueryMixin, TestCase
 ):
     basename = "administrative_unit"
     serializer_class = AdministrativeUnitSerializer
