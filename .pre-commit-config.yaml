@@ -9,8 +9,8 @@ repos:
       pass_filenames: true
       args: ["--config", "backend-project/pyproject.toml"]
       exclude: "migrations/"
--   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.4
+-   repo: https://github.com/PyCQA/flake8
+    rev: 3.9.0
     hooks:
     - id: flake8
       pass_filenames: true
@@ -31,16 +31,16 @@ repos:
     - id: debug-statements
     - id: mixed-line-ending
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v2.10.0
+    rev: v2.12.0
     hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
 -   repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.7.1
+    rev: v1.8.0
     hooks:
     -   id: rst-backticks
 -   repo: https://github.com/PyCQA/isort
-    rev: '5.7.0'  # Use the revision sha / tag you want to point at
+    rev: '5.8.0'  # Use the revision sha / tag you want to point at
     hooks:
     -   id: isort
         args: ["--settings-file", "backend-project/pyproject.toml"]
