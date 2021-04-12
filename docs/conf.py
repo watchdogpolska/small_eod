@@ -130,7 +130,7 @@ def process_django_model(app, what, name, obj, options, lines):
                     )
                 )
             else:
-                lines.append(":type {}: {}".format(field.attname, type(field).__name__))
+                lines.append(f":type {field.attname}: {type(field).__name__}")
     # Return the extended docstring
     return lines
 
