@@ -19,6 +19,10 @@ export default function AdministrativeUnitsListView() {
         <Link to={`/administrativeUnits/edit/${record.id}`}>{record.name}</Link>
       ),
     },
+    {
+      title: formatMessage({ id: fields.category }),
+      dataIndex: 'category',
+    },
   ];
   return (
     <Table

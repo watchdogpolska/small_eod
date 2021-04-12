@@ -1,13 +1,13 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 import { Alert, Checkbox } from 'antd';
-import React, { useState } from 'react';
 import { connect } from 'dva';
-import LoginFrom from '@/components/Login';
+import React, { useState } from 'react';
 import { Dispatch } from 'redux';
-import { LoginModelState } from '@/models/login';
-import { LoginParams } from '@/services/login';
+import LoginFrom from '../../../components/Login';
+import { ConnectState } from '../../../models/connect';
+import { LoginModelState } from '../../../models/login';
+import { LoginParams } from '../../../services/login';
 import styles from './style.less';
-import { ConnectState } from '@/models/connect';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
 

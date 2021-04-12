@@ -5,7 +5,7 @@ export interface AdministrativeUnit {
   id: string;
   parent: string | null;
   name: string;
-  category: number;
+  category: string;
   slug: string;
   updatedOn: string;
   active: boolean;
@@ -31,7 +31,17 @@ export interface DocumentTypeAutocomplete {
   name: string;
 }
 
+export interface EventAutocomplete {
+  id: number;
+  name: string;
+}
+
 export interface FeatureOptionAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface FeatureAutocomplete {
   id: number;
   name: string;
 }
@@ -49,18 +59,6 @@ export interface TagAutocomplete {
 export interface UserAutocomplete {
   id: number;
   username: string;
-}
-
-export interface CaseList {
-  id: number;
-  comment: string;
-  auditedInstitutions: string[];
-  name: string;
-  featureoptions: string[];
-  tags: string[];
-  createdOn: string;
-  modifiedOn: string;
-  letterCount: number;
 }
 
 export interface CaseCount {
@@ -154,7 +152,6 @@ export interface Letter {
   case: number;
   attachments: File[];
   comment: string;
-  excerpt: string;
   documentType: number;
   createdOn: string;
   createdBy: number;
@@ -176,14 +173,6 @@ export interface TokenSet {
 export interface DocumentType {
   id: number;
   name: string;
-}
-
-export interface EventList {
-  id: number;
-  case: string;
-  name: string;
-  date: string;
-  comment: string;
 }
 
 export interface FeatureOption {
@@ -221,34 +210,12 @@ export interface Institution {
   tags: string[];
 }
 
-export interface LetterList {
-  id: number;
-  direction: string;
-  channel: string;
-  final: boolean;
-  date: string;
-  referenceNumber: string;
-  institution: string;
-  case: string;
-  attachmentsCount: number;
-  comment: string;
-  documentType: string;
-  createdOn: string;
-  modifiedOn: string;
-}
-
 export interface SignRequest {
   name: string;
   method: string;
   url: string;
   formData: unknown;
   path: string;
-}
-
-export interface NoteList {
-  id: number;
-  case: string;
-  comment: string;
 }
 
 export interface Tag {

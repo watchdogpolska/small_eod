@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { localeKeys } from '@/locales/pl-PL';
 import { Select, Spin } from 'antd';
 import { SelectProps } from 'antd/es/select';
-import { useDebounce } from '../hooks/useDebounce';
-import { KeysWithValsOfType, OptionType } from '../services/common';
-import { AutocompleteServiceType, AutocompleteFunctionType } from '../services/autocomplete';
-import { QQ } from '../utils/QQ';
-import { localeKeys } from '@/locales/pl-PL';
-import { openNotificationWithIcon } from '@/models/global';
+import React, { useEffect, useState } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-
-type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
+import { useDebounce } from '../hooks/useDebounce';
+import { openNotificationWithIcon } from '../models/global';
+import { AutocompleteFunctionType, AutocompleteServiceType } from '../services/autocomplete';
+import { Awaited, KeysWithValsOfType, OptionType } from '../services/common';
+import { QQ } from '../utils/QQ';
 
 export function FetchSelect<
   Mode extends 'multiple' | 'tags' | undefined,
@@ -46,12 +44,18 @@ export function FetchSelect<
 
   useEffect(() => {
     const arrayValue = Array.isArray(value) ? value : [value];
-    if (arrayValue.length === 0 || mode === 'tags') return;
+    if (
+      typeof value === 'undefined' ||
+      value === null ||
+      arrayValue.length === 0 ||
+      mode === 'tags'
+    )
+      return;
     setShownOptions([]);
     setFetching(true);
 
     autocompleteFunction({
-      ...QQ.in('id', arrayValue),
+      query: QQ.in('id', arrayValue),
       pageSize: 10,
     })
       .then(autocompleteResults => {
@@ -75,7 +79,7 @@ export function FetchSelect<
 
     debouncePromise(() =>
       autocompleteFunction({
-        ...QQ.icontains(searchField, search),
+        query: QQ.icontains(searchField, search),
         pageSize: 10,
       })
         .then(autocompleteResults => {

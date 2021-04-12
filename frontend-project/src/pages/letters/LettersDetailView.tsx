@@ -1,17 +1,16 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Row, Spin, Input, Select, DatePicker } from 'antd';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Spin, Switch } from 'antd';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
-
+import { FetchSelect } from '../../components/FetchSelect';
 import { localeKeys } from '../../locales/pl-PL';
-import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
-import moment from 'moment';
-import { DetailMatchParam } from '@/models/connect';
-import { Letter } from '@/services/definitions';
-import { LettersService } from '@/services/letters';
-import { FetchSelect } from '@/components/FetchSelect';
-import { AutocompleteService } from '@/services/autocomplete';
+import { DetailMatchParam } from '../../models/connect';
+import { AutocompleteService } from '../../services/autocomplete';
+import { Letter } from '../../services/definitions';
+import { LettersService } from '../../services/letters';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -101,7 +100,7 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
           <Row>
             <Col span={16}>
               <Form.Item label={formatMessage({ id: fields.final })} name="final">
-                <Input type="checkbox" placeholder={formatMessage({ id: placeholders.final })} />
+                <Switch />
               </Form.Item>
             </Col>
           </Row>
@@ -113,19 +112,6 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
                   rows={4}
                   placeholder={formatMessage({
                     id: placeholders.comment,
-                  })}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span={16}>
-              <Form.Item label={formatMessage({ id: fields.excerpt })} name="excerpt">
-                <TextArea
-                  rows={4}
-                  placeholder={formatMessage({
-                    id: placeholders.excerpt,
                   })}
                 />
               </Form.Item>
@@ -211,6 +197,14 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
                   mode={undefined}
                   autocompleteFunction={AutocompleteService.institutions}
                 />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.institution })} name="institution">
+                <Input type="file" multiple />
               </Form.Item>
             </Col>
           </Row>

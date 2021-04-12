@@ -1,16 +1,15 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Row, Spin, Input } from 'antd';
+import { Button, Card, Col, Form, Input, Row, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
-
+import { FetchSelect } from '../../components/FetchSelect';
 import { localeKeys } from '../../locales/pl-PL';
-import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
-import { DetailMatchParam } from '@/models/connect';
-import { Note } from '@/services/definitions';
-import { NotesService } from '@/services/notes';
-import { FetchSelect } from '@/components/FetchSelect';
-import { AutocompleteService } from '@/services/autocomplete';
+import { DetailMatchParam } from '../../models/connect';
+import { AutocompleteService } from '../../services/autocomplete';
+import { Note } from '../../services/definitions';
+import { NotesService } from '../../services/notes';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const { TextArea } = Input;
 

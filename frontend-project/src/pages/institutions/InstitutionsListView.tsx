@@ -52,7 +52,7 @@ export default function InstitutionsListView() {
       render: (tags: number[]) => (
         <>
           {tags.map(tag => (
-            <Tag color="blue" key={tag}>
+            <Tag color="default" key={tag}>
               {tag}
             </Tag>
           ))}

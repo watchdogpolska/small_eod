@@ -5,12 +5,12 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
+import { FetchSelect } from '../../components/FetchSelect';
 import { localeKeys } from '../../locales/pl-PL';
-import { DetailMatchParam } from '@/models/connect';
-import { Event } from '@/services/definitions';
-import { EventsService } from '@/services/events';
-import { FetchSelect } from '@/components/FetchSelect';
-import { AutocompleteService } from '@/services/autocomplete';
+import { DetailMatchParam } from '../../models/connect';
+import { AutocompleteService } from '../../services/autocomplete';
+import { Event } from '../../services/definitions';
+import { EventsService } from '../../services/events';
 
 const { TextArea } = Input;
 

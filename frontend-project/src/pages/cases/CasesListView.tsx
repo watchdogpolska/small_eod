@@ -1,14 +1,38 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Button, Space, Tag, Tooltip } from 'antd';
+import { Button, Space, Tag, Tooltip, Tabs } from 'antd';
 import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { CaseList } from '@/services/definitions';
+import { Case } from '@/services/definitions';
 import Table from '@/components/Table';
 import router from 'umi/router';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { CasesService } from '@/services/cases';
+import { FetchLink } from '@/components/FetchLink';
+import { AutocompleteService } from '@/services/autocomplete';
+import LettersListView from '../letters/LettersListView';
+import EventsListView from '../events/EventsListView';
+import NotesListView from '../notes/NotesListView';
+
+const { TabPane } = Tabs;
+
+const MemoCaseExpandedRow = React.memo(CaseExpandedRow);
+function CaseExpandedRow(props: { case: Case['id'] }) {
+  return (
+    <Tabs defaultActiveKey="1">
+      <TabPane tab={formatMessage({ id: localeKeys.menu.letters.self })} key="1">
+        <LettersListView case={props.case} inline />
+      </TabPane>
+      <TabPane tab={formatMessage({ id: localeKeys.menu.events.self })} key="2">
+        <EventsListView case={props.case} inline />
+      </TabPane>
+      <TabPane tab={formatMessage({ id: localeKeys.menu.notes.self })} key="3">
+        <NotesListView case={props.case} inline />
+      </TabPane>
+    </Tabs>
+  );
+}
 
 export default function CaseListsListView() {
   const tableActionRef = useRef<ActionType>();
@@ -24,11 +48,11 @@ export default function CaseListsListView() {
       .catch(() => tableActionRef.current?.reload());
   }
 
-  const columns: ProColumns<CaseList>[] = [
+  const columns: ProColumns<Case>[] = [
     {
       title: formatMessage({ id: fields.name }),
       dataIndex: 'id',
-      render: (_, record: CaseList) => <Link to={`/cases/edit/${record.id}`}>{record.name}</Link>,
+      render: (_, record: Case) => <Link to={`/cases/edit/${record.id}`}>{record.name}</Link>,
     },
     {
       title: formatMessage({ id: fields.auditedInstitutions }),
@@ -36,7 +60,13 @@ export default function CaseListsListView() {
       render: (_, record) => (
         <>
           {record.auditedInstitutions.map(auditedInstitution => (
-            <Tag key={auditedInstitution}>{auditedInstitution}</Tag>
+            <Tag color="blue" key={auditedInstitution}>
+              <FetchLink
+                route="institutions"
+                id={auditedInstitution}
+                autocompleteFunction={AutocompleteService.institutions}
+              />
+            </Tag>
           ))}
         </>
       ),
@@ -58,10 +88,10 @@ export default function CaseListsListView() {
     {
       title: formatMessage({ id: fields.tags }),
       dataIndex: 'tags',
-      render: (tags: number[]) => (
+      render: (_, record) => (
         <>
-          {tags.map(tag => (
-            <Tag color="blue" key={tag}>
+          {record.tags.map(tag => (
+            <Tag color="default" key={tag}>
               {tag}
             </Tag>
           ))}
@@ -106,6 +136,9 @@ export default function CaseListsListView() {
       pageHeader={list.pageHeaderContent}
       tableHeader={list.table.header}
       actionRef={tableActionRef}
+      expandable={{
+        expandedRowRender: record => <MemoCaseExpandedRow case={record.id} />,
+      }}
     />
   );
 }

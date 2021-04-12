@@ -1,13 +1,13 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Space, Spin, Switch } from 'antd';
+import { Button, Card, Col, Form, Input, Row, Space, Spin, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import { localeKeys } from '../../locales/pl-PL';
-import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
-import { DetailMatchParam } from '@/models/connect';
-import { ChannelsService } from '@/services/channels';
-import { Channel } from '@/services/definitions';
+import { DetailMatchParam } from '../../models/connect';
+import { ChannelsService } from '../../services/channels';
+import { Channel } from '../../services/definitions';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const layout = {
   labelCol: { span: 8 },

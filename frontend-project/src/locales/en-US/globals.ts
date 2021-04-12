@@ -8,6 +8,7 @@ export const globalsLocale = {
     total: 'Total',
     actions: 'Actions',
     failedDownload: 'Downloading elements failed',
+    filters: 'Filtering',
   },
   form: {
     save: 'Save',

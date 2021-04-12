@@ -2,15 +2,17 @@ import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { EventList } from '@/services/definitions';
+import { Event, Case } from '@/services/definitions';
 import Table from '@/components/Table';
 import router from 'umi/router';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { EventsService } from '@/services/events';
+import { FetchLink } from '@/components/FetchLink';
+import { AutocompleteService } from '@/services/autocomplete';
 
-export default function EventsListView() {
+export default function EventsListView(props: { case?: Case['id']; inline?: boolean }) {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.events;
 
@@ -24,16 +26,22 @@ export default function EventsListView() {
       .catch(() => tableActionRef.current?.reload());
   }
 
-  const columns: ProColumns<EventList>[] = [
+  const columns: ProColumns<Event>[] = [
     {
       title: formatMessage({ id: fields.name }),
       dataIndex: 'id',
-      render: (_, record: EventList) => <Link to={`/events/edit/${record.id}`}>{record.name}</Link>,
+      render: (_, record: Event) => <Link to={`/events/edit/${record.id}`}>{record.name}</Link>,
     },
     {
       title: formatMessage({ id: fields.case }),
       dataIndex: 'case',
-      render: (_, record: EventList) => record.case,
+      render: (_, record: Event) => (
+        <FetchLink
+          route="cases"
+          id={record.case}
+          autocompleteFunction={AutocompleteService.cases}
+        />
+      ),
     },
     {
       title: formatMessage({ id: fields.date }),
@@ -74,6 +82,8 @@ export default function EventsListView() {
       pageHeader={list.pageHeaderContent}
       tableHeader={list.table.header}
       actionRef={tableActionRef}
+      filters={{ case: props.case }}
+      inline={props.inline}
     />
   );
 }

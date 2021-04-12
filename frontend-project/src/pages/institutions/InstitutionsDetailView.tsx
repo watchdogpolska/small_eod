@@ -1,14 +1,17 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Select, Spin } from 'antd';
+import { Button, Card, Col, Form, Input, Row, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
-
+import { FetchSelect } from '../../components/FetchSelect';
 import { localeKeys } from '../../locales/pl-PL';
-import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
-import { DetailMatchParam } from '@/models/connect';
-import { Institution } from '@/services/definitions';
-import { InstitutionsService } from '@/services/institutions';
+import { DetailMatchParam } from '../../models/connect';
+import { AutocompleteService } from '../../services/autocomplete';
+import { Institution } from '../../services/definitions';
+import { InstitutionsService } from '../../services/institutions';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
+
+const { TextArea } = Input;
 
 const layout = {
   labelCol: { span: 8 },
@@ -94,20 +97,105 @@ export default function InstitutionsDetailView({ match }: DetailMatchParam) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: fields.administrativeDivision })}
-                name="administrative-division"
+                label={formatMessage({ id: fields.administrativeUnit })}
+                name="administrativeUnit"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({
-                      id: errors.administrativeDivision,
-                    }),
+                    message: formatMessage({ id: errors.administrativeUnit }),
                   },
                 ]}
               >
-                <Select
+                <FetchSelect
+                  mode={undefined}
                   placeholder={formatMessage({
-                    id: placeholders.administrativeDivision,
+                    id: placeholders.administrativeUnit,
+                  })}
+                  autocompleteFunction={AutocompleteService.administrativeUnits}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.email })} name="email">
+                <Input type="email" placeholder={formatMessage({ id: placeholders.email })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.city })} name="city">
+                <Input placeholder={formatMessage({ id: placeholders.city })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.epuap })} name="epuap">
+                <Input placeholder={formatMessage({ id: placeholders.epuap })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.street })} name="street">
+                <Input placeholder={formatMessage({ id: placeholders.street })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.postalCode })} name="postalCode">
+                <Input placeholder={formatMessage({ id: placeholders.postalCode })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.houseNo })} name="houseNo">
+                <Input placeholder={formatMessage({ id: placeholders.houseNo })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.flatNo })} name="flatNo">
+                <Input placeholder={formatMessage({ id: placeholders.flatNo })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.nip })} name="nip">
+                <Input placeholder={formatMessage({ id: placeholders.nip })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.regon })} name="regon">
+                <Input placeholder={formatMessage({ id: placeholders.regon })} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item label={formatMessage({ id: fields.comment })} name="comment">
+                <TextArea
+                  rows={4}
+                  placeholder={formatMessage({
+                    id: placeholders.comment,
                   })}
                 />
               </Form.Item>
@@ -115,42 +203,16 @@ export default function InstitutionsDetailView({ match }: DetailMatchParam) {
           </Row>
           <Row>
             <Col span={16}>
-              <Form.Item
-                label={formatMessage({ id: fields.address })}
-                name="address"
-                rules={[
-                  {
-                    required: true,
-                    message: formatMessage({ id: errors.address }),
-                  },
-                ]}
-              >
-                <Select placeholder={formatMessage({ id: placeholders.address })} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={16}>
-              <Form.Item
-                label={formatMessage({ id: fields.externalIdentifier })}
-                name="external-identifier"
-                rules={[
-                  {
-                    required: true,
-                    message: formatMessage({
-                      id: errors.externalIdentifier,
-                    }),
-                  },
-                ]}
-              >
-                <Select
-                  placeholder={formatMessage({
-                    id: placeholders.externalIdentifier,
-                  })}
+              <Form.Item label={formatMessage({ id: fields.tags })} name="tags">
+                <FetchSelect
+                  mode="tags"
+                  placeholder={formatMessage({ id: placeholders.tags })}
+                  autocompleteFunction={AutocompleteService.tags}
                 />
               </Form.Item>
             </Col>
           </Row>
+
           <Row>
             <Col span={16}>
               <Form.Item {...tailLayout}>

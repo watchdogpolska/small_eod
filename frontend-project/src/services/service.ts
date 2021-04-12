@@ -38,21 +38,15 @@ type ReadWriteErrorTranslations = ReadOnlyErrorTranslations & {
   createFailed: string;
 };
 
-export type ReadOnlyServiceType<
-  TList extends ResourceWithId,
-  TDetail extends ResourceWithId = TList
-> = {
-  fetchPage: (props: PaginationParams) => Promise<PaginationResponse<TList>>;
-  fetchOne: (id: TDetail['id']) => Promise<TDetail>;
+export type ReadOnlyServiceType<T extends ResourceWithId> = {
+  fetchPage: (props: PaginationParams) => Promise<PaginationResponse<T>>;
+  fetchOne: (id: T['id']) => Promise<T>;
 };
 
-export type ReadWriteServiceType<
-  TList extends ResourceWithId,
-  TDetail extends ResourceWithId = TList
-> = ReadOnlyServiceType<TList, TDetail> & {
-  create: (data: PostData<TDetail>) => Promise<TDetail>;
-  update: (data: TDetail) => Promise<TDetail>;
-  remove: (id: TDetail['id']) => Promise<TDetail['id']>;
+export type ReadWriteServiceType<T extends ResourceWithId> = ReadOnlyServiceType<T> & {
+  create: (data: PostData<T>) => Promise<T>;
+  update: (data: T) => Promise<T>;
+  remove: (id: T['id']) => Promise<T['id']>;
 };
 
 async function handleError<T>(promise: Promise<T>, errorId: string) {
@@ -68,19 +62,17 @@ async function handleError<T>(promise: Promise<T>, errorId: string) {
   }
 }
 
-export function ReadOnlyService<
-  TList extends ResourceWithId,
-  TDetail extends ResourceWithId = TList
->(props: {
-  readPage: (props: PageQueryType) => Promise<APIResponse<TList>>;
-  readOne: (id: TDetail['id']) => Promise<TDetail>;
+export function ReadOnlyService<T extends ResourceWithId>(props: {
+  readPage: (props: PageQueryType) => Promise<APIResponse<T>>;
+  readOne: (id: T['id']) => Promise<T>;
   translations: ReadOnlyErrorTranslations;
-}): ReadOnlyServiceType<TList, TDetail> {
-  function fetchPage(pageProps: PaginationParams): Promise<PaginationResponse<TList>> {
+}): ReadOnlyServiceType<T> {
+  function fetchPage(pageProps: PaginationParams): Promise<PaginationResponse<T>> {
     return handleError(
       props
         .readPage({
           ...pageProps,
+          query: !pageProps.query ? undefined : pageProps.query,
           limit: pageProps.pageSize || DEFAULT_FECTH_PAGE_SIZE,
           offset: pageProps.current ? pageProps.pageSize * (pageProps.current - 1) : 0,
         })
@@ -92,7 +84,7 @@ export function ReadOnlyService<
     );
   }
 
-  async function fetchOne(id: TDetail['id']): Promise<TDetail> {
+  async function fetchOne(id: T['id']): Promise<T> {
     return handleError(props.readOne(id), props.translations.fetchFailed);
   }
 
@@ -102,26 +94,23 @@ export function ReadOnlyService<
   };
 }
 
-export function ReadWriteService<
-  TList extends ResourceWithId,
-  TDetail extends ResourceWithId = TList
->(props: {
-  readPage: (props: PageQueryType) => Promise<APIResponse<TList>>;
-  readOne: (id: TDetail['id']) => Promise<TDetail>;
-  create: (data: PostData<TDetail>) => Promise<TDetail>;
-  update: (id: TDetail['id'], data: TDetail) => Promise<TDetail>;
-  remove: (id: TDetail['id']) => Promise<null>;
+export function ReadWriteService<T extends ResourceWithId>(props: {
+  readPage: (props: PageQueryType) => Promise<APIResponse<T>>;
+  readOne: (id: T['id']) => Promise<T>;
+  create: (data: PostData<T>) => Promise<T>;
+  update: (id: T['id'], data: T) => Promise<T>;
+  remove: (id: T['id']) => Promise<null>;
   translations: ReadWriteErrorTranslations;
-}): ReadWriteServiceType<TList, TDetail> {
-  function create(data: PostData<TDetail>): Promise<TDetail> {
+}): ReadWriteServiceType<T> {
+  function create(data: PostData<T>): Promise<T> {
     return handleError(props.create(data), props.translations.createFailed);
   }
 
-  function update(data: TDetail): Promise<TDetail> {
+  function update(data: T): Promise<T> {
     return handleError(props.update(data.id, data), props.translations.updateFailed);
   }
 
-  function remove(id: TDetail['id']): Promise<TDetail['id']> {
+  function remove(id: T['id']): Promise<T['id']> {
     return handleError(
       props.remove(id).then(() => id),
       props.translations.removeFailed,

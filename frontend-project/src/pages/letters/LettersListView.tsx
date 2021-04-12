@@ -2,15 +2,17 @@ import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { LetterList } from '@/services/definitions';
+import { Case, Letter } from '@/services/definitions';
 import Table from '@/components/Table';
 import router from 'umi/router';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { LettersService } from '@/services/letters';
+import { FetchLink } from '@/components/FetchLink';
+import { AutocompleteService } from '@/services/autocomplete';
 
-export default function LettersListView() {
+export default function LettersListView(props: { case?: Case['id']; inline?: boolean }) {
   const tableActionRef = useRef<ActionType>();
   const { fields, list, directions } = localeKeys.letters;
 
@@ -24,18 +26,24 @@ export default function LettersListView() {
       .catch(() => tableActionRef.current?.reload());
   }
 
-  const columns: ProColumns<LetterList>[] = [
+  const columns: ProColumns<Letter>[] = [
     {
       title: formatMessage({ id: fields.referenceNumber }),
       dataIndex: 'id',
-      render: (_, record: LetterList) => (
+      render: (_, record: Letter) => (
         <Link to={`/letters/edit/${record.id}`}>{record.referenceNumber}</Link>
       ),
     },
     {
       title: formatMessage({ id: fields.documentType }),
       dataIndex: 'documentType',
-      render: (_, record: LetterList) => <>{record.documentType}</>,
+      render: (_, record: Letter) => (
+        <FetchLink
+          route="documentTypes"
+          id={record.documentType}
+          autocompleteFunction={AutocompleteService.documentTypes}
+        />
+      ),
     },
     {
       title: formatMessage({ id: fields.comment }),
@@ -50,7 +58,13 @@ export default function LettersListView() {
     {
       title: formatMessage({ id: fields.channel }),
       dataIndex: 'channel',
-      render: (_, record: LetterList) => <>{record.channel}</>,
+      render: (_, record: Letter) => (
+        <FetchLink
+          route="channels"
+          id={record.channel}
+          autocompleteFunction={AutocompleteService.channels}
+        />
+      ),
     },
     {
       title: formatMessage({ id: fields.date }),
@@ -60,12 +74,24 @@ export default function LettersListView() {
     {
       title: formatMessage({ id: fields.case }),
       dataIndex: 'case',
-      render: (_, record: LetterList) => <>{record.case}</>,
+      render: (_, record: Letter) => (
+        <FetchLink
+          route="cases"
+          id={record.case}
+          autocompleteFunction={AutocompleteService.cases}
+        />
+      ),
     },
     {
       title: formatMessage({ id: fields.institution }),
       dataIndex: 'institution',
-      render: (_, record: LetterList) => <>{record.institution}</>,
+      render: (_, record: Letter) => (
+        <FetchLink
+          route="institutions"
+          id={record.institution}
+          autocompleteFunction={AutocompleteService.institutions}
+        />
+      ),
     },
     {
       title: formatMessage({ id: fields.createdOn }),
@@ -117,6 +143,11 @@ export default function LettersListView() {
       pageHeader={list.pageHeaderContent}
       tableHeader={list.table.header}
       actionRef={tableActionRef}
+      expandable={{
+        expandedRowRender: record => <>{record.comment}</>,
+      }}
+      filters={{ case: props.case }}
+      inline={props.inline}
     />
   );
 }

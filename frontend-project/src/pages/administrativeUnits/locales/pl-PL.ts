@@ -2,6 +2,7 @@ export const administrativeUnitsLocale = {
   administrativeUnits: {
     fields: {
       name: 'Nazwa',
+      category: 'Kategoria',
     },
     list: {
       pageHeaderContent: 'Lista jednostek administracyjnych',

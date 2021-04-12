@@ -17,7 +17,6 @@ export const lettersLocale = {
       modifiedOn: 'Zmodyfikowano',
       documentType: 'Typ dokumentu',
       final: 'Kończące',
-      excerpt: 'Streszczenie',
     },
     list: {
       pageHeaderContent: 'Lista listów',
@@ -38,8 +37,6 @@ export const lettersLocale = {
         case: 'Sprawa',
         institution: 'Audytowana instytucja',
         documentType: 'Typ dokumentu',
-        final: 'Czy kończące',
-        excerpt: 'Streszczenie',
       },
       errors: {
         referenceNumber: 'Sygnatura jest wymagana',

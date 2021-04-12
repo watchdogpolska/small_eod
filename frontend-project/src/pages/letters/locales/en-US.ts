@@ -17,7 +17,6 @@ export const lettersLocale = {
       modifiedOn: 'Modified on',
       documentType: 'Document type',
       final: 'Final',
-      excerpt: 'Excerpt',
     },
     list: {
       pageHeaderContent: 'Letters list',
@@ -38,8 +37,6 @@ export const lettersLocale = {
         case: 'Case',
         institution: 'Audited institution',
         documentType: 'Document type',
-        final: 'Is final',
-        excerpt: 'Excerpt',
       },
       errors: {
         referenceNumber: 'Reference number is required',

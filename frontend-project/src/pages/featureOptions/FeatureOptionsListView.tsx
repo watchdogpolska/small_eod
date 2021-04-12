@@ -9,6 +9,8 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { FeatureOptionsService } from '@/services/featureOptions';
+import { FetchLink } from '@/components/FetchLink';
+import { AutocompleteService } from '@/services/autocomplete';
 
 export default function FeatureOptionsListView() {
   const tableActionRef = useRef<ActionType>();
@@ -30,6 +32,17 @@ export default function FeatureOptionsListView() {
       dataIndex: 'name',
       render: (_, record: FeatureOption) => (
         <Link to={`/featureOptions/edit/${record.id}`}>{record.name}</Link>
+      ),
+    },
+    {
+      title: formatMessage({ id: fields.feature }),
+      dataIndex: 'feature',
+      render: (_, record: FeatureOption) => (
+        <FetchLink
+          route="features"
+          id={record.feature}
+          autocompleteFunction={AutocompleteService.features}
+        />
       ),
     },
     {

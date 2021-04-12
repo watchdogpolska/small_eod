@@ -1,11 +1,11 @@
 import { localeKeys } from '@/locales/pl-PL';
 import smallEodSDK from '@/utils/sdk';
-import { Letter, LetterList } from './definitions';
+import { Letter } from './definitions';
 import { ReadWriteService } from './service';
 
 const api = new smallEodSDK.LettersApi();
 
-export const LettersService = ReadWriteService<LetterList, Letter>({
+export const LettersService = ReadWriteService<Letter>({
   readPage: props => api.lettersList(props),
   readOne: id => api.lettersRead(id),
   create: data => api.lettersCreate(data),

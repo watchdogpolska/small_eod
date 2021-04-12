@@ -2,6 +2,7 @@ export const featureOptionsLocale = {
   featureOptions: {
     fields: {
       name: 'Name',
+      feature: 'Feature',
     },
     list: {
       pageHeaderContent: 'Feature options list',

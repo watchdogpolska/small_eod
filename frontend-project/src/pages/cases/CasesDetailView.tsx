@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import { localeKeys } from '../../locales/pl-PL';
-import { getFormErrorFromPromiseError } from '@/utils/getFormErrorFromPromiseError';
-import { DetailMatchParam } from '@/models/connect';
-import { FetchSelect } from '@/components/FetchSelect';
-import { CasesService } from '@/services/cases';
-import { Case } from '@/services/definitions';
-import { AutocompleteService } from '@/services/autocomplete';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
+import { DetailMatchParam } from '../../models/connect';
+import { FetchSelect } from '../../components/FetchSelect';
+import { CasesService } from '../../services/cases';
+import { Case } from '../../services/definitions';
+import { AutocompleteService } from '../../services/autocomplete';
 
 const { TextArea } = Input;
 
