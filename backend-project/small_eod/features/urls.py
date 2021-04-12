@@ -5,13 +5,12 @@ from .views import FeatureOptionViewSet, FeatureViewSet
 
 router = routers.SimpleRouter()
 router.register("features", FeatureViewSet)
-
-featureoption_router = routers.NestedSimpleRouter(router, "features", lookup="feature")
-featureoption_router.register(
-    "featureoption", FeatureOptionViewSet, basename="feature-featureoption"
+router.register(
+    "feature_options",
+    FeatureOptionViewSet,
+    basename="feature_option",
 )
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("", include(featureoption_router.urls)),
 ]

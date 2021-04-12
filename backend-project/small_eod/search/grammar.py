@@ -14,6 +14,7 @@ printables = pyparsing_unicode.printables
 alphas = pyparsing_unicode.alphas
 nums = pyparsing_unicode.nums
 alphanums = pyparsing_unicode.alphanums
+excludedChars = "()[],:\"'"
 
 
 class FieldExpr:
@@ -90,13 +91,16 @@ class SearchTerm:
 # the grammar
 AND, OR, NOT = map(CaselessLiteral, "AND OR NOT".split())
 
-searchTerm = Word(alphanums) | quotedString.setParseAction(removeQuotes)
+searchTerm = Word(printables, excludeChars=excludedChars) | quotedString.setParseAction(
+    removeQuotes
+)
 searchTerm.setParseAction(SearchTerm).setName("term")
 
 field_label = Word(alphas).setName("label") + FollowedBy(":")
-field_value = (Word(alphanums) | quotedString.setParseAction(removeQuotes)).setName(
-    "value"
-)
+field_value = (
+    Word(printables, excludeChars=excludedChars)
+    | quotedString.setParseAction(removeQuotes)
+).setName("value")
 field_expr = field_label + Suppress(":") + field_value
 field_expr.setParseAction(FieldExpr)
 

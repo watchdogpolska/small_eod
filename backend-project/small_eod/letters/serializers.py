@@ -46,7 +46,6 @@ class LetterSerializer(UserLogModelSerializer):
             "case",
             "attachments",
             "comment",
-            "excerpt",
             "document_type",
             "created_on",
             "created_by",

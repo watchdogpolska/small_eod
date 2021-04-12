@@ -13,8 +13,8 @@ from ...generic.tests.test_views import (
 )
 from ...search.tests.mixins import SearchQueryMixin
 from ...users.mixins import AuthenticatedMixin
-from ..factories import LetterFactory
-from ..serializers import LetterSerializer
+from ..factories import DocumentTypeFactory, LetterFactory
+from ..serializers import DocumentTypeSerializer, LetterSerializer
 
 
 class PresignedUploadFileTestCase(AuthenticatedMixin, APITestCase):
@@ -128,3 +128,34 @@ class LetterViewSetTestCase(
     def validate_update_item(self, item):
         self.assertEqual(item["id"], self.obj.pk)
         self.assertEqual(item["comment"], f"{self.obj.comment}-updated")
+
+
+class DocumentTypeViewSetTestCase(
+    GenericViewSetMixin,
+    SearchQueryMixin,
+    TestCase,
+):
+    basename = "document_type"
+    serializer_class = DocumentTypeSerializer
+    factory_class = DocumentTypeFactory
+
+    def test_create_minimum(self):
+        self.login_required()
+        name = "testowy-name"
+        response = self.client.post(
+            self.get_url(name="list", **self.get_extra_kwargs()),
+            data={"name": name},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 201, response.json())
+        item = response.json()
+        self.assertEqual(item["name"], name)
+
+    def get_create_data(self):
+        return {"name": f"{self.obj.name}-created"}
+
+    def validate_item(self, item):
+        self.assertEqual(item["name"], self.obj.name)
+
+    def validate_create_item(self, item):
+        self.assertEqual(item["name"], f"{self.obj.name}-created")

@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from .filterset import UserFilterSet
 from .providers import GoogleProvider
 from .serializers import (
     RefreshTokenRequestSerializer,
@@ -31,6 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
         scopes=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE,
     )
     filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_class = UserFilterSet
     ordering_fields = [
         "id",
         "username",
