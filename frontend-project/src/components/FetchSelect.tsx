@@ -42,6 +42,16 @@ export function FetchSelect<
     );
   };
 
+  function extractOptionsFromApiResults(results: T[]) {
+    return results.map(
+      result =>
+        ({
+          label: result[searchField] as string,
+          value: mode === 'tags' ? result[searchField] : result.id,
+        } as OptionsType),
+    );
+  }
+
   useEffect(() => {
     const arrayValue = Array.isArray(value) ? value : [value];
     if (
@@ -59,18 +69,10 @@ export function FetchSelect<
       pageSize: 10,
     })
       .then(autocompleteResults => {
-        setShownOptions(
-          autocompleteResults.map(
-            result =>
-              ({
-                label: result[searchField] as string,
-                value: mode === 'tags' ? result[searchField] : result.id,
-              } as OptionsType),
-          ),
-        );
-        setFetching(false);
+        setShownOptions(extractOptionsFromApiResults(autocompleteResults));
       })
-      .catch(onError);
+      .catch(onError)
+      .finally(() => setFetching(false));
   }, []);
 
   const debounceFetcher = (search: string) => {
@@ -83,18 +85,10 @@ export function FetchSelect<
         pageSize: 10,
       })
         .then(autocompleteResults => {
-          setAutocompleteOptions(
-            autocompleteResults.map(
-              result =>
-                ({
-                  label: result[searchField] as string,
-                  value: mode === 'tags' ? result[searchField] : result.id,
-                } as OptionsType),
-            ),
-          );
-          setFetching(false);
+          setAutocompleteOptions(extractOptionsFromApiResults(autocompleteResults));
         })
-        .catch(onError),
+        .catch(onError)
+        .finally(() => setFetching(false)),
     );
   };
 
