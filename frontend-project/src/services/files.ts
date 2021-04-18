@@ -8,7 +8,7 @@ const api = new smallEodSDK.LettersApi();
 export const FileService = (letter: Letter) => ({
   uploadFile: (name: string, file: File | Blob) => {
     return handleError<string>(
-      (async function () {
+      (async () => {
         const signRequest: SignRequest = await api.lettersFilesSignCreate({ name });
 
         const formData = new FormData();

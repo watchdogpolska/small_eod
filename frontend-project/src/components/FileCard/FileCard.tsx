@@ -7,7 +7,7 @@ import styles from './file-card.less';
 export function FileCard(props: { file: File; onRemove: () => Promise<any> }) {
   const [isRemoving, setRemoving] = useState(false);
   return (
-    <div className={styles.downloadCard}>
+    <div className={styles.fileCard}>
       <a href={props.file.downloadUrl} target="_blank" rel="noopener noreferrer">
         {props.file.name}
       </a>
@@ -21,7 +21,7 @@ export function FileCard(props: { file: File; onRemove: () => Promise<any> }) {
             setRemoving(true);
             props.onRemove().catch(() => setRemoving(false));
           }}
-          className={styles.downloadCardButton}
+          className={styles.fileCardButton}
           danger
         />
       )}

@@ -23,7 +23,7 @@ function LetterExpandedRow(props: { letter: Letter }) {
       .then(() => setAttachments(files => files.filter(file => file.id !== fileId)));
   }
   return (
-    <div>
+    <div style={{ display: 'flex' }}>
       {attachments.map(attachment => (
         <FileCard
           key={attachment.id}
