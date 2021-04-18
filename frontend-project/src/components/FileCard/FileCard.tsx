@@ -8,7 +8,7 @@ export function FileCard(props: { file: File; onRemove: () => Promise<any> }) {
   const [isRemoving, setRemoving] = useState(false);
   return (
     <div className={styles.downloadCard}>
-      <a href={props.file.downloadUrl} target="_blank" rel="noreferer noopener">
+      <a href={props.file.downloadUrl} target="_blank" rel="noopener noreferrer">
         {props.file.name}
       </a>
       {isRemoving ? (
