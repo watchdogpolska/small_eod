@@ -1,14 +1,17 @@
+import { Uploader } from '@/components/Uploader/Uploader';
+import { FileService } from '@/services/files';
+import { PostData } from '@/services/service';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Spin, Switch } from 'antd';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Spin, Switch } from 'antd';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import { FetchSelect } from '../../components/FetchSelect';
 import { localeKeys } from '../../locales/pl-PL';
 import { DetailMatchParam } from '../../models/connect';
 import { AutocompleteService } from '../../services/autocomplete';
-import { Letter } from '../../services/definitions';
+import { File as ResourceFile, Letter } from '../../services/definitions';
 import { LettersService } from '../../services/letters';
 import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
@@ -29,6 +32,7 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editedItem, setEditedItem] = useState<Letter | undefined>();
   const [form] = Form.useForm();
+  const letterFileService = editedItem && FileService(editedItem);
   const {
     directions,
     fields,
@@ -41,20 +45,43 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
 
   function onError(response: any) {
     setIsSubmitting(false);
-    if (response?.statusCode === 400) {
+    if (response?.status === 400) {
       form.setFields(getFormErrorFromPromiseError(response));
     }
   }
 
-  function onSubmit() {
-    const action = isEdit ? LettersService.update : LettersService.create;
-    action({
-      ...(form.getFieldsValue() as Letter),
-      id: Number(match.params.id),
-    })
-      .then(() => router.push('/letters'))
-      .catch(onError);
-    setIsSubmitting(true);
+  const submit = useCallback(
+    async (edit: boolean = false) => {
+      try {
+        await form.validateFields();
+      } catch {
+        return;
+      }
+      const action = isEdit ? LettersService.update : LettersService.create;
+      action({
+        ...(form.getFieldsValue() as Letter),
+        id: Number(match.params.id),
+      })
+        .then(letter =>
+          edit ? router.push(`/letters/edit/${letter.id}`) : router.push('/letters'),
+        )
+        .catch(onError);
+      setIsSubmitting(true);
+    },
+    [form],
+  );
+
+  function onAttachmentUpload(file: File): Promise<ResourceFile> {
+    return letterFileService.uploadFile(file.name, file).then(path =>
+      letterFileService.create({
+        path,
+        name: file.name,
+      } as PostData<ResourceFile>),
+    );
+  }
+
+  function onAttachmentRemove(fileId: ResourceFile['id']) {
+    return letterFileService?.remove(fileId);
   }
 
   if ((isEdit && !editedItem) || isSubmitting) {
@@ -73,7 +100,7 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
     });
 
   return (
-    <Form {...layout} form={form} onFinish={onSubmit}>
+    <Form {...layout} form={form}>
       <PageHeaderWrapper
         content={formatMessage({
           id: isEdit ? editPageHeaderContent : newPageHeaderContent,
@@ -99,7 +126,11 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
 
           <Row>
             <Col span={16}>
-              <Form.Item label={formatMessage({ id: fields.final })} name="final">
+              <Form.Item
+                label={formatMessage({ id: fields.final })}
+                name="final"
+                valuePropName="checked"
+              >
                 <Switch />
               </Form.Item>
             </Col>
@@ -201,20 +232,38 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
             </Col>
           </Row>
 
-          <Row>
-            <Col span={16}>
-              <Form.Item label={formatMessage({ id: fields.institution })} name="institution">
-                <Input type="file" multiple />
-              </Form.Item>
-            </Col>
-          </Row>
+          {isEdit && (
+            <Row>
+              <Col span={16}>
+                <Form.Item label={formatMessage({ id: fields.institution })}>
+                  <Uploader
+                    files={editedItem.attachments}
+                    onUpload={onAttachmentUpload}
+                    onRemove={onAttachmentRemove}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          )}
 
           <Row>
             <Col span={16}>
               <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                  <FormattedMessage id={localeKeys.form.save} />
-                </Button>
+                {editedItem ? (
+                  <Button type="primary" onClick={() => submit()} htmlType="button">
+                    <FormattedMessage id={localeKeys.form.save} />
+                  </Button>
+                ) : (
+                  <Space size="small" direction="horizontal">
+                    <Button type="default" onClick={() => submit()} htmlType="button">
+                      <FormattedMessage id={localeKeys.form.save} />
+                    </Button>
+
+                    <Button type="primary" onClick={() => submit(true)} htmlType="button">
+                      <FormattedMessage id={localeKeys.form.saveAndEdit} />
+                    </Button>
+                  </Space>
+                )}
               </Form.Item>
             </Col>
           </Row>

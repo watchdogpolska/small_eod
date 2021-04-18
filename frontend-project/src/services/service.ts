@@ -49,7 +49,7 @@ export type ReadWriteServiceType<T extends ResourceWithId> = ReadOnlyServiceType
   remove: (id: T['id']) => Promise<T['id']>;
 };
 
-async function handleError<T>(promise: Promise<T>, errorId: string) {
+export async function handleError<T>(promise: Promise<T>, errorId: string) {
   try {
     return await promise;
   } catch (error: any) {

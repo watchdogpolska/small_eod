@@ -21,7 +21,7 @@ export function FetchLink<
   labelField,
 }: {
   route: keyof AutocompleteServiceType;
-  id: ResourceWithId['id'];
+  id: ResourceWithId['id'] | null;
   autocompleteFunction: AutocompleteFunctionType<T>;
   labelField?: SearchField;
 }) {
@@ -37,8 +37,9 @@ export function FetchLink<
   };
 
   useEffect(() => {
+    if (!id) return;
     autocompleteFunction({
-      query: id ? QQ.field('id', id) : undefined,
+      query: QQ.field('id', id),
       pageSize: 10,
     })
       .then(autocompleteResults => {
@@ -48,5 +49,6 @@ export function FetchLink<
       .catch(onError);
   }, []);
 
+  if (!id) return null;
   return isFetching ? <Spin size="small" /> : <Link to={`/${route}/edit/${id}/`}>{label}</Link>;
 }

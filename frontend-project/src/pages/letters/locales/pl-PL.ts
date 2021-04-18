@@ -10,13 +10,14 @@ export const lettersLocale = {
       referenceNumber: 'Sygnatura',
       channel: 'Kanał',
       date: 'Data odbioru / Data wysłania',
-      attachments: 'Liczba załączników',
+      numberAttachments: 'Liczba załączników',
       case: 'Sprawa',
       institution: 'Audytowana instytucja',
       createdOn: 'Utworzono',
       modifiedOn: 'Zmodyfikowano',
       documentType: 'Typ dokumentu',
       final: 'Kończące',
+      attachments: 'Załączniki',
     },
     list: {
       pageHeaderContent: 'Lista listów',
@@ -47,6 +48,14 @@ export const lettersLocale = {
       removeFailed: 'Nie udało się usunąć listu.',
       updateFailed: 'Edycja listu nie powiodła się.',
       createFailed: 'Utworzenie listu nie powiodło się.',
+    },
+  },
+  files: {
+    errors: {
+      fetchFailed: 'Nie udało się pobrać pliku',
+      removeFailed: 'Nie udało się usunąć pliku.',
+      updateFailed: 'Edycja pliku nie powiodła się.',
+      createFailed: 'Utworzenie pliku nie powiodło się.',
     },
   },
 };
