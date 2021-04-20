@@ -7,10 +7,10 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import SelectLang from '@/components/SelectLang';
 import { ConnectState, Route } from '@/models/connect';
-import logo from '../assets/logo.svg';
-import styles from './UserLayout.less';
+import logo from '../assets/logo.png';
+import styles from './LoginLayout.less';
 
-export interface UserLayoutProps {
+export interface LoginLayoutProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };
@@ -18,7 +18,7 @@ export interface UserLayoutProps {
   location: Location;
 }
 
-const UserLayout: FC<UserLayoutProps> = props => {
+const LoginLayout: FC<LoginLayoutProps> = props => {
   const {
     route = {
       routes: [],
@@ -52,12 +52,14 @@ const UserLayout: FC<UserLayoutProps> = props => {
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
-              <Link to="/">
+              <Link to="/" className={styles.headerLink}>
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                <h1 className={styles.title}>Small EOD</h1>
               </Link>
             </div>
-            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+            <div className={styles.desc}>
+              System elektronicznego obiegu dokumentów fundacji Watchdog Polska
+            </div>
           </div>
           {children}
         </div>
@@ -67,4 +69,4 @@ const UserLayout: FC<UserLayoutProps> = props => {
   );
 };
 
-export default connect(({ settings }: ConnectState) => ({ ...settings }))(UserLayout);
+export default connect(({ settings }: ConnectState) => ({ ...settings }))(LoginLayout);

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg2 import openapi
 from drf_yasg2.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -67,7 +68,18 @@ class UserViewSet(viewsets.ModelViewSet):
         operation_description="API endpoint to exchange "
         + "authorization code to access token",
         responses={200: TokenResponseSerializer()},
-        manual_parameters=[],
+        manual_parameters=[
+            openapi.Parameter("authuser", openapi.IN_QUERY, type=openapi.TYPE_STRING),
+            openapi.Parameter("code", openapi.IN_QUERY, type=openapi.TYPE_STRING),
+            openapi.Parameter("prompt", openapi.IN_QUERY, type=openapi.TYPE_STRING),
+            openapi.Parameter(
+                "scope",
+                openapi.IN_QUERY,
+                description="scope of OAuth consents",
+                type=openapi.TYPE_STRING,
+            ),
+            openapi.Parameter("state", openapi.IN_QUERY, type=openapi.TYPE_STRING),
+        ],
         security=[],
     )
     def exchange(self, request):
