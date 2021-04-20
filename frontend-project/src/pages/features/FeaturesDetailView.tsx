@@ -29,8 +29,9 @@ export default function FeaturesDetailView({ match }: DetailMatchParam) {
   } = localeKeys.features;
 
   useEffect(() => {
-    if (isEdit)
+    if (isEdit) {
       FeaturesService.fetchOne(Number(match.params.id)).then(response => setEditedItem(response));
+    }
   }, []);
 
   function onError(response: any) {

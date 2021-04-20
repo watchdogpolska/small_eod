@@ -11,7 +11,7 @@ import { ReadOnlyServiceType, ResourceWithId } from '../../services/service';
 
 const { Search } = Input;
 
-function SearchContainer(props: { value: string; onSearch: (value: string) => void }) {
+function SearchInput(props: { value: string; onSearch: (value: string) => void }) {
   const [value, setValue] = useState(props.value || '');
   return (
     <Search
@@ -65,20 +65,17 @@ function Table<T extends ResourceWithId>({
     usedActionRef.current.reload();
   }
 
+  const filterFromParams = filters
+    ? Object.entries(filters).reduce(
+        (acc, [field, value]) => QQ.and(acc, QQ.field(field, value)),
+        '',
+      )
+    : '';
+
   function fetchFromService(props: PaginationParams) {
     return service.fetchPage({
       ...props,
-      query: QQ.and(
-        props.query,
-        QQ.and(
-          filter,
-          filters &&
-            Object.entries(filters).reduce(
-              (acc, [field, value]) => QQ.and(acc, QQ.field(field, value)),
-              '',
-            ),
-        ),
-      ),
+      query: QQ.and(props.query, QQ.and(filter, filterFromParams)),
     });
   }
 
@@ -97,7 +94,7 @@ function Table<T extends ResourceWithId>({
       <Row gutter={[16, 16]}>
         {!disableFilter && !inline && (
           <Col span={24} className="gutter-row">
-            <SearchContainer value={filter} onSearch={onSearch} />
+            <SearchInput value={filter} onSearch={onSearch} />
           </Col>
         )}
 

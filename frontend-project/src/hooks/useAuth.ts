@@ -6,6 +6,7 @@ export function useAuth() {
   const ACCESS_TOKEN = 'accessToken';
   const REFRESH_TOKEN = 'refreshToken';
   const EXPIRES = 'expires';
+  const EXPIRES_FALLBACK = 10000;
 
   function initSDK(accessToken) {
     const clientBearer = SmallEodClient.ApiClient.instance.authentications.Bearer;
@@ -22,12 +23,13 @@ export function useAuth() {
   function refreshToken(): void {
     if (isLoggedIn())
       UsersService.refresh({ refreshToken: localStorage.getItem(REFRESH_TOKEN) })
-        .then(response => setTokens(response))
-        .catch(() => logout());
+        .then(setTokens)
+        .catch(logout);
   }
 
   function expires(): number {
-    return isLoggedIn() ? Number(localStorage.getItem(EXPIRES)) : 10000;
+    const expiresLS = Number(localStorage.getItem(EXPIRES));
+    return isLoggedIn() && expiresLS ? expiresLS : EXPIRES_FALLBACK;
   }
 
   function isLoggedIn(): boolean {

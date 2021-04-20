@@ -44,9 +44,9 @@ export function FetchLink<
     })
       .then(autocompleteResults => {
         setLabel((autocompleteResults?.[0][searchField] as string) || '');
-        setFetching(false);
       })
-      .catch(onError);
+      .catch(onError)
+      .finally(() => setFetching(false));
   }, []);
 
   if (!id) return null;

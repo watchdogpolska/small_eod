@@ -58,7 +58,8 @@ const LoginLayout: FC<LoginLayoutProps> = props => {
               </Link>
             </div>
             <div className={styles.desc}>
-              System elektronicznego obiegu dokumentów fundacji Watchdog Polska
+              System elektronicznego obiegu dokumentów stowarzyszenia Sieć Obywatelska Watchdog
+              Polska
             </div>
           </div>
           {children}
