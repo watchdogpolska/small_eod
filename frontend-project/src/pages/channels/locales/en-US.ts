@@ -13,7 +13,6 @@ export const channelsLocale = {
     },
     list: {
       pageHeaderContent: 'Channels list',
-      failedRemove: 'Cannot delete channel.',
       table: {
         header: 'Channels list',
       },
@@ -26,9 +25,13 @@ export const channelsLocale = {
       },
       errors: {
         name: 'Name is required',
-        updateFailed: 'Editing the channel failed.',
-        createFailed: 'Creation of the channel failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download channels.',
+      removeFailed: 'Cannot delete channel.',
+      updateFailed: 'Editing the channel failed.',
+      createFailed: 'Creation of the channel failed.',
     },
   },
 };

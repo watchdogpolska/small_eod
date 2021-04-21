@@ -1,20 +1,13 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { Button, Card, Col, Form, Input, Row, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Tag } from '@/services/definitions';
-import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { RouterTypes } from 'umi';
-import { ServiceResponse } from '@/services/service';
-import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
-
-interface TagsDetailViewProps {
-  tags: ReduxResourceState<Tag>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
-}
+import { DetailMatchParam } from '../../models/connect';
+import { Tag } from '../../services/definitions';
+import { TagsService } from '../../services/tags';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,62 +18,42 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function TagsDetailView({ tags, match }: TagsDetailViewProps) {
-  const dispatch = useDispatch();
+export default function TagsDetailView({ match }: DetailMatchParam) {
   const isEdit = Boolean(match.params.id);
-  const editetTags = tags.data.find(value => value.id === Number(match.params.id));
+  const [editedItem, setEditedItem] = useState<Tag | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form] = Form.useForm();
-  function onRequestDone(response: ServiceResponse<Tag>) {
+  const {
+    fields,
+    detailView: { errors, placeholders, editPageHeaderContent, newPageHeaderContent },
+  } = localeKeys.tags;
+
+  useEffect(() => {
+    if (isEdit)
+      TagsService.fetchOne(Number(match.params.id)).then(response => setEditedItem(response));
+  }, []);
+
+  function onError(response: any) {
     setIsSubmitting(false);
-    if (response.status === 'success') {
-      router.push('/tags/list');
-    } else if (response.statusCode === 400) {
-      form.setFields(
-        Array.from(
-          Object.entries(response.errorBody),
-        ).map(([name, errors]: [string, Array<string>]) => ({ name, errors })),
-      );
-    } else {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        `${formatMessage({
-          id: isEdit
-            ? localeKeys.tags.detailView.errors.updateFailed
-            : localeKeys.tags.detailView.errors.createFailed,
-        })} ${response.errorText}`,
-      );
+    if (response?.statusCode === 400) {
+      form.setFields(getFormErrorFromPromiseError(response));
     }
   }
 
-  function onFinish() {
-    if (isEdit) {
-      dispatch({
-        type: 'tags/update',
-        payload: {
-          ...form.getFieldsValue(),
-          id: match.params.id,
-          onResponse: onRequestDone,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'tags/create',
-        payload: {
-          ...form.getFieldsValue(),
-          onResponse: onRequestDone,
-        },
-      });
-    }
+  function onSubmit() {
+    const action = isEdit ? TagsService.update : TagsService.create;
+    action({
+      ...(form.getFieldsValue() as Tag),
+      id: Number(match.params.id),
+    })
+      .then(() => {
+        router.push('/tags');
+      })
+      .catch(onError);
     setIsSubmitting(true);
   }
 
-  useEffect(() => {
-    if (isEdit) dispatch({ type: 'tags/fetchOne', payload: { id: Number(match.params.id) } });
-  }, []);
-
-  if (tags.isLoading || (isEdit && !editetTags) || isSubmitting) {
+  if ((isEdit && !editedItem) || isSubmitting) {
     return (
       <Row justify="center">
         <Col>
@@ -89,44 +62,38 @@ function TagsDetailView({ tags, match }: TagsDetailViewProps) {
       </Row>
     );
   }
-  if (isEdit) form.setFieldsValue(editetTags);
+  if (isEdit) form.setFieldsValue(editedItem);
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={onSubmit}>
       <PageHeaderWrapper
         content={formatMessage({
-          id: isEdit
-            ? localeKeys.tags.detailView.editPageHeaderContent
-            : localeKeys.tags.detailView.newPageHeaderContent,
+          id: isEdit ? editPageHeaderContent : newPageHeaderContent,
         })}
       >
         <Card bordered={false}>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.tags.fields.name })}
+                label={formatMessage({ id: fields.name })}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.tags.detailView.errors.name }),
+                    message: formatMessage({ id: errors.name }),
                   },
                 ]}
               >
-                <Input
-                  placeholder={formatMessage({ id: localeKeys.tags.detailView.placeholders.name })}
-                />
+                <Input placeholder={formatMessage({ id: placeholders.name })} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item {...tailLayout}>
-                <Space>
-                  <Button type="primary" htmlType="submit">
-                    <FormattedMessage id={localeKeys.form.save} />
-                  </Button>
-                </Space>
+                <Button type="primary" htmlType="submit">
+                  <FormattedMessage id={localeKeys.form.save} />
+                </Button>
               </Form.Item>
             </Col>
           </Row>
@@ -135,5 +102,3 @@ function TagsDetailView({ tags, match }: TagsDetailViewProps) {
     </Form>
   );
 }
-
-export default connect((props: TagsDetailViewProps) => props)(TagsDetailView);

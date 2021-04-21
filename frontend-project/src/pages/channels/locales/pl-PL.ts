@@ -13,7 +13,7 @@ export const channelsLocale = {
     },
     list: {
       pageHeaderContent: 'Lista kanałów',
-      failedRemove: 'Nie udało się usunąć kanału.',
+
       table: {
         header: 'Lista kanałów',
       },
@@ -26,9 +26,13 @@ export const channelsLocale = {
       },
       errors: {
         name: 'Nazwa jest wymagana',
-        updateFailed: 'Edycja kanału nie powiodła się.',
-        createFailed: 'Utworzenie kanału nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać kanałów',
+      removeFailed: 'Nie udało się usunąć kanału.',
+      updateFailed: 'Edycja kanału nie powiodła się.',
+      createFailed: 'Utworzenie kanału nie powiodło się.',
     },
   },
 };

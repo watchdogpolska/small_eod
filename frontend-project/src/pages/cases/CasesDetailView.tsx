@@ -1,27 +1,17 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Select, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { Button, Col, Card, Form, Input, Row, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Institution, User, Tag, Case, Feature } from '@/services/definitions';
-import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { RouterTypes } from 'umi';
-import { ServiceResponse } from '@/services/service';
-import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
-
-interface CasesDetailViewProps {
-  cases: ReduxResourceState<Case>;
-  tags: ReduxResourceState<Tag>;
-  users: ReduxResourceState<User>;
-  institutions: Institution[];
-  features: ReduxResourceState<Feature>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
-}
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
+import { DetailMatchParam } from '../../models/connect';
+import { FetchSelect } from '../../components/FetchSelect';
+import { CasesService } from '../../services/cases';
+import { Case } from '../../services/definitions';
+import { AutocompleteService } from '../../services/autocomplete';
 
 const { TextArea } = Input;
-const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -32,81 +22,41 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function CasesDetailView({
-  cases,
-  tags,
-  users,
-  institutions,
-  features,
-  match,
-}: CasesDetailViewProps) {
-  const dispatch = useDispatch();
+export default function CasesDetailView({ match }: DetailMatchParam) {
   const isEdit = Boolean(match.params.id);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const editedCase = cases.data.find(value => value.id === Number(match.params.id));
+  const [editedItem, setEditedItem] = useState<Case | undefined>();
   const [form] = Form.useForm();
+  const {
+    fields,
+    detailView: { editPageHeaderContent, newPageHeaderContent, placeholders, errors },
+  } = localeKeys.cases;
 
-  function onRequestDone(response: ServiceResponse<Case>) {
+  useEffect(() => {
+    if (isEdit)
+      CasesService.fetchOne(Number(match.params.id)).then(response => setEditedItem(response));
+  }, []);
+
+  function onError(response: any) {
     setIsSubmitting(false);
-    if (response.status === 'success') {
-      router.push('/cases');
-    } else if (response.statusCode === 400) {
-      form.setFields(
-        Array.from(
-          Object.entries(response.errorBody),
-        ).map(([name, errors]: [string, Array<string>]) => ({ name, errors })),
-      );
-    } else {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        `${formatMessage({
-          id: isEdit
-            ? localeKeys.cases.detailView.errors.updateFailed
-            : localeKeys.cases.detailView.errors.createFailed,
-        })} ${response.errorText}`,
-      );
+    if (response?.statusCode === 400) {
+      form.setFields(getFormErrorFromPromiseError(response));
     }
   }
-
-  function onFinish() {
-    if (isEdit) {
-      dispatch({
-        type: 'cases/update',
-        payload: {
-          ...form.getFieldsValue(),
-          id: match.params.id,
-          onResponse: onRequestDone,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'cases/create',
-        payload: {
-          ...form.getFieldsValue(),
-          onResponse: onRequestDone,
-        },
-      });
-    }
+  function onSubmit() {
+    const action = isEdit ? CasesService.update : CasesService.create;
+    action({
+      ...(form.getFieldsValue() as Case),
+      id: Number(match.params.id),
+    })
+      .then(() => {
+        router.push('/cases');
+      })
+      .catch(onError);
     setIsSubmitting(true);
   }
 
-  useEffect(() => {
-    dispatch({ type: 'tags/fetchAll' });
-    dispatch({ type: 'users/fetchAll' });
-    dispatch({ type: 'institutions/fetchAll' });
-    dispatch({ type: 'features/fetchAll' });
-    if (isEdit) dispatch({ type: 'cases/fetchOne', payload: { id: Number(match.params.id) } });
-  }, []);
-
-  if (
-    cases.isLoading ||
-    tags.isLoading ||
-    users.isLoading ||
-    features.isLoading ||
-    (isEdit && !editedCase) ||
-    isSubmitting
-  ) {
+  if ((isEdit && !editedItem) || isSubmitting) {
     return (
       <Row justify="center">
         <Col>
@@ -115,52 +65,48 @@ function CasesDetailView({
       </Row>
     );
   }
-  if (isEdit) form.setFieldsValue(editedCase);
+  if (isEdit) form.setFieldsValue(editedItem);
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={onSubmit}>
       <PageHeaderWrapper
         content={formatMessage({
-          id: isEdit
-            ? localeKeys.cases.detailView.editPageHeaderContent
-            : localeKeys.cases.detailView.newPageHeaderContent,
+          id: isEdit ? editPageHeaderContent : newPageHeaderContent,
         })}
       >
         <Card bordered={false}>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.name })}
+                label={formatMessage({ id: fields.name })}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.cases.detailView.errors.name }),
+                    message: formatMessage({ id: errors.name }),
                   },
                 ]}
               >
-                <Input
-                  placeholder={formatMessage({ id: localeKeys.cases.detailView.placeholders.name })}
-                />
+                <Input placeholder={formatMessage({ id: placeholders.name })} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.comment })}
+                label={formatMessage({ id: fields.comment })}
                 name="comment"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.cases.detailView.errors.comment }),
+                    message: formatMessage({ id: errors.comment }),
                   },
                 ]}
               >
                 <TextArea
                   rows={4}
                   placeholder={formatMessage({
-                    id: localeKeys.cases.detailView.placeholders.comment,
+                    id: placeholders.comment,
                   })}
                 />
               </Form.Item>
@@ -169,130 +115,99 @@ function CasesDetailView({
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.tags })}
+                label={formatMessage({ id: fields.tags })}
                 name="tags"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.cases.detailView.errors.tags }),
+                    message: formatMessage({ id: errors.tags }),
                   },
                 ]}
               >
-                <Select
+                <FetchSelect
                   mode="tags"
-                  placeholder={formatMessage({ id: localeKeys.cases.detailView.placeholders.tags })}
-                >
-                  {tags.data.map(tag => (
-                    <Option key={tag.name} value={tag.name}>
-                      {tag.name}
-                    </Option>
-                  ))}
-                </Select>
+                  placeholder={formatMessage({ id: placeholders.tags })}
+                  autocompleteFunction={AutocompleteService.tags}
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.features })}
+                label={formatMessage({ id: fields.featureOptions })}
                 name="featureoptions"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.cases.detailView.errors.features }),
+                    message: formatMessage({ id: errors.featureOptions }),
                   },
                 ]}
               >
-                <Select
+                <FetchSelect
                   mode="multiple"
                   placeholder={formatMessage({
-                    id: localeKeys.cases.detailView.placeholders.features,
+                    id: placeholders.featureOptions,
                   })}
-                >
-                  {features.data.map(feature => (
-                    <Option key={feature.id} value={feature.id}>
-                      {feature.name}
-                    </Option>
-                  ))}
-                </Select>
+                  autocompleteFunction={AutocompleteService.featureOptions}
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.auditedInstitutions })}
+                label={formatMessage({ id: fields.auditedInstitutions })}
                 name="auditedInstitutions"
               >
-                <Select
+                <FetchSelect
                   mode="multiple"
                   placeholder={formatMessage({
-                    id: localeKeys.cases.detailView.placeholders.auditedInstitutions,
+                    id: placeholders.auditedInstitutions,
                   })}
-                >
-                  {institutions.map(institution => (
-                    <Option key={institution.id} value={institution.id}>
-                      {institution.name}
-                    </Option>
-                  ))}
-                </Select>
+                  autocompleteFunction={AutocompleteService.institutions}
+                />
               </Form.Item>
             </Col>
           </Row>
 
           <Row>
             <Col span={16}>
-              <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.notifiedUsers })}
-                name="notifiedUsers"
-              >
-                <Select
+              <Form.Item label={formatMessage({ id: fields.notifiedUsers })} name="notifiedUsers">
+                <FetchSelect
                   mode="multiple"
                   placeholder={formatMessage({
-                    id: localeKeys.cases.detailView.placeholders.notifiedUsers,
+                    id: placeholders.notifiedUsers,
                   })}
-                >
-                  {users.data.map(user => (
-                    <Option key={user.id} value={user.id}>
-                      {user.username}
-                    </Option>
-                  ))}
-                </Select>
+                  autocompleteFunction={AutocompleteService.users}
+                  labelField="username"
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.cases.fields.responsibleUsers })}
+                label={formatMessage({ id: fields.responsibleUsers })}
                 name="responsibleUsers"
               >
-                <Select
+                <FetchSelect
                   mode="multiple"
                   placeholder={formatMessage({
-                    id: localeKeys.cases.detailView.placeholders.responsibleUsers,
+                    id: placeholders.responsibleUsers,
                   })}
-                >
-                  {users.data.map(user => (
-                    <Option key={user.id} value={user.id}>
-                      {user.username}
-                    </Option>
-                  ))}
-                </Select>
+                  autocompleteFunction={AutocompleteService.users}
+                  labelField="username"
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
               <Form.Item {...tailLayout}>
-                <Space>
-                  <Button type="default" htmlType="reset">
-                    <FormattedMessage id={localeKeys.form.reset} />
-                  </Button>
-                  <Button type="primary" htmlType="submit">
-                    <FormattedMessage id={localeKeys.form.save} />
-                  </Button>
-                </Space>
+                <Button type="primary" htmlType="submit">
+                  <FormattedMessage id={localeKeys.form.save} />
+                </Button>
               </Form.Item>
             </Col>
           </Row>
@@ -301,5 +216,3 @@ function CasesDetailView({
     </Form>
   );
 }
-
-export default connect((props: CasesDetailViewProps) => props)(CasesDetailView);

@@ -9,7 +9,6 @@ export const usersLocale = {
     },
     list: {
       pageHeaderContent: 'Lista użytkowników',
-      failedRemove: 'Nie udało się usunąć użytkownika.',
       table: {
         header: 'Lista użytkowników',
       },
@@ -28,9 +27,13 @@ export const usersLocale = {
         username: 'Nazwa użytkownika jest wymagana',
         password: 'Hasło jest wymagane',
         email: 'Email jest wymagany',
-        updateFailed: 'Edycja użytkownika nie powiodła się.',
-        createFailed: 'Utworzenie użytkownika nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać użytkowników',
+      removeFailed: 'Nie udało się usunąć użytkownika.',
+      updateFailed: 'Edycja użytkownika nie powiodła się.',
+      createFailed: 'Utworzenie użytkownika nie powiodło się.',
     },
   },
 };

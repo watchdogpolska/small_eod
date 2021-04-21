@@ -21,6 +21,9 @@ const main = async () => {
         type = 'number';
       } else if (pvalue.type == 'boolean') {
         type = 'boolean';
+      } else if (typeof pvalue.type === 'undefined' && pvalue['$ref']) {
+        const name = pvalue['$ref'].replace('#/definitions/', '');
+        type = `${name}`;
       } else if (pvalue.type == 'array' && pvalue.items.type == 'integer') {
         type = 'number[]';
       } else if (pvalue.type == 'array' && pvalue.items.type == 'string') {

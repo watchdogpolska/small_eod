@@ -1,20 +1,13 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Space, Spin } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { Button, Card, Col, Form, Input, Row, Space, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { DocumentType } from '@/services/definitions';
-import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { RouterTypes } from 'umi';
-import { ServiceResponse } from '@/services/service';
-import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
-
-interface DocumentTypesDetailViewProps {
-  documentTypes: ReduxResourceState<DocumentType>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
-}
+import { DetailMatchParam } from '../../models/connect';
+import { DocumentType } from '../../services/definitions';
+import { DocumentTypesService } from '../../services/documentTypes';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,65 +18,44 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function DocumentTypesDetailView({ documentTypes, match }: DocumentTypesDetailViewProps) {
-  const dispatch = useDispatch();
+export default function DocumentTypesDetailView({ match }: DetailMatchParam) {
   const isEdit = Boolean(match.params.id);
-  const editetDocumentTypes = documentTypes.data.find(
-    value => value.id === Number(match.params.id),
-  );
+  const [editedItem, setEditedItem] = useState<DocumentType | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form] = Form.useForm();
-  function onRequestDone(response: ServiceResponse<DocumentType>) {
-    setIsSubmitting(false);
-    if (response.status === 'success') {
-      router.push('/documentTypes');
-    } else if (response.statusCode === 400) {
-      form.setFields(
-        Array.from(
-          Object.entries(response.errorBody),
-        ).map(([name, errors]: [string, Array<string>]) => ({ name, errors })),
-      );
-    } else {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        `${formatMessage({
-          id: isEdit
-            ? localeKeys.documentTypes.detailView.errors.updateFailed
-            : localeKeys.documentTypes.detailView.errors.createFailed,
-        })} ${response.errorText}`,
-      );
-    }
-  }
-
-  function onFinish() {
-    if (isEdit) {
-      dispatch({
-        type: 'documentTypes/update',
-        payload: {
-          ...form.getFieldsValue(),
-          id: match.params.id,
-          onResponse: onRequestDone,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'documentTypes/create',
-        payload: {
-          ...form.getFieldsValue(),
-          onResponse: onRequestDone,
-        },
-      });
-    }
-    setIsSubmitting(true);
-  }
+  const {
+    fields,
+    detailView: { editPageHeaderContent, newPageHeaderContent, placeholders, errors },
+  } = localeKeys.documentTypes;
 
   useEffect(() => {
     if (isEdit)
-      dispatch({ type: 'documentTypes/fetchOne', payload: { id: Number(match.params.id) } });
+      DocumentTypesService.fetchOne(Number(match.params.id)).then(response =>
+        setEditedItem(response),
+      );
   }, []);
 
-  if (documentTypes.isLoading || (isEdit && !editetDocumentTypes) || isSubmitting) {
+  function onError(response: any) {
+    setIsSubmitting(false);
+    if (response?.statusCode === 400) {
+      form.setFields(getFormErrorFromPromiseError(response));
+    }
+  }
+
+  function onSubmit() {
+    const action = isEdit ? DocumentTypesService.update : DocumentTypesService.create;
+    action({
+      ...(form.getFieldsValue() as DocumentType),
+      id: Number(match.params.id),
+    })
+      .then(() => {
+        router.push('/documentTypes');
+      })
+      .catch(onError);
+    setIsSubmitting(true);
+  }
+
+  if ((isEdit && !editedItem) || isSubmitting) {
     return (
       <Row justify="center">
         <Col>
@@ -92,33 +64,31 @@ function DocumentTypesDetailView({ documentTypes, match }: DocumentTypesDetailVi
       </Row>
     );
   }
-  if (isEdit) form.setFieldsValue(editetDocumentTypes);
+  if (isEdit) form.setFieldsValue(editedItem);
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={onSubmit}>
       <PageHeaderWrapper
         content={formatMessage({
-          id: isEdit
-            ? localeKeys.documentTypes.detailView.editPageHeaderContent
-            : localeKeys.documentTypes.detailView.newPageHeaderContent,
+          id: isEdit ? editPageHeaderContent : newPageHeaderContent,
         })}
       >
         <Card bordered={false}>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.documentTypes.fields.name })}
+                label={formatMessage({ id: fields.name })}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.documentTypes.detailView.errors.name }),
+                    message: formatMessage({ id: errors.name }),
                   },
                 ]}
               >
                 <Input
                   placeholder={formatMessage({
-                    id: localeKeys.documentTypes.detailView.placeholders.name,
+                    id: placeholders.name,
                   })}
                 />
               </Form.Item>
@@ -140,5 +110,3 @@ function DocumentTypesDetailView({ documentTypes, match }: DocumentTypesDetailVi
     </Form>
   );
 }
-
-export default connect((props: DocumentTypesDetailViewProps) => props)(DocumentTypesDetailView);

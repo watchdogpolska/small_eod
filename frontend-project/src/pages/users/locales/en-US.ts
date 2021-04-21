@@ -9,7 +9,6 @@ export const usersLocale = {
     },
     list: {
       pageHeaderContent: 'Users list',
-      failedRemove: 'Cannot delete user.',
       table: {
         header: 'Users list',
       },
@@ -28,9 +27,13 @@ export const usersLocale = {
         username: 'Username is required',
         password: 'Password is required',
         email: 'Email is required',
-        updateFailed: 'Editing the user failed.',
-        createFailed: 'Creation of the user failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download users',
+      removeFailed: 'Cannot delete user.',
+      updateFailed: 'Editing the user failed.',
+      createFailed: 'Creation of the user failed.',
     },
   },
 };

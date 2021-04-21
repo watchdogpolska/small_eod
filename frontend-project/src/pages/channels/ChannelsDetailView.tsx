@@ -1,20 +1,13 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Button, Col, Card, Form, Input, Row, Space, Spin, Switch } from 'antd';
-import { connect, useDispatch } from 'dva';
+import { Button, Card, Col, Form, Input, Row, Space, Spin, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Channel } from '@/services/definitions';
-import { ReduxResourceState } from '@/utils/reduxModel';
 import router from 'umi/router';
-import { RouterTypes } from 'umi';
-import { ServiceResponse } from '@/services/service';
-import { openNotificationWithIcon } from '@/models/global';
 import { localeKeys } from '../../locales/pl-PL';
-
-interface ChannelsDetailViewProps {
-  channels: ReduxResourceState<Channel>;
-  match: RouterTypes['match'] & { params: { id: string | undefined } };
-}
+import { DetailMatchParam } from '../../models/connect';
+import { ChannelsService } from '../../services/channels';
+import { Channel } from '../../services/definitions';
+import { getFormErrorFromPromiseError } from '../../utils/getFormErrorFromPromiseError';
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,62 +18,42 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
-  const dispatch = useDispatch();
+export default function ChannelsDetailView({ match }: DetailMatchParam) {
   const isEdit = Boolean(match.params.id);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const editedChannel = channels.data.find(value => value.id === Number(match.params.id));
+  const [editedItem, setEditedItem] = useState<Channel | undefined>();
   const [form] = Form.useForm();
-  function onRequestDone(response: ServiceResponse<Channel>) {
+  const {
+    fields,
+    detailView: { editPageHeaderContent, newPageHeaderContent, placeholders, errors },
+  } = localeKeys.channels;
+
+  useEffect(() => {
+    if (isEdit)
+      ChannelsService.fetchOne(Number(match.params.id)).then(response => setEditedItem(response));
+  }, []);
+
+  function onError(response: any) {
     setIsSubmitting(false);
-    if (response.status === 'success') {
-      router.push('/channels/list');
-    } else if (response.statusCode === 400) {
-      form.setFields(
-        Array.from(
-          Object.entries(response.errorBody),
-        ).map(([name, errors]: [string, Array<string>]) => ({ name, errors })),
-      );
-    } else {
-      openNotificationWithIcon(
-        'error',
-        formatMessage({ id: localeKeys.error }),
-        `${formatMessage({
-          id: isEdit
-            ? localeKeys.channels.detailView.errors.updateFailed
-            : localeKeys.channels.detailView.errors.createFailed,
-        })} ${response.errorText}`,
-      );
+    if (response?.statusCode === 400) {
+      form.setFields(getFormErrorFromPromiseError(response));
     }
   }
 
-  function onFinish() {
-    if (isEdit) {
-      dispatch({
-        type: 'channels/update',
-        payload: {
-          ...form.getFieldsValue(),
-          id: match.params.id,
-          onResponse: onRequestDone,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'channels/create',
-        payload: {
-          ...form.getFieldsValue(),
-          onResponse: onRequestDone,
-        },
-      });
-    }
+  function onSubmit() {
+    const action = isEdit ? ChannelsService.update : ChannelsService.create;
+    action({
+      ...(form.getFieldsValue() as Channel),
+      id: Number(match.params.id),
+    })
+      .then(() => {
+        router.push('/channels');
+      })
+      .catch(onError);
     setIsSubmitting(true);
   }
 
-  useEffect(() => {
-    if (isEdit) dispatch({ type: 'channels/fetchOne', payload: { id: Number(match.params.id) } });
-  }, []);
-
-  if (channels.isLoading || (isEdit && !editedChannel) || isSubmitting) {
+  if ((isEdit && !editedItem) || isSubmitting) {
     return (
       <Row justify="center">
         <Col>
@@ -89,33 +62,31 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
       </Row>
     );
   }
-  if (isEdit) form.setFieldsValue(editedChannel);
+  if (isEdit) form.setFieldsValue(editedItem);
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish}>
+    <Form {...layout} form={form} onFinish={onSubmit}>
       <PageHeaderWrapper
         content={formatMessage({
-          id: isEdit
-            ? localeKeys.channels.detailView.editPageHeaderContent
-            : localeKeys.channels.detailView.newPageHeaderContent,
+          id: isEdit ? editPageHeaderContent : newPageHeaderContent,
         })}
       >
         <Card bordered={false}>
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.name })}
+                label={formatMessage({ id: fields.name })}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: formatMessage({ id: localeKeys.channels.detailView.errors.name }),
+                    message: formatMessage({ id: errors.name }),
                   },
                 ]}
               >
                 <Input
                   placeholder={formatMessage({
-                    id: localeKeys.channels.detailView.placeholders.name,
+                    id: placeholders.name,
                   })}
                 />
               </Form.Item>
@@ -124,7 +95,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.email })}
+                label={formatMessage({ id: fields.email })}
                 name="email"
                 valuePropName="checked"
               >
@@ -135,7 +106,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.epuap })}
+                label={formatMessage({ id: fields.epuap })}
                 name="epuap"
                 valuePropName="checked"
               >
@@ -146,7 +117,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.city })}
+                label={formatMessage({ id: fields.city })}
                 name="city"
                 valuePropName="checked"
               >
@@ -157,7 +128,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.street })}
+                label={formatMessage({ id: fields.street })}
                 name="street"
                 valuePropName="checked"
               >
@@ -169,7 +140,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.houseNo })}
+                label={formatMessage({ id: fields.houseNo })}
                 name="houseNo"
                 valuePropName="checked"
               >
@@ -180,7 +151,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.flatNo })}
+                label={formatMessage({ id: fields.flatNo })}
                 name="flatNo"
                 valuePropName="checked"
               >
@@ -191,7 +162,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.postalCode })}
+                label={formatMessage({ id: fields.postalCode })}
                 name="postalCode"
                 valuePropName="checked"
               >
@@ -202,7 +173,7 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
           <Row>
             <Col span={16}>
               <Form.Item
-                label={formatMessage({ id: localeKeys.channels.fields.voivodeship })}
+                label={formatMessage({ id: fields.voivodeship })}
                 name="voivodeship"
                 valuePropName="checked"
               >
@@ -226,5 +197,3 @@ function ChannelsDetailView({ channels, match }: ChannelsDetailViewProps) {
     </Form>
   );
 }
-
-export default connect((props: ChannelsDetailViewProps) => props)(ChannelsDetailView);

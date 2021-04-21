@@ -1,3 +1,6 @@
+import { administrativeUnitsLocale } from '@/pages/administrativeUnits/locales/pl-PL';
+import { lettersLocale } from '@/pages/letters/locales/pl-PL';
+import { featuresLocale } from '@/pages/features/locales/pl-PL';
 import { casesLocale } from '../pages/cases/locales/pl-PL';
 import { channelsLocale } from '../pages/channels/locales/pl-PL';
 import { documentTypesLocale } from '../pages/documentTypes/locales/pl-PL';
@@ -12,6 +15,9 @@ import { menuLocale } from './pl-PL/menu';
 import pwa from './pl-PL/pwa';
 import settingDrawer from './pl-PL/settingDrawer';
 import settings from './pl-PL/settings';
+import { institutionsLocale } from '../pages/institutions/locales/pl-PL';
+import { featureOptionsLocale } from '../pages/featureOptions/locales/pl-PL';
+import { notesLocale } from '../pages/notes/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,
@@ -22,6 +28,12 @@ const [labels, keys] = structuredLocale({
   ...usersLocale,
   ...documentTypesLocale,
   ...eventsLocale,
+  ...featuresLocale,
+  ...administrativeUnitsLocale,
+  ...lettersLocale,
+  ...institutionsLocale,
+  ...featureOptionsLocale,
+  ...notesLocale,
 });
 export const localeKeys = keys;
 

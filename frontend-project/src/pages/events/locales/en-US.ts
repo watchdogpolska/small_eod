@@ -8,7 +8,6 @@ export const eventsLocale = {
     },
     list: {
       pageHeaderContent: 'Events list',
-      failedRemove: 'Cannot delete event.',
       table: {
         header: 'Events list',
       },
@@ -27,9 +26,13 @@ export const eventsLocale = {
         comment: 'Comment is required',
         date: 'Date and time are required',
         case: 'Case is required',
-        updateFailed: 'Editing the event failed.',
-        createFailed: 'Creation of the event failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download events.',
+      removeFailed: 'Cannot delete event.',
+      updateFailed: 'Editing the event failed.',
+      createFailed: 'Creation of the event failed.',
     },
   },
 };

@@ -1,0 +1,56 @@
+export const institutionsLocale = {
+  institutions: {
+    fields: {
+      name: 'Name',
+      comment: 'Comment',
+      createdOn: 'Created on',
+      modifiedOn: 'Modified on',
+      tags: 'Tags',
+      administrativeUnit: 'Administrative unit',
+      email: 'Email',
+      city: 'City',
+      epuap: 'ePUAP',
+      street: 'Street',
+      postalCode: 'Postal code',
+      houseNo: 'House number',
+      flatNo: 'Flat number',
+      nip: 'NIP',
+      regon: 'REGON',
+    },
+    list: {
+      pageHeaderContent: 'Letters list',
+      table: {
+        header: 'Letters list',
+      },
+    },
+    detailView: {
+      newPageHeaderContent: 'Create institution',
+      editPageHeaderContent: 'Edit institution',
+      placeholders: {
+        name: 'Name',
+        administrativeUnit: 'Administrative unit',
+        email: 'Email',
+        city: 'City',
+        epuap: 'ePUAP',
+        street: 'Street',
+        postalCode: 'Postal code',
+        houseNo: 'House number',
+        flatNo: 'Flat number',
+        nip: 'NIP',
+        regon: 'REGON',
+        comment: 'Comment',
+        tags: 'Tags',
+      },
+      errors: {
+        name: 'Name is required',
+        administrativeUnit: 'Administrative unit is required',
+      },
+    },
+    errors: {
+      fetchFailed: 'Cannot download institutions',
+      removeFailed: 'Cannot delete institution.',
+      updateFailed: 'Editing the institution failed.',
+      createFailed: 'Creation of the institution failed.',
+    },
+  },
+};

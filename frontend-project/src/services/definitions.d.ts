@@ -5,10 +5,60 @@ export interface AdministrativeUnit {
   id: string;
   parent: string | null;
   name: string;
-  category: number;
+  category: string;
   slug: string;
   updatedOn: string;
   active: boolean;
+}
+
+export interface AdministrativeUnitAutocomplete {
+  id: string;
+  name: string;
+}
+
+export interface CaseAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface ChannelAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface DocumentTypeAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface EventAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface FeatureOptionAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface FeatureAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface InstitutionAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface TagAutocomplete {
+  id: number;
+  name: string;
+}
+
+export interface UserAutocomplete {
+  id: number;
+  username: string;
 }
 
 export interface CaseCount {
@@ -102,7 +152,6 @@ export interface Letter {
   case: number;
   attachments: File[];
   comment: string;
-  excerpt: string;
   documentType: number;
   createdOn: string;
   createdBy: number;
@@ -126,9 +175,10 @@ export interface DocumentType {
   name: string;
 }
 
-export interface NestedFeatureOption {
+export interface FeatureOption {
   id: number;
   name: string;
+  feature: number;
 }
 
 export interface Feature {
@@ -136,13 +186,7 @@ export interface Feature {
   name: string;
   minOptions: number;
   maxOptions: number;
-  featureoptions: NestedFeatureOption[];
-}
-
-export interface FeatureOption {
-  id: number;
-  name: string;
-  feature: number;
+  featureoptions: number[];
 }
 
 export interface Institution {

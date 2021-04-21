@@ -5,7 +5,6 @@ export const documentTypesLocale = {
     },
     list: {
       pageHeaderContent: 'Lista rodzajów dokumentu',
-      failedRemove: 'Nie udało się usunąć rodzaju dokumentu.',
       table: {
         header: 'Lista rodzajów dokumentu',
       },
@@ -18,9 +17,13 @@ export const documentTypesLocale = {
       },
       errors: {
         name: 'Nazwa jest wymagana',
-        updateFailed: 'Edycja rodzaju dokumentu nie powiodła się.',
-        createFailed: 'Utworzenie rodzaju dokumentu nie powiodło się.',
       },
+    },
+    errors: {
+      fetchFailed: 'Nie udało się pobrać rodzajów dokumentu',
+      removeFailed: 'Nie udało się usunąć rodzaju dokumentu.',
+      updateFailed: 'Edycja rodzaju dokumentu nie powiodła się.',
+      createFailed: 'Utworzenie rodzaju dokumentu nie powiodło się.',
     },
   },
 };

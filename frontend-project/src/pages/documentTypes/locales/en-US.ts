@@ -5,7 +5,6 @@ export const documentTypesLocale = {
     },
     list: {
       pageHeaderContent: 'Document types list',
-      failedRemove: 'Cannot delete document type.',
       table: {
         header: 'Document types list',
       },
@@ -18,9 +17,13 @@ export const documentTypesLocale = {
       },
       errors: {
         name: 'Name is required',
-        updateFailed: 'Editing the document type failed.',
-        createFailed: 'Creation of the document type failed.',
       },
+    },
+    errors: {
+      fetchFailed: 'Cannot download document types.',
+      removeFailed: 'Cannot delete document type.',
+      updateFailed: 'Editing the document type failed.',
+      createFailed: 'Creation of the document type failed.',
     },
   },
 };
