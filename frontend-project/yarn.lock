@@ -20946,10 +20946,10 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-vercel@22.0.0:
-  version "22.0.0"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-22.0.0.tgz#cf5ad340d51f9f08ec3f9f771891b3788e72c96a"
-  integrity sha512-yJ70XpYsGutZu5MPb0+m60X1/5ST7axVraEyVYya+EYSDQrpBh3wELjj6A9iCuauzSDBnbvE61MN0Jo+h3CuJg==
+vercel@22.0.1:
+  version "22.0.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-22.0.1.tgz#4cc1c916790c0620b01190075569802ffa1c7535"
+  integrity sha512-zB7BQj19nOnvoSTjg4Cihqn+7lHlBYkGIswGG3vuB3QApaDi3wTORo8P66DXCgzTJB3+F4KT1Oaz2CRL7E+eeA==
   dependencies:
     "@vercel/build-utils" "2.10.2"
     "@vercel/go" "1.2.2"
