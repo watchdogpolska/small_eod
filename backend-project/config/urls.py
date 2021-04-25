@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+import re
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -30,17 +32,15 @@ from small_eod.users.views import UserViewSet
 
 from .swagger import info
 
-import re
-
 
 class BetterDefaultRouter(routers.DefaultRouter):
     def __init__(self, *args, **kwargs):
-        super(BetterDefaultRouter, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.app_urls = []
         self.api_root_dict = {}
 
     def get_urls(self):
-        urls = super(BetterDefaultRouter, self).get_urls()
+        urls = super().get_urls()
         urls.extend(self.app_urls)
         return urls
 
@@ -53,7 +53,9 @@ class BetterDefaultRouter(routers.DefaultRouter):
             except AttributeError:
                 viewnames.add(urlpattern.name)
             self.app_urls.append(urlpattern)
-        self.api_root_dict.update({re.sub(r"-list$", "", viewname): viewname for viewname in viewnames})
+        self.api_root_dict.update(
+            {re.sub(r"-list$", "", viewname): viewname for viewname in viewnames}
+        )
 
     def get_api_root_view(self, api_urls=None):
         api_root_dict = {}
