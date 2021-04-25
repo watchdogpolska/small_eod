@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -29,13 +30,56 @@ from small_eod.users.views import UserViewSet
 
 from .swagger import info
 
-router = routers.DefaultRouter()
+import re
+
+
+class BetterDefaultRouter(routers.DefaultRouter):
+    def __init__(self, *args, **kwargs):
+        super(BetterDefaultRouter, self).__init__(*args, **kwargs)
+        self.app_urls = []
+        self.api_root_dict = {}
+
+    def get_urls(self):
+        urls = super(BetterDefaultRouter, self).get_urls()
+        urls.extend(self.app_urls)
+        return urls
+
+    def include(self, module):
+        urlpatterns = getattr(include(module)[0], "urlpatterns")
+        viewnames = set()
+        for urlpattern in urlpatterns:
+            try:
+                viewnames.update([pattern.name for pattern in urlpattern.url_patterns])
+            except AttributeError:
+                viewnames.add(urlpattern.name)
+            self.app_urls.append(urlpattern)
+        self.api_root_dict.update({re.sub(r"-list$", "", viewname): viewname for viewname in viewnames})
+
+    def get_api_root_view(self, api_urls=None):
+        api_root_dict = {}
+        list_name = self.routes[0].name
+
+        for prefix, viewset, basename in self.registry:
+            api_root_dict[prefix] = list_name.format(basename=basename)
+        api_root_dict.update(self.api_root_dict)
+
+        return self.APIRootView.as_view(api_root_dict=api_root_dict)
+
+
+router = BetterDefaultRouter()
+
 router.register(r"channels", ChannelViewSet)
 router.register(r"events", EventViewSet)
 router.register(r"institutions", InstitutionViewSet)
 router.register(r"notes", NoteViewSet)
 router.register(r"tags", TagViewSet)
 router.register(r"users", UserViewSet)
+router.include("small_eod.cases.urls")
+router.include("small_eod.features.urls")
+router.include("small_eod.collections.urls")
+router.include("small_eod.letters.urls")
+router.include("small_eod.administrative_units.urls")
+router.include("small_eod.autocomplete.urls")
 
 schema_view = get_schema_view(
     info,
@@ -46,12 +90,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include("small_eod.collections.urls")),
-    path("api/", include("small_eod.cases.urls")),
-    path("api/", include("small_eod.letters.urls")),
-    path("api/", include("small_eod.features.urls")),
-    path("api/", include("small_eod.administrative_units.urls")),
-    path("api/", include("small_eod.autocomplete.urls")),
     path("api/docs/", schema_view.with_ui("swagger"), name="api_docs"),
     path("api/redoc/", schema_view.with_ui("redoc"), name="api_redocs"),
     re_path(
@@ -61,7 +99,6 @@ urlpatterns = [
     ),
     path("api/", include(router.urls)),
 ]
-
 
 if settings.DEBUG:
     import debug_toolbar
