@@ -53,9 +53,9 @@ class BetterDefaultRouter(routers.DefaultRouter):
                 viewnames.update([pattern.name for pattern in urlpattern.url_patterns])
             elif hasattr(urlpattern, "name"):
                 viewnames.add(urlpattern.name)
-        self.api_root_dict.update({
-            re.sub(r"-list$", "", viewname): viewname for viewname in viewnames
-        })
+        self.api_root_dict.update(
+            {re.sub(r"-list$", "", viewname): viewname for viewname in viewnames}
+        )
 
     def get_api_root_view(self, api_urls=None):
         api_root_dict = {}
