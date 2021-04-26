@@ -36,26 +36,26 @@ from .swagger import info
 class BetterDefaultRouter(routers.DefaultRouter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.app_urls = []
+        self.include_urls = []
         self.api_root_dict = {}
 
     def get_urls(self):
         urls = super().get_urls()
-        urls.extend(self.app_urls)
+        urls.extend(self.include_urls)
         return urls
 
     def include(self, module):
         urlpatterns = getattr(include(module)[0], "urlpatterns")
         viewnames = set()
         for urlpattern in urlpatterns:
-            try:
+            self.include_urls.append(urlpattern)
+            if hasattr(urlpattern, "url_patterns"):
                 viewnames.update([pattern.name for pattern in urlpattern.url_patterns])
-            except AttributeError:
+            elif hasattr(urlpattern, "name"):
                 viewnames.add(urlpattern.name)
-            self.app_urls.append(urlpattern)
-        self.api_root_dict.update(
-            {re.sub(r"-list$", "", viewname): viewname for viewname in viewnames}
-        )
+        self.api_root_dict.update({
+            re.sub(r"-list$", "", viewname): viewname for viewname in viewnames
+        })
 
     def get_api_root_view(self, api_urls=None):
         api_root_dict = {}
