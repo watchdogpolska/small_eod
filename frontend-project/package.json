@@ -72,7 +72,7 @@
     "react-dom": "17.0.1",
     "react-helmet": "6.1.0",
     "react-router": "5.2.0",
-    "redux": "4.0.5",
+    "redux": "4.1.0",
     "small_eod_client": "github:watchdogpolska/small-eod-sdk-javascript",
     "umi": "2.13.17",
     "umi-plugin-antd-icon-config": "1.0.3",
