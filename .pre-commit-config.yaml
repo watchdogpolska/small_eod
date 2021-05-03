@@ -3,7 +3,7 @@ default_language_version:
 
 repos:
 -   repo: https://github.com/psf/black
-    rev: 21.4b0
+    rev: 21.4b2
     hooks:
     - id: black
       pass_filenames: true
@@ -31,7 +31,7 @@ repos:
     - id: debug-statements
     - id: mixed-line-ending
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v2.13.0
+    rev: v2.14.0
     hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
