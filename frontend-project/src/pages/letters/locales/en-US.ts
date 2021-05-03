@@ -10,13 +10,14 @@ export const lettersLocale = {
       referenceNumber: 'Reference number',
       channel: 'Channel',
       date: 'Date received / Date sent',
-      attachments: 'Number of attachments',
+      numberAttachments: 'Number of attachments',
       case: 'Case',
       institution: 'Audited institution',
       createdOn: 'Created on',
       modifiedOn: 'Modified on',
       documentType: 'Document type',
       final: 'Final',
+      attachments: 'Attachments',
     },
     list: {
       pageHeaderContent: 'Letters list',
@@ -47,6 +48,14 @@ export const lettersLocale = {
       removeFailed: 'Cannot delete letter.',
       updateFailed: 'Editing the letter failed.',
       createFailed: 'Creation of the letter failed.',
+    },
+  },
+  files: {
+    errors: {
+      fetchFailed: 'Cannot download files',
+      removeFailed: 'Cannot delete file.',
+      updateFailed: 'Editing the file failed.',
+      createFailed: 'Creation of the file failed.',
     },
   },
 };

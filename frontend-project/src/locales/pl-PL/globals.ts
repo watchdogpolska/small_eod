@@ -13,6 +13,7 @@ export const globalsLocale = {
   form: {
     save: 'Zapisz',
     reset: 'Wyczyść',
+    saveAndEdit: 'Zapisz i edytuj',
   },
   modal: {
     confirm: 'Potwierdź',

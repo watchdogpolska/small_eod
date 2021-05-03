@@ -37,7 +37,7 @@ export default function DocumentTypesDetailView({ match }: DetailMatchParam) {
 
   function onError(response: any) {
     setIsSubmitting(false);
-    if (response?.statusCode === 400) {
+    if (response?.status === 400) {
       form.setFields(getFormErrorFromPromiseError(response));
     }
   }

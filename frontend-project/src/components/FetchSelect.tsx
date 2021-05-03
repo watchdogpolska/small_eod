@@ -76,10 +76,11 @@ export function FetchSelect<
   }, []);
 
   const debounceFetcher = (search: string) => {
+    if (!search) return [];
     setAutocompleteOptions([]);
     setFetching(true);
 
-    debouncePromise(() =>
+    return debouncePromise(() =>
       autocompleteFunction({
         query: QQ.icontains(searchField, search),
         pageSize: 10,

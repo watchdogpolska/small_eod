@@ -1,8 +1,8 @@
 import { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, Space, Tooltip } from 'antd';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Case, Letter } from '@/services/definitions';
+import { Case, Letter, File } from '@/services/definitions';
 import Table from '@/components/Table';
 import router from 'umi/router';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -11,6 +11,29 @@ import { localeKeys } from '@/locales/pl-PL';
 import { LettersService } from '@/services/letters';
 import { FetchLink } from '@/components/FetchLink';
 import { AutocompleteService } from '@/services/autocomplete';
+import { FileCard } from '@/components/FileCard/FileCard';
+import { FileService } from '@/services/files';
+
+const MemoLetterExpandedRow = React.memo(LetterExpandedRow);
+function LetterExpandedRow(props: { letter: Letter }) {
+  const [attachments, setAttachments] = useState(props.letter.attachments);
+  function onAttachmentRemove(fileId: File['id']) {
+    return FileService(props.letter)
+      .remove(fileId)
+      .then(() => setAttachments(files => files.filter(file => file.id !== fileId)));
+  }
+  return (
+    <div style={{ display: 'flex' }}>
+      {attachments.map(attachment => (
+        <FileCard
+          key={attachment.id}
+          file={attachment}
+          onRemove={() => onAttachmentRemove(attachment.id)}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function LettersListView(props: { case?: Case['id']; inline?: boolean }) {
   const tableActionRef = useRef<ActionType>();
@@ -104,7 +127,7 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
       render: modifiedOn => modifiedOn.toLocaleString(),
     },
     {
-      title: formatMessage({ id: fields.attachments }),
+      title: formatMessage({ id: fields.numberAttachments }),
       dataIndex: 'attachments',
       render: (attachments: []) => attachments.length,
     },
@@ -144,7 +167,7 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
       tableHeader={list.table.header}
       actionRef={tableActionRef}
       expandable={{
-        expandedRowRender: record => <>{record.comment}</>,
+        expandedRowRender: record => <MemoLetterExpandedRow letter={record} />,
       }}
       filters={{ case: props.case }}
       inline={props.inline}
