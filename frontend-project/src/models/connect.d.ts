@@ -2,10 +2,8 @@ import { MenuDataItem } from '@ant-design/pro-layout';
 import { RouterTypes } from 'umi/routerTypes';
 import { GlobalModelState } from './global';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
-import { UserModelState } from './user';
-import { LoginModelState } from './login';
 
-export { GlobalModelState, SettingModelState, UserModelState };
+export { GlobalModelState, SettingModelState };
 
 export interface Loading {
   global: boolean;
@@ -24,8 +22,6 @@ export type ConnectState = {
   loading: Loading;
   userAndlogin: LoginModelState;
   settings: SettingModelState;
-  user: UserModelState;
-  login: LoginModelState;
 };
 
 export type DetailMatchParam = {

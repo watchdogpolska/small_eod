@@ -34,6 +34,8 @@ export const usersLocale = {
       removeFailed: 'Cannot delete user.',
       updateFailed: 'Editing the user failed.',
       createFailed: 'Creation of the user failed.',
+      authFailed: 'Cannot login user.',
+      refreshFailes: 'Cannot refresh auth token.',
     },
   },
 };

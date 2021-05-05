@@ -1,4 +1,3 @@
-from django.urls import reverse
 from requests_oauthlib import OAuth2Session
 
 
@@ -16,7 +15,7 @@ class GoogleProvider:
         return OAuth2Session(
             client_id=self.client_id,
             scope=self.scopes,
-            redirect_uri=request.build_absolute_uri(reverse("user-exchange")),
+            redirect_uri=request.build_absolute_uri("/login/callback"),
         )
 
     def callback_url(self, request):
