@@ -107,7 +107,7 @@
     "import-sort-style-module": "6.0.0",
     "jest-puppeteer": "5.0.3",
     "jsdom-global": "3.0.2",
-    "lint-staged": "10.5.4",
+    "lint-staged": "11.0.0",
     "node-fetch": "2.6.1",
     "prettier": "2.2.1",
     "pro-download": "1.0.1",
