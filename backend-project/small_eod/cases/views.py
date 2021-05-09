@@ -6,9 +6,10 @@ from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
+from ..notifications.views import SendNotificationsMixin
 
 
-class CaseViewSet(viewsets.ModelViewSet):
+class CaseViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
     queryset = Case.objects.with_counter().with_nested_resources().all()
     serializer_class = CaseCountSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
@@ -27,6 +28,7 @@ class CaseViewSet(viewsets.ModelViewSet):
         "created_on",
         "modified_on",
     ]
+    notified_users = "notified_users"
 
 
 class ResponsibleUserViewSet(viewsets.ReadOnlyModelViewSet):
