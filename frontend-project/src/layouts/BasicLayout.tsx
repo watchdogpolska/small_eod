@@ -1,21 +1,21 @@
 import ProLayout, {
-  MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
+  MenuDataItem,
   Settings,
-  SettingDrawer,
 } from '@ant-design/pro-layout';
-import React, { useEffect, FC } from 'react';
-import { Link } from 'umi';
-import { Result, Button } from 'antd';
-import Authorized from '@/utils/Authorized';
-import DefaultFooter from '@/components/GlobalFooter/DefaultFooter';
-import RightContent from '@/components/GlobalHeader/RightContent';
-import { ConnectState } from '@/models/connect';
-import { getAuthorityFromRouter } from '@/utils/utils';
-import { Dispatch } from 'redux';
+import { Button, Result } from 'antd';
 import { connect } from 'dva';
+import React, { FC, useEffect } from 'react';
+import { Dispatch } from 'redux';
+import { Link, Redirect } from 'umi';
 import { formatMessage } from 'umi-plugin-react/locale';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
+import DefaultFooter from '../components/GlobalFooter/DefaultFooter';
+import RightContent from '../components/GlobalHeader/RightContent';
+import { useAuth } from '../hooks/useAuth';
+import { ConnectState } from '../models/connect';
+import Authorized from '../utils/Authorized';
+import { getAuthorityFromRouter } from '../utils/utils';
 
 const noMatch = (
   <Result
@@ -24,7 +24,7 @@ const noMatch = (
     subTitle="Sorry, you are not authorized to access this page."
     extra={
       <Button type="primary">
-        <Link to="/user/login">Go Login</Link>
+        <Link to="/login/sign-in">Go Login</Link>
       </Button>
     }
   />
@@ -64,21 +64,14 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
       pathname: '/',
     },
   } = props;
-  /**
-   * constructor
-   */
+  const auth = useAuth();
 
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
+    if (auth.isLoggedIn()) {
+      auth.refreshToken();
+      window.setInterval(() => auth.refreshToken(), (auth.expires() * 1000) / 3 / 4);
     }
   }, []);
-  /**
-   * init variables
-   */
-  const reactEnv = process.env.REACT_APP_ENV || 'dev';
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
@@ -87,11 +80,14 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
         payload,
       });
     }
-  }; // get children authority
+  };
 
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
+
+  if (!auth.isLoggedIn()) return <Redirect to="/login/sign-in" />;
+
   return (
     <>
       <ProLayout
@@ -138,17 +134,6 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
           {children}
         </Authorized>
       </ProLayout>
-      {reactEnv && reactEnv !== 'prod' && (
-        <SettingDrawer
-          settings={settings}
-          onSettingChange={config =>
-            dispatch({
-              type: 'settings/changeSetting',
-              payload: config,
-            })
-          }
-        />
-      )}
     </>
   );
 };

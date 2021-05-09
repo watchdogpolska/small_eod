@@ -360,6 +360,35 @@ const notesRoutes = {
     { exact: true, path: '/notes', redirect: '/notes/list' },
   ],
 };
+const loginRoutes = {
+  path: '/login',
+  component: '../layouts/LoginLayout',
+  hideInMenu: true,
+  routes: [
+    {
+      name: 'login.sign-in',
+      path: '/login/sign-in',
+      component: './login/SignInView',
+      hideInMenu: true,
+    },
+    {
+      name: 'login.callback',
+      path: '/login/callback',
+      component: './login/OAuthCallbackView',
+    },
+    { exact: true, path: '/login', redirect: '/login/sign-in' },
+  ],
+};
+
+const errorRoutes = {
+  path: '/404',
+  component: '../layouts/LoginLayout',
+  routes: [
+    {
+      component: './exception/404',
+    },
+  ],
+};
 
 export default {
   plugins,
@@ -370,28 +399,11 @@ export default {
   // umi routes: https://umijs.org/zh/guide/router.html
   routes: [
     {
-      path: '/',
+      path: '/*',
       component: '../layouts/BlankLayout',
       routes: [
-        {
-          path: '/user',
-          component: '../layouts/UserLayout',
-          routes: [
-            {
-              path: '/user',
-              redirect: '/user/login',
-            },
-            {
-              name: 'login',
-              icon: 'smile',
-              path: '/user/login',
-              component: './user/login',
-            },
-            {
-              component: './exception/404',
-            },
-          ],
-        },
+        loginRoutes,
+        errorRoutes,
         {
           path: '/',
           component: '../layouts/BasicLayout',
@@ -411,15 +423,8 @@ export default {
             featureOptionsRoutes,
             usersRoutes,
             documentTypesRoutes,
-
-            {
-              path: '/',
-              redirect: '/cases/new',
-              authority: ['admin', 'user'],
-            },
-            {
-              component: './exception/404',
-            },
+            { path: '/', exact: true, redirect: '/cases/list' },
+            { redirect: '/404' },
           ],
         },
       ],

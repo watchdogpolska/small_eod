@@ -44,11 +44,13 @@ export function FetchLink<
     })
       .then(autocompleteResults => {
         setLabel((autocompleteResults?.[0][searchField] as string) || '');
-        setFetching(false);
       })
-      .catch(onError);
+      .catch(onError)
+      .finally(() => setFetching(false));
   }, []);
 
-  if (!id) return null;
+  if (!id) {
+    return null;
+  }
   return isFetching ? <Spin size="small" /> : <Link to={`/${route}/edit/${id}/`}>{label}</Link>;
 }

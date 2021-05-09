@@ -52,7 +52,7 @@ export const lettersLocale = {
   },
   files: {
     errors: {
-      fetchFailed: 'Nie udało się pobrać pliku',
+      fetchFailed: 'Nie udało się pobrać pliku.',
       removeFailed: 'Nie udało się usunąć pliku.',
       updateFailed: 'Edycja pliku nie powiodła się.',
       createFailed: 'Utworzenie pliku nie powiodło się.',

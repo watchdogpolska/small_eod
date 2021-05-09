@@ -65,20 +65,17 @@ function Table<T extends ResourceWithId>({
     usedActionRef.current.reload();
   }
 
+  const filterFromParams = filters
+    ? Object.entries(filters).reduce(
+        (acc, [field, value]) => QQ.and(acc, QQ.field(field, value)),
+        '',
+      )
+    : '';
+
   function fetchFromService(props: PaginationParams) {
     return service.fetchPage({
       ...props,
-      query: QQ.and(
-        props.query,
-        QQ.and(
-          filter,
-          filters &&
-            Object.entries(filters).reduce(
-              (acc, [field, value]) => QQ.and(acc, QQ.field(field, value)),
-              '',
-            ),
-        ),
-      ),
+      query: QQ.and(props.query, QQ.and(filter, filterFromParams)),
     });
   }
 

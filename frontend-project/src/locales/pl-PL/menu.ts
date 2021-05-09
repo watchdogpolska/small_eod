@@ -71,5 +71,9 @@ export const menuLocale = {
       self: 'Jednostki administracyjne',
       list: 'Lista',
     },
+    login: {
+      signIn: 'Zaloguj',
+      callback: 'Callback',
+    },
   },
 };
