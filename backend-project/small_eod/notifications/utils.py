@@ -1,7 +1,7 @@
+import logging
 import sys
 from enum import Enum
 
-import logging
 from django.conf import settings
 from django.core.mail import get_connection
 from django.core.mail.message import EmailMultiAlternatives
@@ -49,7 +49,7 @@ class TemplateKey(Enum):
     @classmethod
     def get_by_target_verb(cls, target, verb):
         model_name = target._meta.model_name
-        name = "{model}_{verb}".format(model=model_name, verb=verb).upper()
+        name = f"{model_name}_{verb}".upper()
         return TemplateKey[name]
 
 
@@ -59,7 +59,7 @@ class MailTemplate:
         self.html_path = html_path
 
     def __str__(self):
-        return "{}-{}".format(self.txt_path, self.html_path)
+        return f"{self.txt_path}-{self.html_path}"
 
     @classmethod
     def from_prefix(cls, prefix):

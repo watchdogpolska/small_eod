@@ -1,5 +1,5 @@
-from rest_framework.views import APIView
 from django.forms.models import model_to_dict
+from rest_framework.views import APIView
 
 
 class SendNotificationsMixin(APIView):
@@ -29,11 +29,15 @@ class SendNotificationsMixin(APIView):
     def initial(self, request, *args, **kwargs):
         if (self.lookup_url_kwarg or self.lookup_field) in self.kwargs:
             self.initial_instance = self.get_object()
-        return super(SendNotificationsMixin, self).initial(request, *args, **kwargs)
+        return super().initial(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        response = super(SendNotificationsMixin, self).dispatch(request, *args, **kwargs)
-        http_action = list(self.action_map.keys())[list(self.action_map.values()).index(self.action)]
+        response = super().dispatch(
+            request, *args, **kwargs
+        )
+        http_action = list(self.action_map.keys())[
+            list(self.action_map.values()).index(self.action)
+        ]
         if http_action in ["delete", "post", "put"]:
             self.send_notifications(http_action, data=response.data)
         return response
