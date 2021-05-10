@@ -3,14 +3,14 @@ default_language_version:
 
 repos:
 -   repo: https://github.com/psf/black
-    rev: 21.4b2
+    rev: 21.5b1
     hooks:
     - id: black
       pass_filenames: true
       args: ["--config", "backend-project/pyproject.toml"]
       exclude: "migrations/"
 -   repo: https://github.com/PyCQA/flake8
-    rev: 3.9.1
+    rev: 3.9.2
     hooks:
     - id: flake8
       pass_filenames: true
@@ -31,7 +31,7 @@ repos:
     - id: debug-statements
     - id: mixed-line-ending
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v2.14.0
+    rev: v2.15.0
     hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
