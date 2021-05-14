@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "small_eod.events",
     "small_eod.administrative_units",
     "small_eod.authkey",
-    "small_eod.notifications"
+    "small_eod.notifications",
 ]
 
 MIDDLEWARE = [
@@ -177,7 +177,9 @@ MINIO_URL = env("MINIO_URL")
 MINIO_BUCKET = env("MINIO_BUCKET", default="files")
 
 
-EMAIL_BACKEND = env("DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+)
 EMAIL_HOST = env("DJANGO_EMAIL_HOST", default="")
 EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER", default="")

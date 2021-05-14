@@ -1,5 +1,5 @@
-from rest_framework.views import APIView
 from django.forms.models import model_to_dict
+from rest_framework.views import APIView
 
 
 class SendNotificationsMixin(APIView):
@@ -8,7 +8,9 @@ class SendNotificationsMixin(APIView):
     init_instance = None
 
     def send_notifications(self, http_action, **kwargs):
-        self.kwargs["pk"] = self.kwargs.get("pk", None) or kwargs["data"].get("id", None)
+        self.kwargs["pk"] = self.kwargs.get("pk", None) or kwargs["data"].get(
+            "id", None
+        )
         instance = None
 
         if http_action in ["post", "put"]:
@@ -16,7 +18,9 @@ class SendNotificationsMixin(APIView):
         else:
             instance = self.init_instance
 
-        if http_action == "put" and not self.has_instance_changed(self.init_instance, instance):
+        if http_action == "put" and not self.has_instance_changed(
+            self.init_instance, instance
+        ):
             return
 
         notified_users = self.get_notified_uers(instance)
@@ -39,7 +43,11 @@ class SendNotificationsMixin(APIView):
 
     def get_notified_uers(self, instance):
         if not self.notified_users:
-            raise TypeError("{0} is missing a `notified_users` attribute.".format(self.__class__.__name__))
+            raise TypeError(
+                "{} is missing a `notified_users` attribute.".format(
+                    self.__class__.__name__
+                )
+            )
         for attr in self.notified_users.split("."):
             instance = getattr(instance, attr)
         return instance.all()
@@ -50,9 +58,7 @@ class SendNotificationsMixin(APIView):
         return super().initial(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(
-            request, *args, **kwargs
-        )
+        response = super().dispatch(request, *args, **kwargs)
         http_action = list(self.action_map.keys())[
             list(self.action_map.values()).index(self.action)
         ]

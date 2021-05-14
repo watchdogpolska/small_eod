@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
-from ..notifications.utils import TemplateMailManager, TemplateKey
+
+from ..notifications.utils import TemplateKey, TemplateMailManager
 
 
 class User(AbstractUser):
@@ -9,7 +10,9 @@ class User(AbstractUser):
         if key not in enabled:
             return False
 
-        return TemplateMailManager.send(template_key=key, recipient_list=[self.email], context=kwargs)
+        return TemplateMailManager.send(
+            template_key=key, recipient_list=[self.email], context=kwargs
+        )
 
     def get_enabled_notifications(self):
         return TemplateMailManager.TEMPLATE_MAP.keys()

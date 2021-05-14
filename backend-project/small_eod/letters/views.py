@@ -8,10 +8,10 @@ from rest_framework.views import APIView
 
 from ..files.models import File
 from ..files.serializers import FileSerializer
+from ..notifications.views import SendNotificationsMixin
 from .filterset import DocumentTypeFilterSet, LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
-from ..notifications.views import SendNotificationsMixin
 
 
 class LetterViewSet(viewsets.ModelViewSet, SendNotificationsMixin):

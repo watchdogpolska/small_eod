@@ -2,11 +2,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
+from ..notifications.views import SendNotificationsMixin
 from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
-from ..notifications.views import SendNotificationsMixin
 
 
 class CaseViewSet(viewsets.ModelViewSet, SendNotificationsMixin):

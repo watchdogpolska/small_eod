@@ -12,10 +12,10 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
+from ..notifications.views import SendNotificationsMixin
 from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
-from ..notifications.views import SendNotificationsMixin
 
 
 class EventViewSet(viewsets.ModelViewSet, SendNotificationsMixin):

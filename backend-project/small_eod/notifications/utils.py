@@ -1,8 +1,8 @@
-import sys
-import random
 import logging
-
+import random
+import sys
 from enum import Enum
+
 from django.conf import settings
 from django.core.mail import get_connection
 from django.core.mail.message import EmailMultiAlternatives
