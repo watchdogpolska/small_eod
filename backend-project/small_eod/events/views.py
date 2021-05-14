@@ -15,9 +15,12 @@ from ..authkey.permissions import AuthKeyPermission
 from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
+from ..notifications.views import SendNotificationsMixin
 
 
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
+    notified_users = "case.notified_users"
+    ignored_fields = ["modified_by"]
     queryset = Event.objects.prefetch_related("case").all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)

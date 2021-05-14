@@ -11,9 +11,12 @@ from ..files.serializers import FileSerializer
 from .filterset import DocumentTypeFilterSet, LetterFilterSet
 from .models import DocumentType, Letter
 from .serializers import DocumentTypeSerializer, LetterSerializer, SignRequestSerializer
+from ..notifications.views import SendNotificationsMixin
 
 
-class LetterViewSet(viewsets.ModelViewSet):
+class LetterViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
+    notified_users = "case.notified_users"
+    ignored_fields = ["modified_on", "modified_by"]
     queryset = Letter.objects.prefetch_related("attachments").all()
     serializer_class = LetterSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)

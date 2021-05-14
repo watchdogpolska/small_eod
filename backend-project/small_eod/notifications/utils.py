@@ -1,7 +1,8 @@
 import sys
-from enum import Enum
-
+import random
 import logging
+
+from enum import Enum
 from django.conf import settings
 from django.core.mail import get_connection
 from django.core.mail.message import EmailMultiAlternatives
@@ -27,30 +28,9 @@ auto = make_auto()
 
 
 class TemplateKey(Enum):
-    CASE_CLOSED = auto()
-    CASE_GRANT_GROUP = auto()
-    CASE_GRANTED = auto()
-    CASE_NEW = auto()
-    CASE_REGISTERED = auto()
-    CASE_UPDATED = auto()
-
-    EVENT_CREATED = auto()
-    EVENT_UPDATED = auto()
-    EVENT_REMINDER = auto()
-
-    LETTER_ACCEPTED = auto()
-    LETTER_CREATED = auto()
-    LETTER_DROP_A_NOTE = auto()
-    LETTER_SEND_TO_CLIENT = auto()
-    LETTER_UPDATED = auto()
-
-    USER_NEW = auto()
-
-    @classmethod
-    def get_by_target_verb(cls, target, verb):
-        model_name = target._meta.model_name
-        name = "{model}_{verb}".format(model=model_name, verb=verb).upper()
-        return TemplateKey[name]
+    CASE_CREATE = auto()
+    CASE_UPDATE = auto()
+    CASE_DESTROY = auto()
 
 
 class MailTemplate:
@@ -59,7 +39,7 @@ class MailTemplate:
         self.html_path = html_path
 
     def __str__(self):
-        return "{}-{}".format(self.txt_path, self.html_path)
+        return f"{self.txt_path}-{self.html_path}"
 
     @classmethod
     def from_prefix(cls, prefix):
@@ -70,58 +50,26 @@ class MailTemplate:
     def render(self, context):
         txt = loader.get_template(self.txt_path).render(context)
         html = loader.get_template(self.html_path).render(context)
-        return (txt, html)
+        return txt, html
 
 
 class TemplateMailManager:
-
     TEMPLATE_MAP = {
-        TemplateKey.CASE_CLOSED: MailTemplate.from_prefix("cases/email/case_closed"),
-        TemplateKey.CASE_GRANT_GROUP: MailTemplate.from_prefix(
-            "cases/email/case_grant_group"
-        ),
-        TemplateKey.CASE_GRANTED: MailTemplate.from_prefix("cases/email/case_granted"),
-        TemplateKey.CASE_NEW: MailTemplate.from_prefix("cases/email/case_new"),
-        TemplateKey.CASE_REGISTERED: MailTemplate.from_prefix(
-            "cases/email/case_registered"
-        ),
-        TemplateKey.CASE_UPDATED: MailTemplate.from_prefix("cases/email/case_updated"),
-        TemplateKey.EVENT_CREATED: MailTemplate.from_prefix(
-            "events/email/event_created"
-        ),
-        TemplateKey.EVENT_UPDATED: MailTemplate.from_prefix(
-            "events/email/event_updated"
-        ),
-        TemplateKey.EVENT_REMINDER: MailTemplate.from_prefix(
-            "events/email/event_reminder"
-        ),
-        TemplateKey.LETTER_ACCEPTED: MailTemplate.from_prefix(
-            "letters/email/letter_accepted"
-        ),
-        TemplateKey.LETTER_CREATED: MailTemplate.from_prefix(
-            "letters/email/letter_created"
-        ),
-        TemplateKey.LETTER_DROP_A_NOTE: MailTemplate.from_prefix(
-            "letters/email/letter_drop_a_note"
-        ),
-        TemplateKey.LETTER_SEND_TO_CLIENT: MailTemplate.from_prefix(
-            "letters/email/letter_send_to_client"
-        ),
-        TemplateKey.LETTER_UPDATED: MailTemplate.from_prefix(
-            "letters/email/letter_updated"
-        ),
-        TemplateKey.USER_NEW: MailTemplate.from_prefix("users/email/new_user"),
+        TemplateKey.CASE_CREATE: [MailTemplate.from_prefix("cases/email/case_created")],
+        TemplateKey.CASE_DESTROY: [MailTemplate.from_prefix("cases/email/case_closed")],
+        TemplateKey.CASE_UPDATE: [MailTemplate.from_prefix("cases/email/case_updated")],
     }
 
     @classmethod
     def send(cls, template_key, recipient_list, context=None, from_email=None, **kwds):
-        template = cls.TEMPLATE_MAP[template_key]
+        template = random.choice(cls.TEMPLATE_MAP[template_key])
         txt, html = template.render(context or {})
         subject, txt = txt.strip().split("\n", 1)
         from_email = from_email if from_email else settings.DEFAULT_FROM_EMAIL
         headers = {}
         if len(sys.argv) > 1 and sys.argv[1] == "test":
             headers["Template"] = str(template)
+
         return cls._send_mail_with_header(
             subject=subject.strip(),
             message=txt,

@@ -5,9 +5,12 @@ from rest_framework.filters import OrderingFilter
 from .filterset import NoteFilterSet
 from .models import Note
 from .serializers import NoteSerializer
+from ..notifications.views import SendNotificationsMixin
 
 
-class NoteViewSet(viewsets.ModelViewSet):
+class NoteViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
+    notified_users = "case.notified_users"
+    ignored_fields = ["modified_by"]
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
