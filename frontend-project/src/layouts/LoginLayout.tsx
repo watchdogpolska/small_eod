@@ -8,6 +8,7 @@ import { connect } from 'dva';
 import SelectLang from '@/components/SelectLang';
 import { ConnectState, Route } from '@/models/connect';
 import logo from '../assets/logo.png';
+import eodLogo from '../assets/watchdog_eod_logo.svg';
 import styles from './LoginLayout.less';
 
 export interface LoginLayoutProps {
@@ -61,6 +62,7 @@ const LoginLayout: FC<LoginLayoutProps> = props => {
             <div className={styles.header}>
               <Link to="/" className={styles.headerLink}>
                 <img alt="logo" className={styles.logo} src={logo} />
+                <img alt="logo aplikacji elektroniczny obieg dokumentów" className={styles.eodLogo} src={eodLogo} />
                 <h1 className={styles.title}>Small EOD</h1>
               </Link>
             </div>
