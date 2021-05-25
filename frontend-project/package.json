@@ -86,7 +86,7 @@
   "devDependencies": {
     "@ant-design/pro-cli": "2.0.4",
     "@types/classnames": "2.3.0",
-    "@types/express": "4.17.11",
+    "@types/express": "4.17.12",
     "@types/history": "4.7.8",
     "@types/jest": "26.0.23",
     "@types/lodash": "4.14.170",
