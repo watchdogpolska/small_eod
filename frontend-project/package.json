@@ -105,7 +105,7 @@
     "import-sort-parser-babylon": "6.0.0",
     "import-sort-parser-typescript": "6.0.0",
     "import-sort-style-module": "6.0.0",
-    "jest-puppeteer": "5.0.3",
+    "jest-puppeteer": "5.0.4",
     "jsdom-global": "3.0.2",
     "lint-staged": "11.0.0",
     "node-fetch": "2.6.1",
