@@ -2,18 +2,18 @@ import logging
 from datetime import datetime
 from uuid import uuid4
 
-from pytz import timezone
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from pytz import timezone
 
-from . import models as models_v1
-from ..tags.models import Tag
-from ..institutions.models import Institution
 from ..cases.models import Case
-from ..features.models import Feature, FeatureOption
 from ..channels.models import Channel
-from ..letters.models import DocumentType, Letter
+from ..features.models import Feature, FeatureOption
 from ..files.models import File
+from ..institutions.models import Institution
+from ..letters.models import DocumentType, Letter
+from ..tags.models import Tag
+from . import models as models_v1
 
 logger = logging.getLogger(__name__)
 MIGRATION_DB = "migration"
@@ -21,7 +21,7 @@ V2_DB = "default"
 
 
 class PkMappings:
-    """ Cache old_pk -> new_pk mapping when it is inconvenient to make a query """
+    """Cache old_pk -> new_pk mapping when it is inconvenient to make a query"""
 
     institution = dict()
     case = dict()
@@ -29,7 +29,7 @@ class PkMappings:
 
 
 def fix_timestamps(new, old):
-    """ Migrate data to auto-filling timestamp fields """
+    """Migrate data to auto-filling timestamp fields"""
     model = type(new)
     # Queryset update will ignore auto_now/auto_now_add
     model.objects.filter(pk=new.pk).update(
