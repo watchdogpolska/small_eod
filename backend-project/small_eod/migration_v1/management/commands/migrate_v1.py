@@ -2,7 +2,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from ...migrator import run, logger
+from ...migrator import logger, run
 
 
 class Command(BaseCommand):
