@@ -69,7 +69,7 @@ const BasicLayout: FC<BasicLayoutProps> = props => {
   useEffect(() => {
     if (auth.isLoggedIn()) {
       auth.refreshToken();
-      window.setInterval(() => auth.refreshToken(), (auth.expires() * 1000) / 3 / 4);
+      window.setInterval(() => auth.refreshToken(), ((auth.expires() * 1000) / 3) * 2);
     }
   }, []);
 
