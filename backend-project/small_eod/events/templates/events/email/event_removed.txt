@@ -1,0 +1,11 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Usunięto wydarzenie - {{instance.name}}
+{% endblock %}
+
+{% block content %}
+Usunięto zaplanowane wydarzenie - {{instance.name}}
+
+Wydarzenie: {{instance.name}}
+Dotyczy: {{instance.case.name}}
+{% endblock %}

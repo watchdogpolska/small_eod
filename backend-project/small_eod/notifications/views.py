@@ -1,24 +1,26 @@
 from django.forms.models import model_to_dict
 from rest_framework.views import APIView
+from django.urls import reverse
 
 
 class SendNotificationsMixin(APIView):
     notified_users = None
     ignored_fields = []
     init_instance = None
+    http_action = None
 
-    def send_notifications(self, http_action, **kwargs):
+    def send_notifications(self, request, **kwargs):
         self.kwargs["pk"] = self.kwargs.get("pk", None) or kwargs["data"].get(
             "id", None
         )
         instance = None
 
-        if http_action in ["post", "put"]:
+        if self.http_action in ["post", "put", "patch"]:
             instance = self.get_object()
         else:
             instance = self.init_instance
 
-        if http_action == "put" and not self.has_instance_changed(
+        if self.http_action == "put" and not self.has_instance_changed(
             self.init_instance, instance
         ):
             return
@@ -26,7 +28,8 @@ class SendNotificationsMixin(APIView):
         notified_users = self.get_notified_uers(instance)
         kwargs["actor"] = self.basename
         kwargs["action"] = self.action
-        kwargs["instance"] = model_to_dict(instance)
+        kwargs["instance"] = instance
+        kwargs["url"] = self.get_abs_path(request)
 
         for user in notified_users:
             user.notify(**kwargs)
@@ -41,6 +44,12 @@ class SendNotificationsMixin(APIView):
 
         return d1 != d2
 
+    def get_abs_path(self, request):
+        path = reverse(f"{self.basename}-list")
+        path = path.replace("/api", "", 1)
+        path = request.build_absolute_uri(path)
+        return path
+
     def get_notified_uers(self, instance):
         if not self.notified_users:
             raise TypeError(
@@ -48,20 +57,25 @@ class SendNotificationsMixin(APIView):
                     self.__class__.__name__
                 )
             )
+
         for attr in self.notified_users.split("."):
-            instance = getattr(instance, attr)
+            instance = getattr(instance, attr, None)
+
+        if not instance:
+            return []
+
         return instance.all()
 
     def initial(self, request, *args, **kwargs):
-        if (self.lookup_url_kwarg or self.lookup_field) in self.kwargs:
+        self.http_action = list(self.action_map.keys())[
+            list(self.action_map.values()).index(self.action)
+        ]
+        if self.http_action in ["put", "delete", "patch"]:
             self.init_instance = self.get_object()
         return super().initial(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        http_action = list(self.action_map.keys())[
-            list(self.action_map.values()).index(self.action)
-        ]
-        if http_action in ["delete", "post", "put"]:
-            self.send_notifications(http_action, data=response.data)
+        if self.http_action in ["delete", "post", "put", "patch"]:
+            self.send_notifications(request=request, data=response.data)
         return response

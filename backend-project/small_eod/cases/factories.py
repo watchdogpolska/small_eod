@@ -18,7 +18,7 @@ class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactor
         m2m_field_name="responsible_users", factory_cls=UserFactory
     )
     notified_users = ManyToManyPostGeneration(
-        m2m_field_name="notified_users", factory_cls=UserFactory
+        m2m_field_name="notified_users", factory_cls=UserFactory, size=3
     )
     tags = ManyToManyPostGeneration(
         m2m_field_name="tags", factory_cls=TagFactory, size=3

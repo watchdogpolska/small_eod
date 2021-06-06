@@ -1,4 +1,5 @@
 from test_plus.test import TestCase
+from django.core import mail
 
 from ...authkey.factories import KeyFactory
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin
@@ -53,3 +54,22 @@ class EventViewSetTestCase(
         self.assertIn(self.obj.name, body)
         self.assertIn(self.obj.comment, body)
         self.assertIn(self.obj.case.name, body)
+
+    def test_send_post_notifications(self):
+        super().test_create_plain()
+        self.assertGreater(len(mail.outbox), 0)
+
+    def test_send_delete_notifications(self):
+        response = self.client.delete(
+            self.get_url(name="detail", pk=self.obj.pk, **self.get_extra_kwargs()),
+        )
+        self.assertTrue(response.status_code, 200)
+        self.assertGreater(len(mail.outbox), 0)
+
+    def test_send_patch_notifications(self):
+        super().test_update_partial_plain()
+        self.assertGreater(len(mail.outbox), 0)
+
+    def test_notify_user_only_once(self):
+        super().test_update_partial_plain()
+        self.assertEqual(len(mail.outbox), len(self.obj.case.notified_users.all()))

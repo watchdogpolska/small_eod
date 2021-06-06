@@ -1,0 +1,14 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Zaktualizowano notatkę dotyczącą sprawy - {{instance.case.name}}
+{% endblock %}
+
+{% block content %}
+
+{{instance.modified_by}} dokonał zmian w notatce dotyczącej obserwowanej przez ciebie sprawy - {{instance.case.name}}.
+
+Sprawa: {{instance.case.name}}
+Zmieniona przez: {{instance.modified_by}}
+Data modyfikacji: {{instance.midofied_on}}
+Treść: {{instance.comment}}
+{% endblock %}

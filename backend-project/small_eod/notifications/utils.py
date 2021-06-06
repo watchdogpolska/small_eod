@@ -1,10 +1,8 @@
 import logging
 import random
-import sys
 from enum import Enum
 
 from django.conf import settings
-from django.core.mail import get_connection
 from django.core.mail.message import EmailMultiAlternatives
 from django.template import loader
 
@@ -12,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def make_auto():
-    """eum.auto replacement"""
+    """enum.auto replacement"""
 
     def loop():
         i = 1
@@ -30,7 +28,21 @@ auto = make_auto()
 class TemplateKey(Enum):
     CASE_CREATE = auto()
     CASE_UPDATE = auto()
+    CASE_PARTIAL_UPDATE = CASE_UPDATE
     CASE_DESTROY = auto()
+    EVENT_CREATE = auto()
+    EVENT_UPDATE = auto()
+    EVENT_PARTIAL_UPDATE = EVENT_UPDATE
+    EVENT_DESTROY = auto()
+    NOTE_CREATE = auto()
+    NOTE_UPDATE = auto()
+    NOTE_PARTIAL_UPDATE = NOTE_UPDATE
+    NOTE_DESTROY = auto()
+    LETTER_CREATE = auto()
+    LETTER_UPDATE = auto()
+    LETTER_PARTIAL_UPDATE = LETTER_UPDATE
+    LETTER_DESTROY = auto()
+    NOTIFICATION_TEST = auto()
 
 
 class MailTemplate:
@@ -56,57 +68,57 @@ class MailTemplate:
 class TemplateMailManager:
     TEMPLATE_MAP = {
         TemplateKey.CASE_CREATE: [MailTemplate.from_prefix("cases/email/case_created")],
-        TemplateKey.CASE_DESTROY: [MailTemplate.from_prefix("cases/email/case_closed")],
+        TemplateKey.CASE_DESTROY: [
+            MailTemplate.from_prefix("cases/email/case_removed")
+        ],
         TemplateKey.CASE_UPDATE: [MailTemplate.from_prefix("cases/email/case_updated")],
+        TemplateKey.CASE_PARTIAL_UPDATE: [
+            MailTemplate.from_prefix("cases/email/case_updated")
+        ],
+        TemplateKey.EVENT_CREATE: [
+            MailTemplate.from_prefix("events/email/event_created")
+        ],
+        TemplateKey.EVENT_PARTIAL_UPDATE: [
+            MailTemplate.from_prefix("events/email/event_updated")
+        ],
+        TemplateKey.EVENT_UPDATE: [
+            MailTemplate.from_prefix("events/email/event_updated")
+        ],
+        TemplateKey.EVENT_DESTROY: [
+            MailTemplate.from_prefix("events/email/event_removed")
+        ],
+        TemplateKey.NOTE_CREATE: [MailTemplate.from_prefix("notes/email/note_created")],
+        TemplateKey.NOTE_UPDATE: [MailTemplate.from_prefix("notes/email/note_updated")],
+        TemplateKey.NOTE_PARTIAL_UPDATE: [
+            MailTemplate.from_prefix("notes/email/note_updated")
+        ],
+        TemplateKey.NOTE_DESTROY: [
+            MailTemplate.from_prefix("notes/email/note_removed")
+        ],
+        TemplateKey.LETTER_CREATE: [
+            MailTemplate.from_prefix("letters/email/letter_created")
+        ],
+        TemplateKey.LETTER_UPDATE: [
+            MailTemplate.from_prefix("letters/email/letter_updated")
+        ],
+        TemplateKey.LETTER_PARTIAL_UPDATE: [
+            MailTemplate.from_prefix("letters/email/letter_updated")
+        ],
+        TemplateKey.LETTER_DESTROY: [
+            MailTemplate.from_prefix("letters/email/letter_removed")
+        ],
+        TemplateKey.NOTIFICATION_TEST: [
+            MailTemplate.from_prefix("notifications/email/test_notifications")
+        ],
     }
 
     @classmethod
-    def send(cls, template_key, recipient_list, context=None, from_email=None, **kwds):
+    def send(cls, template_key, recipient_list, context=None, from_email=None):
         template = random.choice(cls.TEMPLATE_MAP[template_key])
         txt, html = template.render(context or {})
         subject, txt = txt.strip().split("\n", 1)
         from_email = from_email if from_email else settings.DEFAULT_FROM_EMAIL
-        headers = {}
-        if len(sys.argv) > 1 and sys.argv[1] == "test":
-            headers["Template"] = str(template)
+        mail = EmailMultiAlternatives(subject, txt, from_email, recipient_list)
+        mail.attach_alternative(html, "text/html")
 
-        return cls._send_mail_with_header(
-            subject=subject.strip(),
-            message=txt,
-            html_message=html,
-            from_email=from_email,
-            recipient_list=recipient_list,
-            headers=headers,
-            **kwds,
-        )
-
-    @staticmethod
-    def _send_mail_with_header(
-        subject,
-        message,
-        from_email,
-        recipient_list,
-        fail_silently=False,
-        auth_user=None,
-        auth_password=None,
-        connection=None,
-        html_message=None,
-        headers=None,
-    ):
-        """
-        Fork of django.core.mail.send_mail to add haders attribute
-        """
-        connection = connection or get_connection(
-            username=auth_user, password=auth_password, fail_silently=fail_silently
-        )
-        mail = EmailMultiAlternatives(
-            subject,
-            message,
-            from_email,
-            recipient_list,
-            connection=connection,
-            headers=headers or {},
-        )
-        if html_message:
-            mail.attach_alternative(html_message, "text/html")
         return mail.send()

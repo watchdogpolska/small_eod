@@ -1,2 +1,8 @@
-<p>Case removed</p>
-<p>Case removed</p>
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Zamknięto sprawę - {{instance.name}}</p>
+{% endblock %}
+
+{% block content %}
+<p>{{instance.modified_by}} zamknął obserwowaną przez ciebie sprawę - {{instance.name}}</p>
+{% endblock %}

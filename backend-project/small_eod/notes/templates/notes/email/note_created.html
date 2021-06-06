@@ -1,14 +1,15 @@
 {% extends "notifications/email/mail_base.html" %}
 {% block subject %}
-<p>Utworzono nową sprawę - {{instance.name}}</p>
+<p>Dodano notatkę do sprawy - {{case}}</p>
 {% endblock %}
 
 {% block content %}
-<p>W systemie small_eod pojawiła się nowa sprawa.</p>
+<p>{{instance.created_by}} dodał nową notatkę do sprawy - {{instance.case.name}}</p>
 
 <p>
-Sprawa: {{instance.name}}<br/>
+Dotyczy: {{instance.case.name}}<br/>
 Utworzył: {{instance.created_by}}<br/>
 Data utworzenia: {{instance.created_on}}<br/>
+Treść: {{instance.comment}}<br/>
 </p>
 {% endblock %}

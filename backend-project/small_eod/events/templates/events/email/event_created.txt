@@ -1,0 +1,15 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Utworzono nowe wydarzenie w sprawie - {{instance.case.name}}
+{% endblock %}
+
+{% block content %}
+{{instance.created_by}} utworzył nowe wydarzenie - {{instance.name}}.
+
+
+Wydarzenie: {{instance.name}}
+Dotyczy: {{instance.case.name}}
+Zaplanowano na: {{instance.date}}
+Utworzył: {{instance.created_by}}
+Data utworzenia: {{instance.created_on}}
+{% endblock %}

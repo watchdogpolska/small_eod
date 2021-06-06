@@ -1,11 +1,14 @@
 {% extends "notifications/email/mail_base.txt" %}
 {% block subject %}
-Zaktualizowano sprawę - {{instance.name}}
+Zaktualizowano wydarzenie - {{instance.name}}
 {% endblock %}
-{% block content %}
-{{instance.modified_by}} dokonał zmian w obserwowanej przez ciebie sprawie - {{instance.name}}.
 
-Sprawa: {{instance.name}}
+{% block content %}
+{{instance.modified_by}} dokonał zmian w zaplanowanym wydarzeniu - {{instance.name}}
+
+
+Wydarzenie: {{instance.name}}
+Dotyczy: {{instance.case.name}}
 Zmodyfikował: {{instance.modified_by}}
 Data modyfikacji: {{instance.modified_on}}
 {% endblock %}

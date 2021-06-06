@@ -1,0 +1,9 @@
+{% block subject %}
+{% endblock %}
+Witaj {{user.username}},
+
+{% block content %}
+{% endblock %}
+
+
+Więcej szczegółów znajdziesz pod adresem: {{url}}

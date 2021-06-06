@@ -1,0 +1,8 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Zamknięto sprawę - {{instance.name}}
+{% endblock %}
+
+{% block content %}
+{{instance.modified_by}} zamknął obserwowaną przez ciebie sprawę - {{instance.name}}
+{% endblock %}

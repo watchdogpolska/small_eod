@@ -1,0 +1,18 @@
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Nowa wiadomość w sprawie - {{instance.case.name}}</p>
+{% endblock %}
+
+{% block content %}
+{% if instance.direction == "received" %}
+<p>Otrzymano nową wiadomość - {{instance.reference_number}} - dotyczącą obserwowanej przez ciebie sprawy - {{instance.case.name}}</p>
+{% else %}
+<p>Wysłano wiadomość - {{instance.reference_number}} - w sprawie - {{instance.case.name}}</p>
+{% endif %}
+
+<p>
+Dotyczy: {{instance.case.name}}<br/>
+Utworzył: {{instance.created_by}}<br/>
+Data utworzenia: {{instance.created_on}}<br/>
+</p>
+{% endblock %}

@@ -1,12 +1,13 @@
 {% extends "notifications/email/mail_base.txt" %}
 {% block subject %}
-Utworzono nową sprawę - {{instance.name}}
+Dodano notatkę do sprawy - {{case}}
 {% endblock %}
 
 {% block content %}
-W systemie small_eod pojawiła się nowa sprawa.
+{{instance.created_by}} dodał nową notatkę do sprawy - {{instance.case.name}}
 
-Sprawa: {{instance.name}}
+Dotyczy: {{instance.case.name}}
 Utworzył: {{instance.created_by}}
 Data utworzenia: {{instance.created_on}}
+Treść: {{instance.comment}}
 {% endblock %}
