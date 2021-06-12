@@ -79,7 +79,7 @@
     "umi-plugin-locale": "^2.11.6",
     "umi-plugin-pro-block": "1.3.6",
     "umi-plugin-react": "1.15.8",
-    "umi-request": "1.3.5",
+    "umi-request": "1.3.9",
     "use-merge-value": "1.0.2",
     "webpack-chain": "^6.5.1"
   },
