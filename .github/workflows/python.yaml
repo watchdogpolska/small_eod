@@ -90,7 +90,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Setup H1-CLI
       uses: ./.github/actions/h1-cli
-    - uses: webfactory/ssh-agent@v0.5.1
+    - uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Inject website ssh-hostkey
