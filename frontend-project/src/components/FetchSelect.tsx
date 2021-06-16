@@ -36,8 +36,9 @@ export function FetchSelect<
   value?: ValueType;
   labelField?: SearchField;
 }) {
-  const [isFetching, setFetching] = useState(false);
-  const [shownOptions, setShownOptions] = useState<OptionsType[]>([]);
+  const [isFetchingRelatedItems, setFetchingRelatedItems] = useState(false);
+  const [relatedItems, setRelatedItems] = useState<OptionsType[]>([]);
+  const [isFetchingAutocompleteOptions, setFetchingAutocompleteOptions] = useState(false);
   const [autocompleteOptions, setAutocompleteOptions] = useState<OptionsType[]>([]);
   const { debouncePromise } = useDebounce();
   const searchField = labelField || 'name';
@@ -59,56 +60,90 @@ export function FetchSelect<
     );
   }
 
-  // Call the autocomplete api once to convert field ids, fetched from the object's detail endpoint,
-  // into human readable names.
+  // Call the autocomplete api to convert field ids, fetched from the object's detail endpoint,
+  // into human readable names. Expected to be called once per select field.
   // Uses the autocomplete API for (id => name) mapping for consistency - subsequent calls, triggered
   // by user input, will receive (id, name) pairs from the same API.
+  function fetchRelatedItems(arrayValue: Array<number>) {
+    return autocompleteFunction({
+      query: QQ.in('id', arrayValue),
+      pageSize: 10,
+    }).then(extractOptionsFromApiResults);
+  }
+
+  // Request autocomplete suggestions from the backend.
+  function fetchSuggestions(search: string) {
+    return autocompleteFunction({
+      query: QQ.icontains(searchField, search),
+      pageSize: 10,
+    }).then(extractOptionsFromApiResults);
+  }
+
   useEffect(() => {
+    // 1. Map related items' ids (e.g. the current channel id) to a human readable name.
+
+    // Convert current value to an array.
+    // For multiselect fields, the value will already be an array.
     const arrayValue = Array.isArray(value) ? value : [value];
+
     if (
       typeof value === 'undefined' ||
       value === null ||
       arrayValue.length === 0 ||
+      // Tags are already provided as human readable names - no need to fetch anything.
       mode === 'tags'
-    )
-      return;
-    setShownOptions([]);
-    setFetching(true);
+    ) {
+      // Noop.
+      // Nothing to fetch.
+    } else {
+      setRelatedItems([]);
+      setFetchingRelatedItems(true);
 
-    autocompleteFunction({
-      query: QQ.in('id', arrayValue),
-      pageSize: 10,
-    })
+      // NOTE(rwakulszowa): `ValueType` is a bit complicated - converting it to
+      // an array of numbers in a type safe way may require refactoring the
+      // code a bit, hence a manual cast.
+      fetchRelatedItems(arrayValue as Array<number>)
+        .then(autocompleteResults => {
+          setRelatedItems(autocompleteResults);
+        })
+        .catch(onError)
+        .finally(() => setFetchingRelatedItems(false));
+    }
+
+    // 2. Fetch an initial set of suggestions to display in the select component,
+    // before the user had a chance to type anything in the search field.
+    setAutocompleteOptions([]);
+    setFetchingAutocompleteOptions(true);
+
+    fetchSuggestions('')
       .then(autocompleteResults => {
-        setShownOptions(extractOptionsFromApiResults(autocompleteResults));
+        setAutocompleteOptions(autocompleteResults);
       })
       .catch(onError)
-      .finally(() => setFetching(false));
+      .finally(() => setFetchingAutocompleteOptions(false));
   }, []);
 
   // Fetch (id, name) pairs matching the search string.
   // Invoked on every keystroke, after a short delay.
   const debounceFetcher = (search: string) => {
-    if (!search) return [];
     setAutocompleteOptions([]);
-    setFetching(true);
+    setFetchingAutocompleteOptions(true);
 
     return debouncePromise(() =>
-      autocompleteFunction({
-        query: QQ.icontains(searchField, search),
-        pageSize: 10,
-      })
+      fetchSuggestions(search)
         .then(autocompleteResults => {
-          setAutocompleteOptions(extractOptionsFromApiResults(autocompleteResults));
+          setAutocompleteOptions(autocompleteResults);
         })
         .catch(onError)
-        .finally(() => setFetching(false)),
+        .finally(() => setFetchingAutocompleteOptions(false)),
     );
   };
 
   // All options to display to the user.
   // Sets may overlap - remove duplicates to avoid duplicate rendering issues.
-  const options = sortBy(unionBy(shownOptions, autocompleteOptions, 'value'), 'label');
+  const options = sortBy(unionBy(relatedItems, autocompleteOptions, 'value'), 'label');
+
+  const isFetching = isFetchingRelatedItems || isFetchingAutocompleteOptions;
 
   return (
     <Select<OptionsType>
