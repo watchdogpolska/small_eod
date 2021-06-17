@@ -4,8 +4,8 @@ import urllib.request
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-from ....letters.factories import LetterFactory
 from ....events.factories import EventFactory
+from ....letters.factories import LetterFactory
 from ....notes.factories import NoteFactory
 
 URL = (
