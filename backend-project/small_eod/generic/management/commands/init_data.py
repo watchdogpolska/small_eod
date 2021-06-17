@@ -5,6 +5,8 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
 from ....letters.factories import LetterFactory
+from ....events.factories import EventFactory
+from ....notes.factories import NoteFactory
 
 URL = (
     "http://cdn.files.jawne.info.pl/"
@@ -30,4 +32,10 @@ class Command(BaseCommand):
                 args = args + ["--limit", 50]
             call_command("load_terc", *args, stdout=self.stdout)
 
+        # Letter factory creates dependencies recursively.
+        # As a result, all related tables, not just Letters, are filled with some data.
         LetterFactory.create_batch(size=10)
+
+        # Create a few objects not created by the LetterFactory.
+        EventFactory.create_batch(size=5)
+        NoteFactory.create_batch(size=5)
