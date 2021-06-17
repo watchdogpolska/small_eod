@@ -1,9 +1,9 @@
 class SearchQueryMixin:
-    def get_response_for_query(self, query):
+    def get_response_for_query(self, query, **data):
         self.login_required()
         return self.client.get(
             self.get_url(name="list", **self.get_extra_kwargs()),
-            data={"query": query},
+            data={"query": query, **data},
         )
 
     def assertResultEqual(self, response, items):

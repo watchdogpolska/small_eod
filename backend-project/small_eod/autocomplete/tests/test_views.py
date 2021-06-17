@@ -98,6 +98,24 @@ class InstitutionAutocompleteViewSetTestCase(
         self.assertEqual(item["id"], self.obj.id)
         self.assertEqual(item["name"], self.obj.name)
 
+    def test_suggests_related(self):
+        institution_a = InstitutionFactory(name="institution_a")
+        institution_b = InstitutionFactory(name="institution_b")
+        InstitutionFactory(name="institution_c")
+
+        # Make the case audit the 2nd institution - it's unlikely to appear
+        # at the top of the results just by coincidence.
+        case = CaseFactory(audited_institutions=[institution_b])
+
+        # Match all - the related institution should appear at the top.
+        resp = self.get_response_for_query("institution", case=case.id)
+        self.assertEqual(resp.data['results'][0]['id'], institution_b.id)
+
+        # Match a specific, non-related item.
+        # The related institution should not be present.
+        resp = self.get_response_for_query("institution_a", case=case.id)
+        self.assertEqual([r['id'] for r in resp.data['results']], [institution_a.id])
+
 
 class TagAutocompleteViewSetTestCase(ReadOnlyViewSetMixin, SearchQueryMixin, TestCase):
     basename = "autocomplete_tag"
