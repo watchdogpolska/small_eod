@@ -5,8 +5,10 @@ from .models import Feature, FeatureOption
 
 
 class FeatureFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactory):
-    min_options = factory.fuzzy.FuzzyInteger(1, 3)
-    max_options = factory.fuzzy.FuzzyInteger(3, 20)
+    # Set min options to 1 - otherwise, factory generated `FeatureOption` s will,
+    # in most cases, be invalid.
+    min_options = 1
+    max_options = factory.fuzzy.FuzzyInteger(1, 20)
     name = factory.Sequence(lambda n: "features-%04d" % n)
 
     class Meta:
