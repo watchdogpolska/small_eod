@@ -31,3 +31,21 @@ class GoogleProvider:
         )
         resp = google.get(self.userinfo_url)
         return resp.json()
+
+
+class FakeProvider:
+    base_url = "https://localhost:5678"
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def callback_url(self, request):
+        # Hardcode localhost - the provider is expected to be used only in local deployments.
+        # `build_absolute_uri` doesn't work, because it produces a docker friendly url.
+        redirect_uri = f"http://localhost:8000/login/callback"
+        return f"{self.base_url}?redirect_uri={redirect_uri}", None
+
+    def exchange(self, request):
+        # Hardcoded values.
+        # Simple, but working.
+        return {'email': "email@example.com", 'given_name': "GivenName", 'family_name': "FamilyName"}
