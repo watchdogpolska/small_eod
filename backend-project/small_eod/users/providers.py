@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from requests_oauthlib import OAuth2Session
 
 
@@ -49,3 +51,15 @@ class FakeProvider:
         # Hardcoded values.
         # Simple, but working.
         return {'email': "email@example.com", 'given_name': "GivenName", 'family_name': "FamilyName"}
+
+
+def get_provider_cls():
+    flag_value = settings.SOCIAL_AUTH_USE_FAKE_OAUTH
+    if flag_value is True:
+        if not settings.DEBUG:
+            raise ImproperlyConfigured("Fake oauth may only be used in DEBUG mode")
+        return FakeProvider
+    elif flag_value is False:
+        return GoogleProvider
+    else:
+        raise ImproperlyConfigured(f"Fake oauth must be either True or False, is {flag_value}")

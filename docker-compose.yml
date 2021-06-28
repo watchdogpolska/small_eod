@@ -48,6 +48,8 @@ services:
       MINIO_URL: http://minio:9000
       SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: "x-x.apps.googleusercontent.com"
       SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: "x-puMp99EjG7"
+      # Fake oauth - set to True only for local development
+      SOCIAL_AUTH_USE_FAKE_OAUTH: "True"
       # SECRET_KEY
       # DJANGO_ALLOWED_HOSTS
     expose:
