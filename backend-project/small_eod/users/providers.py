@@ -50,7 +50,11 @@ class FakeProvider:
     def exchange(self, request):
         # Hardcoded values.
         # Simple, but working.
-        return {'email': "email@example.com", 'given_name': "GivenName", 'family_name': "FamilyName"}
+        return {
+            "email": "email@example.com",
+            "given_name": "GivenName",
+            "family_name": "FamilyName",
+        }
 
 
 def get_provider_cls():
@@ -62,4 +66,6 @@ def get_provider_cls():
     elif flag_value is False:
         return GoogleProvider
     else:
-        raise ImproperlyConfigured(f"Fake oauth must be either True or False, is {flag_value}")
+        raise ImproperlyConfigured(
+            f"Fake oauth must be either True or False, is {flag_value}"
+        )
