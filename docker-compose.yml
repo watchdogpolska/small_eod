@@ -34,6 +34,7 @@ services:
       target: dev
     depends_on:
       - db
+      - fake-oauth
     volumes:
       - ./backend-project:/code
       - static:/code/static
@@ -78,6 +79,15 @@ services:
     environment:
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
+
+  # fake oauth server for local development *only*.
+  fake-oauth:
+    build:
+      context: ./fake-oauth
+    ports:
+      - "5678:5678"
+    expose:
+      - "5678"
 
 volumes:
   static:
