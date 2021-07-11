@@ -1,6 +1,5 @@
 from django.forms.models import model_to_dict
 from rest_framework.views import APIView
-from django.urls import reverse
 
 
 class SendNotificationsMixin(APIView):
@@ -26,10 +25,10 @@ class SendNotificationsMixin(APIView):
             return
 
         notified_users = self.get_notified_uers(instance)
-        kwargs["actor"] = self.basename
+        kwargs["source"] = self.basename
         kwargs["action"] = self.action
         kwargs["instance"] = instance
-        kwargs["url"] = self.get_abs_path(request)
+        kwargs["request"] = request
 
         for user in notified_users:
             user.notify(**kwargs)
@@ -43,12 +42,6 @@ class SendNotificationsMixin(APIView):
             d2.pop(field, None)
 
         return d1 != d2
-
-    def get_abs_path(self, request):
-        path = reverse(f"{self.basename}-list")
-        path = path.replace("/api", "", 1)
-        path = request.build_absolute_uri(path)
-        return path
 
     def get_notified_uers(self, instance):
         if not self.notified_users:

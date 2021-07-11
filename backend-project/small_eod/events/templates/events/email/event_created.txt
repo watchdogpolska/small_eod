@@ -5,11 +5,4 @@ Utworzono nowe wydarzenie w sprawie - {{instance.case.name}}
 
 {% block content %}
 {{instance.created_by}} utworzył nowe wydarzenie - {{instance.name}}.
-
-
-Wydarzenie: {{instance.name}}
-Dotyczy: {{instance.case.name}}
-Zaplanowano na: {{instance.date}}
-Utworzył: {{instance.created_by}}
-Data utworzenia: {{instance.created_on}}
 {% endblock %}

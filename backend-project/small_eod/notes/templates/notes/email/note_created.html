@@ -5,11 +5,4 @@
 
 {% block content %}
 <p>{{instance.created_by}} dodał nową notatkę do sprawy - {{instance.case.name}}</p>
-
-<p>
-Dotyczy: {{instance.case.name}}<br/>
-Utworzył: {{instance.created_by}}<br/>
-Data utworzenia: {{instance.created_on}}<br/>
-Treść: {{instance.comment}}<br/>
-</p>
 {% endblock %}

@@ -1,3 +1,4 @@
+{% url source|add:"-list" as path %}
 {% block subject %}
 {% endblock %}
 <p>Witaj {{user.username}},<p>
@@ -5,6 +6,8 @@
 {% block content %}
 {% endblock %}
 
+{% with full_path=request.scheme|add:"://"|add:request.get_host|add:path|cut:"api/"%}
 <p>
-Więcej szczegółów znajdziesz pod adresem: <a href={{url}}>{{url}}</a>
+Więcej szczegółów znajdziesz pod adresem: <a href={{full_path}}>{{full_path}}</a>
 </p>
+{% endwith %}

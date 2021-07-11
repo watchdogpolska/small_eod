@@ -118,7 +118,10 @@ class TemplateMailManager:
         txt, html = template.render(context or {})
         subject, txt = txt.strip().split("\n", 1)
         from_email = from_email if from_email else settings.DEFAULT_FROM_EMAIL
-        mail = EmailMultiAlternatives(subject, txt, from_email, recipient_list)
+        headers = {"Action": context["action"]}
+        mail = EmailMultiAlternatives(
+            subject, txt, from_email, recipient_list, headers=headers
+        )
         mail.attach_alternative(html, "text/html")
 
         return mail.send()

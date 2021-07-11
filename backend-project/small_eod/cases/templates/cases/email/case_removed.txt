@@ -4,5 +4,5 @@ Zamknięto sprawę - {{instance.name}}
 {% endblock %}
 
 {% block content %}
-{{instance.modified_by}} zamknął obserwowaną przez ciebie sprawę - {{instance.name}}
+Zamknięto obserwowaną przez ciebie sprawę - {{instance.name}}
 {% endblock %}

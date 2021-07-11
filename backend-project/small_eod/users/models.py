@@ -4,10 +4,12 @@ from ..notifications.utils import TemplateKey, TemplateMailManager
 
 
 class User(AbstractUser):
-    def notify(self, actor, action, **kwargs):
+    def notify(self, **kwargs):
         kwargs["user"] = self
         enabled = self.get_enabled_notifications()
-        key = getattr(TemplateKey, f"{actor}_{action}".upper(), None)
+        key = getattr(
+            TemplateKey, f"{kwargs['source']}_{kwargs['action']}".upper(), None
+        )
         if key not in enabled:
             return False
 

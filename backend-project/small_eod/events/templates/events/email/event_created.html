@@ -5,12 +5,4 @@
 
 {% block content %}
 <p>{{instance.created_by}} utworzył nowe wydarzenie - {{instance.name}}.</p>
-
-<p>
-Wydarzenie: {{instance.name}}<br/>
-Dotyczy: {{instance.case.name}}<br/>
-Zaplanowano na: {{instance.date}}<br/>
-Utworzył: {{instance.created_by}}<br/>
-Data utworzenia: {{instance.created_on}}<br/>
-</p>
 {% endblock %}

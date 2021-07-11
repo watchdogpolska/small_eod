@@ -9,10 +9,4 @@
 {% else %}
 <p>Wysłano wiadomość - {{instance.reference_number}} - w sprawie - {{instance.case.name}}</p>
 {% endif %}
-
-<p>
-Dotyczy: {{instance.case.name}}<br/>
-Utworzył: {{instance.created_by}}<br/>
-Data utworzenia: {{instance.created_on}}<br/>
-</p>
 {% endblock %}

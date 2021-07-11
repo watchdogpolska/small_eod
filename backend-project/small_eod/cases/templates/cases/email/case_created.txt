@@ -5,8 +5,4 @@ Utworzono nową sprawę - {{instance.name}}
 
 {% block content %}
 W systemie small_eod pojawiła się nowa sprawa.
-
-Sprawa: {{instance.name}}
-Utworzył: {{instance.created_by}}
-Data utworzenia: {{instance.created_on}}
 {% endblock %}

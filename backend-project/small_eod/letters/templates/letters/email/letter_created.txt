@@ -9,9 +9,4 @@ Otrzymano nową wiadomość - {{instance.reference_number}} - dotyczącą obserw
 {% else %}
 Wysłano wiadomość - {{instance.reference_number}} - w sprawie - {{instance.case.name}}
 {% endif %}
-
-
-Dotyczy: {{instance.case.name}}
-Utworzył: {{instance.created_by}}
-Data utworzenia: {{instance.created_on}}
 {% endblock %}

@@ -5,9 +5,4 @@ Dodano notatkę do sprawy - {{case}}
 
 {% block content %}
 {{instance.created_by}} dodał nową notatkę do sprawy - {{instance.case.name}}
-
-Dotyczy: {{instance.case.name}}
-Utworzył: {{instance.created_by}}
-Data utworzenia: {{instance.created_on}}
-Treść: {{instance.comment}}
 {% endblock %}

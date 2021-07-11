@@ -5,7 +5,4 @@ Usunięto wydarzenie - {{instance.name}}
 
 {% block content %}
 Usunięto zaplanowane wydarzenie - {{instance.name}}
-
-Wydarzenie: {{instance.name}}
-Dotyczy: {{instance.case.name}}
 {% endblock %}
