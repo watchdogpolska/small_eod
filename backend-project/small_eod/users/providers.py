@@ -42,9 +42,11 @@ class FakeProvider:
         pass
 
     def callback_url(self, request):
-        # Hardcode localhost - the provider is expected to be used only in local deployments.
-        # `build_absolute_uri` doesn't work, because it produces a docker friendly url.
-        redirect_uri = f"http://localhost:8000/login/callback"
+        # Hardcode localhost - the provider is expected to be used only in local
+        # deployments.
+        # `build_absolute_uri` doesn't work, because it produces a docker
+        # friendly url.
+        redirect_uri = "http://localhost:8000/login/callback"
         return f"{self.base_url}?redirect_uri={redirect_uri}", None
 
     def exchange(self, request):
