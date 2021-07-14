@@ -23,7 +23,7 @@ build:
 test: wait_mysql wait_minio test_backend test_openapi_spec
 
 test_backend:
-	docker-compose run backend coverage run manage.py test --keepdb --parallel $(nproc) --verbosity=2 ${TEST}
+	docker-compose run -e SOCIAL_AUTH_USE_FAKE_OAUTH=False backend coverage run manage.py test --keepdb --parallel $(nproc) --verbosity=2 ${TEST}
 
 coverage_html_backend:
 	docker-compose run backend coverage html
