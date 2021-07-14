@@ -3,12 +3,12 @@ import { Select, Spin } from 'antd';
 import { SelectProps } from 'antd/es/select';
 import React, { useEffect, useState } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { unionBy, sortBy } from 'lodash';
 import { useDebounce } from '../hooks/useDebounce';
 import { openNotificationWithIcon } from '../models/global';
 import { AutocompleteFunctionType, AutocompleteServiceType } from '../services/autocomplete';
 import { Awaited, KeysWithValsOfType, OptionType } from '../services/common';
 import { QQ } from '../utils/QQ';
-import { unionBy, sortBy } from 'lodash';
 
 /**
  * Select field with autocompletion.

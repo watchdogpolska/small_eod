@@ -62,7 +62,11 @@ const LoginLayout: FC<LoginLayoutProps> = props => {
             <div className={styles.header}>
               <Link to="/" className={styles.headerLink}>
                 <img alt="logo" className={styles.logo} src={logo} />
-                <img alt="logo aplikacji elektroniczny obieg dokumentów" className={styles.eodLogo} src={eodLogo} />
+                <img
+                  alt="logo aplikacji elektroniczny obieg dokumentów"
+                  className={styles.eodLogo}
+                  src={eodLogo}
+                />
                 <h1 className={styles.title}>Small EOD</h1>
               </Link>
             </div>
