@@ -58,29 +58,6 @@ jobs:
     - name: Docker-compose logs
       run: docker-compose logs
       if: failure()
-  push:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
-    needs:
-      - test
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build production image
-      run: docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:latest backend-project/
-    - name: "Docker login"
-      env:
-        DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
-    - name: Push image
-      run: docker push docker-registry.siecobywatelska.pl/small_eod/backend:latest
-    - name: Trigger SDK regenerate
-      uses: peter-evans/repository-dispatch@v1
-      with:
-        token: ${{ secrets.SDK_REPO_TOKEN }}
-        event-type: pushed
-        repository: watchdogpolska/small-eod-sdk-javascript
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
@@ -88,16 +65,22 @@ jobs:
       - test
     steps:
     - uses: actions/checkout@v2
-    - name: Setup H1-CLI
-      uses: ./.github/actions/h1-cli
-    - uses: webfactory/ssh-agent@v0.5.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Inject website ssh-hostkey
-      run: cat .github/h1-known-hosts > ~/.ssh/known_hosts;
-    - name: Deploy update
-      run: make deploy_backend
+    - name: Build production image
+      run: make build_backend
+    - name: "Docker login"
+      if: github.ref == 'refs/heads/dev'
       env:
-        HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
-        HYPERONE_EARLY_ADOPTERS: 'true'
-        HYPERONE_PROJECT: '587707232a57b6fd80f04bc1'
+        DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
+    - name: Push image
+      run: make push_backend
+      if: github.ref == 'refs/heads/dev'
+    - name: Trigger SDK regenerate
+      uses: peter-evans/repository-dispatch@v1
+      if: github.ref == 'refs/heads/dev'
+      with:
+        token: ${{ secrets.SDK_REPO_TOKEN }}
+        event-type: pushed
+        repository: watchdogpolska/small-eod-sdk-javascript

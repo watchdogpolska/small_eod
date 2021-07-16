@@ -2,9 +2,8 @@
 REFERENCE_OPENAPI?="https://dev.small-eod.siecobywatelska.pl/api/swagger.json"
 GIT_COMMIT := $(shell git rev-parse HEAD)
 TEST?=small_eod
-FRONTEND?=5ed7d87d8073de470f295685
-BACKEND?=5ed804ed8073de470f2984e2
 BRANCH?=dev
+TAG?=latest
 
 start: wait_mysql wait_minio
 	docker-compose up -d
@@ -86,20 +85,19 @@ docs:
 	docker-compose run backend bash -c 'cd ../docs&&sphinx-build -b html -d _build/doctrees . _build/html'
 
 build_balancer:
-	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:latest balancer/
+	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:${TAG} balancer/
+
+build_frontend:
+	docker build -t docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG} frontend-project/
+
+build_backend:
+	docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:${TAG} backend-project/
 
 push_balancer:
-	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:latest
+	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:${TAG}
 
-deploy_frontend:
-	docker-compose run -e REACT_APP_ENV=prod frontend bash -c 'yarn && yarn build'
-	rsync -av --delete frontend-project/dist/ ${FRONTEND}@$$(h1 website show --website ${FRONTEND} --query '[].{fqdn:fqdn}' --output tsv):/data/public
+push_frontend:
+	docker push docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG}
 
-deploy_backend:
-	h1 website ssh --website ${BACKEND} --command 'rm -r /data/env'
-	h1 website ssh --website ${BACKEND} --command 'virtualenv /data/env';
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod fetch origin'
-	h1 website ssh --website ${BACKEND} --command 'git --git-dir=small_eod/.git --work-tree=small_eod checkout -f ${GIT_COMMIT}'
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python -m pip install -r small_eod/backend-project/requirements/production.txt'
-	h1 website ssh --website ${BACKEND} --command '/data/env/bin/python small_eod/backend-project/manage.py migrate --noinput'
-	h1 website restart --query '[].{id:id,state:state}' --website ${BACKEND}
+push_backend:
+	docker push docker-registry.siecobywatelska.pl/small_eod/backend:${TAG}
