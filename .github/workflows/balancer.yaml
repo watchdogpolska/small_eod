@@ -6,7 +6,13 @@ on:
       - dev
     paths:
     - 'balancer/**'
-
+    - '.github/**'
+    - 'Makefile'
+  pull_request:
+    paths:
+    - 'balancer/**'
+    - '.github/**'
+    - 'Makefile'
 jobs:
   push:
     runs-on: ubuntu-latest
@@ -15,10 +21,12 @@ jobs:
     - name: Build production image
       run: make build_balancer
     - name: "Docker login"
+      if: github.ref == 'refs/heads/dev'
       env:
         DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
     - name: Push image
+      if: github.ref == 'refs/heads/dev'
       run: make push_balancer
