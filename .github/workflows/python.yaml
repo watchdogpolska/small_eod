@@ -20,7 +20,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
     - name: Pyupgrade
       run: make pyupgrade
     - name: Lint
@@ -45,11 +45,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       if: github.event_name == 'push'
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@27121b0bdffd731efa15d66772be8dc71245d074 # renovate: tag=v2
       with:
         name: openapi.yaml
         path: ./openapi.yaml
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@27121b0bdffd731efa15d66772be8dc71245d074 # renovate: tag=v2
       # see https://github.com/actions/upload-artifact/issues/11
       # for remove duplicated actions
       with:
@@ -64,7 +64,7 @@ jobs:
     needs:
       - test
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
     - name: Build production image
       run: make build_backend
     - name: "Docker login"
@@ -78,7 +78,7 @@ jobs:
       run: make push_backend
       if: github.ref == 'refs/heads/dev'
     - name: Trigger SDK regenerate
-      uses: peter-evans/repository-dispatch@v1
+      uses: peter-evans/repository-dispatch@ce5485de42c9b2622d2ed064be479e8ed65e76f4 # renovate: tag=v1
       if: github.ref == 'refs/heads/dev'
       with:
         token: ${{ secrets.SDK_REPO_TOKEN }}
