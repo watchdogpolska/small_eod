@@ -1,4 +1,4 @@
-FROM node:14.17.0-slim@sha256:a3ff0656dfa88cc5c4092af3e18d16cbbbf50417ce4d0565d013f9ef51860b3a
+FROM node:14.17.3-slim@sha256:0a89b910e8748253937adec663b169764eb296aea30b696a10f049af95ea223b
 
 RUN apt update && apt install -y g++ git make python3
 
