@@ -14,3 +14,8 @@ Zaimplementowano jedynie absolutne minimum funkcjonalności.
 
 Większość przeglądarek wyświetli ostrzeżenie przy pierwszym kontakcie z serwerem, spododowane samodzielnie podpisanym certyfikatem.
 O ile w przypadku publicznych serwerów jest to oznaka potencjalnego zagrożenia, w tym przypadku ostrzeżenie można zignorować.
+
+## Pętla przekierowań
+
+Jeśli przeglądarka ma zapisane w pamięci cookie po zalogowaniu do serwisu (powstałe, na przykład, po zalogowaniu poprzed panel admin/), próba logowania
+może się nie powieść. Rozwiązaniem jest usunięcie cookie lub użycie karty prywatnej do testowania.
