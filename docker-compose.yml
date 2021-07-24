@@ -34,6 +34,7 @@ services:
       target: dev
     depends_on:
       - db
+      - fake-oauth
     volumes:
       - ./backend-project:/code
       - static:/code/static
@@ -47,6 +48,8 @@ services:
       MINIO_URL: http://minio:9000
       SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: "x-x.apps.googleusercontent.com"
       SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: "x-puMp99EjG7"
+      # Fake oauth - set to True only for local development
+      SOCIAL_AUTH_USE_FAKE_OAUTH: "True"
       # SECRET_KEY
       # DJANGO_ALLOWED_HOSTS
     expose:
@@ -78,6 +81,15 @@ services:
     environment:
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
+
+  # fake oauth server for local development *only*.
+  fake-oauth:
+    build:
+      context: ./fake-oauth
+    ports:
+      - "5678:5678"
+    expose:
+      - "5678"
 
 volumes:
   static:

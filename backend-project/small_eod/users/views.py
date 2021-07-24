@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .filterset import UserFilterSet
-from .providers import GoogleProvider
+from .providers import get_provider_cls
 from .serializers import (
     RefreshTokenRequestSerializer,
     RequestSerializer,
@@ -27,7 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    provider = GoogleProvider(
+    provider = get_provider_cls()(
         client_id=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY,
         client_secret=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
         scopes=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE,

@@ -93,7 +93,9 @@ W celu uruchomienia projektu należy wykonać:
 docker-compose up
 ```
 
-Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:8000/admin/](http://localhost:8000/admin/) winno być możliwe logowanie z wykorzystaniem loginu i hasła, a wszelkie zmiany kodu aplikacji w lokalnym repozytorium będą automatycznie załadowane przez Django.
+Po pomyślnym uruchomieniu projektu środowisko pod adresem [http://localhost:8000/](http://localhost:8000/) winno być możliwe korzystanie z aplikacji
+poprzez konto testowego, automatycznie stworzonego użytkownika. Kwestia autoryzacji opisana jest szerzej w folderze fake-oauth/.
+Wszelkie zmiany kodu aplikacji w lokalnym repozytorium będą automatycznie załadowane przez Django.
 
 W celu utworzenia konta administratora należy wykonać:
 
