@@ -12,7 +12,7 @@ export const lettersLocale = {
       date: 'Date received / Date sent',
       numberAttachments: 'Number of attachments',
       case: 'Case',
-      institution: 'Audited institution',
+      institution: 'Institution',
       createdOn: 'Created on',
       modifiedOn: 'Modified on',
       documentType: 'Document type',
@@ -36,7 +36,7 @@ export const lettersLocale = {
         date: 'Date received / Date sent',
         attachments: 'Number of attachments',
         case: 'Case',
-        institution: 'Audited institution',
+        institution: 'From whom / to whom',
         documentType: 'Document type',
       },
       errors: {
