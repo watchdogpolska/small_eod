@@ -9,7 +9,7 @@ export const lettersLocale = {
       direction: 'Direction',
       referenceNumber: 'Reference number',
       channel: 'Channel',
-      date: 'Date received / Date sent',
+      date: 'Date received / sent',
       numberAttachments: 'Number of attachments',
       case: 'Case',
       institution: 'Institution',
@@ -33,7 +33,7 @@ export const lettersLocale = {
         direction: 'Direction',
         referenceNumber: 'Reference number',
         channel: 'Channel',
-        date: 'Date received / Date sent',
+        date: 'Date received / sent',
         attachments: 'Number of attachments',
         case: 'Case',
         institution: 'From whom / to whom',
@@ -41,6 +41,7 @@ export const lettersLocale = {
       },
       errors: {
         referenceNumber: 'Reference number is required',
+        case: 'Case is required',
       },
     },
     errors: {

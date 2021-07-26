@@ -127,6 +127,29 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
           <Row>
             <Col span={16}>
               <Form.Item
+                label={formatMessage({ id: fields.case })}
+                name="case"
+                rules={[
+                  {
+                    required: true,
+                    message: formatMessage({ id: errors.case }),
+                  },
+                ]}
+              >
+                <FetchSelect
+                  placeholder={formatMessage({
+                    id: placeholders.case,
+                  })}
+                  mode={undefined}
+                  autocompleteFunction={AutocompleteService.cases}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={16}>
+              <Form.Item
                 label={formatMessage({ id: fields.final })}
                 name="final"
                 valuePropName="checked"
@@ -164,7 +187,6 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
             <Col span={16}>
               <Form.Item label={formatMessage({ id: fields.date })} name="date">
                 <DatePicker
-                  showTime
                   placeholder={formatMessage({
                     id: placeholders.date,
                   })}
@@ -199,20 +221,6 @@ export default function LettersDetailView({ match }: DetailMatchParam) {
                   })}
                   mode={undefined}
                   autocompleteFunction={AutocompleteService.channels}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span={16}>
-              <Form.Item label={formatMessage({ id: fields.case })} name="case">
-                <FetchSelect
-                  placeholder={formatMessage({
-                    id: placeholders.case,
-                  })}
-                  mode={undefined}
-                  autocompleteFunction={AutocompleteService.cases}
                 />
               </Form.Item>
             </Col>

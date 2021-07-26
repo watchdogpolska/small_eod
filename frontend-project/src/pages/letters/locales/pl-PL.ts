@@ -9,7 +9,7 @@ export const lettersLocale = {
       direction: 'Kierunek',
       referenceNumber: 'Sygnatura',
       channel: 'Kanał',
-      date: 'Data odbioru / Data wysłania',
+      date: 'Data odbioru / wysłania',
       numberAttachments: 'Liczba załączników',
       case: 'Sprawa',
       institution: 'Instytucja',
@@ -33,7 +33,7 @@ export const lettersLocale = {
         direction: 'Kierunek',
         referenceNumber: 'Sygnatura',
         channel: 'Kanał',
-        date: 'Data odbioru / Data wysłania',
+        date: 'Data odbioru / wysłania',
         attachments: 'Załączniki',
         case: 'Sprawa',
         institution: 'Od kogo/ do kogo',
@@ -41,6 +41,7 @@ export const lettersLocale = {
       },
       errors: {
         referenceNumber: 'Sygnatura jest wymagana',
+        case: 'Sprawa jest wymagana',
       },
     },
     errors: {
