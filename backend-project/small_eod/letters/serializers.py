@@ -9,7 +9,7 @@ from ..files.apps import minio_app
 from ..files.serializers import FileSerializer
 from ..generic.serializers import UserLogModelSerializer
 from ..institutions.models import Institution
-from .models import DocumentType, Letter
+from .models import DocumentType, Letter, ReferenceNumber
 
 
 class DocumentTypeSerializer(serializers.ModelSerializer):
@@ -18,7 +18,14 @@ class DocumentTypeSerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+class ReferenceNumberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReferenceNumber
+        fields = ["id", "name"]
+
+
 class LetterSerializer(UserLogModelSerializer):
+    reference_number = serializers.CharField(default=None)
     document_type = serializers.PrimaryKeyRelatedField(
         many=False, default=None, queryset=DocumentType.objects.all()
     )
@@ -54,6 +61,15 @@ class LetterSerializer(UserLogModelSerializer):
         ]
 
     def create(self, validated_data):
+        # Reference numbers use the "tag" mode - they're provided by value and
+        # created if not matching any known objects.
+        reference_number_value = validated_data.pop("reference_number")
+        reference_number = (
+            ReferenceNumber.objects.get_or_create(name=reference_number_value)[0]
+            if reference_number_value is not None
+            else None
+        )
+
         channel = validated_data.pop("channel")
         document_type = validated_data.pop("document_type")
         institution = validated_data.pop("institution")
@@ -62,6 +78,7 @@ class LetterSerializer(UserLogModelSerializer):
         letter = super().create(validated_data)
         letter.channel = channel
         letter.document_type = document_type
+        letter.reference_number = reference_number
         letter.institution = institution
         letter.case = case
         letter.save()
@@ -74,11 +91,24 @@ class LetterSerializer(UserLogModelSerializer):
         Iterating over those 3 and updating fields of the related objects,
         using key-value pairs from PATCH request.
         """
+        # NOTE(rwa_kulszowa): the section below doesn't seem to do much.
         nested = []
         for nested_object in nested:
             for attr, value in nested_object["data"].items():
                 setattr(nested_object["instance"], attr, value)
             nested_object["instance"].save()
+
+        # Create a new reference number if necessary.
+        # See comment in `create`.
+        if "reference_number" in validated_data:
+            reference_number_value = validated_data.pop("reference_number")
+            reference_number = (
+                ReferenceNumber.objects.get_or_create(name=reference_number_value)[0]
+                if reference_number_value is not None
+                else None
+            )
+            validated_data["reference_number"] = reference_number
+
         return super().update(instance, validated_data)
 
 

@@ -10,6 +10,13 @@ class DocumentTypeSearchSet(BaseSearchSet):
     }
 
 
+class ReferenceNumberSearchSet(BaseSearchSet):
+    search_fields = ["name"]
+    filters = {
+        "id": lambda value: Q(pk=value),
+    }
+
+
 class LetterSearchSet(BaseSearchSet):
     search_fields = ["comment"]
     filters = {

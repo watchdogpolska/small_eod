@@ -11,7 +11,7 @@ from ..channels.models import Channel
 from ..features.models import Feature, FeatureOption
 from ..files.models import File
 from ..institutions.models import Institution
-from ..letters.models import DocumentType, Letter
+from ..letters.models import DocumentType, Letter, ReferenceNumber
 from ..tags.models import Tag
 from . import models as models_v1
 
@@ -270,13 +270,17 @@ def migrate_letter(old_letter):
         )
     )
 
+    new_reference_number, _ = ReferenceNumber.objects.get_or_create(
+        name=old_letter.identifier
+    )
+
     new_letter = Letter(
         direction=new_direction,
         date=new_date,
         comment=old_letter.comment,
         document_type=migrate_lettername(old_letter.name),
         # excerpt=???
-        reference_number=old_letter.identifier,
+        reference_number=new_reference_number,
     )
     if old_letter.institution:
         new_letter.institution = migrate_institution(old_letter.institution)
@@ -311,6 +315,7 @@ def run(clean=False):
         FeatureOption.objects.all().delete()
         Channel.objects.all().delete()
         DocumentType.objects.all().delete()
+        ReferenceNumber.objects.all().delete()
         get_user_model().objects.all().delete()
 
     logger.info("Running v1 -> v2 data migration")
