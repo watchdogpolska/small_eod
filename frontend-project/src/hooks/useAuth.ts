@@ -2,6 +2,11 @@ import { TokenResponse } from '@/services/definitions';
 import { UsersService } from '@/services/users';
 import SmallEodClient from '@/utils/sdk';
 
+const isBasicAuth = Boolean(
+  // @ts-ignore
+  typeof USER !== 'undefined' && typeof PASSWORD !== 'undefined' && USER && PASSWORD,
+);
+
 export function useAuth() {
   const ACCESS_TOKEN = 'accessToken';
   const REFRESH_TOKEN = 'refreshToken';
@@ -21,7 +26,7 @@ export function useAuth() {
   }
 
   function refreshToken(): void {
-    if (isLoggedIn())
+    if (isLoggedIn() && !isBasicAuth)
       UsersService.refresh({ refreshToken: localStorage.getItem(REFRESH_TOKEN) })
         .then(setTokens)
         .catch(logout);
@@ -33,7 +38,10 @@ export function useAuth() {
   }
 
   function isLoggedIn(): boolean {
-    return Boolean(localStorage.getItem(ACCESS_TOKEN) && localStorage.getItem(REFRESH_TOKEN));
+    return (
+      Boolean(localStorage.getItem(ACCESS_TOKEN) && localStorage.getItem(REFRESH_TOKEN)) ||
+      isBasicAuth
+    );
   }
 
   function logout(): void {

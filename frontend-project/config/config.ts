@@ -2,7 +2,11 @@ import slash from 'slash2';
 import defaultSettings from './defaultSettings';
 const { pwa } = defaultSettings;
 
-const backend_url = process.env.API_URL || 'http://backend:8000/';
+const backendUrl = process.env.API_URL || 'http://backend:8000/';
+const basicAuth =
+  process.env.USER && process.env.PASSWORD
+    ? `${process.env.USER}:${process.env.PASSWORD}`
+    : undefined;
 
 const plugins = [
   ['umi-plugin-antd-icon-config', {}],
@@ -481,9 +485,14 @@ export default {
     ['api', 'admin', 'static', 'media'].map(x => [
       `/${x}/`,
       {
-        target: backend_url,
+        target: backendUrl,
         changeOrigin: true,
+        auth: basicAuth,
       },
     ]),
   ),
+  define: {
+    USER: process.env.USER,
+    PASSWORD: process.env.PASSWORD,
+  },
 };

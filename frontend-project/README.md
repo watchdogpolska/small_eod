@@ -50,6 +50,12 @@ Zawiera pliki odpowiedzialne za frontend aplikacji small_eod. Został on napisan
    yarn start:public-api
    ```
 
+   Aby ominąć logowanie za pomocą OAuth możesz uruchomić aplikację dodając zmienne środowiskowe USER oraz PASSWORD. Przy takim ustawieniu aplikacja wykorzysta logowanie z wykorzystaniem basic auth.
+
+   ```
+   USER=root PASSWORD=root yarn start:public-api
+   ```
+
 6. W celu uruchomienia testów wykonaj polecenie:
 
    ```shell
