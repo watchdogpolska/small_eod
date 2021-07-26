@@ -9,19 +9,22 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { TagsService } from '@/services/tags';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function TagsListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.tags;
 
-  function onEdit(id: number) {
-    router.push(`/tags/edit/${id}`);
+  function onEdit(tag: Tag) {
+    router.push(`/tags/edit/${tag.id}`);
   }
 
-  function onRemove(id: number) {
-    TagsService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(tag: Tag) {
+    openRemoveConfirmationModal(tag.name, () =>
+      TagsService.remove(tag.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Tag>[] = [
@@ -33,14 +36,14 @@ export default function TagsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (_, { id }: Tag) => (
+      render: (_, record: Tag) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -49,7 +52,7 @@ export default function TagsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

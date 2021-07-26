@@ -1,5 +1,5 @@
 import { localeKeys } from '@/locales/pl-PL';
-import { openNotificationWithIcon } from '@/models/global';
+import { openNotificationWithIcon } from '@/utils/utils';
 import { PaginationParams, PaginationResponse } from '@/services/common.d';
 import { formatMessage } from 'umi-plugin-react/locale';
 

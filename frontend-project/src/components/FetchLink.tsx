@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'umi';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { localeKeys } from '../locales/pl-PL';
-import { openNotificationWithIcon } from '../models/global';
+import { openNotificationWithIcon } from '../utils/utils';
 import { AutocompleteFunctionType, AutocompleteServiceType } from '../services/autocomplete';
 import { Awaited, KeysWithValsOfType } from '../services/common';
 import { ResourceWithId } from '../services/service';

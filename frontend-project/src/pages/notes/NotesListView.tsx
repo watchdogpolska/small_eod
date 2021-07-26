@@ -11,19 +11,22 @@ import { localeKeys } from '@/locales/pl-PL';
 import { NotesService } from '@/services/notes';
 import { FetchLink } from '@/components/FetchLink';
 import { AutocompleteService } from '@/services/autocomplete';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function NotesListView(props: { case?: Case['id']; inline?: boolean }) {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.notes;
 
-  function onEdit(id: number) {
-    router.push(`/notes/edit/${id}`);
+  function onEdit(note: Note) {
+    router.push(`/notes/edit/${note.id}`);
   }
 
-  function onRemove(id: number) {
-    NotesService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(note: Note) {
+    openRemoveConfirmationModal(String(note.id), () =>
+      NotesService.remove(note.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Note>[] = [
@@ -46,14 +49,14 @@ export default function NotesListView(props: { case?: Case['id']; inline?: boole
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Note) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -62,7 +65,7 @@ export default function NotesListView(props: { case?: Case['id']; inline?: boole
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

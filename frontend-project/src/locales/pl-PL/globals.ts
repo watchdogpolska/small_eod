@@ -16,6 +16,7 @@ export const globalsLocale = {
     saveAndEdit: 'Zapisz i edytuj',
   },
   modal: {
+    title: 'Usunięcie elementu {name}',
     confirm: 'Potwierdź',
     cancel: 'Anuluj',
     description: 'Czy chcesz kontynuować?',

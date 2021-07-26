@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { unionBy, sortBy } from 'lodash';
 import { useDebounce } from '../hooks/useDebounce';
-import { openNotificationWithIcon } from '../models/global';
+import { openNotificationWithIcon } from '../utils/utils';
 import { AutocompleteFunctionType, AutocompleteServiceType } from '../services/autocomplete';
 import { Awaited, KeysWithValsOfType, OptionType } from '../services/common';
 import { QQ } from '../utils/QQ';
