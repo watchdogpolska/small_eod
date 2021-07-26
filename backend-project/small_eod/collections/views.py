@@ -92,7 +92,7 @@ class BaseSubCollection(CollectionTokenSecuredViewSet):
         case = Case.objects.filter(**parse_query(collection.query)).get(
             pk=self.kwargs["case_pk"]
         )
-        return self.model.objects.filter(case=case).all()
+        return self.model.objects.filter(case=case).with_nested_resources().all()
 
 
 class EventCollectionViewSet(BaseSubCollection):

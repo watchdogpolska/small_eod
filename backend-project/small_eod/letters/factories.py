@@ -9,7 +9,7 @@ from ..generic.factories import (
     FuzzyTrueOrFalse,
 )
 from ..institutions.factories import InstitutionFactory
-from .models import DocumentType, Letter
+from .models import DocumentType, Letter, ReferenceNumber
 
 
 class DocumentTypeFactory(DjangoModelFactory):
@@ -17,6 +17,13 @@ class DocumentTypeFactory(DjangoModelFactory):
 
     class Meta:
         model = DocumentType
+
+
+class ReferenceNumberFactory(DjangoModelFactory):
+    name = factory.Sequence(lambda n: "letter-reference_number-%04d" % n)
+
+    class Meta:
+        model = ReferenceNumber
 
 
 class LetterFactory(AbstractTimestampUserFactory, DjangoModelFactory):
@@ -27,12 +34,12 @@ class LetterFactory(AbstractTimestampUserFactory, DjangoModelFactory):
 
     comment = factory.Sequence(lambda n: "letter-comment-%04d" % n)
     excerpt = factory.Sequence(lambda n: "letter-excerpt-%04d" % n)
-    reference_number = factory.Sequence(lambda n: "letter-reference_number-%04d" % n)
 
     case = factory.SubFactory(CaseFactory)
     channel = factory.SubFactory(ChannelFactory)
     institution = factory.SubFactory(InstitutionFactory)
     document_type = factory.SubFactory(DocumentTypeFactory)
+    reference_number = factory.SubFactory(ReferenceNumberFactory)
 
     class Meta:
         model = Letter

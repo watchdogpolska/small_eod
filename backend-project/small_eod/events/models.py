@@ -5,7 +5,14 @@ from ..cases.models import Case
 from ..generic.models import TimestampUserLogModel
 
 
+class EventQuerySet(models.QuerySet):
+    def with_nested_resources(self):
+        return self
+
+
 class Event(TimestampUserLogModel):
+    objects = EventQuerySet.as_manager()
+
     date = models.DateTimeField(verbose_name=_("Date"), help_text=_("Date of event."))
     name = models.CharField(
         max_length=256, verbose_name=_("Name"), help_text=_("Name of event.")
