@@ -13,8 +13,8 @@ from ..features.filterset import FeatureFilterSet, FeatureOptionFilterSet
 from ..features.models import Feature, FeatureOption
 from ..institutions.filterset import InstitutionFilterSet
 from ..institutions.models import Institution
-from ..letters.filterset import DocumentTypeFilterSet
-from ..letters.models import DocumentType
+from ..letters.filterset import DocumentTypeFilterSet, ReferenceNumberFilterSet
+from ..letters.models import DocumentType, ReferenceNumber
 from ..tags.filterset import TagFilterSet
 from ..tags.models import Tag
 from ..users.filterset import UserFilterSet
@@ -24,6 +24,7 @@ from .serializers import (
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
+    ReferenceNumberAutocompleteSerializer,
     EventAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
@@ -87,6 +88,13 @@ class InstitutionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = InstitutionAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = InstitutionFilterSet
+
+
+class ReferenceNumberAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ReferenceNumber.objects.only("id", "name").all()
+    serializer_class = ReferenceNumberAutocompleteSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ReferenceNumberFilterSet
 
 
 class TagAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):

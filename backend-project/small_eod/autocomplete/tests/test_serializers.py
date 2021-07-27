@@ -8,7 +8,7 @@ from ...features.factories import FeatureFactory, FeatureOptionFactory
 from ...generic.mixins import AuthRequiredMixin
 from ...generic.tests.test_serializers import ResourceSerializerMixin
 from ...institutions.factories import InstitutionFactory
-from ...letters.factories import DocumentTypeFactory
+from ...letters.factories import DocumentTypeFactory, ReferenceNumberFactory
 from ...tags.factories import TagFactory
 from ...users.factories import UserFactory
 from ..serializers import (
@@ -16,6 +16,7 @@ from ..serializers import (
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
+    ReferenceNumberAutocompleteSerializer,
     EventAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
@@ -51,6 +52,13 @@ class DocumentTypeAutocompleteSerializerTestCase(
 ):
     serializer_class = DocumentTypeAutocompleteSerializer
     factory_class = DocumentTypeFactory
+
+
+class ReferenceNumberAutocompleteSerializerTestCase(
+    ResourceSerializerMixin, AuthRequiredMixin, TestCase
+):
+    serializer_class = ReferenceNumberAutocompleteSerializer
+    factory_class = ReferenceNumberFactory
 
 
 class EventAutocompleteSerializerTestCase(
