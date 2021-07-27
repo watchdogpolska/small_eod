@@ -6,6 +6,7 @@ from .views import (
     CaseAutocompleteViewSet,
     ChannelAutocompleteViewSet,
     DocumentTypeAutocompleteViewSet,
+    ReferenceNumberAutocompleteViewSet,
     EventAutocompleteViewSet,
     FeatureAutocompleteViewSet,
     FeatureOptionAutocompleteViewSet,
@@ -24,6 +25,11 @@ router.register("cases", CaseAutocompleteViewSet, "autocomplete_case")
 router.register("channels", ChannelAutocompleteViewSet, "autocomplete_channel")
 router.register(
     "document_types", DocumentTypeAutocompleteViewSet, "autocomplete_document_type"
+)
+router.register(
+    "reference_numbers",
+    ReferenceNumberAutocompleteViewSet,
+    "autocomplete_reference_number",
 )
 router.register("events", EventAutocompleteViewSet, "autocomplete_event")
 router.register("features", FeatureAutocompleteViewSet, "autocomplete_feature")
