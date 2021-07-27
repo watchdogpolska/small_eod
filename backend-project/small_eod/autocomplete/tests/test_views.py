@@ -9,8 +9,8 @@ from ...generic.tests.test_views import ReadOnlyViewSetMixin
 from ...institutions.factories import InstitutionFactory
 from ...letters.factories import (
     DocumentTypeFactory,
-    ReferenceNumberFactory,
     LetterFactory,
+    ReferenceNumberFactory,
 )
 from ...search.tests.mixins import SearchQueryMixin
 from ...tags.factories import TagFactory

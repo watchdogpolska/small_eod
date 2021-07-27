@@ -6,11 +6,11 @@ from .views import (
     CaseAutocompleteViewSet,
     ChannelAutocompleteViewSet,
     DocumentTypeAutocompleteViewSet,
-    ReferenceNumberAutocompleteViewSet,
     EventAutocompleteViewSet,
     FeatureAutocompleteViewSet,
     FeatureOptionAutocompleteViewSet,
     InstitutionAutocompleteViewSet,
+    ReferenceNumberAutocompleteViewSet,
     TagAutocompleteViewSet,
     UserAutocompleteViewSet,
 )

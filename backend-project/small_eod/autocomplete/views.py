@@ -1,5 +1,5 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.db import models
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
 from ..administrative_units.filterset import AdministrativeUnitFilterSet
@@ -15,7 +15,7 @@ from ..features.models import Feature, FeatureOption
 from ..institutions.filterset import InstitutionFilterSet
 from ..institutions.models import Institution
 from ..letters.filterset import DocumentTypeFilterSet, ReferenceNumberFilterSet
-from ..letters.models import DocumentType, ReferenceNumber, Letter
+from ..letters.models import DocumentType, Letter, ReferenceNumber
 from ..tags.filterset import TagFilterSet
 from ..tags.models import Tag
 from ..users.filterset import UserFilterSet
@@ -25,11 +25,11 @@ from .serializers import (
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
-    ReferenceNumberAutocompleteSerializer,
     EventAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
+    ReferenceNumberAutocompleteSerializer,
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
