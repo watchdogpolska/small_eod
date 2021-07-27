@@ -99,7 +99,10 @@ export function FetchSelect<
       setRelatedItems([]);
       setFetchingRelatedItems(true);
 
-      fetchRelatedItems(arrayValue)
+      // NOTE(rwakulszowa): `ValueType` is a bit complicated - converting it to
+      // an array of numbers in a type safe way may require refactoring the
+      // code a bit, hence a manual cast.
+      fetchRelatedItems(arrayValue as Array<number>)
         .then(autocompleteResults => {
           setRelatedItems(autocompleteResults);
         })
