@@ -88,7 +88,7 @@ build_balancer:
 	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:${TAG} balancer/
 
 build_frontend:
-	docker build -t docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG} frontend-project/
+	docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG} frontend-project/
 
 build_backend:
 	docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:${TAG} backend-project/
