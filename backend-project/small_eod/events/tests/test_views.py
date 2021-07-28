@@ -1,5 +1,5 @@
-from test_plus.test import TestCase
 from django.core import mail
+from test_plus.test import TestCase
 
 from ...authkey.factories import KeyFactory
 from ...generic.tests.test_views import GenericViewSetMixin, OrderingViewSetMixin

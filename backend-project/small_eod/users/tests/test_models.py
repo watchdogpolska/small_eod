@@ -1,6 +1,7 @@
-from ..factories import UserFactory
 from django.core import mail
 from django.test import TestCase
+
+from ..factories import UserFactory
 
 
 class UserModelTestCase(TestCase):
