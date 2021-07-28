@@ -5,16 +5,16 @@
   ],
   "packageRules": [
     {
-      "depTypeList": ["minor", "patch", "pin", "devDependencies"],
-      "automerge": true
-    },
-    {
-      "packagePatterns": ["^@types/"],
-      "automerge": true
-    },
-    {
       "extends": ["packages:linters"],
       "automerge": true
+    },
+    {
+      "matchPackageNames": ["small_eod_client"],
+      "enabled": true
+    },
+    {
+      "matchManagers": ["npm"],
+      "enabled": false
     }
   ],
   "pre-commit": {
@@ -22,5 +22,6 @@
   },
   "docker": {
     "pinDigests": true
-  }
+  },
+  "enabledManagers": ["docker-compose", "dockerfile", "github-actions"]
 }

@@ -5,29 +5,19 @@ from django.test import TestCase
 
 class UserModelTestCase(TestCase):
     def test_send_enabled_mail_notification(self):
-        kwargs = {
-            "source": "NOTIFICATION",
-            "action": "TEST"
-        }
+        kwargs = {"source": "NOTIFICATION", "action": "TEST"}
         user = UserFactory()
         user.notify(**kwargs)
         self.assertEqual(len(mail.outbox), 1)
 
     def test_do_not_send_disabled_notification(self):
-        kwargs = {
-            "source": "NOTIFICATION",
-            "action": "DISABLED"
-        }
+        kwargs = {"source": "NOTIFICATION", "action": "DISABLED"}
         user = UserFactory()
         user.notify(**kwargs)
         self.assertEqual(len(mail.outbox), 0)
 
     def test_mail_notification_content_is_correct(self):
-        kwargs = {
-            "source": "NOTIFICATION",
-            "action": "TEST",
-            "username": "user"
-        }
+        kwargs = {"source": "NOTIFICATION", "action": "TEST", "username": "user"}
         user = UserFactory()
         user.notify(**kwargs)
         self.assertEqual(len(mail.outbox), 1)

@@ -9,6 +9,12 @@ import { Awaited, KeysWithValsOfType } from '../services/common';
 import { ResourceWithId } from '../services/service';
 import { QQ } from '../utils/QQ';
 
+/**
+ * Given an id, queries the Autocomplete API to get a relevant human-readable name.
+ *
+ * Technically speaking, the component doesn't perform any autocompletion. It communicates
+ * with the autocomplete API to have a single source of truth for (id => name) mappings.
+ */
 export function FetchLink<
   T extends Awaited<ReturnType<AutocompleteServiceType[keyof AutocompleteServiceType]>>[number] & {
     name?: string;
@@ -44,11 +50,13 @@ export function FetchLink<
     })
       .then(autocompleteResults => {
         setLabel((autocompleteResults?.[0][searchField] as string) || '');
-        setFetching(false);
       })
-      .catch(onError);
+      .catch(onError)
+      .finally(() => setFetching(false));
   }, []);
 
-  if (!id) return null;
+  if (!id) {
+    return null;
+  }
   return isFetching ? <Spin size="small" /> : <Link to={`/${route}/edit/${id}/`}>{label}</Link>;
 }

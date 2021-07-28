@@ -34,6 +34,8 @@ export const usersLocale = {
       removeFailed: 'Nie udało się usunąć użytkownika.',
       updateFailed: 'Edycja użytkownika nie powiodła się.',
       createFailed: 'Utworzenie użytkownika nie powiodło się.',
+      authFailed: 'Nie udało się zalogować użytkownika.',
+      refreshFailes: 'Nie udało się odświeżyć tokenu.',
     },
   },
 };

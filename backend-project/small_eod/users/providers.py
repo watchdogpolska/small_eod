@@ -1,4 +1,5 @@
-from django.urls import reverse
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from requests_oauthlib import OAuth2Session
 
 
@@ -16,7 +17,7 @@ class GoogleProvider:
         return OAuth2Session(
             client_id=self.client_id,
             scope=self.scopes,
-            redirect_uri=request.build_absolute_uri(reverse("user-exchange")),
+            redirect_uri=request.build_absolute_uri("/login/callback"),
         )
 
     def callback_url(self, request):
@@ -32,3 +33,41 @@ class GoogleProvider:
         )
         resp = google.get(self.userinfo_url)
         return resp.json()
+
+
+class FakeProvider:
+    base_url = "https://localhost:5678"
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def callback_url(self, request):
+        # Hardcode localhost - the provider is expected to be used only in local
+        # deployments.
+        # `build_absolute_uri` doesn't work, because it produces a docker
+        # friendly url.
+        redirect_uri = "http://localhost:8000/login/callback"
+        return f"{self.base_url}?redirect_uri={redirect_uri}", None
+
+    def exchange(self, request):
+        # Hardcoded values.
+        # Simple, but working.
+        return {
+            "email": "email@example.com",
+            "given_name": "GivenName",
+            "family_name": "FamilyName",
+        }
+
+
+def get_provider_cls():
+    flag_value = settings.SOCIAL_AUTH_USE_FAKE_OAUTH
+    if flag_value is True:
+        if not settings.DEBUG:
+            raise ImproperlyConfigured("Fake oauth may only be used in DEBUG mode")
+        return FakeProvider
+    elif flag_value is False:
+        return GoogleProvider
+    else:
+        raise ImproperlyConfigured(
+            f"Fake oauth must be either True or False, is {flag_value}"
+        )

@@ -31,6 +31,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Application definition
 
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
     "small_eod.administrative_units",
     "small_eod.authkey",
     "small_eod.notifications",
+    "small_eod.migration_v1",
 ]
 
 MIDDLEWARE = [
@@ -98,7 +100,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {"default": env.db()}
+DATABASES = {
+    "default": env.db(),
+    "migration": env.db("MIGRATION_DATABASE_URL"),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -170,12 +175,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/userinfo.profile",
 ]
+SOCIAL_AUTH_USE_FAKE_OAUTH = env("SOCIAL_AUTH_USE_FAKE_OAUTH", default=False)
 
 MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")
 MINIO_URL = env("MINIO_URL")
 MINIO_BUCKET = env("MINIO_BUCKET", default="files")
-
 
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
@@ -188,3 +193,25 @@ DEFAULT_FROM_EMAIL = env("DJANGO_DEFAULT_FROM_EMAIL", default="")
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="")
 EMAIL_USE_TLS = env("DJANGO_EMAIL_USE_TLS", default=True)
 SERVER_EMAIL = EMAIL_HOST_USER
+
+# Very basic logging config
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "migrator": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}

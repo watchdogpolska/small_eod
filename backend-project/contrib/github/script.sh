@@ -10,3 +10,6 @@ docker-compose run --rm backend bash -c 'wait-for-it -t 600 frontend:8000'
 # keep OpenAPI specs for build-artifact
 docker-compose run backend python -W ignore manage.py generate_swagger -f yaml > openapi.yaml
 docker-compose run backend python -W ignore manage.py generate_swagger -f json > openapi.json
+
+# Verify successfull migration of data
+docker-compose run --rm backend python manage.py migrate_v1

@@ -24,11 +24,12 @@ export function Uploader(props: {
 
   function onRemove(removedFile: UploadFile<ResourceFile>) {
     const id = Number(removedFile.uid);
+    function removeFileFromState() {
+      setFiles(state => state.filter(file => file.uid !== removedFile.uid));
+    }
     return Number.isNaN(id)
-      ? setFiles(state => state.filter(file => file.uid !== removedFile.uid))
-      : props
-          .onRemove(id)
-          .then(() => setFiles(state => state.filter(file => file.uid !== removedFile.uid)));
+      ? removeFileFromState()
+      : props.onRemove(id).then(() => removeFileFromState());
   }
 
   function onUpload(request: RcCustomRequestOptions) {

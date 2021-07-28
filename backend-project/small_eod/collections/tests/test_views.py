@@ -172,7 +172,7 @@ class LetterCollectionViewSetTestCase(
         return dict(collection_pk=self.collection.pk, case_pk=self.obj.case.pk)
 
     def validate_item(self, item):
-        self.assertEqual(self.obj.reference_number, item["referenceNumber"])
+        self.assertEqual(self.obj.reference_number.name, item["referenceNumber"])
 
     def increase_list(self):
         children = self.factory_class.create_batch(case=self.obj.case, size=5)

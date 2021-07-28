@@ -25,7 +25,9 @@ class EventViewSetTestCase(
 
     def validate_notifications(self, action):
         mail_types = [_mail.extra_headers["Action"] for _mail in mail.outbox]
-        self.assertEqual(mail_types, [action for _ in self.obj.case.notified_users.all()])
+        self.assertEqual(
+            mail_types, [action for _ in self.obj.case.notified_users.all()]
+        )
 
     def test_ical_failed_authenticate_to_via_session(self):
         self.login_required()

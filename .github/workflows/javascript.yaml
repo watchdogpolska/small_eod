@@ -2,6 +2,8 @@ name: JavaScript files
 
 on:
   push:
+    branches:
+      - dev
     paths:
       - "frontend-project/**"
       - ".github/**"
@@ -11,14 +13,13 @@ on:
       - "frontend-project/**"
       - ".github/**"
       - 'Makefile'
-
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
       - name: Set up Node 14.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@aa759c6c94d3800c55b8601f21ba4b2371704cb7 # renovate: tag=v2
         with:
           node-version: "14.x"
       - name: Install
@@ -41,21 +42,19 @@ jobs:
         working-directory: ./frontend-project/
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
     needs:
       - test
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup H1-CLI
-        uses: ./.github/actions/h1-cli
-      - uses: webfactory/ssh-agent@v0.5.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Inject website ssh-hostkey
-        run: echo '${{ secrets.SSH_KNOWN_HOSTS }}' >> ~/.ssh/known_hosts;
-      - name: Deploy update
-        run: make deploy_frontend
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
+      - name: Build production image
+        run: make build_frontend
+      - name: "Docker login"
+        if: github.ref == 'refs/heads/dev'
         env:
-          HYPERONE_ACCESS_TOKEN_SECRET: ${{ secrets.HYPERONE_TOKEN }}
-          HYPERONE_EARLY_ADOPTERS: "true"
-          HYPERONE_PROJECT: "587707232a57b6fd80f04bc1"
+          DOCKER_REGISTRY_URL: docker-registry.siecobywatelska.pl
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: echo "${DOCKER_PASSWORD}" | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL}
+      - name: Push image
+        if: github.ref == 'refs/heads/dev'
+        run: make push_frontend

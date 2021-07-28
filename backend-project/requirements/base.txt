@@ -1,4 +1,4 @@
-Django==3.1.8
+Django==3.1.12
 django-environ==0.4.5
 django-teryt-tree==0.16.3
 djangorestframework==3.12.1
@@ -23,3 +23,4 @@ django-fullurl==1.1
 Sphinx==3.3.1
 sphinx-rtd-theme==0.5.0
 whitenoise==5.2.0
+mysqlclient==1.4.6

@@ -10,7 +10,7 @@ from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from ..files.models import File
-from .models import DocumentType, Letter
+from .models import DocumentType, Letter, ReferenceNumber
 
 
 def link_to_case(obj):
@@ -114,3 +114,4 @@ class LetterAdmin(admin.ModelAdmin):
 
 admin.site.register(Letter, LetterAdmin)
 admin.site.register(DocumentType)
+admin.site.register(ReferenceNumber)

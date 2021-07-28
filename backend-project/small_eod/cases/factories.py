@@ -24,7 +24,7 @@ class CaseFactory(AbstractTimestampUserFactory, factory.django.DjangoModelFactor
         m2m_field_name="tags", factory_cls=TagFactory, size=3
     )
     featureoptions = ManyToManyPostGeneration(
-        m2m_field_name="featureoptions", factory_cls=FeatureOptionFactory
+        m2m_field_name="featureoptions", factory_cls=FeatureOptionFactory, size=3
     )
 
     class Meta:

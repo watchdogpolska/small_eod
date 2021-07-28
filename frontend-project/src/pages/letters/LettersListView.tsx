@@ -69,30 +69,26 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
       ),
     },
     {
-      title: formatMessage({ id: fields.comment }),
-      dataIndex: 'comment',
-    },
-    {
       title: formatMessage({ id: fields.direction }),
       dataIndex: 'direction',
       render: (direction: string) =>
         formatMessage({ id: direction === 'IN' ? directions.in : directions.out }),
     },
     {
-      title: formatMessage({ id: fields.channel }),
-      dataIndex: 'channel',
+      title: formatMessage({ id: fields.institution }),
+      dataIndex: 'institution',
       render: (_, record: Letter) => (
         <FetchLink
-          route="channels"
-          id={record.channel}
-          autocompleteFunction={AutocompleteService.channels}
+          route="institutions"
+          id={record.institution}
+          autocompleteFunction={AutocompleteService.institutions}
         />
       ),
     },
     {
       title: formatMessage({ id: fields.date }),
       dataIndex: 'date',
-      render: (date: string) => date.toLocaleString(),
+      render: (date: Date) => date.toLocaleDateString(),
     },
     {
       title: formatMessage({ id: fields.case }),
@@ -106,13 +102,17 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
       ),
     },
     {
-      title: formatMessage({ id: fields.institution }),
-      dataIndex: 'institution',
+      title: formatMessage({ id: fields.comment }),
+      dataIndex: 'comment',
+    },
+    {
+      title: formatMessage({ id: fields.channel }),
+      dataIndex: 'channel',
       render: (_, record: Letter) => (
         <FetchLink
-          route="institutions"
-          id={record.institution}
-          autocompleteFunction={AutocompleteService.institutions}
+          route="channels"
+          id={record.channel}
+          autocompleteFunction={AutocompleteService.channels}
         />
       ),
     },

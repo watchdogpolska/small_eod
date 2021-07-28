@@ -18,6 +18,7 @@ import settings from './pl-PL/settings';
 import { institutionsLocale } from '../pages/institutions/locales/pl-PL';
 import { featureOptionsLocale } from '../pages/featureOptions/locales/pl-PL';
 import { notesLocale } from '../pages/notes/locales/pl-PL';
+import { loginLocale } from '../pages/login/locales/pl-PL';
 
 const [labels, keys] = structuredLocale({
   ...menuLocale,
@@ -34,6 +35,7 @@ const [labels, keys] = structuredLocale({
   ...institutionsLocale,
   ...featureOptionsLocale,
   ...notesLocale,
+  ...loginLocale,
 });
 export const localeKeys = keys;
 

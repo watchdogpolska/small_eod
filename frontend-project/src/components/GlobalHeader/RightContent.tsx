@@ -4,7 +4,6 @@ import React from 'react';
 import { ConnectState } from '@/models/connect';
 import { Action } from 'redux';
 import { Dispatch, connect } from 'dva';
-import Avatar from './AvatarDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
@@ -41,7 +40,6 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
           <QuestionCircleOutlined />
         </a>
       </Tooltip>
-      <Avatar menu />
       {reactEnv && (
         <span>
           <Tag color={ENVTagColor[reactEnv]}>{reactEnv}</Tag>

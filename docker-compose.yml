@@ -6,6 +6,8 @@ services:
     image: postgres:12.6-alpine@sha256:b5c57d326a4cb8cf2fd5cdedc758ed72146a69304ae434b177088b94a7c9e6b8
     expose:
       - "5432"
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - ./backend-project/contrib/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
       # /var/lib/postgresql/data
@@ -13,12 +15,26 @@ services:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'pass'
 
+  migration_db:
+    image: mysql:5.7@sha256:be70d18aedc37927293e7947c8de41ae6490ecd4c79df1db40d1b5b5af7d9596
+    environment:
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'small_eod'
+    ports:
+      - "127.0.0.1:3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./backend-project/small_eod/migration_v1/sql_scripts:/docker-entrypoint-initdb.d:ro
+
   backend:
     build:
       context: ./backend-project
       target: dev
     depends_on:
       - db
+      - fake-oauth
     volumes:
       - ./backend-project:/code
       - static:/code/static
@@ -26,11 +42,14 @@ services:
       - ./docs:/docs
     environment:
       DATABASE_URL: postgres://user:pass@db:5432/small_eod
+      MIGRATION_DATABASE_URL: mysql://root:pass@migration_db/small_eod
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
       MINIO_URL: http://minio:9000
       SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: "x-x.apps.googleusercontent.com"
       SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: "x-puMp99EjG7"
+      # Fake oauth - set to True only for local development
+      SOCIAL_AUTH_USE_FAKE_OAUTH: "True"
       # SECRET_KEY
       # DJANGO_ALLOWED_HOSTS
     expose:
@@ -62,6 +81,15 @@ services:
     environment:
       MINIO_ACCESS_KEY: test
       MINIO_SECRET_KEY: test8chars
+
+  # fake oauth server for local development *only*.
+  fake-oauth:
+    build:
+      context: ./fake-oauth
+    ports:
+      - "5678:5678"
+    expose:
+      - "5678"
 
 volumes:
   static:
