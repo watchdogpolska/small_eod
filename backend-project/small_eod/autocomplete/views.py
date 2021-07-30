@@ -24,11 +24,11 @@ from .serializers import (
     CaseAutocompleteSerializer,
     ChannelAutocompleteSerializer,
     DocumentTypeAutocompleteSerializer,
-    ReferenceNumberAutocompleteSerializer,
     EventAutocompleteSerializer,
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
+    ReferenceNumberAutocompleteSerializer,
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
