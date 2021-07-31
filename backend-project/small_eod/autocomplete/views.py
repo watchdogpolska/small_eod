@@ -1,3 +1,4 @@
+from django.db import models
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
@@ -13,8 +14,8 @@ from ..features.filterset import FeatureFilterSet, FeatureOptionFilterSet
 from ..features.models import Feature, FeatureOption
 from ..institutions.filterset import InstitutionFilterSet
 from ..institutions.models import Institution
-from ..letters.filterset import DocumentTypeFilterSet
-from ..letters.models import DocumentType
+from ..letters.filterset import DocumentTypeFilterSet, ReferenceNumberFilterSet
+from ..letters.models import DocumentType, Letter, ReferenceNumber
 from ..tags.filterset import TagFilterSet
 from ..tags.models import Tag
 from ..users.filterset import UserFilterSet
@@ -28,6 +29,7 @@ from .serializers import (
     FeatureAutocompleteSerializer,
     FeatureOptionAutocompleteSerializer,
     InstitutionAutocompleteSerializer,
+    ReferenceNumberAutocompleteSerializer,
     TagAutocompleteSerializer,
     UserAutocompleteSerializer,
 )
@@ -61,6 +63,33 @@ class DocumentTypeAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = DocumentTypeFilterSet
 
 
+class ReferenceNumberAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ReferenceNumberAutocompleteSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ReferenceNumberFilterSet
+
+    def get_queryset(self):
+        req = self.request
+        related_case_id = req.GET.get("case", None)
+        if related_case_id is None:
+            qs = ReferenceNumber.objects.all()
+        else:
+            # Put related objects at the beginning of the list.
+            reference_numbers_under_case = (
+                Letter.objects.filter(case=related_case_id)
+                .values_list("reference_number", flat=True)
+                .distinct()
+            )
+            qs = ReferenceNumber.objects.annotate(
+                related=models.Case(
+                    models.When(id__in=reference_numbers_under_case, then=True),
+                    default=False,
+                    output_field=models.BooleanField(),
+                )
+            ).order_by("-related")
+        return qs.only("id", "name")
+
+
 class EventAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Event.objects.only("id", "name").all()
     serializer_class = EventAutocompleteSerializer
@@ -83,10 +112,25 @@ class FeatureOptionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class InstitutionAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Institution.objects.only("id", "name").all()
     serializer_class = InstitutionAutocompleteSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = InstitutionFilterSet
+
+    def get_queryset(self):
+        req = self.request
+        related_case_id = req.GET.get("case", None)
+        if related_case_id is None:
+            qs = Institution.objects.all()
+        else:
+            # Put related institutions at the beginning of the list.
+            qs = Institution.objects.annotate(
+                related=models.Case(
+                    models.When(case=related_case_id, then=True),
+                    default=False,
+                    output_field=models.BooleanField(),
+                )
+            ).order_by("-related")
+        return qs.only("id", "name")
 
 
 class TagAutocompleteViewSet(viewsets.ReadOnlyModelViewSet):

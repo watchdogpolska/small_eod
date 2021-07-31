@@ -6,7 +6,7 @@ from ..channels.models import Channel
 from ..events.models import Event
 from ..features.models import Feature, FeatureOption
 from ..institutions.models import Institution
-from ..letters.models import DocumentType
+from ..letters.models import DocumentType, ReferenceNumber
 from ..tags.models import Tag
 from ..users.models import User
 
@@ -32,6 +32,12 @@ class ChannelAutocompleteSerializer(serializers.ModelSerializer):
 class DocumentTypeAutocompleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocumentType
+        fields = ["id", "name"]
+
+
+class ReferenceNumberAutocompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReferenceNumber
         fields = ["id", "name"]
 
 
