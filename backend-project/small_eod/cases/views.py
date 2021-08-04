@@ -2,16 +2,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
 
-from ..notifications.views import SendNotificationsMixin
+from ..notifications.views import NotificationsView
 from ..users.serializers import UserSerializer
 from .filterset import CaseFilterSet
 from .models import Case
 from .serializers import CaseCountSerializer
 
 
-class CaseViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
-    notified_users = "notified_users"
-    ignored_fields = ["modified_by", "modified_on"]
+class CaseViewSet(viewsets.ModelViewSet, NotificationsView):
+    notified_users_field = "notified_users"
+    notification_diff_ignored_fields = ["modified_by", "modified_on"]
     queryset = Case.objects.with_counter().with_nested_resources().all()
     serializer_class = CaseCountSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)

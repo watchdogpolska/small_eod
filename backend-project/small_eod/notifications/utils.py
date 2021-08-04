@@ -1,28 +1,12 @@
 import logging
 import random
-from enum import Enum
+from enum import Enum, auto
 
 from django.conf import settings
 from django.core.mail.message import EmailMultiAlternatives
 from django.template import loader
 
 logger = logging.getLogger(__name__)
-
-
-def make_auto():
-    """enum.auto replacement"""
-
-    def loop():
-        i = 1
-        while True:
-            yield i
-            i += 1
-
-    loop = loop()
-    return lambda: next(loop)
-
-
-auto = make_auto()
 
 
 class TemplateKey(Enum):
@@ -46,7 +30,7 @@ class TemplateKey(Enum):
 
 
 class MailTemplate:
-    def __init__(self, txt_path, html_path=None):
+    def __init__(self, txt_path, html_path):
         self.txt_path = txt_path
         self.html_path = html_path
 

@@ -4,5 +4,10 @@ Zaktualizowano wydarzenie - {{instance.name}}
 {% endblock %}
 
 {% block content %}
+<<<<<<< Updated upstream
 {{instance.modified_by}} dokonał zmian w zaplanowanym wydarzeniu - {{instance.name}}
 {% endblock %}
+=======
+{{instance.modified_by}} dokonał(a) zmian w zaplanowanym wydarzeniu - {{instance.name}}
+{% endblock %}
+>>>>>>> Stashed changes

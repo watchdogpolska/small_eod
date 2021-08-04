@@ -4,5 +4,10 @@ Dodano notatkę do sprawy - {{case}}
 {% endblock %}
 
 {% block content %}
+<<<<<<< Updated upstream
 {{instance.created_by}} dodał nową notatkę do sprawy - {{instance.case.name}}
 {% endblock %}
+=======
+{{instance.created_by}} dodał(a) nową notatkę do sprawy - {{instance.case.name}}
+{% endblock %}
+>>>>>>> Stashed changes

@@ -12,15 +12,15 @@ from rest_framework.filters import OrderingFilter
 
 from ..authkey.authentication import AuthKeyAuthentication
 from ..authkey.permissions import AuthKeyPermission
-from ..notifications.views import SendNotificationsMixin
+from ..notifications.views import NotificationsView
 from .filterset import EventFilterSet
 from .models import Event
 from .serializers import EventSerializer
 
 
-class EventViewSet(viewsets.ModelViewSet, SendNotificationsMixin):
-    notified_users = "case.notified_users"
-    ignored_fields = ["modified_by"]
+class EventViewSet(viewsets.ModelViewSet, NotificationsView):
+    notified_users_field = "case.notified_users"
+    notification_diff_ignored_fields = ["modified_by"]
     queryset = Event.objects.prefetch_related("case").all()
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)

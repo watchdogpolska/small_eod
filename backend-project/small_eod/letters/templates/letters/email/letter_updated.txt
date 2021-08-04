@@ -4,5 +4,10 @@ Zmodyfikowano wiadomość - {{instance.reference_number}}
 {% endblock %}
 
 {% block content %}
+<<<<<<< Updated upstream
 {{instance.modified_by}} dokonał zmian w wiadomości - {{instance.reference_number}}.
 {% endblock %}
+=======
+{{instance.modified_by}} dokonał(a) zmian w wiadomości - {{instance.reference_number}}.
+{% endblock %}
+>>>>>>> Stashed changes
