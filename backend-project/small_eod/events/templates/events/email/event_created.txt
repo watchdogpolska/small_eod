@@ -4,10 +4,5 @@ Utworzono nowe wydarzenie w sprawie - {{instance.case.name}}
 {% endblock %}
 
 {% block content %}
-<<<<<<< Updated upstream
-{{instance.created_by}} utworzył nowe wydarzenie - {{instance.name}}.
-{% endblock %}
-=======
 {{instance.created_by}} utworzył(a) nowe wydarzenie - {{instance.name}}.
 {% endblock %}
->>>>>>> Stashed changes
