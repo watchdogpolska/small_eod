@@ -1,0 +1,8 @@
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Usunięto wydarzenie - {{instance.name}}</p>
+{% endblock %}
+
+{% block content %}
+<p>Usunięto zaplanowane wydarzenie - {{instance.name}}</p>
+{% endblock %}

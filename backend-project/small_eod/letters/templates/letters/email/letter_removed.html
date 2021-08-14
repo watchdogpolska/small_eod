@@ -1,0 +1,8 @@
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Usunięto wiadomość - {{instance.reference_number}}</p>
+{% endblock %}
+
+{% block content %}
+<p>Usunięto wiadomość - {{instance.reference_number}} - dotyczącą obserwowanej przez ciebie sprawy - {{instance.case.name}}.</p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Nowa wiadomość w sprawie - {{instance.case.name}}
+{% endblock %}
+
+{% block content %}
+{% if instance.direction == "received" %}
+Otrzymano nową wiadomość - {{instance.reference_number}} - dotyczącą obserwowanej przez ciebie sprawy - {{instance.case.name}}
+{% else %}
+Wysłano wiadomość - {{instance.reference_number}} - w sprawie - {{instance.case.name}}
+{% endif %}
+{% endblock %}

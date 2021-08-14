@@ -1,0 +1,8 @@
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Utworzono nową sprawę - {{instance.name}}</p>
+{% endblock %}
+
+{% block content %}
+<p>W systemie small_eod pojawiła się nowa sprawa.</p>
+{% endblock %}

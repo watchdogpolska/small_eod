@@ -1,0 +1,8 @@
+{% extends "notifications/email/mail_base.html" %}
+{% block subject %}
+<p>Usunięto notatkę dotyczącą sprawy - {{instance.case.name}}</p>
+{% endblock %}
+
+{% block content %}
+<p>Usunięto notatkę dotyczącą obserwowanej przez ciebie sprawy - {{instance.case.name}}</p>
+{% endblock %}

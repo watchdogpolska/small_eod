@@ -1,0 +1,7 @@
+{% extends "notifications/email/mail_base.txt" %}
+{% block subject %}
+Zaktualizowano sprawę - {{instance.name}}
+{% endblock %}
+{% block content %}
+{{instance.modified_by}} dokonał(a) zmian w obserwowanej przez ciebie sprawie - {{instance.name}}.
+{% endblock %}

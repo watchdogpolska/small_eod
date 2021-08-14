@@ -19,6 +19,7 @@ env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+
 DEBUG = False
 
 # Quick-start development settings - unsuitable for production
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     "small_eod.events",
     "small_eod.administrative_units",
     "small_eod.authkey",
+    "small_eod.notifications",
     "small_eod.migration_v1",
 ]
 
@@ -87,7 +89,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ],
+            ]
         },
     },
 ]
@@ -179,6 +181,18 @@ MINIO_ACCESS_KEY = env("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = env("MINIO_SECRET_KEY")
 MINIO_URL = env("MINIO_URL")
 MINIO_BUCKET = env("MINIO_BUCKET", default="files")
+
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_HOST = env("DJANGO_EMAIL_HOST", default="")
+EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD", default="")
+EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER", default="")
+EMAIL_PORT = env("DJANGO_EMAIL_PORT", default="")
+DEFAULT_FROM_EMAIL = env("DJANGO_DEFAULT_FROM_EMAIL", default="")
+EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="")
+EMAIL_USE_TLS = env("DJANGO_EMAIL_USE_TLS", default=True)
+SERVER_EMAIL = EMAIL_HOST_USER
 
 # Very basic logging config
 LOGGING = {

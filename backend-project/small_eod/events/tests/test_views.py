@@ -1,3 +1,4 @@
+from django.core import mail
 from test_plus.test import TestCase
 
 from ...authkey.factories import KeyFactory
@@ -21,6 +22,10 @@ class EventViewSetTestCase(
 
     def validate_item(self, item):
         self.assertEqual(item["name"], self.obj.name)
+
+    def validate_notifications(self, action):
+        mail_types = [mail.extra_headers["Action"] for mail in mail.outbox]
+        self.assertEqual(set(mail_types), {action})
 
     def test_ical_failed_authenticate_to_via_session(self):
         self.login_required()
@@ -53,3 +58,25 @@ class EventViewSetTestCase(
         self.assertIn(self.obj.name, body)
         self.assertIn(self.obj.comment, body)
         self.assertIn(self.obj.case.name, body)
+
+    def test_send_post_notifications(self):
+        super().test_create_plain()
+        self.assertGreater(len(mail.outbox), 0)
+        self.validate_notifications("create")
+
+    def test_send_delete_notifications(self):
+        response = self.client.delete(
+            self.get_url(name="detail", pk=self.obj.pk, **self.get_extra_kwargs()),
+        )
+        self.assertTrue(response.status_code, 200)
+        self.assertGreater(len(mail.outbox), 0)
+        self.validate_notifications("destroy")
+
+    def test_send_patch_notifications(self):
+        super().test_update_partial_plain()
+        self.assertGreater(len(mail.outbox), 0)
+        self.validate_notifications("partial_update")
+
+    def test_notify_user_only_once(self):
+        super().test_update_partial_plain()
+        self.assertEqual(len(mail.outbox), len(self.obj.case.notified_users.all()))

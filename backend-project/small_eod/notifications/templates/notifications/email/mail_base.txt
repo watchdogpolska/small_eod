@@ -1,0 +1,11 @@
+{% url source|add:"-list" as path %}
+{% block subject %}
+{% endblock %}
+Witaj {{user.username}},
+
+{% block content %}
+{% endblock %}
+
+{% with full_path=request.scheme|add:"://"|add:request.get_host|add:path|cut:"api/"%}
+Więcej szczegółów znajdziesz pod adresem: {{full_path}}
+{% endwith %}

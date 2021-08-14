@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 
 from ..files.models import File
 from ..files.serializers import FileSerializer
+from ..notifications.views import NotificationsView
 from .filterset import DocumentTypeFilterSet, LetterFilterSet, ReferenceNumberFilterSet
 from .models import DocumentType, Letter, ReferenceNumber
 from .serializers import (
@@ -18,7 +19,9 @@ from .serializers import (
 )
 
 
-class LetterViewSet(viewsets.ModelViewSet):
+class LetterViewSet(viewsets.ModelViewSet, NotificationsView):
+    notified_users_field = "case.notified_users"
+    notification_diff_ignored_fields = ["modified_on", "modified_by"]
     queryset = Letter.objects.prefetch_related("attachments", "reference_number").all()
     serializer_class = LetterSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
