@@ -1,4 +1,4 @@
-FROM node:14.17.5-slim@sha256:0840e64c86a203f079e5293d64338ae369f7260997debbc7da4c8186f04f9d4e AS env
+FROM node:16.6.2-slim@sha256:d2a8dbd9016f66e78ff82dab29633adc56c8f007974a9c63392e94763423ecf9 AS env
 
 RUN apt update && apt install -y g++ git make python3
 WORKDIR /code
