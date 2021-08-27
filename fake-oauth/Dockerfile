@@ -1,4 +1,4 @@
-FROM node:latest@sha256:e584fb540a22ff2dbce20e71ff191ff1cd325d1530ed8dc3986b7b7f8b46e726
+FROM node:latest@sha256:987be0a7ca165b6b19bf77ca812e980f603a10c1000bf25095cd89e2b146f9ad
 
 WORKDIR oauth
 
