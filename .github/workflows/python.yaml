@@ -39,11 +39,11 @@ jobs:
       run: make test
     - name: System test
       run: ./backend-project/contrib/github/script.sh
-    - name: Send coverage report
-      run: make coverage_send_backend
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+#     - name: Send coverage report
+#       run: make coverage_send_backend
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       if: github.event_name == 'push'
     - uses: actions/upload-artifact@27121b0bdffd731efa15d66772be8dc71245d074 # renovate: tag=v2
       with:
