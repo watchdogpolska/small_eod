@@ -38,7 +38,7 @@ FROM prod_settings AS prod
 RUN pip install --no-cache-dir -r $REQS_FILE
 COPY . /code/
 # timeout increased due slow loading of pyparsing
-CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate --no-input && gunicorn -w 3 --capture-output -b 0.0.0.0:8000 --timeout 60 config.wsgi"]
+CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate --no-input && gunicorn --worker-tmp-dir /dev/shm/ --capture-output -b 0.0.0.0:8000 config.wsgi"]
 
 # DEVELOPMENT BUILD
 FROM dev_settings AS dev
