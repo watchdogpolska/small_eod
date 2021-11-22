@@ -234,7 +234,7 @@ Model danych jest dostępny w dokumentacji API.
 
 Wyróżniamy następujące elementy:
 
-* Feature - dane na temat cech i wartości oceny statystycznej
+* Feature - dane na temat cech i opcji cechy (wartości statycznej)
 * Case - dane na temat sprawy
 * Institution - informacje o instytucjach
 * Tag - dodatkowa konfiguracja prezentacji znaczników
