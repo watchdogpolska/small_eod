@@ -1,10 +1,10 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/api/(?<path>.*)", "dest": "https://dev.small-eod.siecobywatelska.pl/api/$path" },
+    { "src": "/api/(?<path>.*)", "dest": "https://small-eod-dev-4nvf3.ondigitalocean.app/api/$path" },
     {
       "src": "/static/(?<path>.*)",
-      "dest": "https://dev.small-eod.siecobywatelska.pl/static/$path"
+      "dest": "https://small-eod-dev-4nvf3.ondigitalocean.app/static/$path"
     },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
