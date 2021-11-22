@@ -3,11 +3,11 @@ FROM python:${PYTHON_VERSION}-slim as builder
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
-    && apt-get install -y \
-    libmariadbclient-dev-compat \
-    gcc \
-    wait-for-it \
-    gettext \
+&& apt-get install -y \
+libmariadbclient-dev-compat \
+gcc \
+wait-for-it \
+  gettext \
     make \
     && rm -rf /var/lib/apt/lists/*
 # make - required for docs build
@@ -38,11 +38,11 @@ FROM prod_settings AS prod
 RUN pip install --no-cache-dir -r $REQS_FILE
 COPY . /code/
 # timeout increased due slow loading of pyparsing
-CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn -w 3 -b 0.0.0.0:8000 --timeout 60 config.wsgi"]
+CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate --no-input && gunicorn -w 3 --capture-output -b 0.0.0.0:8000 --timeout 60 config.wsgi"]
 
 # DEVELOPMENT BUILD
 FROM dev_settings AS dev
 # Add git required by coveralls
 RUN pip install --no-cache-dir -r $REQS_FILE
 COPY . /code/
-CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+CMD ["bash", "-c", "python manage.py collectstatic --no-input && python manage.py migrate --no-input && python manage.py runserver 0.0.0.0:8000"]
