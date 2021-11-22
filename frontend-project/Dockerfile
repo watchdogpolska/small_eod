@@ -3,6 +3,10 @@ FROM node:16.9.1-slim@sha256:af6f241029c4d63107c6ccbbd030c44d331786d724bd9c2e615
 RUN apt update && apt install -y g++ git make python3
 WORKDIR /code
 
+# DEVELOPMENT BUILD
+FROM env
+CMD ["bash", "-c", "yarn && yarn start"]
+
 # PRODUCTION BUILD
 FROM env AS builder
 COPY ./ /code
@@ -14,6 +18,3 @@ COPY --from=builder /code/dist /usr/share/nginx/html
 EXPOSE 8000
 CMD ["nginx", "-g", "daemon off;"]
 
-# DEVELOPMENT BUILD
-FROM env
-CMD ["bash", "-c", "yarn && yarn start"]
