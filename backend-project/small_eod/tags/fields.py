@@ -11,6 +11,6 @@ class TagField(serializers.ListField):
 
     def to_representation(self, data):
         return [
-            self.child.to_representation(item) if item is not None else None
+            self.child.to_representation(item) if item is not None and hasattr(item, 'all') else None
             for item in data.all()
         ]
