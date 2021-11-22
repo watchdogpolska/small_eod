@@ -3,11 +3,11 @@ FROM python:${PYTHON_VERSION}-slim as builder
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
-&& apt-get install -y \
-libmariadbclient-dev-compat \
-gcc \
-wait-for-it \
-  gettext \
+    && apt-get install -y \
+    libmariadbclient-dev-compat \
+    gcc \
+    wait-for-it \
+    gettext \
     make \
     && rm -rf /var/lib/apt/lists/*
 # make - required for docs build
