@@ -45,11 +45,11 @@ jobs:
 #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       if: github.event_name == 'push'
-    - uses: actions/upload-artifact@27121b0bdffd731efa15d66772be8dc71245d074 # renovate: tag=v2
+    - uses: actions/upload-artifact@da838ae9595ac94171fa2d4de5a2f117b3e7ac32 # renovate: tag=v2
       with:
         name: openapi.yaml
         path: ./openapi.yaml
-    - uses: actions/upload-artifact@27121b0bdffd731efa15d66772be8dc71245d074 # renovate: tag=v2
+    - uses: actions/upload-artifact@da838ae9595ac94171fa2d4de5a2f117b3e7ac32 # renovate: tag=v2
       # see https://github.com/actions/upload-artifact/issues/11
       # for remove duplicated actions
       with:
