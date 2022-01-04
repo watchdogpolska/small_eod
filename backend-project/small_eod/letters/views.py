@@ -44,7 +44,7 @@ class LetterViewSet(viewsets.ModelViewSet, NotificationsView):
         "modified_on",
         "modified_by__username",
     ]
-    ordering = ['-date']
+    ordering = ["-date"]
 
 
 class DocumentTypeViewSet(viewsets.ModelViewSet):
