@@ -8,7 +8,7 @@ FROM env AS builder
 COPY ./ /code
 RUN yarn && yarn build
 
-FROM nginx:stable-alpine@sha256:fd1d617cffdbd1ce3ca63c085985f1aa5ebe5ebc43fbb2a62a75cd4585ad9a49 AS prod
+FROM nginx:stable-alpine@sha256:6378bae949f6d4ee1aceadfe557d72cfffd65aafe3916c85db39d47be1deb773 AS prod
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /code/dist /usr/share/nginx/html
 EXPOSE 8000
