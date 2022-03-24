@@ -1,4 +1,4 @@
-FROM nginx:alpine@sha256:8df2c57b2b9ba34ac4df6e8f643a958ef94b9396c30326f95a0f0206808e9382
+FROM nginx:alpine@sha256:250c11e0c39dc17ba617f3eb0b28b6f456d46483f04823154c6aa68c432ded72
 RUN apk add gettext
 COPY ./nginx.conf /etc/nginx/nginx.conf
 CMD envsubst '\$DOMAIN' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf && nginx -g 'daemon off;'
