@@ -103,7 +103,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": env.db(),
-    "migration": env.db("MIGRATION_DATABASE_URL"),
+    "migration": env.db("MIGRATION_DATABASE_URL", default="sqlite://:memory:"),
 }
 
 # Password validation

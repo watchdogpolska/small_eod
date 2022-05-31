@@ -85,19 +85,19 @@ docs:
 	docker-compose run backend bash -c 'cd ../docs&&sphinx-build -b html -d _build/doctrees . _build/html'
 
 build_balancer:
-	docker build -t docker-registry.siecobywatelska.pl/small_eod/balancer:${TAG} balancer/
+	docker build -t registry.digitalocean.com/ad-masterthesis/small-eod/balancer:${TAG} balancer/
 
 build_frontend:
-	docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG} frontend-project/
+	docker build --target prod -t registry.digitalocean.com/ad-masterthesis/small-eod/frontend:${TAG} frontend-project/
 
 build_backend:
-	docker build --target prod -t docker-registry.siecobywatelska.pl/small_eod/backend:${TAG} backend-project/
+	docker build --target prod -t registry.digitalocean.com/ad-masterthesis/small-eod/backend:${TAG} backend-project/
 
 push_balancer:
-	docker push docker-registry.siecobywatelska.pl/small_eod/balancer:${TAG}
+	docker push registry.digitalocean.com/ad-masterthesis/small-eod/balancer:${TAG}
 
 push_frontend:
-	docker push docker-registry.siecobywatelska.pl/small_eod/frontend:${TAG}
+	docker push registry.digitalocean.com/ad-masterthesis/small-eod/frontend:${TAG}
 
 push_backend:
-	docker push docker-registry.siecobywatelska.pl/small_eod/backend:${TAG}
+	docker push registry.digitalocean.com/ad-masterthesis/small-eod/backend:${TAG}
