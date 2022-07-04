@@ -13,7 +13,6 @@ const main = async () => {
   for (const [name, schema] of Object.entries(spec.definitions)) {
     console.log(`export interface ${name} {`);
     for (const [pname, pvalue] of Object.entries(schema.properties)) {
-      const nullable = pvalue['x-nullable'];
       let type;
       if (pvalue.type == 'string') {
         type = 'string';
@@ -35,11 +34,11 @@ const main = async () => {
         type = `unknown`;
       }
 
-      if (nullable) {
-        console.log(`  ${pname}: ${type} | null;`);
-      } else {
-        console.log(`  ${pname}: ${type};`);
+      if (pvalue['x-nullable']) {
+        type = `${type} | null`
       }
+
+      console.log(`  ${pname}: ${type};`);
     }
     console.log(`}`);
     console.log(``);
