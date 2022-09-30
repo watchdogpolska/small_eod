@@ -11,19 +11,22 @@ import { localeKeys } from '@/locales/pl-PL';
 import { EventsService } from '@/services/events';
 import { FetchLink } from '@/components/FetchLink';
 import { AutocompleteService } from '@/services/autocomplete';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function EventsListView(props: { case?: Case['id']; inline?: boolean }) {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.events;
 
-  function onEdit(id: number) {
-    router.push(`/events/edit/${id}`);
+  function onEdit(event: Event) {
+    router.push(`/events/edit/${event.id}`);
   }
 
-  function onRemove(id: number) {
-    EventsService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(event: Event) {
+    openRemoveConfirmationModal(event.name, () =>
+      EventsService.remove(event.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Event>[] = [
@@ -51,14 +54,14 @@ export default function EventsListView(props: { case?: Case['id']; inline?: bool
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Event) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -67,7 +70,7 @@ export default function EventsListView(props: { case?: Case['id']; inline?: bool
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

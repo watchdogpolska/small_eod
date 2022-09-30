@@ -9,19 +9,22 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { InstitutionsService } from '@/services/institutions';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function InstitutionsListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.institutions;
 
-  function onEdit(id: number) {
-    router.push(`/institutions/edit/${id}`);
+  function onEdit(institution: Institution) {
+    router.push(`/institutions/edit/${institution.id}`);
   }
 
-  function onRemove(id: number) {
-    InstitutionsService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(institution: Institution) {
+    openRemoveConfirmationModal(institution.name, () =>
+      InstitutionsService.remove(institution.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Institution>[] = [
@@ -62,14 +65,14 @@ export default function InstitutionsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Institution) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -78,7 +81,7 @@ export default function InstitutionsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

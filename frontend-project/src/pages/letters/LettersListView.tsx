@@ -13,6 +13,7 @@ import { FetchLink } from '@/components/FetchLink';
 import { AutocompleteService } from '@/services/autocomplete';
 import { FileCard } from '@/components/FileCard/FileCard';
 import { FileService } from '@/services/files';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 const MemoLetterExpandedRow = React.memo(LetterExpandedRow);
 function LetterExpandedRow(props: { letter: Letter }) {
@@ -39,14 +40,16 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
   const tableActionRef = useRef<ActionType>();
   const { fields, list, directions } = localeKeys.letters;
 
-  function onEdit(id: number) {
-    router.push(`/letters/edit/${id}`);
+  function onEdit(letter: Letter) {
+    router.push(`/letters/edit/${letter.id}`);
   }
 
-  function onRemove(id: number) {
-    LettersService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(letter: Letter) {
+    openRemoveConfirmationModal(letter.referenceNumber, () =>
+      LettersService.remove(letter.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Letter>[] = [
@@ -134,14 +137,14 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Letter) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -150,7 +153,7 @@ export default function LettersListView(props: { case?: Case['id']; inline?: boo
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

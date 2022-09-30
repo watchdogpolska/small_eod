@@ -11,19 +11,22 @@ import { localeKeys } from '@/locales/pl-PL';
 import { FeatureOptionsService } from '@/services/featureOptions';
 import { FetchLink } from '@/components/FetchLink';
 import { AutocompleteService } from '@/services/autocomplete';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function FeatureOptionsListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.featureOptions;
 
-  function onEdit(id: number) {
-    router.push(`/featureOptions/edit/${id}`);
+  function onEdit(featureOption: FeatureOption) {
+    router.push(`/featureOptions/edit/${featureOption.id}`);
   }
 
-  function onRemove(id: number) {
-    FeatureOptionsService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(featureOption: FeatureOption) {
+    openRemoveConfirmationModal(featureOption.name, () =>
+      FeatureOptionsService.remove(featureOption.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<FeatureOption>[] = [
@@ -48,14 +51,14 @@ export default function FeatureOptionsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: FeatureOption) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -64,7 +67,7 @@ export default function FeatureOptionsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

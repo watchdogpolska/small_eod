@@ -14,6 +14,7 @@ import { AutocompleteService } from '@/services/autocomplete';
 import LettersListView from '../letters/LettersListView';
 import EventsListView from '../events/EventsListView';
 import NotesListView from '../notes/NotesListView';
+import { openRemoveConfirmationModal } from '../../utils/utils';
 
 const { TabPane } = Tabs;
 
@@ -38,14 +39,16 @@ export default function CaseListsListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.cases;
 
-  function onEdit(id: number) {
-    router.push(`/cases/edit/${id}`);
+  function onEdit(_case: Case) {
+    router.push(`/cases/edit/${_case.id}`);
   }
 
-  function onRemove(id: number) {
-    CasesService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(_case: Case) {
+    openRemoveConfirmationModal(_case.name, () =>
+      CasesService.remove(_case.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Case>[] = [
@@ -105,14 +108,14 @@ export default function CaseListsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Case) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -121,7 +124,7 @@ export default function CaseListsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

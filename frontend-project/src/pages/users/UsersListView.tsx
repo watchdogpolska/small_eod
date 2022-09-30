@@ -9,19 +9,22 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { UsersService } from '@/services/users';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function UsersListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.users;
 
-  function onEdit(id: number) {
-    router.push(`/users/edit/${id}`);
+  function onEdit(user: User) {
+    router.push(`/users/edit/${user.id}`);
   }
 
-  function onRemove(id: number) {
-    UsersService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(user: User) {
+    openRemoveConfirmationModal(`${user.firstName} ${user.lastName} (${user.email})`, () =>
+      UsersService.remove(user.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<User>[] = [
@@ -45,14 +48,14 @@ export default function UsersListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: User) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -61,7 +64,7 @@ export default function UsersListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

@@ -15,6 +15,7 @@ import router from 'umi/router';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { ChannelsService } from '@/services/channels';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export interface IconProps {
   arg: boolean;
@@ -30,14 +31,16 @@ export default function ChannelsListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.channels;
 
-  function onEdit(id: number) {
-    router.push(`/channels/edit/${id}`);
+  function onEdit(channel: Channel) {
+    router.push(`/channels/edit/${channel.id}`);
   }
 
-  function onRemove(id: number) {
-    ChannelsService.remove(id)
-      .then(() => tableActionRef.current?.reload())
-      .catch(() => tableActionRef.current?.reload());
+  function onRemove(channel: Channel) {
+    openRemoveConfirmationModal(channel.name, () =>
+      ChannelsService.remove(channel.id)
+        .then(() => tableActionRef.current?.reload())
+        .catch(() => tableActionRef.current?.reload()),
+    );
   }
 
   const columns: ProColumns<Channel>[] = [
@@ -89,14 +92,14 @@ export default function ChannelsListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Channel) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -105,7 +108,7 @@ export default function ChannelsListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

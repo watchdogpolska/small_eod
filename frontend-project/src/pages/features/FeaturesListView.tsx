@@ -9,19 +9,22 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { localeKeys } from '@/locales/pl-PL';
 import { FeaturesService } from '@/services/features';
+import { openRemoveConfirmationModal } from '@/utils/utils';
 
 export default function FeaturesListView() {
   const tableActionRef = useRef<ActionType>();
   const { fields, list } = localeKeys.features;
 
-  function onEdit(id: number) {
-    router.push(`/features/edit/${id}`);
+  function onEdit(feature: Feature) {
+    router.push(`/features/edit/${feature.id}`);
   }
 
-  function onRemove(id: number) {
-    FeaturesService.remove(id).then(
-      () => tableActionRef.current?.reload(),
-      () => tableActionRef.current?.reload(),
+  function onRemove(feature: Feature) {
+    openRemoveConfirmationModal(feature.name, () =>
+      FeaturesService.remove(feature.id).then(
+        () => tableActionRef.current?.reload(),
+        () => tableActionRef.current?.reload(),
+      ),
     );
   }
 
@@ -42,14 +45,14 @@ export default function FeaturesListView() {
     {
       title: formatMessage({ id: localeKeys.lists.actions }),
       dataIndex: 'id',
-      render: (id: number) => (
+      render: (_, record: Feature) => (
         <Space>
           <Tooltip title={formatMessage({ id: localeKeys.lists.edit })}>
             <Button
               type="default"
               shape="circle"
               icon={<EditOutlined />}
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title={formatMessage({ id: localeKeys.lists.delete })}>
@@ -58,7 +61,7 @@ export default function FeaturesListView() {
               danger
               shape="circle"
               icon={<DeleteOutlined />}
-              onClick={() => onRemove(id)}
+              onClick={() => onRemove(record)}
             />
           </Tooltip>
         </Space>

@@ -1,7 +1,6 @@
 import { GlobalOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { getLocale, setLocale } from 'umi-plugin-react/locale';
-import { ClickParam } from 'antd/es/menu';
 import React, { FC } from 'react';
 import classNames from 'classnames';
 import HeaderDropdown from '../HeaderDropdown';
@@ -15,7 +14,8 @@ const SelectLang: FC<SelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
 
-  const changeLang = ({ key }: ClickParam): void => setLocale(key);
+  const changeLang = ({ key }: { key: React.Key }): void =>
+    typeof key === 'string' && setLocale(key);
 
   const locales = ['pl-PL', 'en-US'];
   const languageLabels = {
