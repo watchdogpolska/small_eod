@@ -272,6 +272,16 @@ W front-endzie przekłada się to na sekcje prezentacji kolekcji, która może z
 
 * udostępnienie katalogu w Google Drive - widok odczytu folderu dla użytkownika, który posiada link jest inny niż użytkownika, który jest uwierzytelniony i zarządza dokumentami
 
+#### Dictionary
+
+W Stowarzyszeniu dla każdej sprawy potrzebujemy przechowywać pewne ogólne informacje, aby móc opracować statyczne opracowania na temat ich rodzajów. Istnieje wiele kryteriów według których chcemy rozpatrywać sprawy, a dla każdego kryterium mamy dopuszczalne wartości wyboru. 
+
+Kod modelu odpowiedzialny za tą funkcjonalność w wersji V1 jest dostępny na https://github.com/watchdogpolska/small_eod/blob/1250927/small_eod/cases/models.py#L36-L91 . Zakłada on sztywne (zapisane w kodzie – wyliczenie z ```Dictionary.Type```) kryterium w jakim chcemy rozpatrywać sprawy (model: ```Case```) i zarządzane w panelu administracyjnym opcje wyboru (model: ```Dictionary```).
+
+W wersji V2 zwiększamy elastyczność tego rozwiązania. Na poziomie systemu zdefiniować chcemy kryteria (model: ```Dictionary```), który posiada relacje do opcji wyboru (model: ```Feature```), a sprawa posiada odwołania do wybranych opcji wyboru (model: ```Feature```). W ramach kryterium mamy zdefiniowane wymaganie maksymalnej i minimalnej opcji wyboru dla danego kryterium ( https://github.com/watchdogpolska/small_eod/blob/67c9220/backend-project/small_eod/dictionaries/models.py#L11-L16 ), co jest weryfikowanae ( https://github.com/watchdogpolska/small_eod/blob/67c922049a604b9e659889e90df0ff23e458ee49/backend-project/small_eod/cases/serializers.py#L70-L85 ).
+
+W interfejsie użytkownika oczekujemy zachowa obecnego rozłożenia na wiele pól, pomimo znacznej zmiany struktury danych (Dictionary->Feature, Dictionary.Type->Dictionary) to oznacza dla każdego kryterium osobne pole wielokrotnego wyboru wartości właściwych dla danego kryterium.
+
 ### Model uprawnień
 
 System wyróżnia następujące uprawnienia:
