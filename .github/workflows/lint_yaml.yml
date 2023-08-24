@@ -12,7 +12,7 @@ jobs:
   lint_speccy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2
+    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
     - name: Lint with Speccy
       run: |
         find $PWD -name 'swagger.yaml' | while read FILE; do
@@ -22,7 +22,7 @@ jobs:
   lint_openapi:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2
+    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
     - name: Lint with openapi-spec-validator
       run: |
         find $PWD -name 'swagger.yaml' | while read FILE; do
