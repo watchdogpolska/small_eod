@@ -16,7 +16,7 @@ services:
       POSTGRES_PASSWORD: 'pass'
 
   migration_db:
-    image: mysql:5.7@sha256:1a73b6a8f507639a8f91ed01ace28965f4f74bb62a9d9b9e7378d5f07fab79dc
+    image: mysql:8.3@sha256:4552fcc5d3cdb8cdee76ee25cce28bf60b0eb3ce93d25ba3bfff7a66bfdcdee8
     environment:
       MYSQL_ROOT_PASSWORD: 'pass'
       MYSQL_ROOT_HOST: '%'
