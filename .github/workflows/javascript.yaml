@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node 14.x
         uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # renovate: tag=v2
         with:
-          node-version: "14.x"
+          node-version: "22.x"
       - name: Install
         run: yarn
         working-directory: ./frontend-project/
